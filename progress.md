@@ -31,6 +31,32 @@
 
 ---
 
+## [TASK-042] Метрики характерности персонажей
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан src/analysis/__init__.py с экспортами модуля
+- Создан src/analysis/character_metrics.py с полной системой метрик
+- Функции детекции маркеров: count_sentences, evaluate_counter_rule, detect_marker, detect_markers
+- Поддержка всех методов детекции: REGEX (regex), COUNTER (sentences/words), BINARY_LLM (опционально)
+- Классы данных: MarkerResult, ReplyAnalysis, CharacterMetrics, GameAnalysis
+- Функция analyze_game: анализирует партию, считает маркеры для каждой реплики персонажа
+- Функция analyze_games: анализирует несколько партий из файлов
+- Функция generate_report: генерирует текстовый отчёт с метриками
+- Отчёт содержит: % маркированных реплик по персонажам, флаги 2+ немаркированных подряд, детали по партиям
+- Создан tests/test_character_metrics.py с 32 тестами (все проходят)
+- Тесты покрывают: подсчёт предложений, правила счётчиков, детекцию маркеров, анализ игры, генерацию отчёта
+
+### Проблемы / Заметки
+- BINARY_LLM маркеры требуют LLM provider, без него возвращают False (для offline анализа)
+- Для полного анализа с LLM маркерами требуется OPENAI_API_KEY
+
+### Коммиты
+- `pending` — Add character distinctiveness metrics (TASK-042)
+
+---
+
 ## [TASK-041] Интеграционный тест: 6 игроков
 **Дата:** 2026-04-19
 **Статус:** done
