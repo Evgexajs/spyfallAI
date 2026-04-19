@@ -50,7 +50,7 @@
 - Нет
 
 ### Коммиты
-- `pending` — Add spy location guessing (TASK-024)
+- `7a4481f` — Add spy location guessing (TASK-024)
 
 ---
 
