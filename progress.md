@@ -46,7 +46,7 @@
 - Нет
 
 ### Коммиты
-- `pending` — будет обновлено после коммита
+- `fd72c39` — Add basic locations for TASK-008
 
 ---
 
