@@ -5,7 +5,7 @@ import os
 import random
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Optional
+from typing import Callable, Optional
 from uuid import uuid4
 
 from src.agents import (
@@ -32,6 +32,20 @@ from src.models import (
     TurnType,
 )
 from src.triggers import TriggerChecker, TriggerResult, VoteTriggerChecker
+
+
+SPEECH_DELAY_MULTIPLIER = float(os.environ.get("SPEECH_DELAY_MULTIPLIER", "0.03"))
+
+
+def calculate_display_delay_ms(content: str) -> int:
+    """Calculate display delay in milliseconds based on content length.
+
+    Formula: length * SPEECH_DELAY_MULTIPLIER + random(0.2s, 0.6s)
+    """
+    base_delay = len(content) * SPEECH_DELAY_MULTIPLIER
+    random_delay = random.uniform(0.2, 0.6)
+    total_seconds = base_delay + random_delay
+    return int(total_seconds * 1000)
 
 
 def load_locations(locations_path: Optional[Path] = None) -> list[Location]:
@@ -437,7 +451,7 @@ async def run_main_round(
             addressee_id=target_id,
             type=TurnType.QUESTION,
             content=question_text,
-            display_delay_ms=0,
+            display_delay_ms=calculate_display_delay_ms(question_text),
         )
         game.turns.append(turn)
         if on_turn:
@@ -476,7 +490,7 @@ async def run_main_round(
             addressee_id=current_questioner,
             type=TurnType.ANSWER,
             content=answer_text,
-            display_delay_ms=0,
+            display_delay_ms=calculate_display_delay_ms(answer_text),
         )
         game.turns.append(answer_turn)
         if on_turn:
@@ -515,14 +529,15 @@ async def run_main_round(
                         except ValueError:
                             guessed_location = None
 
+                    guess_content = f"Я думаю, мы находимся в: {guessed_location.display_name if guessed_location else guessed_location_id}"
                     guess_turn = Turn(
                         turn_number=len(game.turns) + 1,
                         timestamp=datetime.now(),
                         speaker_id=game.spy_id,
                         addressee_id="all",
                         type=TurnType.SPY_GUESS,
-                        content=f"Я думаю, мы находимся в: {guessed_location.display_name if guessed_location else guessed_location_id}",
-                        display_delay_ms=0,
+                        content=guess_content,
+                        display_delay_ms=calculate_display_delay_ms(guess_content),
                     )
                     game.turns.append(guess_turn)
                     if on_turn:
@@ -577,7 +592,7 @@ async def run_main_round(
                     addressee_id=answer_turn.speaker_id,
                     type=TurnType.INTERVENTION,
                     content=intervention_content,
-                    display_delay_ms=0,
+                    display_delay_ms=calculate_display_delay_ms(intervention_content),
                 )
                 game.turns.append(intervention_turn)
                 if on_turn:
@@ -677,14 +692,15 @@ async def run_final_vote(
 
         votes[voter_id] = voted_for
 
+        vote_content = f"Голосую за {voted_for}"
         turn = Turn(
             turn_number=len(game.turns) + 1,
             timestamp=datetime.now(),
             speaker_id=voter_id,
             addressee_id="all",
             type=TurnType.VOTE,
-            content=f"Голосую за {voted_for}",
-            display_delay_ms=0,
+            content=vote_content,
+            display_delay_ms=calculate_display_delay_ms(vote_content),
         )
         game.turns.append(turn)
         if on_turn:

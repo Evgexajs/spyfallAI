@@ -510,7 +510,7 @@
         "Шаг 3: Увидеть индикатор в консоли"
       ],
       "dependencies": ["TASK-011"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-027",

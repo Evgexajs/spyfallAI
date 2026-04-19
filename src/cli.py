@@ -6,6 +6,7 @@ import json
 import os
 import random
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -57,11 +58,17 @@ def colorize(text: str, color: str) -> str:
     return f"{COLORS.get(color, '')}{text}{COLORS['reset']}"
 
 
-def create_turn_printer(character_colors: dict[str, str]):
-    """Create a callback to print turns to console."""
+def create_turn_printer(character_colors: dict[str, str], apply_delay: bool = True):
+    """Create a callback to print turns to console with typing indicator and delay."""
     def print_turn(turn: Turn, game: Game) -> None:
         color = character_colors.get(turn.speaker_id, "reset")
         speaker = colorize(turn.speaker_id, color)
+
+        if turn.display_delay_ms > 0 and apply_delay:
+            typing_msg = f"{speaker} печатает..."
+            print(typing_msg, end="\r", flush=True)
+            time.sleep(turn.display_delay_ms / 1000)
+            print(" " * len(typing_msg), end="\r")
 
         if turn.type == TurnType.QUESTION:
             type_marker = colorize("[Q]", "bold")

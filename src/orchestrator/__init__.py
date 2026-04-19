@@ -1,6 +1,7 @@
 """Orchestrator module for SpyfallAI game flow management."""
 
 from src.orchestrator.game_engine import (
+    calculate_display_delay_ms,
     setup_game,
     load_locations,
     get_location_by_id,
@@ -9,6 +10,7 @@ from src.orchestrator.game_engine import (
 )
 
 __all__ = [
+    "calculate_display_delay_ms",
     "setup_game",
     "load_locations",
     "get_location_by_id",

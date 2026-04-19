@@ -31,6 +31,29 @@
 
 ---
 
+## [TASK-026] Эмуляция задержки реплик
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Добавлена функция calculate_display_delay_ms в src/orchestrator/game_engine.py
+- Формула: length * SPEECH_DELAY_MULTIPLIER + random(0.2s, 0.6s)
+- SPEECH_DELAY_MULTIPLIER загружается из env (дефолт 0.03)
+- Обновлены все 5 мест создания Turn: QUESTION, ANSWER, INTERVENTION, SPY_GUESS, VOTE
+- display_delay_ms записывается в каждый Turn объект
+- Обновлён CLI: добавлен индикатор "X печатает..." в create_turn_printer
+- Добавлен import time и параметр apply_delay в create_turn_printer
+- Функция экспортирована через src/orchestrator/__init__.py
+- Все тесты пройдены: 100 символов -> >3 секунд, индикатор работает
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `pending` — будет обновлено после коммита
+
+---
+
 ## [TASK-025] Правила досрочного голосования
 **Дата:** 2026-04-19
 **Статус:** done
