@@ -31,6 +31,25 @@
 
 ---
 
+## [TASK-004] Pydantic модели данных
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан src/models/__init__.py с экспортом всех моделей
+- Создан src/models/character.py — Character, Trigger, Marker, ConditionType, ReactionType, MarkerMethod, LLMOverride
+- Создан src/models/location.py — Location, Role с валидацией уникальности role_id
+- Создан src/models/game.py — Game, Player, Turn, TurnType, GamePhase, ConfidenceLevel, ConfidenceEntry, TriggerEvent, PhaseEntry, GameOutcome, GameConfig
+- Все модели имеют Pydantic валидацию: границы значений, обязательные поля, кросс-валидация (ровно 1 шпион, уникальные роли)
+
+### Проблемы / Заметки
+- Добавлен LLMOverride как отдельная модель для llm_override в Character
+
+### Коммиты
+- (будет добавлен после коммита)
+
+---
+
 ## [TASK-003] Конфигурация llm_config.json
 **Дата:** 2026-04-19
 **Статус:** done
