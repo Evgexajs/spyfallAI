@@ -110,7 +110,7 @@
         "Шаг 3: Проверить что personal_triggers соответствуют схеме Trigger"
       ],
       "dependencies": ["TASK-004"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-006",

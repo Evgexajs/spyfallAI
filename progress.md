@@ -31,6 +31,26 @@
 
 ---
 
+## [TASK-005] Персонаж: Борис Молот (агрессор)
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан characters/boris_molot.json с полным профилем персонажа
+- Заполнены все поля по схеме PRD 8.1: id, display_name, archetype, backstory, voice_style
+- 4 MUST директивы (машинно проверяемы: счётчики предложений, regex на имена, цитаты)
+- 3 MUST NOT директивы (проверяемы regex на слова-смягчители)
+- 5 detectable_markers: short_reply (counter), direct_question (regex), names_addressee (regex), no_hedging (regex), counter_accusation (binary_llm)
+- 2 personal_triggers: dodged_direct_question, contradiction_with_previous_answer
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- (pending)
+
+---
+
 ## [TASK-004] Pydantic модели данных
 **Дата:** 2026-04-19
 **Статус:** done
