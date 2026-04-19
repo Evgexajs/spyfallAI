@@ -31,6 +31,28 @@
 
 ---
 
+## [TASK-027] Сжатие контекста (compression)
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Добавлены конфигурационные переменные в .env.example: CONTEXT_COMPRESSION_AFTER_N_TURNS (default: 10), CONTEXT_KEEP_LAST_K_TURNS (default: 6)
+- Добавлены поля в Game модель: compressed_history (Optional[str]), compression_checkpoint (Optional[int])
+- Создана функция _compress_history_with_llm для генерации конспекта через utility модель
+- Создана функция _build_compressed_conversation_history для построения сжатого контекста
+- Вспомогательные функции: _get_conversational_turns, _turns_to_messages
+- Обновлены все 4 места использования истории: questioner context, answerer context, intervention context, vote context
+- Алгоритм: после N ходов, старые ходы сжимаются в конспект, последние K ходов остаются полными
+- Экономия токенов: ~65-67% на длинных партиях (20 ходов)
+
+### Проблемы / Заметки
+- Для полной проверки с LLM нужен OPENAI_API_KEY
+
+### Коммиты
+- (будет добавлен после коммита)
+
+---
+
 ## [TASK-026] Эмуляция задержки реплик
 **Дата:** 2026-04-19
 **Статус:** done

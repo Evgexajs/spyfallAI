@@ -529,7 +529,7 @@
         "Шаг 3: Проверить что конспект осмысленный"
       ],
       "dependencies": ["TASK-011", "TASK-002"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-028",

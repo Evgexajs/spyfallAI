@@ -119,6 +119,8 @@ class Game(BaseModel):
     triggered_events: list[TriggerEvent] = Field(default_factory=list, description="Triggered events log")
     phase_transitions: list[PhaseEntry] = Field(default_factory=list, description="Phase history")
     outcome: Optional[GameOutcome] = Field(default=None, description="Final outcome")
+    compressed_history: Optional[str] = Field(default=None, description="Compressed summary of old turns")
+    compression_checkpoint: Optional[int] = Field(default=None, description="Turn number when last compressed")
 
     @field_validator("players")
     @classmethod

@@ -35,6 +35,8 @@ from src.triggers import TriggerChecker, TriggerResult, VoteTriggerChecker
 
 
 SPEECH_DELAY_MULTIPLIER = float(os.environ.get("SPEECH_DELAY_MULTIPLIER", "0.03"))
+CONTEXT_COMPRESSION_AFTER_N_TURNS = int(os.environ.get("CONTEXT_COMPRESSION_AFTER_N_TURNS", "10"))
+CONTEXT_KEEP_LAST_K_TURNS = int(os.environ.get("CONTEXT_KEEP_LAST_K_TURNS", "6"))
 
 
 def calculate_display_delay_ms(content: str) -> int:
@@ -201,6 +203,124 @@ def _build_conversation_history(game: Game) -> list[dict]:
     return messages
 
 
+def _get_conversational_turns(game: Game) -> list[Turn]:
+    """Get only conversational turns (questions, answers, interventions)."""
+    return [t for t in game.turns if t.type in (TurnType.QUESTION, TurnType.ANSWER, TurnType.INTERVENTION)]
+
+
+def _turns_to_messages(turns: list[Turn]) -> list[dict]:
+    """Convert turns to chat messages format."""
+    messages = []
+    for turn in turns:
+        prefix = f"[{turn.speaker_id} → {turn.addressee_id}]"
+        messages.append({
+            "role": "user",
+            "content": f"{prefix} {turn.content}",
+        })
+    return messages
+
+
+async def _compress_history_with_llm(
+    turns: list[Turn],
+    provider: LLMProvider,
+    model: str,
+) -> str:
+    """Compress conversation history using utility LLM model.
+
+    Args:
+        turns: List of turns to compress.
+        provider: LLM provider for the compression.
+        model: Model to use (should be utility model).
+
+    Returns:
+        Compressed summary of the conversation.
+    """
+    if not turns:
+        return ""
+
+    conversation_text = "\n".join([
+        f"[{t.speaker_id} → {t.addressee_id}] {t.content}"
+        for t in turns
+    ])
+
+    prompt = f"""Сделай краткий конспект этого диалога из игры Spyfall (150-200 слов).
+Сохрани ключевую информацию:
+- Кто кого подозревает и почему
+- Важные обвинения и контраргументы
+- Подозрительные или уклончивые ответы
+- Любые намёки на локацию (осторожно, могут быть ложными)
+
+Диалог:
+{conversation_text}
+
+Конспект:"""
+
+    response = await provider.complete(
+        messages=[{"role": "user", "content": prompt}],
+        model=model,
+        temperature=0.3,
+        max_tokens=300,
+    )
+
+    return response.strip()
+
+
+async def _build_compressed_conversation_history(
+    game: Game,
+    provider: LLMProvider,
+) -> list[dict]:
+    """Build conversation history with compression for long games.
+
+    After N turns, compresses older turns into a summary and keeps
+    the last K turns in full. This saves tokens on long games.
+
+    Args:
+        game: Current game state.
+        provider: LLM provider for compression.
+
+    Returns:
+        List of chat messages (possibly with compressed prefix).
+    """
+    conv_turns = _get_conversational_turns(game)
+    total_turns = len(conv_turns)
+
+    if total_turns < CONTEXT_COMPRESSION_AFTER_N_TURNS:
+        return _turns_to_messages(conv_turns)
+
+    turns_to_compress = total_turns - CONTEXT_KEEP_LAST_K_TURNS
+
+    if turns_to_compress <= 0:
+        return _turns_to_messages(conv_turns)
+
+    needs_compression = (
+        game.compressed_history is None or
+        game.compression_checkpoint is None or
+        turns_to_compress > game.compression_checkpoint
+    )
+
+    if needs_compression:
+        old_turns = conv_turns[:turns_to_compress]
+        compressed = await _compress_history_with_llm(
+            turns=old_turns,
+            provider=provider,
+            model=game.config.utility_model,
+        )
+        game.compressed_history = compressed
+        game.compression_checkpoint = turns_to_compress
+
+    recent_turns = conv_turns[turns_to_compress:]
+    recent_messages = _turns_to_messages(recent_turns)
+
+    if game.compressed_history:
+        compressed_message = {
+            "role": "user",
+            "content": f"[КОНСПЕКТ ПРЕДЫДУЩИХ ХОДОВ]\n{game.compressed_history}\n[КОНЕЦ КОНСПЕКТА]",
+        }
+        return [compressed_message] + recent_messages
+
+    return recent_messages
+
+
 def _get_character_by_id(characters: list[Character], char_id: str) -> Character:
     """Find character by ID."""
     for char in characters:
@@ -262,7 +382,7 @@ async def _generate_intervention_content(
         reaction_type=trigger_result.reaction_type,
     )
 
-    history = _build_conversation_history(game)
+    history = await _build_compressed_conversation_history(game, provider)
     messages = [
         {"role": "system", "content": prompt},
         *history,
@@ -425,7 +545,7 @@ async def run_main_round(
         questioner_secret = _get_secret_info(game, questioner_player)
         questioner_prompt = build_system_prompt(questioner_char, game, questioner_secret)
 
-        history = _build_conversation_history(game)
+        history = await _build_compressed_conversation_history(game, provider)
         question_instruction = (
             f"Ты — {questioner_char.display_name}. Сейчас твоя очередь задать вопрос игроку {target_id}. "
             f"Задай один вопрос в своём стиле. Только вопрос, без пояснений."
@@ -464,7 +584,7 @@ async def run_main_round(
         answerer_secret = _get_secret_info(game, answerer_player)
         answerer_prompt = build_system_prompt(answerer_char, game, answerer_secret)
 
-        history = _build_conversation_history(game)
+        history = await _build_compressed_conversation_history(game, provider)
         answer_instruction = (
             f"Ты — {answerer_char.display_name}. Тебе только что задали вопрос. "
             f"Ответь на него в своём стиле. Только ответ, без пояснений."
@@ -660,7 +780,7 @@ async def run_final_vote(
         candidates = [pid for pid in player_ids if pid != voter_id]
         candidates_str = ", ".join(candidates)
 
-        history = _build_conversation_history(game)
+        history = await _build_compressed_conversation_history(game, provider)
         vote_instruction = (
             f"Ты — {voter_char.display_name}. Время голосования. "
             f"Кто из игроков, по-твоему, шпион? Выбери ОДНОГО из: {candidates_str}. "
