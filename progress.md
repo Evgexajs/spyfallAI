@@ -48,7 +48,7 @@
 - Исправлен синтаксис типов для Python 3.9 (Optional[Path] вместо Path | None)
 
 ### Коммиты
-- (pending)
+- `e05e1fb` — Add game orchestrator setup phase (TASK-010)
 
 ---
 
