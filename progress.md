@@ -57,7 +57,7 @@
 - Тесты работают на mock-данных без реальных API-вызовов
 
 ### Коммиты
-- (pending commit)
+- `5c88bcf` — Add spy win rate statistics system (TASK-043)
 
 ---
 
