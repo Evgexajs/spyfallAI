@@ -31,6 +31,26 @@
 
 ---
 
+## [TASK-006] Персонаж: Зоя (дерзкий циник)
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан characters/zoya.json с полным профилем персонажа
+- Заполнены все поля по схеме PRD 8.5: id, display_name, archetype, backstory, voice_style
+- 4 MUST директивы (машинно проверяемы: regex на маркеры сарказма, counter предложений)
+- 3 MUST NOT директивы (проверяемы regex на пафосные слова)
+- 5 detectable_markers: short_reply (counter), sarcasm_markers (regex), question_response (regex), no_pathos (regex), ironic_tone (binary_llm)
+- 2 personal_triggers: dodged_direct_question, contradiction_with_previous_answer (оба → mock_with_dry_sarcasm)
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `PENDING` — Add Zoya character profile for TASK-006
+
+---
+
 ## [TASK-005] Персонаж: Борис Молот (агрессор)
 **Дата:** 2026-04-19
 **Статус:** done
