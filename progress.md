@@ -31,6 +31,27 @@
 
 ---
 
+## [TASK-003] Конфигурация llm_config.json
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан llm_config.json по структуре из PRD (providers, roles, per_character_overrides)
+- Указаны провайдеры: openai, anthropic с соответствующими api_key_env
+- Роли: main (gpt-4o), utility (gpt-4o-mini)
+- Добавлен класс LLMConfig для загрузки и валидации конфига
+- Добавлена функция create_provider для создания провайдера по роли/персонажу
+- Обновлены экспорты в src/llm/__init__.py
+
+### Проблемы / Заметки
+- Anthropic провайдер пока не реализован (raise LLMError)
+- per_character_overrides пустой, будет заполняться при создании персонажей
+
+### Коммиты
+- (будет добавлен после коммита)
+
+---
+
 ## [TASK-002] LLM адаптер для OpenAI
 **Дата:** 2026-04-19
 **Статус:** done
