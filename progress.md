@@ -55,7 +55,7 @@
 - Добавлен формальный тест для регрессионной проверки
 
 ### Коммиты
-- `a9ae72b` — Add API key security tests (TASK-044)
+- `1e8ed12` — Add API key security tests (TASK-044)
 
 ---
 
