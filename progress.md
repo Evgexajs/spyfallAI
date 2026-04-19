@@ -50,7 +50,7 @@
 - Нет
 
 ### Коммиты
-- `pending` — будет обновлено после коммита
+- `504eb70` — Add speech delay emulation (TASK-026)
 
 ---
 
