@@ -31,6 +31,33 @@
 
 ---
 
+## [TASK-041] Интеграционный тест: 6 игроков
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан tests/test_integration_6players.py с полным набором тестов для 6 игроков
+- test_single_6player_game_completes: проверка завершения одной партии с 6 игроками
+- test_five_games_complete_without_errors: запуск 5+ партий подряд (acceptance criterion)
+- test_game_cost_under_limit: проверка стоимости партии < $2
+- test_early_voting_triggers_work: проверка срабатывания досрочного голосования
+- test_characters_are_distinguishable: проверка различимости 6 персонажей
+- test_all_characters_participate: проверка участия всех 6 персонажей
+- test_spy_confidence_system_active: проверка системы уверенности шпиона
+- test_interventions_with_6_players: проверка вмешательств с 6 игроками
+- Используются персонажи: boris_molot, zoya, kim, margo, professor_stein, father_ignatius
+- Добавлены функции: check_early_voting_occurred, analyze_game_cost, calculate_game_duration_minutes
+- run_sync_test() выводит сводную статистику по 5 партиям
+
+### Проблемы / Заметки
+- Для запуска тестов с реальными LLM-вызовами требуется OPENAI_API_KEY
+- Тесты автоматически пропускаются если ключ не установлен
+
+### Коммиты
+- `f421386` — Add integration tests for 6 players (TASK-041)
+
+---
+
 ## [TASK-040] Интеграционный тест: 4 игрока
 **Дата:** 2026-04-19
 **Статус:** done
