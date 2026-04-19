@@ -31,6 +31,31 @@
 
 ---
 
+## [TASK-040] Интеграционный тест: 4 игрока
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан tests/test_integration_4players.py с тестами для 4-игроков
+- test_single_4player_game_completes: проверка завершения одной партии с 4 игроками
+- test_five_games_complete_without_errors: запуск 5 партий подряд (acceptance criterion)
+- test_interventions_present_in_logs: проверка наличия вмешательств в логах
+- test_spy_confidence_log_populated: проверка записей в spy_confidence_log
+- test_characters_are_distinguishable: проверка различимости 4 персонажей
+- test_trigger_system_active: проверка активности системы триггеров
+- Используются персонажи: boris_molot, zoya, kim, margo
+- Функции count_interventions и analyze_spy_confidence для анализа логов
+- Конфигурация: 2 мин, 10 вопросов макс для ускоренных тестов
+
+### Проблемы / Заметки
+- Для запуска тестов с реальными LLM-вызовами требуется OPENAI_API_KEY
+- Тесты автоматически пропускаются если ключ не установлен
+
+### Коммиты
+- `TBD` — Add integration tests for 4 players (TASK-040)
+
+---
+
 ## [TASK-039] Интеграционный тест: полная партия Phase 0
 **Дата:** 2026-04-19
 **Статус:** done

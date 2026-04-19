@@ -776,7 +776,7 @@
         "Шаг 3: Проверить spy_confidence_log"
       ],
       "dependencies": ["TASK-039", "TASK-015", "TASK-022", "TASK-023"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-041",
