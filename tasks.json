@@ -54,7 +54,7 @@
         "Шаг 3: Проверить что ответ возвращается корректно"
       ],
       "dependencies": ["TASK-001"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-003",
