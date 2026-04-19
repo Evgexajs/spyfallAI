@@ -186,7 +186,7 @@
         "Шаг 3: Проверить что локация НЕ упоминается в промпте шпиона"
       ],
       "dependencies": ["TASK-005", "TASK-006", "TASK-007"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-010",
