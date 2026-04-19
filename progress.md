@@ -49,7 +49,7 @@
 - Нет
 
 ### Коммиты
-- `TBD` — Add intervention windows for trigger system (TASK-022)
+- `54990af` — Add intervention windows for trigger system (TASK-022)
 
 ---
 
