@@ -148,7 +148,7 @@
         "Шаг 3: Проверить personal_triggers"
       ],
       "dependencies": ["TASK-004"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-008",

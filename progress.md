@@ -31,6 +31,26 @@
 
 ---
 
+## [TASK-007] Персонаж: Ким (параноик)
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан characters/kim.json с полным профилем персонажа
+- Заполнены все поля по схеме PRD 8.3: id, display_name, archetype, backstory, voice_style
+- 4 MUST директивы (машинно проверяемы: regex на самокоррекцию, слова-смягчители, counter предложений)
+- 3 MUST NOT директивы (проверяемы regex на уверенные обвинения)
+- 5 detectable_markers: self_correction (regex), hedging_words (regex), nervous_filler (regex), no_confident_accusation (regex), panic_response (binary_llm)
+- 2 personal_triggers: direct_accusation, repeated_accusation_on_same_target (оба → panic_and_derail)
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- (будет добавлен после коммита)
+
+---
+
 ## [TASK-006] Персонаж: Зоя (дерзкий циник)
 **Дата:** 2026-04-19
 **Статус:** done
