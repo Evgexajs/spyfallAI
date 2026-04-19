@@ -49,7 +49,7 @@
 - Таймер продолжает тикать во время паузы (соответствует логике — пауза не продлевает время партии)
 
 ### Коммиты
-- `pending` — Add timer and phase status display in UI (TASK-036)
+- `dc332d9` — Add timer and phase status display in UI (TASK-036)
 
 ---
 
