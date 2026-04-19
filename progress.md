@@ -31,6 +31,27 @@
 
 ---
 
+## [TASK-014] CLI точка входа (Phase 0)
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан src/cli.py с полной CLI точкой входа
+- Поддержка параметров: -c (characters), -l (location), -d (duration), -q (max questions)
+- Опции --list-characters и --list-locations для просмотра доступных данных
+- Функции load_character() и list_available_characters() для загрузки персонажей
+- Callback on_turn добавлен в run_main_round и run_final_vote для вывода реплик в реальном времени
+- Цветной вывод реплик в консоль с маркерами типа [Q], [A], [V]
+- Вызов save_game() по завершении партии
+
+### Проблемы / Заметки
+- Полный тест игры требует OPENAI_API_KEY в .env
+
+### Коммиты
+- (pending)
+
+---
+
 ## [TASK-013] Логирование партий в JSON
 **Дата:** 2026-04-19
 **Статус:** done

@@ -282,7 +282,7 @@
         "Шаг 3: Проверить что лог создан в games/"
       ],
       "dependencies": ["TASK-011", "TASK-012", "TASK-013"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-015",

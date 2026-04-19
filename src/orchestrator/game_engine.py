@@ -194,6 +194,7 @@ async def run_main_round(
     game: Game,
     characters: list[Character],
     provider: Optional[LLMProvider] = None,
+    on_turn: Optional[callable] = None,
 ) -> Game:
     """Run the main question-answer round of the game.
 
@@ -250,7 +251,7 @@ async def run_main_round(
         )
         question_text = question_text.strip()
 
-        game.turns.append(Turn(
+        turn = Turn(
             turn_number=len(game.turns) + 1,
             timestamp=datetime.now(),
             speaker_id=current_questioner,
@@ -258,7 +259,10 @@ async def run_main_round(
             type=TurnType.QUESTION,
             content=question_text,
             display_delay_ms=0,
-        ))
+        )
+        game.turns.append(turn)
+        if on_turn:
+            on_turn(turn, game)
 
         answerer_char = _get_character_by_id(characters, target_id)
         answerer_player = next(p for p in game.players if p.character_id == target_id)
@@ -284,7 +288,7 @@ async def run_main_round(
         )
         answer_text = answer_text.strip()
 
-        game.turns.append(Turn(
+        turn = Turn(
             turn_number=len(game.turns) + 1,
             timestamp=datetime.now(),
             speaker_id=target_id,
@@ -292,7 +296,10 @@ async def run_main_round(
             type=TurnType.ANSWER,
             content=answer_text,
             display_delay_ms=0,
-        ))
+        )
+        game.turns.append(turn)
+        if on_turn:
+            on_turn(turn, game)
 
         question_count += 1
         current_questioner = target_id
@@ -304,6 +311,7 @@ async def run_final_vote(
     game: Game,
     characters: list[Character],
     provider: Optional[LLMProvider] = None,
+    on_turn: Optional[callable] = None,
 ) -> Game:
     """Run the final voting phase of the game.
 
@@ -368,7 +376,7 @@ async def run_final_vote(
 
         votes[voter_id] = voted_for
 
-        game.turns.append(Turn(
+        turn = Turn(
             turn_number=len(game.turns) + 1,
             timestamp=datetime.now(),
             speaker_id=voter_id,
@@ -376,7 +384,10 @@ async def run_final_vote(
             type=TurnType.VOTE,
             content=f"Голосую за {voted_for}",
             display_delay_ms=0,
-        ))
+        )
+        game.turns.append(turn)
+        if on_turn:
+            on_turn(turn, game)
 
     vote_counts: dict[str, int] = {}
     for voted_for in votes.values():
