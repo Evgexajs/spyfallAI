@@ -50,7 +50,7 @@
 - Полное тестирование с реальной игрой требует OPENAI_API_KEY
 
 ### Коммиты
-- (pending commit)
+- `5487bc4` — Add kill-switch for inflight LLM requests (TASK-034)
 
 ---
 
