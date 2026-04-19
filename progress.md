@@ -47,7 +47,7 @@
 - Нет
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `d8cb50f` — Add Kim character profile for TASK-007
 
 ---
 
