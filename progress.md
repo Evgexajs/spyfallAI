@@ -49,7 +49,7 @@
 - Для полной проверки с LLM нужен OPENAI_API_KEY
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `c06f7b5` — Add context compression for long games (TASK-027)
 
 ---
 
