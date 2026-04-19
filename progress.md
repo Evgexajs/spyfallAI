@@ -52,7 +52,7 @@
 - Шаг 2 (подключение с другой машины) — ручной тест, при localhost биндинге внешние подключения невозможны
 
 ### Коммиты
-- (pending)
+- `a16eddd` — Add localhost-only security for web UI (TASK-045)
 
 ---
 
