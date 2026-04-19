@@ -870,7 +870,7 @@
         "Шаг 3: Проверить предупреждение при 0.0.0.0"
       ],
       "dependencies": ["TASK-031"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-046",
