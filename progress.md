@@ -47,7 +47,7 @@
 - Нет
 
 ### Коммиты
-- `PENDING` — Add Zoya character profile for TASK-006
+- `df757cc` — Add Zoya character profile for TASK-006
 
 ---
 
