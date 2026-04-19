@@ -31,6 +31,26 @@
 
 ---
 
+## [TASK-017] Персонаж: Отец Игнатий (моралист)
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан characters/father_ignatius.json с полным профилем персонажа
+- Заполнены все поля по схеме PRD 8.6: id, display_name, archetype, backstory, voice_style
+- 4 MUST директивы (машинно проверяемы: regex на имена, апелляции к совести/честности/правде, counter на предложения >=2, binary_llm на моральное давление)
+- 3 MUST NOT директивы (проверяемы: regex на сарказм/иронию, восклицания, прямые обвинения)
+- 5 detectable_markers: names_addressee (regex), conscience_appeal (regex), measured_speech (counter), no_sarcasm (regex), moral_pressure (binary_llm)
+- 2 personal_triggers: contradiction_with_previous_answer, dodged_direct_question (оба → moralize_and_accuse)
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `82734f8` — Add Father Ignatius character profile (TASK-017)
+
+---
+
 ## [TASK-016] Персонаж: Профессор Штейн (душный интеллектуал)
 **Дата:** 2026-04-19
 **Статус:** done
