@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyfallAI</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a2e;
+            color: #eee;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #16213e;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0f3460;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            color: #e94560;
+        }
+
+        .status-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #666;
+        }
+
+        .status-dot.idle { background-color: #666; }
+        .status-dot.running { background-color: #4ade80; animation: pulse 1s infinite; }
+        .status-dot.paused { background-color: #fbbf24; }
+        .status-dot.stopped { background-color: #ef4444; }
+        .status-dot.completed { background-color: #3b82f6; }
+        .status-dot.connecting { background-color: #fbbf24; animation: pulse 0.5s infinite; }
+        .status-dot.disconnected { background-color: #ef4444; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            background-color: #0f0f23;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            background-color: #1a1a2e;
+            border-left: 4px solid #666;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .speaker-name {
+            font-weight: bold;
+        }
+
+        .message-type {
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: #333;
+            color: #aaa;
+        }
+
+        .message-type.question { background-color: #3b82f6; color: white; }
+        .message-type.answer { background-color: #10b981; color: white; }
+        .message-type.intervention { background-color: #f59e0b; color: black; }
+        .message-type.vote { background-color: #8b5cf6; color: white; }
+        .message-type.spy_guess { background-color: #ef4444; color: white; }
+        .message-type.spy_leak { background-color: #dc2626; color: white; }
+
+        .message-content {
+            line-height: 1.5;
+        }
+
+        .message.intervention {
+            font-style: italic;
+            margin-left: 1rem;
+            border-left-color: #f59e0b;
+        }
+
+        .message-addressee {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .system-message {
+            text-align: center;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            color: #888;
+            font-style: italic;
+            background-color: transparent;
+            border-left: none;
+        }
+
+        .system-message.phase {
+            color: #e94560;
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        .system-message.outcome {
+            color: #4ade80;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .system-message.error {
+            color: #ef4444;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: #16213e;
+            padding: 1rem;
+            border-left: 2px solid #0f3460;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            color: #e94560;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #0f3460;
+        }
+
+        .player-list {
+            list-style: none;
+        }
+
+        .player-item {
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+            background-color: #1a1a2e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .player-name {
+            font-weight: bold;
+        }
+
+        .player-role {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .player-item.spy {
+            border: 1px solid #ef4444;
+        }
+
+        .game-info {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #0f3460;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .info-label {
+            color: #888;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-start {
+            background-color: #4ade80;
+            color: #000;
+        }
+
+        .btn-start:hover:not(:disabled) {
+            background-color: #22c55e;
+        }
+
+        .btn-pause {
+            background-color: #fbbf24;
+            color: #000;
+        }
+
+        .btn-pause:hover:not(:disabled) {
+            background-color: #f59e0b;
+        }
+
+        .btn-stop {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .btn-stop:hover:not(:disabled) {
+            background-color: #dc2626;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 0.5rem 1rem;
+            color: #888;
+            font-style: italic;
+        }
+
+        .typing-indicator.visible {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-left: none;
+                border-top: 2px solid #0f3460;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>SpyfallAI</h1>
+        <div class="status-bar">
+            <div class="status-indicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Connecting...</span>
+            </div>
+            <div class="controls">
+                <button class="btn-start" id="btnStart" disabled>Start</button>
+                <button class="btn-pause" id="btnPause" disabled>Pause</button>
+                <button class="btn-stop" id="btnStop" disabled>Stop</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="system-message">Waiting for game to start...</div>
+            </div>
+            <div class="typing-indicator" id="typingIndicator"></div>
+        </div>
+
+        <aside class="sidebar">
+            <h3>Players</h3>
+            <ul class="player-list" id="playerList">
+                <li class="player-item">
+                    <span class="player-name">No players yet</span>
+                </li>
+            </ul>
+
+            <div class="game-info" id="gameInfo">
+                <h3>Game Info</h3>
+                <div class="info-row">
+                    <span class="info-label">Location:</span>
+                    <span id="infoLocation">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Phase:</span>
+                    <span id="infoPhase">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Turns:</span>
+                    <span id="infoTurns">0</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        const TURN_TYPE_LABELS = {
+            question: 'Q',
+            answer: 'A',
+            intervention: 'INT',
+            vote: 'VOTE',
+            spy_guess: 'GUESS',
+            spy_leak: 'LEAK'
+        };
+
+        const PLAYER_COLORS = [
+            '#e94560', '#4ade80', '#3b82f6', '#f59e0b',
+            '#8b5cf6', '#ec4899', '#14b8a6', '#f97316'
+        ];
+
+        let ws = null;
+        let gameStatus = 'idle';
+        let players = [];
+        let playerColorMap = {};
+        let turnCount = 0;
+
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+        const btnStart = document.getElementById('btnStart');
+        const btnPause = document.getElementById('btnPause');
+        const btnStop = document.getElementById('btnStop');
+        const chatMessages = document.getElementById('chatMessages');
+        const playerList = document.getElementById('playerList');
+        const infoLocation = document.getElementById('infoLocation');
+        const infoPhase = document.getElementById('infoPhase');
+        const infoTurns = document.getElementById('infoTurns');
+        const typingIndicator = document.getElementById('typingIndicator');
+
+        function updateStatus(status, wsConnected = true) {
+            gameStatus = status;
+            statusDot.className = 'status-dot ' + (wsConnected ? status : 'disconnected');
+            statusText.textContent = wsConnected
+                ? status.charAt(0).toUpperCase() + status.slice(1)
+                : 'Disconnected';
+
+            btnStart.disabled = !(status === 'idle' || status === 'completed' || status === 'stopped');
+            btnPause.disabled = status !== 'running';
+            btnPause.textContent = status === 'paused' ? 'Resume' : 'Pause';
+            btnStop.disabled = !(status === 'running' || status === 'paused');
+        }
+
+        function getPlayerName(playerId) {
+            const player = players.find(p => p.character_id === playerId);
+            return player ? player.character_id.replace(/_/g, ' ') : playerId;
+        }
+
+        function getPlayerColor(playerId) {
+            if (!playerColorMap[playerId]) {
+                const index = Object.keys(playerColorMap).length % PLAYER_COLORS.length;
+                playerColorMap[playerId] = PLAYER_COLORS[index];
+            }
+            return playerColorMap[playerId];
+        }
+
+        function addMessage(data) {
+            const msg = document.createElement('div');
+            msg.className = 'message';
+
+            if (data.turn_type === 'intervention') {
+                msg.classList.add('intervention');
+            }
+
+            const color = getPlayerColor(data.speaker_id);
+            msg.style.borderLeftColor = color;
+
+            const header = document.createElement('div');
+            header.className = 'message-header';
+
+            const speaker = document.createElement('span');
+            speaker.className = 'speaker-name';
+            speaker.style.color = color;
+            speaker.textContent = getPlayerName(data.speaker_id);
+
+            const typeLabel = document.createElement('span');
+            typeLabel.className = 'message-type ' + data.turn_type;
+            typeLabel.textContent = TURN_TYPE_LABELS[data.turn_type] || data.turn_type;
+
+            header.appendChild(speaker);
+
+            if (data.addressee_id && data.addressee_id !== 'all') {
+                const addressee = document.createElement('span');
+                addressee.className = 'message-addressee';
+                addressee.textContent = ' -> ' + getPlayerName(data.addressee_id);
+                header.appendChild(addressee);
+            }
+
+            header.appendChild(typeLabel);
+
+            const content = document.createElement('div');
+            content.className = 'message-content';
+            content.textContent = data.content;
+
+            msg.appendChild(header);
+            msg.appendChild(content);
+
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addSystemMessage(text, className = '') {
+            const msg = document.createElement('div');
+            msg.className = 'system-message ' + className;
+            msg.textContent = text;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function clearChat() {
+            chatMessages.innerHTML = '';
+            turnCount = 0;
+            infoTurns.textContent = '0';
+        }
+
+        function updatePlayerList() {
+            playerList.innerHTML = '';
+            players.forEach(p => {
+                const li = document.createElement('li');
+                li.className = 'player-item';
+                if (p.is_spy) li.classList.add('spy');
+
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'player-name';
+                nameSpan.style.color = getPlayerColor(p.character_id);
+                nameSpan.textContent = getPlayerName(p.character_id);
+
+                const roleSpan = document.createElement('span');
+                roleSpan.className = 'player-role';
+                roleSpan.textContent = p.is_spy ? 'SPY' : (p.role_id || '');
+
+                li.appendChild(nameSpan);
+                li.appendChild(roleSpan);
+                playerList.appendChild(li);
+            });
+        }
+
+        function showTypingIndicator(speakerId) {
+            typingIndicator.textContent = getPlayerName(speakerId) + ' typing...';
+            typingIndicator.classList.add('visible');
+        }
+
+        function hideTypingIndicator() {
+            typingIndicator.classList.remove('visible');
+        }
+
+        function connectWebSocket() {
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = protocol + '//' + window.location.host + '/ws';
+
+            statusDot.className = 'status-dot connecting';
+            statusText.textContent = 'Connecting...';
+
+            ws = new WebSocket(wsUrl);
+
+            ws.onopen = function() {
+                console.log('WebSocket connected');
+            };
+
+            ws.onclose = function() {
+                console.log('WebSocket disconnected');
+                updateStatus(gameStatus, false);
+                setTimeout(connectWebSocket, 3000);
+            };
+
+            ws.onerror = function(error) {
+                console.error('WebSocket error:', error);
+            };
+
+            ws.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                handleMessage(data);
+            };
+        }
+
+        function handleMessage(data) {
+            console.log('Received:', data);
+
+            switch (data.type) {
+                case 'connected':
+                    updateStatus(data.status);
+                    break;
+
+                case 'game_started':
+                    clearChat();
+                    playerColorMap = {};
+                    players = data.players;
+                    updatePlayerList();
+                    infoLocation.textContent = data.location;
+                    addSystemMessage('Game started! Location: ' + data.location, 'phase');
+                    updateStatus('running');
+                    break;
+
+                case 'phase':
+                    infoPhase.textContent = data.phase;
+                    addSystemMessage('Phase: ' + data.phase, 'phase');
+                    break;
+
+                case 'turn':
+                    hideTypingIndicator();
+                    turnCount++;
+                    infoTurns.textContent = turnCount.toString();
+
+                    const delay = data.turn.display_delay_ms || 0;
+                    if (delay > 500) {
+                        showTypingIndicator(data.turn.speaker_id);
+                        setTimeout(function() {
+                            hideTypingIndicator();
+                            addMessage(data.turn);
+                        }, Math.min(delay, 3000));
+                    } else {
+                        addMessage(data.turn);
+                    }
+                    break;
+
+                case 'game_completed':
+                    updateStatus('completed');
+                    if (data.outcome) {
+                        const winner = data.outcome.winner === 'spy' ? 'Spy wins!' : 'Civilians win!';
+                        addSystemMessage(winner + ' (' + data.outcome.reason + ')', 'outcome');
+                    }
+                    if (data.token_usage) {
+                        addSystemMessage(
+                            'Tokens: ' + data.token_usage.total_input_tokens + ' in / ' +
+                            data.token_usage.total_output_tokens + ' out | Cost: $' +
+                            data.token_usage.total_cost_usd.toFixed(4)
+                        );
+                    }
+                    break;
+
+                case 'game_paused':
+                    updateStatus('paused');
+                    addSystemMessage('Game paused');
+                    break;
+
+                case 'game_resumed':
+                    updateStatus('running');
+                    addSystemMessage('Game resumed');
+                    break;
+
+                case 'game_stopped':
+                    updateStatus('stopped');
+                    addSystemMessage('Game stopped');
+                    break;
+
+                case 'error':
+                    addSystemMessage('Error: ' + data.error, 'error');
+                    break;
+
+                case 'pong':
+                    break;
+
+                default:
+                    console.log('Unknown message type:', data.type);
+            }
+        }
+
+        async function startGame() {
+            try {
+                const response = await fetch('/game/start', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        duration_minutes: 5,
+                        max_questions: 30
+                    })
+                });
+                const result = await response.json();
+                if (!response.ok) {
+                    addSystemMessage('Error: ' + (result.detail || 'Failed to start game'), 'error');
+                }
+            } catch (error) {
+                addSystemMessage('Error: ' + error.message, 'error');
+            }
+        }
+
+        async function pauseGame() {
+            try {
+                if (gameStatus === 'paused') {
+                    await fetch('/game/resume', { method: 'POST' });
+                } else {
+                    await fetch('/game/pause', { method: 'POST' });
+                }
+            } catch (error) {
+                addSystemMessage('Error: ' + error.message, 'error');
+            }
+        }
+
+        async function stopGame() {
+            try {
+                await fetch('/game/stop', { method: 'POST' });
+            } catch (error) {
+                addSystemMessage('Error: ' + error.message, 'error');
+            }
+        }
+
+        btnStart.addEventListener('click', startGame);
+        btnPause.addEventListener('click', pauseGame);
+        btnStop.addEventListener('click', stopGame);
+
+        setInterval(function() {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'ping' }));
+            }
+        }, 30000);
+
+        connectWebSocket();
+    </script>
+</body>
+</html>

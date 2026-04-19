@@ -624,7 +624,7 @@
         "Шаг 3: Увидеть реплики в чате"
       ],
       "dependencies": ["TASK-031"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-033",
