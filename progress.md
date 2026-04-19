@@ -50,7 +50,7 @@
 - Нет
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `79747a1` — Add typing indicator with animated dots (TASK-037)
 
 ---
 
