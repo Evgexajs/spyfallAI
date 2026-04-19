@@ -46,7 +46,7 @@
 - Добавлен LLMOverride как отдельная модель для llm_override в Character
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `975f795` — Add Pydantic data models for TASK-004
 
 ---
 
