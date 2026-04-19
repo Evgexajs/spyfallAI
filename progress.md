@@ -56,7 +56,7 @@
 - Тесты автоматически пропускаются если нет логов партий
 
 ### Коммиты
-- `[БУДЕТ ДОБАВЛЕН]` — Add toxicity MUST NOT directives (TASK-046)
+- `1762545` — Add toxicity MUST NOT directives (TASK-046)
 
 ---
 
