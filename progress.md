@@ -47,4 +47,4 @@
 - pyproject.toml адаптирован под Python >=3.9 вместо >=3.11
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `ea573f0` — Initialize project structure with pyproject.toml and env config
