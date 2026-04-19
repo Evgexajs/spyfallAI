@@ -31,6 +31,26 @@
 
 ---
 
+## [TASK-016] Персонаж: Профессор Штейн (душный интеллектуал)
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан characters/professor_stein.json с полным профилем персонажа
+- Заполнены все поля по схеме PRD 8.4: id, display_name, archetype, backstory, voice_style
+- 4 MUST директивы (машинно проверяемы: regex на аналогии/сравнения, вводные конструкции, counter на предложения)
+- 3 MUST NOT директивы (проверяемы: counter на короткие ответы, regex на восклицания и агрессию)
+- 5 detectable_markers: analogy_present (regex), introductory_phrases (regex), long_reply (counter), no_exclamation (regex), logical_reference (binary_llm)
+- 2 personal_triggers: contradiction_with_previous_answer, silent_for_n_turns (оба → point_out_inconsistency)
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `pending` — Add Professor Stein character profile (TASK-016)
+
+---
+
 ## [TASK-015] Персонаж: Марго (манипулятор)
 **Дата:** 2026-04-19
 **Статус:** done
