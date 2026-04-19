@@ -31,6 +31,25 @@
 
 ---
 
+## [TASK-008] Базовые локации (2 шт для Phase 0)
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан locations.json с 2 локациями: hospital (Больница), airplane (Самолёт)
+- hospital: 4 роли (surgeon, nurse, patient, receptionist)
+- airplane: 5 ролей (pilot, flight_attendant, passenger_business, passenger_economy, air_marshal)
+- Формат соответствует схеме Location из src/models/location.py
+- Все роли имеют уникальные id в рамках своих локаций
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `pending` — будет обновлено после коммита
+
+---
+
 ## [TASK-007] Персонаж: Ким (параноик)
 **Дата:** 2026-04-19
 **Статус:** done
