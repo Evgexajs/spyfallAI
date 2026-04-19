@@ -47,7 +47,7 @@
 - Нет
 
 ### Коммиты
-- `pending` — Add Professor Stein character profile (TASK-016)
+- `5bce13a` — Add Professor Stein character profile (TASK-016)
 
 ---
 
