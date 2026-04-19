@@ -106,6 +106,18 @@ class GameManager:
         for ws in disconnected:
             self.websocket_connections.remove(ws)
 
+    async def on_typing(self, speaker_id: str) -> None:
+        """Callback fired before LLM generation starts - shows typing indicator."""
+        await self.pause_event.wait()
+
+        if self.status == GameStatus.STOPPED:
+            raise asyncio.CancelledError("Game stopped by user")
+
+        await self.broadcast({
+            "type": "typing",
+            "speaker_id": speaker_id,
+        })
+
     async def on_turn(self, turn: Turn, game: Game) -> None:
         """Callback fired after each turn - broadcasts to WebSockets."""
         await self.pause_event.wait()
@@ -180,13 +192,15 @@ class GameManager:
 
             await self.broadcast({"type": "phase", "phase": "main_round"})
             self.game = await run_main_round(
-                self.game, self.characters, provider, on_turn=self.on_turn
+                self.game, self.characters, provider,
+                on_turn=self.on_turn, on_typing=self.on_typing
             )
 
             if self.game.outcome is None and self.status != GameStatus.STOPPED:
                 await self.broadcast({"type": "phase", "phase": "final_vote"})
                 self.game = await run_final_vote(
-                    self.game, self.characters, provider, on_turn=self.on_turn
+                    self.game, self.characters, provider,
+                    on_turn=self.on_turn, on_typing=self.on_typing
                 )
 
             if self.status != GameStatus.STOPPED:

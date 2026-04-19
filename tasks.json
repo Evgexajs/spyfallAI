@@ -719,7 +719,7 @@
         "Шаг 3: Проверить что индикатор исчезает"
       ],
       "dependencies": ["TASK-032", "TASK-026"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-038",

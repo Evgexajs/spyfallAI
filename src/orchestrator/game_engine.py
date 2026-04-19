@@ -611,6 +611,7 @@ async def run_main_round(
     characters: list[Character],
     provider: Optional[LLMProvider] = None,
     on_turn: Optional[callable] = None,
+    on_typing: Optional[callable] = None,
 ) -> Game:
     """Run the main question-answer round of the game.
 
@@ -619,6 +620,7 @@ async def run_main_round(
         characters: List of Character objects participating.
         provider: Optional LLM provider. If None, creates one from config.
         on_turn: Optional callback called after each turn (question, answer, intervention).
+        on_typing: Optional callback called before LLM generation starts with speaker_id.
 
     Returns:
         Updated Game object with turns recorded.
@@ -668,6 +670,9 @@ async def run_main_round(
 
         reroll_count = 0
         question_text = ""
+
+        if on_typing:
+            await on_typing(current_questioner)
 
         for attempt in range(MAX_QUESTION_REROLL_ATTEMPTS + 1):
             question_response = await provider.complete(
@@ -764,6 +769,9 @@ async def run_main_round(
             *history,
             {"role": "user", "content": answer_instruction},
         ]
+
+        if on_typing:
+            await on_typing(target_id)
 
         answer_response = await provider.complete(
             messages=messages,
@@ -893,6 +901,9 @@ async def run_main_round(
             )
 
             if wants_to_intervene:
+                if on_typing:
+                    await on_typing(winner.character_id)
+
                 intervention_content = await _generate_intervention_content(
                     trigger_result=winner,
                     answer_turn=answer_turn,
@@ -967,6 +978,7 @@ async def run_final_vote(
     characters: list[Character],
     provider: Optional[LLMProvider] = None,
     on_turn: Optional[callable] = None,
+    on_typing: Optional[callable] = None,
 ) -> Game:
     """Run the final voting phase of the game.
 
@@ -977,6 +989,8 @@ async def run_final_vote(
         game: Game object after main_round.
         characters: List of Character objects participating.
         provider: Optional LLM provider. If None, creates one from config.
+        on_turn: Optional callback called after each vote turn.
+        on_typing: Optional callback called before LLM generation starts with speaker_id.
 
     Returns:
         Updated Game object with outcome and votes recorded.
@@ -1011,6 +1025,9 @@ async def run_final_vote(
             *history,
             {"role": "user", "content": vote_instruction},
         ]
+
+        if on_typing:
+            await on_typing(voter_id)
 
         vote_llm_response = await provider.complete(
             messages=messages,
