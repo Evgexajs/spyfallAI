@@ -84,6 +84,26 @@ class PhaseEntry(BaseModel):
     reason: Optional[str] = Field(default=None, description="Reason for transition")
 
 
+class TokenUsage(BaseModel):
+    """Accumulated token usage and cost tracking."""
+
+    total_input_tokens: int = Field(default=0, ge=0, description="Total input tokens used")
+    total_output_tokens: int = Field(default=0, ge=0, description="Total output tokens used")
+    total_cost_usd: float = Field(default=0.0, ge=0.0, description="Total cost in USD")
+    llm_calls_count: int = Field(default=0, ge=0, description="Number of LLM calls made")
+
+    @property
+    def total_tokens(self) -> int:
+        return self.total_input_tokens + self.total_output_tokens
+
+    def add_usage(self, input_tokens: int, output_tokens: int, cost: float) -> None:
+        """Add usage from a single LLM call."""
+        self.total_input_tokens += input_tokens
+        self.total_output_tokens += output_tokens
+        self.total_cost_usd += cost
+        self.llm_calls_count += 1
+
+
 class GameOutcome(BaseModel):
     """Final outcome of a game."""
 
@@ -121,6 +141,7 @@ class Game(BaseModel):
     outcome: Optional[GameOutcome] = Field(default=None, description="Final outcome")
     compressed_history: Optional[str] = Field(default=None, description="Compressed summary of old turns")
     compression_checkpoint: Optional[int] = Field(default=None, description="Turn number when last compressed")
+    token_usage: TokenUsage = Field(default_factory=TokenUsage, description="Token usage and cost tracking")
 
     @field_validator("players")
     @classmethod

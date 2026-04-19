@@ -2,10 +2,40 @@ import asyncio
 import json
 import os
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Optional
 
 from openai import APIConnectionError, APIError, APITimeoutError, AsyncOpenAI, RateLimitError
+
+
+MODEL_PRICING: dict[str, dict[str, float]] = {
+    "gpt-4o": {"input": 2.50 / 1_000_000, "output": 10.00 / 1_000_000},
+    "gpt-4o-mini": {"input": 0.15 / 1_000_000, "output": 0.60 / 1_000_000},
+    "gpt-4-turbo": {"input": 10.00 / 1_000_000, "output": 30.00 / 1_000_000},
+    "gpt-3.5-turbo": {"input": 0.50 / 1_000_000, "output": 1.50 / 1_000_000},
+}
+
+
+@dataclass
+class LLMResponse:
+    """Response from LLM with content and usage info."""
+
+    content: str
+    input_tokens: int
+    output_tokens: int
+    model: str
+
+    @property
+    def total_tokens(self) -> int:
+        return self.input_tokens + self.output_tokens
+
+    def calculate_cost(self) -> float:
+        """Calculate cost in USD based on model pricing."""
+        pricing = MODEL_PRICING.get(self.model, MODEL_PRICING.get("gpt-4o"))
+        input_cost = self.input_tokens * pricing["input"]
+        output_cost = self.output_tokens * pricing["output"]
+        return input_cost + output_cost
 
 
 class LLMError(Exception):
@@ -26,6 +56,17 @@ class LLMTimeoutError(LLMError):
     pass
 
 
+class CostExceededError(LLMError):
+    """Raised when game cost exceeds MAX_PARTY_COST_USD."""
+
+    def __init__(self, current_cost: float, max_cost: float):
+        self.current_cost = current_cost
+        self.max_cost = max_cost
+        super().__init__(
+            f"Cost limit exceeded: ${current_cost:.4f} >= ${max_cost:.2f}"
+        )
+
+
 class LLMProvider(ABC):
     """Abstract base class for LLM providers."""
 
@@ -36,7 +77,7 @@ class LLMProvider(ABC):
         model: Optional[str] = None,
         temperature: float = 0.7,
         max_tokens: int = 500,
-    ) -> str:
+    ) -> LLMResponse:
         """Generate a completion from the given messages.
 
         Args:
@@ -46,7 +87,7 @@ class LLMProvider(ABC):
             max_tokens: Maximum tokens in response.
 
         Returns:
-            Generated text response.
+            LLMResponse with content and token usage.
 
         Raises:
             LLMError: On API errors.
@@ -88,7 +129,7 @@ class OpenAIProvider(LLMProvider):
         model: Optional[str] = None,
         temperature: float = 0.7,
         max_tokens: int = 500,
-    ) -> str:
+    ) -> LLMResponse:
         """Generate a completion using OpenAI API."""
         model = model or self._default_model
 
@@ -105,7 +146,17 @@ class OpenAIProvider(LLMProvider):
             content = response.choices[0].message.content
             if content is None:
                 raise LLMError("Empty response from OpenAI")
-            return content
+
+            usage = response.usage
+            input_tokens = usage.prompt_tokens if usage else 0
+            output_tokens = usage.completion_tokens if usage else 0
+
+            return LLMResponse(
+                content=content,
+                input_tokens=input_tokens,
+                output_tokens=output_tokens,
+                model=model,
+            )
 
         except asyncio.TimeoutError:
             raise LLMTimeoutError(f"Request timed out after {self._timeout}s")

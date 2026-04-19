@@ -548,7 +548,7 @@
         "Шаг 3: Установить MAX_PARTY_COST_USD=0.01 и проверить остановку"
       ],
       "dependencies": ["TASK-002"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-029",

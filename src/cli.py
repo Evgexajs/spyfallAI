@@ -11,7 +11,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-from src.llm import LLMConfig, create_provider
+from src.llm import CostExceededError, LLMConfig, create_provider
 from src.models import Character, Game, Turn, TurnType
 from src.orchestrator import load_locations, run_final_vote, run_main_round, setup_game
 from src.storage import save_game
@@ -161,25 +161,47 @@ async def run_game(
     print(colorize("-" * 60, "bold"))
     print()
 
-    game = await run_main_round(game, characters, provider, on_turn=print_turn)
+    cost_exceeded = False
+    try:
+        game = await run_main_round(game, characters, provider, on_turn=print_turn)
 
-    print(colorize("-" * 60, "bold"))
-    print(colorize("FINAL VOTE", "bold"))
-    print(colorize("-" * 60, "bold"))
-    print()
+        if game.outcome is None:
+            print(colorize("-" * 60, "bold"))
+            print(colorize("FINAL VOTE", "bold"))
+            print(colorize("-" * 60, "bold"))
+            print()
 
-    game = await run_final_vote(game, characters, provider, on_turn=print_turn)
+            game = await run_final_vote(game, characters, provider, on_turn=print_turn)
+    except CostExceededError as e:
+        cost_exceeded = True
+        print()
+        print(colorize(f"ОСТАНОВКА: {e}", "red"))
+        game.ended_at = datetime.now()
 
     print(colorize("-" * 60, "bold"))
     print(colorize("RESOLUTION", "bold"))
     print(colorize("-" * 60, "bold"))
     print()
 
-    if game.outcome:
+    if cost_exceeded:
+        print(colorize("Игра прервана: превышен лимит стоимости", "red"))
+    elif game.outcome:
         if game.outcome.winner == "civilians":
             print(colorize(f"Победа мирных! {game.outcome.reason}", "green"))
         else:
             print(colorize(f"Победа шпиона! {game.outcome.reason}", "red"))
+    print()
+
+    print(colorize("-" * 60, "bold"))
+    print(colorize("СТАТИСТИКА", "bold"))
+    print(colorize("-" * 60, "bold"))
+    print()
+    usage = game.token_usage
+    print(f"Токены (вход): {usage.total_input_tokens:,}")
+    print(f"Токены (выход): {usage.total_output_tokens:,}")
+    print(f"Токенов всего: {usage.total_tokens:,}")
+    print(f"LLM вызовов: {usage.llm_calls_count}")
+    print(f"Стоимость: ${usage.total_cost_usd:.4f}")
     print()
 
     filepath = save_game(game)

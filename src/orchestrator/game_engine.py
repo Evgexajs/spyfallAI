@@ -16,7 +16,7 @@ from src.agents import (
     build_spy_confidence_check_prompt,
     build_spy_guess_prompt,
 )
-from src.llm import LLMConfig, LLMProvider, create_provider
+from src.llm import CostExceededError, LLMConfig, LLMProvider, LLMResponse, create_provider
 from src.models import (
     Character,
     ConfidenceEntry,
@@ -37,6 +37,7 @@ from src.triggers import TriggerChecker, TriggerResult, VoteTriggerChecker
 SPEECH_DELAY_MULTIPLIER = float(os.environ.get("SPEECH_DELAY_MULTIPLIER", "0.03"))
 CONTEXT_COMPRESSION_AFTER_N_TURNS = int(os.environ.get("CONTEXT_COMPRESSION_AFTER_N_TURNS", "10"))
 CONTEXT_KEEP_LAST_K_TURNS = int(os.environ.get("CONTEXT_KEEP_LAST_K_TURNS", "6"))
+MAX_PARTY_COST_USD = float(os.environ.get("MAX_PARTY_COST_USD", "3.0"))
 
 
 def calculate_display_delay_ms(content: str) -> int:
@@ -48,6 +49,30 @@ def calculate_display_delay_ms(content: str) -> int:
     random_delay = random.uniform(0.2, 0.6)
     total_seconds = base_delay + random_delay
     return int(total_seconds * 1000)
+
+
+def _track_usage_and_check_cost(game: Game, response: LLMResponse) -> None:
+    """Track token usage from LLM response and check cost limit.
+
+    Args:
+        game: Game to update token usage.
+        response: LLM response with usage info.
+
+    Raises:
+        CostExceededError: If total cost exceeds MAX_PARTY_COST_USD.
+    """
+    cost = response.calculate_cost()
+    game.token_usage.add_usage(
+        input_tokens=response.input_tokens,
+        output_tokens=response.output_tokens,
+        cost=cost,
+    )
+
+    if game.token_usage.total_cost_usd >= MAX_PARTY_COST_USD:
+        raise CostExceededError(
+            current_cost=game.token_usage.total_cost_usd,
+            max_cost=MAX_PARTY_COST_USD,
+        )
 
 
 def load_locations(locations_path: Optional[Path] = None) -> list[Location]:
@@ -224,6 +249,7 @@ async def _compress_history_with_llm(
     turns: list[Turn],
     provider: LLMProvider,
     model: str,
+    game: Game,
 ) -> str:
     """Compress conversation history using utility LLM model.
 
@@ -231,6 +257,7 @@ async def _compress_history_with_llm(
         turns: List of turns to compress.
         provider: LLM provider for the compression.
         model: Model to use (should be utility model).
+        game: Game to track token usage.
 
     Returns:
         Compressed summary of the conversation.
@@ -262,7 +289,8 @@ async def _compress_history_with_llm(
         max_tokens=300,
     )
 
-    return response.strip()
+    _track_usage_and_check_cost(game, response)
+    return response.content.strip()
 
 
 async def _build_compressed_conversation_history(
@@ -304,6 +332,7 @@ async def _build_compressed_conversation_history(
             turns=old_turns,
             provider=provider,
             model=game.config.utility_model,
+            game=game,
         )
         game.compressed_history = compressed
         game.compression_checkpoint = turns_to_compress
@@ -341,6 +370,7 @@ async def _ask_to_intervene(
     characters: list[Character],
     provider: LLMProvider,
     model: str,
+    game: Game,
 ) -> bool:
     """Ask a character if they want to intervene. Returns True if yes."""
     character = _get_character_by_id(characters, trigger_result.character_id)
@@ -358,7 +388,8 @@ async def _ask_to_intervene(
         max_tokens=10,
     )
 
-    response_lower = response.strip().lower()
+    _track_usage_and_check_cost(game, response)
+    response_lower = response.content.strip().lower()
     return "да" in response_lower or "yes" in response_lower
 
 
@@ -388,14 +419,15 @@ async def _generate_intervention_content(
         *history,
     ]
 
-    content = await provider.complete(
+    response = await provider.complete(
         messages=messages,
         model=game.config.main_model,
         temperature=0.9,
         max_tokens=100,
     )
 
-    return content.strip()
+    _track_usage_and_check_cost(game, response)
+    return response.content.strip()
 
 
 async def _check_spy_confidence(
@@ -438,7 +470,8 @@ async def _check_spy_confidence(
         max_tokens=20,
     )
 
-    response_lower = response.strip().lower()
+    _track_usage_and_check_cost(game, response)
+    response_lower = response.content.strip().lower()
 
     if "confident" in response_lower:
         level = ConfidenceLevel.CONFIDENT
@@ -488,7 +521,8 @@ async def _ask_spy_to_guess(
         max_tokens=30,
     )
 
-    response_text = response.strip().lower()
+    _track_usage_and_check_cost(game, response)
+    response_text = response.content.strip().lower()
 
     for loc in available_locations:
         if loc.id.lower() == response_text or loc.id.lower() in response_text:
@@ -556,13 +590,14 @@ async def run_main_round(
             {"role": "user", "content": question_instruction},
         ]
 
-        question_text = await provider.complete(
+        question_response = await provider.complete(
             messages=messages,
             model=game.config.main_model,
             temperature=0.9,
             max_tokens=150,
         )
-        question_text = question_text.strip()
+        _track_usage_and_check_cost(game, question_response)
+        question_text = question_response.content.strip()
 
         turn = Turn(
             turn_number=len(game.turns) + 1,
@@ -595,13 +630,14 @@ async def run_main_round(
             {"role": "user", "content": answer_instruction},
         ]
 
-        answer_text = await provider.complete(
+        answer_response = await provider.complete(
             messages=messages,
             model=game.config.main_model,
             temperature=0.9,
             max_tokens=200,
         )
-        answer_text = answer_text.strip()
+        _track_usage_and_check_cost(game, answer_response)
+        answer_text = answer_response.content.strip()
 
         answer_turn = Turn(
             turn_number=len(game.turns) + 1,
@@ -694,6 +730,7 @@ async def run_main_round(
                 characters=characters,
                 provider=provider,
                 model=game.config.utility_model,
+                game=game,
             )
 
             if wants_to_intervene:
@@ -793,13 +830,14 @@ async def run_final_vote(
             {"role": "user", "content": vote_instruction},
         ]
 
-        vote_response = await provider.complete(
+        vote_llm_response = await provider.complete(
             messages=messages,
             model=game.config.main_model,
             temperature=0.7,
             max_tokens=50,
         )
-        vote_response = vote_response.strip().lower()
+        _track_usage_and_check_cost(game, vote_llm_response)
+        vote_response = vote_llm_response.content.strip().lower()
 
         voted_for = None
         for candidate in candidates:

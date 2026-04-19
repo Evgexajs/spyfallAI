@@ -31,6 +31,32 @@
 
 ---
 
+## [TASK-028] Счётчик токенов и стоимости
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Добавлен MODEL_PRICING dict в src/llm/adapter.py с ценами за токены (gpt-4o, gpt-4o-mini, gpt-4-turbo, gpt-3.5-turbo)
+- Создан dataclass LLMResponse (content, input_tokens, output_tokens, model) с методом calculate_cost()
+- Создан класс исключения CostExceededError для hard kill-switch
+- Обновлён LLMProvider.complete() для возврата LLMResponse вместо строки
+- OpenAIProvider теперь извлекает usage из ответа API (prompt_tokens, completion_tokens)
+- Создана модель TokenUsage (total_input_tokens, total_output_tokens, total_cost_usd, llm_calls_count)
+- Добавлено поле token_usage в модель Game
+- Добавлена функция _track_usage_and_check_cost в orchestrator для трекинга после каждого LLM вызова
+- Обновлены все 8 мест вызова provider.complete() в game_engine.py
+- MAX_PARTY_COST_USD загружается из env (дефолт 3.0)
+- Обновлён CLI: вывод статистики токенов в конце игры, обработка CostExceededError
+- Лог партии содержит полную статистику token_usage
+
+### Проблемы / Заметки
+- Для полного тестирования с реальными вызовами LLM нужен OPENAI_API_KEY
+
+### Коммиты
+- TBD
+
+---
+
 ## [TASK-027] Сжатие контекста (compression)
 **Дата:** 2026-04-19
 **Статус:** done
