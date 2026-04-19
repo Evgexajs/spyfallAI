@@ -31,6 +31,32 @@
 
 ---
 
+## [TASK-031] FastAPI backend setup
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан src/web/__init__.py и src/web/app.py с FastAPI приложением
+- Создана директория src/web/static/ для будущего HTML/JS интерфейса
+- Реализован POST /game/start для запуска новой партии с параметрами
+- Реализованы POST /game/pause, /game/resume, /game/stop для управления партией
+- Реализован GET /game/status для получения текущего состояния
+- Реализованы GET /characters и GET /locations для получения доступных данных
+- Реализован WebSocket /ws для live-обновлений партии
+- Класс GameManager управляет состоянием игры (idle, running, paused, stopped, completed)
+- Используется asyncio.Event для pause/resume и asyncio.CancelledError для stop
+- Все повороты транслируются через WebSocket с turn_type, speaker_id, content, etc.
+- События: game_started, phase, turn, game_paused, game_resumed, game_stopped, game_completed, error
+
+### Проблемы / Заметки
+- Полное тестирование с реальной игрой требует OPENAI_API_KEY
+- Зависимости FastAPI, uvicorn, websockets добавлены в pyproject.toml [web]
+
+### Коммиты
+- `TBD` — Add FastAPI backend setup (TASK-031)
+
+---
+
 ## [TASK-030] Детекция прямых вопросов о локации
 **Дата:** 2026-04-19
 **Статус:** done

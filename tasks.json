@@ -605,7 +605,7 @@
         "Шаг 3: Подключиться к /ws и получить события"
       ],
       "dependencies": ["TASK-014"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-032",
