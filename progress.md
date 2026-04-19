@@ -55,7 +55,7 @@
 - Кнопки Start/Pause/Stop базово работают, но TASK-033 добавит полную функциональность
 
 ### Коммиты
-- (pending commit)
+- `5b0d01c` — Add HTML/JS web interface (TASK-032)
 
 ---
 
