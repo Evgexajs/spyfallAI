@@ -13,6 +13,7 @@ from src.models import (
     Character,
     Game,
     GameConfig,
+    GameOutcome,
     GamePhase,
     Location,
     PhaseEntry,
@@ -295,5 +296,112 @@ async def run_main_round(
 
         question_count += 1
         current_questioner = target_id
+
+    return game
+
+
+async def run_final_vote(
+    game: Game,
+    characters: list[Character],
+    provider: Optional[LLMProvider] = None,
+) -> Game:
+    """Run the final voting phase of the game.
+
+    Each player votes for who they think is the spy.
+    Winner is determined by majority vote.
+
+    Args:
+        game: Game object after main_round.
+        characters: List of Character objects participating.
+        provider: Optional LLM provider. If None, creates one from config.
+
+    Returns:
+        Updated Game object with outcome and votes recorded.
+    """
+    if provider is None:
+        llm_config = LLMConfig()
+        provider, _ = create_provider(llm_config, role="main")
+
+    _transition_phase(game, GamePhase.FINAL_VOTE, "Final voting started")
+
+    player_ids = [p.character_id for p in game.players]
+    votes: dict[str, str] = {}
+
+    for voter_player in game.players:
+        voter_id = voter_player.character_id
+        voter_char = _get_character_by_id(characters, voter_id)
+        voter_secret = _get_secret_info(game, voter_player)
+        voter_prompt = build_system_prompt(voter_char, game, voter_secret)
+
+        candidates = [pid for pid in player_ids if pid != voter_id]
+        candidates_str = ", ".join(candidates)
+
+        history = _build_conversation_history(game)
+        vote_instruction = (
+            f"Ты — {voter_char.display_name}. Время голосования. "
+            f"Кто из игроков, по-твоему, шпион? Выбери ОДНОГО из: {candidates_str}. "
+            f"Напиши ТОЛЬКО имя (id) игрока, за которого голосуешь, без пояснений."
+        )
+
+        messages = [
+            {"role": "system", "content": voter_prompt},
+            *history,
+            {"role": "user", "content": vote_instruction},
+        ]
+
+        vote_response = await provider.complete(
+            messages=messages,
+            model=game.config.main_model,
+            temperature=0.7,
+            max_tokens=50,
+        )
+        vote_response = vote_response.strip().lower()
+
+        voted_for = None
+        for candidate in candidates:
+            if candidate.lower() in vote_response or vote_response in candidate.lower():
+                voted_for = candidate
+                break
+
+        if voted_for is None:
+            voted_for = random.choice(candidates)
+
+        votes[voter_id] = voted_for
+
+        game.turns.append(Turn(
+            turn_number=len(game.turns) + 1,
+            timestamp=datetime.now(),
+            speaker_id=voter_id,
+            addressee_id="all",
+            type=TurnType.VOTE,
+            content=f"Голосую за {voted_for}",
+            display_delay_ms=0,
+        ))
+
+    vote_counts: dict[str, int] = {}
+    for voted_for in votes.values():
+        vote_counts[voted_for] = vote_counts.get(voted_for, 0) + 1
+
+    max_votes = max(vote_counts.values())
+    top_voted = [pid for pid, count in vote_counts.items() if count == max_votes]
+    accused = random.choice(top_voted) if len(top_voted) > 1 else top_voted[0]
+
+    spy_caught = accused == game.spy_id
+
+    if spy_caught:
+        winner = "civilians"
+        reason = f"Шпион ({game.spy_id}) был разоблачён голосованием"
+    else:
+        winner = "spy"
+        reason = f"Мирные обвинили {accused}, но шпионом был {game.spy_id}"
+
+    game.outcome = GameOutcome(
+        winner=winner,
+        reason=reason,
+        votes=votes,
+    )
+
+    game.ended_at = datetime.now()
+    _transition_phase(game, GamePhase.RESOLUTION, f"Game ended: {winner} won")
 
     return game

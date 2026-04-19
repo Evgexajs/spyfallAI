@@ -5,6 +5,7 @@ from src.orchestrator.game_engine import (
     load_locations,
     get_location_by_id,
     run_main_round,
+    run_final_vote,
 )
 
 __all__ = [
@@ -12,4 +13,5 @@ __all__ = [
     "load_locations",
     "get_location_by_id",
     "run_main_round",
+    "run_final_vote",
 ]

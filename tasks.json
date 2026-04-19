@@ -244,7 +244,7 @@
         "Шаг 3: Проверить что winner определён корректно"
       ],
       "dependencies": ["TASK-011"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-013",
