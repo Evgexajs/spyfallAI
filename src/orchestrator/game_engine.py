@@ -7,7 +7,12 @@ from pathlib import Path
 from typing import Optional
 from uuid import uuid4
 
-from src.agents import SecretInfo, build_system_prompt
+from src.agents import (
+    SecretInfo,
+    build_system_prompt,
+    build_intervention_micro_prompt,
+    build_intervention_content_prompt,
+)
 from src.llm import LLMConfig, LLMProvider, create_provider
 from src.models import (
     Character,
@@ -21,6 +26,7 @@ from src.models import (
     Turn,
     TurnType,
 )
+from src.triggers import TriggerChecker, TriggerResult
 
 
 def load_locations(locations_path: Optional[Path] = None) -> list[Location]:
@@ -190,6 +196,69 @@ def _select_target(players: list[Player], questioner_id: str) -> str:
     return random.choice(candidates)
 
 
+async def _ask_to_intervene(
+    trigger_result: TriggerResult,
+    answer_turn: Turn,
+    characters: list[Character],
+    provider: LLMProvider,
+    model: str,
+) -> bool:
+    """Ask a character if they want to intervene. Returns True if yes."""
+    character = _get_character_by_id(characters, trigger_result.character_id)
+
+    prompt = build_intervention_micro_prompt(
+        character=character,
+        answer_turn=answer_turn,
+        reaction_type=trigger_result.reaction_type,
+    )
+
+    response = await provider.complete(
+        messages=[{"role": "user", "content": prompt}],
+        model=model,
+        temperature=0.7,
+        max_tokens=10,
+    )
+
+    response_lower = response.strip().lower()
+    return "да" in response_lower or "yes" in response_lower
+
+
+async def _generate_intervention_content(
+    trigger_result: TriggerResult,
+    answer_turn: Turn,
+    game: Game,
+    characters: list[Character],
+    provider: LLMProvider,
+) -> str:
+    """Generate the intervention content for a character."""
+    character = _get_character_by_id(characters, trigger_result.character_id)
+    player = next(p for p in game.players if p.character_id == character.id)
+    secret_info = _get_secret_info(game, player)
+
+    prompt = build_intervention_content_prompt(
+        character=character,
+        game=game,
+        secret_info=secret_info,
+        answer_turn=answer_turn,
+        reaction_type=trigger_result.reaction_type,
+    )
+
+    history = _build_conversation_history(game)
+    messages = [
+        {"role": "system", "content": prompt},
+        *history,
+    ]
+
+    content = await provider.complete(
+        messages=messages,
+        model=game.config.main_model,
+        temperature=0.9,
+        max_tokens=100,
+    )
+
+    return content.strip()
+
+
 async def run_main_round(
     game: Game,
     characters: list[Character],
@@ -202,6 +271,7 @@ async def run_main_round(
         game: Initialized Game object from setup_game().
         characters: List of Character objects participating.
         provider: Optional LLM provider. If None, creates one from config.
+        on_turn: Optional callback called after each turn (question, answer, intervention).
 
     Returns:
         Updated Game object with turns recorded.
@@ -211,6 +281,8 @@ async def run_main_round(
         provider, _ = create_provider(llm_config, role="main")
 
     _transition_phase(game, GamePhase.MAIN_ROUND, "Main round started")
+
+    trigger_checker = TriggerChecker(characters)
 
     player_ids = [p.character_id for p in game.players]
     current_questioner = random.choice(player_ids)
@@ -288,7 +360,7 @@ async def run_main_round(
         )
         answer_text = answer_text.strip()
 
-        turn = Turn(
+        answer_turn = Turn(
             turn_number=len(game.turns) + 1,
             timestamp=datetime.now(),
             speaker_id=target_id,
@@ -297,9 +369,54 @@ async def run_main_round(
             content=answer_text,
             display_delay_ms=0,
         )
-        game.turns.append(turn)
+        game.turns.append(answer_turn)
         if on_turn:
-            on_turn(turn, game)
+            on_turn(answer_turn, game)
+
+        trigger_checker.update_silence_counters(answer_turn)
+
+        trigger_results = trigger_checker.check_all_characters(answer_turn, game)
+        winner = trigger_checker.select_winner(trigger_results)
+
+        if winner:
+            wants_to_intervene = await _ask_to_intervene(
+                trigger_result=winner,
+                answer_turn=answer_turn,
+                characters=characters,
+                provider=provider,
+                model=game.config.utility_model,
+            )
+
+            if wants_to_intervene:
+                intervention_content = await _generate_intervention_content(
+                    trigger_result=winner,
+                    answer_turn=answer_turn,
+                    game=game,
+                    characters=characters,
+                    provider=provider,
+                )
+
+                intervention_turn = Turn(
+                    turn_number=len(game.turns) + 1,
+                    timestamp=datetime.now(),
+                    speaker_id=winner.character_id,
+                    addressee_id=answer_turn.speaker_id,
+                    type=TurnType.INTERVENTION,
+                    content=intervention_content,
+                    display_delay_ms=0,
+                )
+                game.turns.append(intervention_turn)
+                if on_turn:
+                    on_turn(intervention_turn, game)
+
+                trigger_checker.update_silence_counters(intervention_turn)
+
+            trigger_event = trigger_checker.create_trigger_event(
+                result=winner,
+                turn_number=answer_turn.turn_number,
+                intervened=wants_to_intervene,
+            )
+            game.triggered_events.append(trigger_event)
 
         question_count += 1
         current_questioner = target_id

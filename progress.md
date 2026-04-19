@@ -31,6 +31,28 @@
 
 ---
 
+## [TASK-022] Система триггеров: окна вмешательства
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Добавлены функции build_intervention_micro_prompt и build_intervention_content_prompt в src/agents/prompt_builder.py
+- Обновлён src/agents/__init__.py с экспортами новых функций
+- Добавлены вспомогательные функции _ask_to_intervene и _generate_intervention_content в src/orchestrator/game_engine.py
+- Интегрирована проверка триггеров в run_main_round: после каждого ответа вызывается TriggerChecker
+- Реализована конкуренция по приоритету (highest wins): TriggerChecker.select_winner выбирает победителя
+- Микро-промпт победителю: спрашивает "да"/"нет" через utility модель
+- Вмешательство записывается как Turn с type=INTERVENTION
+- TriggerEvent логируется в game.triggered_events с флагом intervened
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `TBD` — Add intervention windows for trigger system (TASK-022)
+
+---
+
 ## [TASK-021] Система триггеров: глобальные правила
 **Дата:** 2026-04-19
 **Статус:** done

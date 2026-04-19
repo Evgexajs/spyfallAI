@@ -434,7 +434,7 @@
         "Шаг 3: Проверить что intervention записан в лог"
       ],
       "dependencies": ["TASK-021", "TASK-011"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-023",

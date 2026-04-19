@@ -3,9 +3,9 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from src.models.character import Character
+from src.models.character import Character, ReactionType
 from src.models.location import Location, Role
-from src.models.game import Game, Player
+from src.models.game import Game, Player, Turn
 
 
 @dataclass
@@ -199,3 +199,58 @@ def build_system_prompt(
     ]
 
     return "\n".join(sections)
+
+
+REACTION_TYPE_DESCRIPTIONS = {
+    ReactionType.PRESSURE_WITH_SHARPER_QUESTION: "задать резкий уточняющий вопрос, надавить",
+    ReactionType.MOCK_WITH_DRY_SARCASM: "высмеять с сухим сарказмом",
+    ReactionType.MORALIZE_AND_ACCUSE: "морализировать и обвинить",
+    ReactionType.PANIC_AND_DERAIL: "нервно отреагировать, увести тему",
+    ReactionType.POINT_OUT_INCONSISTENCY: "указать на противоречие",
+    ReactionType.DEFLECT_SUSPICION_TO_ANOTHER: "перевести подозрение на другого",
+    ReactionType.SHORT_DISMISSIVE_JAB: "коротко обрубить, отмахнуться",
+}
+
+
+def build_intervention_micro_prompt(
+    character: Character,
+    answer_turn: Turn,
+    reaction_type: ReactionType,
+) -> str:
+    """Build micro-prompt asking if character wants to intervene."""
+    reaction_desc = REACTION_TYPE_DESCRIPTIONS.get(
+        reaction_type, "отреагировать в своём стиле"
+    )
+
+    return f"""Ты — {character.display_name} ({character.archetype}).
+
+Только что {answer_turn.speaker_id} ответил: «{answer_turn.content}»
+
+Это показалось тебе подозрительным. Твой стиль реакции: {reaction_desc}.
+
+Хочешь вмешаться? Ответь ТОЛЬКО "да" или "нет"."""
+
+
+def build_intervention_content_prompt(
+    character: Character,
+    game: Game,
+    secret_info: SecretInfo,
+    answer_turn: Turn,
+    reaction_type: ReactionType,
+) -> str:
+    """Build prompt for generating intervention content."""
+    reaction_desc = REACTION_TYPE_DESCRIPTIONS.get(
+        reaction_type, "отреагировать в своём стиле"
+    )
+
+    base_prompt = build_system_prompt(character, game, secret_info)
+
+    return f"""{base_prompt}
+
+=== ВМЕШАТЕЛЬСТВО ===
+
+Только что {answer_turn.speaker_id} ответил: «{answer_turn.content}»
+
+Ты решил вмешаться. Твоя реакция: {reaction_desc}.
+
+Напиши ОДНУ фразу вмешательства в своём стиле. Не более 1-2 предложений."""

@@ -1,5 +1,15 @@
 """Agent prompt building and management for SpyfallAI."""
 
-from src.agents.prompt_builder import build_system_prompt, SecretInfo
+from src.agents.prompt_builder import (
+    build_system_prompt,
+    build_intervention_micro_prompt,
+    build_intervention_content_prompt,
+    SecretInfo,
+)
 
-__all__ = ["build_system_prompt", "SecretInfo"]
+__all__ = [
+    "build_system_prompt",
+    "build_intervention_micro_prompt",
+    "build_intervention_content_prompt",
+    "SecretInfo",
+]
