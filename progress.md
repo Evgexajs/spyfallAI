@@ -47,7 +47,7 @@
 - Нет
 
 ### Коммиты
-- (pending)
+- `223b146` — Add Boris Molot character profile for TASK-005
 
 ---
 
