@@ -263,7 +263,7 @@
         "Шаг 3: Загрузить файл и проверить структуру"
       ],
       "dependencies": ["TASK-004"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-014",

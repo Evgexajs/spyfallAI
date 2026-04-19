@@ -31,6 +31,25 @@
 
 ---
 
+## [TASK-013] Логирование партий в JSON
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан src/storage/game_repository.py с функциями save_game, load_game, list_games
+- Создан src/storage/__init__.py с экспортами
+- save_game(game) сохраняет в games/{timestamp}_{id}.json
+- Логи никогда не перезаписываются (FileExistsError при дубликате)
+- Полная структура Game из PRD сериализуется корректно
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `TBD` — Add game repository for JSON logging (TASK-013)
+
+---
+
 ## [TASK-012] Оркестратор: Голосование и Resolution
 **Дата:** 2026-04-19
 **Статус:** done
