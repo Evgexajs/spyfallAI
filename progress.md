@@ -31,6 +31,36 @@
 
 ---
 
+## [TASK-043] Статистика побед шпиона
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан src/analysis/spy_statistics.py с полной системой статистики побед шпиона
+- VictoryType enum: 7 типов исхода (spy_guessed_location, civilians_voted_wrong, civilians_voted_correctly, spy_guess_incorrect, spy_leaked_location, cancelled, unknown)
+- GameResult dataclass: результат одной игры (spy_won, victory_type, spy_id, location_id, players_count, duration, etc.)
+- SpyStatistics dataclass: агрегированная статистика (total_games, spy_wins, civilian_wins, разбивка по типам)
+- Свойство spy_win_rate: подсчёт win rate в процентах
+- Свойство is_balanced: проверка целевого диапазона 30-50%
+- Группировка по количеству игроков (by_player_count) и локациям (by_location)
+- Функция determine_victory_type: определение типа победы по GameOutcome
+- Функция analyze_game_for_spy_stats: анализ одной игры
+- Функция analyze_games_for_spy_stats: анализ серии игр
+- Функция load_and_analyze_games: загрузка из games/ и анализ
+- Функция generate_spy_report: генерация текстового отчёта для калибровки
+- Отчёт содержит: общую статистику, разбивку по типу победы, по игрокам, по локациям, рекомендации
+- Создан tests/test_spy_statistics.py с 31 тестами (все проходят)
+- Обновлён src/analysis/__init__.py с экспортами
+
+### Проблемы / Заметки
+- Для прогона 20+ партий требуется OPENAI_API_KEY
+- Тесты работают на mock-данных без реальных API-вызовов
+
+### Коммиты
+- (pending commit)
+
+---
+
 ## [TASK-042] Метрики характерности персонажей
 **Дата:** 2026-04-19
 **Статус:** done
