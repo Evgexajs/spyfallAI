@@ -1067,6 +1067,7 @@ async def run_final_vote(
         winner=winner,
         reason=reason,
         votes=votes,
+        accused_id=accused,
     )
 
     game.ended_at = datetime.now()

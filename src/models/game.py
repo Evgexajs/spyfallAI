@@ -108,11 +108,12 @@ class TokenUsage(BaseModel):
 class GameOutcome(BaseModel):
     """Final outcome of a game."""
 
-    winner: str = Field(description="Winner: 'spy' or 'civilians'")
+    winner: str = Field(description="Winner: 'spy', 'civilians', or 'cancelled'")
     reason: str = Field(min_length=1, description="Why this outcome occurred")
     votes: Optional[dict[str, str]] = Field(default=None, description="Who voted for whom")
     spy_guess: Optional[str] = Field(default=None, description="Location guessed by spy (if applicable)")
     spy_guess_correct: Optional[bool] = Field(default=None, description="Whether spy guess was correct")
+    accused_id: Optional[str] = Field(default=None, description="Who was accused (if applicable)")
 
 
 class GameConfig(BaseModel):

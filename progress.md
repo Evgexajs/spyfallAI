@@ -31,6 +31,29 @@
 
 ---
 
+## [TASK-034] Kill-switch для inflight LLM запросов
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Добавлен set inflight_tasks в GameManager для отслеживания активных LLM запросов
+- Добавлены методы: register_inflight_task(), unregister_inflight_task(), cancel_all_inflight_tasks()
+- Stop теперь отменяет все inflight tasks через cancel_all_inflight_tasks()
+- Добавлена обработка asyncio.CancelledError с установкой outcome=cancelled
+- Обновлён GameOutcome: добавлено поле accused_id, поддержка winner="cancelled"
+- CostExceededError и общие Exception теперь также устанавливают outcome=cancelled и сохраняют лог
+- reset() очищает inflight_tasks set
+- Добавлены тесты в tests/test_killswitch.py (5 тестов, все проходят)
+- Обновлён run_final_vote() для установки accused_id в GameOutcome
+
+### Проблемы / Заметки
+- Полное тестирование с реальной игрой требует OPENAI_API_KEY
+
+### Коммиты
+- (pending commit)
+
+---
+
 ## [TASK-033] Кнопки Start/Pause/Resume/Stop
 **Дата:** 2026-04-19
 **Статус:** done

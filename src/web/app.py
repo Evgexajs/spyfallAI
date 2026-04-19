@@ -16,7 +16,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from src.llm import CostExceededError, LLMConfig, create_provider
-from src.models import Character, Game, Turn, TurnType
+from src.models import Character, Game, GameOutcome, Turn, TurnType
 from src.orchestrator import load_locations, run_final_vote, run_main_round, setup_game
 from src.storage import save_game
 
@@ -59,6 +59,7 @@ class GameManager:
         self.characters: list[Character] = []
         self.status: GameStatus = GameStatus.IDLE
         self.task: Optional[asyncio.Task] = None
+        self.inflight_tasks: set[asyncio.Task] = set()
         self.pause_event: asyncio.Event = asyncio.Event()
         self.pause_event.set()
         self.websocket_connections: list[WebSocket] = []
@@ -78,6 +79,21 @@ class GameManager:
         """List all available character IDs."""
         characters_dir = Path(__file__).parent.parent.parent / "characters"
         return [f.stem for f in characters_dir.glob("*.json")]
+
+    def register_inflight_task(self, task: asyncio.Task) -> None:
+        """Register an inflight LLM task for tracking."""
+        self.inflight_tasks.add(task)
+
+    def unregister_inflight_task(self, task: asyncio.Task) -> None:
+        """Unregister an inflight LLM task."""
+        self.inflight_tasks.discard(task)
+
+    def cancel_all_inflight_tasks(self) -> None:
+        """Cancel all tracked inflight tasks."""
+        for task in list(self.inflight_tasks):
+            if not task.done():
+                task.cancel()
+        self.inflight_tasks.clear()
 
     async def broadcast(self, message: dict) -> None:
         """Send message to all connected WebSocket clients."""
@@ -197,6 +213,11 @@ class GameManager:
             self.status = GameStatus.STOPPED
             if self.game:
                 self.game.ended_at = datetime.now()
+                if self.game.outcome is None:
+                    self.game.outcome = GameOutcome(
+                        winner="cancelled",
+                        reason="Game stopped by user",
+                    )
                 save_game(self.game)
             await self.broadcast({
                 "type": "game_stopped",
@@ -207,6 +228,11 @@ class GameManager:
             self.error_message = str(e)
             if self.game:
                 self.game.ended_at = datetime.now()
+                if self.game.outcome is None:
+                    self.game.outcome = GameOutcome(
+                        winner="cancelled",
+                        reason=f"Cost limit exceeded: {e}",
+                    )
                 save_game(self.game)
             await self.broadcast({
                 "type": "error",
@@ -217,6 +243,12 @@ class GameManager:
             self.error_message = str(e)
             if self.game:
                 self.game.ended_at = datetime.now()
+                if self.game.outcome is None:
+                    self.game.outcome = GameOutcome(
+                        winner="cancelled",
+                        reason=f"Error: {e}",
+                    )
+                save_game(self.game)
             await self.broadcast({
                 "type": "error",
                 "error": str(e),
@@ -258,12 +290,14 @@ class GameManager:
         self.pause_event.set()
 
     def stop(self) -> None:
-        """Stop the current game."""
+        """Stop the current game and cancel all inflight LLM requests."""
         if self.status not in (GameStatus.RUNNING, GameStatus.PAUSED):
             raise HTTPException(status_code=400, detail="No game to stop")
 
         self.status = GameStatus.STOPPED
         self.pause_event.set()
+
+        self.cancel_all_inflight_tasks()
 
         if self.task and not self.task.done():
             self.task.cancel()
@@ -274,6 +308,7 @@ class GameManager:
         self.characters = []
         self.status = GameStatus.IDLE
         self.task = None
+        self.inflight_tasks.clear()
         self.pause_event.set()
         self.error_message = ""
 

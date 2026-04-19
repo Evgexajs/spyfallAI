@@ -662,7 +662,7 @@
         "Шаг 3: Проверить что запрос отменён и лог сохранён"
       ],
       "dependencies": ["TASK-033"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-035",
