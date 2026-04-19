@@ -31,6 +31,27 @@
 
 ---
 
+## [TASK-011] Оркестратор: Основной цикл вопрос-ответ
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Добавлена функция run_main_round(game, characters, provider) в src/orchestrator/game_engine.py
+- Реализован round-robin цикл: вопрос → ответ → следующий questioner = answerer
+- Правило: target выбирается случайно среди всех кроме задающего
+- Каждый ход записывается в game.turns как объект Turn
+- Условия выхода: таймер (duration_minutes) или лимит вопросов (max_questions)
+- Добавлены helper-функции: _transition_phase, _get_secret_info, _build_conversation_history, _get_character_by_id, _select_target
+- Обновлен __init__.py оркестратора с экспортом run_main_round
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- (будет добавлен после коммита)
+
+---
+
 ## [TASK-010] Оркестратор: Setup фаза
 **Дата:** 2026-04-19
 **Статус:** done

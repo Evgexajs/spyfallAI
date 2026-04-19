@@ -225,7 +225,7 @@
         "Шаг 3: Проверить что никто не задаёт вопрос самому себе"
       ],
       "dependencies": ["TASK-010", "TASK-002", "TASK-009"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-012",
