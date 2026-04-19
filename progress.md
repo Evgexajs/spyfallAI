@@ -48,7 +48,7 @@
 - Полный тест игры требует OPENAI_API_KEY в .env
 
 ### Коммиты
-- (pending)
+- `e6f3503` — Add CLI entry point for Phase 0 (TASK-014)
 
 ---
 
