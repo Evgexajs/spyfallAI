@@ -132,6 +132,33 @@
             font-style: italic;
             margin-left: 1rem;
             border-left-color: #f59e0b;
+            background-color: rgba(245, 158, 11, 0.1);
+        }
+
+        .message.vote {
+            background-color: rgba(139, 92, 246, 0.15);
+            border-left-color: #8b5cf6;
+            border-left-width: 6px;
+            border: 2px solid #8b5cf6;
+            border-left-width: 6px;
+        }
+
+        .message.vote .message-content {
+            font-weight: 500;
+        }
+
+        .message.spy_guess {
+            background-color: rgba(239, 68, 68, 0.15);
+            border-left-color: #ef4444;
+            border: 2px solid #ef4444;
+            border-left-width: 6px;
+        }
+
+        .message.spy_leak {
+            background-color: rgba(220, 38, 38, 0.2);
+            border-left-color: #dc2626;
+            border: 2px dashed #dc2626;
+            border-left-width: 6px;
         }
 
         .message-addressee {
@@ -719,8 +746,9 @@
             const msg = document.createElement('div');
             msg.className = 'message';
 
-            if (data.turn_type === 'intervention') {
-                msg.classList.add('intervention');
+            const styledTypes = ['intervention', 'vote', 'spy_guess', 'spy_leak'];
+            if (styledTypes.includes(data.turn_type)) {
+                msg.classList.add(data.turn_type);
             }
 
             const color = getPlayerColor(data.speaker_id);

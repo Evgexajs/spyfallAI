@@ -738,7 +738,7 @@
         "Шаг 3: Проверить стиль голосования"
       ],
       "dependencies": ["TASK-032", "TASK-022"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-039",
