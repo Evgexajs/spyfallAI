@@ -852,7 +852,7 @@
         "Шаг 3: Проверить .env.example"
       ],
       "dependencies": ["TASK-001"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-045",

@@ -31,6 +31,34 @@
 
 ---
 
+## [TASK-044] Безопасность API ключей
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Проверено: .env в .gitignore (строка 2)
+- Проверено: .env.example содержит пустые значения для OPENAI_API_KEY и ANTHROPIC_API_KEY
+- Проверено: llm_config.json хранит имена env-переменных (api_key_env), не сами ключи
+- Проверено: adapter.py загружает ключи через os.getenv()
+- Проверено: Game/GameConfig модели не содержат полей с ключами
+- Создан tests/test_api_key_security.py с 7 тестами безопасности:
+  - test_env_in_gitignore: .env в .gitignore
+  - test_env_example_has_no_real_values: пустые значения ключей
+  - test_game_model_has_no_api_key_fields: нет полей с ключами в моделях
+  - test_llm_config_stores_env_names_not_keys: env-имена, не ключи
+  - test_no_api_keys_in_game_logs: проверка логов партий
+  - test_adapter_uses_env_vars: загрузка из env
+  - test_no_hardcoded_keys_in_source: нет хардкода в коде
+
+### Проблемы / Заметки
+- Все acceptance criteria уже были выполнены в предыдущих задачах
+- Добавлен формальный тест для регрессионной проверки
+
+### Коммиты
+- `a9ae72b` — Add API key security tests (TASK-044)
+
+---
+
 ## [TASK-043] Статистика побед шпиона
 **Дата:** 2026-04-19
 **Статус:** done
