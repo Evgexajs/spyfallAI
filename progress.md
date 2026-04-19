@@ -52,7 +52,7 @@
 - Тесты автоматически пропускаются если ключ не установлен
 
 ### Коммиты
-- `TBD` — Add integration tests for 4 players (TASK-040)
+- `23318c9` — Add integration tests for 4 players (TASK-040)
 
 ---
 
