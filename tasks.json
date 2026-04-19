@@ -472,7 +472,7 @@
         "Шаг 3: Проверить outcome (win/lose)"
       ],
       "dependencies": ["TASK-023"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-025",

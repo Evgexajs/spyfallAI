@@ -290,3 +290,44 @@ def build_spy_confidence_check_prompt(
 - "confident" — уверен, знаю локацию
 
 Ответь ОДНИМ словом: no_idea, few_guesses или confident."""
+
+
+def build_spy_guess_prompt(
+    character: Character,
+    recent_turns: list[Turn],
+    available_locations: list[Location],
+) -> str:
+    """Build prompt for spy to guess the location.
+
+    Args:
+        character: The spy's character profile.
+        recent_turns: Recent turns for context.
+        available_locations: All available locations to choose from.
+
+    Returns:
+        Prompt asking spy to name the location.
+    """
+    recent_context = ""
+    if recent_turns:
+        lines = []
+        for turn in recent_turns[-10:]:
+            prefix = f"[{turn.speaker_id} → {turn.addressee_id}]"
+            lines.append(f"{prefix} {turn.content}")
+        recent_context = "\n".join(lines)
+
+    locations_list = "\n".join(
+        f"• {loc.id} — {loc.display_name}" for loc in available_locations
+    )
+
+    return f"""Ты — {character.display_name} ({character.archetype}). Ты — ШПИОН в этой игре.
+
+Ты уверен, что понял, где находятся игроки. Это твой шанс угадать локацию и выиграть!
+
+Последние реплики:
+{recent_context}
+
+Доступные локации:
+{locations_list}
+
+Какая локация? Напиши ТОЛЬКО id локации (например: hospital, airplane, restaurant).
+Одно слово, без пояснений."""

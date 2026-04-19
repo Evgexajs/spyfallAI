@@ -14,6 +14,7 @@ from src.agents import (
     build_intervention_micro_prompt,
     build_intervention_content_prompt,
     build_spy_confidence_check_prompt,
+    build_spy_guess_prompt,
 )
 from src.llm import LLMConfig, LLMProvider, create_provider
 from src.models import (
@@ -321,6 +322,47 @@ async def _check_spy_confidence(
     return entry, answer_count
 
 
+async def _ask_spy_to_guess(
+    game: Game,
+    characters: list[Character],
+    provider: LLMProvider,
+) -> Optional[str]:
+    """Ask spy to guess the location.
+
+    Args:
+        game: Current game state.
+        characters: List of characters.
+        provider: LLM provider for the guess.
+
+    Returns:
+        Location ID guessed by spy, or None if parsing failed.
+    """
+    spy_character = _get_character_by_id(characters, game.spy_id)
+    recent_turns = game.turns[-10:] if game.turns else []
+    available_locations = load_locations()
+
+    prompt = build_spy_guess_prompt(
+        character=spy_character,
+        recent_turns=recent_turns,
+        available_locations=available_locations,
+    )
+
+    response = await provider.complete(
+        messages=[{"role": "user", "content": prompt}],
+        model=game.config.utility_model,
+        temperature=0.3,
+        max_tokens=30,
+    )
+
+    response_text = response.strip().lower()
+
+    for loc in available_locations:
+        if loc.id.lower() == response_text or loc.id.lower() in response_text:
+            return loc.id
+
+    return None
+
+
 async def run_main_round(
     game: Game,
     characters: list[Character],
@@ -448,6 +490,57 @@ async def run_main_round(
         )
         if confidence_entry:
             game.spy_confidence_log.append(confidence_entry)
+
+            if confidence_entry.level == ConfidenceLevel.CONFIDENT:
+                guessed_location_id = await _ask_spy_to_guess(
+                    game=game,
+                    characters=characters,
+                    provider=provider,
+                )
+
+                if guessed_location_id:
+                    actual_location = get_location_by_id(game.location_id)
+                    guessed_correct = guessed_location_id == game.location_id
+
+                    if guessed_correct:
+                        guessed_location = actual_location
+                    else:
+                        try:
+                            guessed_location = get_location_by_id(guessed_location_id)
+                        except ValueError:
+                            guessed_location = None
+
+                    guess_turn = Turn(
+                        turn_number=len(game.turns) + 1,
+                        timestamp=datetime.now(),
+                        speaker_id=game.spy_id,
+                        addressee_id="all",
+                        type=TurnType.SPY_GUESS,
+                        content=f"Я думаю, мы находимся в: {guessed_location.display_name if guessed_location else guessed_location_id}",
+                        display_delay_ms=0,
+                    )
+                    game.turns.append(guess_turn)
+                    if on_turn:
+                        on_turn(guess_turn, game)
+
+                    if guessed_correct:
+                        game.outcome = GameOutcome(
+                            winner="spy",
+                            reason=f"Шпион ({game.spy_id}) угадал локацию: {actual_location.display_name}",
+                            spy_guess=guessed_location_id,
+                            spy_guess_correct=True,
+                        )
+                    else:
+                        game.outcome = GameOutcome(
+                            winner="civilians",
+                            reason=f"Шпион ({game.spy_id}) неправильно угадал: {guessed_location.display_name if guessed_location else guessed_location_id} (на самом деле: {actual_location.display_name})",
+                            spy_guess=guessed_location_id,
+                            spy_guess_correct=False,
+                        )
+
+                    game.ended_at = datetime.now()
+                    _transition_phase(game, GamePhase.RESOLUTION, f"Spy guessed location: {'correct' if guessed_correct else 'wrong'}")
+                    return game
 
         trigger_checker.update_silence_counters(answer_turn)
 
