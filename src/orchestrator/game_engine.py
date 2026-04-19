@@ -1,6 +1,7 @@
 """Game orchestrator for SpyfallAI - setup and game flow management."""
 
 import json
+import os
 import random
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -12,10 +13,13 @@ from src.agents import (
     build_system_prompt,
     build_intervention_micro_prompt,
     build_intervention_content_prompt,
+    build_spy_confidence_check_prompt,
 )
 from src.llm import LLMConfig, LLMProvider, create_provider
 from src.models import (
     Character,
+    ConfidenceEntry,
+    ConfidenceLevel,
     Game,
     GameConfig,
     GameOutcome,
@@ -259,6 +263,64 @@ async def _generate_intervention_content(
     return content.strip()
 
 
+async def _check_spy_confidence(
+    game: Game,
+    characters: list[Character],
+    provider: LLMProvider,
+    answer_count: int,
+    last_check_answer_count: int,
+) -> tuple[Optional[ConfidenceEntry], int]:
+    """Check spy's confidence level every N answers.
+
+    Args:
+        game: Current game state.
+        characters: List of characters.
+        provider: LLM provider for the check.
+        answer_count: Current number of answers in the game.
+        last_check_answer_count: Answer count at last check.
+
+    Returns:
+        Tuple of (ConfidenceEntry or None, updated last_check_answer_count).
+    """
+    check_interval = int(os.getenv("SPY_CONFIDENCE_CHECK_EVERY_N", "3"))
+
+    if answer_count - last_check_answer_count < check_interval:
+        return None, last_check_answer_count
+
+    spy_character = _get_character_by_id(characters, game.spy_id)
+
+    recent_turns = game.turns[-6:] if game.turns else []
+
+    prompt = build_spy_confidence_check_prompt(
+        character=spy_character,
+        recent_turns=recent_turns,
+    )
+
+    response = await provider.complete(
+        messages=[{"role": "user", "content": prompt}],
+        model=game.config.utility_model,
+        temperature=0.5,
+        max_tokens=20,
+    )
+
+    response_lower = response.strip().lower()
+
+    if "confident" in response_lower:
+        level = ConfidenceLevel.CONFIDENT
+    elif "few_guesses" in response_lower or "few" in response_lower:
+        level = ConfidenceLevel.FEW_GUESSES
+    else:
+        level = ConfidenceLevel.NO_IDEA
+
+    entry = ConfidenceEntry(
+        turn_number=max(1, len(game.turns)),
+        timestamp=datetime.now(),
+        level=level,
+    )
+
+    return entry, answer_count
+
+
 async def run_main_round(
     game: Game,
     characters: list[Character],
@@ -290,6 +352,8 @@ async def run_main_round(
     start_time = game.started_at
     duration = timedelta(minutes=game.config.duration_minutes)
     question_count = 0
+    answer_count = 0
+    last_check_answer_count = 0
 
     while True:
         if datetime.now() - start_time >= duration:
@@ -372,6 +436,18 @@ async def run_main_round(
         game.turns.append(answer_turn)
         if on_turn:
             on_turn(answer_turn, game)
+
+        answer_count += 1
+
+        confidence_entry, last_check_answer_count = await _check_spy_confidence(
+            game=game,
+            characters=characters,
+            provider=provider,
+            answer_count=answer_count,
+            last_check_answer_count=last_check_answer_count,
+        )
+        if confidence_entry:
+            game.spy_confidence_log.append(confidence_entry)
 
         trigger_checker.update_silence_counters(answer_turn)
 

@@ -31,6 +31,28 @@
 
 ---
 
+## [TASK-023] Шкала уверенности шпиона
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Добавлена функция build_spy_confidence_check_prompt в src/agents/prompt_builder.py
+- Обновлён src/agents/__init__.py с экспортом новой функции
+- Добавлена вспомогательная функция _check_spy_confidence в src/orchestrator/game_engine.py
+- Интегрирована проверка уверенности в run_main_round: после каждого ответа проверяется интервал
+- Каждые N ходов (SPY_CONFIDENCE_CHECK_EVERY_N, по умолчанию 3) шпиону задаётся микро-вопрос
+- Агент выбирает состояние: no_idea, few_guesses, confident
+- Состояния логируются в game.spy_confidence_log как ConfidenceEntry
+- Все тесты пройдены: интервал работает корректно, парсинг ответов корректный
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `TBD` — Add spy confidence system (TASK-023)
+
+---
+
 ## [TASK-022] Система триггеров: окна вмешательства
 **Дата:** 2026-04-19
 **Статус:** done
