@@ -49,7 +49,7 @@
 - Нет
 
 ### Коммиты
-- `TBD` — Add spy confidence system (TASK-023)
+- `3f2b7ca` — Add spy confidence system (TASK-023)
 
 ---
 
