@@ -224,6 +224,63 @@
             color: #888;
         }
 
+        .phase-badge {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .phase-badge.setup {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .phase-badge.main_round {
+            background-color: #4ade80;
+            color: black;
+        }
+
+        .phase-badge.optional_vote {
+            background-color: #f59e0b;
+            color: black;
+        }
+
+        .phase-badge.final_vote {
+            background-color: #8b5cf6;
+            color: white;
+        }
+
+        .phase-badge.resolution {
+            background-color: #e94560;
+            color: white;
+        }
+
+        .phase-row {
+            padding: 4px 0;
+        }
+
+        .timer-display {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .timer-display.warning {
+            color: #fbbf24;
+        }
+
+        .timer-display.critical {
+            color: #ef4444;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         .controls {
             display: flex;
             gap: 0.5rem;
@@ -421,9 +478,13 @@
                     <span class="info-label">Location:</span>
                     <span id="infoLocation">-</span>
                 </div>
-                <div class="info-row">
+                <div class="info-row phase-row" id="phaseRow">
                     <span class="info-label">Phase:</span>
-                    <span id="infoPhase">-</span>
+                    <span id="infoPhase" class="phase-badge">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Timer:</span>
+                    <span id="infoTimer" class="timer-display">--:--</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Turns:</span>
@@ -453,6 +514,10 @@
         let players = [];
         let playerColorMap = {};
         let turnCount = 0;
+        let gameStartedAt = null;
+        let gameDurationMinutes = 0;
+        let timerInterval = null;
+        let currentPhase = '-';
 
         const statusDot = document.getElementById('statusDot');
         const statusText = document.getElementById('statusText');
@@ -463,6 +528,7 @@
         const playerList = document.getElementById('playerList');
         const infoLocation = document.getElementById('infoLocation');
         const infoPhase = document.getElementById('infoPhase');
+        const infoTimer = document.getElementById('infoTimer');
         const infoTurns = document.getElementById('infoTurns');
         const typingIndicator = document.getElementById('typingIndicator');
         const confirmDialog = document.getElementById('confirmDialog');
@@ -512,6 +578,74 @@
 
         function hideConfirmDialog() {
             confirmDialog.classList.remove('visible');
+        }
+
+        function formatTime(seconds) {
+            if (seconds < 0) seconds = 0;
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return mins.toString().padStart(2, '0') + ':' + secs.toString().padStart(2, '0');
+        }
+
+        function updateTimer() {
+            if (!gameStartedAt || gameDurationMinutes <= 0) {
+                infoTimer.textContent = '--:--';
+                infoTimer.className = 'timer-display';
+                return;
+            }
+
+            const now = new Date();
+            const startTime = new Date(gameStartedAt);
+            const elapsedMs = now - startTime;
+            const totalMs = gameDurationMinutes * 60 * 1000;
+            const remainingMs = totalMs - elapsedMs;
+            const remainingSecs = Math.ceil(remainingMs / 1000);
+
+            infoTimer.textContent = formatTime(remainingSecs);
+
+            if (remainingSecs <= 0) {
+                infoTimer.textContent = '00:00';
+                infoTimer.className = 'timer-display critical';
+                stopTimer();
+            } else if (remainingSecs <= 30) {
+                infoTimer.className = 'timer-display critical';
+            } else if (remainingSecs <= 60) {
+                infoTimer.className = 'timer-display warning';
+            } else {
+                infoTimer.className = 'timer-display';
+            }
+        }
+
+        function startTimer() {
+            stopTimer();
+            updateTimer();
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function resetTimer() {
+            stopTimer();
+            gameStartedAt = null;
+            gameDurationMinutes = 0;
+            infoTimer.textContent = '--:--';
+            infoTimer.className = 'timer-display';
+        }
+
+        function updatePhase(phase) {
+            currentPhase = phase;
+            if (phase === '-') {
+                infoPhase.textContent = '-';
+                infoPhase.className = 'phase-badge';
+            } else {
+                infoPhase.textContent = phase.replace('_', ' ');
+                infoPhase.className = 'phase-badge ' + phase;
+            }
         }
 
         function getPlayerName(playerId) {
@@ -591,6 +725,8 @@
             chatMessages.innerHTML = '';
             turnCount = 0;
             infoTurns.textContent = '0';
+            resetTimer();
+            updatePhase('-');
         }
 
         function updatePlayerList() {
@@ -667,13 +803,17 @@
                     players = data.players;
                     updatePlayerList();
                     infoLocation.textContent = data.location;
+                    gameStartedAt = data.started_at;
+                    gameDurationMinutes = data.duration_minutes || 0;
+                    startTimer();
+                    updatePhase('setup');
                     addSystemMessage('Game started! Location: ' + data.location, 'phase');
                     updateStatus('running');
                     break;
 
                 case 'phase':
-                    infoPhase.textContent = data.phase;
-                    addSystemMessage('Phase: ' + data.phase, 'phase');
+                    updatePhase(data.phase);
+                    addSystemMessage('Phase: ' + data.phase.replace('_', ' '), 'phase');
                     break;
 
                 case 'turn':
@@ -694,6 +834,8 @@
                     break;
 
                 case 'game_completed':
+                    stopTimer();
+                    updatePhase('resolution');
                     updateStatus('completed');
                     if (data.outcome) {
                         const winner = data.outcome.winner === 'spy' ? 'Spy wins!' : 'Civilians win!';
@@ -719,6 +861,7 @@
                     break;
 
                 case 'game_stopped':
+                    stopTimer();
                     updateStatus('stopped');
                     addSystemMessage('Game stopped');
                     break;

@@ -164,6 +164,8 @@ class GameManager:
                 "game_id": str(self.game.id),
                 "location": location.display_name,
                 "spy_id": self.game.spy_id,
+                "started_at": self.game.started_at.isoformat(),
+                "duration_minutes": self.game.config.duration_minutes,
                 "players": [
                     {
                         "character_id": p.character_id,

@@ -700,7 +700,7 @@
         "Шаг 3: Проверить смену фазы при голосовании"
       ],
       "dependencies": ["TASK-032"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-037",
