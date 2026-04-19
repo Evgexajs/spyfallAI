@@ -46,7 +46,7 @@
 - Нет
 
 ### Коммиты
-- `TBD` — Expand locations from 2 to 10 (TASK-020)
+- `c9d733a` — Expand locations from 2 to 10 (TASK-020)
 
 ---
 
