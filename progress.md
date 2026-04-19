@@ -31,6 +31,26 @@
 
 ---
 
+## [TASK-015] Персонаж: Марго (манипулятор)
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан characters/margo.json с полным профилем персонажа
+- Заполнены все поля по схеме PRD 8.2: id, display_name, archetype, backstory, voice_style
+- 4 MUST директивы (машинно проверяемы: regex на имена, тёплую лексику, отсутствие прямых обвинений)
+- 3 MUST NOT директивы (проверяемы regex на слова давления и агрессивную лексику)
+- 5 detectable_markers: names_addressee (regex), warm_lexicon (regex), no_direct_accusation (regex), no_pressure_words (regex), deflection_present (binary_llm)
+- 2 personal_triggers: direct_accusation, repeated_accusation_on_same_target (оба → deflect_suspicion_to_another)
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `TBD` — Add Margo character profile for TASK-015
+
+---
+
 ## [TASK-014] CLI точка входа (Phase 0)
 **Дата:** 2026-04-19
 **Статус:** done
