@@ -49,7 +49,7 @@
 - Нет
 
 ### Коммиты
-- (pending commit)
+- `abbcd4a` — Add voting and resolution phase (TASK-012)
 
 ---
 
