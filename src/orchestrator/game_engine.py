@@ -31,7 +31,7 @@ from src.models import (
     Turn,
     TurnType,
 )
-from src.triggers import TriggerChecker, TriggerResult
+from src.triggers import TriggerChecker, TriggerResult, VoteTriggerChecker
 
 
 def load_locations(locations_path: Optional[Path] = None) -> list[Location]:
@@ -387,6 +387,7 @@ async def run_main_round(
     _transition_phase(game, GamePhase.MAIN_ROUND, "Main round started")
 
     trigger_checker = TriggerChecker(characters)
+    vote_trigger_checker = VoteTriggerChecker(characters)
 
     player_ids = [p.character_id for p in game.players]
     current_questioner = random.choice(player_ids)
@@ -442,6 +443,8 @@ async def run_main_round(
         if on_turn:
             on_turn(turn, game)
 
+        vote_trigger_checker.update_after_turn(turn)
+
         answerer_char = _get_character_by_id(characters, target_id)
         answerer_player = next(p for p in game.players if p.character_id == target_id)
         answerer_secret = _get_secret_info(game, answerer_player)
@@ -480,6 +483,8 @@ async def run_main_round(
             on_turn(answer_turn, game)
 
         answer_count += 1
+
+        vote_trigger_checker.update_after_turn(answer_turn)
 
         confidence_entry, last_check_answer_count = await _check_spy_confidence(
             game=game,
@@ -579,6 +584,7 @@ async def run_main_round(
                     on_turn(intervention_turn, game)
 
                 trigger_checker.update_silence_counters(intervention_turn)
+                vote_trigger_checker.update_after_turn(intervention_turn)
 
             trigger_event = trigger_checker.create_trigger_event(
                 result=winner,
@@ -586,6 +592,15 @@ async def run_main_round(
                 intervened=wants_to_intervene,
             )
             game.triggered_events.append(trigger_event)
+
+        vote_trigger_result = vote_trigger_checker.check_vote_triggers(game)
+        if vote_trigger_result and vote_trigger_result.triggered:
+            _transition_phase(
+                game,
+                GamePhase.OPTIONAL_VOTE,
+                f"Early voting triggered: {vote_trigger_result.reason}",
+            )
+            break
 
         question_count += 1
         current_questioner = target_id

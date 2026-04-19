@@ -1,0 +1,62 @@
+{
+  "description": "Rules for triggering early voting in SpyfallAI",
+  "version": "1.0",
+  "vote_triggers": [
+    {
+      "id": "accusations_threshold",
+      "condition_type": "accusations_on_same_player",
+      "description": "Triggers when one player receives 2+ total accusations",
+      "priority": 10,
+      "params": {
+        "min_accusations": 2
+      },
+      "detection": {
+        "method": "counter",
+        "rule": "accusations_count >= min_accusations"
+      }
+    },
+    {
+      "id": "consecutive_accusations",
+      "condition_type": "consecutive_accusations_on_same_player",
+      "description": "Triggers when 2 players in a row accuse the same target",
+      "priority": 9,
+      "params": {
+        "consecutive_count": 2
+      },
+      "detection": {
+        "method": "counter",
+        "rule": "consecutive_accusations >= consecutive_count"
+      }
+    },
+    {
+      "id": "no_progress",
+      "condition_type": "no_progress_for_n_turns",
+      "description": "Triggers when N turns pass without any accusations",
+      "priority": 5,
+      "params": {
+        "turns_without_accusations": 8
+      },
+      "detection": {
+        "method": "counter",
+        "rule": "turns_since_accusation >= turns_without_accusations"
+      }
+    }
+  ],
+  "accusation_patterns": [
+    "\\bшпион\\b",
+    "\\bврёшь\\b",
+    "\\bврёт\\b",
+    "\\bврет\\b",
+    "\\bлжёшь\\b",
+    "\\bлжец\\b",
+    "\\bобманываешь\\b",
+    "\\bподозрительн",
+    "\\bвиноват",
+    "\\bэто ты\\b",
+    "\\bты и есть\\b",
+    "\\bименно ты\\b",
+    "\\bточно ты\\b",
+    "\\bне верю тебе\\b",
+    "\\bне доверяю\\b"
+  ]
+}

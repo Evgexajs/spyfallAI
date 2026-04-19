@@ -491,7 +491,7 @@
         "Шаг 3: Проверить переход фазы в логе"
       ],
       "dependencies": ["TASK-021", "TASK-012"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-026",
