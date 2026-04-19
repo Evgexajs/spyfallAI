@@ -48,7 +48,7 @@
 - Нет
 
 ### Коммиты
-- (будет добавлен)
+- `ceaa10b` — Add prompt builder for agents (TASK-009)
 
 ---
 
