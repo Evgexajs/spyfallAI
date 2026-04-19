@@ -206,7 +206,7 @@
         "Шаг 3: Проверить что у мирных есть роли, у шпиона — нет"
       ],
       "dependencies": ["TASK-004", "TASK-008"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-011",

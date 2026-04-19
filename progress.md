@@ -31,6 +31,27 @@
 
 ---
 
+## [TASK-010] Оркестратор: Setup фаза
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан src/orchestrator/game_engine.py с функцией setup_game(characters, location_id)
+- Создан src/orchestrator/__init__.py с экспортами
+- Функция load_locations() загружает локации из locations.json
+- Случайное назначение шпиона через random.choice
+- Раздача ролей мирным игрокам (роли перемешиваются)
+- Шпион получает role_id=None, is_spy=True
+- Возврат объекта Game с phase_transitions начиная с SETUP
+
+### Проблемы / Заметки
+- Исправлен синтаксис типов для Python 3.9 (Optional[Path] вместо Path | None)
+
+### Коммиты
+- (pending)
+
+---
+
 ## [TASK-009] Сборщик промптов для агентов
 **Дата:** 2026-04-19
 **Статус:** done
