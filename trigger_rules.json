@@ -1,0 +1,53 @@
+{
+  "description": "Global trigger rules for SpyfallAI - applied to all characters",
+  "version": "1.0",
+  "global_triggers": [
+    {
+      "id": "global_direct_accusation",
+      "condition_type": "direct_accusation",
+      "description": "Triggers when a character is directly accused by name",
+      "priority": 5,
+      "threshold": 0.5,
+      "default_reaction_type": "deflect_suspicion_to_another",
+      "detection": {
+        "method": "markers",
+        "accusation_patterns": [
+          "\\bшпион\\b",
+          "\\bврёшь\\b",
+          "\\bврет\\b",
+          "\\bлжёшь\\b",
+          "\\bлжец\\b",
+          "\\bобманываешь\\b",
+          "\\bподозрительн",
+          "\\bвиноват",
+          "\\bэто ты\\b",
+          "\\bты и есть\\b",
+          "\\bименно ты\\b",
+          "\\bточно ты\\b",
+          "\\bне верю тебе\\b",
+          "\\bне доверяю\\b"
+        ]
+      }
+    },
+    {
+      "id": "global_silent_for_n_turns",
+      "condition_type": "silent_for_n_turns",
+      "description": "Triggers when a character has been silent (not asked or answered) for N turns",
+      "priority": 3,
+      "threshold": 0.7,
+      "default_reaction_type": "point_out_inconsistency",
+      "params": {
+        "silent_turns": 3
+      },
+      "detection": {
+        "method": "counter",
+        "rule": "turns_since_spoke >= silent_turns"
+      }
+    }
+  ],
+  "accusation_markers": {
+    "description": "Markers that indicate accusation intent - used by direct_accusation detection",
+    "strong_markers": ["шпион", "врёшь", "врет", "лжёшь", "лжец", "виноват"],
+    "weak_markers": ["подозрительно", "странно ведёшь", "не верю", "скрываешь"]
+  }
+}
