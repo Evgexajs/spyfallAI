@@ -795,7 +795,7 @@
         "Шаг 3: Провести 5+ партий для статистики"
       ],
       "dependencies": ["TASK-040", "TASK-016", "TASK-017", "TASK-025"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-042",
