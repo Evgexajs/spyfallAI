@@ -48,7 +48,7 @@
 - Полное тестирование с реальной игрой требует OPENAI_API_KEY
 
 ### Коммиты
-- (pending commit)
+- `035526e` — Add full button functionality with loading states and confirm dialog (TASK-033)
 
 ---
 
