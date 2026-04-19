@@ -53,7 +53,7 @@
 - Зависимости FastAPI, uvicorn, websockets добавлены в pyproject.toml [web]
 
 ### Коммиты
-- `TBD` — Add FastAPI backend setup (TASK-031)
+- `2b38a98` — Add FastAPI backend setup (TASK-031)
 
 ---
 
