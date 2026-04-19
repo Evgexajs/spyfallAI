@@ -47,7 +47,7 @@
 - Нет
 
 ### Коммиты
-- `TBD` — Add Margo character profile for TASK-015
+- `69d543f` — Add Margo character profile (TASK-015)
 
 ---
 
