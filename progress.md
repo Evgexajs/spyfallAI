@@ -53,7 +53,7 @@
 - Для полного анализа с LLM маркерами требуется OPENAI_API_KEY
 
 ### Коммиты
-- `pending` — Add character distinctiveness metrics (TASK-042)
+- `f95cec4` — Add character distinctiveness metrics (TASK-042)
 
 ---
 
