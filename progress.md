@@ -55,7 +55,7 @@
 - Сохранена обратная совместимость: если color не задан, используется динамическая генерация из PLAYER_COLORS
 
 ### Коммиты
-- `pending` — будет добавлен после коммита
+- `d080ecf` — Add persistent color coding for characters (TASK-035)
 
 ---
 
