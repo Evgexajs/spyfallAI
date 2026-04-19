@@ -51,7 +51,7 @@
 - Нет
 
 ### Коммиты
-- `pending` — Add early voting rules (TASK-025)
+- `6882a0e` — Add early voting rules (TASK-025)
 
 ---
 
