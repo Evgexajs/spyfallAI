@@ -16,6 +16,7 @@ class TurnType(str, Enum):
     INTERVENTION = "intervention"
     VOTE = "vote"
     SPY_GUESS = "spy_guess"
+    SPY_LEAK = "spy_leak"
 
 
 class GamePhase(str, Enum):

@@ -84,6 +84,9 @@ def create_turn_printer(character_colors: dict[str, str], apply_delay: bool = Tr
         elif turn.type == TurnType.INTERVENTION:
             type_marker = colorize("[!]", "bold")
             print(f"{type_marker} {speaker}: {turn.content}")
+        elif turn.type == TurnType.SPY_LEAK:
+            type_marker = colorize("[LEAK!]", "red")
+            print(f"{type_marker} {speaker}: {turn.content}")
         else:
             print(f"[{turn.type}] {speaker}: {turn.content}")
 

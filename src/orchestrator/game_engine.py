@@ -213,6 +213,32 @@ def _get_secret_info(game: Game, player: Player) -> SecretInfo:
     return SecretInfo(is_spy=False, location=location, role=role)
 
 
+def _check_for_location_leak(content: str, speaker_id: str, game: Game) -> bool:
+    """Check if spy accidentally mentioned location in their reply.
+
+    Args:
+        content: The text content to check.
+        speaker_id: ID of the speaker.
+        game: Current game state.
+
+    Returns:
+        True if spy leaked the location, False otherwise.
+    """
+    if speaker_id != game.spy_id:
+        return False
+
+    location = get_location_by_id(game.location_id)
+    content_lower = content.lower()
+
+    if location.display_name.lower() in content_lower:
+        return True
+
+    if location.id.lower() in content_lower:
+        return True
+
+    return False
+
+
 def _build_conversation_history(game: Game) -> list[dict]:
     """Build conversation history as chat messages from game turns."""
     messages = []
@@ -599,6 +625,30 @@ async def run_main_round(
         _track_usage_and_check_cost(game, question_response)
         question_text = question_response.content.strip()
 
+        if _check_for_location_leak(question_text, current_questioner, game):
+            actual_location = get_location_by_id(game.location_id)
+            leak_content = question_text
+            leak_turn = Turn(
+                turn_number=len(game.turns) + 1,
+                timestamp=datetime.now(),
+                speaker_id=current_questioner,
+                addressee_id=target_id,
+                type=TurnType.SPY_LEAK,
+                content=leak_content,
+                display_delay_ms=calculate_display_delay_ms(leak_content),
+            )
+            game.turns.append(leak_turn)
+            if on_turn:
+                on_turn(leak_turn, game)
+
+            game.outcome = GameOutcome(
+                winner="civilians",
+                reason=f"Шпион ({game.spy_id}) случайно назвал локацию в вопросе: {actual_location.display_name}",
+            )
+            game.ended_at = datetime.now()
+            _transition_phase(game, GamePhase.RESOLUTION, "Spy leaked location in question")
+            return game
+
         turn = Turn(
             turn_number=len(game.turns) + 1,
             timestamp=datetime.now(),
@@ -638,6 +688,30 @@ async def run_main_round(
         )
         _track_usage_and_check_cost(game, answer_response)
         answer_text = answer_response.content.strip()
+
+        if _check_for_location_leak(answer_text, target_id, game):
+            actual_location = get_location_by_id(game.location_id)
+            leak_content = answer_text
+            leak_turn = Turn(
+                turn_number=len(game.turns) + 1,
+                timestamp=datetime.now(),
+                speaker_id=target_id,
+                addressee_id=current_questioner,
+                type=TurnType.SPY_LEAK,
+                content=leak_content,
+                display_delay_ms=calculate_display_delay_ms(leak_content),
+            )
+            game.turns.append(leak_turn)
+            if on_turn:
+                on_turn(leak_turn, game)
+
+            game.outcome = GameOutcome(
+                winner="civilians",
+                reason=f"Шпион ({game.spy_id}) случайно назвал локацию в ответе: {actual_location.display_name}",
+            )
+            game.ended_at = datetime.now()
+            _transition_phase(game, GamePhase.RESOLUTION, "Spy leaked location in answer")
+            return game
 
         answer_turn = Turn(
             turn_number=len(game.turns) + 1,
@@ -741,6 +815,29 @@ async def run_main_round(
                     characters=characters,
                     provider=provider,
                 )
+
+                if _check_for_location_leak(intervention_content, winner.character_id, game):
+                    actual_location = get_location_by_id(game.location_id)
+                    leak_turn = Turn(
+                        turn_number=len(game.turns) + 1,
+                        timestamp=datetime.now(),
+                        speaker_id=winner.character_id,
+                        addressee_id=answer_turn.speaker_id,
+                        type=TurnType.SPY_LEAK,
+                        content=intervention_content,
+                        display_delay_ms=calculate_display_delay_ms(intervention_content),
+                    )
+                    game.turns.append(leak_turn)
+                    if on_turn:
+                        on_turn(leak_turn, game)
+
+                    game.outcome = GameOutcome(
+                        winner="civilians",
+                        reason=f"Шпион ({game.spy_id}) случайно назвал локацию во вмешательстве: {actual_location.display_name}",
+                    )
+                    game.ended_at = datetime.now()
+                    _transition_phase(game, GamePhase.RESOLUTION, "Spy leaked location in intervention")
+                    return game
 
                 intervention_turn = Turn(
                     turn_number=len(game.turns) + 1,
