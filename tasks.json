@@ -1,0 +1,895 @@
+{
+  "agent_instructions": {
+    "before_start": [
+      "Прочитай этот файл и git log --oneline -20",
+      "Выбери ОДНУ задачу со статусом pending и наивысшим приоритетом",
+      "Проверь, что все dependencies этой задачи имеют статус done"
+    ],
+    "during_work": [
+      "Работай только над выбранной задачей",
+      "Делай коммиты после каждого логического изменения",
+      "Не трогай код, не связанный с текущей задачей"
+    ],
+    "before_finish": [
+      "Выполни ВСЕ test_steps из задачи",
+      "Меняй status на done ТОЛЬКО после успешного прохождения всех тестов",
+      "Напиши summary в progress.md",
+      "ЗАПРЕЩЕНО удалять или редактировать задачи — только менять status"
+    ]
+  },
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "Инициализация структуры проекта",
+      "acceptance_criteria": [
+        "Создана структура директорий: src/, characters/, games/",
+        "Создан pyproject.toml с зависимостями (openai, python-dotenv, pydantic)",
+        "Создан .env.example с пустыми значениями",
+        ".env добавлен в .gitignore"
+      ],
+      "test_steps": [
+        "Шаг 1: Проверить наличие всех директорий командой ls -la",
+        "Шаг 2: Запустить pip install -e . без ошибок",
+        "Шаг 3: Убедиться что .env НЕ в git (git status)"
+      ],
+      "dependencies": [],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-002",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "LLM адаптер для OpenAI",
+      "acceptance_criteria": [
+        "Создан src/llm/adapter.py с базовым интерфейсом",
+        "Реализован OpenAI провайдер",
+        "Поддержка async вызовов",
+        "Обработка ошибок и таймаутов"
+      ],
+      "test_steps": [
+        "Шаг 1: Импортировать модуль без ошибок",
+        "Шаг 2: Сделать тестовый вызов к API (hello world)",
+        "Шаг 3: Проверить что ответ возвращается корректно"
+      ],
+      "dependencies": ["TASK-001"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-003",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "Конфигурация llm_config.json",
+      "acceptance_criteria": [
+        "Создан llm_config.json по структуре из PRD",
+        "Указаны провайдеры: openai, anthropic",
+        "Роли: main (gpt-4o), utility (gpt-4o-mini)",
+        "Поддержка per_character_overrides"
+      ],
+      "test_steps": [
+        "Шаг 1: JSON валиден (python -m json.tool llm_config.json)",
+        "Шаг 2: Адаптер читает конфиг и выбирает правильную модель"
+      ],
+      "dependencies": ["TASK-001"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-004",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Pydantic модели данных",
+      "acceptance_criteria": [
+        "Создан src/models/character.py — Character, Trigger, Marker",
+        "Создан src/models/location.py — Location, Role",
+        "Создан src/models/game.py — Game, Player, Turn",
+        "Все модели имеют валидацию"
+      ],
+      "test_steps": [
+        "Шаг 1: Импортировать все модели без ошибок",
+        "Шаг 2: Создать экземпляр Character с тестовыми данными",
+        "Шаг 3: Проверить что невалидные данные вызывают ValidationError"
+      ],
+      "dependencies": ["TASK-001"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-005",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Персонаж: Борис Молот (агрессор)",
+      "acceptance_criteria": [
+        "Создан characters/boris_molot.json",
+        "Заполнены все поля по схеме из PRD 8.1",
+        "MUST директивы машинно проверяемы",
+        "Определены detectable_markers (3-5 маркеров)"
+      ],
+      "test_steps": [
+        "Шаг 1: JSON валиден",
+        "Шаг 2: Загрузить через pydantic модель Character",
+        "Шаг 3: Проверить что personal_triggers соответствуют схеме Trigger"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-006",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Персонаж: Зоя (дерзкий циник)",
+      "acceptance_criteria": [
+        "Создан characters/zoya.json",
+        "Заполнены все поля по схеме из PRD 8.5",
+        "MUST директивы машинно проверяемы",
+        "Определены detectable_markers"
+      ],
+      "test_steps": [
+        "Шаг 1: JSON валиден",
+        "Шаг 2: Загрузить через pydantic модель",
+        "Шаг 3: Проверить personal_triggers"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-007",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Персонаж: Ким (параноик)",
+      "acceptance_criteria": [
+        "Создан characters/kim.json",
+        "Заполнены все поля по схеме из PRD 8.3",
+        "MUST директивы машинно проверяемы",
+        "Определены detectable_markers"
+      ],
+      "test_steps": [
+        "Шаг 1: JSON валиден",
+        "Шаг 2: Загрузить через pydantic модель",
+        "Шаг 3: Проверить personal_triggers"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-008",
+      "category": "functional",
+      "priority": "high",
+      "description": "Базовые локации (2 шт для Phase 0)",
+      "acceptance_criteria": [
+        "Создан locations.json с 2 локациями",
+        "Каждая локация имеет 3-5 ролей",
+        "Локации: hospital, airplane (или аналоги)",
+        "Формат соответствует схеме Location"
+      ],
+      "test_steps": [
+        "Шаг 1: JSON валиден",
+        "Шаг 2: Загрузить через pydantic модель Location",
+        "Шаг 3: Проверить что роли уникальны в рамках локации"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-009",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Сборщик промптов для агентов",
+      "acceptance_criteria": [
+        "Создан src/agents/prompt_builder.py",
+        "Функция build_system_prompt(character, game_state, secret_info)",
+        "Секретная информация: шпион/не шпион, локация, роль",
+        "Включены few-shot примеры реплик"
+      ],
+      "test_steps": [
+        "Шаг 1: Собрать промпт для Бориса как мирного",
+        "Шаг 2: Собрать промпт для Зои как шпиона",
+        "Шаг 3: Проверить что локация НЕ упоминается в промпте шпиона"
+      ],
+      "dependencies": ["TASK-005", "TASK-006", "TASK-007"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-010",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Оркестратор: Setup фаза",
+      "acceptance_criteria": [
+        "Создан src/orchestrator/game_engine.py",
+        "Функция setup_game(characters, location_id)",
+        "Случайное назначение шпиона",
+        "Раздача ролей мирным игрокам",
+        "Возврат объекта Game"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить setup с 3 персонажами",
+        "Шаг 2: Проверить что ровно 1 шпион",
+        "Шаг 3: Проверить что у мирных есть роли, у шпиона — нет"
+      ],
+      "dependencies": ["TASK-004", "TASK-008"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-011",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Оркестратор: Основной цикл вопрос-ответ",
+      "acceptance_criteria": [
+        "Реализован round-robin цикл: вопрос → ответ → следующий",
+        "Правило: следующий вопрос кому угодно кроме задавшего",
+        "Запись каждого хода в Game.turns",
+        "Условия выхода: таймер или лимит вопросов"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить цикл на 5 ходов",
+        "Шаг 2: Проверить что каждый ход записан в лог",
+        "Шаг 3: Проверить что никто не задаёт вопрос самому себе"
+      ],
+      "dependencies": ["TASK-010", "TASK-002", "TASK-009"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-012",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Оркестратор: Голосование и Resolution",
+      "acceptance_criteria": [
+        "Реализована final_vote фаза",
+        "Каждый агент голосует за подозреваемого",
+        "Определение победителя по большинству",
+        "Запись outcome в Game"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить голосование после main_round",
+        "Шаг 2: Проверить что все проголосовали",
+        "Шаг 3: Проверить что winner определён корректно"
+      ],
+      "dependencies": ["TASK-011"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-013",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Логирование партий в JSON",
+      "acceptance_criteria": [
+        "Создан src/storage/game_repository.py",
+        "Функция save_game(game) → файл games/{timestamp}_{id}.json",
+        "Лог никогда не перезаписывается",
+        "Полная структура по схеме Game из PRD"
+      ],
+      "test_steps": [
+        "Шаг 1: Сохранить тестовую партию",
+        "Шаг 2: Проверить что файл создан в games/",
+        "Шаг 3: Загрузить файл и проверить структуру"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-014",
+      "category": "functional",
+      "priority": "critical",
+      "description": "CLI точка входа (Phase 0)",
+      "acceptance_criteria": [
+        "Создан src/cli.py",
+        "Команда запуска партии с параметрами",
+        "Вывод реплик в консоль в реальном времени",
+        "Вызов save_game по завершении"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить python -m src.cli",
+        "Шаг 2: Увидеть ход партии в консоли",
+        "Шаг 3: Проверить что лог создан в games/"
+      ],
+      "dependencies": ["TASK-011", "TASK-012", "TASK-013"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-015",
+      "category": "functional",
+      "priority": "high",
+      "description": "Персонаж: Марго (манипулятор)",
+      "acceptance_criteria": [
+        "Создан characters/margo.json",
+        "Заполнены все поля по схеме из PRD 8.2",
+        "MUST директивы машинно проверяемы",
+        "Определены detectable_markers"
+      ],
+      "test_steps": [
+        "Шаг 1: JSON валиден",
+        "Шаг 2: Загрузить через pydantic модель",
+        "Шаг 3: Проверить personal_triggers"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-016",
+      "category": "functional",
+      "priority": "high",
+      "description": "Персонаж: Профессор Штейн (душный интеллектуал)",
+      "acceptance_criteria": [
+        "Создан characters/professor_stein.json",
+        "Заполнены все поля по схеме из PRD 8.4",
+        "MUST директивы машинно проверяемы",
+        "Определены detectable_markers"
+      ],
+      "test_steps": [
+        "Шаг 1: JSON валиден",
+        "Шаг 2: Загрузить через pydantic модель",
+        "Шаг 3: Проверить personal_triggers"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-017",
+      "category": "functional",
+      "priority": "high",
+      "description": "Персонаж: Отец Игнатий (моралист)",
+      "acceptance_criteria": [
+        "Создан characters/father_ignatius.json",
+        "Заполнены все поля по схеме из PRD 8.6",
+        "MUST директивы машинно проверяемы",
+        "Определены detectable_markers"
+      ],
+      "test_steps": [
+        "Шаг 1: JSON валиден",
+        "Шаг 2: Загрузить через pydantic модель",
+        "Шаг 3: Проверить personal_triggers"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-018",
+      "category": "functional",
+      "priority": "high",
+      "description": "Персонаж: Лёха (работяга)",
+      "acceptance_criteria": [
+        "Создан characters/lyokha.json",
+        "Заполнены все поля по схеме из PRD 8.7",
+        "MUST директивы машинно проверяемы",
+        "Определены detectable_markers"
+      ],
+      "test_steps": [
+        "Шаг 1: JSON валиден",
+        "Шаг 2: Загрузить через pydantic модель",
+        "Шаг 3: Проверить personal_triggers"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-019",
+      "category": "functional",
+      "priority": "high",
+      "description": "Персонаж: Аврора (драма-квин)",
+      "acceptance_criteria": [
+        "Создан characters/aurora.json",
+        "Заполнены все поля по схеме из PRD 8.8",
+        "MUST директивы машинно проверяемы",
+        "Определены detectable_markers"
+      ],
+      "test_steps": [
+        "Шаг 1: JSON валиден",
+        "Шаг 2: Загрузить через pydantic модель",
+        "Шаг 3: Проверить personal_triggers"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-020",
+      "category": "functional",
+      "priority": "high",
+      "description": "Расширение локаций до 8-10",
+      "acceptance_criteria": [
+        "locations.json содержит 8-10 локаций",
+        "Каждая локация: 3-5 ролей",
+        "Разнообразие: больница, самолёт, ресторан, школа и др.",
+        "Все локации валидны по схеме"
+      ],
+      "test_steps": [
+        "Шаг 1: JSON валиден",
+        "Шаг 2: Загрузить все локации",
+        "Шаг 3: Проверить что все роли уникальны в рамках локации"
+      ],
+      "dependencies": ["TASK-008"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-021",
+      "category": "functional",
+      "priority": "high",
+      "description": "Система триггеров: глобальные правила",
+      "acceptance_criteria": [
+        "Создан trigger_rules.json с глобальными триггерами",
+        "Создан src/triggers/checker.py",
+        "Реализованы condition_types: direct_accusation, silent_for_n_turns",
+        "Детекция по маркерам (имя + обвинение) и счётчикам"
+      ],
+      "test_steps": [
+        "Шаг 1: Передать реплику с обвинением",
+        "Шаг 2: Проверить что direct_accusation срабатывает",
+        "Шаг 3: Проверить счётчик молчания"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-022",
+      "category": "functional",
+      "priority": "high",
+      "description": "Система триггеров: окна вмешательства",
+      "acceptance_criteria": [
+        "После каждого ответа — проверка триггеров всех агентов",
+        "Конкуренция по приоритету (highest wins)",
+        "Микро-промпт победителю: влезаешь? да/нет",
+        "Вмешательство записывается как Turn с type=intervention"
+      ],
+      "test_steps": [
+        "Шаг 1: Сгенерировать ситуацию с 2 сработавшими триггерами",
+        "Шаг 2: Проверить что выбран агент с высшим приоритетом",
+        "Шаг 3: Проверить что intervention записан в лог"
+      ],
+      "dependencies": ["TASK-021", "TASK-011"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-023",
+      "category": "functional",
+      "priority": "high",
+      "description": "Шкала уверенности шпиона",
+      "acceptance_criteria": [
+        "Каждые N ходов (настраиваемо) — микро-проверка шпиона",
+        "Агент выбирает: no_idea, few_guesses, confident",
+        "Только confident даёт право угадывать локацию",
+        "Состояния логируются в spy_confidence_log"
+      ],
+      "test_steps": [
+        "Шаг 1: Провести 6 ходов (N=3)",
+        "Шаг 2: Проверить что было 2 микро-проверки",
+        "Шаг 3: Проверить что состояния записаны в лог"
+      ],
+      "dependencies": ["TASK-011"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-024",
+      "category": "functional",
+      "priority": "high",
+      "description": "Угадывание локации шпионом",
+      "acceptance_criteria": [
+        "В состоянии confident шпион может объявить угадывание",
+        "Шпион называет локацию → немедленное завершение партии",
+        "Угадал = победа шпиона, промазал = проигрыш",
+        "Turn с type=spy_guess"
+      ],
+      "test_steps": [
+        "Шаг 1: Симулировать confident состояние",
+        "Шаг 2: Запустить угадывание",
+        "Шаг 3: Проверить outcome (win/lose)"
+      ],
+      "dependencies": ["TASK-023"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-025",
+      "category": "functional",
+      "priority": "high",
+      "description": "Правила досрочного голосования",
+      "acceptance_criteria": [
+        "Создан vote_trigger_rules.json",
+        "Условия: 2+ обвинения на одного, 2 подряд на одного, N ходов без прогресса",
+        "Голосование запускается кодом, НЕ агентом",
+        "Переход в фазу optional_vote"
+      ],
+      "test_steps": [
+        "Шаг 1: Сгенерировать 2 обвинения на одного игрока",
+        "Шаг 2: Проверить что голосование инициировано",
+        "Шаг 3: Проверить переход фазы в логе"
+      ],
+      "dependencies": ["TASK-021", "TASK-012"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-026",
+      "category": "functional",
+      "priority": "medium",
+      "description": "Эмуляция задержки реплик",
+      "acceptance_criteria": [
+        "Задержка: length * SPEECH_DELAY_MULTIPLIER + random(0.2s, 0.6s)",
+        "Применяется к вопросам, ответам, вмешательствам",
+        "display_delay_ms записывается в Turn",
+        "Индикатор 'X печатает' в консоли"
+      ],
+      "test_steps": [
+        "Шаг 1: Сгенерировать реплику длиной 100 символов",
+        "Шаг 2: Проверить что задержка > 3 секунд",
+        "Шаг 3: Увидеть индикатор в консоли"
+      ],
+      "dependencies": ["TASK-011"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-027",
+      "category": "functional",
+      "priority": "medium",
+      "description": "Сжатие контекста (compression)",
+      "acceptance_criteria": [
+        "После N ходов — конспект старых ходов через utility модель",
+        "Последние K полных ходов остаются без изменений",
+        "Контекст агента = конспект + последние K ходов",
+        "Экономия токенов на длинных партиях"
+      ],
+      "test_steps": [
+        "Шаг 1: Провести 20 ходов",
+        "Шаг 2: Проверить что контекст агента < полного лога",
+        "Шаг 3: Проверить что конспект осмысленный"
+      ],
+      "dependencies": ["TASK-011", "TASK-002"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-028",
+      "category": "functional",
+      "priority": "medium",
+      "description": "Счётчик токенов и стоимости",
+      "acceptance_criteria": [
+        "После каждого LLM вызова — обновление счётчика",
+        "Стоимость рассчитывается по модели (input/output tokens)",
+        "Счётчик записывается в лог партии",
+        "MAX_PARTY_COST_USD как hard kill-switch"
+      ],
+      "test_steps": [
+        "Шаг 1: Провести 5 ходов",
+        "Шаг 2: Проверить что cost > 0 в логе",
+        "Шаг 3: Установить MAX_PARTY_COST_USD=0.01 и проверить остановку"
+      ],
+      "dependencies": ["TASK-002"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-029",
+      "category": "functional",
+      "priority": "medium",
+      "description": "Детекция утечки локации шпионом",
+      "acceptance_criteria": [
+        "Post-check реплик шпиона на упоминание локации",
+        "Детекция через regex (название локации) или утилитарную модель",
+        "Если утечка — шпион проиграл, партия завершается",
+        "Turn с пометкой 'spy_leak'"
+      ],
+      "test_steps": [
+        "Шаг 1: Симулировать реплику шпиона с названием локации",
+        "Шаг 2: Проверить что детекция сработала",
+        "Шаг 3: Проверить outcome = spy_lost"
+      ],
+      "dependencies": ["TASK-011"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-030",
+      "category": "functional",
+      "priority": "medium",
+      "description": "Детекция прямых вопросов о локации",
+      "acceptance_criteria": [
+        "Post-check вопросов мирных на прямое упоминание локации",
+        "Если вопрос типа 'это больница?' — реролл",
+        "Few-shot примеры хороших/плохих вопросов в промпте",
+        "Логирование reroll в отладочном логе"
+      ],
+      "test_steps": [
+        "Шаг 1: Симулировать прямой вопрос",
+        "Шаг 2: Проверить что вопрос отклонён",
+        "Шаг 3: Проверить что сгенерирован новый вопрос"
+      ],
+      "dependencies": ["TASK-011"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-031",
+      "category": "ui",
+      "priority": "medium",
+      "description": "FastAPI backend setup",
+      "acceptance_criteria": [
+        "Создан src/web/app.py с FastAPI",
+        "Эндпоинт POST /game/start",
+        "Эндпоинт POST /game/pause, /game/resume, /game/stop",
+        "WebSocket /ws для live-обновлений"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить uvicorn src.web.app:app",
+        "Шаг 2: Вызвать /game/start через curl",
+        "Шаг 3: Подключиться к /ws и получить события"
+      ],
+      "dependencies": ["TASK-014"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-032",
+      "category": "ui",
+      "priority": "medium",
+      "description": "HTML/JS интерфейс (один файл)",
+      "acceptance_criteria": [
+        "Создан src/web/static/index.html",
+        "Vanilla JS, никаких фреймворков",
+        "Подключение к WebSocket",
+        "Отображение чата с репликами"
+      ],
+      "test_steps": [
+        "Шаг 1: Открыть localhost:8000 в браузере",
+        "Шаг 2: Запустить партию",
+        "Шаг 3: Увидеть реплики в чате"
+      ],
+      "dependencies": ["TASK-031"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-033",
+      "category": "ui",
+      "priority": "medium",
+      "description": "Кнопки Start/Pause/Resume/Stop",
+      "acceptance_criteria": [
+        "Кнопки в UI вызывают соответствующие эндпоинты",
+        "Визуальное отображение текущего состояния",
+        "Stop немедленно прерывает партию",
+        "Disabled состояние для неактивных кнопок"
+      ],
+      "test_steps": [
+        "Шаг 1: Нажать Start — партия начинается",
+        "Шаг 2: Нажать Pause — партия на паузе",
+        "Шаг 3: Нажать Stop — партия завершена"
+      ],
+      "dependencies": ["TASK-032"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-034",
+      "category": "ui",
+      "priority": "medium",
+      "description": "Kill-switch для inflight LLM запросов",
+      "acceptance_criteria": [
+        "Stop отменяет все текущие asyncio tasks",
+        "Использование asyncio.CancelledError",
+        "Партия корректно завершается с outcome=cancelled",
+        "Лог сохраняется даже при отмене"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить партию",
+        "Шаг 2: Нажать Stop во время генерации реплики",
+        "Шаг 3: Проверить что запрос отменён и лог сохранён"
+      ],
+      "dependencies": ["TASK-033"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-035",
+      "category": "ui",
+      "priority": "low",
+      "description": "Цветовая кодировка персонажей",
+      "acceptance_criteria": [
+        "Каждому персонажу — уникальный цвет",
+        "Цвет задан в профиле персонажа или генерируется",
+        "Имя и реплики окрашены в цвет персонажа",
+        "Контраст достаточен для читаемости"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить партию с 4 персонажами",
+        "Шаг 2: Проверить что все имеют разные цвета",
+        "Шаг 3: Проверить читаемость на светлом фоне"
+      ],
+      "dependencies": ["TASK-032"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-036",
+      "category": "ui",
+      "priority": "low",
+      "description": "Таймер и статус фазы в UI",
+      "acceptance_criteria": [
+        "Отображение оставшегося времени партии",
+        "Отображение текущей фазы (setup, main_round, vote, resolution)",
+        "Обновление в реальном времени через WebSocket",
+        "Визуальное выделение активной фазы"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить партию",
+        "Шаг 2: Проверить что таймер тикает",
+        "Шаг 3: Проверить смену фазы при голосовании"
+      ],
+      "dependencies": ["TASK-032"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-037",
+      "category": "ui",
+      "priority": "low",
+      "description": "Индикатор 'персонаж печатает'",
+      "acceptance_criteria": [
+        "Во время генерации реплики — индикатор в UI",
+        "Имя персонажа + 'печатает...'",
+        "Исчезает после появления реплики",
+        "Анимация (точки или spinner)"
+      ],
+      "test_steps": [
+        "Шаг 1: Наблюдать за генерацией реплики",
+        "Шаг 2: Увидеть индикатор",
+        "Шаг 3: Проверить что индикатор исчезает"
+      ],
+      "dependencies": ["TASK-032", "TASK-026"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-038",
+      "category": "ui",
+      "priority": "low",
+      "description": "Визуальное различие типов реплик",
+      "acceptance_criteria": [
+        "Вопрос — обычный стиль",
+        "Ответ — обычный стиль",
+        "Вмешательство — курсив с отступом",
+        "Голосование — выделенный блок"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить партию с вмешательствами",
+        "Шаг 2: Проверить визуальное отличие",
+        "Шаг 3: Проверить стиль голосования"
+      ],
+      "dependencies": ["TASK-032", "TASK-022"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-039",
+      "category": "integration",
+      "priority": "high",
+      "description": "Интеграционный тест: полная партия Phase 0",
+      "acceptance_criteria": [
+        "3 персонажа, 2 локации",
+        "Партия проходит от setup до resolution",
+        "Лог сохранён и валиден",
+        "Характеры различимы в репликах"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить 3 партии подряд",
+        "Шаг 2: Проверить что все завершились без ошибок",
+        "Шаг 3: Прочитать логи и убедиться в различимости персонажей"
+      ],
+      "dependencies": ["TASK-014"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-040",
+      "category": "integration",
+      "priority": "high",
+      "description": "Интеграционный тест: 4 игрока",
+      "acceptance_criteria": [
+        "4 персонажа с полными профилями",
+        "Партия проходит стабильно",
+        "Триггеры и вмешательства работают",
+        "Шкала уверенности шпиона работает"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить 5 партий с 4 игроками",
+        "Шаг 2: Проверить наличие вмешательств в логах",
+        "Шаг 3: Проверить spy_confidence_log"
+      ],
+      "dependencies": ["TASK-039", "TASK-015", "TASK-022", "TASK-023"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-041",
+      "category": "integration",
+      "priority": "high",
+      "description": "Интеграционный тест: 6 игроков",
+      "acceptance_criteria": [
+        "6 персонажей с полными профилями",
+        "Партия длительностью 15-20 минут",
+        "Досрочное голосование срабатывает при условиях",
+        "Стоимость партии < $2"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить партию с 6 игроками",
+        "Шаг 2: Проверить длительность и стоимость в логе",
+        "Шаг 3: Провести 5+ партий для статистики"
+      ],
+      "dependencies": ["TASK-040", "TASK-016", "TASK-017", "TASK-025"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-042",
+      "category": "integration",
+      "priority": "medium",
+      "description": "Метрики характерности персонажей",
+      "acceptance_criteria": [
+        "Автоматическая проверка MUST-паттернов по логу",
+        "Подсчёт detectable_markers для каждой реплики",
+        "Отчёт: % реплик с маркерами по персонажам",
+        "Флаг: 2+ немаркированных подряд"
+      ],
+      "test_steps": [
+        "Шаг 1: Прогнать анализ на 5 партиях",
+        "Шаг 2: Проверить что каждый персонаж имеет > 50% маркированных реплик",
+        "Шаг 3: Проверить отсутствие 2+ немаркированных подряд"
+      ],
+      "dependencies": ["TASK-041"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-043",
+      "category": "integration",
+      "priority": "medium",
+      "description": "Статистика побед шпиона",
+      "acceptance_criteria": [
+        "Подсчёт win rate шпиона на серии партий",
+        "Целевой диапазон: 30-50%",
+        "Разбивка по способу победы (угадал, не нашли)",
+        "Отчёт для калибровки"
+      ],
+      "test_steps": [
+        "Шаг 1: Прогнать 20+ партий",
+        "Шаг 2: Посчитать win rate шпиона",
+        "Шаг 3: Если вне 30-50% — зафиксировать для тюнинга"
+      ],
+      "dependencies": ["TASK-041"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-044",
+      "category": "security",
+      "priority": "high",
+      "description": "Безопасность API ключей",
+      "acceptance_criteria": [
+        "Ключи только через .env",
+        ".env в .gitignore",
+        ".env.example без реальных значений",
+        "Ключи не попадают в логи партий"
+      ],
+      "test_steps": [
+        "Шаг 1: Проверить .gitignore",
+        "Шаг 2: Grep по логам на API ключи",
+        "Шаг 3: Проверить .env.example"
+      ],
+      "dependencies": ["TASK-001"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-045",
+      "category": "security",
+      "priority": "medium",
+      "description": "Веб-UI только на localhost",
+      "acceptance_criteria": [
+        "WEB_UI_HOST дефолт = 127.0.0.1",
+        "Предупреждение при попытке запустить на 0.0.0.0",
+        "Документация о рисках публичного доступа"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить с дефолтным хостом",
+        "Шаг 2: Попробовать подключиться с другой машины — fail",
+        "Шаг 3: Проверить предупреждение при 0.0.0.0"
+      ],
+      "dependencies": ["TASK-031"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-046",
+      "category": "security",
+      "priority": "medium",
+      "description": "MUST NOT директивы про токсичность",
+      "acceptance_criteria": [
+        "Все персонажи имеют MUST NOT на реальные оскорбления",
+        "Только игровое давление, не личные атаки",
+        "Базовый промпт содержит это правило",
+        "Проверка на 10 партиях — ноль нарушений"
+      ],
+      "test_steps": [
+        "Шаг 1: Проверить все characters/*.json",
+        "Шаг 2: Прогнать 10 партий",
+        "Шаг 3: Grep логи на запрещённые паттерны"
+      ],
+      "dependencies": ["TASK-005", "TASK-006", "TASK-007", "TASK-015", "TASK-016", "TASK-017", "TASK-018", "TASK-019"],
+      "status": "pending"
+    }
+  ]
+}
