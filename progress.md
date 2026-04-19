@@ -48,7 +48,7 @@
 - per_character_overrides пустой, будет заполняться при создании персонажей
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `138e332` — Add llm_config.json and config loading for TASK-003
 
 ---
 
