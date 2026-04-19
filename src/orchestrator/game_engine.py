@@ -34,10 +34,15 @@ from src.models import (
 from src.triggers import TriggerChecker, TriggerResult, VoteTriggerChecker
 
 
+import logging
+
 SPEECH_DELAY_MULTIPLIER = float(os.environ.get("SPEECH_DELAY_MULTIPLIER", "0.03"))
 CONTEXT_COMPRESSION_AFTER_N_TURNS = int(os.environ.get("CONTEXT_COMPRESSION_AFTER_N_TURNS", "10"))
 CONTEXT_KEEP_LAST_K_TURNS = int(os.environ.get("CONTEXT_KEEP_LAST_K_TURNS", "6"))
 MAX_PARTY_COST_USD = float(os.environ.get("MAX_PARTY_COST_USD", "3.0"))
+MAX_QUESTION_REROLL_ATTEMPTS = int(os.environ.get("MAX_QUESTION_REROLL_ATTEMPTS", "3"))
+
+logger = logging.getLogger(__name__)
 
 
 def calculate_display_delay_ms(content: str) -> int:
@@ -235,6 +240,50 @@ def _check_for_location_leak(content: str, speaker_id: str, game: Game) -> bool:
 
     if location.id.lower() in content_lower:
         return True
+
+    return False
+
+
+def _check_for_direct_location_question(
+    content: str,
+    speaker_id: str,
+    game: Game,
+    all_locations: list[Location],
+) -> bool:
+    """Check if civilian asked a direct question about the location.
+
+    Detects patterns like 'это больница?' or 'мы в ресторане?' that would
+    give away location information to the spy.
+
+    Args:
+        content: The question text to check.
+        speaker_id: ID of the questioner.
+        game: Current game state.
+        all_locations: List of all available locations.
+
+    Returns:
+        True if direct location question detected, False otherwise.
+    """
+    if speaker_id == game.spy_id:
+        return False
+
+    content_lower = content.lower()
+
+    current_location = get_location_by_id(game.location_id)
+    if current_location.display_name.lower() in content_lower:
+        return True
+    if current_location.id.lower() in content_lower:
+        return True
+
+    for loc in all_locations:
+        if loc.display_name.lower() in content_lower:
+            return True
+        if loc.id.lower() in content_lower:
+            return True
+
+    for role in current_location.roles:
+        if role.display_name.lower() in content_lower:
+            return True
 
     return False
 
@@ -582,6 +631,7 @@ async def run_main_round(
 
     trigger_checker = TriggerChecker(characters)
     vote_trigger_checker = VoteTriggerChecker(characters)
+    all_locations = load_locations()
 
     player_ids = [p.character_id for p in game.players]
     current_questioner = random.choice(player_ids)
@@ -616,14 +666,49 @@ async def run_main_round(
             {"role": "user", "content": question_instruction},
         ]
 
-        question_response = await provider.complete(
-            messages=messages,
-            model=game.config.main_model,
-            temperature=0.9,
-            max_tokens=150,
-        )
-        _track_usage_and_check_cost(game, question_response)
-        question_text = question_response.content.strip()
+        reroll_count = 0
+        question_text = ""
+
+        for attempt in range(MAX_QUESTION_REROLL_ATTEMPTS + 1):
+            question_response = await provider.complete(
+                messages=messages,
+                model=game.config.main_model,
+                temperature=0.9,
+                max_tokens=150,
+            )
+            _track_usage_and_check_cost(game, question_response)
+            question_text = question_response.content.strip()
+
+            is_direct_question = _check_for_direct_location_question(
+                question_text, current_questioner, game, all_locations
+            )
+
+            if is_direct_question and attempt < MAX_QUESTION_REROLL_ATTEMPTS:
+                reroll_count += 1
+                logger.debug(
+                    "Direct location question detected from %s (attempt %d/%d): %s",
+                    current_questioner,
+                    attempt + 1,
+                    MAX_QUESTION_REROLL_ATTEMPTS,
+                    question_text[:50],
+                )
+                continue
+
+            if is_direct_question:
+                logger.warning(
+                    "Direct location question from %s after %d rerolls, using anyway: %s",
+                    current_questioner,
+                    reroll_count,
+                    question_text[:50],
+                )
+            break
+
+        if reroll_count > 0:
+            logger.info(
+                "Question from %s required %d reroll(s) to avoid direct location mention",
+                current_questioner,
+                reroll_count,
+            )
 
         if _check_for_location_leak(question_text, current_questioner, game):
             actual_location = get_location_by_id(game.location_id)
