@@ -31,6 +31,26 @@
 
 ---
 
+## [TASK-018] Персонаж: Лёха (работяга)
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан characters/lyokha.json с полным профилем персонажа
+- Заполнены все поля по схеме PRD 8.7: id, display_name, archetype, backstory, voice_style
+- 4 MUST директивы (машинно проверяемы: counter на предложения <=2, regex на разговорную лексику, regex на dismissive слова, обращение на ты)
+- 3 MUST NOT директивы (проверяемы: regex на аналогии, counter на предложения <=3, regex на книжную лексику)
+- 5 detectable_markers: short_reply (counter), colloquial_speech (regex), dismissive_words (regex), no_complex_analogy (regex), plain_direct_speech (binary_llm)
+- 2 personal_triggers: dodged_direct_question, repeated_accusation_on_same_target (оба → short_dismissive_jab)
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `be4b0b8` — Add Lyokha character profile (TASK-018)
+
+---
+
 ## [TASK-017] Персонаж: Отец Игнатий (моралист)
 **Дата:** 2026-04-19
 **Статус:** done
