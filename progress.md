@@ -31,6 +31,26 @@
 
 ---
 
+## [TASK-019] Персонаж: Аврора (драма-квин)
+**Дата:** 2026-04-19
+**Статус:** done
+
+### Что сделано
+- Создан characters/aurora.json с полным профилем персонажа
+- Заполнены все поля по схеме PRD 8.8: id, display_name, archetype, backstory, voice_style
+- 4 MUST директивы (машинно проверяемы: counter на предложения >=3, regex на восклицания, regex на паузы "...", regex на эмоциональную лексику)
+- 3 MUST NOT директивы (проверяемы: counter на короткие ответы, regex на прямые признания, binary_llm на сухие ответы)
+- 5 detectable_markers: long_reply (counter), exclamation_present (regex), theatrical_pauses (regex), emotional_vocabulary (regex), dramatic_tone (binary_llm)
+- 2 personal_triggers: direct_accusation, repeated_accusation_on_same_target (panic_and_derail, moralize_and_accuse)
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `8a02c10` — Add Aurora character profile (TASK-019)
+
+---
+
 ## [TASK-018] Персонаж: Лёха (работяга)
 **Дата:** 2026-04-19
 **Статус:** done
