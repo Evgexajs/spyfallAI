@@ -46,7 +46,7 @@
 - Нет
 
 ### Коммиты
-- `TBD` — Add game repository for JSON logging (TASK-013)
+- `7d09178` — Add game repository for JSON logging (TASK-013)
 
 ---
 
