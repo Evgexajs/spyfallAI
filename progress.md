@@ -53,7 +53,7 @@
 - Для полного тестирования с реальными вызовами LLM нужен OPENAI_API_KEY
 
 ### Коммиты
-- TBD
+- `dd28dae` — Add token counter and cost tracking (TASK-028)
 
 ---
 
