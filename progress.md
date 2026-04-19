@@ -48,7 +48,7 @@
 - Нет
 
 ### Коммиты
-- (pending)
+- `388576f` — Add visual distinction for reply types in UI (TASK-038)
 
 ---
 
