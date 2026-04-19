@@ -91,6 +91,7 @@ class Character(BaseModel):
     id: str = Field(min_length=1, description="Unique slug: boris_molot, margo_honeytongue, etc.")
     display_name: str = Field(min_length=1, description="Display name in chat: Борис, Марго")
     archetype: str = Field(min_length=1, description="Short label: агрессор, манипулятор")
+    color: Optional[str] = Field(default=None, description="Hex color for UI display, e.g. #e94560")
     backstory: str = Field(min_length=10, description="Biography in 3-5 sentences")
     voice_style: str = Field(min_length=10, description="Speech style description")
     must_directives: list[str] = Field(min_length=1, description="List of MUST rules")

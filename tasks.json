@@ -681,7 +681,7 @@
         "Шаг 3: Проверить читаемость на светлом фоне"
       ],
       "dependencies": ["TASK-032"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-036",

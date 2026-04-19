@@ -516,10 +516,17 @@
 
         function getPlayerName(playerId) {
             const player = players.find(p => p.character_id === playerId);
+            if (player && player.display_name) {
+                return player.display_name;
+            }
             return player ? player.character_id.replace(/_/g, ' ') : playerId;
         }
 
         function getPlayerColor(playerId) {
+            const player = players.find(p => p.character_id === playerId);
+            if (player && player.color) {
+                return player.color;
+            }
             if (!playerColorMap[playerId]) {
                 const index = Object.keys(playerColorMap).length % PLAYER_COLORS.length;
                 playerColorMap[playerId] = PLAYER_COLORS[index];

@@ -167,6 +167,8 @@ class GameManager:
                 "players": [
                     {
                         "character_id": p.character_id,
+                        "display_name": next((c.display_name for c in self.characters if c.id == p.character_id), p.character_id),
+                        "color": next((c.color for c in self.characters if c.id == p.character_id), None),
                         "is_spy": p.is_spy,
                         "role_id": p.role_id,
                     }
