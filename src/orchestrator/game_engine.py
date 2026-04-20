@@ -1,24 +1,30 @@
 """Game orchestrator for SpyfallAI - setup and game flow management."""
 
-import asyncio
 import inspect
 import json
+import logging
 import os
 import random
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Callable, Optional
+from typing import Optional
 from uuid import uuid4
 
 from src.agents import (
     SecretInfo,
-    build_system_prompt,
-    build_intervention_micro_prompt,
     build_intervention_content_prompt,
+    build_intervention_micro_prompt,
     build_spy_confidence_check_prompt,
     build_spy_guess_prompt,
+    build_system_prompt,
 )
-from src.llm import CostExceededError, LLMConfig, LLMProvider, LLMResponse, create_provider
+from src.llm import (
+    CostExceededError,
+    LLMConfig,
+    LLMProvider,
+    LLMResponse,
+    create_provider,
+)
 from src.models import (
     Character,
     ConfidenceEntry,
@@ -34,9 +40,6 @@ from src.models import (
     TurnType,
 )
 from src.triggers import TriggerChecker, TriggerResult, VoteTriggerChecker
-
-
-import logging
 
 SPEECH_DELAY_MULTIPLIER = float(os.environ.get("SPEECH_DELAY_MULTIPLIER", "0.03"))
 CONTEXT_COMPRESSION_AFTER_N_TURNS = int(os.environ.get("CONTEXT_COMPRESSION_AFTER_N_TURNS", "10"))
@@ -1027,11 +1030,23 @@ async def run_final_vote(
         candidates = [pid for pid in player_ids if pid != voter_id]
         candidates_str = ", ".join(candidates)
 
+        # Build history including any votes already cast
         history = await _build_compressed_conversation_history(game, provider)
+
+        # Build vote context showing previous votes
+        previous_votes_text = ""
+        if votes:
+            votes_list = [f"{v}: голосует за {t}" for v, t in votes.items()]
+            previous_votes_text = f"Уже проголосовали: {', '.join(votes_list)}. "
+
         vote_instruction = (
             f"Ты — {voter_char.display_name}. Время голосования. "
+            f"ПРАВИЛО: голосование засчитывается ТОЛЬКО если ВСЕ игроки единогласно укажут на одного человека. "
+            f"Если голоса разделятся — никто не будет обвинён и игра продолжится. "
+            f"{previous_votes_text}"
+            f"Голосуй на основе СВОИХ наблюдений из разговора — не копируй чужие голоса бездумно. "
             f"Кто из игроков, по-твоему, шпион? Выбери ОДНОГО из: {candidates_str}. "
-            f"Напиши ТОЛЬКО имя (id) игрока, за которого голосуешь, без пояснений."
+            f"Напиши ТОЛЬКО имя (id) игрока, без пояснений."
         )
 
         messages = [
