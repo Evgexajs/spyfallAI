@@ -104,37 +104,32 @@ def _track_usage_and_check_cost(game: Game, response: LLMResponse) -> None:
         )
 
 
-def _parse_agent_json_response(raw_response: str, require_content: bool = True) -> dict:
-    """Parse agent JSON response, handling common issues.
+def _parse_json_response(raw_response: str) -> dict:
+    """Parse JSON response from LLM.
 
-    Args:
-        raw_response: Raw LLM response string
-        require_content: If True, require "content" key (for question/answer)
-                        If False, return any valid JSON dict (for spy confidence)
-
-    Returns dict with parsed JSON or fallback.
+    With json_mode=True, response should be clean JSON.
+    Falls back to extracting JSON if wrapped in markdown.
     """
     raw_response = raw_response.strip()
 
-    # Try to extract JSON from response (may have text before/after or markdown wrapper)
+    # Try direct parse first (expected with json_mode=True)
+    try:
+        return json.loads(raw_response)
+    except json.JSONDecodeError:
+        pass
+
+    # Fallback: extract JSON from markdown wrapper
     json_start = raw_response.find("{")
     json_end = raw_response.rfind("}") + 1
-
     if json_start != -1 and json_end > json_start:
-        json_str = raw_response[json_start:json_end]
         try:
-            parsed = json.loads(json_str)
-            if isinstance(parsed, dict):
-                if require_content:
-                    if "content" in parsed:
-                        return parsed
-                else:
-                    return parsed
+            return json.loads(raw_response[json_start:json_end])
         except json.JSONDecodeError:
             pass
 
-    # Fallback: treat entire response as content
-    return {"content": raw_response, "wants_vote": False, "suspect_id": None}
+    # Last resort fallback
+    logger.warning(f"Failed to parse JSON response: {raw_response[:100]}")
+    return {}
 
 
 def _clean_content(content: str) -> str:
@@ -620,41 +615,28 @@ async def _check_spy_confidence(
 
     response = await provider.complete(
         messages=[{"role": "user", "content": prompt}],
-        model=game.config.main_model,  # Use main model for better reasoning
+        model=game.config.main_model,
         temperature=0.5,
         max_tokens=300,
+        json_mode=True,
     )
 
     _track_usage_and_check_cost(game, response)
     raw_response = response.content.strip()
 
     # Parse JSON response
-    hints = None
-    location_guess = None
-    reasoning = None
-    level = ConfidenceLevel.NO_IDEA
+    parsed = _parse_json_response(raw_response)
+    hints = parsed.get("hints")
+    location_guess = parsed.get("location_guess")
+    reasoning = parsed.get("reasoning")
+    confidence_str = str(parsed.get("confidence", "")).lower()
 
-    try:
-        parsed = _parse_agent_json_response(raw_response, require_content=False)
-        hints = parsed.get("hints")
-        location_guess = parsed.get("location_guess")
-        reasoning = parsed.get("reasoning")
-        confidence_str = parsed.get("confidence", "").lower()
-
-        if "confident" in confidence_str:
-            level = ConfidenceLevel.CONFIDENT
-        elif "few_guesses" in confidence_str or "few" in confidence_str:
-            level = ConfidenceLevel.FEW_GUESSES
-        else:
-            level = ConfidenceLevel.NO_IDEA
-    except Exception as e:
-        logger.warning(f"Failed to parse spy confidence JSON: {e}")
-        # Fallback to simple parsing
-        response_lower = raw_response.lower()
-        if "confident" in response_lower:
-            level = ConfidenceLevel.CONFIDENT
-        elif "few_guesses" in response_lower or "few" in response_lower:
-            level = ConfidenceLevel.FEW_GUESSES
+    if "confident" in confidence_str:
+        level = ConfidenceLevel.CONFIDENT
+    elif "few_guesses" in confidence_str or "few" in confidence_str:
+        level = ConfidenceLevel.FEW_GUESSES
+    else:
+        level = ConfidenceLevel.NO_IDEA
 
     entry = ConfidenceEntry(
         turn_number=max(1, len(game.turns)),
@@ -810,12 +792,13 @@ async def run_main_round(
                 model=game.config.main_model,
                 temperature=0.9,
                 max_tokens=200,
+                json_mode=True,
             )
             _track_usage_and_check_cost(game, question_response)
 
             # Parse JSON response
             question_raw_response = question_response.content
-            parsed = _parse_agent_json_response(question_raw_response)
+            parsed = _parse_json_response(question_raw_response)
             question_text = _clean_content(parsed.get("content", question_raw_response))
             question_wants_vote = parsed.get("wants_vote", False)
             question_suspect_id = parsed.get("suspect_id")
@@ -962,12 +945,13 @@ async def run_main_round(
             model=game.config.main_model,
             temperature=0.9,
             max_tokens=250,
+            json_mode=True,
         )
         _track_usage_and_check_cost(game, answer_response)
 
         # Parse JSON response
         answer_raw_response = answer_response.content
-        answer_parsed = _parse_agent_json_response(answer_raw_response)
+        answer_parsed = _parse_json_response(answer_raw_response)
         answer_text = _clean_content(answer_parsed.get("content", answer_raw_response))
         answer_wants_vote = answer_parsed.get("wants_vote", False)
         answer_suspect_id = answer_parsed.get("suspect_id")

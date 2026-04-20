@@ -77,6 +77,7 @@ class LLMProvider(ABC):
         model: Optional[str] = None,
         temperature: float = 0.7,
         max_tokens: int = 500,
+        json_mode: bool = False,
     ) -> LLMResponse:
         """Generate a completion from the given messages.
 
@@ -85,6 +86,7 @@ class LLMProvider(ABC):
             model: Model identifier. If None, uses provider default.
             temperature: Sampling temperature (0.0-2.0).
             max_tokens: Maximum tokens in response.
+            json_mode: If True, force JSON output format.
 
         Returns:
             LLMResponse with content and token usage.
@@ -129,18 +131,23 @@ class OpenAIProvider(LLMProvider):
         model: Optional[str] = None,
         temperature: float = 0.7,
         max_tokens: int = 500,
+        json_mode: bool = False,
     ) -> LLMResponse:
         """Generate a completion using OpenAI API."""
         model = model or self._default_model
 
         try:
+            kwargs = {
+                "model": model,
+                "messages": messages,
+                "temperature": temperature,
+                "max_tokens": max_tokens,
+            }
+            if json_mode:
+                kwargs["response_format"] = {"type": "json_object"}
+
             response = await asyncio.wait_for(
-                self._client.chat.completions.create(
-                    model=model,
-                    messages=messages,
-                    temperature=temperature,
-                    max_tokens=max_tokens,
-                ),
+                self._client.chat.completions.create(**kwargs),
                 timeout=self._timeout,
             )
             content = response.choices[0].message.content
