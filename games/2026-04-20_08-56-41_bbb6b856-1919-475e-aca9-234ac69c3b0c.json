@@ -1,0 +1,242 @@
+{
+  "id": "bbb6b856-1919-475e-aca9-234ac69c3b0c",
+  "started_at": "2026-04-20T08:56:41.784262",
+  "ended_at": "2026-04-20T08:57:16.285275",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "casino",
+  "players": [
+    {
+      "character_id": "lyokha",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "kim",
+      "role_id": "dealer",
+      "is_spy": false
+    },
+    {
+      "character_id": "aurora",
+      "role_id": "bartender",
+      "is_spy": false
+    },
+    {
+      "character_id": "margo",
+      "role_id": "pit_boss",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "lyokha",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T08:56:44.832927",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Чё тут жрать дают, норм?",
+      "display_delay_ms": 979
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T08:56:46.664504",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "О, дорогой Lyokha, здесь каждый найдёт что-то по вкусу. А ты сам что предпочитаешь, интересно?",
+      "display_delay_ms": 3151
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T08:56:47.566444",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "Lyokha, милый, а как ты относишься к яркому освещению?",
+      "display_delay_ms": 1972
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T08:56:49.021519",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Да норм, лишь бы глаза не слепило.",
+      "display_delay_ms": 1558
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T08:56:50.352751",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "[lyokha → aurora] Чё за люди тут, нормальные?",
+      "display_delay_ms": 1559
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T08:56:52.501096",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "О, как можно вообще спросить об этом! Люди, которых я встречаю здесь... они такие разные, но, о боже, все они — часть этой яркой, бурной жизни! Каждый шаг по полу... каждый взгляд... вызывает во мне бурю эмоций! Да, нормальные или нет — это вопрос восприятия... и каждый момент здесь как сцена великой пьесы!",
+      "display_delay_ms": 9546
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T08:56:55.470111",
+      "speaker_id": "kim",
+      "addressee_id": "aurora",
+      "type": "intervention",
+      "content": "Что-то не сходится, ну то есть... ты же вроде говорила про бурю эмоций, а... в смысле, не совсем понятно, как тут это связано с нормальностью, вернее, её отсутствием, наверное.",
+      "display_delay_ms": 5780
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T08:57:03.768688",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "О, Lyokha, как часто ты ощущаешь здесь, в этом... месте, что время будто бы исчезло и всё вокруг — лишь иллюзия?!",
+      "display_delay_ms": 3621
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T08:57:06.529234",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Да ладно, чё за заморочки? Время как время.",
+      "display_delay_ms": 1581
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-20T08:57:08.269307",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "type": "intervention",
+      "content": "Милый Lyokha, интересно, что ты так уверенно говоришь о времени. Ведь здесь, в этой атмосфере, зачастую кажется, что оно течёт совсем иначе, правда, aurora?",
+      "display_delay_ms": 4889
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-20T08:57:13.492811",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за aurora",
+      "display_delay_ms": 1052
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T08:57:13.971776",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за lyokha",
+      "display_delay_ms": 1075
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-20T08:57:15.521382",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за lyokha",
+      "display_delay_ms": 990
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-20T08:57:16.285084",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за lyokha",
+      "display_delay_ms": 785
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T08:56:53.831538",
+      "level": "few_guesses"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T08:56:55.470372",
+      "character_id": "kim",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T08:57:08.269435",
+      "character_id": "margo",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T08:56:41.784262",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized"
+    },
+    {
+      "timestamp": "2026-04-20T08:56:41.784555",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T08:57:08.269519",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 10 ходов"
+    },
+    {
+      "timestamp": "2026-04-20T08:57:08.269946",
+      "from_phase": "optional_vote",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T08:57:16.285297",
+      "from_phase": "final_vote",
+      "to_phase": "resolution",
+      "reason": "Game ended: civilians won"
+    }
+  ],
+  "outcome": {
+    "winner": "civilians",
+    "reason": "Шпион (lyokha) был разоблачён голосованием",
+    "votes": {
+      "lyokha": "aurora",
+      "kim": "lyokha",
+      "aurora": "lyokha",
+      "margo": "lyokha"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": "lyokha"
+  },
+  "compressed_history": "В диалоге между Lyokha и Margo наблюдается легкое подозрение. Margo начинает разговор о еде, пытаясь выяснить предпочтения Lyokha, что может указывать на его уровень знакомства с локацией. Она также задает вопрос о ярком освещении, что может намекать на специфическую атмосферу места, но не дает конкретной информации. \n\nLyokha отвечает нейтрально, что может свидетельствовать о его уклончивом подходе к вопросам Margo. Он не выдает никаких конкретных деталей о себе или своих предпочтениях, что вызывает подозрения. Margo, в свою очередь, пытается установить контакт, но её вопросы могут быть восприняты как попытка выяснить, знает ли Lyokha о локации больше, чем говорит. \n\nВ целом, диалог наполнен намеками и косвенными обвинениями, но конкретные подозрения не озвучиваются. Оба игрока остаются на плаву, избегая прямых обвинений, что создает атмосферу недосказанности и напряжения.",
+  "compression_checkpoint": 4,
+  "token_usage": {
+    "total_input_tokens": 19935,
+    "total_output_tokens": 556,
+    "total_cost_usd": 0.051393100000000004,
+    "llm_calls_count": 18
+  }
+}

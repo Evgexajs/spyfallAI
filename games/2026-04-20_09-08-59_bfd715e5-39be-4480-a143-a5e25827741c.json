@@ -1,0 +1,242 @@
+{
+  "id": "bfd715e5-39be-4480-a143-a5e25827741c",
+  "started_at": "2026-04-20T09:08:59.752825",
+  "ended_at": "2026-04-20T09:09:25.281986",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "casino",
+  "players": [
+    {
+      "character_id": "zoya",
+      "role_id": "pit_boss",
+      "is_spy": false
+    },
+    {
+      "character_id": "boris_molot",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "lyokha",
+      "role_id": "gambler",
+      "is_spy": false
+    },
+    {
+      "character_id": "professor_stein",
+      "role_id": "bartender",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "boris_molot",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T09:09:01.698790",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Zoya, если бы ты могла провести один день, занимаясь только своим делом здесь, как бы ты охарактеризовала этот опыт с точки зрения эмоциональной насыщенности?",
+      "display_delay_ms": 5265
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T09:09:02.881424",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "О, эмоциональная насыщенность, конечно. Прямо как смотреть на сохнущую краску, только с огоньками и фишками.",
+      "display_delay_ms": 3640
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T09:09:04.154270",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "[zoya → professor_stein] Профессор, а как вы относитесь к постоянным звукам, которые здесь слышите?",
+      "display_delay_ms": 3267
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T09:09:05.897538",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Знаете, звуки, которые здесь сопутствуют моему пребыванию, по сути своей напоминают непрерывный симфонический оркестр. Это как если бы каждое движение имело свою мелодию, а каждый жест — свою партитуру. В контексте подобного места, шум становится своего рода фоном, без которого мы не можем существовать в полной мере.",
+      "display_delay_ms": 9971
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T09:09:07.123048",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "[professor_stein → zoya] Zoya, скажите, какова, на ваш взгляд, роль света в этом пространстве, и каким образом он влияет на ваше восприятие происходящего здесь?",
+      "display_delay_ms": 5367
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T09:09:08.251664",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "Свет? Ага, как будто звёздное небо спустилось на землю, чтобы всем мешать спать.",
+      "display_delay_ms": 2702
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T09:09:10.915413",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Это ты, zoya, мешаешь спать своими загадками. Только что сказала про огоньки и фишки, а теперь звёздное небо. Определись, что ты тут видишь.",
+      "display_delay_ms": 4725
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T09:09:13.674842",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "[zoya → boris_molot] Борис, а как часто тебе встречаются действительно честные люди здесь?",
+      "display_delay_ms": 3065
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T09:09:14.396924",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Редко встречаю. Ты следующая, zoya.",
+      "display_delay_ms": 1529
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-20T09:09:16.236265",
+      "speaker_id": "professor_stein",
+      "addressee_id": "boris_molot",
+      "type": "intervention",
+      "content": "Любопытно, Борис. Выходит, что редко встречаем честных людей в месте, где моральные и этические нормы, по сути своей, должны быть краеугольным камнем.",
+      "display_delay_ms": 4776
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-20T09:09:23.435568",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за lyokha",
+      "display_delay_ms": 927
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T09:09:24.040649",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 734
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-20T09:09:24.649664",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 910
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-20T09:09:25.281953",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 675
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T09:09:09.193029",
+      "level": "few_guesses"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T09:09:10.915533",
+      "character_id": "boris_molot",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T09:09:16.236462",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T09:08:59.752825",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized"
+    },
+    {
+      "timestamp": "2026-04-20T09:08:59.753269",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T09:09:16.236546",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 10 ходов"
+    },
+    {
+      "timestamp": "2026-04-20T09:09:16.236953",
+      "from_phase": "optional_vote",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T09:09:25.281989",
+      "from_phase": "final_vote",
+      "to_phase": "resolution",
+      "reason": "Game ended: spy won"
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Мирные обвинили zoya, но шпионом был boris_molot",
+    "votes": {
+      "zoya": "lyokha",
+      "boris_molot": "zoya",
+      "lyokha": "zoya",
+      "professor_stein": "zoya"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": "zoya"
+  },
+  "compressed_history": "В диалоге между профессором Стайном и Зоей возникает подозрение по поводу истинной природы их местоположения. Профессор задает Зое вопрос о её эмоциональном опыте, на что она отвечает уклончиво, сравнивая его с «сохнущей краской». Это вызывает сомнения у профессора, который начинает подозревать, что Зоя может скрывать что-то важное. \n\nПрофессор затем спрашивает о звуках в их окружении, на что Зоя отвечает, что они напоминают симфонический оркестр, что также звучит подозрительно и может указывать на неискренность. Профессор пытается установить связь между звуками и их местом, но Зоя уклоняется от конкретных ответов, что усиливает подозрения.\n\nКлючевые обвинения заключаются в том, что Зоя не дает ясных ответов и использует метафоры, которые могут отвлекать от сути. Профессор, в свою очередь, пытается выяснить, насколько они оба осведомлены о своем окружении, что намекает на возможное место, связанное с искусством или творчеством, но остается неясным.",
+  "compression_checkpoint": 4,
+  "token_usage": {
+    "total_input_tokens": 21227,
+    "total_output_tokens": 654,
+    "total_cost_usd": 0.054935700000000004,
+    "llm_calls_count": 18
+  }
+}
