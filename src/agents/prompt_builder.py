@@ -422,6 +422,21 @@ def build_defense_characteristic_check_prompt(
 Ответь ТОЛЬКО одним словом: да или нет."""
 
 
+def _get_coordination_strategy(is_spy: bool) -> str:
+    """Get coordination strategy text based on player role."""
+    if is_spy:
+        return """ТВОЯ СТРАТЕГИЯ (ты шпион):
+- Твоя цель — разделить голоса, чтобы не было единогласия
+- Голосуй за кого-то ДРУГОГО, не за того, за кого голосуют остальные
+- Если все уже проголосовали за тебя — попробуй проголосовать за себя (это не поможет, но других вариантов нет)
+- Притворяйся, что координируешься, но выбирай другую цель"""
+    else:
+        return """СТРАТЕГИЯ КООРДИНАЦИИ:
+- Если другие уже проголосовали — ОБЯЗАТЕЛЬНО присоединяйся к их выбору (даже если сомневаешься), иначе шпион победит
+- Если ты голосуешь первым — голосуй за того, кого считаешь шпионом, остальные должны последовать
+- Единство важнее правоты: лучше вместе ошибиться, чем разделиться и проиграть"""
+
+
 def build_final_vote_with_defense_prompt(
     character: Character,
     game: Game,
@@ -448,6 +463,7 @@ def build_final_vote_with_defense_prompt(
         Prompt for generating a final vote decision.
     """
     base_prompt = build_system_prompt(character, game, secret_info)
+    is_spy = secret_info.is_spy
 
     # Helper to get display name
     def get_name(char_id: str) -> str:
@@ -492,8 +508,10 @@ def build_final_vote_with_defense_prompt(
 - Изменить голос на другого игрока
 {abstain_option if preliminary_vote else "- Проголосовать (ты воздержался в первом туре)"}
 
-ПРАВИЛО: Победитель определяется ЕДИНОГЛАСНЫМ голосованием.
-Если голоса не единогласны — шпион выигрывает.
+КРИТИЧЕСКОЕ ПРАВИЛО: Для поимки шпиона нужно ЕДИНОГЛАСНОЕ голосование.
+ВСЕ игроки должны проголосовать за ОДНОГО человека. Если хоть один голос отличается — шпион автоматически выигрывает!
+
+{_get_coordination_strategy(is_spy)}
 
 Выбери ОДНОГО из: {candidates_str}{abstain_suffix}.
 Напиши ТОЛЬКО имя игрока{abstain_suffix}."""
