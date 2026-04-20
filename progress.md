@@ -31,6 +31,35 @@
 
 ---
 
+## [TASK-063] UI для новых фаз голосования и защиты
+**Дата:** 2026-04-20
+**Статус:** done
+
+### Что сделано
+- Обновлён index.html (live-игра):
+  - Добавлены PHASE_NAMES для preliminary_vote и pre_final_vote_defense на русском
+  - Добавлены TURN_TYPE_LABELS: П-ГОЛОС, ЗАЩИТА, Ф-ГОЛОС
+  - Добавлены TURN_TYPE_TOOLTIPS с описаниями новых типов
+  - CSS стили для .message.preliminary_vote (фиолетовая рамка)
+  - CSS стили для .message.defense_speech (оранжевая рамка + метка "ЗАЩИТА")
+  - CSS стили для .message.final_vote (фиолетовая рамка)
+  - CSS для .phase-badge.preliminary_vote и .phase-badge.pre_final_vote_defense
+  - Индикаторы смены голоса: "изменил" (оранжевый) / "подтвердил" (зелёный)
+- Обновлён game.html (история игры):
+  - Те же PHASE_NAMES, TURN_TYPE_LABELS, TURN_TYPE_TOOLTIPS
+  - Те же CSS стили для новых типов сообщений
+  - Индикаторы смены голоса в финальном голосовании
+- Добавлены .message-type CSS для preliminary_vote, defense_speech, final_vote
+- Все 237 unit-тестов проходят
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- (будет добавлен после коммита)
+
+---
+
 ## [TASK-062] Обновить поток фаз в оркестраторе
 **Дата:** 2026-04-20
 **Статус:** done

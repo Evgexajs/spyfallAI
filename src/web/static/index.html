@@ -121,6 +121,9 @@
         .message-type.answer { background-color: #10b981; color: white; }
         .message-type.intervention { background-color: #f59e0b; color: black; }
         .message-type.vote { background-color: #8b5cf6; color: white; }
+        .message-type.preliminary_vote { background-color: #a855f7; color: white; }
+        .message-type.defense_speech { background-color: #f97316; color: white; }
+        .message-type.final_vote { background-color: #8b5cf6; color: white; }
         .message-type.spy_guess { background-color: #ef4444; color: white; }
         .message-type.spy_leak { background-color: #dc2626; color: white; }
 
@@ -159,6 +162,68 @@
             border-left-color: #dc2626;
             border: 2px dashed #dc2626;
             border-left-width: 6px;
+        }
+
+        .message.preliminary_vote {
+            background-color: rgba(168, 85, 247, 0.15);
+            border-left-color: #a855f7;
+            border: 2px solid #a855f7;
+            border-left-width: 6px;
+        }
+
+        .message.preliminary_vote .message-content {
+            font-weight: 500;
+        }
+
+        .message.defense_speech {
+            background-color: rgba(249, 115, 22, 0.15);
+            border-left-color: #f97316;
+            border: 3px solid #f97316;
+            border-left-width: 6px;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .message.defense_speech::before {
+            content: 'ЗАЩИТА';
+            display: block;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #f97316;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .message.defense_speech .message-content {
+            font-weight: 500;
+        }
+
+        .message.final_vote {
+            background-color: rgba(139, 92, 246, 0.15);
+            border-left-color: #8b5cf6;
+            border: 2px solid #8b5cf6;
+            border-left-width: 6px;
+        }
+
+        .message.final_vote .message-content {
+            font-weight: 500;
+        }
+
+        .vote-change-indicator {
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+        }
+
+        .vote-change-indicator.changed {
+            background-color: #f59e0b;
+            color: black;
+        }
+
+        .vote-change-indicator.confirmed {
+            background-color: #10b981;
+            color: white;
         }
 
         .message-addressee {
@@ -289,6 +354,16 @@
 
         .phase-badge.final_vote {
             background-color: #8b5cf6;
+            color: white;
+        }
+
+        .phase-badge.preliminary_vote {
+            background-color: #a855f7;
+            color: white;
+        }
+
+        .phase-badge.pre_final_vote_defense {
+            background-color: #f97316;
             color: white;
         }
 
@@ -853,6 +928,9 @@
             answer: 'A',
             intervention: 'INT',
             vote: 'VOTE',
+            preliminary_vote: 'П-ГОЛОС',
+            defense_speech: 'ЗАЩИТА',
+            final_vote: 'Ф-ГОЛОС',
             spy_guess: 'GUESS',
             spy_leak: 'LEAK'
         };
@@ -862,6 +940,9 @@
             answer: 'Ответ — игрок отвечает на заданный вопрос',
             intervention: 'Вмешательство — игрок перебивает для комментария',
             vote: 'Голосование — игрок голосует за подозреваемого',
+            preliminary_vote: 'Предварительное голосование — первичный голос за подозреваемого',
+            defense_speech: 'Защита — обвиняемый игрок защищает себя перед голосованием',
+            final_vote: 'Финальное голосование — окончательный голос после защиты',
             spy_guess: 'Угадывание — шпион пытается угадать локацию',
             spy_leak: 'Утечка — шпион случайно выдал локацию'
         };
@@ -1159,7 +1240,7 @@
             const msg = document.createElement('div');
             msg.className = 'message';
 
-            const styledTypes = ['intervention', 'vote', 'spy_guess', 'spy_leak'];
+            const styledTypes = ['intervention', 'vote', 'spy_guess', 'spy_leak', 'preliminary_vote', 'defense_speech', 'final_vote'];
             if (styledTypes.includes(data.turn_type)) {
                 msg.classList.add(data.turn_type);
             }
@@ -1192,6 +1273,23 @@
 
             header.appendChild(typeLabel);
             header.appendChild(typeInfo);
+
+            // Add vote change indicator for final_vote
+            if (data.turn_type === 'final_vote') {
+                const voteIndicator = document.createElement('span');
+                voteIndicator.className = 'vote-change-indicator';
+                const contentLower = data.content.toLowerCase();
+                if (contentLower.includes('меняю') || contentLower.includes('изменяю')) {
+                    voteIndicator.classList.add('changed');
+                    voteIndicator.textContent = 'изменил';
+                } else if (contentLower.includes('подтверждаю')) {
+                    voteIndicator.classList.add('confirmed');
+                    voteIndicator.textContent = 'подтвердил';
+                }
+                if (voteIndicator.textContent) {
+                    header.appendChild(voteIndicator);
+                }
+            }
 
             const content = document.createElement('div');
             content.className = 'message-content';
@@ -1347,6 +1445,8 @@
                         'setup': 'Подготовка',
                         'main_round': 'Основной раунд',
                         'optional_vote': 'Досрочное голосование',
+                        'preliminary_vote': 'Предварительное голосование',
+                        'pre_final_vote_defense': 'Защита обвиняемых',
                         'final_vote': 'Финальное голосование',
                         'resolution': 'Подведение итогов'
                     };

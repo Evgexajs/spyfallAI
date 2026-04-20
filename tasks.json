@@ -1223,7 +1223,7 @@
         "Шаг 3: Проверить индикаторы смены голоса"
       ],
       "dependencies": ["TASK-062"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-064",
