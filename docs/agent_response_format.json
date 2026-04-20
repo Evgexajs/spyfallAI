@@ -1,0 +1,70 @@
+{
+  "description": "Формат JSON ответов агентов в SpyfallAI",
+  "version": "1.0",
+
+  "question_response": {
+    "description": "Ответ агента при задании вопроса",
+    "example": {
+      "content": "Зоя, какой запах ты чувствуешь, когда заходишь сюда утром?",
+      "wants_vote": false,
+      "suspect_id": null
+    },
+    "fields": {
+      "content": {
+        "type": "string",
+        "required": true,
+        "description": "Текст вопроса в стиле персонажа"
+      },
+      "wants_vote": {
+        "type": "boolean",
+        "required": true,
+        "description": "true = хочу начать голосование прямо сейчас"
+      },
+      "suspect_id": {
+        "type": "string | null",
+        "required": true,
+        "description": "ID подозреваемого если wants_vote=true, иначе null"
+      }
+    }
+  },
+
+  "answer_response": {
+    "description": "Ответ агента на вопрос",
+    "example": {
+      "content": "Запах? Ну, пахнет бумагой и чернилами от принтера. Обычное дело.",
+      "wants_vote": false,
+      "suspect_id": null
+    },
+    "fields": {
+      "content": {
+        "type": "string",
+        "required": true,
+        "description": "Текст ответа в стиле персонажа"
+      },
+      "wants_vote": {
+        "type": "boolean",
+        "required": true,
+        "description": "true = хочу начать голосование после ответа"
+      },
+      "suspect_id": {
+        "type": "string | null",
+        "required": true,
+        "description": "ID подозреваемого если wants_vote=true, иначе null"
+      }
+    }
+  },
+
+  "vote_trigger_example": {
+    "description": "Пример когда игрок хочет запустить голосование",
+    "example": {
+      "content": "Аврора, твои ответы слишком расплывчатые. Я уверен — ты шпион!",
+      "wants_vote": true,
+      "suspect_id": "aurora"
+    }
+  },
+
+  "valid_suspect_ids": {
+    "description": "ID игроков передаются в промпте, например:",
+    "example": ["boris_molot", "aurora", "professor_stein", "zoya"]
+  }
+}

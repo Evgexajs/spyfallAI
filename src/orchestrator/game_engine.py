@@ -542,8 +542,12 @@ async def _generate_intervention_content(
     game: Game,
     characters: list[Character],
     provider: LLMProvider,
-) -> str:
-    """Generate the intervention content for a character."""
+) -> tuple[str, str]:
+    """Generate the intervention content for a character.
+
+    Returns:
+        Tuple of (cleaned_content, raw_response)
+    """
     character = _get_character_by_id(characters, trigger_result.character_id)
     player = next(p for p in game.players if p.character_id == character.id)
     secret_info = _get_secret_info(game, player)
@@ -572,7 +576,9 @@ async def _generate_intervention_content(
     )
 
     _track_usage_and_check_cost(game, response)
-    return response.content.strip()
+    raw_response = response.content
+    cleaned_content = _clean_content(raw_response.strip())
+    return cleaned_content, raw_response
 
 
 async def _check_spy_confidence(
@@ -781,8 +787,9 @@ async def run_main_round(
             _track_usage_and_check_cost(game, question_response)
 
             # Parse JSON response
-            parsed = _parse_agent_json_response(question_response.content)
-            question_text = _clean_content(parsed.get("content", question_response.content))
+            question_raw_response = question_response.content
+            parsed = _parse_agent_json_response(question_raw_response)
+            question_text = _clean_content(parsed.get("content", question_raw_response))
             question_wants_vote = parsed.get("wants_vote", False)
             question_suspect_id = parsed.get("suspect_id")
 
@@ -873,6 +880,7 @@ async def run_main_round(
             type=TurnType.QUESTION,
             content=question_text,
             display_delay_ms=calculate_display_delay_ms(question_text),
+            raw_response=question_raw_response,
         )
         game.turns.append(turn)
         if on_turn:
@@ -931,8 +939,9 @@ async def run_main_round(
         _track_usage_and_check_cost(game, answer_response)
 
         # Parse JSON response
-        answer_parsed = _parse_agent_json_response(answer_response.content)
-        answer_text = _clean_content(answer_parsed.get("content", answer_response.content))
+        answer_raw_response = answer_response.content
+        answer_parsed = _parse_agent_json_response(answer_raw_response)
+        answer_text = _clean_content(answer_parsed.get("content", answer_raw_response))
         answer_wants_vote = answer_parsed.get("wants_vote", False)
         answer_suspect_id = answer_parsed.get("suspect_id")
 
@@ -968,6 +977,7 @@ async def run_main_round(
             type=TurnType.ANSWER,
             content=answer_text,
             display_delay_ms=calculate_display_delay_ms(answer_text),
+            raw_response=answer_raw_response,
         )
         game.turns.append(answer_turn)
         if on_turn:
@@ -1069,7 +1079,7 @@ async def run_main_round(
                 if on_typing:
                     await on_typing(winner.character_id)
 
-                intervention_content = await _generate_intervention_content(
+                intervention_content, intervention_raw = await _generate_intervention_content(
                     trigger_result=winner,
                     answer_turn=answer_turn,
                     game=game,
@@ -1108,6 +1118,7 @@ async def run_main_round(
                     type=TurnType.INTERVENTION,
                     content=intervention_content,
                     display_delay_ms=calculate_display_delay_ms(intervention_content),
+                    raw_response=intervention_raw,
                 )
                 game.turns.append(intervention_turn)
                 if on_turn:

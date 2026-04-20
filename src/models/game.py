@@ -60,6 +60,7 @@ class Turn(BaseModel):
     type: TurnType = Field(description="Type of turn")
     content: str = Field(min_length=1, description="Text content of the turn")
     display_delay_ms: int = Field(ge=0, description="Display delay in milliseconds")
+    raw_response: Optional[str] = Field(default=None, description="Raw LLM response before parsing")
 
 
 class ConfidenceEntry(BaseModel):
