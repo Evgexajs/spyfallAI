@@ -1016,9 +1016,9 @@ async def run_final_vote(
     If defense was skipped, copies preliminary votes without LLM calls.
     If defense was executed, each voter can confirm or change their vote.
 
-    Winner is determined by STRICT MAJORITY:
-    - If one target has more than half of all votes → check if spy
-    - If no majority → spy wins
+    Winner is determined by UNANIMOUS voting:
+    - If ALL players vote for the same target → check if spy
+    - If not unanimous (any abstention or split) → spy wins
 
     Args:
         game: Game object after defense phase (or preliminary vote if defense skipped).
@@ -1202,15 +1202,14 @@ async def run_final_vote(
         game.final_vote_result = final_votes
         game.vote_changes = vote_changes
 
-    # Determine winner using strict majority
+    # Determine winner using UNANIMOUS voting
     vote_counts: dict[str, int] = {}
-    total_votes = 0
+    total_voters = len(final_votes)
     for target in final_votes.values():
         if target is not None:
             vote_counts[target] = vote_counts.get(target, 0) + 1
-            total_votes += 1
 
-    # Find winner by strict majority
+    # Find the target with most votes
     winner_target = None
     max_votes = 0
     for target, count in vote_counts.items():
@@ -1218,22 +1217,22 @@ async def run_final_vote(
             max_votes = count
             winner_target = target
 
-    # Strict majority: more than half of all votes (excluding abstentions)
-    has_majority = max_votes > total_votes / 2 if total_votes > 0 else False
+    # Unanimous: ALL players must vote for the same target (no abstentions allowed)
+    is_unanimous = max_votes == total_voters and winner_target is not None
 
     if on_vote_result:
-        await _call_callback(on_vote_result, has_majority, dict(final_votes))
+        await _call_callback(on_vote_result, is_unanimous, dict(final_votes))
 
-    if has_majority and winner_target:
-        # Someone got strict majority
+    if is_unanimous and winner_target:
+        # Everyone voted for the same target
         spy_caught = winner_target == game.spy_id
 
         if spy_caught:
             winner = "civilians"
-            reason = f"Шпион ({game.spy_id}) был разоблачён большинством голосов ({max_votes}/{total_votes})"
+            reason = f"Шпион ({game.spy_id}) был единогласно разоблачён ({max_votes}/{total_voters})"
         else:
             winner = "spy"
-            reason = f"Мирные большинством обвинили {winner_target}, но шпионом был {game.spy_id}"
+            reason = f"Мирные единогласно обвинили {winner_target}, но шпионом был {game.spy_id}"
 
         game.outcome = GameOutcome(
             winner=winner,
@@ -1242,11 +1241,11 @@ async def run_final_vote(
             accused_id=winner_target,
         )
     else:
-        # No majority - spy wins
-        if total_votes == 0:
+        # Not unanimous - spy wins
+        if max_votes == 0:
             reason = f"Все воздержались — шпион ({game.spy_id}) побеждает"
         else:
-            reason = f"Голоса разделились (нет большинства) — шпион ({game.spy_id}) побеждает"
+            reason = f"Голоса не единогласны ({max_votes}/{total_voters}) — шпион ({game.spy_id}) побеждает"
 
         game.outcome = GameOutcome(
             winner="spy",
