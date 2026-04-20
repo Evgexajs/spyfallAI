@@ -983,6 +983,26 @@
       ],
       "dependencies": ["TASK-048", "TASK-050"],
       "status": "pending"
+    },
+    {
+      "id": "TASK-052",
+      "category": "ui",
+      "priority": "high",
+      "description": "Локализация UI на русский язык",
+      "acceptance_criteria": [
+        "Все тексты в index.html на русском: 'Игра началась', 'Фаза:', 'Победа шпиона/мирных'",
+        "Роли в locations.json на русском: pit_boss→крупье, bartender→бармен, etc.",
+        "Outcome сообщения на русском",
+        "Названия кнопок: Start→Старт, Pause→Пауза, Stop→Стоп",
+        "Labels: Players→Игроки, Game Info→Информация, Location→Локация"
+      ],
+      "test_steps": [
+        "Шаг 1: Открыть UI и запустить игру",
+        "Шаг 2: Проверить что ВСЕ тексты на русском",
+        "Шаг 3: Проверить роли игроков — должны быть на русском"
+      ],
+      "dependencies": ["TASK-032"],
+      "status": "pending"
     }
   ]
 }
