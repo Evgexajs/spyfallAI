@@ -54,7 +54,7 @@
 - Нет
 
 ### Коммиты
-- (ожидает коммита)
+- `83eb587` — Localize UI to Russian language (TASK-052)
 
 ---
 
