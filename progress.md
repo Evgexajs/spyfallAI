@@ -53,7 +53,7 @@
 - 18 тестов в test_games_api.py пройдено
 
 ### Коммиты
-- Коммит будет добавлен после записи
+- `f15ed4d` — feat: add backward compatibility tests for old game logs (TASK-065)
 
 ---
 
