@@ -7,6 +7,7 @@ import os
 import signal
 import subprocess
 import sys
+import time
 import warnings
 
 from dotenv import load_dotenv
@@ -24,7 +25,7 @@ def kill_port(port: int) -> bool:
         killed = False
         for pid in pids:
             if pid:
-                os.kill(int(pid), signal.SIGTERM)
+                os.kill(int(pid), signal.SIGKILL)
                 killed = True
         return killed
     except Exception:
@@ -103,6 +104,7 @@ def main() -> None:
 
     if kill_port(port):
         print(f"Killed existing process on port {port}")
+        time.sleep(1)
 
     print(f"Starting SpyfallAI web server on http://{host}:{port}")
     if host in LOCALHOST_ALIASES:
