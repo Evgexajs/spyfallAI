@@ -65,7 +65,7 @@
 - Нет
 
 ### Коммиты
-- (pending)
+- `7243880` — feat: implement final vote with defense phase integration (TASK-061)
 
 ---
 
