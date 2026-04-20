@@ -1194,9 +1194,8 @@ async def run_final_vote(
                 voted_for = _parse_final_vote(retry_response.content.strip().lower(), candidates, name_to_id)
 
                 if voted_for is None:
-                    # Still abstaining - pick randomly as last resort
-                    voted_for = random.choice(candidates)
-                    logger.warning(f"Voter {voter_id} insisted on abstaining, random fallback: {voted_for}")
+                    # Still abstaining - accept it, spy wins
+                    logger.info(f"Voter {voter_id} insisted on abstaining after warning")
 
             final_votes[voter_id] = voted_for
 
