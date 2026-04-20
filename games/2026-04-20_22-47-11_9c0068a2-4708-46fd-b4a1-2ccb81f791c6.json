@@ -1,0 +1,179 @@
+{
+  "id": "9c0068a2-4708-46fd-b4a1-2ccb81f791c6",
+  "started_at": "2026-04-20T22:47:11.853279",
+  "ended_at": "2026-04-20T22:48:08.001258",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "airplane",
+  "players": [
+    {
+      "character_id": "aurora",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "boris_molot",
+      "role_id": "passenger_business",
+      "is_spy": false
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": "flight_attendant",
+      "is_spy": false
+    },
+    {
+      "character_id": "margo",
+      "role_id": "pilot",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "aurora",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T22:47:13.587692",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Марго, скажи честно, какие звуки ты можешь услышать здесь чаще всего?",
+      "display_delay_ms": 2418,
+      "raw_response": "{\n  \"content\": \"Марго, скажи честно, какие звуки ты можешь услышать здесь чаще всего?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T22:47:17.633188",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "О, Игнатий, дорогой, ты же знаешь, что здесь можно услышать приятное жужжание двигателей и периодические объявления. Это придаёт ощущение безопасности, не находишь?",
+      "display_delay_ms": 5277,
+      "raw_response": "{\n  \"content\": \"О, Игнатий, дорогой, ты же знаешь, что здесь можно услышать приятное жужжание двигателей и периодические объявления. Это придаёт ощущение безопасности, не находишь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T22:47:27.460903",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "Аврора, милая, как ты обычно чувствуешь себя, когда здесь немного потряхивает?",
+      "display_delay_ms": 2617,
+      "raw_response": "{\n  \"content\": \"Аврора, милая, как ты обычно чувствуешь себя, когда здесь немного потряхивает?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T22:47:31.312479",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "О, Марго, каковы же эти моменты! Такое потряхивание... оно заставляет меня ощущать каждую секунду как новую драму! Жизнь в движении, в постоянной перемене... ах, это так волнительно!",
+      "display_delay_ms": 5726,
+      "raw_response": "{\n  \"content\": \"О, Марго, каковы же эти моменты! Такое потряхивание... оно заставляет меня ощущать каждую секунду как новую драму! Жизнь в движении, в постоянной перемене... ах, это так волнительно!\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T22:47:38.826738",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "О, Игнатий, что ты видишь вокруг нас, когда мы двигаемся вперёд?",
+      "display_delay_ms": 2323,
+      "raw_response": "{\n  \"content\": \"О, Игнатий, что ты видишь вокруг нас, когда мы двигаемся вперёд?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:47:42.738887",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Аврора, дорогая, вокруг нас — ряды сидений с людьми, занятыми своими делами. Мы видим узкие проходы, а за окнами — бескрайние небеса и облака. Всё это располагает к размышлениям о высоте и полёте, разве не так?",
+      "display_delay_ms": 6542,
+      "raw_response": "{\n  \"content\": \"Аврора, дорогая, вокруг нас — ряды сидений с людьми, занятыми своими делами. Мы видим узкие проходы, а за окнами — бескрайние небеса и облака. Всё это располагает к размышлениям о высоте и полёте, разве не так?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T22:47:53.830807",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "spy_guess",
+      "content": "Я думаю, мы находимся в: Самолёт",
+      "display_delay_ms": 1354,
+      "raw_response": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T22:47:58.512416",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "intervention",
+      "content": "О боже, о боже! Как можно было сомневаться в моей гениальности?! Самолёт… это не просто средство передвижения, это символ стремления к высотам! Ах, как немыслимо, что другие игроки не смогли уловить этот величественный смысл! Я — звезда этой игры, и мои соперники могут только мечтать о моём сиянии!",
+      "display_delay_ms": 9486,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:47:51.627320",
+      "level": "confident",
+      "hints": [
+        "приятное жужжание двигателей и периодические объявления",
+        "ряды сидений с людьми, узкие проходы, за окнами — бескрайние небеса и облака"
+      ],
+      "location_guess": "самолёт",
+      "reasoning": "Несколько подсказок явно указывают на самолёт: звуки двигателей и объявления, упоминание о потряхивании, а также описание окружающей обстановки с сидениями и видом на облака.",
+      "raw_response": "{\n  \"hints\": [\n    \"приятное жужжание двигателей и периодические объявления\",\n    \"ряды сидений с людьми, узкие проходы, за окнами — бескрайние небеса и облака\"\n  ],\n  \"location_guess\": \"самолёт\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Несколько подсказок явно указывают на самолёт: звуки двигателей и объявления, упоминание о потряхивании, а также описание окружающей обстановки с сидениями и видом на облака.\"\n}"
+    }
+  ],
+  "triggered_events": [],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T22:47:11.853279",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-20T22:47:11.853538",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-20T22:48:08.001307",
+      "from_phase": "main_round",
+      "to_phase": "resolution",
+      "reason": "Spy guessed location: correct",
+      "status": null,
+      "initiator_id": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Шпион (aurora) угадал локацию: Самолёт",
+    "votes": null,
+    "spy_guess": "airplane",
+    "spy_guess_correct": true,
+    "accused_id": null
+  },
+  "compressed_history": null,
+  "compression_checkpoint": null,
+  "token_usage": {
+    "total_input_tokens": 11205,
+    "total_output_tokens": 670,
+    "total_cost_usd": 0.0315071,
+    "llm_calls_count": 9
+  },
+  "preliminary_vote_result": null,
+  "defense_speeches": [],
+  "final_vote_result": null,
+  "vote_changes": []
+}

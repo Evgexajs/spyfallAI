@@ -1,0 +1,343 @@
+{
+  "id": "86f3a861-aacf-4767-b510-694bed75e449",
+  "started_at": "2026-04-20T22:53:48.159011",
+  "ended_at": "2026-04-20T22:56:26.248902",
+  "config": {
+    "duration_minutes": 7,
+    "players_count": 4,
+    "max_questions": 50,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "submarine",
+  "players": [
+    {
+      "character_id": "professor_stein",
+      "role_id": "sonar_operator",
+      "is_spy": false
+    },
+    {
+      "character_id": "lyokha",
+      "role_id": "captain",
+      "is_spy": false
+    },
+    {
+      "character_id": "margo",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "zoya",
+      "role_id": "cook",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "margo",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T22:53:50.185061",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Какие звуки у тебя за стеной, Марго?",
+      "display_delay_ms": 1634,
+      "raw_response": "{\n  \"content\": \"Какие звуки у тебя за стеной, Марго?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T22:53:53.297794",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "О, Зоя, это такой интересный вопрос. В общем-то, я слышу приглушенные шумы, и, знаете, кажется, кто-то иногда негромко разговаривает. Как будто кто-то делится своими мыслями. А ты что слышишь, дорогая?",
+      "display_delay_ms": 6477,
+      "raw_response": "{\n  \"content\": \"О, Зоя, это такой интересный вопрос. В общем-то, я слышу приглушенные шумы, и, знаете, кажется, кто-то иногда негромко разговаривает. Как будто кто-то делится своими мыслями. А ты что слышишь, дорогая?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T22:54:01.341435",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Штейн, дорогой, а какие запахи ты чаще всего ощущаешь здесь?",
+      "display_delay_ms": 2146,
+      "raw_response": "{\n  \"content\": \"Штейн, дорогой, а какие запахи ты чаще всего ощущаешь здесь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T22:54:04.983048",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Следует отметить, что обоняние, по сути, является важнейшим инструментом восприятия нашего окружения. Подобно тому, как морские течения перемещают воду, здесь иногда ощущается неуловимый аромат свежести, смешанный с нотками машинного масла, словно напоминание о нашем текущем положении и функциях. Всё это создаёт определённую атмосферу, характерную для нашего местоположения.",
+      "display_delay_ms": 11672,
+      "raw_response": "{\n  \"content\": \"Следует отметить, что обоняние, по сути, является важнейшим инструментом восприятия нашего окружения. Подобно тому, как морские течения перемещают воду, здесь иногда ощущается неуловимый аромат свежести, смешанный с нотками машинного масла, словно напоминание о нашем текущем положении и функциях. Всё это создаёт определённую атмосферу, характерную для нашего местоположения.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T22:54:18.244115",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, каково твоё отношение к тесноте пространства, в котором мы находимся?",
+      "display_delay_ms": 2815,
+      "raw_response": "{\n  \"content\": \"Зоя, каково твоё отношение к тесноте пространства, в котором мы находимся?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:54:22.103556",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "Ну, знаешь, теснота — это как обнимашки, только без согласия. О, да, обожаю это чувство!",
+      "display_delay_ms": 2847,
+      "raw_response": "{\n  \"content\": \"Ну, знаешь, теснота — это как обнимашки, только без согласия. О, да, обожаю это чувство!\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T22:54:33.103264",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Чё за фигня, Зоя? Подозрительно уклончиво ответила. Ты явно что-то скрываешь, а?",
+      "display_delay_ms": 2760,
+      "raw_response": "Чё за фигня, Зоя? Подозрительно уклончиво ответила. Ты явно что-то скрываешь, а?"
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T22:54:37.091703",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Марго, а как ты относишься к этой вечной вибрации тут? Не замечаешь её, случайно?",
+      "display_delay_ms": 2854,
+      "raw_response": "{\n  \"content\": \"Марго, а как ты относишься к этой вечной вибрации тут? Не замечаешь её, случайно?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T22:54:41.630148",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "О, Зоя, эта вибрация как будто убаюкивает, правда? Это такое непривычное, но интересное ощущение, не находишь? Как ты к этому относишься, милая?",
+      "display_delay_ms": 4670,
+      "raw_response": "{\n  \"content\": \"О, Зоя, эта вибрация как будто убаюкивает, правда? Это такое непривычное, но интересное ощущение, не находишь? Как ты к этому относишься, милая?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-20T22:54:47.980038",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Любопытное наблюдение, Марго. Однако, ваш ответ несколько уклончив и обобщён, что вызывает определённые подозрения, словно вы пытаетесь скрыть истинную природу места, где мы находимся.",
+      "display_delay_ms": 6028,
+      "raw_response": "Любопытное наблюдение, Марго. Однако, ваш ответ несколько уклончив и обобщён, что вызывает определённые подозрения, словно вы пытаетесь скрыть истинную природу места, где мы находимся."
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-20T22:54:59.963355",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Штейн, дорогой, а что скажешь о странных звуках, которые иногда можно услышать здесь? Они ведь могут о многом рассказать, правда?",
+      "display_delay_ms": 4427,
+      "raw_response": "{\n  \"content\": \"Штейн, дорогой, а что скажешь о странных звуках, которые иногда можно услышать здесь? Они ведь могут о многом рассказать, правда?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T22:55:13.067873",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Строго говоря, звуки здесь могут быть подобны симфонии, созданной взаимодействием различных факторов, как в сложной оркестровке, где каждый элемент важен. Конечно, это может вызывать переживания, но, по сути, такие звуки, скорее, напоминают постоянный шёпот, сопровождающий нашу работу. Следует отметить, что в этом есть определённая стабильность.",
+      "display_delay_ms": 10656,
+      "raw_response": "{\n  \"content\": \"Строго говоря, звуки здесь могут быть подобны симфонии, созданной взаимодействием различных факторов, как в сложной оркестровке, где каждый элемент важен. Конечно, это может вызывать переживания, но, по сути, такие звуки, скорее, напоминают постоянный шёпот, сопровождающий нашу работу. Следует отметить, что в этом есть определённая стабильность.\",\n  \"wants_vote\": true,\n  \"suspect_id\": \"margo\"\n}"
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-20T22:55:23.725936",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "intervention",
+      "content": "[ГОЛОСОВАНИЕ] Штейн инициирует голосование против Марго!",
+      "display_delay_ms": 2160,
+      "raw_response": null
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-20T22:55:35.188930",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Марго] Строго говоря, друзья, в сложной и многослойной ситуации, в которой мы оказались, именно ответы Марго вызывают наибольшее подозрение. Её уклончивые комментарии и обобщения, подобно туману, скрывают истинную природу того, что мы должны выявить. По сути, я считаю, что она не демонстрирует понимание нашей текущей ситуации, что весьма тревожно. Таким образом, я голосую за Марго.",
+      "display_delay_ms": 12232,
+      "raw_response": null
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T22:55:49.420903",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Марго] Марго, чё-то ты сильно хитришь. Вибрации, звуки — всё как-то общо. Голосую против тебя.",
+      "display_delay_ms": 3278,
+      "raw_response": null
+    },
+    {
+      "turn_number": 16,
+      "timestamp": "2026-04-20T22:55:54.130715",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Зоя] Дорогие, мне кажется, что Зоя вела себя немного странновато, не так ли? Её комментарии о тесноте и обнимашках были несколько уклончивыми, как будто она что-то скрывает. Думаю, стоит обратить внимание на неё.",
+      "display_delay_ms": 6936,
+      "raw_response": null
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-20T22:56:03.423043",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Марго] Ну да, конечно, я всегда мечтала оказаться в компании великого шпиона. Марго, твои ответы - это как попытка спрятать слона за занавеской. Тут что-то явно не так.",
+      "display_delay_ms": 5499,
+      "raw_response": null
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T22:56:12.157233",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "defense_speech",
+      "content": "Дорогие Штейн, Лёха и Зоя, вы такие проницательные и наблюдательные! Однако, возможно, ваши предположения отвлекают от истинного подозреваемого.",
+      "display_delay_ms": 4657,
+      "raw_response": null
+    },
+    {
+      "turn_number": 19,
+      "timestamp": "2026-04-20T22:56:18.043154",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Марго, а какую одежду ты тут предпочитаешь носить? Это что-то специфическое или просто что-то удобное?",
+      "display_delay_ms": 3527,
+      "raw_response": "{\"content\": \"Марго, а какую одежду ты тут предпочитаешь носить? Это что-то специфическое или просто что-то удобное?\", \"wants_vote\": false, \"suspect_id\": null}"
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:54:29.244467",
+      "level": "confident",
+      "hints": [
+        "приглушенные шумы и негромкие разговоры",
+        "запах свежести и машинного масла"
+      ],
+      "location_guess": "подводная лодка",
+      "reasoning": "Шумы и разговоры могут быть характерны для замкнутого пространства, где люди работают в непосредственной близости друг от друга. Запах свежести и машинного масла характерен для механизированных объектов, таких как подводные лодки. Теснота пространства также указывает на ограниченное пространство, что соответствует условиям на подводной лодке.",
+      "raw_response": "{\n  \"hints\": [\n    \"приглушенные шумы и негромкие разговоры\",\n    \"запах свежести и машинного масла\"\n  ],\n  \"location_guess\": \"подводная лодка\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Шумы и разговоры могут быть характерны для замкнутого пространства, где люди работают в непосредственной близости друг от друга. Запах свежести и машинного масла характерен для механизированных объектов, таких как подводные лодки. Теснота пространства также указывает на ограниченное пространство, что соответствует условиям на подводной лодке.\"\n}"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:54:35.865121",
+      "character_id": "lyokha",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T22:54:54.009427",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T22:53:48.159011",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-20T22:53:48.159325",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-20T22:55:25.887910",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Голосование инициировано игроком Штейн",
+      "status": "player_initiated",
+      "initiator_id": "professor_stein"
+    },
+    {
+      "timestamp": "2026-04-20T22:55:25.888558",
+      "from_phase": "optional_vote",
+      "to_phase": "preliminary_vote",
+      "reason": "Preliminary voting started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-20T22:56:08.924856",
+      "from_phase": "preliminary_vote",
+      "to_phase": "pre_final_vote_defense",
+      "reason": "Defense speeches for 1 player(s) with 3 votes",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-20T22:56:16.817226",
+      "from_phase": "pre_final_vote_defense",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    }
+  ],
+  "outcome": {
+    "winner": "cancelled",
+    "reason": "Game stopped by user",
+    "votes": null,
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": null
+  },
+  "compressed_history": "В диалоге между персонажами игры Spyfall возникают подозрения и обвинения. Зоя начинает с вопроса к Марго о звуках за стеной, на что Марго отвечает уклончиво, упоминая приглушенные шумы и разговоры, что вызывает подозрения у остальных. Профессор Штейн задает вопрос о запахах, на что отвечает философски, упоминая аромат свежести и машинного масла, что может намекать на техническую локацию. \n\nЗоя, в свою очередь, делает шутливый комментарий о тесноте пространства, сравнивая её с обнимашками без согласия, что вызывает недовольство у Лёхи. Он обвиняет Зою в уклончивости и в том, что она что-то скрывает. Это создаёт напряжение в группе, так как Лёха начинает подозревать Зою. В диалоге присутствуют намёки на техническую или закрытую локацию, однако они могут быть ложными. В целом, атмосфера подозрительности нарастает, и персонажи начинают сомневаться в честности друг друга.",
+  "compression_checkpoint": 7,
+  "token_usage": {
+    "total_input_tokens": 37664,
+    "total_output_tokens": 2135,
+    "total_cost_usd": 0.10265785,
+    "llm_calls_count": 26
+  },
+  "preliminary_vote_result": {
+    "professor_stein": "margo",
+    "lyokha": "margo",
+    "margo": "zoya",
+    "zoya": "margo"
+  },
+  "defense_speeches": [
+    {
+      "defender_id": "margo",
+      "votes_received": 3,
+      "content": "Дорогие Штейн, Лёха и Зоя, вы такие проницательные и наблюдательные! Однако, возможно, ваши предположения отвлекают от истинного подозреваемого.",
+      "timestamp": "2026-04-20T22:56:12.157182",
+      "regenerated": false
+    }
+  ],
+  "final_vote_result": null,
+  "vote_changes": []
+}
