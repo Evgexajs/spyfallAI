@@ -990,11 +990,13 @@ async def run_final_vote(
     provider: Optional[LLMProvider] = None,
     on_turn: Optional[callable] = None,
     on_typing: Optional[callable] = None,
+    on_vote_result: Optional[callable] = None,
 ) -> Game:
     """Run the final voting phase of the game.
 
     Each player votes for who they think is the spy.
-    Winner is determined by majority vote.
+    Voting succeeds ONLY if unanimous (all players vote for the same person).
+    If votes are split, game.outcome remains None and game continues.
 
     Args:
         game: Game object after main_round.
@@ -1002,9 +1004,10 @@ async def run_final_vote(
         provider: Optional LLM provider. If None, creates one from config.
         on_turn: Optional callback called after each vote turn.
         on_typing: Optional callback called before LLM generation starts with speaker_id.
+        on_vote_result: Optional callback called with vote result (unanimous: bool, votes: dict).
 
     Returns:
-        Updated Game object with outcome and votes recorded.
+        Updated Game object. If unanimous, outcome is set. If split, outcome remains None.
     """
     if provider is None:
         llm_config = LLMConfig()
@@ -1074,31 +1077,37 @@ async def run_final_vote(
         if on_turn:
             await _call_callback(on_turn, turn, game)
 
-    vote_counts: dict[str, int] = {}
-    for voted_for in votes.values():
-        vote_counts[voted_for] = vote_counts.get(voted_for, 0) + 1
+    unique_votes = set(votes.values())
+    is_unanimous = len(unique_votes) == 1
 
-    max_votes = max(vote_counts.values())
-    top_voted = [pid for pid, count in vote_counts.items() if count == max_votes]
-    accused = random.choice(top_voted) if len(top_voted) > 1 else top_voted[0]
+    if on_vote_result:
+        await _call_callback(on_vote_result, is_unanimous, votes)
 
-    spy_caught = accused == game.spy_id
+    if is_unanimous:
+        accused = list(unique_votes)[0]
+        spy_caught = accused == game.spy_id
 
-    if spy_caught:
-        winner = "civilians"
-        reason = f"Шпион ({game.spy_id}) был разоблачён голосованием"
+        if spy_caught:
+            winner = "civilians"
+            reason = f"Шпион ({game.spy_id}) был единогласно разоблачён"
+        else:
+            winner = "spy"
+            reason = f"Мирные единогласно обвинили {accused}, но шпионом был {game.spy_id}"
+
+        game.outcome = GameOutcome(
+            winner=winner,
+            reason=reason,
+            votes=votes,
+            accused_id=accused,
+        )
+
+        game.ended_at = datetime.now()
+        _transition_phase(game, GamePhase.RESOLUTION, f"Game ended: {winner} won (unanimous vote)")
     else:
-        winner = "spy"
-        reason = f"Мирные обвинили {accused}, но шпионом был {game.spy_id}"
-
-    game.outcome = GameOutcome(
-        winner=winner,
-        reason=reason,
-        votes=votes,
-        accused_id=accused,
-    )
-
-    game.ended_at = datetime.now()
-    _transition_phase(game, GamePhase.RESOLUTION, f"Game ended: {winner} won")
+        _transition_phase(
+            game,
+            GamePhase.MAIN_ROUND,
+            f"Voting failed: votes split ({len(unique_votes)} different targets)"
+        )
 
     return game

@@ -192,6 +192,19 @@
             color: #ef4444;
         }
 
+        .system-message.vote_split {
+            color: #f59e0b;
+            font-weight: bold;
+            background-color: rgba(245, 158, 11, 0.15);
+            border-radius: 4px;
+            padding: 0.75rem;
+        }
+
+        .system-message.vote_unanimous {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
         .sidebar {
             width: 280px;
             background-color: #16213e;
@@ -1361,6 +1374,16 @@
                     }
                     if (data.token_usage) {
                         addStatsMessage(data.token_usage);
+                    }
+                    break;
+
+                case 'vote_split':
+                    addSystemMessage(data.message || 'Голоса разделились — голосование не прошло', 'vote_split');
+                    break;
+
+                case 'vote_result':
+                    if (data.is_unanimous) {
+                        addSystemMessage('Единогласное голосование!', 'vote_unanimous');
                     }
                     break;
 

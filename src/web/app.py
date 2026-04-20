@@ -148,6 +148,14 @@ class GameManager:
         }
         await self.broadcast(turn_data)
 
+    async def on_vote_result(self, is_unanimous: bool, votes: dict[str, str]) -> None:
+        """Callback fired after voting completes - broadcasts vote result."""
+        await self.broadcast({
+            "type": "vote_result",
+            "is_unanimous": is_unanimous,
+            "votes": votes,
+        })
+
     async def run_game_loop(
         self,
         character_ids: list[str],
@@ -198,18 +206,26 @@ class GameManager:
                 ],
             })
 
-            await self.broadcast({"type": "phase", "phase": "main_round"})
-            self.game = await run_main_round(
-                self.game, self.characters, provider,
-                on_turn=self.on_turn, on_typing=self.on_typing
-            )
-
-            if self.game.outcome is None and self.status != GameStatus.STOPPED:
-                await self.broadcast({"type": "phase", "phase": "final_vote"})
-                self.game = await run_final_vote(
+            while self.game.outcome is None and self.status != GameStatus.STOPPED:
+                await self.broadcast({"type": "phase", "phase": "main_round"})
+                self.game = await run_main_round(
                     self.game, self.characters, provider,
                     on_turn=self.on_turn, on_typing=self.on_typing
                 )
+
+                if self.game.outcome is None and self.status != GameStatus.STOPPED:
+                    await self.broadcast({"type": "phase", "phase": "final_vote"})
+                    self.game = await run_final_vote(
+                        self.game, self.characters, provider,
+                        on_turn=self.on_turn, on_typing=self.on_typing,
+                        on_vote_result=self.on_vote_result
+                    )
+
+                    if self.game.outcome is None and self.status != GameStatus.STOPPED:
+                        await self.broadcast({
+                            "type": "vote_split",
+                            "message": "Голоса разделились — голосование не прошло, игра продолжается",
+                        })
 
             if self.status != GameStatus.STOPPED:
                 self.status = GameStatus.COMPLETED

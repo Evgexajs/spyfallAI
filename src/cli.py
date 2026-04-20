@@ -159,22 +159,28 @@ async def run_game(
     }
     print_turn = create_turn_printer(character_colors)
 
-    print(colorize("-" * 60, "bold"))
-    print(colorize("MAIN ROUND", "bold"))
-    print(colorize("-" * 60, "bold"))
-    print()
-
     cost_exceeded = False
     try:
-        game = await run_main_round(game, characters, provider, on_turn=print_turn)
-
-        if game.outcome is None:
+        while game.outcome is None:
             print(colorize("-" * 60, "bold"))
-            print(colorize("FINAL VOTE", "bold"))
+            print(colorize("MAIN ROUND", "bold"))
             print(colorize("-" * 60, "bold"))
             print()
 
-            game = await run_final_vote(game, characters, provider, on_turn=print_turn)
+            game = await run_main_round(game, characters, provider, on_turn=print_turn)
+
+            if game.outcome is None:
+                print(colorize("-" * 60, "bold"))
+                print(colorize("FINAL VOTE", "bold"))
+                print(colorize("-" * 60, "bold"))
+                print()
+
+                game = await run_final_vote(game, characters, provider, on_turn=print_turn)
+
+                if game.outcome is None:
+                    print()
+                    print(colorize("Голоса разделились — голосование не прошло, игра продолжается", "yellow"))
+                    print()
     except CostExceededError as e:
         cost_exceeded = True
         print()
