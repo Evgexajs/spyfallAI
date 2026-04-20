@@ -1026,6 +1026,16 @@ async def run_final_vote(
     if current_phase != GamePhase.OPTIONAL_VOTE:
         _transition_phase(game, GamePhase.FINAL_VOTE, "Final voting started")
 
+    # Determine if this is a "final" vote where split means losing
+    time_elapsed = datetime.now() - game.started_at
+    time_limit = timedelta(minutes=game.config.duration_minutes)
+    time_expired = time_elapsed >= time_limit
+
+    question_count = len([t for t in game.turns if t.type == TurnType.QUESTION])
+    max_questions_reached = question_count >= game.config.max_questions
+
+    is_final_vote = time_expired or max_questions_reached
+
     player_ids = [p.character_id for p in game.players]
     votes: dict[str, str] = {}
 
@@ -1047,14 +1057,26 @@ async def run_final_vote(
             votes_list = [f"{v}: голосует за {t}" for v, t in votes.items()]
             previous_votes_text = f"Уже проголосовали: {', '.join(votes_list)}. "
 
+        if is_final_vote:
+            stakes_text = (
+                "ВНИМАНИЕ: Это ФИНАЛЬНОЕ голосование! Время или лимит вопросов исчерпаны. "
+                "Если голоса разделятся — шпион автоматически побеждает. "
+                "Постарайтесь договориться и выбрать одного подозреваемого. "
+            )
+        else:
+            stakes_text = (
+                "Это досрочное голосование. "
+                "Если голоса разделятся — игра продолжится. "
+            )
+
         vote_instruction = (
             f"Ты — {voter_char.display_name}. Время голосования. "
-            f"ПРАВИЛО: голосование засчитывается ТОЛЬКО если ВСЕ игроки единогласно укажут на одного человека. "
-            f"Если голоса разделятся — никто не будет обвинён и игра продолжится. "
+            f"{stakes_text}"
+            f"ПРАВИЛО: голосование засчитывается ТОЛЬКО если ВСЕ единогласно укажут на одного. "
             f"{previous_votes_text}"
-            f"Голосуй на основе СВОИХ наблюдений из разговора — не копируй чужие голоса бездумно. "
-            f"Кто из игроков, по-твоему, шпион? Выбери ОДНОГО из: {candidates_str}. "
-            f"Напиши ТОЛЬКО имя (id) игрока, без пояснений."
+            f"Голосуй на основе СВОИХ наблюдений — не копируй чужие голоса бездумно. "
+            f"Кто шпион? Выбери ОДНОГО из: {candidates_str}. "
+            f"Напиши ТОЛЬКО имя (id) игрока."
         )
 
         messages = [
