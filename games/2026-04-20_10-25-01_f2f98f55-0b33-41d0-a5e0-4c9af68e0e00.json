@@ -1,0 +1,242 @@
+{
+  "id": "f2f98f55-0b33-41d0-a5e0-4c9af68e0e00",
+  "started_at": "2026-04-20T10:25:01.257934",
+  "ended_at": "2026-04-20T10:25:23.436853",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "restaurant",
+  "players": [
+    {
+      "character_id": "zoya",
+      "role_id": "sommelier",
+      "is_spy": false
+    },
+    {
+      "character_id": "boris_molot",
+      "role_id": "guest",
+      "is_spy": false
+    },
+    {
+      "character_id": "aurora",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": "hostess",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "aurora",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T10:25:03.891462",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "Ага, boris_molot, сколько ты уже сидишь в таком месте и не скучно ли тебе?",
+      "display_delay_ms": 2531
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T10:25:05.311328",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Зоя, я тут недавно, но скучно быть не может. Ты чего спрашиваешь?",
+      "display_delay_ms": 2258
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T10:25:06.232826",
+      "speaker_id": "boris_molot",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "[boris_molot → father_ignatius] Father_ignatius, что ты думаешь о звуках вокруг?",
+      "display_delay_ms": 2913
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T10:25:07.155567",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "boris_molot",
+      "type": "answer",
+      "content": "Дорогой Борис, позволь мне быть откровенным с тобой. В этой тишине и гармонии звуки кажутся мелодией для души. Скажи честно, разве ты не чувствуешь этой атмосферы?",
+      "display_delay_ms": 5189
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T10:25:08.793987",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Дорогая Зоя, скажи по совести, что здесь приносит тебе наибольшее удовлетворение?",
+      "display_delay_ms": 2682
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T10:25:09.710211",
+      "speaker_id": "zoya",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "О, конечно, удовлетворение. Ты это серьёзно? Разве не очевидно, что это вино?",
+      "display_delay_ms": 2680
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T10:25:12.174335",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Ах, дорогая Зоя!... Как можно?! Вино в таком месте?! Это просто немыслимо!",
+      "display_delay_ms": 2653
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T10:25:13.196719",
+      "speaker_id": "zoya",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "[зоя → father_ignatius] О, вы, святые отцы, обожаете гармонию и тишину, а что вы скажете о бокале или двух к обеду?",
+      "display_delay_ms": 3670
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T10:25:14.144332",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Зоя, дорогая, ты затронула интересную тему. По совести говоря, умеренность во всём — лучшая добродетель. Может ли бокал вина нарушить гармонию? Это зависит от намерений сердца.",
+      "display_delay_ms": 5716
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-20T10:25:15.961861",
+      "speaker_id": "boris_molot",
+      "addressee_id": "father_ignatius",
+      "type": "intervention",
+      "content": "Это ты, Father_ignatius, тут в гармонии плаваешь, а сам про вино говоришь. Определись, тишина или бокал?",
+      "display_delay_ms": 3516
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-20T10:25:20.744148",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за aurora",
+      "display_delay_ms": 999
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T10:25:21.286360",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за father_ignatius",
+      "display_delay_ms": 1037
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-20T10:25:22.046883",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за father_ignatius",
+      "display_delay_ms": 1174
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-20T10:25:23.436297",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за boris_molot",
+      "display_delay_ms": 1229
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T10:25:10.533529",
+      "level": "few_guesses"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T10:25:12.174938",
+      "character_id": "aurora",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T10:25:15.962305",
+      "character_id": "boris_molot",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T10:25:01.257934",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized"
+    },
+    {
+      "timestamp": "2026-04-20T10:25:01.258223",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T10:25:15.962392",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 10 ходов"
+    },
+    {
+      "timestamp": "2026-04-20T10:25:15.962597",
+      "from_phase": "optional_vote",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T10:25:23.436873",
+      "from_phase": "final_vote",
+      "to_phase": "resolution",
+      "reason": "Game ended: spy won"
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Мирные обвинили father_ignatius, но шпионом был aurora",
+    "votes": {
+      "zoya": "aurora",
+      "boris_molot": "father_ignatius",
+      "aurora": "father_ignatius",
+      "father_ignatius": "boris_molot"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": "father_ignatius"
+  },
+  "compressed_history": "В диалоге между игроками Zoya, Boris Molot и Father Ignatius наблюдаются подозрения и уклончивые ответы. Zoya начинает с вопроса к Boris Molot о том, не скучно ли ему в его месте, что может намекать на её подозрения в его непричастности. Boris отвечает, что он недавно здесь и скучать не может, что вызывает у Zoya сомнения.\n\nBoris затем обращается к Father Ignatius с вопросом о звуках вокруг, что может указывать на его желание выяснить, как другие воспринимают атмосферу. Father Ignatius отвечает, что тишина и гармония создают мелодию для души, что может показаться уклончивым и неясным в контексте обсуждения. Его ответ не даёт конкретной информации о локации, но намекает на спокойную обстановку.\n\nТаким образом, Zoya подозревает Boris Molot, а Boris, в свою очередь, пытается выяснить мнение Father Ignatius, который также может быть под подозрением из-за своих расплывчатых ответов. Обсуждение звуков и атмосферы может намекать на место, связанное с тишиной, например, храм или библиотеку.",
+  "compression_checkpoint": 4,
+  "token_usage": {
+    "total_input_tokens": 21072,
+    "total_output_tokens": 609,
+    "total_cost_usd": 0.0542627,
+    "llm_calls_count": 18
+  }
+}

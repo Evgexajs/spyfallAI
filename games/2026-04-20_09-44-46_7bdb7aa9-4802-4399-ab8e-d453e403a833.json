@@ -1,0 +1,79 @@
+{
+  "id": "7bdb7aa9-4802-4399-ab8e-d453e403a833",
+  "started_at": "2026-04-20T09:44:46.395634",
+  "ended_at": "2026-04-20T09:44:49.771296",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "airplane",
+  "players": [
+    {
+      "character_id": "boris_molot",
+      "role_id": "flight_attendant",
+      "is_spy": false
+    },
+    {
+      "character_id": "professor_stein",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "aurora",
+      "role_id": "pilot",
+      "is_spy": false
+    },
+    {
+      "character_id": "lyokha",
+      "role_id": "air_marshal",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "professor_stein",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T09:44:49.771247",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "Строго говоря, мне любопытно узнать, aurora, если бы ты сравнила атмосферу нашего местопребывания с какой-либо литературной аллюзией, на что бы это напоминало?",
+      "display_delay_ms": 5005
+    }
+  ],
+  "spy_confidence_log": [],
+  "triggered_events": [],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T09:44:46.395634",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized"
+    },
+    {
+      "timestamp": "2026-04-20T09:44:46.395956",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    }
+  ],
+  "outcome": {
+    "winner": "cancelled",
+    "reason": "Error: 'PhaseEntry' object has no attribute 'phase'",
+    "votes": null,
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": null
+  },
+  "compressed_history": null,
+  "compression_checkpoint": null,
+  "token_usage": {
+    "total_input_tokens": 951,
+    "total_output_tokens": 46,
+    "total_cost_usd": 0.0028375,
+    "llm_calls_count": 1
+  }
+}

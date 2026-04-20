@@ -1,0 +1,242 @@
+{
+  "id": "80ad02a0-e3f0-44fd-a917-5344c95ce02a",
+  "started_at": "2026-04-20T09:57:41.517882",
+  "ended_at": "2026-04-20T09:58:06.236570",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "submarine",
+  "players": [
+    {
+      "character_id": "boris_molot",
+      "role_id": "sonar_operator",
+      "is_spy": false
+    },
+    {
+      "character_id": "kim",
+      "role_id": "captain",
+      "is_spy": false
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": "engineer",
+      "is_spy": false
+    },
+    {
+      "character_id": "aurora",
+      "role_id": null,
+      "is_spy": true
+    }
+  ],
+  "spy_id": "aurora",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T09:57:43.476800",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "Aurora, скажи честно, какие мысли приходят тебе на ум, когда ты слышишь постоянный гул вокруг?",
+      "display_delay_ms": 3045
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T09:57:45.553051",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "О, отец Игнатий, как вы можете задавать такой вопрос?! Этот гул... он немыслим! Как будто вся вселенная шепчет свои тайны мне на ухо... Этот звук пробуждает странные эмоции, заставляя задуматься о вечном! Как можно оставаться равнодушным в такой момент?!",
+      "display_delay_ms": 8210
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T09:57:47.291830",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "Отец Игнатий, о боже, расскажите мне, какое ощущение вызывает у вас окружающий свет? Неужели он не кажется вам божественным сиянием, освещающим наш путь?!",
+      "display_delay_ms": 4858
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T09:57:48.519418",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Аврора, свет вокруг нас не столько божественен, сколько необходим. В его мерцании я вижу не только путь к истине, но и предупреждение о нашей хрупкости. Как думаешь, можем ли мы оставаться на этом пути, если совесть не будет нашему компасом?",
+      "display_delay_ms": 7771
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T09:57:49.339159",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "Аврора, скажи честно, как ты справляешься с теснотой вокруг нас? Разве не вызывают ли такие условия желание обрести свободу душе?",
+      "display_delay_ms": 4099
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T09:57:51.080081",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "Ах, отец Игнатий, какая мука! Теснота... она словно сковывает моё сердце, лишая крыльев мою душу! Но разве возможно не мечтать о свободе, когда стены давят нам на плечи?! О, как я жажду простора, где могу развернуться во всю ширь своей страсти и чувств! Это, увы, мучительное испытание для моего драматического духа!",
+      "display_delay_ms": 9942
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T09:57:54.356700",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "type": "intervention",
+      "content": "Аврора, не надо драм. Сама говоришь о мечтах, а всё равно прячешь настоящие чувства. И не слишком ли много громких слов для такого простого вопроса?",
+      "display_delay_ms": 4853
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T09:57:55.689279",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "О, отец Игнатий, скажите мне, пожалуйста, как ваши чувства отзываются на этот невероятный ажиотаж вокруг? Разве он не напоминает вам о буре страстей, что бушуют в человеческой душе?!",
+      "display_delay_ms": 5839
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T09:57:56.946403",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Аврора, мои чувства в этом ажиотаже напоминают мне о том, как важно оставаться спокойным и рассудительным. Ведь буря страстей может увести нас от истины, если мы не будем внимательны к голосу своей совести. Скажи честно, можешь ли ты устоять перед соблазном потерять эту ясность?",
+      "display_delay_ms": 8787
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-20T09:57:58.863235",
+      "speaker_id": "kim",
+      "addressee_id": "father_ignatius",
+      "type": "intervention",
+      "content": "Эм... отец Игнатий, вы, ну, говорите о спокойствии, а тут такой гул и, в смысле, теснота, наверное сложно сохранять ясность, я хотел сказать. Как это вяжется, если, опять же, эти условия, ну, не совсем-то спокойные, в общем?",
+      "display_delay_ms": 6959
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-20T09:58:04.186241",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за aurora",
+      "display_delay_ms": 989
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T09:58:04.904117",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за aurora",
+      "display_delay_ms": 1043
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-20T09:58:05.621836",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за aurora",
+      "display_delay_ms": 957
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-20T09:58:06.235190",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за kim",
+      "display_delay_ms": 806
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T09:57:51.797713",
+      "level": "few_guesses"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T09:57:54.357908",
+      "character_id": "boris_molot",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T09:57:58.864946",
+      "character_id": "kim",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T09:57:41.517882",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized"
+    },
+    {
+      "timestamp": "2026-04-20T09:57:41.518340",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T09:57:58.865183",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 10 ходов"
+    },
+    {
+      "timestamp": "2026-04-20T09:57:58.866360",
+      "from_phase": "optional_vote",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T09:58:06.236593",
+      "from_phase": "final_vote",
+      "to_phase": "resolution",
+      "reason": "Game ended: civilians won"
+    }
+  ],
+  "outcome": {
+    "winner": "civilians",
+    "reason": "Шпион (aurora) был разоблачён голосованием",
+    "votes": {
+      "boris_molot": "aurora",
+      "kim": "aurora",
+      "father_ignatius": "aurora",
+      "aurora": "kim"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": "aurora"
+  },
+  "compressed_history": "В диалоге между Отцом Игнатием и Авророй возникает подозрение в отношении их истинных намерений. Отец Игнатий задаёт вопрос о гуле, который окружает их, намекая на его возможное значение, что вызывает у Авроры уклончивый и эмоциональный ответ. Она говорит о гуле как о \"шепоте вселенной\", что может быть воспринято как попытка отвлечь внимание от сути вопроса. \n\nОтец Игнатий, в свою очередь, указывает на важность света, который, по его мнению, не является божественным, а скорее предупреждением о хрупкости их существования. Это утверждение может намекать на необходимость быть осторожными и внимательными к окружающей среде. \n\nАврора, задавая встречный вопрос о свете, пытается перевести разговор в более абстрактное русло, что также может указывать на её желание скрыть истинные мысли. В целом, диалог наполнен намёками на их местоположение и внутренние переживания, однако оба участника стараются не выдавать свои истинные намерения.",
+  "compression_checkpoint": 4,
+  "token_usage": {
+    "total_input_tokens": 22752,
+    "total_output_tokens": 846,
+    "total_cost_usd": 0.060193500000000004,
+    "llm_calls_count": 18
+  }
+}
