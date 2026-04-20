@@ -140,6 +140,10 @@ class GameManager:
         if self.status == GameStatus.STOPPED:
             raise asyncio.CancelledError("Game stopped by user")
 
+        # Apply display delay server-side (simulates typing time)
+        if turn.display_delay_ms > 0:
+            await asyncio.sleep(turn.display_delay_ms / 1000)
+
         turn_data = {
             "type": "turn",
             "turn": {
