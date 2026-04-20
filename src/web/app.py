@@ -283,6 +283,12 @@ class GameManager:
                         "accused_id": self.game.outcome.accused_id,
                     }
 
+                # Calculate game duration
+                game_duration_seconds = None
+                if self.game.started_at and self.game.ended_at:
+                    duration = self.game.ended_at - self.game.started_at
+                    game_duration_seconds = int(duration.total_seconds())
+
                 await self.broadcast({"type": "typing", "speaker_id": None})
                 await self.broadcast({
                     "type": "game_completed",
@@ -293,6 +299,7 @@ class GameManager:
                         "total_cost_usd": self.game.token_usage.total_cost_usd,
                         "llm_calls_count": self.game.token_usage.llm_calls_count,
                     },
+                    "duration_seconds": game_duration_seconds,
                 })
 
                 save_game(self.game)

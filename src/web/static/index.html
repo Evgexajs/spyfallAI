@@ -1310,12 +1310,20 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        function addStatsMessage(tokenUsage) {
+        function addStatsMessage(tokenUsage, durationSeconds) {
             const msg = document.createElement('div');
             msg.className = 'system-message stats-message';
 
+            // Format duration
+            let durationText = '';
+            if (durationSeconds) {
+                const mins = Math.floor(durationSeconds / 60);
+                const secs = durationSeconds % 60;
+                durationText = 'Длительность: ' + mins + ':' + secs.toString().padStart(2, '0') + ' | ';
+            }
+
             const text = document.createElement('span');
-            text.textContent = 'Токены: ' + tokenUsage.total_input_tokens + ' вх / ' +
+            text.textContent = durationText + 'Токены: ' + tokenUsage.total_input_tokens + ' вх / ' +
                 tokenUsage.total_output_tokens + ' вых | Стоимость: $' +
                 tokenUsage.total_cost_usd.toFixed(4);
 
@@ -1479,7 +1487,7 @@
                         addSystemMessage(winner + ' (' + data.outcome.reason + ')', 'outcome');
                     }
                     if (data.token_usage) {
-                        addStatsMessage(data.token_usage);
+                        addStatsMessage(data.token_usage, data.duration_seconds);
                     }
                     break;
 
