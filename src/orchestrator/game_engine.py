@@ -12,6 +12,7 @@ from uuid import uuid4
 
 from src.agents import (
     SecretInfo,
+    build_defense_characteristic_check_prompt,
     build_defense_speech_prompt,
     build_final_vote_with_defense_prompt,
     build_intervention_content_prompt,
@@ -1493,6 +1494,41 @@ def _truncate_to_sentences(text: str, max_sentences: int) -> tuple[str, bool]:
     return truncated.strip(), True
 
 
+async def _check_defense_speech_characteristic(
+    game: Game,
+    character: Character,
+    defense_content: str,
+    provider: LLMProvider,
+) -> bool:
+    """Check if a defense speech is characteristic of the character.
+
+    Uses the utility model to verify the speech matches the character's style
+    and MUST-directives.
+
+    Args:
+        game: Current game state (for tracking usage).
+        character: The defending character profile.
+        defense_content: The generated defense speech content.
+        provider: LLM provider for the check.
+
+    Returns:
+        True if characteristic, False if not.
+    """
+    prompt = build_defense_characteristic_check_prompt(character, defense_content)
+
+    response = await provider.complete(
+        messages=[{"role": "user", "content": prompt}],
+        model=game.config.utility_model,
+        temperature=0.3,
+        max_tokens=10,
+    )
+
+    _track_usage_and_check_cost(game, response)
+    response_lower = response.content.strip().lower()
+
+    return "да" in response_lower or "yes" in response_lower
+
+
 async def run_defense_speeches(
     game: Game,
     characters: list[Character],
@@ -1601,6 +1637,26 @@ async def run_defense_speeches(
         _track_usage_and_check_cost(game, defense_response)
 
         defense_content = defense_response.content.strip()
+        was_regenerated = False
+
+        is_characteristic = await _check_defense_speech_characteristic(
+            game, defender_char, defense_content, provider
+        )
+
+        if not is_characteristic:
+            logger.info(
+                f"Defense speech from {defender_id} not characteristic, regenerating once"
+            )
+            regenerated_response = await provider.complete(
+                messages=messages,
+                model=game.config.main_model,
+                temperature=0.9,
+                max_tokens=200,
+            )
+            _track_usage_and_check_cost(game, regenerated_response)
+            defense_content = regenerated_response.content.strip()
+            was_regenerated = True
+            logger.info(f"Defense speech from {defender_id} regenerated")
 
         truncated_content, was_truncated = _truncate_to_sentences(
             defense_content, DEFENSE_SPEECH_MAX_SENTENCES
@@ -1617,6 +1673,7 @@ async def run_defense_speeches(
             votes_received=max_votes,
             content=defense_content,
             timestamp=datetime.now(),
+            regenerated=was_regenerated,
         )
         game.defense_speeches.append(defense_speech)
 

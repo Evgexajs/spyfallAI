@@ -98,6 +98,7 @@ class DefenseSpeech(BaseModel):
     votes_received: int = Field(ge=0, description="Votes received in preliminary voting")
     content: str = Field(min_length=1, description="Text of defense speech")
     timestamp: datetime = Field(description="When the speech was given")
+    regenerated: bool = Field(default=False, description="Whether the speech was regenerated for being not characteristic")
 
 
 class VoteChange(BaseModel):

@@ -638,3 +638,136 @@ class TestNoTriggersOrInterventions:
         assert executed is True
         intervention_turns = [t for t in game.turns if t.type == TurnType.INTERVENTION]
         assert len(intervention_turns) == 0
+
+
+class TestDefenseCharacteristicCheck:
+    """Tests for defense speech characteristic post-check (TASK-064)."""
+
+    def test_characteristic_prompt_includes_must_directives(self):
+        """Characteristic check prompt should include MUST-directives."""
+        from src.agents import build_defense_characteristic_check_prompt
+
+        char = create_mock_character("boris", "Борис", "агрессор")
+        char.must_directives = [
+            "Переводить подозрение на обвинителя",
+            "Использовать не более 2 предложений",
+        ]
+        char.voice_style = "короткие рубленые фразы"
+
+        prompt = build_defense_characteristic_check_prompt(char, "Моя защита!")
+
+        assert "Борис" in prompt
+        assert "агрессор" in prompt
+        assert "Переводить подозрение на обвинителя" in prompt
+        assert "Использовать не более 2 предложений" in prompt
+        assert "короткие рубленые фразы" in prompt
+        assert "да или нет" in prompt.lower()
+
+    def test_characteristic_speech_not_regenerated(self):
+        """Speech that is characteristic should not be regenerated."""
+        game = create_test_game([
+            {"id": "boris", "role_id": "surgeon", "is_spy": False},
+            {"id": "zoya", "role_id": "nurse", "is_spy": True},
+        ])
+        characters = [
+            create_mock_character("boris", "Борис", "агрессор"),
+            create_mock_character("zoya", "Зоя", "дерзкий циник"),
+        ]
+
+        vote_counts = {"boris": 2}
+
+        mock_provider = MagicMock()
+        call_count = [0]
+
+        async def mock_complete(*args, **kwargs):
+            call_count[0] += 1
+            if call_count[0] == 1:
+                return create_mock_llm_response("Это защитная речь.")
+            else:
+                return create_mock_llm_response("да")
+
+        mock_provider.complete = mock_complete
+
+        game, executed = run_async(run_defense_speeches(
+            game, characters, vote_counts, provider=mock_provider
+        ))
+
+        assert executed is True
+        assert len(game.defense_speeches) == 1
+        assert game.defense_speeches[0].regenerated is False
+        assert call_count[0] == 2
+
+    def test_non_characteristic_speech_regenerated_once(self):
+        """Speech that is not characteristic should be regenerated once."""
+        game = create_test_game([
+            {"id": "boris", "role_id": "surgeon", "is_spy": False},
+            {"id": "zoya", "role_id": "nurse", "is_spy": True},
+        ])
+        characters = [
+            create_mock_character("boris", "Борис", "агрессор"),
+            create_mock_character("zoya", "Зоя", "дерзкий циник"),
+        ]
+
+        vote_counts = {"boris": 2}
+
+        mock_provider = MagicMock()
+        call_count = [0]
+
+        async def mock_complete(*args, **kwargs):
+            call_count[0] += 1
+            if call_count[0] == 1:
+                return create_mock_llm_response("Первая версия речи.")
+            elif call_count[0] == 2:
+                return create_mock_llm_response("нет")
+            elif call_count[0] == 3:
+                return create_mock_llm_response("Регенерированная речь!")
+            else:
+                return create_mock_llm_response("да")
+
+        mock_provider.complete = mock_complete
+
+        game, executed = run_async(run_defense_speeches(
+            game, characters, vote_counts, provider=mock_provider
+        ))
+
+        assert executed is True
+        assert len(game.defense_speeches) == 1
+        assert game.defense_speeches[0].regenerated is True
+        assert "Регенерированная" in game.defense_speeches[0].content
+        assert call_count[0] == 3
+
+    def test_regeneration_logged(self):
+        """Regeneration should be logged."""
+        game = create_test_game([
+            {"id": "boris", "role_id": "surgeon", "is_spy": False},
+            {"id": "zoya", "role_id": "nurse", "is_spy": True},
+        ])
+        characters = [
+            create_mock_character("boris", "Борис", "агрессор"),
+            create_mock_character("zoya", "Зоя", "дерзкий циник"),
+        ]
+
+        vote_counts = {"boris": 2}
+
+        mock_provider = MagicMock()
+        call_count = [0]
+
+        async def mock_complete(*args, **kwargs):
+            call_count[0] += 1
+            if call_count[0] == 1:
+                return create_mock_llm_response("Первая версия.")
+            elif call_count[0] == 2:
+                return create_mock_llm_response("нет")
+            else:
+                return create_mock_llm_response("Вторая версия.")
+
+        mock_provider.complete = mock_complete
+
+        with patch("src.orchestrator.game_engine.logger") as mock_logger:
+            game, executed = run_async(run_defense_speeches(
+                game, characters, vote_counts, provider=mock_provider
+            ))
+
+            info_calls = [str(call) for call in mock_logger.info.call_args_list]
+            regeneration_logged = any("regenerat" in call.lower() for call in info_calls)
+            assert regeneration_logged, f"Expected regeneration log, got: {info_calls}"

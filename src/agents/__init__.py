@@ -2,6 +2,7 @@
 
 from src.agents.prompt_builder import (
     SecretInfo,
+    build_defense_characteristic_check_prompt,
     build_defense_speech_prompt,
     build_final_vote_with_defense_prompt,
     build_intervention_content_prompt,
@@ -13,6 +14,7 @@ from src.agents.prompt_builder import (
 
 __all__ = [
     "SecretInfo",
+    "build_defense_characteristic_check_prompt",
     "build_defense_speech_prompt",
     "build_final_vote_with_defense_prompt",
     "build_intervention_content_prompt",

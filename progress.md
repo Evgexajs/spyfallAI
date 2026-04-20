@@ -31,6 +31,40 @@
 
 ---
 
+## [TASK-064] Пост-чек защитных реплик на характерность
+**Дата:** 2026-04-20
+**Статус:** done
+
+### Что сделано
+- Добавлено поле `regenerated: bool` в модель DefenseSpeech (src/models/game.py)
+- Создана функция `build_defense_characteristic_check_prompt()` в prompt_builder.py:
+  - Формирует промпт для утилитарной модели
+  - Включает имя персонажа, архетип, стиль речи, MUST-директивы
+  - Требует бинарный ответ "да/нет"
+- Создана функция `_check_defense_speech_characteristic()` в game_engine.py:
+  - Вызывает утилитарную модель с низкой температурой (0.3)
+  - Возвращает True если реплика характерна
+- Модифицирована функция `run_defense_speeches()`:
+  - После генерации речи проверяет характерность
+  - Если не характерна — регенерирует ОДИН раз (temperature=0.9)
+  - Логирует регенерацию через logger.info
+  - Устанавливает regenerated=True на DefenseSpeech
+- Добавлены 4 теста в TestDefenseCharacteristicCheck:
+  - test_characteristic_prompt_includes_must_directives
+  - test_characteristic_speech_not_regenerated
+  - test_non_characteristic_speech_regenerated_once
+  - test_regeneration_logged
+
+### Тестирование
+- Все 30 тестов в test_defense_speeches.py прошли
+- Все 72 теста по defense/voting прошли
+- 247 unit-тестов прошли (19 интеграционных требуют API ключ)
+
+### Коммиты
+- (будет добавлен)
+
+---
+
 ## [TASK-063] UI для новых фаз голосования и защиты
 **Дата:** 2026-04-20
 **Статус:** done

@@ -381,6 +381,39 @@ def build_defense_speech_prompt(
 Напиши свою защитную речь:"""
 
 
+def build_defense_characteristic_check_prompt(
+    character: Character,
+    defense_content: str,
+) -> str:
+    """Build prompt to check if a defense speech is characteristic of the character.
+
+    Args:
+        character: The defending character profile.
+        defense_content: The generated defense speech content.
+
+    Returns:
+        Prompt for utility model to check characteristicness (yes/no answer).
+    """
+    must_directives_str = "\n".join(f"• {d}" for d in character.must_directives)
+
+    return f"""Ты — эксперт по оценке реплик игровых персонажей.
+
+Персонаж: {character.display_name}
+Архетип: {character.archetype}
+Стиль речи: {character.voice_style}
+
+ОБЯЗАТЕЛЬНЫЕ ПРАВИЛА персонажа (MUST):
+{must_directives_str}
+
+Защитная реплика:
+"{defense_content}"
+
+Вопрос: Соответствует ли эта реплика характеру персонажа {character.display_name} ({character.archetype})?
+Реплика должна соответствовать стилю речи и хотя бы частично следовать MUST-директивам.
+
+Ответь ТОЛЬКО одним словом: да или нет."""
+
+
 def build_final_vote_with_defense_prompt(
     character: Character,
     game: Game,
