@@ -94,6 +94,7 @@ class PhaseEntry(BaseModel):
     to_phase: GamePhase = Field(description="New phase")
     reason: Optional[str] = Field(default=None, description="Reason for transition")
     status: Optional[str] = Field(default=None, description="Phase status (e.g. 'skipped_copied_from_preliminary')")
+    initiator_id: Optional[str] = Field(default=None, description="ID of player who initiated this phase (for voting)")
 
 
 class DefenseSpeech(BaseModel):

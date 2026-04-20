@@ -251,7 +251,11 @@ def setup_game(
 
 
 def _transition_phase(
-    game: Game, to_phase: GamePhase, reason: str, status: Optional[str] = None
+    game: Game,
+    to_phase: GamePhase,
+    reason: str,
+    status: Optional[str] = None,
+    initiator_id: Optional[str] = None,
 ) -> None:
     """Record a phase transition in the game."""
     current_phase = game.phase_transitions[-1].to_phase if game.phase_transitions else None
@@ -262,6 +266,7 @@ def _transition_phase(
             to_phase=to_phase,
             reason=reason,
             status=status,
+            initiator_id=initiator_id,
         )
     )
 
@@ -877,6 +882,7 @@ async def run_main_round(
                 GamePhase.OPTIONAL_VOTE,
                 f"Голосование инициировано игроком {initiator_name}",
                 status="player_initiated",
+                initiator_id=current_questioner,
             )
             break  # Exit main loop to go to voting
 
@@ -1041,6 +1047,7 @@ async def run_main_round(
                 GamePhase.OPTIONAL_VOTE,
                 f"Голосование инициировано игроком {initiator_name}",
                 status="player_initiated",
+                initiator_id=target_id,
             )
             break  # Exit main loop to go to voting
 
@@ -1562,7 +1569,22 @@ async def run_preliminary_vote(
     id_to_name = {c.id: c.display_name for c in characters}
     name_to_id = {c.display_name: c.id for c in characters}
 
-    for voter_player in game.players:
+    # Find vote initiator from phase transitions and put them first
+    initiator_id = None
+    for pt in reversed(game.phase_transitions):
+        if pt.to_phase == GamePhase.OPTIONAL_VOTE and pt.initiator_id:
+            initiator_id = pt.initiator_id
+            break
+
+    # Reorder players: initiator first, then others in original order
+    voting_order = list(game.players)
+    if initiator_id:
+        voting_order = sorted(
+            game.players,
+            key=lambda p: (0 if p.character_id == initiator_id else 1)
+        )
+
+    for voter_player in voting_order:
         voter_id = voter_player.character_id
         voter_char = _get_character_by_id(characters, voter_id)
         voter_secret = _get_secret_info(game, voter_player)
