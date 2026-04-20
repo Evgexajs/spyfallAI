@@ -48,7 +48,7 @@
 - Нет
 
 ### Коммиты
-- `98e3d8e` — feat: add defense phase env variables (TASK-056)
+- `8bb7796` — feat: add defense phase env variables (TASK-056)
 
 ---
 
