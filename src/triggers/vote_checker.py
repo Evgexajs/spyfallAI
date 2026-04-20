@@ -18,6 +18,7 @@ class VoteTriggerRule:
     condition_type: str
     description: str
     priority: int
+    is_critical: bool = False
     params: dict = field(default_factory=dict)
 
 
@@ -30,6 +31,7 @@ class VoteTriggerResult:
     condition_type: str
     priority: int
     reason: str
+    is_critical: bool = False
     target_player_id: Optional[str] = None
 
 
@@ -53,6 +55,7 @@ def load_vote_trigger_rules(config_path: Optional[Path] = None) -> tuple[list[Vo
                 condition_type=r["condition_type"],
                 description=r["description"],
                 priority=r["priority"],
+                is_critical=r.get("is_critical", False),
                 params=r.get("params", {}),
             )
         )
@@ -147,7 +150,7 @@ class VoteTriggerChecker:
         results: list[VoteTriggerResult] = []
 
         for rule in self.rules:
-            result = self._check_rule(rule, progress)
+            result = self._check_rule(rule, progress, game)
             if result and result.triggered:
                 results.append(result)
 
@@ -158,7 +161,7 @@ class VoteTriggerChecker:
         return results[0]
 
     def _check_rule(
-        self, rule: VoteTriggerRule, progress: float = 0.0
+        self, rule: VoteTriggerRule, progress: float = 0.0, game: Optional[Game] = None
     ) -> Optional[VoteTriggerResult]:
         """Check a single vote trigger rule."""
         if rule.condition_type == "accusations_on_same_player":
@@ -167,6 +170,10 @@ class VoteTriggerChecker:
             return self._check_consecutive_accusations(rule)
         elif rule.condition_type == "no_progress_for_n_turns":
             return self._check_no_progress(rule, progress)
+        elif rule.condition_type == "time_running_out":
+            return self._check_time_running_out(rule, game)
+        elif rule.condition_type == "questions_running_out":
+            return self._check_questions_running_out(rule, game)
         return None
 
     def _check_accusations_threshold(self, rule: VoteTriggerRule) -> Optional[VoteTriggerResult]:
@@ -183,6 +190,7 @@ class VoteTriggerChecker:
                     condition_type=rule.condition_type,
                     priority=rule.priority,
                     reason=f"{name} получил {count} обвинений",
+                    is_critical=rule.is_critical,
                     target_player_id=char_id,
                 )
 
@@ -201,6 +209,7 @@ class VoteTriggerChecker:
                 condition_type=rule.condition_type,
                 priority=rule.priority,
                 reason=f"{name} обвинён {self._consecutive_accusations_on_target} раз подряд",
+                is_critical=rule.is_critical,
                 target_player_id=self._last_accused,
             )
 
@@ -228,6 +237,61 @@ class VoteTriggerChecker:
                 condition_type=rule.condition_type,
                 priority=rule.priority,
                 reason=f"Нет обвинений уже {self._turns_since_any_accusation} ходов",
+                is_critical=rule.is_critical,
+                target_player_id=None,
+            )
+
+        return None
+
+    def _check_time_running_out(
+        self, rule: VoteTriggerRule, game: Optional[Game] = None
+    ) -> Optional[VoteTriggerResult]:
+        """Check if time is running out."""
+        if game is None or game.started_at is None:
+            return None
+
+        from datetime import datetime
+
+        elapsed = (datetime.now() - game.started_at).total_seconds()
+        total_seconds = game.config.duration_minutes * 60
+        remaining_percent = max(0, (total_seconds - elapsed) / total_seconds * 100)
+
+        threshold = rule.params.get("time_threshold_percent", 20)
+
+        if remaining_percent <= threshold:
+            return VoteTriggerResult(
+                triggered=True,
+                rule_id=rule.id,
+                condition_type=rule.condition_type,
+                priority=rule.priority,
+                reason=f"Осталось менее {threshold}% времени",
+                is_critical=rule.is_critical,
+                target_player_id=None,
+            )
+
+        return None
+
+    def _check_questions_running_out(
+        self, rule: VoteTriggerRule, game: Optional[Game] = None
+    ) -> Optional[VoteTriggerResult]:
+        """Check if questions are running out."""
+        if game is None:
+            return None
+
+        question_turns = len([t for t in game.turns if t.type == TurnType.QUESTION])
+        max_questions = game.config.max_questions
+        remaining_percent = max(0, (max_questions - question_turns) / max_questions * 100) if max_questions > 0 else 100
+
+        threshold = rule.params.get("questions_threshold_percent", 20)
+
+        if remaining_percent <= threshold:
+            return VoteTriggerResult(
+                triggered=True,
+                rule_id=rule.id,
+                condition_type=rule.condition_type,
+                priority=rule.priority,
+                reason=f"Осталось менее {threshold}% вопросов",
+                is_critical=rule.is_critical,
                 target_player_id=None,
             )
 

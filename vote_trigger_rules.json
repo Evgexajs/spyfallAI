@@ -1,12 +1,13 @@
 {
   "description": "Rules for triggering early voting in SpyfallAI",
-  "version": "1.0",
+  "version": "1.1",
   "vote_triggers": [
     {
       "id": "accusations_threshold",
       "condition_type": "accusations_on_same_player",
       "description": "Triggers when one player receives 2+ total accusations",
       "priority": 10,
+      "is_critical": false,
       "params": {
         "min_accusations": 2
       },
@@ -20,6 +21,7 @@
       "condition_type": "consecutive_accusations_on_same_player",
       "description": "Triggers when 2 players in a row accuse the same target",
       "priority": 9,
+      "is_critical": false,
       "params": {
         "consecutive_count": 2
       },
@@ -33,6 +35,7 @@
       "condition_type": "no_progress_for_n_turns",
       "description": "Triggers when N turns pass without any accusations (scales with game progress)",
       "priority": 5,
+      "is_critical": false,
       "params": {
         "turns_without_accusations": 8,
         "turns_without_accusations_start": 20
@@ -40,6 +43,34 @@
       "detection": {
         "method": "counter",
         "rule": "turns_since_accusation >= dynamic_threshold (20 at start, 8 at end)"
+      }
+    },
+    {
+      "id": "time_critical",
+      "condition_type": "time_running_out",
+      "description": "Triggers when less than 20% of time remains",
+      "priority": 15,
+      "is_critical": true,
+      "params": {
+        "time_threshold_percent": 20
+      },
+      "detection": {
+        "method": "time",
+        "rule": "remaining_time_percent <= time_threshold_percent"
+      }
+    },
+    {
+      "id": "questions_critical",
+      "condition_type": "questions_running_out",
+      "description": "Triggers when less than 20% of questions remain",
+      "priority": 15,
+      "is_critical": true,
+      "params": {
+        "questions_threshold_percent": 20
+      },
+      "detection": {
+        "method": "counter",
+        "rule": "remaining_questions_percent <= questions_threshold_percent"
       }
     }
   ],

@@ -228,7 +228,18 @@ class GameManager:
                     on_turn=self.on_turn, on_typing=self.on_typing
                 )
 
+                # Initialize flags for this voting cycle
+                is_critical_trigger = False
+                is_unanimous_preliminary = False
+                vote_counts = {}
+
                 if self.game.outcome is None and self.status != GameStatus.STOPPED:
+                    # Check if this was a critical trigger (time/questions running out)
+                    for pt in reversed(self.game.phase_transitions):
+                        if pt.to_phase.value == "optional_vote":
+                            is_critical_trigger = pt.status == "critical"
+                            break
+
                     await self.broadcast({"type": "phase", "phase": "preliminary_vote"})
                     self.game, vote_counts = await run_preliminary_vote(
                         self.game, self.characters, provider,
@@ -247,6 +258,11 @@ class GameManager:
                         })
                         continue  # Back to main_round
 
+                    # Check if preliminary vote was unanimous (all voted for same target, no abstentions)
+                    if self.game.preliminary_vote_result:
+                        targets = [t for t in self.game.preliminary_vote_result.values() if t is not None]
+                        is_unanimous_preliminary = len(targets) == len(self.game.players) and len(set(targets)) == 1
+
                 if self.game.outcome is None and self.status != GameStatus.STOPPED:
                     await self.broadcast({"type": "phase", "phase": "pre_final_vote_defense"})
                     self.game, defense_was_executed = await run_defense_speeches(
@@ -259,6 +275,14 @@ class GameManager:
                             "type": "defense_skipped",
                             "message": "Фаза защиты пропущена — недостаточно голосов",
                         })
+
+                    # Only proceed to final vote if critical trigger OR unanimous preliminary
+                    if not is_critical_trigger and not is_unanimous_preliminary:
+                        await self.broadcast({
+                            "type": "vote_inconclusive",
+                            "message": "Нет единогласия — обсуждение продолжается",
+                        })
+                        continue  # Back to main_round
 
                 if self.game.outcome is None and self.status != GameStatus.STOPPED:
                     await self.broadcast({"type": "phase", "phase": "final_vote"})

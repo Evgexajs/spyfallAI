@@ -697,7 +697,9 @@ async def run_main_round(
         history = await _build_compressed_conversation_history(game, provider)
         question_instruction = (
             f"Ты — {questioner_char.display_name}. Сейчас твоя очередь задать вопрос игроку {target_char.display_name}. "
-            f"Задай один вопрос в своём стиле. Только вопрос, без пояснений."
+            f"Задай КОНКРЕТНЫЙ вопрос про локацию: про оборудование, звуки, запахи, одежду, действия — "
+            f"то, что мирный знает, а шпион нет. Избегай абстрактных вопросов про 'жизнь' или 'чувства'. "
+            f"Только вопрос, без пояснений."
         )
         messages = [
             {"role": "system", "content": questioner_prompt},
@@ -797,10 +799,21 @@ async def run_main_round(
         answerer_prompt = build_system_prompt(answerer_char, game, answerer_secret, id_to_name)
 
         history = await _build_compressed_conversation_history(game, provider)
-        answer_instruction = (
-            f"Ты — {answerer_char.display_name}. Тебе только что задали вопрос. "
-            f"Ответь на него в своём стиле. Только ответ, без пояснений."
-        )
+        # Different instruction based on whether answerer is spy or civilian
+        if answerer_player.is_spy:
+            answer_instruction = (
+                f"Ты — {answerer_char.display_name}. Тебе задали вопрос. "
+                f"Ты ШПИОН — не знаешь локацию. Ответь достаточно конкретно чтобы не вызвать подозрений, "
+                f"но не слишком — можешь ошибиться. Слушай подсказки в вопросе. "
+                f"Только ответ, без пояснений."
+            )
+        else:
+            answer_instruction = (
+                f"Ты — {answerer_char.display_name}. Тебе задали вопрос. "
+                f"Ты МИРНЫЙ — знаешь локацию. Дай КОНКРЕТНЫЙ ответ с деталями про своё место/роль. "
+                f"Это поможет другим мирным понять что ты свой. Не будь абстрактным! "
+                f"Только ответ, без пояснений."
+            )
         messages = [
             {"role": "system", "content": answerer_prompt},
             *history,
@@ -1001,6 +1014,7 @@ async def run_main_round(
                 game,
                 GamePhase.OPTIONAL_VOTE,
                 f"Early voting triggered: {vote_trigger_result.reason}",
+                status="critical" if vote_trigger_result.is_critical else "optional",
             )
             break
 
@@ -1316,6 +1330,23 @@ async def run_final_vote(
     return game
 
 
+def _normalize_for_vote_match(text: str) -> str:
+    """Normalize text for vote matching: lowercase, replace underscores with spaces."""
+    return text.lower().replace("_", " ")
+
+
+def _get_name_stem(name: str) -> str:
+    """Get base stem of a Russian name by stripping common case endings."""
+    name_lower = name.lower()
+    # Russian case endings (sorted by length to strip longest first)
+    endings = ["ой", "ей", "ью", "ом", "ем", "ам", "ям", "ах", "ях", "ов", "ев",
+               "ы", "и", "у", "ю", "е", "а", "о"]
+    for ending in endings:
+        if len(name_lower) > len(ending) + 2 and name_lower.endswith(ending):
+            return name_lower[:-len(ending)]
+    return name_lower
+
+
 def _parse_final_vote(
     response: str, candidates: list[str], name_to_id: Optional[dict[str, str]] = None
 ) -> Optional[str]:
@@ -1331,16 +1362,30 @@ def _parse_final_vote(
     """
     abstain_markers = ["воздерж", "abstain", "пропуск", "skip", "нет голоса"]
 
-    # Check for candidate IDs first (to avoid matching "воздержусь" with candidate "zoya")
+    # Normalize response (lowercase, underscores to spaces)
+    response_normalized = _normalize_for_vote_match(response)
+
+    # Check for candidate IDs (with normalization)
     for candidate in candidates:
-        if candidate.lower() in response or response in candidate.lower():
+        candidate_normalized = _normalize_for_vote_match(candidate)
+        if candidate_normalized in response_normalized:
             return candidate
 
     # Check for display names if mapping provided
     if name_to_id:
         for name, cid in name_to_id.items():
-            if cid in candidates and (name.lower() in response or response in name.lower()):
+            if cid not in candidates:
+                continue
+            name_normalized = _normalize_for_vote_match(name)
+            # Check exact name match
+            if name_normalized in response_normalized:
                 return cid
+            # Check stem match (for Russian case inflections like Аврора/Аврору)
+            name_stem = _get_name_stem(name)
+            if len(name_stem) >= 3:
+                # Check if stem appears in response (with word boundary awareness)
+                if name_stem in response_normalized:
+                    return cid
 
     # Check for abstain
     for marker in abstain_markers:
@@ -1531,15 +1576,26 @@ def _parse_preliminary_vote(
     Returns:
         candidate ID if voted, None if abstained
     """
-    # Check for candidate IDs first
+    # Normalize response
+    response_normalized = _normalize_for_vote_match(response)
+
+    # Check for candidate IDs (with normalization)
     for candidate in candidates:
-        if candidate.lower() in response or response in candidate.lower():
+        candidate_normalized = _normalize_for_vote_match(candidate)
+        if candidate_normalized in response_normalized:
             return candidate
 
     # Check for display names if mapping provided
     if name_to_id:
         for name, cid in name_to_id.items():
-            if cid in candidates and (name.lower() in response or response in name.lower()):
+            if cid not in candidates:
+                continue
+            name_normalized = _normalize_for_vote_match(name)
+            if name_normalized in response_normalized:
+                return cid
+            # Check stem match (for Russian case inflections)
+            name_stem = _get_name_stem(name)
+            if len(name_stem) >= 3 and name_stem in response_normalized:
                 return cid
 
     abstain_markers = ["воздерж", "abstain", "skip this", "пропуска", "я пас"]
