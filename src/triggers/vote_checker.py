@@ -139,10 +139,15 @@ class VoteTriggerChecker:
         Returns:
             VoteTriggerResult if voting should be triggered, None otherwise.
         """
+        # Calculate game progress (0.0 to 1.0) based on questions asked
+        turn_count = len([t for t in game.turns if t.type.value in ("question", "answer")])
+        max_questions = game.config.max_questions * 2  # questions + answers
+        progress = min(1.0, turn_count / max_questions) if max_questions > 0 else 0.0
+
         results: list[VoteTriggerResult] = []
 
         for rule in self.rules:
-            result = self._check_rule(rule)
+            result = self._check_rule(rule, progress)
             if result and result.triggered:
                 results.append(result)
 
@@ -152,14 +157,16 @@ class VoteTriggerChecker:
         results.sort(key=lambda r: r.priority, reverse=True)
         return results[0]
 
-    def _check_rule(self, rule: VoteTriggerRule) -> Optional[VoteTriggerResult]:
+    def _check_rule(
+        self, rule: VoteTriggerRule, progress: float = 0.0
+    ) -> Optional[VoteTriggerResult]:
         """Check a single vote trigger rule."""
         if rule.condition_type == "accusations_on_same_player":
             return self._check_accusations_threshold(rule)
         elif rule.condition_type == "consecutive_accusations_on_same_player":
             return self._check_consecutive_accusations(rule)
         elif rule.condition_type == "no_progress_for_n_turns":
-            return self._check_no_progress(rule)
+            return self._check_no_progress(rule, progress)
         return None
 
     def _check_accusations_threshold(self, rule: VoteTriggerRule) -> Optional[VoteTriggerResult]:
@@ -199,9 +206,20 @@ class VoteTriggerChecker:
 
         return None
 
-    def _check_no_progress(self, rule: VoteTriggerRule) -> Optional[VoteTriggerResult]:
-        """Check if there have been no accusations for N turns."""
-        turns_threshold = rule.params.get("turns_without_accusations", 8)
+    def _check_no_progress(
+        self, rule: VoteTriggerRule, progress: float = 0.0
+    ) -> Optional[VoteTriggerResult]:
+        """Check if there have been no accusations for N turns.
+
+        Threshold scales with game progress:
+        - Start of game (0%): higher threshold (more patience)
+        - End of game (100%): lower threshold (trigger sooner)
+        """
+        min_threshold = rule.params.get("turns_without_accusations", 8)
+        max_threshold = rule.params.get("turns_without_accusations_start", 20)
+
+        # Linear interpolation: start high, end low
+        turns_threshold = int(max_threshold - (max_threshold - min_threshold) * progress)
 
         if self._turns_since_any_accusation >= turns_threshold:
             return VoteTriggerResult(

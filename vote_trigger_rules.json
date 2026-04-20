@@ -31,14 +31,15 @@
     {
       "id": "no_progress",
       "condition_type": "no_progress_for_n_turns",
-      "description": "Triggers when N turns pass without any accusations",
+      "description": "Triggers when N turns pass without any accusations (scales with game progress)",
       "priority": 5,
       "params": {
-        "turns_without_accusations": 8
+        "turns_without_accusations": 8,
+        "turns_without_accusations_start": 20
       },
       "detection": {
         "method": "counter",
-        "rule": "turns_since_accusation >= turns_without_accusations"
+        "rule": "turns_since_accusation >= dynamic_threshold (20 at start, 8 at end)"
       }
     }
   ],
