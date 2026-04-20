@@ -1147,16 +1147,41 @@ async def run_final_vote(
             # Parse vote response
             voted_for = _parse_final_vote(vote_response, candidates, name_to_id)
 
-            # If abstain not allowed and got None, retry once then fallback
-            if voted_for is None and not DEFENSE_ALLOW_ABSTAIN:
-                logger.info(f"Voter {voter_id} tried to abstain but not allowed, retrying")
+            # If abstained, ping them again with a warning - this is final vote!
+            if voted_for is None:
+                logger.info(f"Voter {voter_id} tried to abstain in final vote, pinging again")
 
+                # Record the abstention attempt
+                abstain_turn = Turn(
+                    turn_number=len(game.turns) + 1,
+                    timestamp=datetime.now(),
+                    speaker_id=voter_id,
+                    addressee_id="all",
+                    type=TurnType.FINAL_VOTE,
+                    content="Хочу воздержаться...",
+                    display_delay_ms=calculate_display_delay_ms("Хочу воздержаться..."),
+                )
+                game.turns.append(abstain_turn)
+                if on_turn:
+                    await _call_callback(on_turn, abstain_turn, game)
+
+                # Ping with dramatic warning
+                voter_name = id_to_name.get(voter_id, voter_id)
                 candidates_names = ", ".join(id_to_name.get(c, c) for c in candidates)
+                retry_prompt = (
+                    f"{voter_name}, это ФИНАЛЬНОЕ голосование! "
+                    f"Воздержание = автоматическая победа шпиона. "
+                    f"Ты правда хочешь слить игру? Выбери кого-то: {candidates_names}"
+                )
+
                 retry_messages = [
                     {"role": "system", "content": vote_prompt},
                     *history,
-                    {"role": "user", "content": f"Воздержание запрещено. Выбери ОДНОГО из: {candidates_names}"},
+                    {"role": "user", "content": retry_prompt},
                 ]
+
+                if on_typing:
+                    await on_typing(voter_id)
 
                 retry_response = await provider.complete(
                     messages=retry_messages,
@@ -1169,8 +1194,9 @@ async def run_final_vote(
                 voted_for = _parse_final_vote(retry_response.content.strip().lower(), candidates, name_to_id)
 
                 if voted_for is None:
+                    # Still abstaining - pick randomly as last resort
                     voted_for = random.choice(candidates)
-                    logger.warning(f"Voter {voter_id} still abstained after retry, random fallback: {voted_for}")
+                    logger.warning(f"Voter {voter_id} insisted on abstaining, random fallback: {voted_for}")
 
             final_votes[voter_id] = voted_for
 
