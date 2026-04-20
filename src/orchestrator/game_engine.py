@@ -1127,20 +1127,28 @@ async def run_final_vote(
         game.ended_at = datetime.now()
         _transition_phase(game, GamePhase.RESOLUTION, f"Game ended: {winner} won (unanimous vote)")
     else:
-        # Check if time has run out
+        # Check if time has run out or max questions reached
         time_elapsed = datetime.now() - game.started_at
         time_limit = timedelta(minutes=game.config.duration_minutes)
         time_expired = time_elapsed >= time_limit
 
-        if time_expired:
-            # Time ran out and votes split - spy wins
+        question_count = len([t for t in game.turns if t.type == TurnType.QUESTION])
+        max_questions_reached = question_count >= game.config.max_questions
+
+        if time_expired or max_questions_reached:
+            # Game limit reached and votes split - spy wins
+            if time_expired:
+                reason = f"Время вышло, голоса разделились — шпион ({game.spy_id}) побеждает"
+            else:
+                reason = f"Лимит вопросов достигнут, голоса разделились — шпион ({game.spy_id}) побеждает"
+
             game.outcome = GameOutcome(
                 winner="spy",
-                reason=f"Время вышло, голоса разделились — шпион ({game.spy_id}) побеждает",
+                reason=reason,
                 votes=votes,
             )
             game.ended_at = datetime.now()
-            _transition_phase(game, GamePhase.RESOLUTION, "Game ended: spy won (time expired, votes split)")
+            _transition_phase(game, GamePhase.RESOLUTION, "Game ended: spy won (limit reached, votes split)")
         else:
             _transition_phase(
                 game,
