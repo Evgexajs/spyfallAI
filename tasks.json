@@ -1063,6 +1063,205 @@
       ],
       "dependencies": ["TASK-012"],
       "status": "done"
+    },
+    {
+      "id": "TASK-056",
+      "category": "infrastructure",
+      "priority": "high",
+      "description": "[CR-001] Добавить env-переменные для фазы защиты",
+      "acceptance_criteria": [
+        "DEFENSE_MIN_VOTES_TO_QUALIFY (int, default 2) — минимум голосов для запуска защиты",
+        "DEFENSE_SPEECH_MAX_SENTENCES (int, default 2) — максимум предложений в защите",
+        "DEFENSE_ALLOW_ABSTAIN (bool, default true) — разрешено ли воздержание",
+        "Переменные добавлены в .env.example с описанием",
+        "Переменные читаются в конфиге оркестратора"
+      ],
+      "test_steps": [
+        "Шаг 1: Проверить .env.example содержит новые переменные",
+        "Шаг 2: Проверить что значения по умолчанию корректны"
+      ],
+      "dependencies": [],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-057",
+      "category": "models",
+      "priority": "high",
+      "description": "[CR-001] Добавить новые типы Turn для голосований",
+      "acceptance_criteria": [
+        "TurnType.PRELIMINARY_VOTE — голос в предварительном голосовании",
+        "TurnType.DEFENSE_SPEECH — защитная реплика",
+        "TurnType.FINAL_VOTE — голос в финальном голосовании",
+        "Существующий VOTE можно оставить для обратной совместимости"
+      ],
+      "test_steps": [
+        "Шаг 1: Импортировать TurnType и проверить новые значения",
+        "Шаг 2: Запустить pytest tests/test_models.py"
+      ],
+      "dependencies": [],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-058",
+      "category": "models",
+      "priority": "high",
+      "description": "[CR-001] Добавить новые поля в модель Game",
+      "acceptance_criteria": [
+        "preliminary_vote_result: dict[str, str | None] — голоса предварительного",
+        "defense_speeches: list[DefenseSpeech] — список защитных реплик",
+        "final_vote_result: dict[str, str | None] — голоса финального",
+        "vote_changes: list[VoteChange] — кто изменил голос",
+        "Новые типы DefenseSpeech и VoteChange с полями из CR-001 раздел 7.3",
+        "Поля опциональны для обратной совместимости"
+      ],
+      "test_steps": [
+        "Шаг 1: Создать Game с новыми полями",
+        "Шаг 2: Сериализовать/десериализовать в JSON",
+        "Шаг 3: Проверить что старые логи без этих полей загружаются"
+      ],
+      "dependencies": ["TASK-057"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-059",
+      "category": "functional",
+      "priority": "critical",
+      "description": "[CR-001] Реализовать фазу предварительного голосования (F11)",
+      "acceptance_criteria": [
+        "Каждый игрок голосует за одного или воздерживается (если DEFENSE_ALLOW_ABSTAIN=true)",
+        "Если DEFENSE_ALLOW_ABSTAIN=false — воздержание запрещено, при null перезапрос + fallback",
+        "Результат: словарь {voter_id → target_id | null}",
+        "Агрегат {target_id → count} без учёта воздержавшихся",
+        "Промпт согласован с DEFENSE_ALLOW_ABSTAIN"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить игру, дождаться предварительного голосования",
+        "Шаг 2: Проверить что preliminary_vote_result заполнен",
+        "Шаг 3: Проверить подсчёт голосов"
+      ],
+      "dependencies": ["TASK-056", "TASK-057", "TASK-058"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-060",
+      "category": "functional",
+      "priority": "critical",
+      "description": "[CR-001] Реализовать фазу защитных реплик (F12)",
+      "acceptance_criteria": [
+        "Активируется если максимум голосов >= DEFENSE_MIN_VOTES_TO_QUALIFY",
+        "Защиту получают ВСЕ игроки с максимальным числом голосов (2-2-2 → трое)",
+        "Порядок защит случайный, фиксируется в логе",
+        "Реплика не более DEFENSE_SPEECH_MAX_SENTENCES предложений (обрезка + warning)",
+        "addressee_id = 'all', применяется задержка проговаривания",
+        "Триггеры и окна вмешательства НЕ запускаются во время защит",
+        "Если максимум голосов < порога — фаза пропускается"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить игру с голосованием 3-2-1 → один защитник",
+        "Шаг 2: Запустить игру с голосованием 2-2-2 → три защитника",
+        "Шаг 3: Проверить что defense_speeches заполнен"
+      ],
+      "dependencies": ["TASK-059"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-061",
+      "category": "functional",
+      "priority": "critical",
+      "description": "[CR-001] Модифицировать финальное голосование с возможностью смены голоса (F13)",
+      "acceptance_criteria": [
+        "Если защита пропущена — final_vote = preliminary_vote (без LLM вызовов)",
+        "В phase_transitions status: 'skipped_copied_from_preliminary'",
+        "Если защита была — каждый агент решает подтвердить/изменить голос",
+        "Промпт содержит: исходный голос + защитные реплики + вопрос",
+        "vote_changes заполняется для изменивших голос",
+        "Воздержавшиеся в preliminary могут проголосовать в final",
+        "Победитель: строгое большинство → проверка шпиона; иначе шпион выигрывает"
+      ],
+      "test_steps": [
+        "Шаг 1: Игра с пропущенной защитой — проверить копирование голосов",
+        "Шаг 2: Игра с защитой — проверить vote_changes",
+        "Шаг 3: Проверить определение победителя"
+      ],
+      "dependencies": ["TASK-060"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-062",
+      "category": "functional",
+      "priority": "critical",
+      "description": "[CR-001] Обновить поток фаз в оркестраторе",
+      "acceptance_criteria": [
+        "Новый поток: main_round → preliminary_vote → pre_final_vote_defense → final_vote → resolution",
+        "GamePhase enum содержит: PRELIMINARY_VOTE, PRE_FINAL_VOTE_DEFENSE",
+        "Досрочное голосование (optional_vote) теперь идёт через preliminary → defense → final",
+        "phase_transitions корректно записываются"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить игру до конца",
+        "Шаг 2: Проверить phase_transitions содержит новые фазы",
+        "Шаг 3: Проверить досрочное голосование идёт по новому потоку"
+      ],
+      "dependencies": ["TASK-061"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-063",
+      "category": "ui",
+      "priority": "high",
+      "description": "[CR-001] UI для новых фаз голосования и защиты",
+      "acceptance_criteria": [
+        "Фаза preliminary_vote — голоса показываются блоком 'X против Y'",
+        "Фаза pre_final_vote_defense — защитные реплики выделены (рамка, метка ЗАЩИТА)",
+        "Фаза final_vote — индикатор 'изменил голос' / 'подтвердил голос'",
+        "Новые фазы в PHASE_NAMES на русском",
+        "История игры показывает новые фазы корректно"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить игру с защитой, проверить отображение",
+        "Шаг 2: Открыть историю игры, проверить визуализацию",
+        "Шаг 3: Проверить индикаторы смены голоса"
+      ],
+      "dependencies": ["TASK-062"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-064",
+      "category": "functional",
+      "priority": "medium",
+      "description": "[CR-001] Пост-чек защитных реплик на характерность",
+      "acceptance_criteria": [
+        "После генерации защитной реплики — проверка утилитарной моделью",
+        "Вопрос: 'эта реплика характерна для персонажа X?'",
+        "Если нет — реплика регенерируется ОДИН раз",
+        "В лог пишется если была регенерация",
+        "MUST-директивы персонажа включены в промпт защиты"
+      ],
+      "test_steps": [
+        "Шаг 1: Проверить что промпт защиты содержит MUST-директивы",
+        "Шаг 2: Симулировать 'не характерную' реплику, проверить регенерацию"
+      ],
+      "dependencies": ["TASK-060"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-065",
+      "category": "infrastructure",
+      "priority": "medium",
+      "description": "[CR-001] Обратная совместимость со старыми логами игр",
+      "acceptance_criteria": [
+        "Старые логи без новых полей загружаются без ошибок",
+        "preliminary_vote_result, defense_speeches, vote_changes = None/[] для старых",
+        "UI корректно отображает старые игры",
+        "Миграция существующих файлов НЕ требуется"
+      ],
+      "test_steps": [
+        "Шаг 1: Загрузить существующий лог игры",
+        "Шаг 2: Открыть в UI — не должно быть ошибок",
+        "Шаг 3: Сериализовать/десериализовать без потерь"
+      ],
+      "dependencies": ["TASK-058"],
+      "status": "pending"
     }
   ]
 }
