@@ -231,6 +231,18 @@ class GameManager:
                         on_turn=self.on_turn, on_typing=self.on_typing
                     )
 
+                    # Check if there's a clear suspect (someone with >= 2 votes)
+                    max_votes = max(vote_counts.values()) if vote_counts else 0
+                    has_clear_suspect = max_votes >= 2
+
+                    if not has_clear_suspect:
+                        # No clear suspect - back to discussion
+                        await self.broadcast({
+                            "type": "vote_inconclusive",
+                            "message": "Голоса разделились — нет явного подозреваемого, обсуждение продолжается",
+                        })
+                        continue  # Back to main_round
+
                 if self.game.outcome is None and self.status != GameStatus.STOPPED:
                     await self.broadcast({"type": "phase", "phase": "pre_final_vote_defense"})
                     self.game, defense_was_executed = await run_defense_speeches(
@@ -254,9 +266,10 @@ class GameManager:
                     )
 
                     if self.game.outcome is None and self.status != GameStatus.STOPPED:
+                        # Final vote split - back to discussion
                         await self.broadcast({
                             "type": "vote_split",
-                            "message": "Голоса разделились — голосование не прошло, игра продолжается",
+                            "message": "Мирные не единогласны — шпион пока не пойман, обсуждение продолжается",
                         })
 
             if self.status != GameStatus.STOPPED:
