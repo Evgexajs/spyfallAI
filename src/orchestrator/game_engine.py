@@ -501,9 +501,21 @@ def _get_character_by_id(characters: list[Character], char_id: str) -> Character
     raise ValueError(f"Character '{char_id}' not found")
 
 
-def _select_target(players: list[Player], questioner_id: str) -> str:
-    """Select a random target for the question (not the questioner)."""
-    candidates = [p.character_id for p in players if p.character_id != questioner_id]
+def _select_target(players: list[Player], questioner_id: str, exclude_id: Optional[str] = None) -> str:
+    """Select a random target for the question.
+
+    Args:
+        players: List of players.
+        questioner_id: ID of the person asking (excluded).
+        exclude_id: ID of person who just asked the questioner (excluded to prevent ping-pong).
+    """
+    excluded = {questioner_id}
+    if exclude_id:
+        excluded.add(exclude_id)
+    candidates = [p.character_id for p in players if p.character_id not in excluded]
+    if not candidates:
+        # Fallback if everyone is excluded (shouldn't happen with 3+ players)
+        candidates = [p.character_id for p in players if p.character_id != questioner_id]
     return random.choice(candidates)
 
 
@@ -764,6 +776,7 @@ async def run_main_round(
 
     player_ids = [p.character_id for p in game.players]
     current_questioner = random.choice(player_ids)
+    previous_questioner: Optional[str] = None  # Track who asked the current questioner
 
     # Build id -> display_name mapping for prompts
     id_to_name = {c.id: c.display_name for c in characters}
@@ -780,7 +793,8 @@ async def run_main_round(
         if question_count >= game.config.max_questions:
             break
 
-        target_id = _select_target(game.players, current_questioner)
+        # Exclude previous questioner to prevent ping-pong (A asks B, B asks A)
+        target_id = _select_target(game.players, current_questioner, exclude_id=previous_questioner)
         target_char = _get_character_by_id(characters, target_id)
 
         questioner_char = _get_character_by_id(characters, current_questioner)
@@ -1248,7 +1262,8 @@ async def run_main_round(
             break
 
         question_count += 1
-        current_questioner = target_id
+        previous_questioner = current_questioner  # Remember who asked
+        current_questioner = target_id  # Answerer becomes next questioner
 
     return game
 
