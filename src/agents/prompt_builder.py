@@ -274,63 +274,48 @@ def build_intervention_content_prompt(
 
 def build_spy_confidence_check_prompt(
     character: Character,
-    recent_turns: list[Turn],
+    conversation_summary: str,
 ) -> str:
     """Build micro-prompt for spy confidence check.
 
     Args:
         character: The spy's character profile.
-        recent_turns: Recent turns since last check for context.
+        conversation_summary: Full conversation context (compressed + recent).
 
     Returns:
         Prompt asking spy to assess their confidence level.
     """
-    recent_context = ""
-    if recent_turns:
-        lines = []
-        for turn in recent_turns[-6:]:
-            prefix = f"[{turn.speaker_id} → {turn.addressee_id}]"
-            lines.append(f"{prefix} {turn.content}")
-        recent_context = "\n".join(lines)
-
     return f"""Ты — {character.display_name} ({character.archetype}). Ты — ШПИОН в этой игре.
 
 Ты слушал разговор и пытаешься понять, где вы находитесь.
+Ищи подсказки: упоминания еды, напитков, музыки, одежды, оборудования, действий — всё, что может указать на место.
 
-Последние реплики:
-{recent_context}
+Разговор:
+{conversation_summary}
 
 Оцени свою уверенность в понимании локации:
 - "no_idea" — понятия не имею, где мы
 - "few_guesses" — есть несколько догадок, но не уверен
-- "confident" — уверен, знаю локацию
+- "confident" — уверен, знаю локацию (есть явные подсказки)
 
 Ответь ОДНИМ словом: no_idea, few_guesses или confident."""
 
 
 def build_spy_guess_prompt(
     character: Character,
-    recent_turns: list[Turn],
+    conversation_summary: str,
     available_locations: list[Location],
 ) -> str:
     """Build prompt for spy to guess the location.
 
     Args:
         character: The spy's character profile.
-        recent_turns: Recent turns for context.
+        conversation_summary: Full conversation context (compressed + recent).
         available_locations: All available locations to choose from.
 
     Returns:
         Prompt asking spy to name the location.
     """
-    recent_context = ""
-    if recent_turns:
-        lines = []
-        for turn in recent_turns[-10:]:
-            prefix = f"[{turn.speaker_id} → {turn.addressee_id}]"
-            lines.append(f"{prefix} {turn.content}")
-        recent_context = "\n".join(lines)
-
     locations_list = "\n".join(
         f"• {loc.id} — {loc.display_name}" for loc in available_locations
     )
@@ -339,8 +324,8 @@ def build_spy_guess_prompt(
 
 Ты уверен, что понял, где находятся игроки. Это твой шанс угадать локацию и выиграть!
 
-Последние реплики:
-{recent_context}
+Разговор:
+{conversation_summary}
 
 Доступные локации:
 {locations_list}

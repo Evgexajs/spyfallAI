@@ -545,11 +545,13 @@ async def _check_spy_confidence(
 
     spy_character = _get_character_by_id(characters, game.spy_id)
 
-    recent_turns = game.turns[-6:] if game.turns else []
+    # Build full conversation context for spy analysis
+    history_messages = await _build_compressed_conversation_history(game, provider)
+    conversation_summary = "\n".join(msg["content"] for msg in history_messages)
 
     prompt = build_spy_confidence_check_prompt(
         character=spy_character,
-        recent_turns=recent_turns,
+        conversation_summary=conversation_summary,
     )
 
     response = await provider.complete(
@@ -594,12 +596,15 @@ async def _ask_spy_to_guess(
         Location ID guessed by spy, or None if parsing failed.
     """
     spy_character = _get_character_by_id(characters, game.spy_id)
-    recent_turns = game.turns[-10:] if game.turns else []
     available_locations = load_locations()
+
+    # Build full conversation context for spy to analyze
+    history_messages = await _build_compressed_conversation_history(game, provider)
+    conversation_summary = "\n".join(msg["content"] for msg in history_messages)
 
     prompt = build_spy_guess_prompt(
         character=spy_character,
-        recent_turns=recent_turns,
+        conversation_summary=conversation_summary,
         available_locations=available_locations,
     )
 

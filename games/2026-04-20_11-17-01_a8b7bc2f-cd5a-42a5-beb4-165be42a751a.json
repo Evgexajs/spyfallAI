@@ -1,0 +1,1230 @@
+{
+  "id": "a8b7bc2f-cd5a-42a5-beb4-165be42a751a",
+  "started_at": "2026-04-20T11:17:01.811113",
+  "ended_at": "2026-04-20T11:22:24.989964",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "restaurant",
+  "players": [
+    {
+      "character_id": "professor_stein",
+      "role_id": "sommelier",
+      "is_spy": false
+    },
+    {
+      "character_id": "margo",
+      "role_id": "chef",
+      "is_spy": false
+    },
+    {
+      "character_id": "zoya",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "lyokha",
+      "role_id": "hostess",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "zoya",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T11:17:04.275554",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, дорогая, скажи, как часто ты сталкиваешься с неожиданностями в своей работе здесь?",
+      "display_delay_ms": 2958
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T11:17:05.288076",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "О да, здесь сплошные неожиданности, прям как утренний дождь в пустыне. А ты как, часто промокаешь?",
+      "display_delay_ms": 3358
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T11:17:07.641827",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "[zoя → professor_stein] Professor, как думаешь, что здесь хуже — местный климат или твои шутки?",
+      "display_delay_ms": 3127
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T11:17:10.814975",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Видите ли, строго говоря, сравнивать климат и мои шутки — это, по сути, как сопоставлять философский трактат с простым анекдотом. Один авторитет настаивал, что истинное понимание зависит от предшествующих обстоятельств, и в данном случае местный климат, вероятно, более значим для первичного восприятия.",
+      "display_delay_ms": 9541
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T11:17:12.300645",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "[margo], как ты оцениваешь значение тишины в этом месте, если рассматривать её как условие для достижения гармонии между звуками, создаваемыми тобой, и окружающей средой?",
+      "display_delay_ms": 5484
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T11:17:13.525038",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "О, professor_stein, вы так мудро подметили этот аспект тишины. Мне всегда казалось, что в гармонии со звуками, которые я создаю, есть особая красота. А вы замечали, как иногда lyokha как-то особенно внимателен к нашим разговорам?",
+      "display_delay_ms": 7195
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T11:17:17.033313",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Да ладно, margo, не гони пургу. Какой там внимателен, тут не до философии вашей.",
+      "display_delay_ms": 2746
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T11:17:17.681946",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "[мargo → professor_stein] Professor, дорогой, скажите, когда вы в последний раз испытали настоящий восторг от своей работы здесь?",
+      "display_delay_ms": 4194
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T11:17:19.726287",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Знаете, восторг, по сути, подобен редкому винтажному вину — его сложно обрести и ещё сложнее оценить без контекста. В моей практике, строго говоря, истинный восторг возникает в моменты, когда предоставляется возможность создать уникальную гармонию между сложной истинной и доступной её интерпретацией. Но, если ответить на ваш вопрос, последний раз это чувство посетило меня, когда удалось убедить молодого коллегу в неочевидной, но глубокой связи между двумя казалось бы несопоставимыми философскими подходами.",
+      "display_delay_ms": 15646
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-20T11:17:22.182466",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "intervention",
+      "content": "Ага, конечно, сравнивать восторг с вином — это как носить шляпу на пляже ночью.  Как насчёт того, чтобы почаще удивлять молодых коллег?",
+      "display_delay_ms": 4452
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-20T11:17:27.199788",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 657
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T11:17:28.120848",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 759
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-20T11:17:29.454079",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за professor_stein",
+      "display_delay_ms": 1175
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-20T11:17:30.074413",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за professor_stein",
+      "display_delay_ms": 1060
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T11:17:31.095670",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "[margo], чё у тебя тут самый сложный день был?",
+      "display_delay_ms": 1645
+    },
+    {
+      "turn_number": 16,
+      "timestamp": "2026-04-20T11:17:36.211996",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "О, милый lyokha, ты знаешь, иногда самый сложный день — это когда всё идёт не так, как было задумано. Но я всегда стараюсь сделать так, чтобы даже самые трудные ситуации превращались в моменты сладкого триумфа. А ты как справляешься со сложностями?",
+      "display_delay_ms": 7718
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-20T11:17:41.535957",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Professor, милый, скажите, а как вы относитесь к шуму, который иногда может нарушать наше спокойствие?",
+      "display_delay_ms": 3540
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T11:17:48.806114",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Шум, уважаемая, в нашем контексте напоминает фон в симфонии, который при неумелом исполнении способен исказить тональность всей пьесы. Строго говоря, в нашей работе, как и в философии, важно уметь находить и соблюдать баланс между звуковыми волнами и внутренней тишиной. Это, казалось бы, парадоксальное состояние является основой для правильной интерпретации окружающей действительности.",
+      "display_delay_ms": 11997
+    },
+    {
+      "turn_number": 19,
+      "timestamp": "2026-04-20T11:17:57.923768",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "[professor_stein → lyokha] Lyokha, позвольте поинтересоваться: как вы справляетесь с необходимостью поддерживать гармонию между, скажем, внешним хаосом и внутренним спокойствием в ваших текущих условиях?",
+      "display_delay_ms": 6470
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-20T11:18:02.834958",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "Да ладно, чё за гармония? Просто делаю своё дело, и всё.",
+      "display_delay_ms": 2243
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-20T11:18:10.313184",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "type": "intervention",
+      "content": "О да, конечно, \"просто делаю своё дело\". Интересно, как это у тебя выходит в таком хаосе. Звучит как стратегия из разряда \"закрой глаза и надейся на лучшее\", а?",
+      "display_delay_ms": 5041
+    },
+    {
+      "turn_number": 22,
+      "timestamp": "2026-04-20T11:18:15.635302",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "[margo → lyokha] Слушай, Margo, а как часто ты тут бываешь?",
+      "display_delay_ms": 1985
+    },
+    {
+      "turn_number": 23,
+      "timestamp": "2026-04-20T11:18:22.393322",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "Ах, милый Lyokha, моя работа требует постоянного присутствия, так что здесь я как рыба в воде. А как ты относишься к постоянству, дорогой?",
+      "display_delay_ms": 4490
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T11:18:31.099492",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Любопытно, как ваше утверждение о постоянном присутствии перекликается с философской концепцией времени, где каждый миг уникален и неповторим. Возникает вопрос: если все столь непостоянно, как можно утверждать постоянство?",
+      "display_delay_ms": 6904
+    },
+    {
+      "turn_number": 25,
+      "timestamp": "2026-04-20T11:18:38.268397",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за lyokha",
+      "display_delay_ms": 799
+    },
+    {
+      "turn_number": 26,
+      "timestamp": "2026-04-20T11:18:39.290375",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за professor_stein",
+      "display_delay_ms": 1152
+    },
+    {
+      "turn_number": 27,
+      "timestamp": "2026-04-20T11:18:40.316510",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за professor_stein",
+      "display_delay_ms": 1053
+    },
+    {
+      "turn_number": 28,
+      "timestamp": "2026-04-20T11:18:41.040936",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за professor_stein",
+      "display_delay_ms": 1338
+    },
+    {
+      "turn_number": 29,
+      "timestamp": "2026-04-20T11:18:42.465497",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "Lyokha, с точки зрения логики, хотелось бы понять, как вы воспринимаете баланс между необходимостью в стабильных результатах и непредвиденными изменениями, которые, как метафорическая волна, могут изменить траекторию деятельности?",
+      "display_delay_ms": 7344
+    },
+    {
+      "turn_number": 30,
+      "timestamp": "2026-04-20T11:18:47.585581",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "Да чё-то выдумываешь, чувак. Просто делаю максимум, чё могу, и всё.",
+      "display_delay_ms": 2370
+    },
+    {
+      "turn_number": 31,
+      "timestamp": "2026-04-20T11:18:53.764287",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Ай, Zoya, а чё для тебя тут самое сложное?",
+      "display_delay_ms": 1544
+    },
+    {
+      "turn_number": 32,
+      "timestamp": "2026-04-20T11:18:58.641991",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "Самое сложное? Ага, притворяться, что мне это всё интересно.",
+      "display_delay_ms": 2203
+    },
+    {
+      "turn_number": 33,
+      "timestamp": "2026-04-20T11:19:03.050569",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "[yoya → lyokha] А сколько у тебя таких вот \"максимумов\" в день бывает, интересно?",
+      "display_delay_ms": 2960
+    },
+    {
+      "turn_number": 34,
+      "timestamp": "2026-04-20T11:19:07.249347",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Да чё, каждый день по разному.",
+      "display_delay_ms": 1123
+    },
+    {
+      "turn_number": 35,
+      "timestamp": "2026-04-20T11:19:13.668987",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "type": "intervention",
+      "content": "Любопытное утверждение, Lyokha. Строго говоря, вариативность в этой ситуации напоминает случайную последовательность, а не закономерность, как в методах научного поиска.",
+      "display_delay_ms": 5284
+    },
+    {
+      "turn_number": 36,
+      "timestamp": "2026-04-20T11:19:18.199366",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Чё думаешь о местной живой музыке?",
+      "display_delay_ms": 1535
+    },
+    {
+      "turn_number": 37,
+      "timestamp": "2026-04-20T11:19:22.984506",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "Ага, как насчёт какофонии вместо музыки? Ну да, местные таланты всегда удивляют.",
+      "display_delay_ms": 2728
+    },
+    {
+      "turn_number": 38,
+      "timestamp": "2026-04-20T11:19:29.056143",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Мне кажется, дорогой Lyokha, это ведь немножко странно, что Зоя так отозвалась о музыке. Разве она не звучит совершенно волшебно и не добавляет шарма этому месту? Может быть, она просто пытается отвлечь наше внимание?",
+      "display_delay_ms": 6854
+    },
+    {
+      "turn_number": 39,
+      "timestamp": "2026-04-20T11:19:33.217287",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 1009
+    },
+    {
+      "turn_number": 40,
+      "timestamp": "2026-04-20T11:19:33.768166",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 834
+    },
+    {
+      "turn_number": 41,
+      "timestamp": "2026-04-20T11:19:34.382023",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за lyokha",
+      "display_delay_ms": 752
+    },
+    {
+      "turn_number": 42,
+      "timestamp": "2026-04-20T11:19:35.100641",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 1049
+    },
+    {
+      "turn_number": 43,
+      "timestamp": "2026-04-20T11:19:35.804612",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, дорогая, а как ты относишься к тому, что иногда атмосфера здесь бывает такой... изысканной? Не замечала ли ты, как это влияет на твоё настроение?",
+      "display_delay_ms": 5044
+    },
+    {
+      "turn_number": 44,
+      "timestamp": "2026-04-20T11:19:41.035862",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "О да, изысканность. Ничего так поднимает настроение, как пыль с налётом пафоса. А ты разве не чувствуешь себя героиней романа? Ну да, конечно.",
+      "display_delay_ms": 4733
+    },
+    {
+      "turn_number": 45,
+      "timestamp": "2026-04-20T11:19:46.670763",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "[zoya → professor_stein] Ну, профессор, как там ваш научный подход помогает с выбором напитков? Или тут тоже случайности правят бал?",
+      "display_delay_ms": 4450
+    },
+    {
+      "turn_number": 46,
+      "timestamp": "2026-04-20T11:19:52.812447",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Видите ли, в вопросе выбора напитков заложена, как ни странно, метафизическая задача на поиск гармонии. Строго говоря, это не просто вопрос вкуса, а поиск симфонии между различными аспектами — подобно тому, как философ пытается постичь истину, сопоставляя противоречивые идеи. Таким образом, случайность, о которой вы упомянули, лишь кажущаяся — в действительности, всё подчинено скрытым закономерностям, которые мы стремимся постичь.",
+      "display_delay_ms": 13366
+    },
+    {
+      "turn_number": 47,
+      "timestamp": "2026-04-20T11:19:58.959451",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, как бы вы оценили природу неизбежного фонового шума здесь — является ли он, по вашему, необходимым элементом общей атмосферы или скорее невидимой тенью, омрачающей восприятие?",
+      "display_delay_ms": 5687
+    },
+    {
+      "turn_number": 48,
+      "timestamp": "2026-04-20T11:20:04.792405",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "О да, шум — это как саундтрек к моей жизни. Нельзя же жить без драматической музыки на фоне, верно? Ну да, конечно.",
+      "display_delay_ms": 3941
+    },
+    {
+      "turn_number": 49,
+      "timestamp": "2026-04-20T11:20:10.936695",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Мне кажется, дорогой профессор, Зоя немного противоречит себе. Сначала жалуясь на пыльный налёт пафоса, а теперь утверждая, что шум — это её саундтрек. Как думаете, откуда такая перемена?",
+      "display_delay_ms": 5828
+    },
+    {
+      "turn_number": 50,
+      "timestamp": "2026-04-20T11:20:16.159393",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "О, профессор, как насчёт того, чтобы выбрать между интеллектом и интуицией? Или вы там по-прежнему предпочитаете метафизические копания?",
+      "display_delay_ms": 4301
+    },
+    {
+      "turn_number": 51,
+      "timestamp": "2026-04-20T11:20:28.190251",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Видите ли, Зоя, попытка выбрать между интеллектом и интуицией напоминает мне классическую дихотомию между рационализмом и эмпиризмом. Строго говоря, это не столько выбор, сколько поиск синергии между двумя подходами. Подобно тому, как алхимик стремится объединить противоречивые элементы, я предпочитаю использовать оба инструмента в достижении более глубокой истины.",
+      "display_delay_ms": 11576
+    },
+    {
+      "turn_number": 52,
+      "timestamp": "2026-04-20T11:20:34.284401",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "type": "intervention",
+      "content": "Ой, профессор, хватит уже этой фигни! Говори проще, а не как робот.",
+      "display_delay_ms": 2412
+    },
+    {
+      "turn_number": 53,
+      "timestamp": "2026-04-20T11:20:39.526952",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 987
+    },
+    {
+      "turn_number": 54,
+      "timestamp": "2026-04-20T11:20:40.227636",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 978
+    },
+    {
+      "turn_number": 55,
+      "timestamp": "2026-04-20T11:20:40.737593",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за margo",
+      "display_delay_ms": 773
+    },
+    {
+      "turn_number": 56,
+      "timestamp": "2026-04-20T11:20:41.351616",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 826
+    },
+    {
+      "turn_number": 57,
+      "timestamp": "2026-04-20T11:20:42.476350",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "Лёха, дорогой, а как ты относишься к тем, кто не умеет наслаждаться моментами тишины? Не кажется ли тебе, что они упускают что-то важное?",
+      "display_delay_ms": 4589
+    },
+    {
+      "turn_number": 58,
+      "timestamp": "2026-04-20T11:20:47.702140",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Да нормально отношусь. Пусть себе не наслаждаются, их дело.",
+      "display_delay_ms": 2261
+    },
+    {
+      "turn_number": 59,
+      "timestamp": "2026-04-20T11:20:53.244413",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Как тебе местная еда, профессор?",
+      "display_delay_ms": 1264
+    },
+    {
+      "turn_number": 60,
+      "timestamp": "2026-04-20T11:20:59.170243",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "Любопытно, ваш вопрос, Лёха, может быть трактован с точки зрения символизма, где еда — это нечто большее, нежели просто пища. По сути, каждая дегустация — это как встреча с произведением искусства, где каждый элемент и нюанс вкуса напоминает сложный симфонический аккорд, а атмосфера делает это переживание почти сакральным.",
+      "display_delay_ms": 10092
+    },
+    {
+      "turn_number": 61,
+      "timestamp": "2026-04-20T11:21:04.596922",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, как бы ты описала гармонию, если бы она была звуком, исходящим из подсознательной глубины твоего опыта?",
+      "display_delay_ms": 3668
+    },
+    {
+      "turn_number": 62,
+      "timestamp": "2026-04-20T11:21:10.127844",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "О да, конечно, профессор. Гармония как звук? Это, наверное, тот момент, когда все наконец-то замолчат. Как думаешь?",
+      "display_delay_ms": 3976
+    },
+    {
+      "turn_number": 63,
+      "timestamp": "2026-04-20T11:21:17.908838",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Зоя, ты так интересно описала гармонию, но разве шум не всегда был тебе по душе, дорогая? Это небольшое противоречие, не находишь?",
+      "display_delay_ms": 4215
+    },
+    {
+      "turn_number": 64,
+      "timestamp": "2026-04-20T11:21:24.873214",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "[margo] Ну да, конечно, дорогая. А скажи, как ты относишься к тем, кто постоянно меняет своё мнение?",
+      "display_delay_ms": 3514
+    },
+    {
+      "turn_number": 65,
+      "timestamp": "2026-04-20T11:21:31.700362",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "О, Зоя, интересный вопрос. Изменчивость мнений — это как специи в блюде, не правда ли? Важно лишь, чтобы менялось всё к лучшему, ты ведь согласна, милый друг?",
+      "display_delay_ms": 5258
+    },
+    {
+      "turn_number": 66,
+      "timestamp": "2026-04-20T11:21:37.875237",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Любопытное замечание, но важно отметить, что изменчивость мнений сама по себе не гарантирует улучшения, подобно тому, как добавление случайных ингредиентов в блюдо не всегда приводит к кулинарному шедевру.",
+      "display_delay_ms": 6633
+    },
+    {
+      "turn_number": 67,
+      "timestamp": "2026-04-20T11:21:48.049082",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 1007
+    },
+    {
+      "turn_number": 68,
+      "timestamp": "2026-04-20T11:21:48.686651",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 821
+    },
+    {
+      "turn_number": 69,
+      "timestamp": "2026-04-20T11:21:49.345997",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за margo",
+      "display_delay_ms": 794
+    },
+    {
+      "turn_number": 70,
+      "timestamp": "2026-04-20T11:21:49.936305",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 833
+    },
+    {
+      "turn_number": 71,
+      "timestamp": "2026-04-20T11:21:55.526706",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "[зоя → lyokha] Ну что, Лёха, расскажи-ка, каково это — смотреть на всё с той высоты, где ты обычно летаешь?",
+      "display_delay_ms": 3453
+    },
+    {
+      "turn_number": 72,
+      "timestamp": "2026-04-20T11:22:04.590049",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Да ладно, Зоя, не гони. Я на земле стою, а не лечу.",
+      "display_delay_ms": 1902
+    },
+    {
+      "turn_number": 73,
+      "timestamp": "2026-04-20T11:22:13.720059",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 1045
+    },
+    {
+      "turn_number": 74,
+      "timestamp": "2026-04-20T11:22:14.200826",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 689
+    },
+    {
+      "turn_number": 75,
+      "timestamp": "2026-04-20T11:22:14.712487",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за lyokha",
+      "display_delay_ms": 1046
+    },
+    {
+      "turn_number": 76,
+      "timestamp": "2026-04-20T11:22:15.291470",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 1036
+    },
+    {
+      "turn_number": 77,
+      "timestamp": "2026-04-20T11:22:15.791052",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 764
+    },
+    {
+      "turn_number": 78,
+      "timestamp": "2026-04-20T11:22:16.307460",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 964
+    },
+    {
+      "turn_number": 79,
+      "timestamp": "2026-04-20T11:22:16.822964",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за margo",
+      "display_delay_ms": 840
+    },
+    {
+      "turn_number": 80,
+      "timestamp": "2026-04-20T11:22:17.328276",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 918
+    },
+    {
+      "turn_number": 81,
+      "timestamp": "2026-04-20T11:22:17.799949",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 721
+    },
+    {
+      "turn_number": 82,
+      "timestamp": "2026-04-20T11:22:18.296037",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 726
+    },
+    {
+      "turn_number": 83,
+      "timestamp": "2026-04-20T11:22:18.893456",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за margo",
+      "display_delay_ms": 880
+    },
+    {
+      "turn_number": 84,
+      "timestamp": "2026-04-20T11:22:19.390394",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 1009
+    },
+    {
+      "turn_number": 85,
+      "timestamp": "2026-04-20T11:22:19.950447",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 667
+    },
+    {
+      "turn_number": 86,
+      "timestamp": "2026-04-20T11:22:20.460762",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 936
+    },
+    {
+      "turn_number": 87,
+      "timestamp": "2026-04-20T11:22:20.950828",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за margo",
+      "display_delay_ms": 844
+    },
+    {
+      "turn_number": 88,
+      "timestamp": "2026-04-20T11:22:21.481355",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 829
+    },
+    {
+      "turn_number": 89,
+      "timestamp": "2026-04-20T11:22:22.066105",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 808
+    },
+    {
+      "turn_number": 90,
+      "timestamp": "2026-04-20T11:22:22.613150",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 860
+    },
+    {
+      "turn_number": 91,
+      "timestamp": "2026-04-20T11:22:23.262346",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за margo",
+      "display_delay_ms": 971
+    },
+    {
+      "turn_number": 92,
+      "timestamp": "2026-04-20T11:22:23.888271",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 886
+    },
+    {
+      "turn_number": 93,
+      "timestamp": "2026-04-20T11:22:24.471173",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "vote",
+      "content": "Голосую за zoya",
+      "display_delay_ms": 725
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T11:17:14.308792",
+      "level": "few_guesses"
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-20T11:18:03.346826",
+      "level": "few_guesses"
+    },
+    {
+      "turn_number": 34,
+      "timestamp": "2026-04-20T11:19:07.958217",
+      "level": "few_guesses"
+    },
+    {
+      "turn_number": 48,
+      "timestamp": "2026-04-20T11:20:05.510316",
+      "level": "few_guesses"
+    },
+    {
+      "turn_number": 62,
+      "timestamp": "2026-04-20T11:21:10.549710",
+      "level": "few_guesses"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T11:17:17.033908",
+      "character_id": "lyokha",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T11:17:22.182965",
+      "character_id": "zoya",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-20T11:18:10.313686",
+      "character_id": "zoya",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 23,
+      "timestamp": "2026-04-20T11:18:31.100047",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 34,
+      "timestamp": "2026-04-20T11:19:13.669295",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 37,
+      "timestamp": "2026-04-20T11:19:29.056753",
+      "character_id": "margo",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 48,
+      "timestamp": "2026-04-20T11:20:10.936971",
+      "character_id": "margo",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 51,
+      "timestamp": "2026-04-20T11:20:34.284908",
+      "character_id": "lyokha",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 62,
+      "timestamp": "2026-04-20T11:21:17.909210",
+      "character_id": "margo",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 65,
+      "timestamp": "2026-04-20T11:21:37.875507",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T11:17:01.811113",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized"
+    },
+    {
+      "timestamp": "2026-04-20T11:17:01.811403",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T11:17:22.183061",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 10 ходов"
+    },
+    {
+      "timestamp": "2026-04-20T11:17:22.183457",
+      "from_phase": "optional_vote",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T11:17:30.074953",
+      "from_phase": "final_vote",
+      "to_phase": "main_round",
+      "reason": "Voting failed: votes split (2 different targets)"
+    },
+    {
+      "timestamp": "2026-04-20T11:17:30.075311",
+      "from_phase": "main_round",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T11:18:31.100131",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 10 ходов"
+    },
+    {
+      "timestamp": "2026-04-20T11:18:31.100450",
+      "from_phase": "optional_vote",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T11:18:41.041508",
+      "from_phase": "final_vote",
+      "to_phase": "main_round",
+      "reason": "Voting failed: votes split (2 different targets)"
+    },
+    {
+      "timestamp": "2026-04-20T11:18:41.041936",
+      "from_phase": "main_round",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T11:19:29.056835",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 10 ходов"
+    },
+    {
+      "timestamp": "2026-04-20T11:19:29.057101",
+      "from_phase": "optional_vote",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T11:19:35.101290",
+      "from_phase": "final_vote",
+      "to_phase": "main_round",
+      "reason": "Voting failed: votes split (2 different targets)"
+    },
+    {
+      "timestamp": "2026-04-20T11:19:35.101623",
+      "from_phase": "main_round",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T11:20:34.284983",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 10 ходов"
+    },
+    {
+      "timestamp": "2026-04-20T11:20:34.285228",
+      "from_phase": "optional_vote",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T11:20:41.352374",
+      "from_phase": "final_vote",
+      "to_phase": "main_round",
+      "reason": "Voting failed: votes split (2 different targets)"
+    },
+    {
+      "timestamp": "2026-04-20T11:20:41.352778",
+      "from_phase": "main_round",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T11:21:37.875528",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 10 ходов"
+    },
+    {
+      "timestamp": "2026-04-20T11:21:37.875611",
+      "from_phase": "optional_vote",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T11:21:49.936473",
+      "from_phase": "final_vote",
+      "to_phase": "main_round",
+      "reason": "Voting failed: votes split (2 different targets)"
+    },
+    {
+      "timestamp": "2026-04-20T11:21:49.936537",
+      "from_phase": "main_round",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:04.590564",
+      "from_phase": "main_round",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:15.291754",
+      "from_phase": "final_vote",
+      "to_phase": "main_round",
+      "reason": "Voting failed: votes split (2 different targets)"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:15.291849",
+      "from_phase": "main_round",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:15.292729",
+      "from_phase": "main_round",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:17.329006",
+      "from_phase": "final_vote",
+      "to_phase": "main_round",
+      "reason": "Voting failed: votes split (2 different targets)"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:17.329298",
+      "from_phase": "main_round",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:17.331108",
+      "from_phase": "main_round",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:19.391046",
+      "from_phase": "final_vote",
+      "to_phase": "main_round",
+      "reason": "Voting failed: votes split (2 different targets)"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:19.391318",
+      "from_phase": "main_round",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:19.393141",
+      "from_phase": "main_round",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:21.481814",
+      "from_phase": "final_vote",
+      "to_phase": "main_round",
+      "reason": "Voting failed: votes split (2 different targets)"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:21.481981",
+      "from_phase": "main_round",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:21.483383",
+      "from_phase": "main_round",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:23.888462",
+      "from_phase": "final_vote",
+      "to_phase": "main_round",
+      "reason": "Voting failed: votes split (2 different targets)"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:23.888540",
+      "from_phase": "main_round",
+      "to_phase": "main_round",
+      "reason": "Main round started"
+    },
+    {
+      "timestamp": "2026-04-20T11:22:23.889168",
+      "from_phase": "main_round",
+      "to_phase": "final_vote",
+      "reason": "Final voting started"
+    }
+  ],
+  "outcome": {
+    "winner": "cancelled",
+    "reason": "Game stopped by user",
+    "votes": null,
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": null
+  },
+  "compressed_history": "В диалоге участники подозревают друг друга в уклончивости и неискренности. Мargo задает Зое вопрос о неожиданностях в работе, на что Зоя отвечает метафорично, вызывая подозрения в её честности. Профессор Штейн, пытаясь поддержать разговор, сравнивает климат с шутками, что вызывает недовольство у Зои. Она обвиняет Лёху в том, что его подход к работе слишком прост и неискренен, что вызывает его защитную реакцию. \n\nМargo замечает, что Зоя противоречит себе, сначала жалуясь на атмосферу, а затем утверждая, что шум — это её \"саундтрек\". Это вызывает подозрения в её истинных чувствах. Лёха, в свою очередь, демонстрирует пренебрежение к философским размышлениям, что вызывает недовольство у профессора, который пытается углубить разговор о гармонии и еде. \n\nВ ходе обсуждения упоминаются темы музыки и атмосферы, что может намекать на локацию, связанную с искусством или культурой, однако все намёки могут быть ложными.",
+  "compression_checkpoint": 46,
+  "token_usage": {
+    "total_input_tokens": 220935,
+    "total_output_tokens": 13681,
+    "total_cost_usd": 0.4333735000000001,
+    "llm_calls_count": 151
+  }
+}
