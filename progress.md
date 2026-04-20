@@ -57,7 +57,7 @@
 - Нет
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `3c64fce` — Add tooltips to game history page (TASK-054)
 
 ---
 
