@@ -340,6 +340,7 @@ def build_defense_speech_prompt(
     secret_info: SecretInfo,
     votes_received: int,
     max_sentences: int = 2,
+    id_to_name: Optional[dict[str, str]] = None,
 ) -> str:
     """Build prompt for a defense speech during pre-final-vote defense phase.
 
@@ -349,17 +350,24 @@ def build_defense_speech_prompt(
         secret_info: Secret information (is_spy, location, role).
         votes_received: How many votes this character received.
         max_sentences: Maximum allowed sentences in defense.
+        id_to_name: Optional mapping of character IDs to display names.
 
     Returns:
         Prompt for generating a defense speech.
     """
     base_prompt = build_system_prompt(character, game, secret_info)
 
+    # Helper to get display name
+    def get_name(char_id: str) -> str:
+        if id_to_name:
+            return id_to_name.get(char_id, char_id)
+        return char_id
+
     voters_against = []
     if game.preliminary_vote_result:
         for voter_id, target_id in game.preliminary_vote_result.items():
             if target_id == character.id:
-                voters_against.append(voter_id)
+                voters_against.append(get_name(voter_id))
 
     voters_str = ", ".join(voters_against) if voters_against else "несколько игроков"
 
@@ -422,6 +430,7 @@ def build_final_vote_with_defense_prompt(
     defense_speeches: list[DefenseSpeech],
     candidates: list[str],
     allow_abstain: bool = True,
+    id_to_name: Optional[dict[str, str]] = None,
 ) -> str:
     """Build prompt for final vote after defense speeches (CR-001 F13).
 
@@ -433,14 +442,21 @@ def build_final_vote_with_defense_prompt(
         defense_speeches: All defense speeches delivered.
         candidates: List of valid candidates to vote for.
         allow_abstain: Whether abstention is allowed.
+        id_to_name: Optional mapping of character IDs to display names.
 
     Returns:
         Prompt for generating a final vote decision.
     """
     base_prompt = build_system_prompt(character, game, secret_info)
 
+    # Helper to get display name
+    def get_name(char_id: str) -> str:
+        if id_to_name:
+            return id_to_name.get(char_id, char_id)
+        return char_id
+
     if preliminary_vote:
-        original_vote_text = f"В предварительном голосовании ты голосовал(а) против {preliminary_vote}."
+        original_vote_text = f"В предварительном голосовании ты голосовал(а) против {get_name(preliminary_vote)}."
     else:
         original_vote_text = "В предварительном голосовании ты воздержался(ась)."
 
@@ -448,12 +464,13 @@ def build_final_vote_with_defense_prompt(
     if defense_speeches:
         speeches_list = []
         for speech in defense_speeches:
-            speeches_list.append(f"- {speech.defender_id}: \"{speech.content}\"")
+            defender_name = get_name(speech.defender_id)
+            speeches_list.append(f"- {defender_name}: \"{speech.content}\"")
         speeches_text = "Защитные речи обвиняемых:\n" + "\n".join(speeches_list)
     else:
         speeches_text = "Защитных речей не было."
 
-    candidates_str = ", ".join(candidates)
+    candidates_str = ", ".join(get_name(c) for c in candidates)
 
     if allow_abstain:
         abstain_option = "Ты можешь воздержаться, написав 'воздержусь'. "
@@ -475,8 +492,8 @@ def build_final_vote_with_defense_prompt(
 - Изменить голос на другого игрока
 {abstain_option if preliminary_vote else "- Проголосовать (ты воздержался в первом туре)"}
 
-ПРАВИЛО: Победитель определяется СТРОГИМ БОЛЬШИНСТВОМ голосов.
-Если голоса разделятся (нет большинства) — шпион выигрывает.
+ПРАВИЛО: Победитель определяется ЕДИНОГЛАСНЫМ голосованием.
+Если голоса не единогласны — шпион выигрывает.
 
 Выбери ОДНОГО из: {candidates_str}{abstain_suffix}.
-Напиши ТОЛЬКО имя (id) игрока{abstain_suffix}."""
+Напиши ТОЛЬКО имя игрока{abstain_suffix}."""

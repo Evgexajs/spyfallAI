@@ -1,0 +1,588 @@
+{
+  "id": "a64e5243-95b8-4273-b2a4-167baa6e0a42",
+  "started_at": "2026-04-20T19:47:53.608031",
+  "ended_at": "2026-04-20T19:53:42.457087",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "hospital",
+  "players": [
+    {
+      "character_id": "professor_stein",
+      "role_id": "receptionist",
+      "is_spy": false
+    },
+    {
+      "character_id": "kim",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "boris_molot",
+      "role_id": "nurse",
+      "is_spy": false
+    },
+    {
+      "character_id": "zoya",
+      "role_id": "surgeon",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "kim",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T19:47:55.403477",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "type": "question",
+      "content": "Как ты относишься к запахам, которые здесь раздаются?",
+      "display_delay_ms": 1794
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T19:47:58.180412",
+      "speaker_id": "kim",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Ну, запахи, в смысле... они могут быть разными, наверное. То есть, иногда, кажется, слишком интенсивными, но, в то же время, может быть... это просто моя тревожность, наверное.",
+      "display_delay_ms": 5556
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T19:48:05.895893",
+      "speaker_id": "kim",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "[kim → boris_molot] А, скажи, ты часто слышишь здесь... ну, в смысле, какие-то странные звуки, вернее, они могут... может быть, тебе тоже кажется, что они подозрительные?",
+      "display_delay_ms": 5564
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T19:48:13.411897",
+      "speaker_id": "boris_molot",
+      "addressee_id": "kim",
+      "type": "answer",
+      "content": "Звуки? Да, постоянные. Ким, ты так и не ответил прямо. Уверен, ты знаешь, что здесь происходит?",
+      "display_delay_ms": 3410
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T19:48:17.569277",
+      "speaker_id": "boris_molot",
+      "addressee_id": "kim",
+      "type": "question",
+      "content": "Как ты относишься к толпе, Ким?",
+      "display_delay_ms": 1471
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T19:48:20.068279",
+      "speaker_id": "kim",
+      "addressee_id": "boris_molot",
+      "type": "answer",
+      "content": "Толпа, ну... я не против, в смысле, если всё под контролем, наверное. Но, может быть, иногда это напрягает, вернее, вызывает беспокойство, кажется.",
+      "display_delay_ms": 4828
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T19:48:27.850799",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "type": "intervention",
+      "content": "Любопытное наблюдение, Ким. Однако следует отметить, что ваши рассуждения касательно контроля и беспокойства находятся в определённом логическом противоречии, которое требует более детального анализа.",
+      "display_delay_ms": 6530
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T19:48:36.966646",
+      "speaker_id": "kim",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "[zoya] А ты, ну, как думаешь, здесь что-то может... ну, как бы... пойти не так, в смысле, что-то, что, кажется, вызывает... беспокойство?",
+      "display_delay_ms": 4604
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T19:48:42.902016",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "type": "answer",
+      "content": "О, конечно, здесь всё всегда идёт не так, если верить паранойе. А у тебя часто \"всё под контролем\", как ты выразился?",
+      "display_delay_ms": 4081
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-20T19:48:48.501653",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Кажется, Зоя, ты сама не уверена, что здесь происходит. Вон, как выкрутилась, когда тебя спросили.",
+      "display_delay_ms": 3382
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-20T19:49:01.845437",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "[zoya → professor_stein] О да, профессор, а как вы относитесь к запаху антисептика? Не напоминает ли это вам что-то из вашей цветущей молодости?",
+      "display_delay_ms": 4626
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T19:49:13.318258",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Видите ли, запах антисептика, строго говоря, напоминает мне об эпохах академических исследований, когда чистота была не просто условием, а необходимым элементом достижения объективности. Фактически, этот аромат действует как своеобразный катализатор для умственного сосредоточения, подобно тому, как метафорический свежий воздух может вдохновить на новые открытия.",
+      "display_delay_ms": 11428
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-20T19:49:31.547591",
+      "speaker_id": "kim",
+      "addressee_id": "professor_stein",
+      "type": "intervention",
+      "content": "Но ведь, ну, в смысле... профессор, вы, может быть, спутали что-то? Вернее, антисептик и свежий воздух — вещи, наверное, не совсем совместимые, то есть, ну, разве что в теории, вернее, в ваших академических изысканиях.",
+      "display_delay_ms": 7049
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-20T19:49:46.360205",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "type": "question",
+      "content": "Ким, разрешите уточнить, как вы считаете, есть ли в данной среде, так сказать, элементы, которые, подобно цепной реакции, способны повлиять на ваше эмоциональное состояние и, возможно, даже вызывать иррациональные проявления?",
+      "display_delay_ms": 7019
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T19:49:59.344498",
+      "speaker_id": "kim",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "Ну, то есть, профессор, конечно... может быть, что-то здесь и влияет, в смысле, цепная реакция, как вы сказали. Вернее, я хотел сказать, что это возможно, да, вполне вероятно.",
+      "display_delay_ms": 5657
+    },
+    {
+      "turn_number": 16,
+      "timestamp": "2026-04-20T19:50:12.198264",
+      "speaker_id": "boris_molot",
+      "addressee_id": "kim",
+      "type": "intervention",
+      "content": "Это ты запутался, Ким. Сам же сказал, что толпе не доверяешь, а теперь цепная реакция на эмоции влияет? Определись уже.",
+      "display_delay_ms": 4158
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-20T19:50:21.818345",
+      "speaker_id": "kim",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Профессор, а у вас, в смысле, часто бывают такие моменты, ну, когда вы чувствуете, что вроде как находитесь не совсем там, где думали, не из-за неправильных расчётов, а, ну, из-за чего-то более... непредвиденного?",
+      "display_delay_ms": 6989
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T19:50:39.745869",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "type": "answer",
+      "content": "Ким, с точки зрения философской интерпретации, строго говоря, чувство дезориентации, которое вы описываете, может, по сути, напоминать эффект, подобный открытию незнакомой главы в книге, которую вы считали давно изученной. Это состояние, где ожидаемое и неожиданное переплетаются, создавая уникальную возможность для переоценки окружающей реальности.",
+      "display_delay_ms": 10914
+    },
+    {
+      "turn_number": 19,
+      "timestamp": "2026-04-20T19:50:58.102974",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "intervention",
+      "content": "Ах, профессор, вы, конечно, мастер сказочных метафор. Дезориентация или книжный клуб, неужели это одно и то же? Может, просто кто-то потерял очки?",
+      "display_delay_ms": 4815
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-20T19:51:12.102677",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "type": "question",
+      "content": "Ким, как вы считаете, существует ли в этом месте, если взять метафорическую призму, под которой события кажутся одновременно предсказуемыми и абстрактными, нечто, что можно было бы назвать иллюзией спокойствия?",
+      "display_delay_ms": 6792
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-20T19:51:25.110375",
+      "speaker_id": "kim",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "Ну, в смысле... наверное, может быть, да — иллюзия спокойствия, вернее, она вроде бы есть, но... словами обманчива, ну то есть, вроде так.",
+      "display_delay_ms": 4369
+    },
+    {
+      "turn_number": 22,
+      "timestamp": "2026-04-20T19:51:40.367081",
+      "speaker_id": "boris_molot",
+      "addressee_id": "kim",
+      "type": "intervention",
+      "content": "Ким, ты запутался. \"Наверное, может быть\" — это не ответ. Чего ты темнишь?",
+      "display_delay_ms": 2510
+    },
+    {
+      "turn_number": 23,
+      "timestamp": "2026-04-20T19:51:48.977522",
+      "speaker_id": "kim",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, а у тебя когда-нибудь было такое, ну, в смысле, как будто все вокруг говорит одно, а ты чувствуешь, что должно быть по-другому, может быть, из-за... вернее, не знаю, просто из-за интуиции?",
+      "display_delay_ms": 6378
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T19:52:01.794663",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "type": "answer",
+      "content": "Ага, конечно, каждый день. У меня интуиция с радио анекдоты слушает.",
+      "display_delay_ms": 2563
+    },
+    {
+      "turn_number": 25,
+      "timestamp": "2026-04-20T19:52:10.374997",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Любопытное наблюдение, Зоя. Как говорил один известный философ, разум-раздвоенность — это зеркало собственных внутренних противоречий.",
+      "display_delay_ms": 4273
+    },
+    {
+      "turn_number": 26,
+      "timestamp": "2026-04-20T19:52:20.874921",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "Борис, скажи, а что тебя больше раздражает: когда всё слишком тихо или когда каждый пытается переорать друг друга?",
+      "display_delay_ms": 3823
+    },
+    {
+      "turn_number": 27,
+      "timestamp": "2026-04-20T19:52:30.852446",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Когда тишина, значит, кто-то темнит. Шумнее — проще шпиона вычислить.",
+      "display_delay_ms": 2517
+    },
+    {
+      "turn_number": 28,
+      "timestamp": "2026-04-20T19:52:39.349735",
+      "speaker_id": "kim",
+      "addressee_id": "boris_molot",
+      "type": "intervention",
+      "content": "Но ведь когда шумно, кажется, можно что-то упустить, ну в смысле, не заметить чьей-то хитрой игры, вернее, может быть незаметной!",
+      "display_delay_ms": 4197
+    },
+    {
+      "turn_number": 29,
+      "timestamp": "2026-04-20T19:52:49.253307",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Профессор, какой запах тебе тут знаком?",
+      "display_delay_ms": 1610
+    },
+    {
+      "turn_number": 30,
+      "timestamp": "2026-04-20T19:52:56.963774",
+      "speaker_id": "professor_stein",
+      "addressee_id": "boris_molot",
+      "type": "answer",
+      "content": "Фактически, Борис, запах, который наиболее напоминает мне о текущем контексте, это аромат антисептика — он, как невидимый страж, защищает нас от невидимых угроз, подобно тому, как мудрость охраняет от заблуждений.",
+      "display_delay_ms": 6641
+    },
+    {
+      "turn_number": 31,
+      "timestamp": "2026-04-20T19:53:10.070011",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "intervention",
+      "content": "О да, профессор, мудрость и антисептик — такие уж они друзья. А может, ты просто работаешь в магазине метафор?",
+      "display_delay_ms": 3853
+    },
+    {
+      "turn_number": 32,
+      "timestamp": "2026-04-20T19:53:19.389839",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Голосую против kim",
+      "display_delay_ms": 907
+    },
+    {
+      "turn_number": 33,
+      "timestamp": "2026-04-20T19:53:21.056440",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Голосую против boris_molot",
+      "display_delay_ms": 1047
+    },
+    {
+      "turn_number": 34,
+      "timestamp": "2026-04-20T19:53:22.664723",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Голосую против kim",
+      "display_delay_ms": 800
+    },
+    {
+      "turn_number": 35,
+      "timestamp": "2026-04-20T19:53:25.224506",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Голосую против kim",
+      "display_delay_ms": 840
+    },
+    {
+      "turn_number": 36,
+      "timestamp": "2026-04-20T19:53:28.406344",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "defense_speech",
+      "content": "Ну, я понимаю, что может показаться, в смысле, что мои ответы были, ну, немного расплывчаты, вернее, не совсем конкретны, но я... я не шпион, в смысле, я просто стараюсь разобраться, как и все вы.",
+      "display_delay_ms": 6400
+    },
+    {
+      "turn_number": 37,
+      "timestamp": "2026-04-20T19:53:36.393359",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Подтверждаю голос за kim",
+      "display_delay_ms": 972
+    },
+    {
+      "turn_number": 38,
+      "timestamp": "2026-04-20T19:53:38.024325",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Подтверждаю голос за boris_molot",
+      "display_delay_ms": 1370
+    },
+    {
+      "turn_number": 39,
+      "timestamp": "2026-04-20T19:53:40.071907",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Воздерживаюсь",
+      "display_delay_ms": 625
+    },
+    {
+      "turn_number": 40,
+      "timestamp": "2026-04-20T19:53:41.301520",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Подтверждаю голос за kim",
+      "display_delay_ms": 1153
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T19:48:25.597466",
+      "level": "few_guesses"
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T19:50:10.559565",
+      "level": "few_guesses"
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T19:52:08.405990",
+      "level": "few_guesses"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T19:48:34.382604",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T19:48:51.886025",
+      "character_id": "boris_molot",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T19:49:38.598594",
+      "character_id": "kim",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T19:50:16.358464",
+      "character_id": "boris_molot",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T19:51:02.919783",
+      "character_id": "zoya",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-20T19:51:42.878738",
+      "character_id": "boris_molot",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T19:52:14.650274",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 27,
+      "timestamp": "2026-04-20T19:52:43.547719",
+      "character_id": "kim",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 30,
+      "timestamp": "2026-04-20T19:53:13.925097",
+      "character_id": "zoya",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T19:47:53.608031",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T19:47:53.608328",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T19:53:13.925641",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 15 ходов",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T19:53:13.926154",
+      "from_phase": "optional_vote",
+      "to_phase": "preliminary_vote",
+      "reason": "Preliminary voting started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T19:53:26.067156",
+      "from_phase": "preliminary_vote",
+      "to_phase": "pre_final_vote_defense",
+      "reason": "Defense speeches for 1 player(s) with 3 votes",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T19:53:34.808754",
+      "from_phase": "pre_final_vote_defense",
+      "to_phase": "final_vote",
+      "reason": "Final voting started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T19:53:42.457132",
+      "from_phase": "final_vote",
+      "to_phase": "resolution",
+      "reason": "Game ended: civilians won",
+      "status": null
+    }
+  ],
+  "outcome": {
+    "winner": "civilians",
+    "reason": "Шпион (kim) был разоблачён большинством голосов (2/3)",
+    "votes": {
+      "professor_stein": "kim",
+      "kim": "boris_molot",
+      "zoya": "kim"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": "kim"
+  },
+  "compressed_history": "В диалоге участники подозревают друг друга в том, что кто-то из них может быть шпионом. Ким вызывает подозрения у Бориса, который отмечает, что его ответы уклончивы и неясны. Борис также указывает на неуверенность Зои, когда она говорит о том, что \"всё всегда идёт не так\". Профессор Штейн пытается анализировать ситуацию, но его метафорические рассуждения о запахе антисептика и дезориентации лишь запутывают Кима, который сам становится объектом подозрений за свои неопределённые ответы.\n\nКим выражает беспокойство по поводу толпы и странных звуков, что вызывает дополнительные вопросы. Борис называет его запутанным, а Зоя иронично комментирует философские метафоры профессора. В ходе обсуждения упоминаются запахи и звуки, которые могут намекать на локацию, но остаются неясными. В целом, атмосфера диалога наполнена недоверием и попытками выявить шпиона среди них.",
+  "compression_checkpoint": 25,
+  "token_usage": {
+    "total_input_tokens": 87606,
+    "total_output_tokens": 7115,
+    "total_cost_usd": 0.16922695,
+    "llm_calls_count": 75
+  },
+  "preliminary_vote_result": {
+    "professor_stein": "kim",
+    "kim": "boris_molot",
+    "boris_molot": "kim",
+    "zoya": "kim"
+  },
+  "defense_speeches": [
+    {
+      "defender_id": "kim",
+      "votes_received": 3,
+      "content": "Ну, я понимаю, что может показаться, в смысле, что мои ответы были, ну, немного расплывчаты, вернее, не совсем конкретны, но я... я не шпион, в смысле, я просто стараюсь разобраться, как и все вы.",
+      "timestamp": "2026-04-20T19:53:28.406294",
+      "regenerated": false
+    }
+  ],
+  "final_vote_result": {
+    "professor_stein": "kim",
+    "kim": "boris_molot",
+    "boris_molot": null,
+    "zoya": "kim"
+  },
+  "vote_changes": [
+    {
+      "voter_id": "boris_molot",
+      "from_target": "kim",
+      "to_target": null
+    }
+  ]
+}

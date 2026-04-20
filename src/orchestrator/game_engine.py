@@ -1042,6 +1042,10 @@ async def run_final_vote(
     final_votes: dict[str, Optional[str]] = {}
     vote_changes: list[VoteChange] = []
 
+    # Build id <-> display_name mappings for human-readable output and parsing
+    id_to_name = {c.id: c.display_name for c in characters}
+    name_to_id = {c.display_name: c.id for c in characters}
+
     if not defense_was_executed:
         # Defense was skipped - copy preliminary votes without LLM calls
         logger.info("Defense was skipped - copying preliminary votes to final votes")
@@ -1059,7 +1063,8 @@ async def run_final_vote(
         # Record turns for each vote (for consistency in logs)
         for voter_id, target_id in final_votes.items():
             if target_id:
-                vote_content = f"Голосую за {target_id} (подтверждено)"
+                target_name = id_to_name.get(target_id, target_id)
+                vote_content = f"Подтверждаю голос за {target_name}"
             else:
                 vote_content = "Воздерживаюсь (подтверждено)"
 
@@ -1103,6 +1108,7 @@ async def run_final_vote(
                 defense_speeches=defense_speeches,
                 candidates=candidates,
                 allow_abstain=DEFENSE_ALLOW_ABSTAIN,
+                id_to_name=id_to_name,
             )
 
             history = await _build_compressed_conversation_history(game, provider)
@@ -1112,10 +1118,12 @@ async def run_final_vote(
             if final_votes:
                 votes_list = []
                 for v, t in final_votes.items():
+                    voter_name = id_to_name.get(v, v)
                     if t is None:
-                        votes_list.append(f"{v}: воздержался")
+                        votes_list.append(f"{voter_name}: воздержался")
                     else:
-                        votes_list.append(f"{v}: за {t}")
+                        target_name = id_to_name.get(t, t)
+                        votes_list.append(f"{voter_name}: за {target_name}")
                 previous_votes_text = f"\nУже проголосовали в финале: {', '.join(votes_list)}."
 
             messages = [
@@ -1137,16 +1145,17 @@ async def run_final_vote(
             vote_response = vote_llm_response.content.strip().lower()
 
             # Parse vote response
-            voted_for = _parse_final_vote(vote_response, candidates)
+            voted_for = _parse_final_vote(vote_response, candidates, name_to_id)
 
             # If abstain not allowed and got None, retry once then fallback
             if voted_for is None and not DEFENSE_ALLOW_ABSTAIN:
                 logger.info(f"Voter {voter_id} tried to abstain but not allowed, retrying")
 
+                candidates_names = ", ".join(id_to_name.get(c, c) for c in candidates)
                 retry_messages = [
                     {"role": "system", "content": vote_prompt},
                     *history,
-                    {"role": "user", "content": f"Воздержание запрещено. Выбери ОДНОГО из: {', '.join(candidates)}"},
+                    {"role": "user", "content": f"Воздержание запрещено. Выбери ОДНОГО из: {candidates_names}"},
                 ]
 
                 retry_response = await provider.complete(
@@ -1157,7 +1166,7 @@ async def run_final_vote(
                 )
                 _track_usage_and_check_cost(game, retry_response)
 
-                voted_for = _parse_final_vote(retry_response.content.strip().lower(), candidates)
+                voted_for = _parse_final_vote(retry_response.content.strip().lower(), candidates, name_to_id)
 
                 if voted_for is None:
                     voted_for = random.choice(candidates)
@@ -1177,12 +1186,13 @@ async def run_final_vote(
 
             # Create turn
             if voted_for:
+                voted_for_name = id_to_name.get(voted_for, voted_for)
                 if voted_for == preliminary_vote:
-                    vote_content = f"Подтверждаю голос за {voted_for}"
+                    vote_content = f"Подтверждаю голос за {voted_for_name}"
                 elif preliminary_vote:
-                    vote_content = f"Меняю голос: теперь за {voted_for}"
+                    vote_content = f"Меняю голос: теперь за {voted_for_name}"
                 else:
-                    vote_content = f"Голосую за {voted_for}"
+                    vote_content = f"Голосую за {voted_for_name}"
             else:
                 vote_content = "Воздерживаюсь"
 
@@ -1259,22 +1269,31 @@ async def run_final_vote(
     return game
 
 
-def _parse_final_vote(response: str, candidates: list[str]) -> Optional[str]:
+def _parse_final_vote(
+    response: str, candidates: list[str], name_to_id: Optional[dict[str, str]] = None
+) -> Optional[str]:
     """Parse final vote response.
 
     Args:
         response: Raw LLM response (lowercased).
         candidates: List of valid candidate IDs.
+        name_to_id: Optional mapping of display names to IDs.
 
     Returns:
         Voted target ID or None if abstained.
     """
     abstain_markers = ["воздерж", "abstain", "пропуск", "skip", "нет голоса"]
 
-    # Check for candidate first (to avoid matching "воздержусь" with candidate "zoya")
+    # Check for candidate IDs first (to avoid matching "воздержусь" with candidate "zoya")
     for candidate in candidates:
         if candidate.lower() in response or response in candidate.lower():
             return candidate
+
+    # Check for display names if mapping provided
+    if name_to_id:
+        for name, cid in name_to_id.items():
+            if cid in candidates and (name.lower() in response or response in name.lower()):
+                return cid
 
     # Check for abstain
     for marker in abstain_markers:
@@ -1317,6 +1336,10 @@ async def run_preliminary_vote(
     player_ids = [p.character_id for p in game.players]
     votes: dict[str, Optional[str]] = {}
 
+    # Build id <-> display_name mappings for human-readable output and parsing
+    id_to_name = {c.id: c.display_name for c in characters}
+    name_to_id = {c.display_name: c.id for c in characters}
+
     for voter_player in game.players:
         voter_id = voter_player.character_id
         voter_char = _get_character_by_id(characters, voter_id)
@@ -1324,7 +1347,7 @@ async def run_preliminary_vote(
         voter_prompt = build_system_prompt(voter_char, game, voter_secret)
 
         candidates = [pid for pid in player_ids if pid != voter_id]
-        candidates_str = ", ".join(candidates)
+        candidates_str = ", ".join(id_to_name.get(c, c) for c in candidates)
 
         history = await _build_compressed_conversation_history(game, provider)
 
@@ -1332,10 +1355,12 @@ async def run_preliminary_vote(
         if votes:
             votes_list = []
             for v, t in votes.items():
+                voter_name = id_to_name.get(v, v)
                 if t is None:
-                    votes_list.append(f"{v}: воздержался")
+                    votes_list.append(f"{voter_name}: воздержался")
                 else:
-                    votes_list.append(f"{v}: против {t}")
+                    target_name = id_to_name.get(t, t)
+                    votes_list.append(f"{voter_name}: против {target_name}")
             previous_votes_text = f"Уже проголосовали: {', '.join(votes_list)}. "
 
         if DEFENSE_ALLOW_ABSTAIN:
@@ -1351,7 +1376,7 @@ async def run_preliminary_vote(
             f"{previous_votes_text}"
             f"Кого ты подозреваешь в том, что он шпион? Выбери ОДНОГО из: {candidates_str}. "
             f"{abstain_option}"
-            f"Напиши ТОЛЬКО имя (id) игрока{abstain_suffix}."
+            f"Напиши ТОЛЬКО имя игрока{abstain_suffix}."
         )
 
         messages = [
@@ -1372,7 +1397,7 @@ async def run_preliminary_vote(
         _track_usage_and_check_cost(game, vote_llm_response)
         vote_response = vote_llm_response.content.strip().lower()
 
-        voted_for = _parse_preliminary_vote(vote_response, candidates)
+        voted_for = _parse_preliminary_vote(vote_response, candidates, name_to_id)
 
         if voted_for is None and not DEFENSE_ALLOW_ABSTAIN:
             logger.warning(
@@ -1382,7 +1407,7 @@ async def run_preliminary_vote(
                 f"Ты — {voter_char.display_name}. "
                 f"Ты ОБЯЗАН выбрать одного игрока, воздержание недоступно. "
                 f"Кто шпион? Выбери ОДНОГО из: {candidates_str}. "
-                f"Напиши ТОЛЬКО имя (id) игрока."
+                f"Напиши ТОЛЬКО имя игрока."
             )
             retry_messages = [
                 {"role": "system", "content": voter_prompt},
@@ -1398,7 +1423,7 @@ async def run_preliminary_vote(
             )
             _track_usage_and_check_cost(game, retry_response)
             vote_response = retry_response.content.strip().lower()
-            voted_for = _parse_preliminary_vote(vote_response, candidates)
+            voted_for = _parse_preliminary_vote(vote_response, candidates, name_to_id)
 
             if voted_for is None:
                 voted_for = random.choice(candidates)
@@ -1412,7 +1437,7 @@ async def run_preliminary_vote(
         if voted_for is None:
             vote_content = "Воздерживаюсь"
         else:
-            vote_content = f"Голосую против {voted_for}"
+            vote_content = f"Голосую против {id_to_name.get(voted_for, voted_for)}"
 
         turn = Turn(
             turn_number=len(game.turns) + 1,
@@ -1441,20 +1466,28 @@ async def run_preliminary_vote(
 
 
 def _parse_preliminary_vote(
-    response: str, candidates: list[str]
+    response: str, candidates: list[str], name_to_id: Optional[dict[str, str]] = None
 ) -> Optional[str]:
     """Parse preliminary vote response.
 
     Args:
         response: LLM response text (lowercase)
         candidates: List of valid candidate IDs
+        name_to_id: Optional mapping of display names to IDs
 
     Returns:
         candidate ID if voted, None if abstained
     """
+    # Check for candidate IDs first
     for candidate in candidates:
         if candidate.lower() in response or response in candidate.lower():
             return candidate
+
+    # Check for display names if mapping provided
+    if name_to_id:
+        for name, cid in name_to_id.items():
+            if cid in candidates and (name.lower() in response or response in name.lower()):
+                return cid
 
     abstain_markers = ["воздерж", "abstain", "skip this", "пропуска", "я пас"]
     for marker in abstain_markers:
@@ -1557,6 +1590,9 @@ async def run_defense_speeches(
         llm_config = LLMConfig()
         provider, _ = create_provider(llm_config, role="main")
 
+    # Build id -> display_name mapping for human-readable output
+    id_to_name = {c.id: c.display_name for c in characters}
+
     if not vote_counts:
         logger.info("Defense phase skipped: no votes cast")
         _transition_phase(
@@ -1614,6 +1650,7 @@ async def run_defense_speeches(
             secret_info=defender_secret,
             votes_received=max_votes,
             max_sentences=DEFENSE_SPEECH_MAX_SENTENCES,
+            id_to_name=id_to_name,
         )
 
         history = await _build_compressed_conversation_history(game, provider)

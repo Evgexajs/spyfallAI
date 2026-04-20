@@ -1,0 +1,444 @@
+{
+  "id": "445744de-4521-4e2f-b961-a29ae3113225",
+  "started_at": "2026-04-20T19:42:36.291543",
+  "ended_at": "2026-04-20T19:44:20.215302",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "hospital",
+  "players": [
+    {
+      "character_id": "kim",
+      "role_id": "patient",
+      "is_spy": false
+    },
+    {
+      "character_id": "aurora",
+      "role_id": "surgeon",
+      "is_spy": false
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": "nurse",
+      "is_spy": false
+    },
+    {
+      "character_id": "margo",
+      "role_id": null,
+      "is_spy": true
+    }
+  ],
+  "spy_id": "margo",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T19:42:39.265877",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "Аврора, милая, а тебе здесь не кажется немного шумновато? Интересно, что ты об этом думаешь?",
+      "display_delay_ms": 3313
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T19:42:43.147889",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "О, Мардж, ты не представляешь! Шум, он как музыка жизни, но иногда... *вздрагивает* ...он пробирает до костей! Невыносимо, как порой кажется, что он заполоняет всё вокруг, и даже тишина кричит! В такие моменты хочется воскликнуть: \"О боже, как пережить это?!\". Но, увы, такова наша участь, и мы должны играть свои роли, даже в этом сумасшедшем хоре звуков!",
+      "display_delay_ms": 11132
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T19:42:45.503550",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "Отец Игнатий, прошу, скажите... *вдох* ...ваша душа спокойна среди этих стен или же вы, подобно мне, ощущаете рокот страстей, витающий в воздухе и переплетающийся с каждой нотой этого места?!",
+      "display_delay_ms": 5931
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T19:42:47.856323",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Аврора, дитя моё, каждый звук здесь служит напоминанием о том, как драгоценна жизнь. Но истина для меня проста: душа должна всегда оставаться в мире, даже если вокруг шумят страсти. Искренне верю, что именно в этом испытании мы можем найти покой и равновесие. А что подсказывает тебе твоя совесть?",
+      "display_delay_ms": 9414
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T19:42:49.087459",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "Аврора, скажи честно, что больше всего помогает тебе сохранять душевное равновесие среди этих переменчивых звуков?",
+      "display_delay_ms": 3763
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T19:42:51.544117",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "О, отец Игнатий, это истинное испытание для моей тонкой души! Моя сила в драме, в каждой реплике и жесте, превращающей хаос в искусство! Когда шум заполоняет всё, я закрываю глаза, вдохновляюсь великими партитурами и вспоминаю, что каждый звук — это лишь нота в моей великой симфонии жизни! Невозможно представить, как иное могло бы успокоить бурю эмоций во мне!",
+      "display_delay_ms": 11194
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T19:42:54.512388",
+      "speaker_id": "kim",
+      "addressee_id": "aurora",
+      "type": "intervention",
+      "content": "Подождите, Аврора, я что-то, ну, кажется, упустил... Ты вроде бы говоришь, что шум тебя вдохновляет, но всё равно на него жалуешься? В смысле, это как-то противоречиво, вернее, я хотел сказать, просто странно немного.",
+      "display_delay_ms": 6964
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T19:42:55.639232",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "О, Мардж! Позволь спросить тебя... *вздыхает* ...какая мелодия звучит в твоей душе, когда ты находишься здесь? Ведь каждому из нас принадлежит свой уникальный мотив, верно?",
+      "display_delay_ms": 5555
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T19:42:57.583773",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Аврора, дорогая, ты так прекрасно уловила суть! В моей душе звучит мелодия теплоты и обаяния, как лёгкий бриз на берегу. Разве она не чудесна? Интересно, не кажется ли тебе, что именно этот мотив помогает находить ответы на любые вопросы здесь, вокруг нас?",
+      "display_delay_ms": 8098
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-20T19:43:00.300224",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Дорогая Margo, разве не кажется тебе, что подобной мелодии может не хватать конкретики, чтобы понять, что происходит вокруг? Искренность в ответе могла бы прояснить многое.",
+      "display_delay_ms": 5546
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-20T19:43:07.764797",
+      "speaker_id": "margo",
+      "addressee_id": "kim",
+      "type": "question",
+      "content": "Ким, милый, а что ты больше всего ценишь в наших встречах здесь? Ведь каждый миг может стать бриллиантом в нашей жизни, не так ли?",
+      "display_delay_ms": 4493
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T19:43:13.776521",
+      "speaker_id": "kim",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Ну, я... в смысле, наверное, наиболее важно это, ну, общение, вернее, взаимоотношения, которые у нас здесь складываются. То есть, они как бы... как связь между нами, понимаешь? Хотя, возможно, я что-то путаю, но кажется, именно в этом, ну, суть наших встреч.",
+      "display_delay_ms": 8142
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-20T19:43:22.160690",
+      "speaker_id": "aurora",
+      "addressee_id": "kim",
+      "type": "intervention",
+      "content": "О, Ким, как это трогательно и... вместе с тем НЕВЕРОЯТНО противоречиво! Ты говоришь о связи, как о несокрушимой нити судьбы, но в твоих словах я слышу нотку неуверенности... Как можно?! Это просто немыслимо!",
+      "display_delay_ms": 6416
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-20T19:43:28.930100",
+      "speaker_id": "kim",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "Отец Игнатий, возможно, вы могли бы объяснить, ну, как часто вам приходится сталкиваться, в смысле, с трудностями в вашей деятельности здесь, и как вы, ну, справляетесь с ними?",
+      "display_delay_ms": 5742
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T19:43:35.984868",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "kim",
+      "type": "answer",
+      "content": "Ким, в своей жизни я часто сталкиваюсь с трудностями, как и всякий человек. Но верю, что душевная стойкость и честность перед самим собой позволяют преодолеть всё. Как ты считаешь, не является ли это ключом к истинному пониманию?",
+      "display_delay_ms": 7386
+    },
+    {
+      "turn_number": 16,
+      "timestamp": "2026-04-20T19:43:46.124434",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "type": "intervention",
+      "content": "Ах, милый Ким, разве не заметили вы, как Отец Игнатий нежно обращает внимание на добродетели, но не упоминает конкретную ситуацию? Не кажется ли вам, что это немного отвлекает от сути?",
+      "display_delay_ms": 6088
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-20T19:43:51.038035",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "kim",
+      "type": "question",
+      "content": "Ким, скажи честно, как ты чувствуешь себя в этом месте, когда вокруг столько суеты и спешки? Видишь ли ты правду в своём сердце?",
+      "display_delay_ms": 4070
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T19:43:58.660069",
+      "speaker_id": "kim",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "Ну, я... в смысле, чувствую себя, наверное, немного напряжённо, то есть, в этом месте всегда что-то происходит, какая-то суета, точно. Но, в общем, наверное, это нормально. Вернее, ну, всё-таки здесь постоянно есть движение, кажется, оно всё-таки неотъемлемая часть.",
+      "display_delay_ms": 8283
+    },
+    {
+      "turn_number": 19,
+      "timestamp": "2026-04-20T19:44:05.419720",
+      "speaker_id": "aurora",
+      "addressee_id": "kim",
+      "type": "intervention",
+      "content": "О, Ким, как это по-человечески и вместе с тем невероятно противоречиво! Ты говоришь о суете, как о вечной симфонии движения, но в твоих словах я слышу эхом тревогу... Как можно?! Это просто немыслимо!",
+      "display_delay_ms": 6553
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-20T19:44:11.722794",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Голосую против aurora",
+      "display_delay_ms": 932
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-20T19:44:12.553788",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Голосую против father_ignatius",
+      "display_delay_ms": 1253
+    },
+    {
+      "turn_number": 22,
+      "timestamp": "2026-04-20T19:44:13.563619",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Голосую против margo",
+      "display_delay_ms": 981
+    },
+    {
+      "turn_number": 23,
+      "timestamp": "2026-04-20T19:44:14.179840",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Голосую против father_ignatius",
+      "display_delay_ms": 1313
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T19:44:16.945739",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "defense_speech",
+      "content": "Дорогие аврора и марго, прежде чем вы сделаете поспешные выводы, прошу вас, вглядитесь в мои глаза и дайте шанс на истину. Разве можно обвинить меня без веских доказательств, не задумавшись о совести и справедливости?",
+      "display_delay_ms": 6774
+    },
+    {
+      "turn_number": 25,
+      "timestamp": "2026-04-20T19:44:17.590592",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Подтверждаю голос за aurora",
+      "display_delay_ms": 1010
+    },
+    {
+      "turn_number": 26,
+      "timestamp": "2026-04-20T19:44:18.750244",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Подтверждаю голос за father_ignatius",
+      "display_delay_ms": 1637
+    },
+    {
+      "turn_number": 27,
+      "timestamp": "2026-04-20T19:44:19.504419",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Подтверждаю голос за margo",
+      "display_delay_ms": 1157
+    },
+    {
+      "turn_number": 28,
+      "timestamp": "2026-04-20T19:44:20.214412",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Меняю голос: теперь за aurora",
+      "display_delay_ms": 1098
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T19:42:52.260889",
+      "level": "few_guesses"
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T19:43:43.883934",
+      "level": "few_guesses"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T19:42:54.512959",
+      "character_id": "kim",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T19:43:00.300507",
+      "character_id": "father_ignatius",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T19:43:22.161285",
+      "character_id": "aurora",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T19:43:46.124876",
+      "character_id": "margo",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T19:44:05.420411",
+      "character_id": "aurora",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T19:42:36.291543",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T19:42:36.291917",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T19:44:05.420567",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 19 ходов",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T19:44:05.420898",
+      "from_phase": "optional_vote",
+      "to_phase": "preliminary_vote",
+      "reason": "Preliminary voting started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T19:44:14.180461",
+      "from_phase": "preliminary_vote",
+      "to_phase": "pre_final_vote_defense",
+      "reason": "Defense speeches for 1 player(s) with 2 votes",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T19:44:16.946433",
+      "from_phase": "pre_final_vote_defense",
+      "to_phase": "final_vote",
+      "reason": "Final voting started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T19:44:20.215331",
+      "from_phase": "final_vote",
+      "to_phase": "resolution",
+      "reason": "Game ended: spy won",
+      "status": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Голоса разделились (нет большинства) — шпион (margo) побеждает",
+    "votes": {
+      "kim": "aurora",
+      "aurora": "father_ignatius",
+      "father_ignatius": "margo",
+      "margo": "aurora"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": null
+  },
+  "compressed_history": "В диалоге участники обсуждают шумное окружение, что вызывает подозрения и противоречия. Аврора, с одной стороны, утверждает, что шум вдохновляет её, но одновременно жалуется на него, что вызывает недоумение у Кима. Он указывает на противоречивость её слов, что может указывать на уклончивость. Мардж поддерживает Аврору, но её ответ о \"мелодии теплоты\" кажется слишком абстрактным, что вызывает сомнения у Отца Игнатия. Он настаивает на необходимости конкретики в ответах, что ставит под сомнение искренность Мардж.\n\nКим, в свою очередь, говорит о важности общения, но его слова также звучат неуверенно, что вызывает подозрения у Авроры, которая указывает на его противоречивость. В ходе обсуждения участники пытаются найти общий язык, но каждый из них оставляет ощущение недосказанности и неопределенности.\n\nЛокация, вероятно, связана с музыкой или искусством, учитывая упоминания о \"симфонии жизни\" и \"мелодии\", но это может быть ложным намёком, чтобы запутать других.",
+  "compression_checkpoint": 13,
+  "token_usage": {
+    "total_input_tokens": 59930,
+    "total_output_tokens": 3959,
+    "total_cost_usd": 0.12273375000000002,
+    "llm_calls_count": 46
+  },
+  "preliminary_vote_result": {
+    "kim": "aurora",
+    "aurora": "father_ignatius",
+    "father_ignatius": "margo",
+    "margo": "father_ignatius"
+  },
+  "defense_speeches": [
+    {
+      "defender_id": "father_ignatius",
+      "votes_received": 2,
+      "content": "Дорогие аврора и марго, прежде чем вы сделаете поспешные выводы, прошу вас, вглядитесь в мои глаза и дайте шанс на истину. Разве можно обвинить меня без веских доказательств, не задумавшись о совести и справедливости?",
+      "timestamp": "2026-04-20T19:44:16.945669",
+      "regenerated": false
+    }
+  ],
+  "final_vote_result": {
+    "kim": "aurora",
+    "aurora": "father_ignatius",
+    "father_ignatius": "margo",
+    "margo": "aurora"
+  },
+  "vote_changes": [
+    {
+      "voter_id": "margo",
+      "from_target": "father_ignatius",
+      "to_target": "aurora"
+    }
+  ]
+}
