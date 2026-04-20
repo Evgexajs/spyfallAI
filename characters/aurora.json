@@ -67,5 +67,6 @@
   ],
   "intervention_priority": 5,
   "intervention_threshold": 0.5,
+  "spy_risk_tolerance": "bold",
   "llm_override": null
 }

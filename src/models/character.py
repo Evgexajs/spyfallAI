@@ -6,6 +6,14 @@ from typing import Optional
 from pydantic import BaseModel, Field, field_validator
 
 
+class SpyRiskTolerance(str, Enum):
+    """How likely the spy is to auto-guess when confident."""
+
+    CAUTIOUS = "cautious"  # Never auto-guesses, waits for forced situation
+    MODERATE = "moderate"  # Auto-guesses after 2+ confident checks
+    BOLD = "bold"  # Auto-guesses immediately when confident
+
+
 class ConditionType(str, Enum):
     """Trigger condition types (MVP — only formally detectable conditions)."""
 
@@ -100,6 +108,10 @@ class Character(BaseModel):
     personal_triggers: list[Trigger] = Field(default_factory=list, description="Personal triggers")
     intervention_priority: int = Field(ge=1, le=10, description="Priority for intervention window (1-10)")
     intervention_threshold: float = Field(ge=0.0, le=1.0, description="Trigger threshold (0-1)")
+    spy_risk_tolerance: SpyRiskTolerance = Field(
+        default=SpyRiskTolerance.MODERATE,
+        description="How likely to auto-guess when spy and confident: cautious/moderate/bold"
+    )
     llm_override: Optional[LLMOverride] = Field(default=None, description="Optional model/provider override")
 
     @field_validator("detectable_markers")

@@ -40,6 +40,7 @@ from src.models import (
     Location,
     PhaseEntry,
     Player,
+    SpyRiskTolerance,
     Turn,
     TurnType,
     VoteChange,
@@ -816,6 +817,7 @@ async def run_main_round(
     question_count = 0
     answer_count = 0
     last_check_answer_count = 0
+    consecutive_confident_count = 0  # Track consecutive "confident" checks for moderate risk tolerance
 
     while True:
         if datetime.now() - start_time >= duration:
@@ -1137,7 +1139,30 @@ async def run_main_round(
         if confidence_entry:
             game.spy_confidence_log.append(confidence_entry)
 
+            # Track consecutive confident checks
             if confidence_entry.level == ConfidenceLevel.CONFIDENT:
+                consecutive_confident_count += 1
+            else:
+                consecutive_confident_count = 0
+
+            # Check if spy should auto-guess based on risk tolerance
+            spy_character = _get_character_by_id(characters, game.spy_id)
+            should_auto_guess = False
+
+            if confidence_entry.level == ConfidenceLevel.CONFIDENT:
+                if spy_character.spy_risk_tolerance == SpyRiskTolerance.BOLD:
+                    should_auto_guess = True
+                    logger.info(f"Spy {game.spy_id} is bold - auto-guessing immediately")
+                elif spy_character.spy_risk_tolerance == SpyRiskTolerance.MODERATE:
+                    if consecutive_confident_count >= 2:
+                        should_auto_guess = True
+                        logger.info(f"Spy {game.spy_id} is moderate - auto-guessing after {consecutive_confident_count} confident checks")
+                    else:
+                        logger.info(f"Spy {game.spy_id} is moderate - waiting for more confident checks ({consecutive_confident_count}/2)")
+                else:  # CAUTIOUS
+                    logger.info(f"Spy {game.spy_id} is cautious - will not auto-guess")
+
+            if should_auto_guess:
                 guessed_location_id = await _ask_spy_to_guess(
                     game=game,
                     characters=characters,

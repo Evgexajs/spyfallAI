@@ -1,6 +1,6 @@
 """Pydantic data models for SpyfallAI."""
 
-from src.models.character import Character, Marker, Trigger, ConditionType, ReactionType, MarkerMethod
+from src.models.character import Character, Marker, Trigger, ConditionType, ReactionType, MarkerMethod, SpyRiskTolerance
 from src.models.location import Location, Role
 from src.models.game import (
     ConfidenceEntry,
@@ -36,6 +36,7 @@ __all__ = [
     "Player",
     "ReactionType",
     "Role",
+    "SpyRiskTolerance",
     "TokenUsage",
     "Trigger",
     "TriggerEvent",
