@@ -4,10 +4,31 @@ Run with: python -m src.web
 """
 
 import os
+import signal
+import subprocess
 import sys
 import warnings
 
 from dotenv import load_dotenv
+
+
+def kill_port(port: int) -> bool:
+    """Kill any process using the specified port. Returns True if killed."""
+    try:
+        result = subprocess.run(
+            ["lsof", "-t", f"-i:{port}"],
+            capture_output=True,
+            text=True,
+        )
+        pids = result.stdout.strip().split("\n")
+        killed = False
+        for pid in pids:
+            if pid:
+                os.kill(int(pid), signal.SIGTERM)
+                killed = True
+        return killed
+    except Exception:
+        return False
 
 SECURITY_WARNING = """
 ================================================================================
@@ -79,6 +100,9 @@ def main() -> None:
             file=sys.stderr,
         )
         sys.exit(1)
+
+    if kill_port(port):
+        print(f"Killed existing process on port {port}")
 
     print(f"Starting SpyfallAI web server on http://{host}:{port}")
     if host in LOCALHOST_ALIASES:

@@ -344,7 +344,10 @@ async def start_game(request: GameStartRequest) -> GameStateResponse:
 
     character_ids = request.character_ids
     if character_ids is None:
-        character_ids = game_manager.list_available_characters()
+        available = game_manager.list_available_characters()
+        players_count = int(os.environ.get("PLAYERS_PER_GAME", "4"))
+        players_count = min(players_count, len(available))
+        character_ids = random.sample(available, players_count)
 
     if len(character_ids) < 3:
         raise HTTPException(status_code=400, detail="At least 3 characters required")
