@@ -14,7 +14,10 @@ class TurnType(str, Enum):
     QUESTION = "question"
     ANSWER = "answer"
     INTERVENTION = "intervention"
-    VOTE = "vote"
+    VOTE = "vote"  # Kept for backwards compatibility
+    PRELIMINARY_VOTE = "preliminary_vote"  # Vote in preliminary voting phase
+    DEFENSE_SPEECH = "defense_speech"  # Defense speech by accused player
+    FINAL_VOTE = "final_vote"  # Vote in final voting phase
     SPY_GUESS = "spy_guess"
     SPY_LEAK = "spy_leak"
 
