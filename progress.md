@@ -61,7 +61,7 @@
 - 247 unit-тестов прошли (19 интеграционных требуют API ключ)
 
 ### Коммиты
-- (будет добавлен)
+- `1ebd9a8` — feat: add post-check for defense speech characteristicness (TASK-064)
 
 ---
 
