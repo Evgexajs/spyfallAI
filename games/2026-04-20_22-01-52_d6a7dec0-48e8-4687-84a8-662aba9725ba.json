@@ -1,0 +1,559 @@
+{
+  "id": "d6a7dec0-48e8-4687-84a8-662aba9725ba",
+  "started_at": "2026-04-20T22:01:52.782544",
+  "ended_at": "2026-04-20T22:07:18.637460",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "museum",
+  "players": [
+    {
+      "character_id": "margo",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": "guide",
+      "is_spy": false
+    },
+    {
+      "character_id": "aurora",
+      "role_id": "visitor",
+      "is_spy": false
+    },
+    {
+      "character_id": "boris_molot",
+      "role_id": "guard_museum",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "margo",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T22:01:54.548947",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "Борис, милый, расскажи, какие интересные звуки ты здесь слышишь?",
+      "display_delay_ms": 2487,
+      "raw_response": "{\n  \"content\": \"Борис, милый, расскажи, какие интересные звуки ты здесь слышишь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T22:01:58.381303",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Шаги по мрамору, шорох одежды, шёпоты иногда. Звуки спокойные.",
+      "display_delay_ms": 2215,
+      "raw_response": "```json\n{\n  \"content\": \"Шаги по мрамору, шорох одежды, шёпоты иногда. Звуки спокойные.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T22:02:01.775616",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Какие наряды здесь привычны для работников, Марго?",
+      "display_delay_ms": 2081,
+      "raw_response": "{\n  \"content\": \"Какие наряды здесь привычны для работников, Марго?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T22:02:05.248232",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "type": "answer",
+      "content": "О, здесь все такие изысканные, Борис. Я бы сказала, по одежде можно заметить некий стильный флёр. Интересно, а ты замечал какие-то особенные детали в нарядах?",
+      "display_delay_ms": 5300,
+      "raw_response": "```json\n{\n  \"content\": \"О, здесь все такие изысканные, Борис. Я бы сказала, по одежде можно заметить некий стильный флёр. Интересно, а ты замечал какие-то особенные детали в нарядах?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T22:02:12.503699",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "Аврора, дорогая, интересно узнать, какие ароматы ты здесь замечала?",
+      "display_delay_ms": 2360,
+      "raw_response": "```json\n{\n  \"content\": \"Аврора, дорогая, интересно узнать, какие ароматы ты здесь замечала?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:02:16.056129",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Ах, как можно не заметить этот изысканный аромат старины и изящества! Здесь пахнет, словно древними книгами и легкой ноткой лака для дерева... Мы словно в другом времени, не правда ли?",
+      "display_delay_ms": 5737,
+      "raw_response": "```json\n{\n  \"content\": \"Ах, как можно не заметить этот изысканный аромат старины и изящества! Здесь пахнет, словно древними книгами и легкой ноткой лака для дерева... Мы словно в другом времени, не правда ли?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T22:02:26.509142",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "type": "intervention",
+      "content": "Аврора, позволь заметить, твои слова кажутся мне уклончивыми. Не скрываешь ли ты чего-то от нас? Будь искренней — разве так сложно назвать конкретные детали?",
+      "display_delay_ms": 4975,
+      "raw_response": "Аврора, позволь заметить, твои слова кажутся мне уклончивыми. Не скрываешь ли ты чего-то от нас? Будь искренней — разве так сложно назвать конкретные детали?"
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T22:02:32.677467",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "Ах, Игнатий, ты только послушай моё волнение! Что ты можешь рассказать о том, как здесь организованы выставки? Есть ли особые детали, привлекающие внимание?",
+      "display_delay_ms": 5187,
+      "raw_response": "{\n  \"content\": \"Ах, Игнатий, ты только послушай моё волнение! Что ты можешь рассказать о том, как здесь организованы выставки? Есть ли особые детали, привлекающие внимание?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T22:02:41.022571",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Аврора, ты знаешь, что выставки здесь организуются с особым вниманием к деталям и эстетике. Каждая картина находится в золотой раме, которая подчёркивает её искусность. Также античные скульптуры расставлены так, чтобы их красота была видна в каждом уголке зала. Всё это создает атмосферу величия и почтения к искусству.",
+      "display_delay_ms": 9827,
+      "raw_response": "```json\n{\n  \"content\": \"Аврора, ты знаешь, что выставки здесь организуются с особым вниманием к деталям и эстетике. Каждая картина находится в золотой раме, которая подчёркивает её искусность. Также античные скульптуры расставлены так, чтобы их красота была видна в каждом уголке зала. Всё это создает атмосферу величия и почтения к искусству.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-20T22:02:53.860387",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "type": "intervention",
+      "content": "Мне кажется, дорогой Игнатий, ты немного уклончиво ответил на вопрос Авроры. Такая обтекаемость — это не признак ли чего-то подозрительного?",
+      "display_delay_ms": 4560,
+      "raw_response": "Мне кажется, дорогой Игнатий, ты немного уклончиво ответил на вопрос Авроры. Такая обтекаемость — это не признак ли чего-то подозрительного?"
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-20T22:03:02.528318",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Марго, скажи по совести, какие образы или произведения искусства вызывают у тебя наибольшее впечатление в текущей экспозиции?",
+      "display_delay_ms": 4276,
+      "raw_response": "```json\n{\n  \"content\": \"Марго, скажи по совести, какие образы или произведения искусства вызывают у тебя наибольшее впечатление в текущей экспозиции?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T22:03:14.643473",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "Ах, Игнатий, дорогой, знаешь, мне всегда нравятся те произведения искусства, которые передают тепло человеческих эмоций. Портреты с тонкими мазками и яркими глазами — вот что меня всегда трогает. Не находишь их поразительными?",
+      "display_delay_ms": 7230,
+      "raw_response": "{\n  \"content\": \"Ах, Игнатий, дорогой, знаешь, мне всегда нравятся те произведения искусства, которые передают тепло человеческих эмоций. Портреты с тонкими мазками и яркими глазами — вот что меня всегда трогает. Не находишь их поразительными?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-20T22:03:28.587630",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Марго, о боже! Твои слова... столь возвышенные, и всё же... столь уклончивые! Портреты с \"теплом эмоций\", говоришь? Разве это не туманно? Может, ты что-то скрываешь, а?",
+      "display_delay_ms": 5551,
+      "raw_response": "Марго, о боже! Твои слова... столь возвышенные, и всё же... столь уклончивые! Портреты с \"теплом эмоций\", говоришь? Разве это не туманно? Может, ты что-то скрываешь, а?"
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-20T22:03:39.373785",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "Борис, милый, скажи, ты заметил, какие здесь вокруг стулья? Они как-то особенно выделяются, правда?",
+      "display_delay_ms": 3171,
+      "raw_response": "```json\n{\n  \"content\": \"Борис, милый, скажи, ты заметил, какие здесь вокруг стулья? Они как-то особенно выделяются, правда?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T22:03:48.440843",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Стулья здесь жёсткие, Марго, специально чтоб долго на них не сидели. Для смотрителей такие, чтоб не расслаблялись, понимаешь?",
+      "display_delay_ms": 4211,
+      "raw_response": "```json\n{\n  \"content\": \"Стулья здесь жёсткие, Марго, специально чтоб долго на них не сидели. Для смотрителей такие, чтоб не расслаблялись, понимаешь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 16,
+      "timestamp": "2026-04-20T22:04:01.059257",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "boris_molot",
+      "type": "intervention",
+      "content": "Борис, твой ответ вызывает у меня сомнения, друг мой. Тебе не кажется, что эта жёсткость стульев — слишком узкая деталь для такого места? Быть может, ты что-то скрываешь от нас?",
+      "display_delay_ms": 5522,
+      "raw_response": "Борис, твой ответ вызывает у меня сомнения, друг мой. Тебе не кажется, что эта жёсткость стульев — слишком узкая деталь для такого места? Быть может, ты что-то скрываешь от нас?"
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-20T22:04:12.727196",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Марго, как здесь охраняют картины? Видела ли ты что-то особенное в системе безопасности?",
+      "display_delay_ms": 3120,
+      "raw_response": "```json\n{\n  \"content\": \"Марго, как здесь охраняют картины? Видела ли ты что-то особенное в системе безопасности?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T22:04:20.939580",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "type": "answer",
+      "content": "О, Борис, милая деталь, которую ты заметил! Да, охрана здесь внимательная, но действует ненавязчиво. У них особая система, которая не бросается в глаза, но, тем не менее, эффективна.",
+      "display_delay_ms": 5983,
+      "raw_response": "```json\n{\n  \"content\": \"О, Борис, милая деталь, которую ты заметил! Да, охрана здесь внимательная, но действует ненавязчиво. У них особая система, которая не бросается в глаза, но, тем не менее, эффективна.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 19,
+      "timestamp": "2026-04-20T22:04:38.456121",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Ах, Марго! Как потрясающе звучит твоя речь... но столь расплывчато! Эти слова о \"ненавязчивой системе\"... Разве это не уклончиво? Ты что-то скрываешь, милая?!",
+      "display_delay_ms": 5265,
+      "raw_response": "Ах, Марго! Как потрясающе звучит твоя речь... но столь расплывчато! Эти слова о \"ненавязчивой системе\"... Разве это не уклончиво? Ты что-то скрываешь, милая?!"
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-20T22:04:50.703431",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "Борис, милый, что ты слышишь вокруг? Какие звуки больше всего привлекают твоё внимание здесь?",
+      "display_delay_ms": 3214,
+      "raw_response": "```json\n{\n  \"content\": \"Борис, милый, что ты слышишь вокруг? Какие звуки больше всего привлекают твоё внимание здесь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-20T22:04:59.517395",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Слышишь шорох обуви по паркету и негромкий треск охранной радио, когда друг другу докладывают.",
+      "display_delay_ms": 3297,
+      "raw_response": "```json\n{\n  \"content\": \"Слышишь шорох обуви по паркету и негромкий треск охранной радио, когда друг другу докладывают.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 22,
+      "timestamp": "2026-04-20T22:05:08.806815",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "boris_molot",
+      "type": "intervention",
+      "content": "Борис, друг мой, ты столь уверенно говоришь о звуках, да ещё и о таких специфических. Но не кажется ли тебе, что твой ответ несколько.. как бы это сказать.. настораживающий? Может, это лишь фасад? Будь искренен.",
+      "display_delay_ms": 6714,
+      "raw_response": "Борис, друг мой, ты столь уверенно говоришь о звуках, да ещё и о таких специфических. Но не кажется ли тебе, что твой ответ несколько.. как бы это сказать.. настораживающий? Может, это лишь фасад? Будь искренен."
+    },
+    {
+      "turn_number": 23,
+      "timestamp": "2026-04-20T22:05:22.065511",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Марго, какие здесь указатели? Есть ли у них особая тематика или стиль?",
+      "display_delay_ms": 2696,
+      "raw_response": "```json\n{\n  \"content\": \"Марго, какие здесь указатели? Есть ли у них особая тематика или стиль?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T22:05:29.872307",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "type": "answer",
+      "content": "О, Борис, какие интересные наблюдения! Указатели здесь действительно утончённые, с лёгкими декоративными элементами, и они прекрасно вписываются в общую атмосферу. Замечаешь, как они не перегружают пространство?",
+      "display_delay_ms": 6867,
+      "raw_response": "```json\n{\n  \"content\": \"О, Борис, какие интересные наблюдения! Указатели здесь действительно утончённые, с лёгкими декоративными элементами, и они прекрасно вписываются в общую атмосферу. Замечаешь, как они не перегружают пространство?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}\n```"
+    },
+    {
+      "turn_number": 25,
+      "timestamp": "2026-04-20T22:05:47.756955",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Ах, Марго! Как можно было?! Твои слова звучат столь приглаженно и безлико... разве это не уклончивое описание, о котором говорят в книгах о шпионах? Обман и тайна витает в воздухе... Ты что-то скрываешь, без сомнения!",
+      "display_delay_ms": 7093,
+      "raw_response": "Ах, Марго! Как можно было?! Твои слова звучат столь приглаженно и безлико... разве это не уклончивое описание, о котором говорят в книгах о шпионах? Обман и тайна витает в воздухе... Ты что-то скрываешь, без сомнения!"
+    },
+    {
+      "turn_number": 26,
+      "timestamp": "2026-04-20T22:06:01.634149",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Выдвигаю голосование, дорогие. Мне кажется, что Аврора ведёт себя несколько странно, не так ли? Её ответы часто звучат как обвинения, а не прояснения. Может, это она пытается отвлечь нас от истины?",
+      "display_delay_ms": 6489,
+      "raw_response": null
+    },
+    {
+      "turn_number": 27,
+      "timestamp": "2026-04-20T22:06:11.132488",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Аврора, моя подруга, твоё поведение и риторика вызывают у меня вопросы. Твои слова о тайне и обмане звучат слишком общими и беспочвенными. Возможно, за этой завесой скрывается что-то большее, чем ты хочешь показать. Поэтому я голосую против тебя.",
+      "display_delay_ms": 7952,
+      "raw_response": null
+    },
+    {
+      "turn_number": 28,
+      "timestamp": "2026-04-20T22:06:22.025948",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "О, как можно было так жестоко поступить со мной, друзья мои?! Голоса против меня — это как кинжал в сердце! Но я не сдамся без боя... Я голосую против Марго! Её слова... они словно покрыты туманом неопределённости. Ужасно, немыслимо! Всё указывает на скрытый умысел... О боже, пусть правда восторжествует!",
+      "display_delay_ms": 9445,
+      "raw_response": null
+    },
+    {
+      "turn_number": 29,
+      "timestamp": "2026-04-20T22:06:33.230416",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Аврора. У неё уклончивые ответы, а на мой вопрос о стиле указателей — ни слова. Подозрительно.",
+      "display_delay_ms": 3379,
+      "raw_response": null
+    },
+    {
+      "turn_number": 30,
+      "timestamp": "2026-04-20T22:06:38.338549",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "defense_speech",
+      "content": "Друзья мои, о боже, как можно! Я всего лишь актриса, погруженная в атмосферу искусства и старины...",
+      "display_delay_ms": 3371,
+      "raw_response": null
+    },
+    {
+      "turn_number": 31,
+      "timestamp": "2026-04-20T22:06:42.869116",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Я голосую за Игнатия, дорогая Аврора. Мне кажется, его подозрения и настойчивость несколько противоречат той атмосфере, которую мы все так ценим. Не правда ли, он был слишком строг и категоричен?",
+      "display_delay_ms": 6102,
+      "raw_response": null
+    },
+    {
+      "turn_number": 32,
+      "timestamp": "2026-04-20T22:06:51.109626",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Аврора, моя дорогая, твои слова могут сбить с толку, но мне всё же кажется, что ты уклоняешься от истины. Советую взглянуть в глаза своей совести и задуматься о честности. Я подтверждаю свой голос против тебя.",
+      "display_delay_ms": 6772,
+      "raw_response": null
+    },
+    {
+      "turn_number": 33,
+      "timestamp": "2026-04-20T22:07:00.501170",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "О, боже, как же несправедливо! Я, Аврора, стою здесь среди вас, а мои друзья уже дважды подняли голос против меня! Но, позвольте! Я не шпион, я всего лишь погружена в атмосферу искусства и старины! Как можно?! \n\nТем не менее, раз такое дело... Я остаюсь верна своему первому чувству и голосую против Марго. Её слова и уклончивость... они внушают мне подозрения. Пусть правда восторжествует!",
+      "display_delay_ms": 12217,
+      "raw_response": null
+    },
+    {
+      "turn_number": 34,
+      "timestamp": "2026-04-20T22:07:14.857698",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Аврора, ты слишком часто уходишь в обтекаемость и расплывчатые описания. Я подтверждаю свой голос. Аврора.",
+      "display_delay_ms": 3778,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:02:24.145355",
+      "level": "no_idea",
+      "hints": null,
+      "location_guess": null,
+      "reasoning": null,
+      "raw_response": "```json\n{\n  \"hints\": [\n    \"Шаги по мрамору, шорох одежды, шёпоты\",\n    \"Аромат старины и изящества, запах древних книг и лака для дерева\"\n  ],\n  \"location_guess\": \"музей\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Описание звуков и ароматов указывает на место, где может быть мраморный пол и хранятся старинные вещи, такие как книги или экспонаты. Подсказки об изысканных нарядах работников также соответствуют музею, где персонал может носить более формальную одежду.\"\n}\n```"
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T22:03:58.320908",
+      "level": "no_idea",
+      "hints": null,
+      "location_guess": null,
+      "reasoning": null,
+      "raw_response": "```json\n{\n  \"hints\": [\"аромат старины\", \"экспозиция с произведениями искусства\"],\n  \"location_guess\": \"музей\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Несколько участников упоминают произведения искусства и экспозиции, а также атмосферу, связанную с культурным местом. Это указывает на музей как наиболее вероятное место.\"\n}\n```"
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T22:05:44.507387",
+      "level": "no_idea",
+      "hints": null,
+      "location_guess": null,
+      "reasoning": null,
+      "raw_response": "```json\n{\n  \"hints\": [\n    \"запахи старины\",\n    \"портреты с теплом эмоций\",\n    \"жесткие стулья\",\n    \"ненавязчивая система охраны\",\n    \"шорох обуви по паркету\",\n    \"указатели с декоративными элементами\"\n  ],\n  \"location_guess\": \"музей\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Несколько ключевых подсказок указывают на музей: запахи старины и портреты с эмоциями предполагают наличие экспонатов и картин, что типично для музея. Жесткие стулья и ненавязчивая система охраны также соответствуют атмосфере музея, где часто есть охрана, но она не должна быть навязчивой. Шорох обуви по паркету и указатели с декоративными элементами дополняют картину, создавая образ тихого, атмосферного места, каковым часто является музей.\"\n}\n```"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:02:31.485963",
+      "character_id": "father_ignatius",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T22:02:58.422370",
+      "character_id": "margo",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T22:03:34.140778",
+      "character_id": "aurora",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T22:04:06.582393",
+      "character_id": "father_ignatius",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T22:04:43.722606",
+      "character_id": "aurora",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-20T22:05:15.522656",
+      "character_id": "father_ignatius",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T22:05:54.852185",
+      "character_id": "aurora",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T22:01:52.782544",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T22:01:52.782864",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T22:05:54.852454",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Осталось менее 20% времени",
+      "status": "critical"
+    },
+    {
+      "timestamp": "2026-04-20T22:05:54.852903",
+      "from_phase": "optional_vote",
+      "to_phase": "preliminary_vote",
+      "reason": "Preliminary voting started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T22:06:36.611718",
+      "from_phase": "preliminary_vote",
+      "to_phase": "pre_final_vote_defense",
+      "reason": "Defense speeches for 1 player(s) with 3 votes",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T22:06:41.711723",
+      "from_phase": "pre_final_vote_defense",
+      "to_phase": "final_vote",
+      "reason": "Final voting started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T22:07:18.637498",
+      "from_phase": "final_vote",
+      "to_phase": "resolution",
+      "reason": "Game ended: spy won",
+      "status": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Мирные не единогласны (2/3) — шпион (Марго) побеждает",
+    "votes": {
+      "margo": "aurora",
+      "father_ignatius": "aurora",
+      "aurora": "margo",
+      "boris_molot": "aurora"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": null
+  },
+  "compressed_history": "В диалоге между участниками игры Spyfall возникают подозрения и обвинения, касающиеся их истинной роли и места. Марго начинает с вопроса к Борису о звуках, которые он слышит, на что тот отвечает о спокойных шорохах и шепотах. Затем Марго намекает на стильную одежду работников, что вызывает интерес у Авроры, которая описывает атмосферу старины и изящества. Однако Игнатий указывает на уклончивость Авроры, требуя конкретики.\n\nМарго также подвергает сомнению ответы Игнатия, указывая на его обтекаемость. Аврора, в свою очередь, обвиняет Марго в уклончивости, когда та говорит о \"тепле человеческих эмоций\" в искусстве. Борис, отвечая на вопросы о стульях, упоминает их жёсткость, что вызывает сомнения у Игнатия, который считает это слишком узкой деталью. В конце Марго говорит о системе охраны, но Аврора вновь обвиняет её в уклончивости, подчеркивая, что её слова звучат расплывчато.\n\nЛокация, на которую намекают участники, вероятно, связана с искусством и выставками, что подтверждается описанием стульев и охраны картин.",
+  "compression_checkpoint": 19,
+  "token_usage": {
+    "total_input_tokens": 85120,
+    "total_output_tokens": 6726,
+    "total_cost_usd": 0.21399210000000013,
+    "llm_calls_count": 61
+  },
+  "preliminary_vote_result": {
+    "margo": "aurora",
+    "father_ignatius": "aurora",
+    "aurora": "margo",
+    "boris_molot": "aurora"
+  },
+  "defense_speeches": [
+    {
+      "defender_id": "aurora",
+      "votes_received": 3,
+      "content": "Друзья мои, о боже, как можно! Я всего лишь актриса, погруженная в атмосферу искусства и старины...",
+      "timestamp": "2026-04-20T22:06:38.338498",
+      "regenerated": false
+    }
+  ],
+  "final_vote_result": {
+    "margo": "aurora",
+    "father_ignatius": "aurora",
+    "aurora": "margo",
+    "boris_molot": "aurora"
+  },
+  "vote_changes": []
+}

@@ -104,21 +104,19 @@ def _track_usage_and_check_cost(game: Game, response: LLMResponse) -> None:
         )
 
 
-def _parse_agent_json_response(raw_response: str) -> dict:
+def _parse_agent_json_response(raw_response: str, require_content: bool = True) -> dict:
     """Parse agent JSON response, handling common issues.
 
-    Expected format:
-    {
-        "content": "Текст реплики",
-        "wants_vote": false,
-        "suspect_id": null
-    }
+    Args:
+        raw_response: Raw LLM response string
+        require_content: If True, require "content" key (for question/answer)
+                        If False, return any valid JSON dict (for spy confidence)
 
-    Returns dict with at least 'content' key.
+    Returns dict with parsed JSON or fallback.
     """
     raw_response = raw_response.strip()
 
-    # Try to extract JSON from response (may have text before/after)
+    # Try to extract JSON from response (may have text before/after or markdown wrapper)
     json_start = raw_response.find("{")
     json_end = raw_response.rfind("}") + 1
 
@@ -126,8 +124,12 @@ def _parse_agent_json_response(raw_response: str) -> dict:
         json_str = raw_response[json_start:json_end]
         try:
             parsed = json.loads(json_str)
-            if isinstance(parsed, dict) and "content" in parsed:
-                return parsed
+            if isinstance(parsed, dict):
+                if require_content:
+                    if "content" in parsed:
+                        return parsed
+                else:
+                    return parsed
         except json.JSONDecodeError:
             pass
 
@@ -633,7 +635,7 @@ async def _check_spy_confidence(
     level = ConfidenceLevel.NO_IDEA
 
     try:
-        parsed = _parse_agent_json_response(raw_response)
+        parsed = _parse_agent_json_response(raw_response, require_content=False)
         hints = parsed.get("hints")
         location_guess = parsed.get("location_guess")
         reasoning = parsed.get("reasoning")
