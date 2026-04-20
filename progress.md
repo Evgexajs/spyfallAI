@@ -71,7 +71,7 @@
 - Нет
 
 ### Коммиты
-- (pending commit)
+- `6fe895b` — feat: implement defense speeches phase (TASK-060)
 
 ---
 
