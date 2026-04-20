@@ -49,7 +49,7 @@
 - Реализация включает базовый функционал для TASK-050 и TASK-051
 
 ### Коммиты
-- `7976edb` — Add History button to UI header (TASK-049)
+- `2ad5bf5` — Add History button to UI header (TASK-049)
 
 ---
 
