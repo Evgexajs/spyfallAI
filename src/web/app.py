@@ -269,10 +269,19 @@ class GameManager:
                         })
                         continue  # Back to main_round
 
-                    # Check if preliminary vote was unanimous (all voted for same target, no abstentions)
+                    # Check if preliminary vote was unanimous among CIVILIANS
+                    # (spy obviously won't vote against themselves)
                     if self.game.preliminary_vote_result:
-                        targets = [t for t in self.game.preliminary_vote_result.values() if t is not None]
-                        is_unanimous_preliminary = len(targets) == len(self.game.players) and len(set(targets)) == 1
+                        civilian_ids = [p.character_id for p in self.game.players if not p.is_spy]
+                        civilian_votes = [
+                            self.game.preliminary_vote_result.get(cid)
+                            for cid in civilian_ids
+                        ]
+                        civilian_targets = [t for t in civilian_votes if t is not None]
+                        is_unanimous_preliminary = (
+                            len(civilian_targets) == len(civilian_ids) and
+                            len(set(civilian_targets)) == 1
+                        )
 
                 if self.game.outcome is None and self.status != GameStatus.STOPPED:
                     await self.broadcast({"type": "phase", "phase": "pre_final_vote_defense"})
