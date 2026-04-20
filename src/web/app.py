@@ -238,10 +238,11 @@ class GameManager:
                 vote_counts = {}
 
                 if self.game.outcome is None and self.status != GameStatus.STOPPED:
-                    # Check if this was a critical trigger (time/questions running out or player initiated)
+                    # Check if this was a critical trigger (time/questions running out)
+                    # Note: player_initiated is NOT critical - it should require unanimity
                     for pt in reversed(self.game.phase_transitions):
                         if pt.to_phase.value == "optional_vote":
-                            is_critical_trigger = pt.status in ("critical", "player_initiated")
+                            is_critical_trigger = pt.status == "critical"
                             break
 
                     await self.broadcast({"type": "phase", "phase": "preliminary_vote"})
