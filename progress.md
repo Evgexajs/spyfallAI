@@ -56,7 +56,7 @@
 - Нет
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `2513d23` — feat: add UI support for new voting and defense phases (TASK-063)
 
 ---
 
