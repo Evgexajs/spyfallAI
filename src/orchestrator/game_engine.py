@@ -47,6 +47,11 @@ CONTEXT_KEEP_LAST_K_TURNS = int(os.environ.get("CONTEXT_KEEP_LAST_K_TURNS", "6")
 MAX_PARTY_COST_USD = float(os.environ.get("MAX_PARTY_COST_USD", "3.0"))
 MAX_QUESTION_REROLL_ATTEMPTS = int(os.environ.get("MAX_QUESTION_REROLL_ATTEMPTS", "3"))
 
+# Defense phase settings (CR-001)
+DEFENSE_MIN_VOTES_TO_QUALIFY = int(os.environ.get("DEFENSE_MIN_VOTES_TO_QUALIFY", "2"))
+DEFENSE_SPEECH_MAX_SENTENCES = int(os.environ.get("DEFENSE_SPEECH_MAX_SENTENCES", "2"))
+DEFENSE_ALLOW_ABSTAIN = os.environ.get("DEFENSE_ALLOW_ABSTAIN", "true").lower() in ("true", "1", "yes")
+
 logger = logging.getLogger(__name__)
 
 
