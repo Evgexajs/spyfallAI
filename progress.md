@@ -55,7 +55,7 @@
 - Переходы фаз корректно записываются с from_phase/to_phase
 
 ### Коммиты
-- (pending commit)
+- `e745d11` — feat: verify phase flow integration and add tests (TASK-062)
 
 ---
 
