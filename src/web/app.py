@@ -8,17 +8,16 @@ from datetime import datetime
 from enum import Enum
 from pathlib import Path
 from typing import Optional
-from uuid import UUID
 
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from src.llm import CostExceededError, LLMConfig, create_provider
-from src.models import Character, Game, GameOutcome, Turn, TurnType
+from src.models import Character, Game, GameOutcome, Turn
 from src.orchestrator import load_locations, run_final_vote, run_main_round, setup_game
-from src.storage import save_game
+from src.storage import list_games, load_game, save_game
 
 
 app = FastAPI(title="SpyfallAI", version="0.1.0")
@@ -49,6 +48,15 @@ class GameStateResponse(BaseModel):
     status: GameStatus
     game_id: Optional[str] = None
     message: str = ""
+
+
+class GameListItem(BaseModel):
+    """Single game item in games list."""
+
+    id: str
+    started_at: str
+    location_id: str
+    winner: Optional[str] = None
 
 
 class GameManager:
@@ -452,6 +460,28 @@ async def list_locations() -> list[dict]:
         }
         for loc in locations
     ]
+
+
+@app.get("/games", response_model=list[GameListItem])
+async def get_games_list() -> list[GameListItem]:
+    """List all saved games, sorted by date (newest first)."""
+    game_files = list_games()
+    result = []
+
+    for filepath in game_files:
+        try:
+            game = load_game(filepath)
+            winner = game.outcome.winner if game.outcome else None
+            result.append(GameListItem(
+                id=str(game.id),
+                started_at=game.started_at.isoformat(),
+                location_id=game.location_id,
+                winner=winner,
+            ))
+        except Exception:
+            continue
+
+    return result
 
 
 @app.websocket("/ws")

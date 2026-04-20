@@ -31,6 +31,32 @@
 
 ---
 
+## [TASK-047] API endpoint GET /games — список всех игр
+**Дата:** 2026-04-20
+**Статус:** done
+
+### Что сделано
+- Добавлен GET /games endpoint в src/web/app.py
+- Возвращает список игр из папки games/ (id, started_at, location_id, winner)
+- Сортировка по дате (новые первые) — используется list_games() из storage
+- Пустой список если нет игр
+- Добавлена модель GameListItem для типизации ответа
+- Создан tests/test_games_api.py с 6 тестами (все проходят):
+  - test_get_games_returns_json_array
+  - test_get_games_empty_when_no_games
+  - test_get_games_returns_game_fields
+  - test_get_games_sorted_newest_first
+  - test_get_games_handles_missing_outcome
+  - test_game_list_item_model
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `75073c1` — Add GET /games API endpoint (TASK-047)
+
+---
+
 ## [TASK-046] MUST NOT директивы про токсичность
 **Дата:** 2026-04-20
 **Статус:** done
