@@ -31,6 +31,34 @@
 
 ---
 
+## [TASK-062] Обновить поток фаз в оркестраторе
+**Дата:** 2026-04-20
+**Статус:** done
+
+### Что сделано
+- Верифицирован поток фаз в оркестраторе (уже реализован в TASK-059, 060, 061):
+  - main_round → preliminary_vote → pre_final_vote_defense → final_vote → resolution
+  - При досрочном голосовании: main_round → optional_vote → preliminary_vote → defense → final
+- Создан tests/test_phase_flow.py с 17 тестами:
+  - TestGamePhaseEnum: 3 теста проверки наличия всех фаз
+  - TestPhaseTransitions: 2 теста записи переходов фаз
+  - TestNormalPhaseFlow: 3 теста нормального потока
+  - TestEarlyVotingFlow: 3 теста досрочного голосования
+  - TestFullPhaseFlowIntegration: 3 теста порядка фаз
+  - TestPhaseStatusField: 2 теста статуса PhaseEntry
+  - TestVoteSplitBehavior: 1 тест поведения при разделении голосов
+- Все 17 тестов проходят, 99 связанных тестов проходят
+
+### Проблемы / Заметки
+- Интеграция в app.py и cli.py уже была выполнена в предыдущих задачах (TASK-059, 060, 061)
+- GamePhase enum содержит: PRELIMINARY_VOTE, PRE_FINAL_VOTE_DEFENSE (добавлены в TASK-059)
+- Переходы фаз корректно записываются с from_phase/to_phase
+
+### Коммиты
+- (pending commit)
+
+---
+
 ## [TASK-061] Модифицировать финальное голосование с возможностью смены голоса (F13)
 **Дата:** 2026-04-20
 **Статус:** done

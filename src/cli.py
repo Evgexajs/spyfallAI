@@ -13,7 +13,14 @@ from typing import Optional
 
 from src.llm import CostExceededError, LLMConfig, create_provider
 from src.models import Character, Game, Turn, TurnType
-from src.orchestrator import load_locations, run_final_vote, run_main_round, setup_game
+from src.orchestrator import (
+    load_locations,
+    run_defense_speeches,
+    run_final_vote,
+    run_main_round,
+    run_preliminary_vote,
+    setup_game,
+)
 from src.storage import save_game
 
 
@@ -80,6 +87,15 @@ def create_turn_printer(character_colors: dict[str, str], apply_delay: bool = Tr
             print(f"{type_marker} {speaker} → {addressee}: {turn.content}")
         elif turn.type == TurnType.VOTE:
             type_marker = colorize("[V]", "bold")
+            print(f"{type_marker} {speaker}: {turn.content}")
+        elif turn.type == TurnType.PRELIMINARY_VOTE:
+            type_marker = colorize("[PV]", "bold")
+            print(f"{type_marker} {speaker}: {turn.content}")
+        elif turn.type == TurnType.DEFENSE_SPEECH:
+            type_marker = colorize("[DEF]", "magenta")
+            print(f"{type_marker} {speaker}: {turn.content}")
+        elif turn.type == TurnType.FINAL_VOTE:
+            type_marker = colorize("[FV]", "bold")
             print(f"{type_marker} {speaker}: {turn.content}")
         elif turn.type == TurnType.INTERVENTION:
             type_marker = colorize("[!]", "bold")
@@ -171,11 +187,37 @@ async def run_game(
 
             if game.outcome is None:
                 print(colorize("-" * 60, "bold"))
+                print(colorize("PRELIMINARY VOTE", "bold"))
+                print(colorize("-" * 60, "bold"))
+                print()
+
+                game, vote_counts = await run_preliminary_vote(
+                    game, characters, provider, on_turn=print_turn
+                )
+
+                print(colorize("-" * 60, "bold"))
+                print(colorize("DEFENSE SPEECHES", "bold"))
+                print(colorize("-" * 60, "bold"))
+                print()
+
+                game, defense_was_executed = await run_defense_speeches(
+                    game, characters, vote_counts, provider, on_turn=print_turn
+                )
+
+                if not defense_was_executed:
+                    print(colorize("(Фаза защиты пропущена — недостаточно голосов)", "yellow"))
+                    print()
+
+                print(colorize("-" * 60, "bold"))
                 print(colorize("FINAL VOTE", "bold"))
                 print(colorize("-" * 60, "bold"))
                 print()
 
-                game = await run_final_vote(game, characters, provider, on_turn=print_turn)
+                game = await run_final_vote(
+                    game, characters, provider,
+                    on_turn=print_turn,
+                    defense_was_executed=defense_was_executed,
+                )
 
                 if game.outcome is None:
                     print()

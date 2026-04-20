@@ -16,7 +16,14 @@ from pydantic import BaseModel
 
 from src.llm import CostExceededError, LLMConfig, create_provider
 from src.models import Character, Game, GameOutcome, Turn
-from src.orchestrator import load_locations, run_final_vote, run_main_round, setup_game
+from src.orchestrator import (
+    load_locations,
+    run_defense_speeches,
+    run_final_vote,
+    run_main_round,
+    run_preliminary_vote,
+    setup_game,
+)
 from src.storage import find_game_by_id, list_games, load_game, save_game
 
 
@@ -214,11 +221,32 @@ class GameManager:
                 )
 
                 if self.game.outcome is None and self.status != GameStatus.STOPPED:
+                    await self.broadcast({"type": "phase", "phase": "preliminary_vote"})
+                    self.game, vote_counts = await run_preliminary_vote(
+                        self.game, self.characters, provider,
+                        on_turn=self.on_turn, on_typing=self.on_typing
+                    )
+
+                if self.game.outcome is None and self.status != GameStatus.STOPPED:
+                    await self.broadcast({"type": "phase", "phase": "pre_final_vote_defense"})
+                    self.game, defense_was_executed = await run_defense_speeches(
+                        self.game, self.characters, vote_counts, provider,
+                        on_turn=self.on_turn, on_typing=self.on_typing
+                    )
+
+                    if not defense_was_executed:
+                        await self.broadcast({
+                            "type": "defense_skipped",
+                            "message": "Фаза защиты пропущена — недостаточно голосов",
+                        })
+
+                if self.game.outcome is None and self.status != GameStatus.STOPPED:
                     await self.broadcast({"type": "phase", "phase": "final_vote"})
                     self.game = await run_final_vote(
                         self.game, self.characters, provider,
                         on_turn=self.on_turn, on_typing=self.on_typing,
-                        on_vote_result=self.on_vote_result
+                        on_vote_result=self.on_vote_result,
+                        defense_was_executed=defense_was_executed,
                     )
 
                     if self.game.outcome is None and self.status != GameStatus.STOPPED:
