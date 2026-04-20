@@ -689,7 +689,7 @@
                 playerList.appendChild(li);
             });
 
-            document.getElementById('infoLocation').textContent = gameData.location_id || '-';
+            document.getElementById('infoLocation').textContent = gameData.location_display_name || gameData.location_id || '-';
             document.getElementById('infoStarted').textContent = formatDateTime(gameData.started_at);
             document.getElementById('infoEnded').textContent = formatDateTime(gameData.ended_at);
             document.getElementById('infoDuration').textContent = formatDuration(gameData.started_at, gameData.ended_at);

@@ -502,12 +502,32 @@ async def get_games_list() -> list[GameListItem]:
 
 @app.get("/games/{game_id}")
 async def get_game_by_id(game_id: str) -> dict:
-    """Get full game data by ID."""
+    """Get full game data by ID with enriched display names."""
     game = find_game_by_id(game_id)
     if game is None:
         raise HTTPException(status_code=404, detail=f"Game '{game_id}' not found")
 
-    return game.model_dump(mode="json")
+    result = game.model_dump(mode="json")
+
+    # Enrich players with display names and colors from character files
+    for player in result["players"]:
+        try:
+            char = game_manager.load_character(player["character_id"])
+            player["display_name"] = char.display_name
+            player["color"] = char.color
+        except FileNotFoundError:
+            player["display_name"] = player["character_id"].replace("_", " ").title()
+            player["color"] = None
+
+    # Enrich location with display name
+    locations = load_locations()
+    location = next((loc for loc in locations if loc.id == game.location_id), None)
+    if location:
+        result["location_display_name"] = location.display_name
+    else:
+        result["location_display_name"] = game.location_id
+
+    return result
 
 
 @app.websocket("/ws")
