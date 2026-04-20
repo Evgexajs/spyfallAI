@@ -40,13 +40,17 @@ class GameStatus(str, Enum):
     COMPLETED = "completed"
 
 
+DEFAULT_DURATION_MINUTES = int(os.environ.get("GAME_DURATION_MINUTES", "5"))
+DEFAULT_MAX_QUESTIONS = int(os.environ.get("MAX_QUESTIONS_BEFORE_VOTE", "30"))
+
+
 class GameStartRequest(BaseModel):
     """Request body for starting a game."""
 
     character_ids: Optional[list[str]] = None
     location_id: Optional[str] = None
-    duration_minutes: int = 3
-    max_questions: int = 50
+    duration_minutes: Optional[int] = None
+    max_questions: Optional[int] = None
 
 
 class GameStateResponse(BaseModel):
@@ -461,8 +465,8 @@ async def start_game(request: GameStartRequest) -> GameStateResponse:
     game_manager.start(
         character_ids=character_ids,
         location_id=request.location_id,
-        duration_minutes=request.duration_minutes,
-        max_questions=request.max_questions,
+        duration_minutes=request.duration_minutes or DEFAULT_DURATION_MINUTES,
+        max_questions=request.max_questions or DEFAULT_MAX_QUESTIONS,
     )
 
     await asyncio.sleep(0.1)
@@ -526,6 +530,18 @@ async def get_game_status() -> GameStateResponse:
         game_id=str(game_manager.game.id) if game_manager.game else None,
         message=game_manager.error_message or "",
     )
+
+
+@app.get("/config")
+async def get_config() -> dict:
+    """Get server configuration from environment variables."""
+    return {
+        "duration_minutes": DEFAULT_DURATION_MINUTES,
+        "max_questions": DEFAULT_MAX_QUESTIONS,
+        "spy_confidence_check_every_n": int(os.environ.get("SPY_CONFIDENCE_CHECK_EVERY_N", "3")),
+        "defense_allow_abstain": os.environ.get("DEFENSE_ALLOW_ABSTAIN", "true").lower() in ("true", "1", "yes"),
+        "defense_min_votes_to_qualify": int(os.environ.get("DEFENSE_MIN_VOTES_TO_QUALIFY", "2")),
+    }
 
 
 @app.get("/characters")

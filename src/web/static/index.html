@@ -1551,10 +1551,7 @@
                 const response = await fetch('/game/start', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        duration_minutes: 5,
-                        max_questions: 30
-                    })
+                    body: JSON.stringify({})
                 });
                 const result = await response.json();
                 if (!response.ok) {

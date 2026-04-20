@@ -272,7 +272,7 @@ def build_intervention_micro_prompt(
 
 Это показалось тебе подозрительным. Твой стиль реакции: {reaction_desc}.
 
-Хочешь вмешаться? Ответь ТОЛЬКО "да" или "нет"."""
+Хочешь вмешаться? Ответь JSON: {{"intervene": true или false}}"""
 
 
 def build_intervention_content_prompt(
@@ -355,6 +355,7 @@ def build_spy_guess_prompt(
     locations_list = "\n".join(
         f"• {loc.id} — {loc.display_name}" for loc in available_locations
     )
+    location_ids = ", ".join(f'"{loc.id}"' for loc in available_locations)
 
     return f"""Ты — {character.display_name} ({character.archetype}). Ты — ШПИОН в этой игре.
 
@@ -366,8 +367,8 @@ def build_spy_guess_prompt(
 Доступные локации:
 {locations_list}
 
-Какая локация? Напиши ТОЛЬКО id локации (например: hospital, airplane, restaurant).
-Одно слово, без пояснений."""
+Ответь JSON:
+{{"location_id": ID из [{location_ids}], "reasoning": "почему ты так думаешь"}}"""
 
 
 def build_defense_speech_prompt(
@@ -455,7 +456,7 @@ def build_defense_characteristic_check_prompt(
 Вопрос: Соответствует ли эта реплика характеру персонажа {character.display_name} ({character.archetype})?
 Реплика должна соответствовать стилю речи и хотя бы частично следовать MUST-директивам.
 
-Ответь ТОЛЬКО одним словом: да или нет."""
+Ответь JSON: {{"is_characteristic": true или false}}"""
 
 
 def _get_coordination_strategy(is_spy: bool) -> str:

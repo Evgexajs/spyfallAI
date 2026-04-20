@@ -287,14 +287,14 @@ def main():
     parser.add_argument(
         "-d", "--duration",
         type=int,
-        default=int(os.environ.get("GAME_DURATION_MINUTES", "3")),
-        help="Game duration in minutes (default: 3)"
+        default=int(os.environ.get("GAME_DURATION_MINUTES", "5")),
+        help="Game duration in minutes (default: 5, env: GAME_DURATION_MINUTES)"
     )
     parser.add_argument(
         "-q", "--max-questions",
         type=int,
-        default=int(os.environ.get("MAX_QUESTIONS_BEFORE_VOTE", "50")),
-        help="Max questions before forced vote (default: 50)"
+        default=int(os.environ.get("MAX_QUESTIONS_BEFORE_VOTE", "30")),
+        help="Max questions before forced vote (default: 30, env: MAX_QUESTIONS_BEFORE_VOTE)"
     )
     parser.add_argument(
         "--list-characters",

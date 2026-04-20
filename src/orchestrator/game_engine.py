@@ -525,12 +525,13 @@ async def _ask_to_intervene(
         messages=[{"role": "user", "content": prompt}],
         model=model,
         temperature=0.7,
-        max_tokens=10,
+        max_tokens=20,
+        json_mode=True,
     )
 
     _track_usage_and_check_cost(game, response)
-    response_lower = response.content.strip().lower()
-    return "да" in response_lower or "yes" in response_lower
+    parsed = _parse_json_response(response.content.strip())
+    return parsed.get("intervene", False) is True
 
 
 async def _generate_intervention_content(
@@ -683,15 +684,18 @@ async def _ask_spy_to_guess(
         messages=[{"role": "user", "content": prompt}],
         model=game.config.utility_model,
         temperature=0.3,
-        max_tokens=30,
+        max_tokens=100,
+        json_mode=True,
     )
 
     _track_usage_and_check_cost(game, response)
-    response_text = response.content.strip().lower()
+    parsed = _parse_json_response(response.content.strip())
+    location_id = parsed.get("location_id")
 
-    for loc in available_locations:
-        if loc.id.lower() == response_text or loc.id.lower() in response_text:
-            return loc.id
+    # Validate location_id is valid
+    valid_ids = {loc.id for loc in available_locations}
+    if location_id and location_id in valid_ids:
+        return location_id
 
     return None
 
@@ -757,21 +761,20 @@ async def run_main_round(
         other_players = [p.character_id for p in game.players if p.character_id != current_questioner]
         other_players_str = ", ".join([id_to_name.get(p, p) for p in other_players])
 
+        other_players_json = ", ".join(f'"{p}"' for p in other_players)
         question_instruction = f"""Ты — {questioner_char.display_name}. Задай вопрос игроку {target_char.display_name}.
 
-Ответь СТРОГО в формате JSON:
+Ответь JSON:
 {{
-  "content": "Твой вопрос здесь",
-  "wants_vote": false,
-  "suspect_id": null
+  "content": "твой вопрос",
+  "wants_vote": true | false,
+  "suspect_id": ID из [{other_players_json}] | null
 }}
 
 Правила:
 - content: КОНКРЕТНЫЙ вопрос про локацию (оборудование, звуки, запахи, одежду, действия)
-- wants_vote: true если хочешь СЕЙЧАС начать голосование (уверен кто шпион)
-- suspect_id: если wants_vote=true, укажи ID подозреваемого из [{', '.join(other_players)}], иначе null
-
-НЕ добавляй ничего кроме JSON. Без пояснений, без текста до/после."""
+- wants_vote: true если хочешь СЕЙЧАС начать голосование (уверен кто шпион), иначе false
+- suspect_id: если wants_vote=true укажи ID подозреваемого, иначе null"""
         messages = [
             {"role": "system", "content": questioner_prompt},
             *history,
@@ -914,22 +917,21 @@ async def run_main_round(
         else:
             role_hint = "Ты МИРНЫЙ — знаешь локацию. Дай КОНКРЕТНЫЙ ответ с деталями про своё место/роль."
 
+        other_players_json = ", ".join(f'"{p}"' for p in other_players_for_answer)
         answer_instruction = f"""Ты — {answerer_char.display_name}. Тебе задали вопрос.
 {role_hint}
 
-Ответь СТРОГО в формате JSON:
+Ответь JSON:
 {{
-  "content": "Твой ответ здесь",
-  "wants_vote": false,
-  "suspect_id": null
+  "content": "твой ответ",
+  "wants_vote": true | false,
+  "suspect_id": ID из [{other_players_json}] | null
 }}
 
 Правила:
 - content: твой ответ на вопрос
-- wants_vote: true если хочешь СЕЙЧАС начать голосование
-- suspect_id: если wants_vote=true, укажи ID подозреваемого из [{', '.join(other_players_for_answer)}], иначе null
-
-НЕ добавляй ничего кроме JSON."""
+- wants_vote: true если хочешь СЕЙЧАС начать голосование, иначе false
+- suspect_id: если wants_vote=true укажи ID подозреваемого, иначе null"""
 
         messages = [
             {"role": "system", "content": answerer_prompt},
@@ -1256,6 +1258,8 @@ async def run_final_vote(
             voter_secret = _get_secret_info(game, voter_player)
 
             candidates = [pid for pid in player_ids if pid != voter_id]
+            candidates_json = ", ".join(f'"{c}"' for c in candidates)
+            candidates_display = ", ".join(f"{id_to_name.get(c, c)} ({c})" for c in candidates)
             preliminary_vote = preliminary_votes.get(voter_id)
 
             # Build prompt with defense context
@@ -1283,12 +1287,21 @@ async def run_final_vote(
                     else:
                         target_name = id_to_name.get(t, t)
                         votes_list.append(f"{voter_name}: за {target_name}")
-                previous_votes_text = f"\nУже проголосовали в финале: {', '.join(votes_list)}."
+                previous_votes_text = f" Уже проголосовали: {', '.join(votes_list)}."
+
+            allow_abstain_str = "null если воздерживаешься" if DEFENSE_ALLOW_ABSTAIN else "воздержание НЕДОСТУПНО"
+            vote_instruction = (
+                f"Финальное голосование!{previous_votes_text}\n"
+                f"Кандидаты: {candidates_display}\n\n"
+                f"Ответь JSON:\n"
+                f'{{"vote_for": ID из [{candidates_json}] или {allow_abstain_str}, '
+                f'"speech": "твоя речь"}}'
+            )
 
             messages = [
                 {"role": "system", "content": vote_prompt},
                 *history,
-                {"role": "user", "content": f"Твой финальный голос:{previous_votes_text}"},
+                {"role": "user", "content": vote_instruction},
             ]
 
             if on_typing:
@@ -1298,16 +1311,22 @@ async def run_final_vote(
                 messages=messages,
                 model=game.config.main_model,
                 temperature=0.7,
-                max_tokens=150,  # More tokens for optional reasoning
+                max_tokens=200,
+                json_mode=True,
             )
             _track_usage_and_check_cost(game, vote_llm_response)
-            vote_response_full = vote_llm_response.content.strip()
-            vote_response = vote_response_full.lower()
+            vote_raw = vote_llm_response.content.strip()
+            vote_parsed = _parse_json_response(vote_raw)
 
-            # Parse vote response
-            voted_for = _parse_final_vote(vote_response, candidates, name_to_id)
+            voted_for = vote_parsed.get("vote_for")
+            vote_speech = vote_parsed.get("speech", "")
 
-            # If abstained, ping them again with a warning - this is final vote!
+            # Validate vote_for is a valid candidate ID
+            if voted_for is not None and voted_for not in candidates:
+                logger.warning(f"Invalid vote_for '{voted_for}' from {voter_id}, treating as abstain")
+                voted_for = None
+
+            # If abstained in final vote, ping them again with a warning
             if voted_for is None:
                 logger.info(f"Voter {voter_id} tried to abstain in final vote, pinging again")
 
@@ -1326,18 +1345,16 @@ async def run_final_vote(
                     await _call_callback(on_turn, abstain_turn, game)
 
                 # Ping with dramatic warning
-                voter_name = id_to_name.get(voter_id, voter_id)
-                candidates_names = ", ".join(id_to_name.get(c, c) for c in candidates)
-                retry_prompt = (
-                    f"{voter_name}, это ФИНАЛЬНОЕ голосование! "
-                    f"Воздержание = автоматическая победа шпиона. "
-                    f"Ты правда хочешь слить игру? Выбери кого-то: {candidates_names}"
+                retry_instruction = (
+                    f"Это ФИНАЛЬНОЕ голосование! Воздержание = победа шпиона.\n"
+                    f"Кандидаты: {candidates_display}\n\n"
+                    f"Ответь JSON: {{\"vote_for\": ID из [{candidates_json}], \"speech\": \"...\"}}"
                 )
 
                 retry_messages = [
                     {"role": "system", "content": vote_prompt},
                     *history,
-                    {"role": "user", "content": retry_prompt},
+                    {"role": "user", "content": retry_instruction},
                 ]
 
                 if on_typing:
@@ -1348,14 +1365,18 @@ async def run_final_vote(
                     model=game.config.main_model,
                     temperature=0.8,
                     max_tokens=150,
+                    json_mode=True,
                 )
                 _track_usage_and_check_cost(game, retry_response)
 
-                vote_response_full = retry_response.content.strip()
-                voted_for = _parse_final_vote(vote_response_full.lower(), candidates, name_to_id)
+                retry_parsed = _parse_json_response(retry_response.content.strip())
+                voted_for = retry_parsed.get("vote_for")
+                vote_speech = retry_parsed.get("speech", vote_speech)
+
+                if voted_for is not None and voted_for not in candidates:
+                    voted_for = None
 
                 if voted_for is None:
-                    # Still abstaining - accept it, spy wins
                     logger.info(f"Voter {voter_id} insisted on abstaining after warning")
 
             final_votes[voter_id] = voted_for
@@ -1370,9 +1391,9 @@ async def run_final_vote(
                 vote_changes.append(change)
                 logger.info(f"Vote change: {voter_id} changed from {preliminary_vote} to {voted_for}")
 
-            # Create turn - use full response if it has reasoning
-            if vote_response_full and len(vote_response_full) > 15:
-                vote_content = vote_response_full
+            # Use speech from JSON, fallback to simple format
+            if vote_speech:
+                vote_content = _clean_content(vote_speech)
             elif voted_for:
                 voted_for_name = id_to_name.get(voted_for, voted_for)
                 if voted_for == preliminary_vote:
@@ -1467,71 +1488,6 @@ async def run_final_vote(
     return game
 
 
-def _normalize_for_vote_match(text: str) -> str:
-    """Normalize text for vote matching: lowercase, replace underscores with spaces."""
-    return text.lower().replace("_", " ")
-
-
-def _get_name_stem(name: str) -> str:
-    """Get base stem of a Russian name by stripping common case endings."""
-    name_lower = name.lower()
-    # Russian case endings (sorted by length to strip longest first)
-    endings = ["ой", "ей", "ью", "ом", "ем", "ам", "ям", "ах", "ях", "ов", "ев",
-               "ы", "и", "у", "ю", "е", "а", "о"]
-    for ending in endings:
-        if len(name_lower) > len(ending) + 2 and name_lower.endswith(ending):
-            return name_lower[:-len(ending)]
-    return name_lower
-
-
-def _parse_final_vote(
-    response: str, candidates: list[str], name_to_id: Optional[dict[str, str]] = None
-) -> Optional[str]:
-    """Parse final vote response.
-
-    Args:
-        response: Raw LLM response (lowercased).
-        candidates: List of valid candidate IDs.
-        name_to_id: Optional mapping of display names to IDs.
-
-    Returns:
-        Voted target ID or None if abstained.
-    """
-    abstain_markers = ["воздерж", "abstain", "пропуск", "skip", "нет голоса"]
-
-    # Normalize response (lowercase, underscores to spaces)
-    response_normalized = _normalize_for_vote_match(response)
-
-    # Check for candidate IDs (with normalization)
-    for candidate in candidates:
-        candidate_normalized = _normalize_for_vote_match(candidate)
-        if candidate_normalized in response_normalized:
-            return candidate
-
-    # Check for display names if mapping provided
-    if name_to_id:
-        for name, cid in name_to_id.items():
-            if cid not in candidates:
-                continue
-            name_normalized = _normalize_for_vote_match(name)
-            # Check exact name match
-            if name_normalized in response_normalized:
-                return cid
-            # Check stem match (for Russian case inflections like Аврора/Аврору)
-            name_stem = _get_name_stem(name)
-            if len(name_stem) >= 3:
-                # Check if stem appears in response (with word boundary awareness)
-                if name_stem in response_normalized:
-                    return cid
-
-    # Check for abstain
-    for marker in abstain_markers:
-        if marker in response:
-            return None
-
-    return None
-
-
 async def run_preliminary_vote(
     game: Game,
     characters: list[Character],
@@ -1576,7 +1532,8 @@ async def run_preliminary_vote(
         voter_prompt = build_system_prompt(voter_char, game, voter_secret, id_to_name)
 
         candidates = [pid for pid in player_ids if pid != voter_id]
-        candidates_str = ", ".join(id_to_name.get(c, c) for c in candidates)
+        candidates_json = ", ".join(f'"{c}"' for c in candidates)
+        candidates_display = ", ".join(f"{id_to_name.get(c, c)} ({c})" for c in candidates)
 
         history = await _build_compressed_conversation_history(game, provider)
 
@@ -1593,24 +1550,23 @@ async def run_preliminary_vote(
             previous_votes_text = f"Уже проголосовали: {', '.join(votes_list)}. "
 
         is_first_voter = len(votes) == 0
+        allow_abstain_str = "null если воздерживаешься" if DEFENSE_ALLOW_ABSTAIN else "воздержание НЕДОСТУПНО"
 
         if is_first_voter:
-            # First voter initiates voting
             vote_instruction = (
-                f"Ты — {voter_char.display_name}. Ты решаешь выдвинуть голосование! "
-                f"Объяви кого подозреваешь. Если есть конкретные причины — объясни, если не уверен — просто назови имя. "
-                f"Кандидаты: {candidates_str}. "
-                f"Примеры: 'Выдвигаю голосование! Считаю что [ИМЯ] — шпион, он слишком уклончиво отвечал' "
-                f"или просто 'Голосую против [ИМЯ]'"
+                f"Ты — {voter_char.display_name}. Ты решаешь выдвинуть голосование!\n"
+                f"Кандидаты: {candidates_display}\n\n"
+                f"Ответь JSON:\n"
+                f'{{"vote_for": ID из [{candidates_json}] или {allow_abstain_str}, '
+                f'"speech": "твоя речь при голосовании"}}'
             )
         else:
-            # Others follow
             vote_instruction = (
-                f"Ты — {voter_char.display_name}. Идёт голосование. "
-                f"{previous_votes_text}"
-                f"Выбери кого подозреваешь. Можешь объяснить почему, а можешь просто проголосовать. "
-                f"Кандидаты: {candidates_str}. "
-                f"Примеры: 'Голосую против [ИМЯ], потому что...' или просто '[ИМЯ]' или 'Воздерживаюсь'"
+                f"Ты — {voter_char.display_name}. Идёт голосование. {previous_votes_text}\n"
+                f"Кандидаты: {candidates_display}\n\n"
+                f"Ответь JSON:\n"
+                f'{{"vote_for": ID из [{candidates_json}] или {allow_abstain_str}, '
+                f'"speech": "твоя речь при голосовании"}}'
             )
 
         messages = [
@@ -1624,25 +1580,29 @@ async def run_preliminary_vote(
 
         vote_llm_response = await provider.complete(
             messages=messages,
-            model=game.config.main_model,  # Use main model for better reasoning
+            model=game.config.main_model,
             temperature=0.7,
-            max_tokens=150,  # More tokens for reasoning
+            max_tokens=200,
+            json_mode=True,
         )
         _track_usage_and_check_cost(game, vote_llm_response)
-        vote_response_full = vote_llm_response.content.strip()
-        vote_response = vote_response_full.lower()
+        vote_raw = vote_llm_response.content.strip()
+        vote_parsed = _parse_json_response(vote_raw)
 
-        voted_for = _parse_preliminary_vote(vote_response, candidates, name_to_id)
+        voted_for = vote_parsed.get("vote_for")
+        vote_speech = vote_parsed.get("speech", "")
+
+        # Validate vote_for is a valid candidate ID
+        if voted_for is not None and voted_for not in candidates:
+            logger.warning(f"Invalid vote_for '{voted_for}' from {voter_id}, treating as abstain")
+            voted_for = None
 
         if voted_for is None and not DEFENSE_ALLOW_ABSTAIN:
-            logger.warning(
-                f"Player {voter_id} returned abstain but DEFENSE_ALLOW_ABSTAIN=false, retrying"
-            )
+            logger.warning(f"Player {voter_id} tried to abstain but DEFENSE_ALLOW_ABSTAIN=false, retrying")
             retry_instruction = (
                 f"Ты — {voter_char.display_name}. "
-                f"Ты ОБЯЗАН выбрать одного игрока, воздержание недоступно. "
-                f"Кто шпион? Выбери ОДНОГО из: {candidates_str}. "
-                f"Напиши ТОЛЬКО имя игрока."
+                f"Воздержание НЕДОСТУПНО. Ты ОБЯЗАН выбрать.\n"
+                f"Ответь JSON: {{\"vote_for\": ID из [{candidates_json}], \"speech\": \"...\"}}'"
             )
             retry_messages = [
                 {"role": "system", "content": voter_prompt},
@@ -1654,21 +1614,25 @@ async def run_preliminary_vote(
                 messages=retry_messages,
                 model=game.config.utility_model,
                 temperature=0.7,
-                max_tokens=50,
+                max_tokens=100,
+                json_mode=True,
             )
             _track_usage_and_check_cost(game, retry_response)
-            vote_response_full = retry_response.content.strip()
-            vote_response = vote_response_full.lower()
-            voted_for = _parse_preliminary_vote(vote_response, candidates, name_to_id)
+            retry_parsed = _parse_json_response(retry_response.content.strip())
+            voted_for = retry_parsed.get("vote_for")
+            vote_speech = retry_parsed.get("speech", vote_speech)
+
+            if voted_for is not None and voted_for not in candidates:
+                voted_for = None
 
             if voted_for is None:
                 logger.info(f"Player {voter_id} insisted on abstaining in preliminary vote")
 
         votes[voter_id] = voted_for
 
-        # Use full response with reasoning, or fallback to simple format
-        if vote_response_full and len(vote_response_full) > 10:
-            vote_content = vote_response_full
+        # Use speech from JSON, fallback to simple format
+        if vote_speech:
+            vote_content = _clean_content(vote_speech)
         elif voted_for is None:
             vote_content = "Воздерживаюсь"
         else:
@@ -1698,49 +1662,6 @@ async def run_preliminary_vote(
     logger.info(f"Vote counts (excluding abstentions): {vote_counts}")
 
     return game, vote_counts
-
-
-def _parse_preliminary_vote(
-    response: str, candidates: list[str], name_to_id: Optional[dict[str, str]] = None
-) -> Optional[str]:
-    """Parse preliminary vote response.
-
-    Args:
-        response: LLM response text (lowercase)
-        candidates: List of valid candidate IDs
-        name_to_id: Optional mapping of display names to IDs
-
-    Returns:
-        candidate ID if voted, None if abstained
-    """
-    # Normalize response
-    response_normalized = _normalize_for_vote_match(response)
-
-    # Check for candidate IDs (with normalization)
-    for candidate in candidates:
-        candidate_normalized = _normalize_for_vote_match(candidate)
-        if candidate_normalized in response_normalized:
-            return candidate
-
-    # Check for display names if mapping provided
-    if name_to_id:
-        for name, cid in name_to_id.items():
-            if cid not in candidates:
-                continue
-            name_normalized = _normalize_for_vote_match(name)
-            if name_normalized in response_normalized:
-                return cid
-            # Check stem match (for Russian case inflections)
-            name_stem = _get_name_stem(name)
-            if len(name_stem) >= 3 and name_stem in response_normalized:
-                return cid
-
-    abstain_markers = ["воздерж", "abstain", "skip this", "пропуска", "я пас"]
-    for marker in abstain_markers:
-        if marker in response:
-            return None
-
-    return None
 
 
 def _count_sentences(text: str) -> int:
@@ -1798,13 +1719,13 @@ async def _check_defense_speech_characteristic(
         messages=[{"role": "user", "content": prompt}],
         model=game.config.utility_model,
         temperature=0.3,
-        max_tokens=10,
+        max_tokens=20,
+        json_mode=True,
     )
 
     _track_usage_and_check_cost(game, response)
-    response_lower = response.content.strip().lower()
-
-    return "да" in response_lower or "yes" in response_lower
+    parsed = _parse_json_response(response.content.strip())
+    return parsed.get("is_characteristic", False) is True
 
 
 async def run_defense_speeches(
