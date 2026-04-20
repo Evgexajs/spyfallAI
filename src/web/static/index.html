@@ -1209,13 +1209,23 @@
             infoTimer.className = 'timer-display';
         }
 
+        const phaseTranslations = {
+            'setup': 'Подготовка',
+            'main_round': 'Основной раунд',
+            'optional_vote': 'Досрочное голосование',
+            'preliminary_vote': 'Предварительное голосование',
+            'pre_final_vote_defense': 'Защита обвиняемых',
+            'final_vote': 'Финальное голосование',
+            'resolution': 'Итоги'
+        };
+
         function updatePhase(phase) {
             currentPhase = phase;
             if (phase === '-') {
                 infoPhase.textContent = '-';
                 infoPhase.className = 'phase-badge';
             } else {
-                infoPhase.textContent = phase.replace('_', ' ');
+                infoPhase.textContent = phaseTranslations[phase] || phase;
                 infoPhase.className = 'phase-badge ' + phase;
             }
         }
@@ -1364,13 +1374,13 @@
 
                 const roleSpan = document.createElement('span');
                 roleSpan.className = 'player-role';
-                roleSpan.textContent = p.is_spy ? 'ШПИОН' : (p.role_id || '');
+                roleSpan.textContent = p.is_spy ? 'ШПИОН' : (p.role_name || p.role_id || '');
 
                 roleContainer.appendChild(roleSpan);
 
                 if (p.is_spy) {
                     roleContainer.appendChild(createInfoIcon('Шпион не знает локацию и пытается её угадать, не выдав себя', 'right'));
-                } else if (p.role_id) {
+                } else if (p.role_name || p.role_id) {
                     roleContainer.appendChild(createInfoIcon('Роль игрока в текущей локации', 'right'));
                 }
 

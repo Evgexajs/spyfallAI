@@ -1,0 +1,457 @@
+{
+  "id": "2ff1a6e1-925d-4d5d-a4cd-c2d7bbaf01f3",
+  "started_at": "2026-04-20T21:15:42.540740",
+  "ended_at": "2026-04-20T21:21:34.856826",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "hospital",
+  "players": [
+    {
+      "character_id": "professor_stein",
+      "role_id": "receptionist",
+      "is_spy": false
+    },
+    {
+      "character_id": "aurora",
+      "role_id": "surgeon",
+      "is_spy": false
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "margo",
+      "role_id": "patient",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "father_ignatius",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T21:15:45.773096",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "О, Margo, милая душа! Какие звуки чаще всего проникают в твое сознание, когда ты находишься здесь? Неужели они не наводят на размышления о смысле жизни?..",
+      "display_delay_ms": 5003
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T21:15:53.077681",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Aurora, дорогая, что за чудесный вопрос! Звуки здесь удивительно разнообразны, и мне кажется, они действительно способны пробудить мысли о вечном. Писки и шепоты словно напоминают о том, как хрупка наша жизнь, не так ли?",
+      "display_delay_ms": 7155
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T21:16:03.009549",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "Father Ignatius, дорогой, в этом месте, где всё так непредсказуемо, как часто вы находите время для молитвы? Ведь здесь, наверное, это особенно важно, не правда ли?",
+      "display_delay_ms": 5295
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T21:16:10.485174",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Дорогая Margo, молитва — это неизменная часть моей жизни, независимо от хаоса вокруг. В любое время и в любом месте важно оставаться верным своей совести и находить минуту для общения с Богом. Скажи, чувствуешь ли ты ту же потребность внутри себя?",
+      "display_delay_ms": 7884
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T21:16:21.446981",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Professor Stein, скажите, как часто вы размышляете о истинных ценностях жизни, находясь здесь? Ведь именно честность и внутренняя искренность помогают нам не сбиться с пути, не так ли?",
+      "display_delay_ms": 5989
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T21:16:30.376346",
+      "speaker_id": "professor_stein",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "Дорогой отец Игнатиус, вопрос о истинных ценностях жизни, строго говоря, сродни исследованию сложного научного феномена, где каждая гипотеза требует глубокого критического анализа. В данном контексте честность и искренность, по сути, представляют собой базис, на который стоит опираться, словно фундамент для здания, которое мы называем \"жизнь\". Так что да, размышления об этом всегда актуальны, особенно в окружении, где человеческие судьбы напоминают хрупкий сосуд, готовый в любой миг разбиться.",
+      "display_delay_ms": 15438
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T21:16:50.129878",
+      "speaker_id": "aurora",
+      "addressee_id": "professor_stein",
+      "type": "intervention",
+      "content": "О великая наука и философия! Но, профессор, не кажется ли вам противоречивым, что столь глубокие мысли озвучиваются в месте, где каждое мгновение решает чью-то судьбу?! Неужели вы действительно считаете, что жизнь столь хрупка лишь здесь, а не в каждом уголке нашего бытия?...",
+      "display_delay_ms": 8777
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T21:17:02.685870",
+      "speaker_id": "professor_stein",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "Отец Игнатиус, с точки зрения вашего духовного призвания, как вы оцениваете атмосферу вокруг? Можно ли сказать, что она способствует душевной гармонии, словно тихая гавань в бурном море жизни, или, напротив, вызывает размышления о бренности бытия?",
+      "display_delay_ms": 7629
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T21:17:12.818678",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "Дорогой Professor Stein, атмосфера, в которой мы находимся, действительно может заставить задуматься о бренности нашего существования. Однако, как человек духовный, я стремлюсь видеть в этом возможность для поиска внутреннего мира и гармонии. Важно оставаться верным чистоте совести и помнить, что каждый день — это дар, который мы не должны принимать легкомысленно. Согласны ли вы с этим?",
+      "display_delay_ms": 12058
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-20T21:17:27.667766",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "type": "intervention",
+      "content": "Дорогой Father Ignatius, как мне кажется, ваше стремление находить гармонию в столь тревожной обстановке может вызвать некоторые вопросы у наших друзей. Ведь не все ли мы немного забываем здесь о тревожной природе нашего окружения, когда целиком сосредотачиваемся лишь на внутреннем мире?",
+      "display_delay_ms": 9125
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-20T21:17:42.808054",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "Aurora, как по-вашему, не слишком ли мы увлеклись тонкими материями и философскими размышлениями, забывая о том, что истинную правду можно найти, лишь глядя в глаза друг другу?",
+      "display_delay_ms": 5697
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T21:17:54.401379",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "Ах, отец Игнатиус! Как можно считать, что мы так забылись в своих мечтаниях и размышлениях, если именно здесь, в этом месте, каждое мгновение — как сцена великого спектакля, где каждый взгляд, каждое слово определяет нашу судьбу?! О, боже... Ведь только глядя в глаза друг другу, мы можем постичь истинную суть человека, правда ли это невообразимо важно?!",
+      "display_delay_ms": 11170
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-20T21:18:12.111179",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "type": "intervention",
+      "content": "Любопытное наблюдение, Aurora, однако, функция 'взгляда в глаза', строго говоря, напоминает взгляд сквозь призму иллюзий, их разрыв может лишь вмешать нас в лабиринты субъективных впечатлений.",
+      "display_delay_ms": 6027
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-20T21:18:25.099999",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "О, отец Игнатиус! Как же вы справляетесь с теми моментами, когда сердце сжимается от волнения... когда вокруг слышатся голоса тех, кто нуждается в утешении и помощи? Это ведь немыслимо сложно, правда?",
+      "display_delay_ms": 6496
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T21:18:37.712649",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Aurora, моя дорогая, в такие моменты я ищу утешение в вере и стараюсь дарить его тем, кто в этом нуждается. Ведь истинная сила духа, согласитесь, открывается нам в самых непростых испытаниях. Важно помнить о чистоте совести и не бояться заглянуть в глаза своим собственным страхам.",
+      "display_delay_ms": 8803
+    },
+    {
+      "turn_number": 16,
+      "timestamp": "2026-04-20T21:18:54.471737",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "type": "intervention",
+      "content": "Father Ignatius, дорогой мой, как интересно, что вы упомянули о силе духа в таких обстоятельствах. Неужели это значит, что вы находите спокойствие даже в месте, где бесконечные вызовы и хаос подстерегают на каждом шагу?",
+      "display_delay_ms": 7027
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-20T21:19:07.185236",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Margo, скажи мне честно, по совести, какие чувства ты испытываешь, когда вокруг неспокойно и каждая минута может стать решающей?",
+      "display_delay_ms": 4350
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T21:19:18.033241",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "О, Father Ignatius, ты так проницателен, милый. В такие моменты я чувствую странную смесь тревоги и надежды, словно каждая минута — это шанс на обновление, не так ли?",
+      "display_delay_ms": 5476
+    },
+    {
+      "turn_number": 19,
+      "timestamp": "2026-04-20T21:19:29.647180",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Любопытно, Margo, ваше утверждение кажется противоречивым, ведь тревога и надежда, по сути, представляют собой противоположные состояния ума, напоминая древний парадокс о невозможности быть одновременно на суше и в воде.",
+      "display_delay_ms": 6801
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-20T21:19:43.053417",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Строго говоря, настало время применить метод дедукции, чтобы выявить скрытые аспекты поведения участников. В этом контексте, я склонен выдвинуть голосование против Father Ignatius. Фактически, его риторика о внутреннем мире и духовной гармонии, по сути, могла служить средством отвлечения внимания от более приземлённых и насущных вопросов нашей локации.",
+      "display_delay_ms": 11125
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-20T21:19:56.593581",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "О, как сложно сделать выбор в этом вихре эмоций и подозрений! Но, как говорится, истинное намерение всегда проявляется в словах и действиях. Моя интуиция подсказывает мне обратить внимание на Марго. Её слова о тревоге и надежде... как они могут так искусно переплетаться в этой обстановке? Немыслимо! Возможно, это лишь драма, созданная, чтобы скрыть истину. Голосую против Марго!",
+      "display_delay_ms": 11693
+    },
+    {
+      "turn_number": 22,
+      "timestamp": "2026-04-20T21:20:10.632708",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Margo, в твоих словах я слышу что-то, что не даёт покоя моей совести. Тревога и надежда — сложные союзники. Возможно, именно они подчеркивают непростую истину, скрытую за фасадом. Надеюсь, ты поймешь моё решение. Голосую против тебя, Margo.",
+      "display_delay_ms": 7650
+    },
+    {
+      "turn_number": 23,
+      "timestamp": "2026-04-20T21:20:20.701502",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "О, дорогие мои, как это интересно наблюдать за вашими решениями. Я голосую против Aurora, ведь её вопросы и взгляды в глаза кажутся немного... странными. Не находите ли вы, что это может быть попытка отвлечь наше внимание от чего-то более важного?",
+      "display_delay_ms": 7784
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T21:20:31.864454",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "defense_speech",
+      "content": "Дорогие мои, Aurora и Father Ignatius, как замечательно, что у нас есть возможность обмениваться такими интересными мыслями. Возможно, Professor Stein со мной согласится, что в нашем обсуждении главное — это искренность и доверие.",
+      "display_delay_ms": 7352
+    },
+    {
+      "turn_number": 25,
+      "timestamp": "2026-04-20T21:20:41.471032",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Строго говоря, на основе имеющихся данных, я склонен полагать, что Margo проявляет определённые противоречия в своих заявлениях. Её ответы представляются несколько уклончивыми и, возможно, указывают на попытку скрыть истинную природу своей роли. Однако, учитывая всю сложность и многослойность ситуации, я считаю целесообразным изменить свой голос и предположить, что Margo может быть шпионом.",
+      "display_delay_ms": 12059
+    },
+    {
+      "turn_number": 26,
+      "timestamp": "2026-04-20T21:20:56.213374",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "О, боже мой! Как же это всё запутанно! Но сердце моё говорит мне, что в этих словах скрыто нечто большее... чем кажется на первый взгляд. Ах, как же сложно сделать выбор, когда каждый словно актёр на сцене, прячущий свои истинные эмоции за маской! Но мой инстинкт... он шепчет мне... шепчет... что Марго могла быть не до конца откровенна. О, как несправедливо выбирать... и всё же, я подтверждаю свой голос... за Марго. Надеюсь, это поможет нам выйти из тени неведения!",
+      "display_delay_ms": 14667
+    },
+    {
+      "turn_number": 27,
+      "timestamp": "2026-04-20T21:21:14.054285",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Margo, я должен признать, что твоё объяснение вызывает у меня некоторое беспокойство. Тревога и надежда — это действительно сложные чувства, но я верю в искренность твоих слов. Тем не менее, в этой ситуации я, по совести, поддержу мнение большинства и проголосую за тебя. Надеюсь, правда скоро откроется нам всем.",
+      "display_delay_ms": 9964
+    },
+    {
+      "turn_number": 28,
+      "timestamp": "2026-04-20T21:21:26.649516",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Хочу воздержаться...",
+      "display_delay_ms": 808
+    },
+    {
+      "turn_number": 29,
+      "timestamp": "2026-04-20T21:21:28.531452",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Я выберу Аврору. Дорогие мои, она вела себя несколько неоднозначно. Интересно, согласитесь, как её вопросы и комментарии иногда вводили нас в заблуждение, правда? Надеюсь, это правильное решение.",
+      "display_delay_ms": 6324
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T21:16:47.154396",
+      "level": "few_guesses"
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T21:18:52.026864",
+      "level": "few_guesses"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T21:16:58.908899",
+      "character_id": "aurora",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T21:17:36.794837",
+      "character_id": "margo",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T21:18:18.124897",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T21:19:01.499546",
+      "character_id": "margo",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T21:19:36.449991",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T21:15:42.540740",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T21:15:42.540958",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T21:19:36.450282",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 19 ходов",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T21:19:36.451055",
+      "from_phase": "optional_vote",
+      "to_phase": "preliminary_vote",
+      "reason": "Preliminary voting started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T21:20:28.488305",
+      "from_phase": "preliminary_vote",
+      "to_phase": "pre_final_vote_defense",
+      "reason": "Defense speeches for 1 player(s) with 2 votes",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T21:20:39.218542",
+      "from_phase": "pre_final_vote_defense",
+      "to_phase": "final_vote",
+      "reason": "Final voting started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T21:21:34.856856",
+      "from_phase": "final_vote",
+      "to_phase": "resolution",
+      "reason": "Game ended: spy won",
+      "status": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Мирные не единогласны (2/3) — шпион (Игнатий) побеждает",
+    "votes": {
+      "professor_stein": "margo",
+      "aurora": "margo",
+      "father_ignatius": "margo"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": null
+  },
+  "compressed_history": "В диалоге участники обсуждают философские и духовные аспекты жизни в загадочном месте, что вызывает подозрения и вопросы о их истинных намерениях. Aurora начинает с вопроса к Margo о звуках, которые могут наводить на размышления о жизни. Margo отвечает уклончиво, подчеркивая хрупкость существования. Father Ignatius, в свою очередь, говорит о важности молитвы, что вызывает у Margo сомнения в его способности оставаться сосредоточенным на внутреннем мире в тревожной обстановке.\n\nProfessor Stein пытается связать философские размышления с реальностью, но Aurora указывает на противоречие между глубокими размышлениями и непосредственной опасностью их окружения. Father Ignatius поднимает вопрос о поиске гармонии, на что Margo отвечает, что это может отвлекать от тревожной природы их ситуации. Aurora подчеркивает важность взгляда в глаза друг другу как способа понять истинную суть человека, но Professor Stein находит это наблюдение слишком субъективным.\n\nТаким образом, участники подозревают друг друга в уклонении от реальности, и их ответы полны намеков на сложные отношения и возможные скрытые мотивы. Локация, вероятно, связана с опасностью и неопределенностью, что усиливает напряжение в диалоге.",
+  "compression_checkpoint": 13,
+  "token_usage": {
+    "total_input_tokens": 62957,
+    "total_output_tokens": 4850,
+    "total_cost_usd": 0.15689265000000005,
+    "llm_calls_count": 47
+  },
+  "preliminary_vote_result": {
+    "professor_stein": null,
+    "aurora": "margo",
+    "father_ignatius": "margo",
+    "margo": "aurora"
+  },
+  "defense_speeches": [
+    {
+      "defender_id": "margo",
+      "votes_received": 2,
+      "content": "Дорогие мои, Aurora и Father Ignatius, как замечательно, что у нас есть возможность обмениваться такими интересными мыслями. Возможно, Professor Stein со мной согласится, что в нашем обсуждении главное — это искренность и доверие.",
+      "timestamp": "2026-04-20T21:20:31.864388",
+      "regenerated": false
+    }
+  ],
+  "final_vote_result": {
+    "professor_stein": "margo",
+    "aurora": "margo",
+    "father_ignatius": "margo",
+    "margo": null
+  },
+  "vote_changes": [
+    {
+      "voter_id": "professor_stein",
+      "from_target": null,
+      "to_target": "margo"
+    },
+    {
+      "voter_id": "margo",
+      "from_target": "aurora",
+      "to_target": null
+    }
+  ]
+}

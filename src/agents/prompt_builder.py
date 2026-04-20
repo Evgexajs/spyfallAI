@@ -146,13 +146,16 @@ def _format_secret_info(secret_info: SecretInfo) -> str:
     return "\n".join(lines)
 
 
-def _format_players_section(game: Game, current_character_id: str) -> str:
+def _format_players_section(
+    game: Game, current_character_id: str, id_to_name: Optional[dict[str, str]] = None
+) -> str:
     """Format other players section."""
     lines = ["", "=== ДРУГИЕ ИГРОКИ ===", ""]
 
     for player in game.players:
         if player.character_id != current_character_id:
-            lines.append(f"• {player.character_id}")
+            name = id_to_name.get(player.character_id, player.character_id) if id_to_name else player.character_id
+            lines.append(f"• {name}")
 
     return "\n".join(lines)
 
@@ -192,6 +195,7 @@ def build_system_prompt(
     character: Character,
     game: Game,
     secret_info: SecretInfo,
+    id_to_name: Optional[dict[str, str]] = None,
 ) -> str:
     """
     Build the system prompt for an agent.
@@ -200,6 +204,7 @@ def build_system_prompt(
         character: The character profile for this agent.
         game: The current game state.
         secret_info: Secret information (is_spy, location, role).
+        id_to_name: Optional mapping of character IDs to display names.
 
     Returns:
         Complete system prompt string.
@@ -210,7 +215,7 @@ def build_system_prompt(
         _format_must_directives(character),
         _format_must_not_directives(character),
         _format_secret_info(secret_info),
-        _format_players_section(game, character.id),
+        _format_players_section(game, character.id, id_to_name),
         _format_few_shot_section(character),
     ]
 
@@ -232,15 +237,17 @@ def build_intervention_micro_prompt(
     character: Character,
     answer_turn: Turn,
     reaction_type: ReactionType,
+    id_to_name: Optional[dict[str, str]] = None,
 ) -> str:
     """Build micro-prompt asking if character wants to intervene."""
     reaction_desc = REACTION_TYPE_DESCRIPTIONS.get(
         reaction_type, "отреагировать в своём стиле"
     )
+    speaker_name = id_to_name.get(answer_turn.speaker_id, answer_turn.speaker_id) if id_to_name else answer_turn.speaker_id
 
     return f"""Ты — {character.display_name} ({character.archetype}).
 
-Только что {answer_turn.speaker_id} ответил: «{answer_turn.content}»
+Только что {speaker_name} ответил: «{answer_turn.content}»
 
 Это показалось тебе подозрительным. Твой стиль реакции: {reaction_desc}.
 
@@ -253,19 +260,21 @@ def build_intervention_content_prompt(
     secret_info: SecretInfo,
     answer_turn: Turn,
     reaction_type: ReactionType,
+    id_to_name: Optional[dict[str, str]] = None,
 ) -> str:
     """Build prompt for generating intervention content."""
     reaction_desc = REACTION_TYPE_DESCRIPTIONS.get(
         reaction_type, "отреагировать в своём стиле"
     )
+    speaker_name = id_to_name.get(answer_turn.speaker_id, answer_turn.speaker_id) if id_to_name else answer_turn.speaker_id
 
-    base_prompt = build_system_prompt(character, game, secret_info)
+    base_prompt = build_system_prompt(character, game, secret_info, id_to_name)
 
     return f"""{base_prompt}
 
 === ВМЕШАТЕЛЬСТВО ===
 
-Только что {answer_turn.speaker_id} ответил: «{answer_turn.content}»
+Только что {speaker_name} ответил: «{answer_turn.content}»
 
 Ты решил вмешаться. Твоя реакция: {reaction_desc}.
 

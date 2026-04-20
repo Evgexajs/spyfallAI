@@ -198,6 +198,9 @@ class GameManager:
                 main_model=model,
             )
 
+            # Build role_id to display_name mapping
+            role_names = {r.id: r.display_name for r in location.roles} if location.roles else {}
+
             await self.broadcast({
                 "type": "game_started",
                 "game_id": str(self.game.id),
@@ -212,6 +215,7 @@ class GameManager:
                         "color": next((c.color for c in self.characters if c.id == p.character_id), None),
                         "is_spy": p.is_spy,
                         "role_id": p.role_id,
+                        "role_name": role_names.get(p.role_id, p.role_id) if p.role_id else None,
                     }
                     for p in self.game.players
                 ],

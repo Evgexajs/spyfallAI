@@ -473,11 +473,13 @@ async def _ask_to_intervene(
 ) -> bool:
     """Ask a character if they want to intervene. Returns True if yes."""
     character = _get_character_by_id(characters, trigger_result.character_id)
+    id_to_name = {c.id: c.display_name for c in characters}
 
     prompt = build_intervention_micro_prompt(
         character=character,
         answer_turn=answer_turn,
         reaction_type=trigger_result.reaction_type,
+        id_to_name=id_to_name,
     )
 
     response = await provider.complete(
@@ -503,6 +505,7 @@ async def _generate_intervention_content(
     character = _get_character_by_id(characters, trigger_result.character_id)
     player = next(p for p in game.players if p.character_id == character.id)
     secret_info = _get_secret_info(game, player)
+    id_to_name = {c.id: c.display_name for c in characters}
 
     prompt = build_intervention_content_prompt(
         character=character,
@@ -510,6 +513,7 @@ async def _generate_intervention_content(
         secret_info=secret_info,
         answer_turn=answer_turn,
         reaction_type=trigger_result.reaction_type,
+        id_to_name=id_to_name,
     )
 
     history = await _build_compressed_conversation_history(game, provider)
@@ -667,6 +671,9 @@ async def run_main_round(
     player_ids = [p.character_id for p in game.players]
     current_questioner = random.choice(player_ids)
 
+    # Build id -> display_name mapping for prompts
+    id_to_name = {c.id: c.display_name for c in characters}
+
     start_time = game.started_at
     duration = timedelta(minutes=game.config.duration_minutes)
     question_count = 0
@@ -680,15 +687,16 @@ async def run_main_round(
             break
 
         target_id = _select_target(game.players, current_questioner)
+        target_char = _get_character_by_id(characters, target_id)
 
         questioner_char = _get_character_by_id(characters, current_questioner)
         questioner_player = next(p for p in game.players if p.character_id == current_questioner)
         questioner_secret = _get_secret_info(game, questioner_player)
-        questioner_prompt = build_system_prompt(questioner_char, game, questioner_secret)
+        questioner_prompt = build_system_prompt(questioner_char, game, questioner_secret, id_to_name)
 
         history = await _build_compressed_conversation_history(game, provider)
         question_instruction = (
-            f"Ты — {questioner_char.display_name}. Сейчас твоя очередь задать вопрос игроку {target_id}. "
+            f"Ты — {questioner_char.display_name}. Сейчас твоя очередь задать вопрос игроку {target_char.display_name}. "
             f"Задай один вопрос в своём стиле. Только вопрос, без пояснений."
         )
         messages = [
@@ -786,7 +794,7 @@ async def run_main_round(
         answerer_char = _get_character_by_id(characters, target_id)
         answerer_player = next(p for p in game.players if p.character_id == target_id)
         answerer_secret = _get_secret_info(game, answerer_player)
-        answerer_prompt = build_system_prompt(answerer_char, game, answerer_secret)
+        answerer_prompt = build_system_prompt(answerer_char, game, answerer_secret, id_to_name)
 
         history = await _build_compressed_conversation_history(game, provider)
         answer_instruction = (
@@ -1383,7 +1391,7 @@ async def run_preliminary_vote(
         voter_id = voter_player.character_id
         voter_char = _get_character_by_id(characters, voter_id)
         voter_secret = _get_secret_info(game, voter_player)
-        voter_prompt = build_system_prompt(voter_char, game, voter_secret)
+        voter_prompt = build_system_prompt(voter_char, game, voter_secret, id_to_name)
 
         candidates = [pid for pid in player_ids if pid != voter_id]
         candidates_str = ", ".join(id_to_name.get(c, c) for c in candidates)
