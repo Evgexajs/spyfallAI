@@ -531,3 +531,11 @@ if static_dir.exists():
         if index_path.exists():
             return FileResponse(index_path)
         raise HTTPException(status_code=404, detail="index.html not found")
+
+    @app.get("/game/{game_id}")
+    async def serve_game_page(game_id: str):
+        """Serve the game view page."""
+        game_path = static_dir / "game.html"
+        if game_path.exists():
+            return FileResponse(game_path)
+        raise HTTPException(status_code=404, detail="game.html not found")

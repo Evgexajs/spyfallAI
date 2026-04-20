@@ -242,3 +242,45 @@ class TestGetGameById:
         assert "total_output_tokens" in token_usage
         assert "total_cost_usd" in token_usage
         assert "llm_calls_count" in token_usage
+
+
+class TestGameViewPage:
+    """Tests for GET /game/{game_id} page endpoint."""
+
+    def test_game_view_page_returns_html(self, client):
+        """Test that GET /game/{id} returns HTML page."""
+        response = client.get("/game/some-game-id")
+        assert response.status_code == 200
+        assert "text/html" in response.headers["content-type"]
+
+    def test_game_view_page_contains_spyfallai_title(self, client):
+        """Test that game view page has SpyfallAI in title."""
+        response = client.get("/game/some-game-id")
+        assert response.status_code == 200
+        assert b"SpyfallAI" in response.content
+
+    def test_game_view_page_has_loading_indicator(self, client):
+        """Test that game view page has loading indicator."""
+        response = client.get("/game/some-game-id")
+        assert response.status_code == 200
+        assert b"loadingIndicator" in response.content
+
+    def test_game_view_page_has_chat_messages_container(self, client):
+        """Test that game view page has chat messages container."""
+        response = client.get("/game/some-game-id")
+        assert response.status_code == 200
+        assert b"chatMessages" in response.content
+
+    def test_game_view_page_has_player_list(self, client):
+        """Test that game view page has player list section."""
+        response = client.get("/game/some-game-id")
+        assert response.status_code == 200
+        assert b"playerList" in response.content
+
+    def test_game_view_page_has_stats_section(self, client):
+        """Test that game view page has statistics section."""
+        response = client.get("/game/some-game-id")
+        assert response.status_code == 200
+        assert b"statsSection" in response.content
+        assert b"statInputTokens" in response.content
+        assert b"statCost" in response.content

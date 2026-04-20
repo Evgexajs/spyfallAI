@@ -982,7 +982,7 @@
         "Шаг 3: Проверить отображение всех реплик и статистики"
       ],
       "dependencies": ["TASK-048", "TASK-050"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-052",
