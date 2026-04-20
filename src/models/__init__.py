@@ -5,6 +5,7 @@ from src.models.location import Location, Role
 from src.models.game import (
     ConfidenceEntry,
     ConfidenceLevel,
+    DefenseSpeech,
     Game,
     GameConfig,
     GameOutcome,
@@ -15,6 +16,7 @@ from src.models.game import (
     TriggerEvent,
     Turn,
     TurnType,
+    VoteChange,
 )
 
 __all__ = [
@@ -22,6 +24,7 @@ __all__ = [
     "ConditionType",
     "ConfidenceEntry",
     "ConfidenceLevel",
+    "DefenseSpeech",
     "Game",
     "GameConfig",
     "GameOutcome",
@@ -38,4 +41,5 @@ __all__ = [
     "TriggerEvent",
     "Turn",
     "TurnType",
+    "VoteChange",
 ]

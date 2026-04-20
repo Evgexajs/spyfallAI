@@ -86,6 +86,24 @@ class PhaseEntry(BaseModel):
     from_phase: Optional[GamePhase] = Field(default=None, description="Previous phase (null at start)")
     to_phase: GamePhase = Field(description="New phase")
     reason: Optional[str] = Field(default=None, description="Reason for transition")
+    status: Optional[str] = Field(default=None, description="Phase status (e.g. 'skipped_copied_from_preliminary')")
+
+
+class DefenseSpeech(BaseModel):
+    """A defense speech by an accused player."""
+
+    defender_id: str = Field(min_length=1, description="ID of defending character")
+    votes_received: int = Field(ge=0, description="Votes received in preliminary voting")
+    content: str = Field(min_length=1, description="Text of defense speech")
+    timestamp: datetime = Field(description="When the speech was given")
+
+
+class VoteChange(BaseModel):
+    """Record of a vote change between preliminary and final voting."""
+
+    voter_id: str = Field(min_length=1, description="Who changed their vote")
+    from_target: Optional[str] = Field(default=None, description="Previous vote target (null if abstained)")
+    to_target: Optional[str] = Field(default=None, description="New vote target (null if abstained)")
 
 
 class TokenUsage(BaseModel):
@@ -147,6 +165,18 @@ class Game(BaseModel):
     compressed_history: Optional[str] = Field(default=None, description="Compressed summary of old turns")
     compression_checkpoint: Optional[int] = Field(default=None, description="Turn number when last compressed")
     token_usage: TokenUsage = Field(default_factory=TokenUsage, description="Token usage and cost tracking")
+    preliminary_vote_result: Optional[dict[str, Optional[str]]] = Field(
+        default=None, description="Preliminary voting results: {voter_id: target_id | null}"
+    )
+    defense_speeches: list[DefenseSpeech] = Field(
+        default_factory=list, description="List of defense speeches (ordered)"
+    )
+    final_vote_result: Optional[dict[str, Optional[str]]] = Field(
+        default=None, description="Final voting results: {voter_id: target_id | null}"
+    )
+    vote_changes: list[VoteChange] = Field(
+        default_factory=list, description="List of vote changes between preliminary and final"
+    )
 
     @field_validator("players")
     @classmethod

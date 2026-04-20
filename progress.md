@@ -31,6 +31,38 @@
 
 ---
 
+## [TASK-058] Добавить новые поля в модель Game
+**Дата:** 2026-04-20
+**Статус:** done
+
+### Что сделано
+- Добавлены новые типы данных в src/models/game.py:
+  - DefenseSpeech: defender_id, votes_received, content, timestamp
+  - VoteChange: voter_id, from_target, to_target
+- Добавлено поле status в PhaseEntry (для "skipped_copied_from_preliminary")
+- Добавлены новые опциональные поля в модель Game:
+  - preliminary_vote_result: dict[str, Optional[str]] — голоса предварительного голосования
+  - defense_speeches: list[DefenseSpeech] — список защитных реплик
+  - final_vote_result: dict[str, Optional[str]] — голоса финального голосования
+  - vote_changes: list[VoteChange] — кто изменил голос
+- Обновлён src/models/__init__.py с экспортом DefenseSpeech и VoteChange
+- Создан tests/test_defense_voting_models.py с 24 тестами:
+  - TestDefenseSpeechModel: 5 тестов создания и сериализации
+  - TestVoteChangeModel: 5 тестов включая abstain сценарии
+  - TestPhaseEntryStatus: 2 теста для нового поля status
+  - TestGameWithNewFields: 5 тестов полей Game
+  - TestBackwardCompatibility: 3 теста обратной совместимости со старыми логами
+  - TestTurnTypeValues: 4 теста проверки TurnType enum
+- Все 24 новых + 35 существующих тестов проходят
+
+### Проблемы / Заметки
+- Все поля опциональны для обратной совместимости с существующими логами игр
+
+### Коммиты
+- `a15b731` — feat: add new Game model fields for defense voting phase (TASK-058)
+
+---
+
 ## [TASK-057] Добавить новые типы Turn для голосований
 **Дата:** 2026-04-20
 **Статус:** done
