@@ -1369,6 +1369,10 @@
         }
 
         function showTypingIndicator(speakerId) {
+            if (!speakerId) {
+                hideTypingIndicator();
+                return;
+            }
             const color = getPlayerColor(speakerId);
             typingIndicator.innerHTML = `
                 <span class="speaker-name" style="color: ${color}">${getPlayerName(speakerId)}</span>

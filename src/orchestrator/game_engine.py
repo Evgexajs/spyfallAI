@@ -1269,16 +1269,19 @@ async def run_final_vote(
     if on_vote_result:
         await _call_callback(on_vote_result, is_unanimous, dict(final_votes))
 
+    spy_name = id_to_name.get(game.spy_id, game.spy_id)
+
     if is_unanimous and winner_target:
         # All civilians voted for the same target
         spy_caught = winner_target == game.spy_id
+        target_name = id_to_name.get(winner_target, winner_target)
 
         if spy_caught:
             winner = "civilians"
-            reason = f"Шпион ({game.spy_id}) был единогласно разоблачён мирными ({max_civilian_votes}/{total_civilian_voters})"
+            reason = f"Шпион ({spy_name}) был единогласно разоблачён мирными ({max_civilian_votes}/{total_civilian_voters})"
         else:
             winner = "spy"
-            reason = f"Мирные единогласно обвинили {winner_target}, но шпионом был {game.spy_id}"
+            reason = f"Мирные единогласно обвинили {target_name}, но шпионом был {spy_name}"
 
         game.outcome = GameOutcome(
             winner=winner,
@@ -1289,9 +1292,9 @@ async def run_final_vote(
     else:
         # Civilians not unanimous - spy wins
         if max_civilian_votes == 0:
-            reason = f"Мирные воздержались — шпион ({game.spy_id}) побеждает"
+            reason = f"Мирные воздержались — шпион ({spy_name}) побеждает"
         else:
-            reason = f"Мирные не единогласны ({max_civilian_votes}/{total_civilian_voters}) — шпион ({game.spy_id}) побеждает"
+            reason = f"Мирные не единогласны ({max_civilian_votes}/{total_civilian_voters}) — шпион ({spy_name}) побеждает"
 
         game.outcome = GameOutcome(
             winner="spy",
