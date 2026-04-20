@@ -144,7 +144,7 @@ class GameManager:
                 "content": turn.content,
                 "display_delay_ms": turn.display_delay_ms,
             },
-            "game_phase": game.phase_transitions[-1].phase.value if game.phase_transitions else "unknown",
+            "game_phase": game.phase_transitions[-1].to_phase.value if game.phase_transitions else "unknown",
         }
         await self.broadcast(turn_data)
 
