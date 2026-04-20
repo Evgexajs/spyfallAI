@@ -1395,21 +1395,25 @@ async def run_preliminary_vote(
                     votes_list.append(f"{voter_name}: против {target_name}")
             previous_votes_text = f"Уже проголосовали: {', '.join(votes_list)}. "
 
-        if DEFENSE_ALLOW_ABSTAIN:
-            abstain_option = "Ты можешь воздержаться, написав 'воздержусь'. "
-            abstain_suffix = ' или слово "воздержусь"'
-        else:
-            abstain_option = ""
-            abstain_suffix = ""
+        is_first_voter = len(votes) == 0
 
-        vote_instruction = (
-            f"Ты — {voter_char.display_name}. Время предварительного голосования. "
-            f"После этого голосования игроки с наибольшим числом голосов получат возможность защититься. "
-            f"{previous_votes_text}"
-            f"Кого ты подозреваешь в том, что он шпион? Выбери ОДНОГО из: {candidates_str}. "
-            f"{abstain_option}"
-            f"Напиши ТОЛЬКО имя игрока{abstain_suffix}."
-        )
+        if is_first_voter:
+            # First voter initiates voting with accusation
+            vote_instruction = (
+                f"Ты — {voter_char.display_name}. Ты решаешь выдвинуть голосование! "
+                f"Объяви кого ты подозреваешь и ПОЧЕМУ (конкретные подозрительные моменты из разговора). "
+                f"Кандидаты: {candidates_str}. "
+                f"Формат: 'Выдвигаю голосование! Считаю что [ИМЯ] — шпион, потому что [причина 1-2 предложения]'"
+            )
+        else:
+            # Others follow with their reasoning
+            vote_instruction = (
+                f"Ты — {voter_char.display_name}. Идёт голосование. "
+                f"{previous_votes_text}"
+                f"Выбери кого подозреваешь и объясни ПОЧЕМУ (1-2 предложения). "
+                f"Кандидаты: {candidates_str}. "
+                f"Формат: 'Голосую против [ИМЯ], потому что [причина]' или 'Воздерживаюсь, потому что [причина]'"
+            )
 
         messages = [
             {"role": "system", "content": voter_prompt},
@@ -1422,12 +1426,13 @@ async def run_preliminary_vote(
 
         vote_llm_response = await provider.complete(
             messages=messages,
-            model=game.config.utility_model,
+            model=game.config.main_model,  # Use main model for better reasoning
             temperature=0.7,
-            max_tokens=50,
+            max_tokens=150,  # More tokens for reasoning
         )
         _track_usage_and_check_cost(game, vote_llm_response)
-        vote_response = vote_llm_response.content.strip().lower()
+        vote_response_full = vote_llm_response.content.strip()
+        vote_response = vote_response_full.lower()
 
         voted_for = _parse_preliminary_vote(vote_response, candidates, name_to_id)
 
@@ -1454,19 +1459,19 @@ async def run_preliminary_vote(
                 max_tokens=50,
             )
             _track_usage_and_check_cost(game, retry_response)
-            vote_response = retry_response.content.strip().lower()
+            vote_response_full = retry_response.content.strip()
+            vote_response = vote_response_full.lower()
             voted_for = _parse_preliminary_vote(vote_response, candidates, name_to_id)
 
             if voted_for is None:
-                voted_for = random.choice(candidates)
-                logger.warning(
-                    f"Player {voter_id} still returned abstain after retry, "
-                    f"randomly selecting {voted_for}"
-                )
+                logger.info(f"Player {voter_id} insisted on abstaining in preliminary vote")
 
         votes[voter_id] = voted_for
 
-        if voted_for is None:
+        # Use full response with reasoning, or fallback to simple format
+        if vote_response_full and len(vote_response_full) > 10:
+            vote_content = vote_response_full
+        elif voted_for is None:
             vote_content = "Воздерживаюсь"
         else:
             vote_content = f"Голосую против {id_to_name.get(voted_for, voted_for)}"
