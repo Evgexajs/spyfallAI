@@ -13,6 +13,7 @@ from uuid import uuid4
 from src.agents import (
     SecretInfo,
     build_defense_speech_prompt,
+    build_final_vote_with_defense_prompt,
     build_intervention_content_prompt,
     build_intervention_micro_prompt,
     build_spy_confidence_check_prompt,
@@ -40,6 +41,7 @@ from src.models import (
     Player,
     Turn,
     TurnType,
+    VoteChange,
 )
 from src.triggers import TriggerChecker, TriggerResult, VoteTriggerChecker
 
@@ -1006,186 +1008,280 @@ async def run_final_vote(
     on_turn: Optional[callable] = None,
     on_typing: Optional[callable] = None,
     on_vote_result: Optional[callable] = None,
+    defense_was_executed: bool = False,
 ) -> Game:
-    """Run the final voting phase of the game.
+    """Run the final voting phase of the game (CR-001 F13).
 
-    Each player votes for who they think is the spy.
-    Voting succeeds ONLY if unanimous (all players vote for the same person).
-    If votes are split, game.outcome remains None and game continues.
+    If defense was skipped, copies preliminary votes without LLM calls.
+    If defense was executed, each voter can confirm or change their vote.
+
+    Winner is determined by STRICT MAJORITY:
+    - If one target has more than half of all votes → check if spy
+    - If no majority → spy wins
 
     Args:
-        game: Game object after main_round.
+        game: Game object after defense phase (or preliminary vote if defense skipped).
         characters: List of Character objects participating.
         provider: Optional LLM provider. If None, creates one from config.
         on_turn: Optional callback called after each vote turn.
         on_typing: Optional callback called before LLM generation starts with speaker_id.
-        on_vote_result: Optional callback called with vote result (unanimous: bool, votes: dict).
+        on_vote_result: Optional callback called with vote result.
+        defense_was_executed: Whether defense speeches were delivered.
 
     Returns:
-        Updated Game object. If unanimous, outcome is set. If split, outcome remains None.
+        Updated Game object with outcome set.
     """
     if provider is None:
         llm_config = LLMConfig()
         provider, _ = create_provider(llm_config, role="main")
 
-    # Only transition if not already in a voting phase (e.g., came from OPTIONAL_VOTE)
-    current_phase = game.phase_transitions[-1].to_phase if game.phase_transitions else None
-    if current_phase != GamePhase.OPTIONAL_VOTE:
-        _transition_phase(game, GamePhase.FINAL_VOTE, "Final voting started")
-
-    # Determine if this is a "final" vote where split means losing
-    time_elapsed = datetime.now() - game.started_at
-    time_limit = timedelta(minutes=game.config.duration_minutes)
-    time_expired = time_elapsed >= time_limit
-
-    question_count = len([t for t in game.turns if t.type == TurnType.QUESTION])
-    max_questions_reached = question_count >= game.config.max_questions
-
-    is_final_vote = time_expired or max_questions_reached
+    _transition_phase(game, GamePhase.FINAL_VOTE, "Final voting started")
 
     player_ids = [p.character_id for p in game.players]
-    votes: dict[str, str] = {}
+    final_votes: dict[str, Optional[str]] = {}
+    vote_changes: list[VoteChange] = []
 
-    for voter_player in game.players:
-        voter_id = voter_player.character_id
-        voter_char = _get_character_by_id(characters, voter_id)
-        voter_secret = _get_secret_info(game, voter_player)
-        voter_prompt = build_system_prompt(voter_char, game, voter_secret)
+    if not defense_was_executed:
+        # Defense was skipped - copy preliminary votes without LLM calls
+        logger.info("Defense was skipped - copying preliminary votes to final votes")
 
-        candidates = [pid for pid in player_ids if pid != voter_id]
-        candidates_str = ", ".join(candidates)
-
-        # Build history including any votes already cast
-        history = await _build_compressed_conversation_history(game, provider)
-
-        # Build vote context showing previous votes
-        previous_votes_text = ""
-        if votes:
-            votes_list = [f"{v}: голосует за {t}" for v, t in votes.items()]
-            previous_votes_text = f"Уже проголосовали: {', '.join(votes_list)}. "
-
-        if is_final_vote:
-            stakes_text = (
-                "ВНИМАНИЕ: Это ФИНАЛЬНОЕ голосование! Время или лимит вопросов исчерпаны. "
-                "Если голоса разделятся — шпион автоматически побеждает. "
-                "Постарайтесь договориться и выбрать одного подозреваемого. "
-            )
+        if game.preliminary_vote_result:
+            final_votes = dict(game.preliminary_vote_result)
         else:
-            stakes_text = (
-                "Это досрочное голосование. "
-                "Если голоса разделятся — игра продолжится. "
+            # No preliminary votes - should not happen, but handle gracefully
+            logger.warning("No preliminary votes found, using empty votes")
+            final_votes = {}
+
+        game.final_vote_result = final_votes
+        game.vote_changes = []
+
+        # Record turns for each vote (for consistency in logs)
+        for voter_id, target_id in final_votes.items():
+            if target_id:
+                vote_content = f"Голосую за {target_id} (подтверждено)"
+            else:
+                vote_content = "Воздерживаюсь (подтверждено)"
+
+            turn = Turn(
+                turn_number=len(game.turns) + 1,
+                timestamp=datetime.now(),
+                speaker_id=voter_id,
+                addressee_id="all",
+                type=TurnType.FINAL_VOTE,
+                content=vote_content,
+                display_delay_ms=calculate_display_delay_ms(vote_content),
+            )
+            game.turns.append(turn)
+            if on_turn:
+                await _call_callback(on_turn, turn, game)
+
+        # Mark phase transition with status
+        game.phase_transitions[-1].status = "skipped_copied_from_preliminary"
+
+    else:
+        # Defense was executed - allow vote changes
+        logger.info("Defense was executed - allowing vote changes in final voting")
+
+        defense_speeches = game.defense_speeches or []
+        preliminary_votes = game.preliminary_vote_result or {}
+
+        for voter_player in game.players:
+            voter_id = voter_player.character_id
+            voter_char = _get_character_by_id(characters, voter_id)
+            voter_secret = _get_secret_info(game, voter_player)
+
+            candidates = [pid for pid in player_ids if pid != voter_id]
+            preliminary_vote = preliminary_votes.get(voter_id)
+
+            # Build prompt with defense context
+            vote_prompt = build_final_vote_with_defense_prompt(
+                character=voter_char,
+                game=game,
+                secret_info=voter_secret,
+                preliminary_vote=preliminary_vote,
+                defense_speeches=defense_speeches,
+                candidates=candidates,
+                allow_abstain=DEFENSE_ALLOW_ABSTAIN,
             )
 
-        vote_instruction = (
-            f"Ты — {voter_char.display_name}. Время голосования. "
-            f"{stakes_text}"
-            f"ПРАВИЛО: голосование засчитывается ТОЛЬКО если ВСЕ единогласно укажут на одного. "
-            f"{previous_votes_text}"
-            f"Голосуй на основе СВОИХ наблюдений — не копируй чужие голоса бездумно. "
-            f"Кто шпион? Выбери ОДНОГО из: {candidates_str}. "
-            f"Напиши ТОЛЬКО имя (id) игрока."
-        )
+            history = await _build_compressed_conversation_history(game, provider)
 
-        messages = [
-            {"role": "system", "content": voter_prompt},
-            *history,
-            {"role": "user", "content": vote_instruction},
-        ]
+            # Build context showing previous final votes
+            previous_votes_text = ""
+            if final_votes:
+                votes_list = []
+                for v, t in final_votes.items():
+                    if t is None:
+                        votes_list.append(f"{v}: воздержался")
+                    else:
+                        votes_list.append(f"{v}: за {t}")
+                previous_votes_text = f"\nУже проголосовали в финале: {', '.join(votes_list)}."
 
-        if on_typing:
-            await on_typing(voter_id)
+            messages = [
+                {"role": "system", "content": vote_prompt},
+                *history,
+                {"role": "user", "content": f"Твой финальный голос:{previous_votes_text}"},
+            ]
 
-        vote_llm_response = await provider.complete(
-            messages=messages,
-            model=game.config.main_model,
-            temperature=0.7,
-            max_tokens=50,
-        )
-        _track_usage_and_check_cost(game, vote_llm_response)
-        vote_response = vote_llm_response.content.strip().lower()
+            if on_typing:
+                await on_typing(voter_id)
 
-        voted_for = None
-        for candidate in candidates:
-            if candidate.lower() in vote_response or vote_response in candidate.lower():
-                voted_for = candidate
-                break
+            vote_llm_response = await provider.complete(
+                messages=messages,
+                model=game.config.main_model,
+                temperature=0.7,
+                max_tokens=50,
+            )
+            _track_usage_and_check_cost(game, vote_llm_response)
+            vote_response = vote_llm_response.content.strip().lower()
 
-        if voted_for is None:
-            voted_for = random.choice(candidates)
+            # Parse vote response
+            voted_for = _parse_final_vote(vote_response, candidates)
 
-        votes[voter_id] = voted_for
+            # If abstain not allowed and got None, retry once then fallback
+            if voted_for is None and not DEFENSE_ALLOW_ABSTAIN:
+                logger.info(f"Voter {voter_id} tried to abstain but not allowed, retrying")
 
-        vote_content = f"Голосую за {voted_for}"
-        turn = Turn(
-            turn_number=len(game.turns) + 1,
-            timestamp=datetime.now(),
-            speaker_id=voter_id,
-            addressee_id="all",
-            type=TurnType.VOTE,
-            content=vote_content,
-            display_delay_ms=calculate_display_delay_ms(vote_content),
-        )
-        game.turns.append(turn)
-        if on_turn:
-            await _call_callback(on_turn, turn, game)
+                retry_messages = [
+                    {"role": "system", "content": vote_prompt},
+                    *history,
+                    {"role": "user", "content": f"Воздержание запрещено. Выбери ОДНОГО из: {', '.join(candidates)}"},
+                ]
 
-    unique_votes = set(votes.values())
-    is_unanimous = len(unique_votes) == 1
+                retry_response = await provider.complete(
+                    messages=retry_messages,
+                    model=game.config.main_model,
+                    temperature=0.8,
+                    max_tokens=50,
+                )
+                _track_usage_and_check_cost(game, retry_response)
+
+                voted_for = _parse_final_vote(retry_response.content.strip().lower(), candidates)
+
+                if voted_for is None:
+                    voted_for = random.choice(candidates)
+                    logger.warning(f"Voter {voter_id} still abstained after retry, random fallback: {voted_for}")
+
+            final_votes[voter_id] = voted_for
+
+            # Record vote change if different from preliminary
+            if voted_for != preliminary_vote:
+                change = VoteChange(
+                    voter_id=voter_id,
+                    from_target=preliminary_vote,
+                    to_target=voted_for,
+                )
+                vote_changes.append(change)
+                logger.info(f"Vote change: {voter_id} changed from {preliminary_vote} to {voted_for}")
+
+            # Create turn
+            if voted_for:
+                if voted_for == preliminary_vote:
+                    vote_content = f"Подтверждаю голос за {voted_for}"
+                elif preliminary_vote:
+                    vote_content = f"Меняю голос: теперь за {voted_for}"
+                else:
+                    vote_content = f"Голосую за {voted_for}"
+            else:
+                vote_content = "Воздерживаюсь"
+
+            turn = Turn(
+                turn_number=len(game.turns) + 1,
+                timestamp=datetime.now(),
+                speaker_id=voter_id,
+                addressee_id="all",
+                type=TurnType.FINAL_VOTE,
+                content=vote_content,
+                display_delay_ms=calculate_display_delay_ms(vote_content),
+            )
+            game.turns.append(turn)
+            if on_turn:
+                await _call_callback(on_turn, turn, game)
+
+        game.final_vote_result = final_votes
+        game.vote_changes = vote_changes
+
+    # Determine winner using strict majority
+    vote_counts: dict[str, int] = {}
+    total_votes = 0
+    for target in final_votes.values():
+        if target is not None:
+            vote_counts[target] = vote_counts.get(target, 0) + 1
+            total_votes += 1
+
+    # Find winner by strict majority
+    winner_target = None
+    max_votes = 0
+    for target, count in vote_counts.items():
+        if count > max_votes:
+            max_votes = count
+            winner_target = target
+
+    # Strict majority: more than half of all votes (excluding abstentions)
+    has_majority = max_votes > total_votes / 2 if total_votes > 0 else False
 
     if on_vote_result:
-        await _call_callback(on_vote_result, is_unanimous, votes)
+        await _call_callback(on_vote_result, has_majority, dict(final_votes))
 
-    if is_unanimous:
-        accused = list(unique_votes)[0]
-        spy_caught = accused == game.spy_id
+    if has_majority and winner_target:
+        # Someone got strict majority
+        spy_caught = winner_target == game.spy_id
 
         if spy_caught:
             winner = "civilians"
-            reason = f"Шпион ({game.spy_id}) был единогласно разоблачён"
+            reason = f"Шпион ({game.spy_id}) был разоблачён большинством голосов ({max_votes}/{total_votes})"
         else:
             winner = "spy"
-            reason = f"Мирные единогласно обвинили {accused}, но шпионом был {game.spy_id}"
+            reason = f"Мирные большинством обвинили {winner_target}, но шпионом был {game.spy_id}"
 
         game.outcome = GameOutcome(
             winner=winner,
             reason=reason,
-            votes=votes,
-            accused_id=accused,
+            votes={k: v for k, v in final_votes.items() if v is not None},
+            accused_id=winner_target,
+        )
+    else:
+        # No majority - spy wins
+        if total_votes == 0:
+            reason = f"Все воздержались — шпион ({game.spy_id}) побеждает"
+        else:
+            reason = f"Голоса разделились (нет большинства) — шпион ({game.spy_id}) побеждает"
+
+        game.outcome = GameOutcome(
+            winner="spy",
+            reason=reason,
+            votes={k: v for k, v in final_votes.items() if v is not None},
         )
 
-        game.ended_at = datetime.now()
-        _transition_phase(game, GamePhase.RESOLUTION, f"Game ended: {winner} won (unanimous vote)")
-    else:
-        # Check if time has run out or max questions reached
-        time_elapsed = datetime.now() - game.started_at
-        time_limit = timedelta(minutes=game.config.duration_minutes)
-        time_expired = time_elapsed >= time_limit
-
-        question_count = len([t for t in game.turns if t.type == TurnType.QUESTION])
-        max_questions_reached = question_count >= game.config.max_questions
-
-        if time_expired or max_questions_reached:
-            # Game limit reached and votes split - spy wins
-            if time_expired:
-                reason = f"Время вышло, голоса разделились — шпион ({game.spy_id}) побеждает"
-            else:
-                reason = f"Лимит вопросов достигнут, голоса разделились — шпион ({game.spy_id}) побеждает"
-
-            game.outcome = GameOutcome(
-                winner="spy",
-                reason=reason,
-                votes=votes,
-            )
-            game.ended_at = datetime.now()
-            _transition_phase(game, GamePhase.RESOLUTION, "Game ended: spy won (limit reached, votes split)")
-        else:
-            _transition_phase(
-                game,
-                GamePhase.MAIN_ROUND,
-                f"Voting failed: votes split ({len(unique_votes)} different targets)"
-            )
+    game.ended_at = datetime.now()
+    _transition_phase(game, GamePhase.RESOLUTION, f"Game ended: {game.outcome.winner} won")
 
     return game
+
+
+def _parse_final_vote(response: str, candidates: list[str]) -> Optional[str]:
+    """Parse final vote response.
+
+    Args:
+        response: Raw LLM response (lowercased).
+        candidates: List of valid candidate IDs.
+
+    Returns:
+        Voted target ID or None if abstained.
+    """
+    abstain_markers = ["воздерж", "abstain", "пропуск", "skip", "нет голоса"]
+
+    # Check for candidate first (to avoid matching "воздержусь" with candidate "zoya")
+    for candidate in candidates:
+        if candidate.lower() in response or response in candidate.lower():
+            return candidate
+
+    # Check for abstain
+    for marker in abstain_markers:
+        if marker in response:
+            return None
+
+    return None
 
 
 async def run_preliminary_vote(

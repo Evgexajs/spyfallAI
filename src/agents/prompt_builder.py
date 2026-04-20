@@ -5,7 +5,7 @@ from typing import Optional
 
 from src.models.character import Character, ReactionType
 from src.models.location import Location, Role
-from src.models.game import Game, Player, Turn
+from src.models.game import DefenseSpeech, Game, Player, Turn
 
 
 @dataclass
@@ -379,3 +379,71 @@ def build_defense_speech_prompt(
 - Не признавай, что ты шпион (даже если это так)
 
 Напиши свою защитную речь:"""
+
+
+def build_final_vote_with_defense_prompt(
+    character: Character,
+    game: Game,
+    secret_info: SecretInfo,
+    preliminary_vote: Optional[str],
+    defense_speeches: list[DefenseSpeech],
+    candidates: list[str],
+    allow_abstain: bool = True,
+) -> str:
+    """Build prompt for final vote after defense speeches (CR-001 F13).
+
+    Args:
+        character: The voting character profile.
+        game: The current game state.
+        secret_info: Secret information (is_spy, location, role).
+        preliminary_vote: This voter's preliminary vote (None if abstained).
+        defense_speeches: All defense speeches delivered.
+        candidates: List of valid candidates to vote for.
+        allow_abstain: Whether abstention is allowed.
+
+    Returns:
+        Prompt for generating a final vote decision.
+    """
+    base_prompt = build_system_prompt(character, game, secret_info)
+
+    if preliminary_vote:
+        original_vote_text = f"В предварительном голосовании ты голосовал(а) против {preliminary_vote}."
+    else:
+        original_vote_text = "В предварительном голосовании ты воздержался(ась)."
+
+    speeches_text = ""
+    if defense_speeches:
+        speeches_list = []
+        for speech in defense_speeches:
+            speeches_list.append(f"- {speech.defender_id}: \"{speech.content}\"")
+        speeches_text = "Защитные речи обвиняемых:\n" + "\n".join(speeches_list)
+    else:
+        speeches_text = "Защитных речей не было."
+
+    candidates_str = ", ".join(candidates)
+
+    if allow_abstain:
+        abstain_option = "Ты можешь воздержаться, написав 'воздержусь'. "
+        abstain_suffix = ' или слово "воздержусь"'
+    else:
+        abstain_option = ""
+        abstain_suffix = ""
+
+    return f"""{base_prompt}
+
+=== ФИНАЛЬНОЕ ГОЛОСОВАНИЕ ===
+
+{original_vote_text}
+
+{speeches_text}
+
+Теперь ты можешь:
+- Подтвердить свой голос
+- Изменить голос на другого игрока
+{abstain_option if preliminary_vote else "- Проголосовать (ты воздержался в первом туре)"}
+
+ПРАВИЛО: Победитель определяется СТРОГИМ БОЛЬШИНСТВОМ голосов.
+Если голоса разделятся (нет большинства) — шпион выигрывает.
+
+Выбери ОДНОГО из: {candidates_str}{abstain_suffix}.
+Напиши ТОЛЬКО имя (id) игрока{abstain_suffix}."""

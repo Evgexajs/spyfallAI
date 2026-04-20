@@ -31,6 +31,44 @@
 
 ---
 
+## [TASK-061] Модифицировать финальное голосование с возможностью смены голоса (F13)
+**Дата:** 2026-04-20
+**Статус:** done
+
+### Что сделано
+- Создана функция `build_final_vote_with_defense_prompt()` в src/agents/prompt_builder.py:
+  - Промпт содержит исходный голос избирателя в предварительном голосовании
+  - Включает все защитные реплики для контекста
+  - Объясняет правило строгого большинства (шпион выигрывает при отсутствии)
+  - Поддерживает опцию воздержания (DEFENSE_ALLOW_ABSTAIN)
+- Обновлён src/agents/__init__.py с экспортом build_final_vote_with_defense_prompt
+- Модифицирована функция `run_final_vote()` в src/orchestrator/game_engine.py:
+  - Добавлен параметр defense_was_executed: bool
+  - Если защита пропущена — копирует preliminary_vote без LLM вызовов
+  - В phase_transitions устанавливается status: 'skipped_copied_from_preliminary'
+  - Если защита была — каждый агент решает подтвердить/изменить голос
+  - Отслеживает vote_changes для изменивших голос (VoteChange объекты)
+  - Воздержавшиеся в preliminary могут проголосовать в final
+  - Победитель определяется строгим большинством (> 50% голосов)
+  - При отсутствии большинства — шпион выигрывает
+- Добавлена вспомогательная функция `_parse_final_vote()` для парсинга ответов
+- Создан tests/test_final_vote_defense.py с 18 тестами:
+  - TestDefenseSkippedCopyVotes: 4 теста копирования голосов без LLM
+  - TestDefenseExecutedVoteChanges: 3 теста смены голосов
+  - TestStrictMajorityWinner: 4 теста определения победителя
+  - TestFinalVotePromptContent: 4 теста содержимого промпта
+  - TestVoteResultCallback: 1 тест callback функции
+  - TestTurnContent: 2 теста контента ходов
+- Все 18 тестов проходят, 226 тестов всего проходят
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- (pending)
+
+---
+
 ## [TASK-060] Реализовать фазу защитных реплик (F12)
 **Дата:** 2026-04-20
 **Статус:** done
