@@ -1140,7 +1140,7 @@
         "Шаг 3: Проверить подсчёт голосов"
       ],
       "dependencies": ["TASK-056", "TASK-057", "TASK-058"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-060",

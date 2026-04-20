@@ -31,6 +31,40 @@
 
 ---
 
+## [TASK-059] Реализовать фазу предварительного голосования (F11)
+**Дата:** 2026-04-20
+**Статус:** done
+
+### Что сделано
+- Добавлены новые фазы в GamePhase enum:
+  - PRELIMINARY_VOTE = "preliminary_vote" — фаза предварительного голосования
+  - PRE_FINAL_VOTE_DEFENSE = "pre_final_vote_defense" — фаза защитных реплик
+- Создана функция run_preliminary_vote() в src/orchestrator/game_engine.py:
+  - Каждый игрок голосует за одного или воздерживается (если DEFENSE_ALLOW_ABSTAIN=true)
+  - Если DEFENSE_ALLOW_ABSTAIN=false — воздержание запрещено, при null перезапрос + fallback
+  - Результат: словарь {voter_id → target_id | null} в game.preliminary_vote_result
+  - Агрегат {target_id → count} без учёта воздержавшихся возвращается из функции
+  - Промпт согласован с DEFENSE_ALLOW_ABSTAIN
+- Добавлена вспомогательная функция _parse_preliminary_vote() для парсинга ответов
+- Обновлён src/orchestrator/__init__.py с экспортом run_preliminary_vote
+- Создан tests/test_preliminary_voting.py с 21 тестами:
+  - TestParsePreliminarilyVote: 6 тестов парсинга ответов
+  - TestRunPreliminaryVoteBasics: 3 теста базовой функциональности
+  - TestVoteCounts: 3 теста подсчёта голосов
+  - TestAbstainBehavior: 3 теста поведения при воздержании
+  - TestVoteTurnContent: 2 теста контента ходов
+  - TestCallbacks: 2 теста callback-функций
+  - TestPromptContent: 2 теста содержимого промптов
+- Все 21 тест проходят, 182 теста всего проходят (1 несвязанный failure)
+
+### Проблемы / Заметки
+- Исправлен парсинг abstain маркеров чтобы не конфликтовать с именами игроков (проверка кандидатов первой)
+
+### Коммиты
+- `860052f` — feat: implement preliminary voting phase (TASK-059)
+
+---
+
 ## [TASK-058] Добавить новые поля в модель Game
 **Дата:** 2026-04-20
 **Статус:** done

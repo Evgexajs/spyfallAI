@@ -1184,3 +1184,183 @@ async def run_final_vote(
             )
 
     return game
+
+
+async def run_preliminary_vote(
+    game: Game,
+    characters: list[Character],
+    provider: Optional[LLMProvider] = None,
+    on_turn: Optional[callable] = None,
+    on_typing: Optional[callable] = None,
+) -> tuple[Game, dict[str, int]]:
+    """Run the preliminary voting phase (CR-001 F11).
+
+    Each player votes for who they think is the spy or abstains (if allowed).
+    Results are stored in game.preliminary_vote_result.
+
+    Args:
+        game: Game object after main_round.
+        characters: List of Character objects participating.
+        provider: Optional LLM provider. If None, creates one from config.
+        on_turn: Optional callback called after each vote turn.
+        on_typing: Optional callback called before LLM generation starts.
+
+    Returns:
+        Tuple of:
+        - Updated Game object with preliminary_vote_result populated
+        - Aggregate dict {target_id: vote_count} (excluding abstentions)
+    """
+    if provider is None:
+        llm_config = LLMConfig()
+        provider, _ = create_provider(llm_config, role="utility")
+
+    _transition_phase(game, GamePhase.PRELIMINARY_VOTE, "Preliminary voting started")
+
+    player_ids = [p.character_id for p in game.players]
+    votes: dict[str, Optional[str]] = {}
+
+    for voter_player in game.players:
+        voter_id = voter_player.character_id
+        voter_char = _get_character_by_id(characters, voter_id)
+        voter_secret = _get_secret_info(game, voter_player)
+        voter_prompt = build_system_prompt(voter_char, game, voter_secret)
+
+        candidates = [pid for pid in player_ids if pid != voter_id]
+        candidates_str = ", ".join(candidates)
+
+        history = await _build_compressed_conversation_history(game, provider)
+
+        previous_votes_text = ""
+        if votes:
+            votes_list = []
+            for v, t in votes.items():
+                if t is None:
+                    votes_list.append(f"{v}: воздержался")
+                else:
+                    votes_list.append(f"{v}: против {t}")
+            previous_votes_text = f"Уже проголосовали: {', '.join(votes_list)}. "
+
+        if DEFENSE_ALLOW_ABSTAIN:
+            abstain_option = "Ты можешь воздержаться, написав 'воздержусь'. "
+            abstain_suffix = ' или слово "воздержусь"'
+        else:
+            abstain_option = ""
+            abstain_suffix = ""
+
+        vote_instruction = (
+            f"Ты — {voter_char.display_name}. Время предварительного голосования. "
+            f"После этого голосования игроки с наибольшим числом голосов получат возможность защититься. "
+            f"{previous_votes_text}"
+            f"Кого ты подозреваешь в том, что он шпион? Выбери ОДНОГО из: {candidates_str}. "
+            f"{abstain_option}"
+            f"Напиши ТОЛЬКО имя (id) игрока{abstain_suffix}."
+        )
+
+        messages = [
+            {"role": "system", "content": voter_prompt},
+            *history,
+            {"role": "user", "content": vote_instruction},
+        ]
+
+        if on_typing:
+            await _call_callback(on_typing, voter_id)
+
+        vote_llm_response = await provider.complete(
+            messages=messages,
+            model=game.config.utility_model,
+            temperature=0.7,
+            max_tokens=50,
+        )
+        _track_usage_and_check_cost(game, vote_llm_response)
+        vote_response = vote_llm_response.content.strip().lower()
+
+        voted_for = _parse_preliminary_vote(vote_response, candidates)
+
+        if voted_for is None and not DEFENSE_ALLOW_ABSTAIN:
+            logger.warning(
+                f"Player {voter_id} returned abstain but DEFENSE_ALLOW_ABSTAIN=false, retrying"
+            )
+            retry_instruction = (
+                f"Ты — {voter_char.display_name}. "
+                f"Ты ОБЯЗАН выбрать одного игрока, воздержание недоступно. "
+                f"Кто шпион? Выбери ОДНОГО из: {candidates_str}. "
+                f"Напиши ТОЛЬКО имя (id) игрока."
+            )
+            retry_messages = [
+                {"role": "system", "content": voter_prompt},
+                *history,
+                {"role": "user", "content": retry_instruction},
+            ]
+
+            retry_response = await provider.complete(
+                messages=retry_messages,
+                model=game.config.utility_model,
+                temperature=0.7,
+                max_tokens=50,
+            )
+            _track_usage_and_check_cost(game, retry_response)
+            vote_response = retry_response.content.strip().lower()
+            voted_for = _parse_preliminary_vote(vote_response, candidates)
+
+            if voted_for is None:
+                voted_for = random.choice(candidates)
+                logger.warning(
+                    f"Player {voter_id} still returned abstain after retry, "
+                    f"randomly selecting {voted_for}"
+                )
+
+        votes[voter_id] = voted_for
+
+        if voted_for is None:
+            vote_content = "Воздерживаюсь"
+        else:
+            vote_content = f"Голосую против {voted_for}"
+
+        turn = Turn(
+            turn_number=len(game.turns) + 1,
+            timestamp=datetime.now(),
+            speaker_id=voter_id,
+            addressee_id="all",
+            type=TurnType.PRELIMINARY_VOTE,
+            content=vote_content,
+            display_delay_ms=calculate_display_delay_ms(vote_content),
+        )
+        game.turns.append(turn)
+        if on_turn:
+            await _call_callback(on_turn, turn, game)
+
+    game.preliminary_vote_result = votes
+
+    vote_counts: dict[str, int] = {}
+    for target in votes.values():
+        if target is not None:
+            vote_counts[target] = vote_counts.get(target, 0) + 1
+
+    logger.info(f"Preliminary vote results: {votes}")
+    logger.info(f"Vote counts (excluding abstentions): {vote_counts}")
+
+    return game, vote_counts
+
+
+def _parse_preliminary_vote(
+    response: str, candidates: list[str]
+) -> Optional[str]:
+    """Parse preliminary vote response.
+
+    Args:
+        response: LLM response text (lowercase)
+        candidates: List of valid candidate IDs
+
+    Returns:
+        candidate ID if voted, None if abstained
+    """
+    for candidate in candidates:
+        if candidate.lower() in response or response in candidate.lower():
+            return candidate
+
+    abstain_markers = ["воздерж", "abstain", "skip this", "пропуска", "я пас"]
+    for marker in abstain_markers:
+        if marker in response:
+            return None
+
+    return None

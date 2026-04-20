@@ -28,6 +28,8 @@ class GamePhase(str, Enum):
     SETUP = "setup"
     MAIN_ROUND = "main_round"
     OPTIONAL_VOTE = "optional_vote"
+    PRELIMINARY_VOTE = "preliminary_vote"  # CR-001: Before defense phase
+    PRE_FINAL_VOTE_DEFENSE = "pre_final_vote_defense"  # CR-001: Defense speeches
     FINAL_VOTE = "final_vote"
     RESOLUTION = "resolution"
 
