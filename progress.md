@@ -31,6 +31,32 @@
 
 ---
 
+## [TASK-065] Обратная совместимость со старыми логами игр
+**Дата:** 2026-04-20
+**Статус:** done
+
+### Что сделано
+- Проверена существующая реализация — все новые CR-001 поля уже имеют дефолты:
+  - `preliminary_vote_result: Optional[dict] = None`
+  - `defense_speeches: list = []` (default_factory)
+  - `final_vote_result: Optional[dict] = None`
+  - `vote_changes: list = []` (default_factory)
+- Добавлены интеграционные тесты в test_defense_voting_models.py:
+  - `test_load_existing_game_files` — загружает все реальные файлы из games/
+  - `test_old_game_defaults_are_correct` — проверяет корректные дефолты
+  - `test_round_trip_preserves_existing_game_data` — сериализация/десериализация
+- Все 6 существующих логов игр загружаются без ошибок
+- UI API тесты (test_games_api.py) проходят — старые игры отображаются
+
+### Тесты
+- 27 тестов в test_defense_voting_models.py пройдено
+- 18 тестов в test_games_api.py пройдено
+
+### Коммиты
+- Коммит будет добавлен после записи
+
+---
+
 ## [TASK-064] Пост-чек защитных реплик на характерность
 **Дата:** 2026-04-20
 **Статус:** done

@@ -1,7 +1,8 @@
-"""Tests for defense voting phase models (TASK-058)."""
+"""Tests for defense voting phase models (TASK-058, TASK-065)."""
 
 import json
 from datetime import datetime
+from pathlib import Path
 from uuid import uuid4
 
 import pytest
@@ -17,6 +18,7 @@ from src.models import (
     TurnType,
     VoteChange,
 )
+from src.storage.game_repository import load_game
 
 
 class TestDefenseSpeechModel:
@@ -425,3 +427,80 @@ class TestTurnTypeValues:
     def test_vote_type_preserved(self):
         """Test old VOTE type still exists for backward compatibility."""
         assert TurnType.VOTE.value == "vote"
+
+
+class TestRealGameFileBackwardCompatibility:
+    """Tests for backward compatibility with real game log files (TASK-065)."""
+
+    def test_load_existing_game_files(self):
+        """Test loading all existing game files from games/ directory.
+
+        Verifies that old game logs without CR-001 fields load without errors.
+        """
+        games_dir = Path(__file__).parent.parent / "games"
+        if not games_dir.exists():
+            pytest.skip("No games directory found")
+
+        game_files = list(games_dir.glob("*.json"))
+        if not game_files:
+            pytest.skip("No game files found")
+
+        for game_file in game_files:
+            game = load_game(game_file)
+
+            assert game.id is not None
+            assert game.location_id is not None
+            assert len(game.players) >= 3
+            prelim_vote = game.preliminary_vote_result
+            assert prelim_vote is None or isinstance(prelim_vote, dict)
+            assert isinstance(game.defense_speeches, list)
+            assert game.final_vote_result is None or isinstance(game.final_vote_result, dict)
+            assert isinstance(game.vote_changes, list)
+
+    def test_old_game_defaults_are_correct(self):
+        """Test that old games get correct default values for new fields."""
+        games_dir = Path(__file__).parent.parent / "games"
+        if not games_dir.exists():
+            pytest.skip("No games directory found")
+
+        game_files = list(games_dir.glob("*.json"))
+        if not game_files:
+            pytest.skip("No game files found")
+
+        for game_file in game_files:
+            with open(game_file, "r", encoding="utf-8") as f:
+                raw_data = json.load(f)
+
+            game = load_game(game_file)
+
+            if "preliminary_vote_result" not in raw_data:
+                assert game.preliminary_vote_result is None
+            if "defense_speeches" not in raw_data:
+                assert game.defense_speeches == []
+            if "final_vote_result" not in raw_data:
+                assert game.final_vote_result is None
+            if "vote_changes" not in raw_data:
+                assert game.vote_changes == []
+
+    def test_round_trip_preserves_existing_game_data(self):
+        """Test that loading and re-serializing an old game preserves all original data."""
+        games_dir = Path(__file__).parent.parent / "games"
+        if not games_dir.exists():
+            pytest.skip("No games directory found")
+
+        game_files = list(games_dir.glob("*.json"))
+        if not game_files:
+            pytest.skip("No game files found")
+
+        for game_file in game_files:
+            with open(game_file, "r", encoding="utf-8") as f:
+                original_data = json.load(f)
+
+            game = load_game(game_file)
+            reserialized = json.loads(game.model_dump_json())
+
+            assert reserialized["id"] == original_data["id"]
+            assert reserialized["location_id"] == original_data["location_id"]
+            assert reserialized["spy_id"] == original_data["spy_id"]
+            assert len(reserialized["players"]) == len(original_data["players"])
+            assert len(reserialized["turns"]) == len(original_data.get("turns", []))
