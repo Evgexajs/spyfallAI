@@ -1021,7 +1021,10 @@ async def run_final_vote(
         llm_config = LLMConfig()
         provider, _ = create_provider(llm_config, role="main")
 
-    _transition_phase(game, GamePhase.FINAL_VOTE, "Final voting started")
+    # Only transition if not already in a voting phase (e.g., came from OPTIONAL_VOTE)
+    current_phase = game.phase_transitions[-1].to_phase if game.phase_transitions else None
+    if current_phase != GamePhase.OPTIONAL_VOTE:
+        _transition_phase(game, GamePhase.FINAL_VOTE, "Final voting started")
 
     player_ids = [p.character_id for p in game.players]
     votes: dict[str, str] = {}
