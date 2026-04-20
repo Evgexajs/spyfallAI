@@ -69,6 +69,10 @@ class ConfidenceEntry(BaseModel):
     turn_number: int = Field(ge=1, description="Turn number when checked")
     timestamp: datetime = Field(description="When the check occurred")
     level: ConfidenceLevel = Field(description="Confidence level chosen by spy")
+    hints: Optional[list[str]] = Field(default=None, description="Hints the spy noticed")
+    location_guess: Optional[str] = Field(default=None, description="Spy's current location guess")
+    reasoning: Optional[str] = Field(default=None, description="Why spy chose this confidence level")
+    raw_response: Optional[str] = Field(default=None, description="Raw LLM response")
 
 
 class TriggerEvent(BaseModel):

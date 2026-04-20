@@ -618,25 +618,50 @@ async def _check_spy_confidence(
 
     response = await provider.complete(
         messages=[{"role": "user", "content": prompt}],
-        model=game.config.utility_model,
+        model=game.config.main_model,  # Use main model for better reasoning
         temperature=0.5,
-        max_tokens=20,
+        max_tokens=300,
     )
 
     _track_usage_and_check_cost(game, response)
-    response_lower = response.content.strip().lower()
+    raw_response = response.content.strip()
 
-    if "confident" in response_lower:
-        level = ConfidenceLevel.CONFIDENT
-    elif "few_guesses" in response_lower or "few" in response_lower:
-        level = ConfidenceLevel.FEW_GUESSES
-    else:
-        level = ConfidenceLevel.NO_IDEA
+    # Parse JSON response
+    hints = None
+    location_guess = None
+    reasoning = None
+    level = ConfidenceLevel.NO_IDEA
+
+    try:
+        parsed = _parse_agent_json_response(raw_response)
+        hints = parsed.get("hints")
+        location_guess = parsed.get("location_guess")
+        reasoning = parsed.get("reasoning")
+        confidence_str = parsed.get("confidence", "").lower()
+
+        if "confident" in confidence_str:
+            level = ConfidenceLevel.CONFIDENT
+        elif "few_guesses" in confidence_str or "few" in confidence_str:
+            level = ConfidenceLevel.FEW_GUESSES
+        else:
+            level = ConfidenceLevel.NO_IDEA
+    except Exception as e:
+        logger.warning(f"Failed to parse spy confidence JSON: {e}")
+        # Fallback to simple parsing
+        response_lower = raw_response.lower()
+        if "confident" in response_lower:
+            level = ConfidenceLevel.CONFIDENT
+        elif "few_guesses" in response_lower or "few" in response_lower:
+            level = ConfidenceLevel.FEW_GUESSES
 
     entry = ConfidenceEntry(
         turn_number=max(1, len(game.turns)),
         timestamp=datetime.now(),
         level=level,
+        hints=hints,
+        location_guess=location_guess,
+        reasoning=reasoning,
+        raw_response=raw_response,
     )
 
     return entry, answer_count
