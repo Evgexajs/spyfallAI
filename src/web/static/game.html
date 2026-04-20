@@ -705,14 +705,60 @@
                     : '-';
             }
 
-            addSystemMessage('Игра началась', 'phase');
+            const PHASE_NAMES = {
+                'setup': 'Подготовка',
+                'main_round': 'Основной раунд',
+                'optional_vote': 'Досрочное голосование',
+                'final_vote': 'Финальное голосование',
+                'resolution': 'Итоги'
+            };
 
-            let currentPhase = null;
-            if (gameData.turns) {
-                gameData.turns.forEach(turn => {
-                    addMessage(turn);
+            // Merge phase transitions with turns and sort by time/turn_number
+            const events = [];
+
+            if (gameData.phase_transitions) {
+                gameData.phase_transitions.forEach(pt => {
+                    events.push({
+                        type: 'phase',
+                        phase: pt.to_phase,
+                        reason: pt.reason,
+                        timestamp: new Date(pt.timestamp),
+                        turn_number: 0
+                    });
                 });
             }
+
+            if (gameData.turns) {
+                gameData.turns.forEach(turn => {
+                    events.push({
+                        type: 'turn',
+                        turn: turn,
+                        timestamp: new Date(turn.timestamp),
+                        turn_number: turn.turn_number
+                    });
+                });
+            }
+
+            // Sort by timestamp, then by turn_number (phases before their turns)
+            events.sort((a, b) => {
+                const timeDiff = a.timestamp - b.timestamp;
+                if (Math.abs(timeDiff) > 1000) return timeDiff;
+                return a.turn_number - b.turn_number;
+            });
+
+            // Render events in order
+            let lastPhase = null;
+            events.forEach(event => {
+                if (event.type === 'phase') {
+                    if (event.phase !== lastPhase) {
+                        const phaseName = PHASE_NAMES[event.phase] || event.phase;
+                        addSystemMessage('— ' + phaseName + ' —', 'phase');
+                        lastPhase = event.phase;
+                    }
+                } else if (event.type === 'turn') {
+                    addMessage(event.turn);
+                }
+            });
 
             if (gameData.outcome) {
                 let outcomeText = '';
