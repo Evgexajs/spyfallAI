@@ -1391,19 +1391,19 @@ async def run_final_vote(
                 vote_changes.append(change)
                 logger.info(f"Vote change: {voter_id} changed from {preliminary_vote} to {voted_for}")
 
-            # Use speech from JSON, fallback to simple format
-            if vote_speech:
-                vote_content = _clean_content(vote_speech)
-            elif voted_for:
+            # Build vote content: always show target, optionally add speech
+            if voted_for is None:
+                vote_content = "Воздерживаюсь"
+            else:
                 voted_for_name = id_to_name.get(voted_for, voted_for)
                 if voted_for == preliminary_vote:
-                    vote_content = f"Подтверждаю голос за {voted_for_name}"
+                    vote_content = f"[Голос: {voted_for_name}]"
                 elif preliminary_vote:
-                    vote_content = f"Меняю голос: теперь за {voted_for_name}"
+                    vote_content = f"[Меняю голос: {voted_for_name}]"
                 else:
-                    vote_content = f"Голосую за {voted_for_name}"
-            else:
-                vote_content = "Воздерживаюсь"
+                    vote_content = f"[Голос: {voted_for_name}]"
+                if vote_speech:
+                    vote_content += f" {_clean_content(vote_speech)}"
 
             turn = Turn(
                 turn_number=len(game.turns) + 1,
@@ -1630,13 +1630,14 @@ async def run_preliminary_vote(
 
         votes[voter_id] = voted_for
 
-        # Use speech from JSON, fallback to simple format
-        if vote_speech:
-            vote_content = _clean_content(vote_speech)
-        elif voted_for is None:
+        # Build vote content: always show target, optionally add speech
+        if voted_for is None:
             vote_content = "Воздерживаюсь"
         else:
-            vote_content = f"Голосую против {id_to_name.get(voted_for, voted_for)}"
+            target_name = id_to_name.get(voted_for, voted_for)
+            vote_content = f"[Голос: {target_name}]"
+            if vote_speech:
+                vote_content += f" {_clean_content(vote_speech)}"
 
         turn = Turn(
             turn_number=len(game.turns) + 1,
