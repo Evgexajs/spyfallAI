@@ -22,6 +22,7 @@ from src.orchestrator import (
     run_final_vote,
     run_main_round,
     run_preliminary_vote,
+    run_preliminary_with_revotes,
     setup_game,
 )
 from src.storage import find_game_by_id, list_games, load_game, save_game
@@ -238,87 +239,61 @@ class GameManager:
                     on_turn=self.on_turn, on_typing=self.on_typing
                 )
 
-                # Initialize flags for this voting cycle
+                # Check if this was a critical trigger (time/questions running out)
                 is_critical_trigger = False
-                is_unanimous_preliminary = False
-                vote_counts = {}
+                for pt in reversed(self.game.phase_transitions):
+                    if pt.to_phase.value == "optional_vote":
+                        is_critical_trigger = pt.status == "critical"
+                        break
 
                 if self.game.outcome is None and self.status != GameStatus.STOPPED:
-                    # Check if this was a critical trigger (time/questions running out)
-                    # Note: player_initiated is NOT critical - it should require unanimity
-                    for pt in reversed(self.game.phase_transitions):
-                        if pt.to_phase.value == "optional_vote":
-                            is_critical_trigger = pt.status == "critical"
-                            break
-
                     await self.broadcast({"type": "phase", "phase": "preliminary_vote"})
-                    self.game, vote_counts = await run_preliminary_vote(
+
+                    # Run preliminary vote with re-vote cycle (includes defense)
+                    self.game, vote_counts, is_unanimous, accused_id = await run_preliminary_with_revotes(
                         self.game, self.characters, provider,
                         on_turn=self.on_turn, on_typing=self.on_typing
                     )
 
-                    # Check if there's a clear suspect (someone with >= 2 votes)
-                    max_votes = max(vote_counts.values()) if vote_counts else 0
-                    has_clear_suspect = max_votes >= 2
+                    if is_unanimous and accused_id:
+                        # Unanimous in preliminary+revotes - resolve immediately
+                        spy_caught = accused_id == self.game.spy_id
+                        spy_char = next(c for c in self.characters if c.id == self.game.spy_id)
 
-                    if not has_clear_suspect:
-                        # No clear suspect - back to discussion
-                        await self.broadcast({
-                            "type": "vote_inconclusive",
-                            "message": "Голоса разделились — нет явного подозреваемого, обсуждение продолжается",
-                        })
-                        continue  # Back to main_round
+                        if spy_caught:
+                            self.game.outcome = GameOutcome(
+                                winner="civilians",
+                                reason=f"Шпион ({spy_char.display_name}) был единогласно разоблачён",
+                                votes=self.game.preliminary_vote_result,
+                                accused_id=accused_id,
+                            )
+                        else:
+                            accused_char = next(c for c in self.characters if c.id == accused_id)
+                            self.game.outcome = GameOutcome(
+                                winner="spy",
+                                reason=f"Игроки единогласно обвинили {accused_char.display_name}, но шпионом был {spy_char.display_name}",
+                                votes=self.game.preliminary_vote_result,
+                                accused_id=accused_id,
+                            )
+                        self.game.ended_at = datetime.now()
 
-                    # Check if preliminary vote was unanimous among CIVILIANS
-                    # (spy obviously won't vote against themselves)
-                    if self.game.preliminary_vote_result:
-                        civilian_ids = [p.character_id for p in self.game.players if not p.is_spy]
-                        civilian_votes = [
-                            self.game.preliminary_vote_result.get(cid)
-                            for cid in civilian_ids
-                        ]
-                        civilian_targets = [t for t in civilian_votes if t is not None]
-                        is_unanimous_preliminary = (
-                            len(civilian_targets) == len(civilian_ids) and
-                            len(set(civilian_targets)) == 1
-                        )
-
-                if self.game.outcome is None and self.status != GameStatus.STOPPED:
-                    await self.broadcast({"type": "phase", "phase": "pre_final_vote_defense"})
-                    self.game, defense_was_executed = await run_defense_speeches(
-                        self.game, self.characters, vote_counts, provider,
-                        on_turn=self.on_turn, on_typing=self.on_typing
-                    )
-
-                    if not defense_was_executed:
-                        await self.broadcast({
-                            "type": "defense_skipped",
-                            "message": "Фаза защиты пропущена — недостаточно голосов",
-                        })
-
-                    # Only proceed to final vote if critical trigger OR unanimous preliminary
-                    if not is_critical_trigger and not is_unanimous_preliminary:
+                    elif not is_critical_trigger:
+                        # Player-initiated, not unanimous - back to discussion
                         await self.broadcast({
                             "type": "vote_inconclusive",
                             "message": "Нет единогласия — обсуждение продолжается",
                         })
                         continue  # Back to main_round
 
+                # Critical trigger and not unanimous - proceed to final vote
                 if self.game.outcome is None and self.status != GameStatus.STOPPED:
                     await self.broadcast({"type": "phase", "phase": "final_vote"})
                     self.game = await run_final_vote(
                         self.game, self.characters, provider,
                         on_turn=self.on_turn, on_typing=self.on_typing,
                         on_vote_result=self.on_vote_result,
-                        defense_was_executed=defense_was_executed,
+                        defense_was_executed=True,  # Defense happened in preliminary cycle
                     )
-
-                    if self.game.outcome is None and self.status != GameStatus.STOPPED:
-                        # Final vote split - back to discussion
-                        await self.broadcast({
-                            "type": "vote_split",
-                            "message": "Мирные не единогласны — шпион пока не пойман, обсуждение продолжается",
-                        })
 
             if self.status != GameStatus.STOPPED:
                 self.status = GameStatus.COMPLETED

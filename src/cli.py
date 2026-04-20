@@ -13,12 +13,14 @@ from typing import Optional
 
 from src.llm import CostExceededError, LLMConfig, create_provider
 from src.models import Character, Game, Turn, TurnType
+from src.models import GameOutcome
 from src.orchestrator import (
     load_locations,
     run_defense_speeches,
     run_final_vote,
     run_main_round,
     run_preliminary_vote,
+    run_preliminary_with_revotes,
     setup_game,
 )
 from src.storage import save_game
@@ -187,42 +189,54 @@ async def run_game(
 
             if game.outcome is None:
                 print(colorize("-" * 60, "bold"))
-                print(colorize("PRELIMINARY VOTE", "bold"))
+                print(colorize("PRELIMINARY VOTE + DEFENSE + REVOTES", "bold"))
                 print(colorize("-" * 60, "bold"))
                 print()
 
-                game, vote_counts = await run_preliminary_vote(
+                # Run preliminary vote with re-vote cycle
+                game, vote_counts, is_unanimous, accused_id = await run_preliminary_with_revotes(
                     game, characters, provider, on_turn=print_turn
                 )
 
-                print(colorize("-" * 60, "bold"))
-                print(colorize("DEFENSE SPEECHES", "bold"))
-                print(colorize("-" * 60, "bold"))
-                print()
+                if is_unanimous and accused_id:
+                    # Unanimous - resolve
+                    spy_caught = accused_id == game.spy_id
+                    spy_char = next(c for c in characters if c.id == game.spy_id)
 
-                game, defense_was_executed = await run_defense_speeches(
-                    game, characters, vote_counts, provider, on_turn=print_turn
-                )
+                    if spy_caught:
+                        game.outcome = GameOutcome(
+                            winner="civilians",
+                            reason=f"Шпион ({spy_char.display_name}) был единогласно разоблачён",
+                            votes=game.preliminary_vote_result,
+                            accused_id=accused_id,
+                        )
+                    else:
+                        accused_char = next(c for c in characters if c.id == accused_id)
+                        game.outcome = GameOutcome(
+                            winner="spy",
+                            reason=f"Игроки единогласно обвинили {accused_char.display_name}, но шпионом был {spy_char.display_name}",
+                            votes=game.preliminary_vote_result,
+                            accused_id=accused_id,
+                        )
+                    game.ended_at = datetime.now()
 
-                if not defense_was_executed:
-                    print(colorize("(Фаза защиты пропущена — недостаточно голосов)", "yellow"))
+                elif game.outcome is None:
+                    # Not unanimous - proceed to final vote (for critical triggers only in web)
+                    # In CLI we always go to final vote for simplicity
+                    print()
+                    print(colorize("Нет единогласия — финальное голосование", "yellow"))
                     print()
 
-                print(colorize("-" * 60, "bold"))
-                print(colorize("FINAL VOTE", "bold"))
-                print(colorize("-" * 60, "bold"))
-                print()
-
-                game = await run_final_vote(
-                    game, characters, provider,
-                    on_turn=print_turn,
-                    defense_was_executed=defense_was_executed,
-                )
-
-                if game.outcome is None:
+                    print(colorize("-" * 60, "bold"))
+                    print(colorize("FINAL VOTE", "bold"))
+                    print(colorize("-" * 60, "bold"))
                     print()
-                    print(colorize("Голоса разделились — голосование не прошло, игра продолжается", "yellow"))
-                    print()
+
+                    game = await run_final_vote(
+                        game, characters, provider,
+                        on_turn=print_turn,
+                        defense_was_executed=True,
+                    )
     except CostExceededError as e:
         cost_exceeded = True
         print()
