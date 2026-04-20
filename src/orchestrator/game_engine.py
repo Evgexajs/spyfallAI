@@ -705,6 +705,34 @@ async def _ask_spy_to_guess(
     return None
 
 
+async def _generate_spy_triumph_speech(
+    game: Game,
+    spy_character: Character,
+    location_name: str,
+    provider: LLMProvider,
+) -> str:
+    """Generate a triumphant speech for the spy after correctly guessing the location."""
+    prompt = f"""Ты — {spy_character.display_name} ({spy_character.archetype}).
+Ты был ШПИОНОМ и только что УГАДАЛ локацию: {location_name}!
+
+Произнеси победную реплику (1-2 предложения) в своём стиле.
+Можешь подколоть остальных игроков, похвастаться или сказать что-то характерное для твоего персонажа.
+
+Стиль речи: {spy_character.voice_style}
+
+Ответь ТОЛЬКО репликой, без кавычек и пояснений."""
+
+    response = await provider.complete(
+        messages=[{"role": "user", "content": prompt}],
+        model=game.config.utility_model,
+        temperature=0.9,
+        max_tokens=100,
+    )
+
+    _track_usage_and_check_cost(game, response)
+    return _clean_content(response.content.strip())
+
+
 async def run_main_round(
     game: Game,
     characters: list[Character],
@@ -1099,6 +1127,24 @@ async def run_main_round(
                         await _call_callback(on_turn, guess_turn, game)
 
                     if guessed_correct:
+                        # Generate triumphant spy speech
+                        spy_char = _get_character_by_id(characters, game.spy_id)
+                        triumph_content = await _generate_spy_triumph_speech(
+                            game, spy_char, actual_location.display_name, provider
+                        )
+                        triumph_turn = Turn(
+                            turn_number=len(game.turns) + 1,
+                            timestamp=datetime.now(),
+                            speaker_id=game.spy_id,
+                            addressee_id="all",
+                            type=TurnType.INTERVENTION,
+                            content=triumph_content,
+                            display_delay_ms=calculate_display_delay_ms(triumph_content),
+                        )
+                        game.turns.append(triumph_turn)
+                        if on_turn:
+                            await _call_callback(on_turn, triumph_turn, game)
+
                         game.outcome = GameOutcome(
                             winner="spy",
                             reason=f"Шпион ({game.spy_id}) угадал локацию: {actual_location.display_name}",
