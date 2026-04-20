@@ -1,5 +1,7 @@
 """Game orchestrator for SpyfallAI - setup and game flow management."""
 
+import asyncio
+import inspect
 import json
 import os
 import random
@@ -43,6 +45,15 @@ MAX_PARTY_COST_USD = float(os.environ.get("MAX_PARTY_COST_USD", "3.0"))
 MAX_QUESTION_REROLL_ATTEMPTS = int(os.environ.get("MAX_QUESTION_REROLL_ATTEMPTS", "3"))
 
 logger = logging.getLogger(__name__)
+
+
+async def _call_callback(callback, *args):
+    """Call a callback, awaiting if it's async."""
+    if callback is None:
+        return
+    result = callback(*args)
+    if inspect.iscoroutine(result):
+        await result
 
 
 def calculate_display_delay_ms(content: str) -> int:
@@ -729,7 +740,7 @@ async def run_main_round(
             )
             game.turns.append(leak_turn)
             if on_turn:
-                on_turn(leak_turn, game)
+                await _call_callback(on_turn, leak_turn, game)
 
             game.outcome = GameOutcome(
                 winner="civilians",
@@ -750,7 +761,7 @@ async def run_main_round(
         )
         game.turns.append(turn)
         if on_turn:
-            on_turn(turn, game)
+            await _call_callback(on_turn, turn, game)
 
         vote_trigger_checker.update_after_turn(turn)
 
@@ -796,7 +807,7 @@ async def run_main_round(
             )
             game.turns.append(leak_turn)
             if on_turn:
-                on_turn(leak_turn, game)
+                await _call_callback(on_turn, leak_turn, game)
 
             game.outcome = GameOutcome(
                 winner="civilians",
@@ -817,7 +828,7 @@ async def run_main_round(
         )
         game.turns.append(answer_turn)
         if on_turn:
-            on_turn(answer_turn, game)
+            await _call_callback(on_turn, answer_turn, game)
 
         answer_count += 1
 
@@ -864,7 +875,7 @@ async def run_main_round(
                     )
                     game.turns.append(guess_turn)
                     if on_turn:
-                        on_turn(guess_turn, game)
+                        await _call_callback(on_turn, guess_turn, game)
 
                     if guessed_correct:
                         game.outcome = GameOutcome(
@@ -925,7 +936,7 @@ async def run_main_round(
                     )
                     game.turns.append(leak_turn)
                     if on_turn:
-                        on_turn(leak_turn, game)
+                        await _call_callback(on_turn, leak_turn, game)
 
                     game.outcome = GameOutcome(
                         winner="civilians",
@@ -946,7 +957,7 @@ async def run_main_round(
                 )
                 game.turns.append(intervention_turn)
                 if on_turn:
-                    on_turn(intervention_turn, game)
+                    await _call_callback(on_turn, intervention_turn, game)
 
                 trigger_checker.update_silence_counters(intervention_turn)
                 vote_trigger_checker.update_after_turn(intervention_turn)
@@ -1061,7 +1072,7 @@ async def run_final_vote(
         )
         game.turns.append(turn)
         if on_turn:
-            on_turn(turn, game)
+            await _call_callback(on_turn, turn, game)
 
     vote_counts: dict[str, int] = {}
     for voted_for in votes.values():

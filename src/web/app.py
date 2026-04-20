@@ -214,6 +214,7 @@ class GameManager:
                         "accused_id": self.game.outcome.accused_id,
                     }
 
+                await self.broadcast({"type": "typing", "speaker_id": None})
                 await self.broadcast({
                     "type": "game_completed",
                     "outcome": outcome_data,
@@ -237,6 +238,7 @@ class GameManager:
                         reason="Game stopped by user",
                     )
                 save_game(self.game)
+            await self.broadcast({"type": "typing", "speaker_id": None})
             await self.broadcast({
                 "type": "game_stopped",
                 "message": "Game stopped by user",
