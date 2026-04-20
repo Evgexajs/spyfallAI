@@ -648,6 +648,100 @@
             }
         }
 
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #444;
+            color: #aaa;
+            font-size: 10px;
+            font-weight: bold;
+            font-style: normal;
+            cursor: help;
+            margin-left: 4px;
+            position: relative;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .info-icon:hover {
+            background-color: #666;
+            color: #fff;
+        }
+
+        .info-icon .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1a1a2e;
+            color: #eee;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: normal;
+            white-space: nowrap;
+            z-index: 1000;
+            margin-bottom: 6px;
+            border: 1px solid #444;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: opacity 0.2s, visibility 0.2s;
+        }
+
+        .info-icon .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: #444;
+        }
+
+        .info-icon:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .info-icon.right .tooltip {
+            left: auto;
+            right: 0;
+            transform: none;
+        }
+
+        .info-icon.right .tooltip::after {
+            left: auto;
+            right: 8px;
+            transform: none;
+        }
+
+        .info-icon.left .tooltip {
+            left: 0;
+            transform: none;
+        }
+
+        .info-icon.left .tooltip::after {
+            left: 8px;
+            transform: none;
+        }
+
+        .spy-label {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .stats-message {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
@@ -711,7 +805,7 @@
         </div>
 
         <aside class="sidebar">
-            <h3>Игроки</h3>
+            <h3>Игроки <span class="info-icon" title="Участники игры">i<span class="tooltip">AI-персонажи, участвующие в текущей игре. Один из них — шпион.</span></span></h3>
             <ul class="player-list" id="playerList">
                 <li class="player-item">
                     <span class="player-name">Игроков пока нет</span>
@@ -721,19 +815,19 @@
             <div class="game-info" id="gameInfo">
                 <h3>Информация</h3>
                 <div class="info-row">
-                    <span class="info-label">Локация:</span>
+                    <span class="info-label">Локация: <span class="info-icon" title="Место действия игры, известное всем кроме шпиона">i<span class="tooltip">Место действия игры, известное всем кроме шпиона</span></span></span>
                     <span id="infoLocation">-</span>
                 </div>
                 <div class="info-row phase-row" id="phaseRow">
-                    <span class="info-label">Фаза:</span>
+                    <span class="info-label">Фаза: <span class="info-icon" title="Текущий этап игры">i<span class="tooltip">Текущий этап игры: подготовка, раунд вопросов, голосование или итоги</span></span></span>
                     <span id="infoPhase" class="phase-badge">-</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">Таймер:</span>
+                    <span class="info-label">Таймер: <span class="info-icon" title="Оставшееся время">i<span class="tooltip">Оставшееся время до окончания раунда</span></span></span>
                     <span id="infoTimer" class="timer-display">--:--</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">Ходов:</span>
+                    <span class="info-label">Ходов: <span class="info-icon" title="Количество ходов">i<span class="tooltip">Количество вопросов и ответов в текущей игре</span></span></span>
                     <span id="infoTurns">0</span>
                 </div>
             </div>
@@ -749,6 +843,28 @@
             spy_guess: 'GUESS',
             spy_leak: 'LEAK'
         };
+
+        const TURN_TYPE_TOOLTIPS = {
+            question: 'Вопрос — игрок задаёт вопрос другому участнику',
+            answer: 'Ответ — игрок отвечает на заданный вопрос',
+            intervention: 'Вмешательство — игрок перебивает для комментария',
+            vote: 'Голосование — игрок голосует за подозреваемого',
+            spy_guess: 'Угадывание — шпион пытается угадать локацию',
+            spy_leak: 'Утечка — шпион случайно выдал локацию'
+        };
+
+        function createInfoIcon(tooltipText, position = '') {
+            const icon = document.createElement('span');
+            icon.className = 'info-icon' + (position ? ' ' + position : '');
+            icon.textContent = 'i';
+
+            const tooltip = document.createElement('span');
+            tooltip.className = 'tooltip';
+            tooltip.textContent = tooltipText;
+
+            icon.appendChild(tooltip);
+            return icon;
+        }
 
         const PLAYER_COLORS = [
             '#e94560', '#4ade80', '#3b82f6', '#f59e0b',
@@ -1050,6 +1166,8 @@
             typeLabel.className = 'message-type ' + data.turn_type;
             typeLabel.textContent = TURN_TYPE_LABELS[data.turn_type] || data.turn_type;
 
+            const typeInfo = createInfoIcon(TURN_TYPE_TOOLTIPS[data.turn_type] || data.turn_type);
+
             header.appendChild(speaker);
 
             if (data.addressee_id && data.addressee_id !== 'all') {
@@ -1060,6 +1178,7 @@
             }
 
             header.appendChild(typeLabel);
+            header.appendChild(typeInfo);
 
             const content = document.createElement('div');
             content.className = 'message-content';
@@ -1076,6 +1195,22 @@
             const msg = document.createElement('div');
             msg.className = 'system-message ' + className;
             msg.textContent = text;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addStatsMessage(tokenUsage) {
+            const msg = document.createElement('div');
+            msg.className = 'system-message stats-message';
+
+            const text = document.createElement('span');
+            text.textContent = 'Токены: ' + tokenUsage.total_input_tokens + ' вх / ' +
+                tokenUsage.total_output_tokens + ' вых | Стоимость: $' +
+                tokenUsage.total_cost_usd.toFixed(4);
+
+            msg.appendChild(text);
+            msg.appendChild(createInfoIcon('Входные токены — текст запросов к ИИ. Выходные — ответы ИИ. Стоимость рассчитывается по тарифам OpenAI.'));
+
             chatMessages.appendChild(msg);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
@@ -1100,12 +1235,24 @@
                 nameSpan.style.color = getPlayerColor(p.character_id);
                 nameSpan.textContent = getPlayerName(p.character_id);
 
+                const roleContainer = document.createElement('span');
+                roleContainer.style.display = 'flex';
+                roleContainer.style.alignItems = 'center';
+
                 const roleSpan = document.createElement('span');
                 roleSpan.className = 'player-role';
                 roleSpan.textContent = p.is_spy ? 'ШПИОН' : (p.role_id || '');
 
+                roleContainer.appendChild(roleSpan);
+
+                if (p.is_spy) {
+                    roleContainer.appendChild(createInfoIcon('Шпион не знает локацию и пытается её угадать, не выдав себя', 'right'));
+                } else if (p.role_id) {
+                    roleContainer.appendChild(createInfoIcon('Роль игрока в текущей локации', 'right'));
+                }
+
                 li.appendChild(nameSpan);
-                li.appendChild(roleSpan);
+                li.appendChild(roleContainer);
                 playerList.appendChild(li);
             });
         }
@@ -1213,11 +1360,7 @@
                         addSystemMessage(winner + ' (' + data.outcome.reason + ')', 'outcome');
                     }
                     if (data.token_usage) {
-                        addSystemMessage(
-                            'Токены: ' + data.token_usage.total_input_tokens + ' вх / ' +
-                            data.token_usage.total_output_tokens + ' вых | Стоимость: $' +
-                            data.token_usage.total_cost_usd.toFixed(4)
-                        );
+                        addStatsMessage(data.token_usage);
                     }
                     break;
 
