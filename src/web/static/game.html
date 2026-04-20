@@ -289,6 +289,88 @@
             color: #f59e0b;
         }
 
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #444;
+            color: #aaa;
+            font-size: 10px;
+            font-weight: bold;
+            font-style: normal;
+            cursor: help;
+            margin-left: 4px;
+            position: relative;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .info-icon:hover {
+            background-color: #666;
+            color: #fff;
+        }
+
+        .info-icon .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1a1a2e;
+            color: #eee;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: normal;
+            white-space: nowrap;
+            z-index: 1000;
+            margin-bottom: 6px;
+            border: 1px solid #444;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: opacity 0.2s, visibility 0.2s;
+        }
+
+        .info-icon .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: #444;
+        }
+
+        .info-icon:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .info-icon.right .tooltip {
+            left: auto;
+            right: 0;
+            transform: none;
+        }
+
+        .info-icon.right .tooltip::after {
+            left: auto;
+            right: 8px;
+            transform: none;
+        }
+
+        .info-icon.left .tooltip {
+            left: 0;
+            transform: none;
+        }
+
+        .info-icon.left .tooltip::after {
+            left: 8px;
+            transform: none;
+        }
+
         .loading {
             display: flex;
             justify-content: center;
@@ -355,12 +437,12 @@
         </div>
 
         <aside class="sidebar" id="sidebar" style="display: none;">
-            <h3>Игроки</h3>
+            <h3>Игроки <span class="info-icon" title="Участники игры">i<span class="tooltip">AI-персонажи, участвовавшие в этой игре. Один из них — шпион.</span></span></h3>
             <ul class="player-list" id="playerList"></ul>
 
             <div class="game-info">
                 <div class="info-row">
-                    <span class="info-label">Локация:</span>
+                    <span class="info-label">Локация: <span class="info-icon" title="Место действия">i<span class="tooltip">Место действия игры, известное всем кроме шпиона</span></span></span>
                     <span class="info-value" id="infoLocation">-</span>
                 </div>
                 <div class="info-row">
@@ -376,13 +458,13 @@
                     <span class="info-value" id="infoDuration">-</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">Ходов:</span>
+                    <span class="info-label">Ходов: <span class="info-icon" title="Количество ходов">i<span class="tooltip">Количество вопросов и ответов в этой игре</span></span></span>
                     <span class="info-value" id="infoTurns">-</span>
                 </div>
             </div>
 
             <div class="stats-section" id="statsSection">
-                <h4>Статистика</h4>
+                <h4>Статистика <span class="info-icon" title="Статистика токенов">i<span class="tooltip">Входные токены — текст запросов к ИИ. Выходные — ответы ИИ. Стоимость рассчитывается по тарифам OpenAI.</span></span></h4>
                 <div class="stat-row">
                     <span class="stat-label">Входные токены:</span>
                     <span class="stat-value" id="statInputTokens">-</span>
@@ -412,6 +494,28 @@
             spy_guess: 'GUESS',
             spy_leak: 'LEAK'
         };
+
+        const TURN_TYPE_TOOLTIPS = {
+            question: 'Вопрос — игрок задаёт вопрос другому участнику',
+            answer: 'Ответ — игрок отвечает на заданный вопрос',
+            intervention: 'Вмешательство — игрок перебивает для комментария',
+            vote: 'Голосование — игрок голосует за подозреваемого',
+            spy_guess: 'Угадывание — шпион пытается угадать локацию',
+            spy_leak: 'Утечка — шпион случайно выдал локацию'
+        };
+
+        function createInfoIcon(tooltipText, position = '') {
+            const icon = document.createElement('span');
+            icon.className = 'info-icon' + (position ? ' ' + position : '');
+            icon.textContent = 'i';
+
+            const tooltip = document.createElement('span');
+            tooltip.className = 'tooltip';
+            tooltip.textContent = tooltipText;
+
+            icon.appendChild(tooltip);
+            return icon;
+        }
 
         const PLAYER_COLORS = [
             '#e94560', '#4ade80', '#3b82f6', '#f59e0b',
@@ -489,6 +593,8 @@
             typeLabel.className = 'message-type ' + turnType;
             typeLabel.textContent = TURN_TYPE_LABELS[turnType] || turnType.toUpperCase();
 
+            const typeInfo = createInfoIcon(TURN_TYPE_TOOLTIPS[turnType] || turnType);
+
             header.appendChild(speaker);
 
             if (turn.addressee_id && turn.addressee_id !== 'all') {
@@ -499,6 +605,7 @@
             }
 
             header.appendChild(typeLabel);
+            header.appendChild(typeInfo);
 
             const turnNumber = document.createElement('span');
             turnNumber.className = 'message-turn-number';
@@ -561,12 +668,24 @@
                 nameSpan.style.color = getPlayerColor(player.character_id);
                 nameSpan.textContent = getPlayerName(player.character_id);
 
+                const roleContainer = document.createElement('span');
+                roleContainer.style.display = 'flex';
+                roleContainer.style.alignItems = 'center';
+
                 const roleSpan = document.createElement('span');
                 roleSpan.className = 'player-role';
                 roleSpan.textContent = player.is_spy ? 'ШПИОН' : (player.role_id || '');
 
+                roleContainer.appendChild(roleSpan);
+
+                if (player.is_spy) {
+                    roleContainer.appendChild(createInfoIcon('Шпион не знает локацию и пытается её угадать, не выдав себя', 'right'));
+                } else if (player.role_id) {
+                    roleContainer.appendChild(createInfoIcon('Роль игрока в текущей локации', 'right'));
+                }
+
                 li.appendChild(nameSpan);
-                li.appendChild(roleSpan);
+                li.appendChild(roleContainer);
                 playerList.appendChild(li);
             });
 
