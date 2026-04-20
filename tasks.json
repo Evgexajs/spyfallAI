@@ -890,6 +890,99 @@
       ],
       "dependencies": ["TASK-005", "TASK-006", "TASK-007", "TASK-015", "TASK-016", "TASK-017", "TASK-018", "TASK-019"],
       "status": "done"
+    },
+    {
+      "id": "TASK-047",
+      "category": "ui",
+      "priority": "medium",
+      "description": "API endpoint GET /games — список всех игр",
+      "acceptance_criteria": [
+        "Эндпоинт GET /games возвращает список игр из папки games/",
+        "Каждый элемент содержит: id, started_at, location_id, outcome.winner",
+        "Сортировка по дате (новые первые)",
+        "Пустой список если нет игр"
+      ],
+      "test_steps": [
+        "Шаг 1: Вызвать GET /games через curl",
+        "Шаг 2: Проверить что возвращается JSON массив",
+        "Шаг 3: Проверить наличие полей id, started_at, location_id"
+      ],
+      "dependencies": ["TASK-031"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-048",
+      "category": "ui",
+      "priority": "medium",
+      "description": "API endpoint GET /games/{id} — данные одной игры",
+      "acceptance_criteria": [
+        "Эндпоинт GET /games/{id} возвращает полные данные игры",
+        "404 если игра не найдена",
+        "Включает turns, players, outcome, token_usage"
+      ],
+      "test_steps": [
+        "Шаг 1: Получить id из GET /games",
+        "Шаг 2: Вызвать GET /games/{id}",
+        "Шаг 3: Проверить полную структуру игры"
+      ],
+      "dependencies": ["TASK-047"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-049",
+      "category": "ui",
+      "priority": "medium",
+      "description": "Кнопка История в header UI",
+      "acceptance_criteria": [
+        "Кнопка 'История' рядом с Start/Pause/Stop",
+        "Клик открывает модальное окно или секцию со списком игр",
+        "Стиль консистентен с остальными кнопками"
+      ],
+      "test_steps": [
+        "Шаг 1: Открыть UI в браузере",
+        "Шаг 2: Найти кнопку История",
+        "Шаг 3: Кликнуть и увидеть список игр"
+      ],
+      "dependencies": ["TASK-047"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-050",
+      "category": "ui",
+      "priority": "medium",
+      "description": "Список игр с поиском по ID",
+      "acceptance_criteria": [
+        "Отображается список всех игр (id, дата, локация, победитель)",
+        "Поле поиска фильтрует по ID",
+        "Кликабельные элементы списка",
+        "Показывается сообщение если игр нет"
+      ],
+      "test_steps": [
+        "Шаг 1: Открыть историю",
+        "Шаг 2: Ввести часть ID в поиск",
+        "Шаг 3: Проверить фильтрацию списка"
+      ],
+      "dependencies": ["TASK-049"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-051",
+      "category": "ui",
+      "priority": "medium",
+      "description": "Страница просмотра игры в новой вкладке",
+      "acceptance_criteria": [
+        "Клик на игру открывает /game/{id} в новой вкладке",
+        "Страница показывает полный лог: игроки, реплики, итог",
+        "Реплики отформатированы как в live-игре (цвета, типы)",
+        "Показана статистика: токены, стоимость, длительность"
+      ],
+      "test_steps": [
+        "Шаг 1: Кликнуть на игру в списке",
+        "Шаг 2: Проверить что открылась новая вкладка",
+        "Шаг 3: Проверить отображение всех реплик и статистики"
+      ],
+      "dependencies": ["TASK-048", "TASK-050"],
+      "status": "pending"
     }
   ]
 }
