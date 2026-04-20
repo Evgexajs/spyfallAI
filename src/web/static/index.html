@@ -381,6 +381,164 @@
             background-color: #dc2626;
         }
 
+        .btn-history {
+            background-color: #6366f1;
+            color: white;
+            min-width: 80px;
+        }
+
+        .btn-history:hover:not(:disabled) {
+            background-color: #4f46e5;
+        }
+
+        .modal-dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-dialog.visible {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #16213e;
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #0f3460;
+        }
+
+        .modal-header h3 {
+            color: #e94560;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        .history-search {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: 1px solid #0f3460;
+            border-radius: 4px;
+            background-color: #1a1a2e;
+            color: #eee;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .history-search:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        .history-search::placeholder {
+            color: #666;
+        }
+
+        .games-list {
+            flex: 1;
+            overflow-y: auto;
+            list-style: none;
+        }
+
+        .games-list-empty {
+            text-align: center;
+            color: #888;
+            padding: 2rem;
+            font-style: italic;
+        }
+
+        .game-item {
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            background-color: #1a1a2e;
+            border-radius: 4px;
+            cursor: pointer;
+            border-left: 4px solid #0f3460;
+            transition: all 0.2s;
+        }
+
+        .game-item:hover {
+            background-color: #252547;
+            border-left-color: #6366f1;
+        }
+
+        .game-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.25rem;
+        }
+
+        .game-item-id {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #6366f1;
+        }
+
+        .game-item-date {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .game-item-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .game-item-location {
+            color: #aaa;
+        }
+
+        .game-item-winner {
+            font-weight: bold;
+        }
+
+        .game-item-winner.spy {
+            color: #ef4444;
+        }
+
+        .game-item-winner.civilians {
+            color: #4ade80;
+        }
+
+        .game-item-winner.cancelled {
+            color: #888;
+        }
+
         .confirm-dialog {
             display: none;
             position: fixed;
@@ -515,6 +673,7 @@
                 <button class="btn-start" id="btnStart" disabled>Start</button>
                 <button class="btn-pause" id="btnPause" disabled>Pause</button>
                 <button class="btn-stop" id="btnStop" disabled>Stop</button>
+                <button class="btn-history" id="btnHistory">История</button>
             </div>
         </div>
     </header>
@@ -535,6 +694,19 @@
                     <button class="btn-confirm-yes" id="btnConfirmYes">Stop Game</button>
                     <button class="btn-confirm-no" id="btnConfirmNo">Cancel</button>
                 </div>
+            </div>
+        </div>
+
+        <div class="modal-dialog" id="historyModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>История игр</h3>
+                    <button class="modal-close" id="btnHistoryClose">&times;</button>
+                </div>
+                <input type="text" class="history-search" id="historySearch" placeholder="Поиск по ID...">
+                <ul class="games-list" id="gamesList">
+                    <li class="games-list-empty">Загрузка...</li>
+                </ul>
             </div>
         </div>
 
@@ -608,6 +780,12 @@
         const confirmDialog = document.getElementById('confirmDialog');
         const btnConfirmYes = document.getElementById('btnConfirmYes');
         const btnConfirmNo = document.getElementById('btnConfirmNo');
+        const btnHistory = document.getElementById('btnHistory');
+        const historyModal = document.getElementById('historyModal');
+        const btnHistoryClose = document.getElementById('btnHistoryClose');
+        const historySearch = document.getElementById('historySearch');
+        const gamesList = document.getElementById('gamesList');
+        let allGames = [];
 
         function updateStatus(status, wsConnected = true) {
             gameStatus = status;
@@ -652,6 +830,104 @@
 
         function hideConfirmDialog() {
             confirmDialog.classList.remove('visible');
+        }
+
+        function showHistoryModal() {
+            historyModal.classList.add('visible');
+            historySearch.value = '';
+            fetchGames();
+        }
+
+        function hideHistoryModal() {
+            historyModal.classList.remove('visible');
+        }
+
+        async function fetchGames() {
+            gamesList.innerHTML = '<li class="games-list-empty">Загрузка...</li>';
+            try {
+                const response = await fetch('/games');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch games');
+                }
+                allGames = await response.json();
+                renderGamesList(allGames);
+            } catch (error) {
+                gamesList.innerHTML = '<li class="games-list-empty">Ошибка загрузки: ' + error.message + '</li>';
+            }
+        }
+
+        function renderGamesList(games) {
+            if (games.length === 0) {
+                gamesList.innerHTML = '<li class="games-list-empty">Нет сохранённых игр</li>';
+                return;
+            }
+            gamesList.innerHTML = '';
+            games.forEach(game => {
+                const li = document.createElement('li');
+                li.className = 'game-item';
+                li.onclick = () => openGamePage(game.id);
+
+                const header = document.createElement('div');
+                header.className = 'game-item-header';
+
+                const idSpan = document.createElement('span');
+                idSpan.className = 'game-item-id';
+                idSpan.textContent = game.id.substring(0, 8) + '...';
+                idSpan.title = game.id;
+
+                const dateSpan = document.createElement('span');
+                dateSpan.className = 'game-item-date';
+                dateSpan.textContent = formatGameDate(game.started_at);
+
+                header.appendChild(idSpan);
+                header.appendChild(dateSpan);
+
+                const details = document.createElement('div');
+                details.className = 'game-item-details';
+
+                const locationSpan = document.createElement('span');
+                locationSpan.className = 'game-item-location';
+                locationSpan.textContent = game.location_id || '-';
+
+                const winnerSpan = document.createElement('span');
+                winnerSpan.className = 'game-item-winner';
+                if (game.winner === 'spy') {
+                    winnerSpan.classList.add('spy');
+                    winnerSpan.textContent = 'Шпион';
+                } else if (game.winner === 'civilians') {
+                    winnerSpan.classList.add('civilians');
+                    winnerSpan.textContent = 'Мирные';
+                } else if (game.winner === 'cancelled') {
+                    winnerSpan.classList.add('cancelled');
+                    winnerSpan.textContent = 'Отменена';
+                } else {
+                    winnerSpan.textContent = game.winner || '-';
+                }
+
+                details.appendChild(locationSpan);
+                details.appendChild(winnerSpan);
+
+                li.appendChild(header);
+                li.appendChild(details);
+                gamesList.appendChild(li);
+            });
+        }
+
+        function formatGameDate(isoString) {
+            if (!isoString) return '-';
+            const date = new Date(isoString);
+            return date.toLocaleDateString('ru-RU') + ' ' + date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function filterGames(searchText) {
+            const filtered = allGames.filter(game =>
+                game.id.toLowerCase().includes(searchText.toLowerCase())
+            );
+            renderGamesList(filtered);
+        }
+
+        function openGamePage(gameId) {
+            window.open('/game/' + gameId, '_blank');
         }
 
         function formatTime(seconds) {
@@ -1027,10 +1303,24 @@
         btnStop.addEventListener('click', requestStopGame);
         btnConfirmYes.addEventListener('click', stopGame);
         btnConfirmNo.addEventListener('click', hideConfirmDialog);
+        btnHistory.addEventListener('click', showHistoryModal);
+        btnHistoryClose.addEventListener('click', hideHistoryModal);
+        historySearch.addEventListener('input', (e) => filterGames(e.target.value));
+
+        historyModal.addEventListener('click', function(e) {
+            if (e.target === historyModal) {
+                hideHistoryModal();
+            }
+        });
 
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && confirmDialog.classList.contains('visible')) {
-                hideConfirmDialog();
+            if (e.key === 'Escape') {
+                if (confirmDialog.classList.contains('visible')) {
+                    hideConfirmDialog();
+                }
+                if (historyModal.classList.contains('visible')) {
+                    hideHistoryModal();
+                }
             }
         });
 

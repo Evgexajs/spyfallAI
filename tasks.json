@@ -944,7 +944,7 @@
         "Шаг 3: Кликнуть и увидеть список игр"
       ],
       "dependencies": ["TASK-047"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-050",
