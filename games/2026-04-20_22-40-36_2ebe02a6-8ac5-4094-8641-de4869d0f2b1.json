@@ -1,0 +1,169 @@
+{
+  "id": "2ebe02a6-8ac5-4094-8641-de4869d0f2b1",
+  "started_at": "2026-04-20T22:40:36.138528",
+  "ended_at": "2026-04-20T22:41:07.499104",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "hospital",
+  "players": [
+    {
+      "character_id": "margo",
+      "role_id": "nurse",
+      "is_spy": false
+    },
+    {
+      "character_id": "zoya",
+      "role_id": "receptionist",
+      "is_spy": false
+    },
+    {
+      "character_id": "kim",
+      "role_id": "surgeon",
+      "is_spy": false
+    },
+    {
+      "character_id": "lyokha",
+      "role_id": null,
+      "is_spy": true
+    }
+  ],
+  "spy_id": "lyokha",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T22:40:38.329181",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "Лёха, а как ты относишься к таким специфическим запахам здесь? Ну, в смысле... как считаешь, это нормально, вернее, привычно?",
+      "display_delay_ms": 4223,
+      "raw_response": "{\n  \"content\": \"Лёха, а как ты относишься к таким специфическим запахам здесь? Ну, в смысле... как считаешь, это нормально, вернее, привычно?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T22:40:43.775377",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "type": "answer",
+      "content": "Такие запахи, чё. Нормально, давно привык.",
+      "display_delay_ms": 1585,
+      "raw_response": "{\n  \"content\": \"Такие запахи, чё. Нормально, давно привык.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T22:40:46.459385",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "type": "question",
+      "content": "Эй, Ким, а ты как с одеждой, тут удобно?",
+      "display_delay_ms": 1513,
+      "raw_response": "{\n  \"content\": \"Эй, Ким, а ты как с одеждой, тут удобно?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T22:40:48.951944",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "Ну, в смысле... в зелёном халате довольно удобно, вернее, иногда даже чувствуешь себя некой... защитой. Правда, маска может немного мешать, но это всё привычное дело.",
+      "display_delay_ms": 5368,
+      "raw_response": "{\n  \"content\": \"Ну, в смысле... в зелёном халате довольно удобно, вернее, иногда даже чувствуешь себя некой... защитой. Правда, маска может немного мешать, но это всё привычное дело.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T22:40:55.916324",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "А что тебя больше всего раздражает здесь, ну, в смысле, среди звуков и всего такого?",
+      "display_delay_ms": 3104,
+      "raw_response": "{\n  \"content\": \"А что тебя больше всего раздражает здесь, ну, в смысле, среди звуков и всего такого?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:41:00.562075",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "type": "answer",
+      "content": "Да фиг его знает, шум постоянно какой-то. Надоедает.",
+      "display_delay_ms": 1925,
+      "raw_response": "{\n  \"content\": \"Да фиг его знает, шум постоянно какой-то. Надоедает.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T22:41:05.975298",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "spy_guess",
+      "content": "Я думаю, мы находимся в: Больница",
+      "display_delay_ms": 1523,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:41:03.861320",
+      "level": "confident",
+      "hints": [
+        "специфические запахи",
+        "зелёный халат и маска"
+      ],
+      "location_guess": "больница",
+      "reasoning": "Упоминание специфических запахов и зелёного халата с маской указывает на медицинское учреждение, вероятно, больницу. Эти элементы чаще всего ассоциируются с медицинской средой, где запахи и защитная одежда являются обычным явлением.",
+      "raw_response": "{\n  \"hints\": [\"специфические запахи\", \"зелёный халат и маска\"],\n  \"location_guess\": \"больница\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Упоминание специфических запахов и зелёного халата с маской указывает на медицинское учреждение, вероятно, больницу. Эти элементы чаще всего ассоциируются с медицинской средой, где запахи и защитная одежда являются обычным явлением.\"\n}"
+    }
+  ],
+  "triggered_events": [],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T22:40:36.138528",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-20T22:40:36.138843",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-20T22:41:07.499129",
+      "from_phase": "main_round",
+      "to_phase": "resolution",
+      "reason": "Spy guessed location: correct",
+      "status": null,
+      "initiator_id": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Шпион (lyokha) угадал локацию: Больница",
+    "votes": null,
+    "spy_guess": "hospital",
+    "spy_guess_correct": true,
+    "accused_id": null
+  },
+  "compressed_history": null,
+  "compression_checkpoint": null,
+  "token_usage": {
+    "total_input_tokens": 10384,
+    "total_output_tokens": 489,
+    "total_cost_usd": 0.029111,
+    "llm_calls_count": 8
+  },
+  "preliminary_vote_result": null,
+  "defense_speeches": [],
+  "final_vote_result": null,
+  "vote_changes": []
+}

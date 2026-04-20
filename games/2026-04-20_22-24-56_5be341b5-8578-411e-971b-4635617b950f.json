@@ -1,0 +1,412 @@
+{
+  "id": "5be341b5-8578-411e-971b-4635617b950f",
+  "started_at": "2026-04-20T22:24:56.373438",
+  "ended_at": "2026-04-20T22:27:56.231218",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "bank",
+  "players": [
+    {
+      "character_id": "zoya",
+      "role_id": "security_guard",
+      "is_spy": false
+    },
+    {
+      "character_id": "lyokha",
+      "role_id": "client",
+      "is_spy": false
+    },
+    {
+      "character_id": "margo",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": "teller",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "margo",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T22:24:58.842022",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "Игнатий, дорогой, интересно, а какие у нас тут звуки чаще всего слышны?",
+      "display_delay_ms": 2534,
+      "raw_response": "{\n  \"content\": \"Игнатий, дорогой, интересно, а какие у нас тут звуки чаще всего слышны?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T22:25:04.482117",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Марго, моя дорогая, здесь часто можно услышать звуки шагов по мраморному полу и негромкие разговоры. Эти звуки навевают чувство порядка и организованности. Скажи, разве это не так?",
+      "display_delay_ms": 5657,
+      "raw_response": "{\n  \"content\": \"Марго, моя дорогая, здесь часто можно услышать звуки шагов по мраморному полу и негромкие разговоры. Эти звуки навевают чувство порядка и организованности. Скажи, разве это не так?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T22:25:12.240164",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "Лёха, скажи мне, во что ты обычно одеваешься для работы здесь? Это важно для нашей совести.",
+      "display_delay_ms": 3074,
+      "raw_response": "{\n  \"content\": \"Лёха, скажи мне, во что ты обычно одеваешься для работы здесь? Это важно для нашей совести.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T22:25:16.487088",
+      "speaker_id": "lyokha",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "Да чё тут, обычные шмотки. Чё, костюм что ли надевать, когда бумажки заполняешь?",
+      "display_delay_ms": 2670,
+      "raw_response": "{\n  \"content\": \"Да чё тут, обычные шмотки. Чё, костюм что ли надевать, когда бумажки заполняешь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T22:25:20.628760",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Марго, чё у нас тут обычно в очереди народ делает, кроме как ждать?",
+      "display_delay_ms": 2570,
+      "raw_response": "{\n  \"content\": \"Марго, чё у нас тут обычно в очереди народ делает, кроме как ждать?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:25:25.519668",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "Лёха, милый, люди обычно болтают о всяких мелочах, о том, как пролетает время, и конечно, делают комплименты друг другу, чтобы скоротать ожидание, не так ли?",
+      "display_delay_ms": 4952,
+      "raw_response": "{\n  \"content\": \"Лёха, милый, люди обычно болтают о всяких мелочах, о том, как пролетает время, и конечно, делают комплименты друг другу, чтобы скоротать ожидание, не так ли?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T22:25:34.699418",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Ага, Марго, будто бы все здесь такие любезные комплиментологи. Звучит подозрительно абстрактно, не находишь? Может, ты что-то скрываешь?",
+      "display_delay_ms": 4441,
+      "raw_response": "Ага, Марго, будто бы все здесь такие любезные комплиментологи. Звучит подозрительно абстрактно, не находишь? Может, ты что-то скрываешь?"
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T22:25:40.249576",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "Лёха, дорогой, а какие бумаги тебе чаще всего приходится заполнять? Интересно, есть ли у них специфический запах?",
+      "display_delay_ms": 3674,
+      "raw_response": "{\n  \"content\": \"Лёха, дорогой, а какие бумаги тебе чаще всего приходится заполнять? Интересно, есть ли у них специфический запах?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T22:25:45.371523",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Да блин, бумаги как бумаги, без всяких спецзапахов. Вся эта бюрократия короче.",
+      "display_delay_ms": 2826,
+      "raw_response": "{\n  \"content\": \"Да блин, бумаги как бумаги, без всяких спецзапахов. Вся эта бюрократия короче.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-20T22:25:50.225155",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "type": "intervention",
+      "content": "Лёха, я не могу не заметить, что твои слова звучат слишком уклончиво и не дают нам чёткого представления. Быть может, у тебя есть какие-то сомнения или что-то, что ты хотел бы искренне поделиться?",
+      "display_delay_ms": 6228,
+      "raw_response": "Лёха, я не могу не заметить, что твои слова звучат слишком уклончиво и не дают нам чёткого представления. Быть может, у тебя есть какие-то сомнения или что-то, что ты хотел бы искренне поделиться?"
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-20T22:26:03.305976",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Марго, а ты заметила, как тут с этим железом вокруг — часто ломается или свет мигает?",
+      "display_delay_ms": 2753,
+      "raw_response": "{\n  \"content\": \"Марго, а ты заметила, как тут с этим железом вокруг — часто ломается или свет мигает?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T22:26:13.247214",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "Лёха, дорогой, у нас тут всегда полно оборудования — но, как я заметила, оно довольно надёжное. Не замечала особых проблем, хотя иногда, может быть, свет и мигнёт, но это ведь мелочи, не правда ли?",
+      "display_delay_ms": 6171,
+      "raw_response": "{\n  \"content\": \"Лёха, дорогой, у нас тут всегда полно оборудования — но, как я заметила, оно довольно надёжное. Не замечала особых проблем, хотя иногда, может быть, свет и мигнёт, но это ведь мелочи, не правда ли?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-20T22:26:26.741225",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Ага, Марго, но ты сама не замечаешь, что это звучит уклончиво? Или ты специально так обтекаемо отвечаешь, чтобы нас запутать?",
+      "display_delay_ms": 4172,
+      "raw_response": "Ага, Марго, но ты сама не замечаешь, что это звучит уклончиво? Или ты специально так обтекаемо отвечаешь, чтобы нас запутать?"
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-20T22:26:36.628988",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "Лёха, милый, а как часто ты слышишь звуки шагов здесь? Бывают ли они тяжелыми, например, как будто кто-то несет что-то громоздкое?",
+      "display_delay_ms": 4193,
+      "raw_response": "{\n  \"content\": \"Лёха, милый, а как часто ты слышишь звуки шагов здесь? Бывают ли они тяжелыми, например, как будто кто-то несет что-то громоздкое?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T22:26:46.723511",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Шаги тяжёлые, как ломовая лошадь. Тут народ постоянно чего-то таскает, то документы, то ящики.",
+      "display_delay_ms": 3172,
+      "raw_response": "{\n  \"content\": \"Шаги тяжёлые, как ломовая лошадь. Тут народ постоянно чего-то таскает, то документы, то ящики.\",\n  \"wants_vote\": true,\n  \"suspect_id\": \"margo\"\n}"
+    },
+    {
+      "turn_number": 16,
+      "timestamp": "2026-04-20T22:26:55.900996",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Ну да, конечно, Лёха. Шаги как у ломовой лошади? Серьёзно? Такое ощущение, будто ты тут только что с телеги слез. Так что я за тебя, дружок.",
+      "display_delay_ms": 4590,
+      "raw_response": null
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-20T22:27:02.273351",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Чё-то, Марго, ты крутишь-вертишь, как будто не знаешь, чё к чему. Так что мой голос за тебя.",
+      "display_delay_ms": 3193,
+      "raw_response": null
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T22:27:07.000139",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Ох, Лёха, дорогой, в твоих ответах столько неопределённости, что это вызывает у меня легкие сомнения. Надеюсь, ты не обижаешься, но я голосую за тебя.",
+      "display_delay_ms": 4849,
+      "raw_response": null
+    },
+    {
+      "turn_number": 19,
+      "timestamp": "2026-04-20T22:27:13.167378",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "Друзья мои, я долго прислушивался к каждому из вас. Лёха, твои ответы так и не дали ясности, и мне кажется, что твоя совесть сегодня не совсем чиста. Возможно, тебе стоит быть более искренним, чтобы развеять сомнения.",
+      "display_delay_ms": 6811,
+      "raw_response": null
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-20T22:27:22.790256",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "defense_speech",
+      "content": "Ребят, вы чё, прикалываетесь? Я тут просто по делам, бумаги оформляю.",
+      "display_delay_ms": 2485,
+      "raw_response": null
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-20T22:27:27.621876",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Ну да, конечно, Лёха, шаги как у ломовой лошади среди мраморных полов — очень убедительно. Ага, точно не шпион. Или всё-таки шпион?",
+      "display_delay_ms": 4515,
+      "raw_response": null
+    },
+    {
+      "turn_number": 22,
+      "timestamp": "2026-04-20T22:27:33.539676",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Слушайте, мне это чё-то подозрительно. Марго всё время как-то обтекаемо отвечает, про свет и оборудование чушь толкает. Я за неё голосую.",
+      "display_delay_ms": 4368,
+      "raw_response": null
+    },
+    {
+      "turn_number": 23,
+      "timestamp": "2026-04-20T22:27:39.872869",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "О, Лёха, милый, я вижу, что Зоя тоже обратила внимание на твою уклончивость. Это немного странно, не так ли? Но, возможно, ты просто запутался. Всё же, голосую за тебя, чтобы убедиться, что мы на правильном пути.",
+      "display_delay_ms": 6794,
+      "raw_response": null
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T22:27:49.107982",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "final_vote",
+      "content": "Лёха, мой друг, твои ответы звучат уклончиво и вызывают сомнения. Взгляни мне в глаза и скажи честно: действительно ли твоя совесть чиста? Мы здесь все стараемся быть искренними, и я надеюсь, ты тоже откроешь своё сердце.",
+      "display_delay_ms": 7118,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:25:32.577069",
+      "level": "few_guesses",
+      "hints": [
+        "звуки шагов по мраморному полу и негромкие разговоры",
+        "люди в очереди болтают и делают комплименты"
+      ],
+      "location_guess": "государственное учреждение, например, паспортный стол или ЗАГС",
+      "reasoning": "Звуки шагов по мраморному полу и негромкие разговоры могут быть в официальных зданиях, таких как государственные учреждения. Очередь и разговоры в ожидании также характерны для таких мест. Однако, детали не дают однозначного указания на конкретное место, поэтому уверенность средняя.",
+      "raw_response": "{\n  \"hints\": [\n    \"звуки шагов по мраморному полу и негромкие разговоры\",\n    \"люди в очереди болтают и делают комплименты\"\n  ],\n  \"location_guess\": \"государственное учреждение, например, паспортный стол или ЗАГС\",\n  \"confidence\": \"few_guesses\",\n  \"reasoning\": \"Звуки шагов по мраморному полу и негромкие разговоры могут быть в официальных зданиях, таких как государственные учреждения. Очередь и разговоры в ожидании также характерны для таких мест. Однако, детали не дают однозначного указания на конкретное место, поэтому уверенность средняя.\"\n}"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T22:25:39.142015",
+      "character_id": "zoya",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T22:25:56.455111",
+      "character_id": "father_ignatius",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T22:26:30.915500",
+      "character_id": "zoya",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T22:24:56.373438",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T22:24:56.373760",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T22:26:49.896931",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Голосование инициировано игроком Лёха",
+      "status": "player_initiated"
+    },
+    {
+      "timestamp": "2026-04-20T22:26:49.897088",
+      "from_phase": "optional_vote",
+      "to_phase": "preliminary_vote",
+      "reason": "Preliminary voting started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T22:27:19.979236",
+      "from_phase": "preliminary_vote",
+      "to_phase": "pre_final_vote_defense",
+      "reason": "Defense speeches for 1 player(s) with 3 votes",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T22:27:25.275853",
+      "from_phase": "pre_final_vote_defense",
+      "to_phase": "final_vote",
+      "reason": "Final voting started",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T22:27:56.231252",
+      "from_phase": "final_vote",
+      "to_phase": "resolution",
+      "reason": "Game ended: spy won",
+      "status": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Мирные не единогласны (2/3) — шпион (Марго) побеждает",
+    "votes": {
+      "zoya": "lyokha",
+      "lyokha": "margo",
+      "margo": "lyokha",
+      "father_ignatius": "lyokha"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": null
+  },
+  "compressed_history": "В диалоге между персонажами игры Spyfall разворачивается напряжённое обсуждение, в котором каждый пытается выявить шпионов. Мargo начинает с вопроса к Father Ignatius о звуках, характерных для их места, на что он отвечает, упоминая шаги по мраморному полу и разговоры, что намекает на организованную обстановку. Father Ignatius затем задаёт вопрос Lyokha о его одежде для работы, на что тот отвечает, что носит обычные вещи, что вызывает подозрение у других.\n\nZoya указывает на абстрактность ответов Margo, намекая на её возможное сокрытие информации. Margo, в свою очередь, интересуется, какие бумаги заполняет Lyokha, и задаёт вопрос о запахе, что также может быть попыткой выявить его истинную роль. Lyokha отвечает, что бумаги обычные и не имеют специфического запаха, что звучит уклончиво. В ходе диалога создаётся атмосфера недоверия, и каждый из участников пытается защитить себя, одновременно подозревая других. Локация намекает на бюрократическую обстановку, возможно, офис или учреждение.",
+  "compression_checkpoint": 9,
+  "token_usage": {
+    "total_input_tokens": 52374,
+    "total_output_tokens": 3057,
+    "total_cost_usd": 0.14055240000000002,
+    "llm_calls_count": 35
+  },
+  "preliminary_vote_result": {
+    "zoya": "lyokha",
+    "lyokha": "margo",
+    "margo": "lyokha",
+    "father_ignatius": "lyokha"
+  },
+  "defense_speeches": [
+    {
+      "defender_id": "lyokha",
+      "votes_received": 3,
+      "content": "Ребят, вы чё, прикалываетесь? Я тут просто по делам, бумаги оформляю.",
+      "timestamp": "2026-04-20T22:27:22.790203",
+      "regenerated": false
+    }
+  ],
+  "final_vote_result": {
+    "zoya": "lyokha",
+    "lyokha": "margo",
+    "margo": "lyokha",
+    "father_ignatius": "lyokha"
+  },
+  "vote_changes": []
+}
