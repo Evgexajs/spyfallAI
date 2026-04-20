@@ -62,7 +62,7 @@
 - Нет
 
 ### Коммиты
-- `0be5db7` — Add info icons with tooltips to UI elements (TASK-053)
+- `4065dad` — Add info icons with tooltips to UI elements (TASK-053)
 
 ---
 
