@@ -1139,10 +1139,11 @@ async def run_final_vote(
                 messages=messages,
                 model=game.config.main_model,
                 temperature=0.7,
-                max_tokens=50,
+                max_tokens=150,  # More tokens for optional reasoning
             )
             _track_usage_and_check_cost(game, vote_llm_response)
-            vote_response = vote_llm_response.content.strip().lower()
+            vote_response_full = vote_llm_response.content.strip()
+            vote_response = vote_response_full.lower()
 
             # Parse vote response
             voted_for = _parse_final_vote(vote_response, candidates, name_to_id)
@@ -1187,11 +1188,12 @@ async def run_final_vote(
                     messages=retry_messages,
                     model=game.config.main_model,
                     temperature=0.8,
-                    max_tokens=50,
+                    max_tokens=150,
                 )
                 _track_usage_and_check_cost(game, retry_response)
 
-                voted_for = _parse_final_vote(retry_response.content.strip().lower(), candidates, name_to_id)
+                vote_response_full = retry_response.content.strip()
+                voted_for = _parse_final_vote(vote_response_full.lower(), candidates, name_to_id)
 
                 if voted_for is None:
                     # Still abstaining - accept it, spy wins
@@ -1209,8 +1211,10 @@ async def run_final_vote(
                 vote_changes.append(change)
                 logger.info(f"Vote change: {voter_id} changed from {preliminary_vote} to {voted_for}")
 
-            # Create turn
-            if voted_for:
+            # Create turn - use full response if it has reasoning
+            if vote_response_full and len(vote_response_full) > 15:
+                vote_content = vote_response_full
+            elif voted_for:
                 voted_for_name = id_to_name.get(voted_for, voted_for)
                 if voted_for == preliminary_vote:
                     vote_content = f"Подтверждаю голос за {voted_for_name}"
@@ -1398,21 +1402,22 @@ async def run_preliminary_vote(
         is_first_voter = len(votes) == 0
 
         if is_first_voter:
-            # First voter initiates voting with accusation
+            # First voter initiates voting
             vote_instruction = (
                 f"Ты — {voter_char.display_name}. Ты решаешь выдвинуть голосование! "
-                f"Объяви кого ты подозреваешь и ПОЧЕМУ (конкретные подозрительные моменты из разговора). "
+                f"Объяви кого подозреваешь. Если есть конкретные причины — объясни, если не уверен — просто назови имя. "
                 f"Кандидаты: {candidates_str}. "
-                f"Формат: 'Выдвигаю голосование! Считаю что [ИМЯ] — шпион, потому что [причина 1-2 предложения]'"
+                f"Примеры: 'Выдвигаю голосование! Считаю что [ИМЯ] — шпион, он слишком уклончиво отвечал' "
+                f"или просто 'Голосую против [ИМЯ]'"
             )
         else:
-            # Others follow with their reasoning
+            # Others follow
             vote_instruction = (
                 f"Ты — {voter_char.display_name}. Идёт голосование. "
                 f"{previous_votes_text}"
-                f"Выбери кого подозреваешь и объясни ПОЧЕМУ (1-2 предложения). "
+                f"Выбери кого подозреваешь. Можешь объяснить почему, а можешь просто проголосовать. "
                 f"Кандидаты: {candidates_str}. "
-                f"Формат: 'Голосую против [ИМЯ], потому что [причина]' или 'Воздерживаюсь, потому что [причина]'"
+                f"Примеры: 'Голосую против [ИМЯ], потому что...' или просто '[ИМЯ]' или 'Воздерживаюсь'"
             )
 
         messages = [

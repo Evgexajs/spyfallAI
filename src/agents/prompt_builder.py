@@ -514,4 +514,4 @@ def build_final_vote_with_defense_prompt(
 {_get_coordination_strategy(is_spy)}
 
 Выбери ОДНОГО из: {candidates_str}{abstain_suffix}.
-Напиши ТОЛЬКО имя игрока{abstain_suffix}."""
+Можешь объяснить почему, а можешь просто назвать имя."""
