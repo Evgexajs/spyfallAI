@@ -61,7 +61,7 @@
 - Исправлен парсинг abstain маркеров чтобы не конфликтовать с именами игроков (проверка кандидатов первой)
 
 ### Коммиты
-- `860052f` — feat: implement preliminary voting phase (TASK-059)
+- `a383a17` — feat: implement preliminary voting phase (TASK-059)
 
 ---
 
