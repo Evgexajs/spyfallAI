@@ -222,7 +222,13 @@ def main():
         "-c", "--characters",
         type=str,
         default=None,
-        help="Comma-separated character IDs (default: all available)"
+        help="Comma-separated character IDs (overrides -n)"
+    )
+    parser.add_argument(
+        "-n", "--players",
+        type=int,
+        default=int(os.environ.get("PLAYERS_PER_GAME", "4")),
+        help="Number of random players (default: 4, ignored if -c specified)"
     )
     parser.add_argument(
         "-l", "--location",
@@ -272,10 +278,16 @@ def main():
             print(f"    Roles: {roles}")
         return
 
+    available = list_available_characters()
+
     if args.characters:
         character_ids = [c.strip() for c in args.characters.split(",")]
     else:
-        character_ids = list_available_characters()
+        if args.players > len(available):
+            print(f"Error: Requested {args.players} players but only {len(available)} available", file=sys.stderr)
+            sys.exit(1)
+        character_ids = random.sample(available, args.players)
+        print(f"Случайно выбрано {args.players} игроков: {', '.join(character_ids)}")
 
     if len(character_ids) < 3:
         print("Error: At least 3 characters required", file=sys.stderr)
