@@ -1119,10 +1119,25 @@ async def run_final_vote(
         game.ended_at = datetime.now()
         _transition_phase(game, GamePhase.RESOLUTION, f"Game ended: {winner} won (unanimous vote)")
     else:
-        _transition_phase(
-            game,
-            GamePhase.MAIN_ROUND,
-            f"Voting failed: votes split ({len(unique_votes)} different targets)"
-        )
+        # Check if time has run out
+        time_elapsed = datetime.now() - game.started_at
+        time_limit = timedelta(minutes=game.config.duration_minutes)
+        time_expired = time_elapsed >= time_limit
+
+        if time_expired:
+            # Time ran out and votes split - spy wins
+            game.outcome = GameOutcome(
+                winner="spy",
+                reason=f"Время вышло, голоса разделились — шпион ({game.spy_id}) побеждает",
+                votes=votes,
+            )
+            game.ended_at = datetime.now()
+            _transition_phase(game, GamePhase.RESOLUTION, "Game ended: spy won (time expired, votes split)")
+        else:
+            _transition_phase(
+                game,
+                GamePhase.MAIN_ROUND,
+                f"Voting failed: votes split ({len(unique_votes)} different targets)"
+            )
 
     return game

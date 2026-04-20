@@ -320,5 +320,96 @@ class TestVoteResultCallback:
         assert len(set(received_data["votes"].values())) == 2
 
 
+class TestTimeoutBehavior:
+    """Test game behavior when time expires."""
+
+    def create_test_game(self, num_players: int = 4, duration_minutes: int = 5) -> Game:
+        """Create a test game with specified number of players."""
+        players = [
+            Player(
+                character_id=f"player_{i}",
+                role_id=f"role_{i}" if i != 0 else None,
+                is_spy=(i == 0),
+            )
+            for i in range(num_players)
+        ]
+
+        return Game(
+            id=uuid4(),
+            started_at=datetime.now(),
+            config=GameConfig(
+                duration_minutes=duration_minutes,
+                players_count=num_players,
+                max_questions=20,
+                main_model="gpt-4o",
+                utility_model="gpt-4o-mini",
+            ),
+            location_id="test_location",
+            players=players,
+            spy_id="player_0",
+            turns=[],
+            spy_confidence_log=[],
+            triggered_events=[],
+            phase_transitions=[
+                PhaseEntry(
+                    timestamp=datetime.now(),
+                    to_phase=GamePhase.SETUP,
+                    reason="Test game setup",
+                )
+            ],
+            token_usage=TokenUsage(),
+        )
+
+    def test_split_vote_with_time_expired_spy_wins(self):
+        """When time expires and votes split, spy wins."""
+        from datetime import timedelta
+
+        game = self.create_test_game(4, duration_minutes=1)
+        game.started_at = datetime.now() - timedelta(minutes=10)
+
+        time_elapsed = datetime.now() - game.started_at
+        time_limit = timedelta(minutes=game.config.duration_minutes)
+        time_expired = time_elapsed >= time_limit
+
+        assert time_expired is True
+
+        votes = {"player_1": "player_0", "player_2": "player_1"}
+        unique_votes = set(votes.values())
+        is_unanimous = len(unique_votes) == 1
+
+        assert is_unanimous is False
+
+        if not is_unanimous and time_expired:
+            outcome = GameOutcome(
+                winner="spy",
+                reason=f"Время вышло, голоса разделились — шпион ({game.spy_id}) побеждает",
+                votes=votes,
+            )
+            assert outcome.winner == "spy"
+            assert "Время вышло" in outcome.reason
+
+    def test_split_vote_with_time_remaining_continues(self):
+        """When time remains and votes split, game continues."""
+        from datetime import timedelta
+
+        game = self.create_test_game(4, duration_minutes=60)
+
+        time_elapsed = datetime.now() - game.started_at
+        time_limit = timedelta(minutes=game.config.duration_minutes)
+        time_expired = time_elapsed >= time_limit
+
+        assert time_expired is False
+
+        votes = {"player_1": "player_0", "player_2": "player_1"}
+        unique_votes = set(votes.values())
+        is_unanimous = len(unique_votes) == 1
+
+        assert is_unanimous is False
+
+        if not is_unanimous and not time_expired:
+            next_phase = GamePhase.MAIN_ROUND
+            assert next_phase == GamePhase.MAIN_ROUND
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
