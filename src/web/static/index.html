@@ -1470,6 +1470,8 @@
 
                 case 'game_completed':
                     stopTimer();
+                    infoTimer.textContent = '--:--';
+                    infoTimer.className = 'timer-display';
                     updatePhase('resolution');
                     updateStatus('completed');
                     if (data.outcome) {
@@ -1503,6 +1505,8 @@
 
                 case 'game_stopped':
                     stopTimer();
+                    infoTimer.textContent = '--:--';
+                    infoTimer.className = 'timer-display';
                     updateStatus('stopped');
                     addSystemMessage('Игра остановлена');
                     break;
