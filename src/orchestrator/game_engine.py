@@ -104,6 +104,45 @@ def _track_usage_and_check_cost(game: Game, response: LLMResponse) -> None:
         )
 
 
+def _parse_agent_json_response(raw_response: str) -> dict:
+    """Parse agent JSON response, handling common issues.
+
+    Expected format:
+    {
+        "content": "Текст реплики",
+        "wants_vote": false,
+        "suspect_id": null
+    }
+
+    Returns dict with at least 'content' key.
+    """
+    raw_response = raw_response.strip()
+
+    # Try to extract JSON from response (may have text before/after)
+    json_start = raw_response.find("{")
+    json_end = raw_response.rfind("}") + 1
+
+    if json_start != -1 and json_end > json_start:
+        json_str = raw_response[json_start:json_end]
+        try:
+            parsed = json.loads(json_str)
+            if isinstance(parsed, dict) and "content" in parsed:
+                return parsed
+        except json.JSONDecodeError:
+            pass
+
+    # Fallback: treat entire response as content
+    return {"content": raw_response, "wants_vote": False, "suspect_id": None}
+
+
+def _clean_content(content: str) -> str:
+    """Remove system artifacts from content like [player_id → target_id]."""
+    import re
+    # Remove patterns like [boris_molot → zoya] or [boris_molot]
+    content = re.sub(r'\[[\w_]+(?:\s*→\s*[\w_]+)?\]\s*', '', content)
+    return content.strip()
+
+
 def load_locations(locations_path: Optional[Path] = None) -> list[Location]:
     """Load locations from JSON file."""
     if locations_path is None:
@@ -698,12 +737,26 @@ async def run_main_round(
         questioner_prompt = build_system_prompt(questioner_char, game, questioner_secret, id_to_name)
 
         history = await _build_compressed_conversation_history(game, provider)
-        question_instruction = (
-            f"Ты — {questioner_char.display_name}. Сейчас твоя очередь задать вопрос игроку {target_char.display_name}. "
-            f"Задай КОНКРЕТНЫЙ вопрос про локацию: про оборудование, звуки, запахи, одежду, действия — "
-            f"то, что мирный знает, а шпион нет. Избегай абстрактных вопросов про 'жизнь' или 'чувства'. "
-            f"Только вопрос, без пояснений."
-        )
+
+        # Build list of other players for suspect_id
+        other_players = [p.character_id for p in game.players if p.character_id != current_questioner]
+        other_players_str = ", ".join([id_to_name.get(p, p) for p in other_players])
+
+        question_instruction = f"""Ты — {questioner_char.display_name}. Задай вопрос игроку {target_char.display_name}.
+
+Ответь СТРОГО в формате JSON:
+{{
+  "content": "Твой вопрос здесь",
+  "wants_vote": false,
+  "suspect_id": null
+}}
+
+Правила:
+- content: КОНКРЕТНЫЙ вопрос про локацию (оборудование, звуки, запахи, одежду, действия)
+- wants_vote: true если хочешь СЕЙЧАС начать голосование (уверен кто шпион)
+- suspect_id: если wants_vote=true, укажи ID подозреваемого из [{', '.join(other_players)}], иначе null
+
+НЕ добавляй ничего кроме JSON. Без пояснений, без текста до/после."""
         messages = [
             {"role": "system", "content": questioner_prompt},
             *history,
@@ -712,6 +765,8 @@ async def run_main_round(
 
         reroll_count = 0
         question_text = ""
+        question_wants_vote = False
+        question_suspect_id = None
 
         if on_typing:
             await on_typing(current_questioner)
@@ -721,10 +776,15 @@ async def run_main_round(
                 messages=messages,
                 model=game.config.main_model,
                 temperature=0.9,
-                max_tokens=150,
+                max_tokens=200,
             )
             _track_usage_and_check_cost(game, question_response)
-            question_text = question_response.content.strip()
+
+            # Parse JSON response
+            parsed = _parse_agent_json_response(question_response.content)
+            question_text = _clean_content(parsed.get("content", question_response.content))
+            question_wants_vote = parsed.get("wants_vote", False)
+            question_suspect_id = parsed.get("suspect_id")
 
             is_direct_question = _check_for_direct_location_question(
                 question_text, current_questioner, game, all_locations
@@ -756,6 +816,30 @@ async def run_main_round(
                 current_questioner,
                 reroll_count,
             )
+
+        # Check if questioner wants to trigger voting
+        if question_wants_vote and question_suspect_id:
+            logger.info(f"Player {current_questioner} wants to vote against {question_suspect_id}")
+            _transition_phase(
+                game,
+                GamePhase.OPTIONAL_VOTE,
+                f"Голосование инициировано игроком {id_to_name.get(current_questioner, current_questioner)}",
+                status="player_initiated",
+            )
+            # Record the question turn first
+            turn = Turn(
+                turn_number=len(game.turns) + 1,
+                timestamp=datetime.now(),
+                speaker_id=current_questioner,
+                addressee_id=target_id,
+                type=TurnType.QUESTION,
+                content=question_text,
+                display_delay_ms=calculate_display_delay_ms(question_text),
+            )
+            game.turns.append(turn)
+            if on_turn:
+                await _call_callback(on_turn, turn, game)
+            break  # Exit main loop to go to voting
 
         if _check_for_location_leak(question_text, current_questioner, game):
             actual_location = get_location_by_id(game.location_id)
@@ -802,21 +886,33 @@ async def run_main_round(
         answerer_prompt = build_system_prompt(answerer_char, game, answerer_secret, id_to_name)
 
         history = await _build_compressed_conversation_history(game, provider)
+
+        # Build list of other players for suspect_id
+        other_players_for_answer = [p.character_id for p in game.players if p.character_id != target_id]
+
         # Different instruction based on whether answerer is spy or civilian
         if answerer_player.is_spy:
-            answer_instruction = (
-                f"Ты — {answerer_char.display_name}. Тебе задали вопрос. "
-                f"Ты ШПИОН — не знаешь локацию. Ответь достаточно конкретно чтобы не вызвать подозрений, "
-                f"но не слишком — можешь ошибиться. Слушай подсказки в вопросе. "
-                f"Только ответ, без пояснений."
-            )
+            role_hint = "Ты ШПИОН — не знаешь локацию. Ответь достаточно конкретно чтобы не вызвать подозрений, но не слишком."
         else:
-            answer_instruction = (
-                f"Ты — {answerer_char.display_name}. Тебе задали вопрос. "
-                f"Ты МИРНЫЙ — знаешь локацию. Дай КОНКРЕТНЫЙ ответ с деталями про своё место/роль. "
-                f"Это поможет другим мирным понять что ты свой. Не будь абстрактным! "
-                f"Только ответ, без пояснений."
-            )
+            role_hint = "Ты МИРНЫЙ — знаешь локацию. Дай КОНКРЕТНЫЙ ответ с деталями про своё место/роль."
+
+        answer_instruction = f"""Ты — {answerer_char.display_name}. Тебе задали вопрос.
+{role_hint}
+
+Ответь СТРОГО в формате JSON:
+{{
+  "content": "Твой ответ здесь",
+  "wants_vote": false,
+  "suspect_id": null
+}}
+
+Правила:
+- content: твой ответ на вопрос
+- wants_vote: true если хочешь СЕЙЧАС начать голосование
+- suspect_id: если wants_vote=true, укажи ID подозреваемого из [{', '.join(other_players_for_answer)}], иначе null
+
+НЕ добавляй ничего кроме JSON."""
+
         messages = [
             {"role": "system", "content": answerer_prompt},
             *history,
@@ -830,10 +926,15 @@ async def run_main_round(
             messages=messages,
             model=game.config.main_model,
             temperature=0.9,
-            max_tokens=200,
+            max_tokens=250,
         )
         _track_usage_and_check_cost(game, answer_response)
-        answer_text = answer_response.content.strip()
+
+        # Parse JSON response
+        answer_parsed = _parse_agent_json_response(answer_response.content)
+        answer_text = _clean_content(answer_parsed.get("content", answer_response.content))
+        answer_wants_vote = answer_parsed.get("wants_vote", False)
+        answer_suspect_id = answer_parsed.get("suspect_id")
 
         if _check_for_location_leak(answer_text, target_id, game):
             actual_location = get_location_by_id(game.location_id)
@@ -871,6 +972,17 @@ async def run_main_round(
         game.turns.append(answer_turn)
         if on_turn:
             await _call_callback(on_turn, answer_turn, game)
+
+        # Check if answerer wants to trigger voting
+        if answer_wants_vote and answer_suspect_id:
+            logger.info(f"Player {target_id} wants to vote against {answer_suspect_id}")
+            _transition_phase(
+                game,
+                GamePhase.OPTIONAL_VOTE,
+                f"Голосование инициировано игроком {id_to_name.get(target_id, target_id)}",
+                status="player_initiated",
+            )
+            break  # Exit main loop to go to voting
 
         answer_count += 1
 

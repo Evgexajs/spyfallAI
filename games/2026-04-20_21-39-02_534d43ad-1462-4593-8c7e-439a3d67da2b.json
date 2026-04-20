@@ -1,0 +1,409 @@
+{
+  "id": "534d43ad-1462-4593-8c7e-439a3d67da2b",
+  "started_at": "2026-04-20T21:39:02.465956",
+  "ended_at": "2026-04-20T21:43:03.811325",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "bank",
+  "players": [
+    {
+      "character_id": "boris_molot",
+      "role_id": "security_guard",
+      "is_spy": false
+    },
+    {
+      "character_id": "aurora",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "professor_stein",
+      "role_id": "manager",
+      "is_spy": false
+    },
+    {
+      "character_id": "zoya",
+      "role_id": "teller",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "aurora",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-20T21:39:04.568592",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "А как тебе эти стеклянные перегородки? Удобно через них работать?",
+      "display_delay_ms": 2360
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-20T21:39:08.584743",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "О, стеклянные перегородки! Как они создают атмосферу... некоей уединённости, но при этом всё на виду! Это как играть на сцене с открытыми кулисами! Удобство? Оно, конечно, спорно... но в этом есть нечто драматическое!",
+      "display_delay_ms": 7056
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-20T21:39:17.558384",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "Борис, скажи, а этот запах... он тебе кажется привычным или вызывает какое-то особенное восприятие?",
+      "display_delay_ms": 3407
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-20T21:39:22.228778",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Запах денег знаком, как старая пыль. Каждый день одно и то же.",
+      "display_delay_ms": 2179
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-20T21:39:25.383277",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "Аврора, что чаще слышишь: разговоры или шелест бумаг?",
+      "display_delay_ms": 2005
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T21:39:28.692410",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "type": "answer",
+      "content": "Ах, какой сложный вопрос! Звуки... они переплетаются... Но, пожалуй, разговоры... они всегда громче и насыщеннее, чем шелест бумаг. Эмоции людей заполняют пространство сильнее!",
+      "display_delay_ms": 5541
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-20T21:39:37.876423",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "type": "intervention",
+      "content": "Любопытное замечание, Аврора. Однако, строго говоря, ваше ответ оставляет много вопросов, поскольку он явно уклончив и лишён конкретики. Вы что-то скрываете?",
+      "display_delay_ms": 5119
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-20T21:39:44.655592",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "Борис, скажи, а как ты справляешься с этими бесконечными телефонными звонками и переговорами?",
+      "display_delay_ms": 3220
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T21:39:48.868902",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Не мой вопрос. Я у входа, следить за порядком — моё дело, а не звонки.",
+      "display_delay_ms": 2481
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-20T21:39:53.301651",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "type": "intervention",
+      "content": "Ага, и конечно все мы верим, что в банке всегда спокойно у входа. Что-то ты темнишь, Борис, явно не убедительно.",
+      "display_delay_ms": 3613
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-20T21:40:02.459465",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "[boris_molot → zoya] Зоя, что ты носишь на работе: форма или обычная одежда?",
+      "display_delay_ms": 2814
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T21:40:10.494954",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "type": "answer",
+      "content": "О, конечно, у нас здесь стандартная форма. Как же ещё без неё?",
+      "display_delay_ms": 2171
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-20T21:40:18.640147",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Любопытное заявление, Зоя. Фактически, ваш ответ демонстрирует некоторую расплывчатость. \"Стандартная форма\" — это весьма уклончивое определение. Быть может, вы что-то скрываете от нас?",
+      "display_delay_ms": 6032
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-20T21:40:31.413884",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Штейн, а как у тебя дела с мраморными полами? Скучаешь по ним, когда не здесь?",
+      "display_delay_ms": 2924
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T21:40:39.924659",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Видите ли, с мраморными полами у меня установлены довольно глубокие ассоциации. Они напоминают, в некоторых аспектах, строгую элегантность, присущую классическому искусству. Когда не здесь, я, строго говоря, действительно ощущаю определённую нехватку той утончённой атмосферы, которую мрамор добавляет в каждодневные будни.",
+      "display_delay_ms": 9968
+    },
+    {
+      "turn_number": 16,
+      "timestamp": "2026-04-20T21:40:57.383978",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "type": "intervention",
+      "content": "[boris_molot] Это подозрительно, Штейн. Слишком философствуешь. Ты что-то скрываешь?",
+      "display_delay_ms": 3017
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-20T21:41:09.058527",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "[professor_stein → aurora] Аврора, скажите, когда вы оказываетесь здесь, какой конкретный звук наиболее часто привлекает ваше внимание?",
+      "display_delay_ms": 4617
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T21:41:20.489408",
+      "speaker_id": "aurora",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "О, боже мой, звуки здесь... они такие разнообразные! Иногда нежное жужжание, словно шепот ветра... И в то же время, могут быть такие моменты, когда звуки становятся более отчетливыми, вызывая чувство таинственности и ожидания. Этот контраст завораживает, не правда ли?",
+      "display_delay_ms": 8242
+    },
+    {
+      "turn_number": 19,
+      "timestamp": "2026-04-20T21:41:35.909534",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "type": "intervention",
+      "content": "Ага, Аврора, снова поэзия вместо ответов. Ты что-то скрываешь, и это подозрительно уклончиво.",
+      "display_delay_ms": 3020
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-20T21:41:44.354705",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, скажи мне, о боже, какие специфические запахи ты чувствуешь, находясь здесь?",
+      "display_delay_ms": 2820
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-20T21:41:52.109518",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Ах, запахи... ну да, пахнет бумагой и металлом. Как думаешь, где это может быть, Аврора?",
+      "display_delay_ms": 2956
+    },
+    {
+      "turn_number": 22,
+      "timestamp": "2026-04-20T21:42:01.529804",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Любопытное наблюдение, Зоя. Ваши ответы, по сути, аналогичны туману в зеркале: вроде бы что-то видишь, но сама суть ускользает. Это подозрительно.",
+      "display_delay_ms": 4596
+    },
+    {
+      "turn_number": 23,
+      "timestamp": "2026-04-20T21:42:13.540818",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "Как часто у вас тут пересчитывают содержимое, Борис?",
+      "display_delay_ms": 1959
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T21:42:20.279645",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Пересчитывают регулярно. Порядок у нас строгий.",
+      "display_delay_ms": 1943
+    },
+    {
+      "turn_number": 25,
+      "timestamp": "2026-04-20T21:42:30.420489",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "type": "intervention",
+      "content": "Борис, о, как захватывающе... но не слишком ли это уклончиво, мой дорогой? Пересчитывание может быть столь разным в понимании! Подозрительно, не так ли?!",
+      "display_delay_ms": 4941
+    },
+    {
+      "turn_number": 26,
+      "timestamp": "2026-04-20T21:42:42.649506",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, какая у тебя униформа?",
+      "display_delay_ms": 1121
+    },
+    {
+      "turn_number": 27,
+      "timestamp": "2026-04-20T21:42:50.323031",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "type": "answer",
+      "content": "О да, униформа — почти как в комедии: строгий костюм, как будто деньги сами не пересчитаются.",
+      "display_delay_ms": 2990
+    },
+    {
+      "turn_number": 28,
+      "timestamp": "2026-04-20T21:42:58.929134",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Любопытное заявление, Зоя. Фактически, ваша аналогия с комедией напоминает театральную завесу, скрывающую истинный контекст. Возможно, вы что-то скрываете?",
+      "display_delay_ms": 4880
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T21:39:35.615109",
+      "level": "few_guesses"
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T21:40:55.225816",
+      "level": "few_guesses"
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T21:42:28.613769",
+      "level": "few_guesses"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-20T21:39:42.997393",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-20T21:39:56.916579",
+      "character_id": "zoya",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-20T21:40:24.674258",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-20T21:41:00.402776",
+      "character_id": "boris_molot",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-20T21:41:38.931381",
+      "character_id": "zoya",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-20T21:42:06.126668",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-20T21:42:35.362815",
+      "character_id": "aurora",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    },
+    {
+      "turn_number": 27,
+      "timestamp": "2026-04-20T21:43:03.811066",
+      "character_id": "professor_stein",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-20T21:39:02.465956",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null
+    },
+    {
+      "timestamp": "2026-04-20T21:39:02.466444",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null
+    }
+  ],
+  "outcome": {
+    "winner": "cancelled",
+    "reason": "Error: _transition_phase() got an unexpected keyword argument 'status'",
+    "votes": null,
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": null
+  },
+  "compressed_history": "В диалоге участники обсуждают стеклянные перегородки, запахи и звуки, что вызывает подозрения и обвинения. Зоя начинает с вопроса к Авроре о стеклянных перегородках, на что Аврора отвечает уклончиво, сравнивая их с театром. Борис, в свою очередь, говорит о \"запахе денег\", что вызывает у Зои сомнения в его правдивости, так как она считает, что у входа в банк не может быть спокойно. Профессор Штейн также подозревает Аврору в уклончивости, указывая на отсутствие конкретики в её ответах.\n\nЗоя обвиняет Бориса в том, что он \"темнит\", а профессор Штейн называет его философствование подозрительным. Аврора, в ответ на вопросы о звуках, говорит о контрасте, что снова вызывает недовольство у Зои. В конце Зоя задаёт вопрос о запахах, на что Аврора отвечает общими фразами о запахе бумаги и металла, что намекает на возможное местоположение — банк. Участники явно подозревают друг друга, что создаёт напряжённую атмосферу.",
+  "compression_checkpoint": 21,
+  "token_usage": {
+    "total_input_tokens": 71778,
+    "total_output_tokens": 5668,
+    "total_cost_usd": 0.15881705000000002,
+    "llm_calls_count": 58
+  },
+  "preliminary_vote_result": null,
+  "defense_speeches": [],
+  "final_vote_result": null,
+  "vote_changes": []
+}
