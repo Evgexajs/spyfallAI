@@ -840,12 +840,7 @@ async def run_main_round(
         # Check if questioner wants to trigger voting
         if question_wants_vote and question_suspect_id:
             logger.info(f"Player {current_questioner} wants to vote against {question_suspect_id}")
-            _transition_phase(
-                game,
-                GamePhase.OPTIONAL_VOTE,
-                f"Голосование инициировано игроком {id_to_name.get(current_questioner, current_questioner)}",
-                status="player_initiated",
-            )
+
             # Record the question turn first
             turn = Turn(
                 turn_number=len(game.turns) + 1,
@@ -859,6 +854,30 @@ async def run_main_round(
             game.turns.append(turn)
             if on_turn:
                 await _call_callback(on_turn, turn, game)
+
+            # Add visual vote initiation message
+            suspect_name = id_to_name.get(question_suspect_id, question_suspect_id)
+            initiator_name = id_to_name.get(current_questioner, current_questioner)
+            vote_init_content = f"[ГОЛОСОВАНИЕ] {initiator_name} инициирует голосование против {suspect_name}!"
+            vote_init_turn = Turn(
+                turn_number=len(game.turns) + 1,
+                timestamp=datetime.now(),
+                speaker_id=current_questioner,
+                addressee_id="all",
+                type=TurnType.INTERVENTION,
+                content=vote_init_content,
+                display_delay_ms=calculate_display_delay_ms(vote_init_content),
+            )
+            game.turns.append(vote_init_turn)
+            if on_turn:
+                await _call_callback(on_turn, vote_init_turn, game)
+
+            _transition_phase(
+                game,
+                GamePhase.OPTIONAL_VOTE,
+                f"Голосование инициировано игроком {initiator_name}",
+                status="player_initiated",
+            )
             break  # Exit main loop to go to voting
 
         if _check_for_location_leak(question_text, current_questioner, game):
@@ -999,10 +1018,28 @@ async def run_main_round(
         # Check if answerer wants to trigger voting
         if answer_wants_vote and answer_suspect_id:
             logger.info(f"Player {target_id} wants to vote against {answer_suspect_id}")
+
+            # Add visual vote initiation message
+            suspect_name = id_to_name.get(answer_suspect_id, answer_suspect_id)
+            initiator_name = id_to_name.get(target_id, target_id)
+            vote_init_content = f"[ГОЛОСОВАНИЕ] {initiator_name} инициирует голосование против {suspect_name}!"
+            vote_init_turn = Turn(
+                turn_number=len(game.turns) + 1,
+                timestamp=datetime.now(),
+                speaker_id=target_id,
+                addressee_id="all",
+                type=TurnType.INTERVENTION,
+                content=vote_init_content,
+                display_delay_ms=calculate_display_delay_ms(vote_init_content),
+            )
+            game.turns.append(vote_init_turn)
+            if on_turn:
+                await _call_callback(on_turn, vote_init_turn, game)
+
             _transition_phase(
                 game,
                 GamePhase.OPTIONAL_VOTE,
-                f"Голосование инициировано игроком {id_to_name.get(target_id, target_id)}",
+                f"Голосование инициировано игроком {initiator_name}",
                 status="player_initiated",
             )
             break  # Exit main loop to go to voting
