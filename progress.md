@@ -62,7 +62,7 @@
 - При разделении голосов игра продолжается, что может привести к более длинным партиям
 
 ### Коммиты
-- `9b58529` — Fix voting logic: unanimous instead of majority (TASK-055)
+- `5c8b925` — Fix voting logic: unanimous instead of majority (TASK-055)
 
 ---
 
