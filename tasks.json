@@ -1162,7 +1162,7 @@
         "Шаг 3: Проверить что defense_speeches заполнен"
       ],
       "dependencies": ["TASK-059"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-061",

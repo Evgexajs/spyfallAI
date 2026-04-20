@@ -332,3 +332,50 @@ def build_spy_guess_prompt(
 
 Какая локация? Напиши ТОЛЬКО id локации (например: hospital, airplane, restaurant).
 Одно слово, без пояснений."""
+
+
+def build_defense_speech_prompt(
+    character: Character,
+    game: Game,
+    secret_info: SecretInfo,
+    votes_received: int,
+    max_sentences: int = 2,
+) -> str:
+    """Build prompt for a defense speech during pre-final-vote defense phase.
+
+    Args:
+        character: The defending character profile.
+        game: The current game state.
+        secret_info: Secret information (is_spy, location, role).
+        votes_received: How many votes this character received.
+        max_sentences: Maximum allowed sentences in defense.
+
+    Returns:
+        Prompt for generating a defense speech.
+    """
+    base_prompt = build_system_prompt(character, game, secret_info)
+
+    voters_against = []
+    if game.preliminary_vote_result:
+        for voter_id, target_id in game.preliminary_vote_result.items():
+            if target_id == character.id:
+                voters_against.append(voter_id)
+
+    voters_str = ", ".join(voters_against) if voters_against else "несколько игроков"
+
+    return f"""{base_prompt}
+
+=== ЗАЩИТНАЯ РЕЧЬ ===
+
+{votes_received} игрок(ов) проголосовали против тебя: {voters_str}.
+
+Теперь у тебя есть шанс защититься перед финальным голосованием.
+Убеди всех, что ты НЕ шпион. Оставайся в образе своего персонажа!
+
+ВАЖНО:
+- Говори в своём стиле ({character.archetype})
+- Не более {max_sentences} предложений
+- Обращайся ко всем игрокам
+- Не признавай, что ты шпион (даже если это так)
+
+Напиши свою защитную речь:"""

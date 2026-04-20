@@ -6,6 +6,7 @@ from src.agents.prompt_builder import (
     build_intervention_content_prompt,
     build_spy_confidence_check_prompt,
     build_spy_guess_prompt,
+    build_defense_speech_prompt,
     SecretInfo,
 )
 
@@ -15,5 +16,6 @@ __all__ = [
     "build_intervention_content_prompt",
     "build_spy_confidence_check_prompt",
     "build_spy_guess_prompt",
+    "build_defense_speech_prompt",
     "SecretInfo",
 ]

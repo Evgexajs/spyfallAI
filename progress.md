@@ -31,6 +31,50 @@
 
 ---
 
+## [TASK-060] Реализовать фазу защитных реплик (F12)
+**Дата:** 2026-04-20
+**Статус:** done
+
+### Что сделано
+- Создана функция `build_defense_speech_prompt()` в src/agents/prompt_builder.py:
+  - Генерирует промпт для защитной реплики персонажа
+  - Включает информацию о голосах против персонажа
+  - Содержит ограничение на количество предложений (DEFENSE_SPEECH_MAX_SENTENCES)
+  - Инструктирует оставаться в образе персонажа
+- Обновлён src/agents/__init__.py с экспортом build_defense_speech_prompt
+- Создана функция `run_defense_speeches()` в src/orchestrator/game_engine.py:
+  - Активируется если max(votes) >= DEFENSE_MIN_VOTES_TO_QUALIFY
+  - Защиту получают ВСЕ игроки с максимальным числом голосов (2-2-2 → трое защитников)
+  - Порядок защит случайный (random.shuffle), фиксируется в логе
+  - Реплика обрезается до DEFENSE_SPEECH_MAX_SENTENCES предложений с warning в логе
+  - addressee_id = 'all', применяется calculate_display_delay_ms()
+  - Триггеры и окна вмешательства НЕ запускаются во время защит
+  - Если max(votes) < порога — фаза пропускается со статусом 'skipped_below_threshold'
+- Добавлены вспомогательные функции:
+  - `_count_sentences()` — подсчёт предложений в тексте
+  - `_truncate_to_sentences()` — обрезка текста до N предложений
+- Обновлён src/orchestrator/__init__.py с экспортом run_defense_speeches
+- Создан tests/test_defense_speeches.py с 26 тестами:
+  - TestCountSentences: 6 тестов подсчёта предложений
+  - TestTruncateToSentences: 4 теста обрезки предложений
+  - TestDefensePhaseSkipping: 2 теста пропуска фазы (нет голосов, ниже порога)
+  - TestDefensePhaseExecution: 5 тестов выполнения фазы (один/несколько защитников, turn, callbacks)
+  - TestSentenceTruncation: 1 тест обрезки длинных речей
+  - TestDefensePromptBuilder: 3 теста промпта защиты
+  - TestPhaseTransitions: 2 теста переходов фаз
+  - TestTokenUsageTracking: 1 тест трекинга токенов
+  - TestDefenseOrder: 1 тест рандомизации порядка
+  - TestNoTriggersOrInterventions: 1 тест отсутствия триггеров
+- Все 26 тестов проходят, 208 тестов всего проходят (1 несвязанный failure)
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- (pending commit)
+
+---
+
 ## [TASK-059] Реализовать фазу предварительного голосования (F11)
 **Дата:** 2026-04-20
 **Статус:** done

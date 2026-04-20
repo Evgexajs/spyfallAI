@@ -12,6 +12,7 @@ from uuid import uuid4
 
 from src.agents import (
     SecretInfo,
+    build_defense_speech_prompt,
     build_intervention_content_prompt,
     build_intervention_micro_prompt,
     build_spy_confidence_check_prompt,
@@ -29,6 +30,7 @@ from src.models import (
     Character,
     ConfidenceEntry,
     ConfidenceLevel,
+    DefenseSpeech,
     Game,
     GameConfig,
     GameOutcome,
@@ -1364,3 +1366,177 @@ def _parse_preliminary_vote(
             return None
 
     return None
+
+
+def _count_sentences(text: str) -> int:
+    """Count sentences in text using punctuation markers."""
+    import re
+    sentences = re.split(r'[.!?]+', text)
+    sentences = [s.strip() for s in sentences if s.strip()]
+    return len(sentences)
+
+
+def _truncate_to_sentences(text: str, max_sentences: int) -> tuple[str, bool]:
+    """Truncate text to maximum number of sentences.
+
+    Args:
+        text: Input text.
+        max_sentences: Maximum allowed sentences.
+
+    Returns:
+        Tuple of (truncated text, was_truncated flag).
+    """
+    import re
+    sentence_pattern = r'([^.!?]*[.!?]+)'
+    matches = re.findall(sentence_pattern, text)
+
+    if len(matches) <= max_sentences:
+        return text, False
+
+    truncated = ''.join(matches[:max_sentences])
+    return truncated.strip(), True
+
+
+async def run_defense_speeches(
+    game: Game,
+    characters: list[Character],
+    vote_counts: dict[str, int],
+    provider: Optional[LLMProvider] = None,
+    on_turn: Optional[callable] = None,
+    on_typing: Optional[callable] = None,
+) -> tuple[Game, bool]:
+    """Run the defense speech phase (CR-001 F12).
+
+    Players with the most votes get to defend themselves before final voting.
+
+    Args:
+        game: Game object after preliminary_vote.
+        characters: List of Character objects participating.
+        vote_counts: Dict {target_id: vote_count} from preliminary voting.
+        provider: Optional LLM provider. If None, creates one from config.
+        on_turn: Optional callback called after each defense turn.
+        on_typing: Optional callback called before LLM generation starts.
+
+    Returns:
+        Tuple of:
+        - Updated Game object with defense_speeches populated
+        - Boolean indicating if defense phase was executed (True) or skipped (False)
+    """
+    if provider is None:
+        llm_config = LLMConfig()
+        provider, _ = create_provider(llm_config, role="main")
+
+    if not vote_counts:
+        logger.info("Defense phase skipped: no votes cast")
+        _transition_phase(
+            game,
+            GamePhase.PRE_FINAL_VOTE_DEFENSE,
+            "Defense phase skipped: no votes cast",
+        )
+        game.phase_transitions[-1].status = "skipped_no_votes"
+        return game, False
+
+    max_votes = max(vote_counts.values())
+
+    if max_votes < DEFENSE_MIN_VOTES_TO_QUALIFY:
+        logger.info(
+            f"Defense phase skipped: max votes ({max_votes}) < threshold ({DEFENSE_MIN_VOTES_TO_QUALIFY})"
+        )
+        _transition_phase(
+            game,
+            GamePhase.PRE_FINAL_VOTE_DEFENSE,
+            f"Defense phase skipped: max votes ({max_votes}) < threshold ({DEFENSE_MIN_VOTES_TO_QUALIFY})",
+        )
+        game.phase_transitions[-1].status = "skipped_below_threshold"
+        return game, False
+
+    defenders = [
+        target_id for target_id, count in vote_counts.items()
+        if count == max_votes
+    ]
+
+    random.shuffle(defenders)
+    logger.info(f"Defense phase: {len(defenders)} defender(s) with {max_votes} votes: {defenders}")
+
+    _transition_phase(
+        game,
+        GamePhase.PRE_FINAL_VOTE_DEFENSE,
+        f"Defense speeches for {len(defenders)} player(s) with {max_votes} votes",
+    )
+
+    game.defense_speeches = []
+
+    for defender_id in defenders:
+        defender_player = next(
+            (p for p in game.players if p.character_id == defender_id), None
+        )
+        if defender_player is None:
+            logger.warning(f"Defender {defender_id} not found in players")
+            continue
+
+        defender_char = _get_character_by_id(characters, defender_id)
+        defender_secret = _get_secret_info(game, defender_player)
+
+        defense_prompt = build_defense_speech_prompt(
+            character=defender_char,
+            game=game,
+            secret_info=defender_secret,
+            votes_received=max_votes,
+            max_sentences=DEFENSE_SPEECH_MAX_SENTENCES,
+        )
+
+        history = await _build_compressed_conversation_history(game, provider)
+
+        messages = [
+            {"role": "system", "content": defense_prompt},
+            *history,
+            {"role": "user", "content": "Произнеси свою защитную речь:"},
+        ]
+
+        if on_typing:
+            await _call_callback(on_typing, defender_id)
+
+        defense_response = await provider.complete(
+            messages=messages,
+            model=game.config.main_model,
+            temperature=0.8,
+            max_tokens=200,
+        )
+        _track_usage_and_check_cost(game, defense_response)
+
+        defense_content = defense_response.content.strip()
+
+        truncated_content, was_truncated = _truncate_to_sentences(
+            defense_content, DEFENSE_SPEECH_MAX_SENTENCES
+        )
+        if was_truncated:
+            logger.warning(
+                f"Defense speech from {defender_id} truncated from "
+                f"{_count_sentences(defense_content)} to {DEFENSE_SPEECH_MAX_SENTENCES} sentences"
+            )
+            defense_content = truncated_content
+
+        defense_speech = DefenseSpeech(
+            defender_id=defender_id,
+            votes_received=max_votes,
+            content=defense_content,
+            timestamp=datetime.now(),
+        )
+        game.defense_speeches.append(defense_speech)
+
+        turn = Turn(
+            turn_number=len(game.turns) + 1,
+            timestamp=datetime.now(),
+            speaker_id=defender_id,
+            addressee_id="all",
+            type=TurnType.DEFENSE_SPEECH,
+            content=defense_content,
+            display_delay_ms=calculate_display_delay_ms(defense_content),
+        )
+        game.turns.append(turn)
+
+        if on_turn:
+            await _call_callback(on_turn, turn, game)
+
+    logger.info(f"Defense phase completed: {len(game.defense_speeches)} speech(es)")
+    return game, True

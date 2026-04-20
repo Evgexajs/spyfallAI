@@ -8,6 +8,7 @@ from src.orchestrator.game_engine import (
     run_main_round,
     run_final_vote,
     run_preliminary_vote,
+    run_defense_speeches,
 )
 
 __all__ = [
@@ -18,4 +19,5 @@ __all__ = [
     "run_main_round",
     "run_final_vote",
     "run_preliminary_vote",
+    "run_defense_speeches",
 ]
