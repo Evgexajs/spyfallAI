@@ -745,6 +745,36 @@ async def _generate_spy_triumph_speech(
     return _clean_content(response.content.strip())
 
 
+async def _generate_spy_defeat_speech(
+    game: Game,
+    spy_character: Character,
+    guessed_location: str,
+    actual_location: str,
+    provider: LLMProvider,
+) -> str:
+    """Generate a defeat speech for the spy after incorrectly guessing the location."""
+    prompt = f"""Ты — {spy_character.display_name} ({spy_character.archetype}).
+Ты был ШПИОНОМ и только что ОШИБСЯ с локацией!
+Ты сказал "{guessed_location}", а на самом деле это был: {actual_location}.
+
+Произнеси реплику разочарования/удивления (1-2 предложения) в своём стиле.
+Можешь посетовать, удивиться, или сказать что-то характерное для персонажа.
+
+Стиль речи: {spy_character.voice_style}
+
+Ответь ТОЛЬКО репликой, без кавычек и пояснений."""
+
+    response = await provider.complete(
+        messages=[{"role": "user", "content": prompt}],
+        model=game.config.utility_model,
+        temperature=0.9,
+        max_tokens=100,
+    )
+
+    _track_usage_and_check_cost(game, response)
+    return _clean_content(response.content.strip())
+
+
 async def run_main_round(
     game: Game,
     characters: list[Character],
@@ -1166,6 +1196,27 @@ async def run_main_round(
                             spy_guess_correct=True,
                         )
                     else:
+                        # Generate defeat speech for spy
+                        spy_char = _get_character_by_id(characters, game.spy_id)
+                        defeat_content = await _generate_spy_defeat_speech(
+                            game, spy_char,
+                            guessed_location.display_name if guessed_location else guessed_location_id,
+                            actual_location.display_name,
+                            provider
+                        )
+                        defeat_turn = Turn(
+                            turn_number=len(game.turns) + 1,
+                            timestamp=datetime.now(),
+                            speaker_id=game.spy_id,
+                            addressee_id="all",
+                            type=TurnType.INTERVENTION,
+                            content=defeat_content,
+                            display_delay_ms=calculate_display_delay_ms(defeat_content),
+                        )
+                        game.turns.append(defeat_turn)
+                        if on_turn:
+                            await _call_callback(on_turn, defeat_turn, game)
+
                         game.outcome = GameOutcome(
                             winner="civilians",
                             reason=f"Шпион ({game.spy_id}) неправильно угадал: {guessed_location.display_name if guessed_location else guessed_location_id} (на самом деле: {actual_location.display_name})",
