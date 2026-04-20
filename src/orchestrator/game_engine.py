@@ -57,6 +57,7 @@ MAX_QUESTION_REROLL_ATTEMPTS = int(os.environ.get("MAX_QUESTION_REROLL_ATTEMPTS"
 DEFENSE_MIN_VOTES_TO_QUALIFY = int(os.environ.get("DEFENSE_MIN_VOTES_TO_QUALIFY", "2"))
 DEFENSE_SPEECH_MAX_SENTENCES = int(os.environ.get("DEFENSE_SPEECH_MAX_SENTENCES", "2"))
 DEFENSE_ALLOW_ABSTAIN = os.environ.get("DEFENSE_ALLOW_ABSTAIN", "true").lower() in ("true", "1", "yes")
+MAX_RE_VOTES = 2  # Maximum number of re-votes when leader changes
 
 logger = logging.getLogger(__name__)
 
@@ -1344,6 +1345,31 @@ async def run_main_round(
     return game
 
 
+def _get_vote_leader(votes: dict[str, Optional[str]], spy_id: str) -> Optional[str]:
+    """Get the leader (person with most civilian votes) from a vote result.
+
+    Args:
+        votes: Dict mapping voter_id to target_id (or None for abstain).
+        spy_id: ID of the spy (their vote doesn't count).
+
+    Returns:
+        ID of the leader, or None if no votes cast.
+    """
+    vote_counts: dict[str, int] = {}
+    for voter_id, target in votes.items():
+        if voter_id == spy_id:
+            continue  # Spy's vote doesn't count
+        if target is not None:
+            vote_counts[target] = vote_counts.get(target, 0) + 1
+
+    if not vote_counts:
+        return None
+
+    max_votes = max(vote_counts.values())
+    leaders = [target for target, count in vote_counts.items() if count == max_votes]
+    return leaders[0] if len(leaders) == 1 else leaders[0]  # Return first if tie
+
+
 async def run_final_vote(
     game: Game,
     characters: list[Character],
@@ -1352,6 +1378,8 @@ async def run_final_vote(
     on_typing: Optional[callable] = None,
     on_vote_result: Optional[callable] = None,
     defense_was_executed: bool = False,
+    previous_leader: Optional[str] = None,
+    re_vote_count: int = 0,
 ) -> Game:
     """Run the final voting phase of the game (CR-001 F13).
 
@@ -1360,7 +1388,8 @@ async def run_final_vote(
 
     Winner is determined by UNANIMOUS voting:
     - If ALL players vote for the same target → check if spy
-    - If not unanimous (any abstention or split) → spy wins
+    - If not unanimous AND leader changed AND re_votes < MAX_RE_VOTES → re-vote with defense
+    - If not unanimous AND (leader same OR re_votes >= MAX_RE_VOTES) → game continues
 
     Args:
         game: Game object after defense phase (or preliminary vote if defense skipped).
@@ -1370,15 +1399,23 @@ async def run_final_vote(
         on_typing: Optional callback called before LLM generation starts with speaker_id.
         on_vote_result: Optional callback called with vote result.
         defense_was_executed: Whether defense speeches were delivered.
+        previous_leader: Leader from previous voting round (for re-vote detection).
+        re_vote_count: Number of re-votes already performed (max MAX_RE_VOTES).
 
     Returns:
-        Updated Game object with outcome set.
+        Updated Game object with outcome set (or None if game continues).
     """
     if provider is None:
         llm_config = LLMConfig()
         provider, _ = create_provider(llm_config, role="main")
 
-    _transition_phase(game, GamePhase.FINAL_VOTE, "Final voting started")
+    # Get preliminary leader if not provided (first call after preliminary vote)
+    if previous_leader is None and game.preliminary_vote_result:
+        previous_leader = _get_vote_leader(game.preliminary_vote_result, game.spy_id)
+        logger.info(f"Extracted preliminary leader: {previous_leader}")
+
+    phase_reason = "Final voting started" if re_vote_count == 0 else f"Re-vote {re_vote_count} started"
+    _transition_phase(game, GamePhase.FINAL_VOTE, phase_reason)
 
     player_ids = [p.character_id for p in game.players]
     final_votes: dict[str, Optional[str]] = {}
@@ -1650,21 +1687,78 @@ async def run_final_vote(
             votes={k: v for k, v in final_votes.items() if v is not None},
             accused_id=winner_target,
         )
-    else:
-        # Civilians not unanimous - spy wins
-        if max_civilian_votes == 0:
-            reason = f"Мирные воздержались — шпион ({spy_name}) побеждает"
-        else:
-            reason = f"Мирные не единогласны ({max_civilian_votes}/{total_civilian_voters}) — шпион ({spy_name}) побеждает"
+        game.ended_at = datetime.now()
+        _transition_phase(game, GamePhase.RESOLUTION, f"Game ended: {game.outcome.winner} won")
+        return game
 
-        game.outcome = GameOutcome(
-            winner="spy",
-            reason=reason,
-            votes={k: v for k, v in final_votes.items() if v is not None},
+    # Not unanimous - check if leader changed and we can re-vote
+    current_leader = winner_target  # Person with most votes (even if not unanimous)
+
+    # Determine if we should trigger a re-vote
+    leader_changed = previous_leader is not None and current_leader != previous_leader
+    can_revote = re_vote_count < MAX_RE_VOTES
+
+    if leader_changed and can_revote and current_leader is not None:
+        # Leader changed - run defense for new leader and re-vote
+        logger.info(
+            f"Leader changed from {previous_leader} to {current_leader}, "
+            f"triggering re-vote ({re_vote_count + 1}/{MAX_RE_VOTES})"
         )
 
-    game.ended_at = datetime.now()
-    _transition_phase(game, GamePhase.RESOLUTION, f"Game ended: {game.outcome.winner} won")
+        # Announce re-vote
+        current_leader_name = id_to_name.get(current_leader, current_leader)
+        previous_leader_name = id_to_name.get(previous_leader, previous_leader)
+        revote_content = (
+            f"[ПЕРЕВЫБОР] Лидер изменился: {previous_leader_name} → {current_leader_name}. "
+            f"Новое голосование! (попытка {re_vote_count + 1}/{MAX_RE_VOTES})"
+        )
+        revote_turn = Turn(
+            turn_number=len(game.turns) + 1,
+            timestamp=datetime.now(),
+            speaker_id="system",
+            addressee_id="all",
+            type=TurnType.INTERVENTION,
+            content=revote_content,
+            display_delay_ms=calculate_display_delay_ms(revote_content),
+        )
+        game.turns.append(revote_turn)
+        if on_turn:
+            await _call_callback(on_turn, revote_turn, game)
+
+        # Run defense speech for new leader
+        new_leader_vote_counts = {current_leader: max_civilian_votes}
+        game, defense_executed = await run_defense_speeches(
+            game=game,
+            characters=characters,
+            vote_counts=new_leader_vote_counts,
+            provider=provider,
+            on_turn=on_turn,
+            on_typing=on_typing,
+        )
+
+        # Recursive re-vote
+        return await run_final_vote(
+            game=game,
+            characters=characters,
+            provider=provider,
+            on_turn=on_turn,
+            on_typing=on_typing,
+            on_vote_result=on_vote_result,
+            defense_was_executed=defense_executed,
+            previous_leader=current_leader,
+            re_vote_count=re_vote_count + 1,
+        )
+
+    # No re-vote - game continues (back to main round)
+    logger.info(
+        f"Vote not unanimous ({max_civilian_votes}/{total_civilian_voters}), "
+        f"leader_changed={leader_changed}, re_vote_count={re_vote_count} - game continues"
+    )
+    _transition_phase(
+        game,
+        GamePhase.MAIN_ROUND,
+        f"Голосование не прошло ({max_civilian_votes}/{total_civilian_voters}), игра продолжается",
+    )
 
     return game
 
