@@ -214,7 +214,9 @@ def setup_game(
     return game
 
 
-def _transition_phase(game: Game, to_phase: GamePhase, reason: str) -> None:
+def _transition_phase(
+    game: Game, to_phase: GamePhase, reason: str, status: Optional[str] = None
+) -> None:
     """Record a phase transition in the game."""
     current_phase = game.phase_transitions[-1].to_phase if game.phase_transitions else None
     game.phase_transitions.append(
@@ -223,6 +225,7 @@ def _transition_phase(game: Game, to_phase: GamePhase, reason: str) -> None:
             from_phase=current_phase,
             to_phase=to_phase,
             reason=reason,
+            status=status,
         )
     )
 
