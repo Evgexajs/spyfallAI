@@ -158,3 +158,87 @@ def test_game_list_item_model():
         winner=None,
     )
     assert item_no_winner.winner is None
+
+
+class TestGetGameById:
+    """Tests for GET /games/{id} endpoint."""
+
+    def test_get_game_by_id_returns_full_game(self, client, temp_games_dir):
+        """Test that GET /games/{id} returns full game data."""
+        game = create_test_game(location_id="hospital", winner="civilians")
+        save_game(game, temp_games_dir)
+
+        response = client.get(f"/games/{game.id}")
+        assert response.status_code == 200
+
+        data = response.json()
+        assert data["id"] == str(game.id)
+        assert data["location_id"] == "hospital"
+        assert "turns" in data
+        assert "players" in data
+        assert "outcome" in data
+        assert "token_usage" in data
+
+    def test_get_game_by_id_returns_404_when_not_found(self, client, temp_games_dir):
+        """Test that GET /games/{id} returns 404 for non-existent game."""
+        fake_id = "00000000-0000-0000-0000-000000000000"
+        response = client.get(f"/games/{fake_id}")
+        assert response.status_code == 404
+        assert "not found" in response.json()["detail"].lower()
+
+    def test_get_game_by_id_includes_players(self, client, temp_games_dir):
+        """Test that returned game includes players with correct fields."""
+        game = create_test_game()
+        save_game(game, temp_games_dir)
+
+        response = client.get(f"/games/{game.id}")
+        assert response.status_code == 200
+
+        data = response.json()
+        players = data["players"]
+        assert len(players) == 3
+
+        for player in players:
+            assert "character_id" in player
+            assert "is_spy" in player
+            assert "role_id" in player
+
+    def test_get_game_by_id_includes_turns(self, client, temp_games_dir):
+        """Test that returned game includes turns array."""
+        game = create_test_game()
+        save_game(game, temp_games_dir)
+
+        response = client.get(f"/games/{game.id}")
+        assert response.status_code == 200
+
+        data = response.json()
+        assert "turns" in data
+        assert isinstance(data["turns"], list)
+
+    def test_get_game_by_id_includes_outcome(self, client, temp_games_dir):
+        """Test that returned game includes outcome."""
+        game = create_test_game(winner="spy")
+        save_game(game, temp_games_dir)
+
+        response = client.get(f"/games/{game.id}")
+        assert response.status_code == 200
+
+        data = response.json()
+        outcome = data["outcome"]
+        assert outcome["winner"] == "spy"
+        assert "reason" in outcome
+
+    def test_get_game_by_id_includes_token_usage(self, client, temp_games_dir):
+        """Test that returned game includes token_usage."""
+        game = create_test_game()
+        save_game(game, temp_games_dir)
+
+        response = client.get(f"/games/{game.id}")
+        assert response.status_code == 200
+
+        data = response.json()
+        token_usage = data["token_usage"]
+        assert "total_input_tokens" in token_usage
+        assert "total_output_tokens" in token_usage
+        assert "total_cost_usd" in token_usage
+        assert "llm_calls_count" in token_usage

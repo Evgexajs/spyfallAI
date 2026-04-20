@@ -31,6 +31,32 @@
 
 ---
 
+## [TASK-048] API endpoint GET /games/{id} — данные одной игры
+**Дата:** 2026-04-20
+**Статус:** done
+
+### Что сделано
+- Добавлен GET /games/{id} endpoint в src/web/app.py
+- Возвращает полные данные игры: turns, players, outcome, token_usage
+- 404 если игра не найдена
+- Добавлена функция find_game_by_id() в src/storage/game_repository.py
+- Обновлён src/storage/__init__.py с экспортом новой функции
+- Добавлено 6 новых тестов в tests/test_games_api.py:
+  - test_get_game_by_id_returns_full_game
+  - test_get_game_by_id_returns_404_when_not_found
+  - test_get_game_by_id_includes_players
+  - test_get_game_by_id_includes_turns
+  - test_get_game_by_id_includes_outcome
+  - test_get_game_by_id_includes_token_usage
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `91b8e59` — Add GET /games/{id} API endpoint (TASK-048)
+
+---
+
 ## [TASK-047] API endpoint GET /games — список всех игр
 **Дата:** 2026-04-20
 **Статус:** done
@@ -53,7 +79,7 @@
 - Нет
 
 ### Коммиты
-- `75073c1` — Add GET /games API endpoint (TASK-047)
+- `10a3065` — Add GET /games API endpoint (TASK-047)
 
 ---
 

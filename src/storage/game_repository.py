@@ -88,3 +88,28 @@ def list_games(games_dir: Optional[Path] = None) -> list[Path]:
     files = list(games_dir.glob("*.json"))
     files.sort(key=lambda p: p.stat().st_mtime, reverse=True)
     return files
+
+
+def find_game_by_id(game_id: str, games_dir: Optional[Path] = None) -> Optional[Game]:
+    """
+    Find and load a game by its ID.
+
+    Args:
+        game_id: The UUID string of the game to find.
+        games_dir: Optional custom directory. Defaults to project's games/.
+
+    Returns:
+        The Game object if found, None otherwise.
+    """
+    if games_dir is None:
+        games_dir = _get_games_dir()
+
+    games_dir = Path(games_dir)
+    if not games_dir.exists():
+        return None
+
+    matching_files = list(games_dir.glob(f"*_{game_id}.json"))
+    if not matching_files:
+        return None
+
+    return load_game(matching_files[0])

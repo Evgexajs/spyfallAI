@@ -926,7 +926,7 @@
         "Шаг 3: Проверить полную структуру игры"
       ],
       "dependencies": ["TASK-047"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-049",

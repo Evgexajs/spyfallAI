@@ -17,7 +17,7 @@ from pydantic import BaseModel
 from src.llm import CostExceededError, LLMConfig, create_provider
 from src.models import Character, Game, GameOutcome, Turn
 from src.orchestrator import load_locations, run_final_vote, run_main_round, setup_game
-from src.storage import list_games, load_game, save_game
+from src.storage import find_game_by_id, list_games, load_game, save_game
 
 
 app = FastAPI(title="SpyfallAI", version="0.1.0")
@@ -482,6 +482,16 @@ async def get_games_list() -> list[GameListItem]:
             continue
 
     return result
+
+
+@app.get("/games/{game_id}")
+async def get_game_by_id(game_id: str) -> dict:
+    """Get full game data by ID."""
+    game = find_game_by_id(game_id)
+    if game is None:
+        raise HTTPException(status_code=404, detail=f"Game '{game_id}' not found")
+
+    return game.model_dump(mode="json")
 
 
 @app.websocket("/ws")
