@@ -49,7 +49,7 @@
 - Шаг 2: `from src.post_game import POST_GAME_ANALYSIS_ENABLED` работает ✓
 
 ### Коммиты
-- (pending)
+- `6156a88` — feat: add env variables for post-game analysis (TASK-079)
 
 ---
 
