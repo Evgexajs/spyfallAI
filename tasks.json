@@ -1564,7 +1564,7 @@
         "Шаг 2: Импортировать PostGameAnalyzer без ошибок"
       ],
       "dependencies": ["TASK-079", "TASK-080"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-082",

@@ -31,6 +31,29 @@
 
 ---
 
+## [TASK-081] Создать базовую структуру модуля src/post_game/
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Создан `src/post_game/analyzer.py` с классом `PostGameAnalyzer`:
+  - Stub метод `analyze(game_path)` — будет реализован в TASK-086
+  - Stub метод `_collect_character_turns(game, character_id)` — TASK-082
+  - Stub метод `_analyze_character(character, turns)` — TASK-084
+  - Stub метод `save_analysis(game_path, analysis)` — TASK-087
+  - Stub метод `_load_character_profile(character_id)`
+- Создан `src/post_game/prompts.py` с функцией `build_analysis_prompt` — TASK-083
+- Обновлён `src/post_game/__init__.py` с экспортом `PostGameAnalyzer`
+
+### Тестовые шаги (пройдены)
+- Шаг 1: ls -la src/post_game/ — все 4 файла на месте ✓
+- Шаг 2: `from src.post_game import PostGameAnalyzer` работает ✓
+
+### Коммиты
+- `pending` — feat: add basic post_game module structure (TASK-081)
+
+---
+
 ## [TASK-080] Создать Pydantic модели для пост-анализа
 **Дата:** 2026-04-21
 **Статус:** done
