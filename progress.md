@@ -46,7 +46,7 @@
 - Нет
 
 ### Коммиты
-- `pending` — добавить после коммита
+- `72fce71` — feat: add find_game_path_by_id to game_repository (TASK-090)
 
 ---
 
