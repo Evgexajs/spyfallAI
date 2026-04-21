@@ -131,6 +131,7 @@
         .message-type.final_vote { background-color: #8b5cf6; color: white; }
         .message-type.spy_guess { background-color: #ef4444; color: white; }
         .message-type.spy_leak { background-color: #dc2626; color: white; }
+        .message-type.system { background-color: #eab308; color: #1f2937; }
 
         .message-content {
             line-height: 1.5;
@@ -166,6 +167,14 @@
             border-left-color: #dc2626;
             border: 2px dashed #dc2626;
             border-left-width: 6px;
+        }
+
+        .message.system {
+            background-color: rgba(234, 179, 8, 0.15);
+            border-left-color: #eab308;
+            border: 2px solid #eab308;
+            border-left-width: 6px;
+            text-align: center;
         }
 
         .message.preliminary_vote {
@@ -564,7 +573,8 @@
             defense_speech: 'ЗАЩИТА',
             final_vote: 'Ф-ГОЛОС',
             spy_guess: 'GUESS',
-            spy_leak: 'LEAK'
+            spy_leak: 'LEAK',
+            system: 'СИСТЕМА'
         };
 
         const TURN_TYPE_TOOLTIPS = {
@@ -576,7 +586,8 @@
             defense_speech: 'Защита — обвиняемый игрок защищает себя перед голосованием',
             final_vote: 'Финальное голосование — окончательный голос после защиты',
             spy_guess: 'Угадывание — шпион пытается угадать локацию',
-            spy_leak: 'Утечка — шпион случайно выдал локацию'
+            spy_leak: 'Утечка — шпион случайно выдал локацию',
+            system: 'Системное сообщение — автоматическое уведомление о событии в игре'
         };
 
         function createInfoIcon(tooltipText, position = '') {

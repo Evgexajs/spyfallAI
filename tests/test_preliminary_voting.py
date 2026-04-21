@@ -29,7 +29,6 @@ from src.models import (
 )
 from src.orchestrator.game_engine import (
     run_preliminary_vote,
-    _parse_preliminary_vote,
 )
 
 
@@ -100,51 +99,6 @@ def create_test_characters(num: int = 3) -> list[Character]:
         create_test_character(f"player_{i}", f"Player {i}")
         for i in range(num)
     ]
-
-
-class TestParsePreliminarilyVote:
-    """Tests for _parse_preliminary_vote function."""
-
-    def test_parse_exact_candidate_name(self):
-        """Should return candidate when exact name is found."""
-        candidates = ["boris", "zoya", "kim"]
-        assert _parse_preliminary_vote("boris", candidates) == "boris"
-        assert _parse_preliminary_vote("zoya", candidates) == "zoya"
-        assert _parse_preliminary_vote("kim", candidates) == "kim"
-
-    def test_parse_candidate_in_sentence(self):
-        """Should return candidate when name appears in sentence."""
-        candidates = ["boris", "zoya", "kim"]
-        assert _parse_preliminary_vote("думаю это boris", candidates) == "boris"
-        assert _parse_preliminary_vote("голосую за kim", candidates) == "kim"
-        assert _parse_preliminary_vote("zoya выглядит подозрительно", candidates) == "zoya"
-
-    def test_parse_abstain_russian(self):
-        """Should return None for Russian abstain markers."""
-        candidates = ["boris", "zoya", "kim"]
-        assert _parse_preliminary_vote("воздержусь", candidates) is None
-        assert _parse_preliminary_vote("воздерживаюсь", candidates) is None
-        assert _parse_preliminary_vote("я пас", candidates) is None
-
-    def test_parse_abstain_english(self):
-        """Should return None for English abstain markers."""
-        candidates = ["boris", "zoya", "kim"]
-        assert _parse_preliminary_vote("abstain", candidates) is None
-        assert _parse_preliminary_vote("skip this", candidates) is None
-        assert _parse_preliminary_vote("i abstain", candidates) is None
-
-    def test_parse_unknown_response(self):
-        """Should return None for unrecognized response."""
-        candidates = ["boris", "zoya", "kim"]
-        assert _parse_preliminary_vote("кто-то другой", candidates) is None
-        assert _parse_preliminary_vote("не знаю", candidates) is None
-        assert _parse_preliminary_vote("123", candidates) is None
-
-    def test_parse_partial_match(self):
-        """Should find candidate when name is substring of response."""
-        candidates = ["player_1", "player_2", "player_3"]
-        assert _parse_preliminary_vote("player_1", candidates) == "player_1"
-        assert _parse_preliminary_vote("я думаю player_2", candidates) == "player_2"
 
 
 def create_mock_llm_response(content: str) -> MagicMock:

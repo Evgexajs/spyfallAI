@@ -224,7 +224,7 @@ class TestDefenseSkippedCopyVotes:
         final_vote_turns = [t for t in result.turns if t.type == TurnType.FINAL_VOTE]
         assert len(final_vote_turns) == 3
         for turn in final_vote_turns:
-            assert "подтверждено" in turn.content.lower()
+            assert "подтверждаю" in turn.content.lower()
 
 
 class TestDefenseExecutedVoteChanges:

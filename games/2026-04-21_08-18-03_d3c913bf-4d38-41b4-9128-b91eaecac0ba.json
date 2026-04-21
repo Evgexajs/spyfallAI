@@ -1,0 +1,266 @@
+{
+  "id": "d3c913bf-4d38-41b4-9128-b91eaecac0ba",
+  "started_at": "2026-04-21T08:18:03.045419",
+  "ended_at": "2026-04-21T08:19:47.625783",
+  "config": {
+    "duration_minutes": 7,
+    "players_count": 4,
+    "max_questions": 50,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "spa",
+  "players": [
+    {
+      "character_id": "lyokha",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "aurora",
+      "role_id": "administrator",
+      "is_spy": false
+    },
+    {
+      "character_id": "kim",
+      "role_id": "masseur",
+      "is_spy": false
+    },
+    {
+      "character_id": "professor_stein",
+      "role_id": "cosmetologist",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "lyokha",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-21T08:18:05.090289",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "type": "question",
+      "content": "Ким, какие звуки тут обычно слышишь?",
+      "display_delay_ms": 1393,
+      "raw_response": "{\n  \"content\": \"Ким, какие звуки тут обычно слышишь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T08:18:07.842002",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "Ну... в смысле, обычно тут довольно тихо, наверное, только иногда послышатся такие, ну как бы, шуршащие звуки, и, возможно, приглушённая музыка. То есть, всё чтобы расслабиться, вернее, для атмосферы.",
+      "display_delay_ms": 6580,
+      "raw_response": "{\n  \"content\": \"Ну... в смысле, обычно тут довольно тихо, наверное, только иногда послышатся такие, ну как бы, шуршащие звуки, и, возможно, приглушённая музыка. То есть, всё чтобы расслабиться, вернее, для атмосферы.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-21T08:18:15.982191",
+      "speaker_id": "kim",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Штейн, как думаешь, почему здесь могут понадобиться мягкие халаты?",
+      "display_delay_ms": 2224,
+      "raw_response": "{\n  \"content\": \"Штейн, как думаешь, почему здесь могут понадобиться мягкие халаты?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-21T08:18:19.985060",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "type": "answer",
+      "content": "По сути, вопрос о мягкости халатов носит сродни вопросу о сути комфорта, напоминая о давней мысли, что физическая расслабленность способствует и ментальному расслаблению. Как утверждал один из неназванных мыслителей, облачение в мягкий халат, возможно, снимает не только неудобство материальное, но и эмоциональное напряжение, подобно тому как шершавая поверхность сглаживается тёплым дождём.",
+      "display_delay_ms": 12108,
+      "raw_response": "{\n  \"content\": \"По сути, вопрос о мягкости халатов носит сродни вопросу о сути комфорта, напоминая о давней мысли, что физическая расслабленность способствует и ментальному расслаблению. Как утверждал один из неназванных мыслителей, облачение в мягкий халат, возможно, снимает не только неудобство материальное, но и эмоциональное напряжение, подобно тому как шершавая поверхность сглаживается тёплым дождём.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T08:18:33.881621",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "Лёха, как бы ты описал атмосферу этого места в сравнении с другими публичными заведениями?",
+      "display_delay_ms": 3129,
+      "raw_response": "{\n  \"content\": \"Лёха, как бы ты описал атмосферу этого места в сравнении с другими публичными заведениями?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-21T08:18:37.776466",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "Слушай, тут как-то спокойней и расслабон больше, чем в других местах.",
+      "display_delay_ms": 2580,
+      "raw_response": "{\n  \"content\": \"Слушай, тут как-то спокойней и расслабон больше, чем в других местах.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-21T08:18:44.363704",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "type": "intervention",
+      "content": "О, как можно быть столь... уклончивым?! Лёха, твой ответ вызывает подозрение! Где же драматизм и детальность?! Ты что-то скрываешь?!",
+      "display_delay_ms": 4182,
+      "raw_response": "О, как можно быть столь... уклончивым?! Лёха, твой ответ вызывает подозрение! Где же драматизм и детальность?! Ты что-то скрываешь?!"
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T08:18:49.941357",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "type": "question",
+      "content": "Ким, чё тут обычно делают? Какие действия вокруг?",
+      "display_delay_ms": 1809,
+      "raw_response": "{\n  \"content\": \"Ким, чё тут обычно делают? Какие действия вокруг?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-21T08:18:54.322787",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "Ну, в смысле, тут вроде как всё про релаксацию, вернее, обстановку создают для того чтобы человек мог отдохнуть. То есть, много времени проводят, например, с маслами или... ну, как бы, просто заботятся о комфорте.",
+      "display_delay_ms": 6694,
+      "raw_response": "{\n  \"content\": \"Ну, в смысле, тут вроде как всё про релаксацию, вернее, обстановку создают для того чтобы человек мог отдохнуть. То есть, много времени проводят, например, с маслами или... ну, как бы, просто заботятся о комфорте.\",\n  \"wants_vote\": true,\n  \"suspect_id\": \"professor_stein\"\n}"
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-21T08:19:01.018504",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "intervention",
+      "content": "[ГОЛОСОВАНИЕ] Ким инициирует голосование против Штейн!",
+      "display_delay_ms": 2061,
+      "raw_response": null
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T08:19:09.322662",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Штейн] Ну, в смысле, я не хочу быть слишком категоричным, но... Штейн, твой ответ про комфорт был, ну, немного странным. В смысле, кажется, ты пытался уйти от темы, вернее, запутать нас. Я не то чтобы уверен, но это как-то подозрительно, наверное.",
+      "display_delay_ms": 7962,
+      "raw_response": null
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-21T08:19:19.055196",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Штейн] Штейн, ты как-то мудришь. Слишком всё у тебя запутано, чё за философия? Давай проще, а то подозрительно.",
+      "display_delay_ms": 3827,
+      "raw_response": null
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-21T08:19:24.560114",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Штейн] О, как немыслимо, что я должна принять столь важное решение! Но, увы, атмосфера вокруг нас полна подозрений, и Штейн, твой ответ о комфорте был столь туманен и загадочен... Я вынуждена присоединиться к обвинению, ибо как иначе найти правду в этом театре жизни?!",
+      "display_delay_ms": 8731,
+      "raw_response": null
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-21T08:19:36.023816",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Ким] Фактически, если мы объективно рассмотрим все имеющиеся данные, то обнаружим, что именно Ким проявляет наибольшую степень уклончивости и неопределённости в своих ответах. Его описания словно напоминают туманную завесу, за которой прячется истинное понимание ситуации. Как один неназванный философ отмечал, истина не терпит полутонов и расплывчатых формулировок.",
+      "display_delay_ms": 11600,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-21T08:18:42.213990",
+      "level": "confident",
+      "hints": [
+        "шуршащие звуки и приглушённая музыка",
+        "мягкие халаты и атмосфера расслабления"
+      ],
+      "location_guess": "спа-салон",
+      "reasoning": "Несколько подсказок указывают на спа-салон: шуршащие звуки и приглушённая музыка создают атмосферу расслабления, а мягкие халаты часто используются в спа для комфорта посетителей.",
+      "raw_response": "{\n  \"hints\": [\"шуршащие звуки и приглушённая музыка\", \"мягкие халаты и атмосфера расслабления\"],\n  \"location_guess\": \"спа-салон\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Несколько подсказок указывают на спа-салон: шуршащие звуки и приглушённая музыка создают атмосферу расслабления, а мягкие халаты часто используются в спа для комфорта посетителей.\"\n}"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-21T08:18:48.547493",
+      "character_id": "aurora",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-21T08:18:03.045419",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T08:18:03.045636",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T08:19:03.081097",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Голосование инициировано игроком Ким",
+      "status": "player_initiated",
+      "initiator_id": "kim"
+    },
+    {
+      "timestamp": "2026-04-21T08:19:03.081385",
+      "from_phase": "optional_vote",
+      "to_phase": "preliminary_vote",
+      "reason": "Preliminary voting started",
+      "status": null,
+      "initiator_id": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Игроки единогласно обвинили Штейн, но шпионом был Лёха",
+    "votes": {
+      "kim": "professor_stein",
+      "lyokha": "professor_stein",
+      "aurora": "professor_stein",
+      "professor_stein": "kim"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": "professor_stein"
+  },
+  "compressed_history": "В диалоге между игроками Ким и Штейн возникает подозрение к Киму, когда он описывает звуки, которые слышны в их локации. Ким утверждает, что здесь тихо, с шуршащими звуками и приглушённой музыкой, что может указывать на расслабляющую атмосферу. Однако его уклончивые ответы вызывают сомнения у Лёхи, который начинает подозревать Кима в том, что он может быть шпионом.\n\nШтейн, в свою очередь, задаёт вопрос о мягких халатах, что также вызывает подозрения. Его философский ответ о комфорте и расслаблении кажется слишком запутанным и неуместным, что может указывать на попытку отвлечь внимание от сути вопроса. Лёха начинает сомневаться в искренности Штейна, считая его ответ уклончивым.\n\nВ ходе обсуждения намекается на локацию, связанную с расслаблением, возможно, это спа или курорт, но конкретные детали остаются неясными. Обвинения и контраргументы создают напряжение, и игроки продолжают искать правду о том, кто из них шпион.",
+  "compression_checkpoint": 4,
+  "token_usage": {
+    "total_input_tokens": 25035,
+    "total_output_tokens": 1247,
+    "total_cost_usd": 0.0715983,
+    "llm_calls_count": 16
+  },
+  "preliminary_vote_result": {
+    "kim": "professor_stein",
+    "lyokha": "professor_stein",
+    "aurora": "professor_stein",
+    "professor_stein": "kim"
+  },
+  "defense_speeches": [],
+  "final_vote_result": null,
+  "vote_changes": []
+}

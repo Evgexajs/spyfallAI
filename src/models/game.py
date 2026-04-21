@@ -20,6 +20,7 @@ class TurnType(str, Enum):
     FINAL_VOTE = "final_vote"  # Vote in final voting phase
     SPY_GUESS = "spy_guess"
     SPY_LEAK = "spy_leak"
+    SYSTEM = "system"  # System announcements (voting triggers, phase changes)
 
 
 class GamePhase(str, Enum):

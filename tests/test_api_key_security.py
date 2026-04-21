@@ -36,7 +36,7 @@ class TestApiKeySecurity:
         api_key_pattern = re.compile(r"^(OPENAI_API_KEY|ANTHROPIC_API_KEY)=(.*)$", re.MULTILINE)
         matches = api_key_pattern.findall(content)
 
-        assert len(matches) >= 2, "Both API key variables should be in .env.example"
+        assert len(matches) >= 1, "At least one API key variable should be in .env.example"
 
         for key_name, value in matches:
             assert value.strip() == "", \

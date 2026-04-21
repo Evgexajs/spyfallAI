@@ -661,7 +661,7 @@ class TestDefenseCharacteristicCheck:
         assert "Переводить подозрение на обвинителя" in prompt
         assert "Использовать не более 2 предложений" in prompt
         assert "короткие рубленые фразы" in prompt
-        assert "да или нет" in prompt.lower()
+        assert "true или false" in prompt.lower()
 
     def test_characteristic_speech_not_regenerated(self):
         """Speech that is characteristic should not be regenerated."""
@@ -684,7 +684,7 @@ class TestDefenseCharacteristicCheck:
             if call_count[0] == 1:
                 return create_mock_llm_response("Это защитная речь.")
             else:
-                return create_mock_llm_response("да")
+                return create_mock_llm_response('{"is_characteristic": true}')
 
         mock_provider.complete = mock_complete
 
@@ -718,11 +718,11 @@ class TestDefenseCharacteristicCheck:
             if call_count[0] == 1:
                 return create_mock_llm_response("Первая версия речи.")
             elif call_count[0] == 2:
-                return create_mock_llm_response("нет")
+                return create_mock_llm_response('{"is_characteristic": false}')
             elif call_count[0] == 3:
                 return create_mock_llm_response("Регенерированная речь!")
             else:
-                return create_mock_llm_response("да")
+                return create_mock_llm_response('{"is_characteristic": true}')
 
         mock_provider.complete = mock_complete
 
@@ -757,7 +757,7 @@ class TestDefenseCharacteristicCheck:
             if call_count[0] == 1:
                 return create_mock_llm_response("Первая версия.")
             elif call_count[0] == 2:
-                return create_mock_llm_response("нет")
+                return create_mock_llm_response('{"is_characteristic": false}')
             else:
                 return create_mock_llm_response("Вторая версия.")
 
