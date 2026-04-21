@@ -59,10 +59,6 @@ DEFENSE_SPEECH_MAX_SENTENCES = int(os.environ.get("DEFENSE_SPEECH_MAX_SENTENCES"
 DEFENSE_ALLOW_ABSTAIN = os.environ.get("DEFENSE_ALLOW_ABSTAIN", "true").lower() in ("true", "1", "yes")
 MAX_RE_VOTES = 2  # Maximum number of re-votes when leader changes
 
-# TEMPORARY: Disable spy auto-guess to test F13 (final vote)
-# TODO: Remove this after testing
-DISABLE_SPY_AUTO_GUESS = True
-
 logger = logging.getLogger(__name__)
 
 
@@ -1154,7 +1150,7 @@ async def run_main_round(
             spy_character = _get_character_by_id(characters, game.spy_id)
             should_auto_guess = False
 
-            if confidence_entry.level == ConfidenceLevel.CONFIDENT and not DISABLE_SPY_AUTO_GUESS:
+            if confidence_entry.level == ConfidenceLevel.CONFIDENT:
                 if spy_character.spy_risk_tolerance == SpyRiskTolerance.BOLD:
                     should_auto_guess = True
                     logger.info(f"Spy {game.spy_id} is bold - auto-guessing immediately")
@@ -1166,8 +1162,6 @@ async def run_main_round(
                         logger.info(f"Spy {game.spy_id} is moderate - waiting for more confident checks ({consecutive_confident_count}/2)")
                 else:  # CAUTIOUS
                     logger.info(f"Spy {game.spy_id} is cautious - will not auto-guess")
-            elif DISABLE_SPY_AUTO_GUESS:
-                logger.info(f"Spy auto-guess DISABLED for testing")
 
             if should_auto_guess:
                 guessed_location_id = await _ask_spy_to_guess(
