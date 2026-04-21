@@ -18,9 +18,21 @@ from src.models.game import (
     TurnType,
     VoteChange,
 )
+from src.models.post_game_analysis import (
+    AnalysisStatus,
+    CharacterAnalysis,
+    MarkerAnalysis,
+    MarkerAnalysisEntry,
+    MarkerTurnAnalysis,
+    MustComplianceAnalysis,
+    MustDirectiveAnalysis,
+    PostGameAnalysis,
+)
 
 __all__ = [
+    "AnalysisStatus",
     "Character",
+    "CharacterAnalysis",
     "ConditionType",
     "ConfidenceEntry",
     "ConfidenceLevel",
@@ -31,9 +43,15 @@ __all__ = [
     "GamePhase",
     "Location",
     "Marker",
+    "MarkerAnalysis",
+    "MarkerAnalysisEntry",
     "MarkerMethod",
+    "MarkerTurnAnalysis",
+    "MustComplianceAnalysis",
+    "MustDirectiveAnalysis",
     "PhaseEntry",
     "Player",
+    "PostGameAnalysis",
     "ReactionType",
     "Role",
     "SpyRiskTolerance",

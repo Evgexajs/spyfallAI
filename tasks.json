@@ -1546,7 +1546,7 @@
         "Шаг 3: Сериализовать/десериализовать в JSON"
       ],
       "dependencies": [],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-081",

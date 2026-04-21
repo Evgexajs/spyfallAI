@@ -31,6 +31,33 @@
 
 ---
 
+## [TASK-080] Создать Pydantic модели для пост-анализа
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Создан `src/models/post_game_analysis.py` с Pydantic моделями:
+  - `AnalysisStatus` — enum (completed, skipped, failed, not_analyzed)
+  - `MarkerTurnAnalysis` — анализ маркера для одного хода
+  - `MarkerAnalysisEntry` — результат анализа одного маркера
+  - `MarkerAnalysis` — контейнер для всех маркеров персонажа
+  - `MustDirectiveAnalysis` — анализ одной MUST-директивы
+  - `MustComplianceAnalysis` — контейнер для всех MUST-директив
+  - `CharacterAnalysis` — полный анализ одного персонажа
+  - `PostGameAnalysis` — top-level контейнер для всей партии
+- Обновлён `src/models/__init__.py` с экспортом всех новых моделей
+- Модели соответствуют формату JSON из CR-003 раздел 6.2
+
+### Тестовые шаги (пройдены)
+- Шаг 1: Импорт всех моделей без ошибок ✓
+- Шаг 2: Создание PostGameAnalysis с тестовыми данными ✓
+- Шаг 3: Сериализация/десериализация в JSON ✓
+
+### Коммиты
+- (pending)
+
+---
+
 ## [TASK-079] Добавить env-переменные для пост-анализа партии
 **Дата:** 2026-04-21
 **Статус:** done
