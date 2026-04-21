@@ -452,12 +452,29 @@ class PostGameAnalyzer:
         """Save analysis results back to the game log file.
 
         Adds or overwrites the post_game_analysis field in the game JSON.
+        Existing fields in the log are preserved without modification.
+        If post_game_analysis already exists, it is overwritten and a warning is logged.
 
         Args:
             game_path: Path to the game JSON log file.
             analysis: Analysis results to save.
+
+        Raises:
+            FileNotFoundError: If game_path doesn't exist.
+            json.JSONDecodeError: If game file contains invalid JSON.
         """
-        raise NotImplementedError("Will be implemented in TASK-087")
+        with open(game_path, "r", encoding="utf-8") as f:
+            game_data = json.load(f)
+
+        if "post_game_analysis" in game_data:
+            logger.warning(
+                f"Overwriting existing post_game_analysis in {game_path.name}"
+            )
+
+        game_data["post_game_analysis"] = analysis.model_dump(mode="json")
+
+        with open(game_path, "w", encoding="utf-8") as f:
+            json.dump(game_data, f, ensure_ascii=False, indent=2)
 
     def _load_character_profile(self, character_id: str) -> Optional[Character]:
         """Load a character profile from the characters/ directory.

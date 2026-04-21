@@ -1683,7 +1683,7 @@
         "Шаг 3: Сохранить повторно — проверить warning и перезапись"
       ],
       "dependencies": ["TASK-086"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-088",
