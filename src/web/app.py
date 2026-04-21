@@ -26,6 +26,8 @@ from src.orchestrator import (
     setup_game,
 )
 from src.storage import find_game_by_id, list_games, load_game, save_game
+from src.post_game.analyzer import PostGameAnalyzer
+from src.post_game.config import POST_GAME_ANALYSIS_ENABLED
 
 
 app = FastAPI(title="SpyfallAI", version="0.1.0")
@@ -325,7 +327,24 @@ class GameManager:
                     "duration_seconds": game_duration_seconds,
                 })
 
-                save_game(self.game)
+                filepath = save_game(self.game)
+
+                # Run post-game analysis if enabled
+                if POST_GAME_ANALYSIS_ENABLED:
+                    try:
+                        analyzer = PostGameAnalyzer()
+                        analysis = await analyzer.analyze(filepath)
+                        if analysis.status.value != "failed":
+                            analyzer.save_analysis(filepath, analysis)
+                            await self.broadcast({
+                                "type": "analysis_complete",
+                                "status": analysis.status.value,
+                            })
+                    except Exception as e:
+                        await self.broadcast({
+                            "type": "analysis_error",
+                            "error": str(e),
+                        })
 
         except asyncio.CancelledError:
             self.status = GameStatus.STOPPED
