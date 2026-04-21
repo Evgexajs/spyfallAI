@@ -49,7 +49,7 @@
 - Нет
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `15a4c42` — test: add unit tests for PostGameAnalyzer (TASK-091)
 
 ---
 
