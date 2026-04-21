@@ -1489,7 +1489,7 @@
         "Шаг 2: Все тесты проходят"
       ],
       "dependencies": ["TASK-075", "TASK-076"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-078",

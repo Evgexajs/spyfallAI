@@ -31,6 +31,42 @@
 
 ---
 
+## [TASK-077] Написать тесты для всех детекторов
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Создан консолидированный файл `tests/test_trigger_detectors.py` с 24 тестами
+- Тесты для `dodged_direct_question`:
+  - Уклончивый ответ возвращает True
+  - Прямой ответ возвращает False
+  - Невалидный ответ LLM возвращает False с warning
+  - Исключение LLM возвращает False с warning
+  - Поддержка английских ответов (yes/no)
+  - Проверка содержимого промпта
+- Тесты для `repeated_accusation_on_same_target`:
+  - 2 обвинения подряд срабатывает
+  - Обвинения через 10 ходов не срабатывает
+  - Обвинения на разные цели не срабатывает
+  - `params.target_id` записывается в TriggerEvent
+- Тесты для `contradiction_with_previous_answer`:
+  - Явное противоречие срабатывает
+  - Перефразирование не срабатывает
+  - Смена темы не срабатывает
+  - Менее 2 предыдущих ответов — проверка пропускается
+  - Невалидный ответ LLM не срабатывает
+  - `reasoning` и `params` записываются в TriggerEvent
+- Тесты для `silent_for_n_turns` с персональными reaction_types:
+  - Борис использует `pressure_with_sharper_question`
+  - Ким использует `panic_and_derail`
+  - Разные персонажи имеют разные reaction_type для одного condition
+- Все тесты используют моки для LLM (`AsyncMock`, `MagicMock`)
+
+### Коммиты
+- `<pending>` — test: add consolidated trigger detector tests (TASK-077)
+
+---
+
 ## [TASK-076] Обновить метод создания TriggerEvent для новых полей
 **Дата:** 2026-04-21
 **Статус:** done
