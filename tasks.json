@@ -1623,7 +1623,7 @@
         "Шаг 3: Вызвать с моком таймаута — проверить error='timeout'"
       ],
       "dependencies": ["TASK-083"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-085",
