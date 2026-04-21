@@ -1603,7 +1603,7 @@
         "Шаг 3: Проверить что формат JSON явно задан"
       ],
       "dependencies": ["TASK-081"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-084",
