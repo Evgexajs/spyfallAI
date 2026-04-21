@@ -48,7 +48,7 @@
 - Нет
 
 ### Коммиты
-- (pending)
+- `480298e` — feat: implement save_analysis() method in PostGameAnalyzer (TASK-087)
 
 ---
 
