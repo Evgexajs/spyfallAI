@@ -49,7 +49,7 @@
 - Дополнительно: несуществующий персонаж возвращает пустой список ✓
 
 ### Коммиты
-- `TBD` — feat: implement _collect_character_turns (TASK-082)
+- `912458f` — feat: implement _collect_character_turns for post-game analysis (TASK-082)
 
 ---
 
