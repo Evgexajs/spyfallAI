@@ -43,7 +43,7 @@
 - Успешно импортируются: `from src.orchestrator.game_engine import REPEATED_ACCUSATION_WINDOW, CONTRADICTION_HISTORY_WINDOW`
 
 ### Коммиты
-- `1b0ff9d` — Add CR-002 env variables for trigger detectors
+- `0b15610` — Add CR-002 env variables for trigger detectors
 
 ---
 
