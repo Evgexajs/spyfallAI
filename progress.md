@@ -51,7 +51,7 @@
 5. LLM пропустил маркер из профиля → добавляется с `status=NOT_ANALYZED` + warning (lines 336-358)
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `9e53164` — feat: implement edge case handling in post-game analyzer
 
 ---
 
