@@ -31,6 +31,30 @@
 
 ---
 
+## [TASK-085] Обработка edge cases в анализаторе
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Все edge cases уже были реализованы в TASK-084, верифицировано соответствие acceptance criteria
+- Исправлены тесты в `tests/test_post_game_analyzer_edge_cases.py`:
+  - Добавлено поле `timestamp` в helper `create_turn()` (обязательное поле в модели Turn)
+  - Конвертированы async тесты с `pytest.mark.asyncio` на `asyncio.run()` (pytest-asyncio не установлен)
+  - Вынесены длинные JSON mock-ответы в константы для соответствия ruff line-length
+- Все 12 тестов проходят успешно
+
+### Проверенные edge cases
+1. Игрок без реплик → `status='skipped', reason='no_replies'` (lines 112-114)
+2. Профиль без detectable_markers → `markers.status='skipped', reason='no_markers_in_profile'` (lines 250-255)
+3. Профиль без must_directives → `must_compliance.status='skipped', reason='no_must_in_profile'` (lines 257-262)
+4. LLM вернул маркеры не из профиля → игнорируются + warning в `_analyzer_warnings` (lines 360-380)
+5. LLM пропустил маркер из профиля → добавляется с `status=NOT_ANALYZED` + warning (lines 336-358)
+
+### Коммиты
+- (будет добавлен после коммита)
+
+---
+
 ## [TASK-084] Реализовать вызов LLM и парсинг ответа
 **Дата:** 2026-04-21
 **Статус:** done

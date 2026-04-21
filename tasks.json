@@ -1643,7 +1643,7 @@
         "Шаг 3: Тест с галлюцинированными маркерами от LLM"
       ],
       "dependencies": ["TASK-084"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-086",

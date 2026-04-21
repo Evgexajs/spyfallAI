@@ -96,6 +96,11 @@ class PostGameAnalyzer:
         Calls the LLM with the analysis prompt and parses the JSON response.
         Uses timeout from POST_GAME_ANALYSIS_TIMEOUT_SECONDS env variable.
 
+        Edge cases handled:
+        - No turns: returns skipped analysis with reason='no_replies'
+        - No detectable_markers: markers.status='skipped', reason='no_markers_in_profile'
+        - No must_directives: must_compliance.status='skipped', reason='no_must_in_profile'
+
         Args:
             character: The character profile.
             turns: Character's turns with context.
@@ -104,6 +109,19 @@ class PostGameAnalyzer:
             CharacterAnalysis with markers and must_compliance results.
             On error, returns CharacterAnalysis with status='failed' and error description.
         """
+        if not turns:
+            logger.info(f"Character {character.id} has no turns, skipping analysis")
+            return self._skipped_analysis(character.id, "no_replies")
+
+        has_markers = bool(character.detectable_markers)
+        has_must = bool(character.must_directives)
+
+        if not has_markers and not has_must:
+            logger.info(f"Character {character.id} has no markers and no must_directives")
+            return self._skipped_analysis(
+                character.id, "no_markers_in_profile_and_no_must_in_profile"
+            )
+
         prompt = build_analysis_prompt(character, turns)
 
         config = LLMConfig()
@@ -143,7 +161,9 @@ class PostGameAnalyzer:
             logger.warning(f"Invalid JSON from LLM for character {character.id}: {e}")
             return self._failed_analysis(character.id, "invalid_json")
 
-        return self._parse_llm_response(character, data)
+        return self._parse_llm_response(
+            character, data, has_markers=has_markers, has_must=has_must
+        )
 
     def _failed_analysis(self, character_id: str, error: str) -> CharacterAnalysis:
         """Create a failed CharacterAnalysis with the given error."""
@@ -163,32 +183,83 @@ class PostGameAnalyzer:
             error=error
         )
 
+    def _skipped_analysis(self, character_id: str, reason: str) -> CharacterAnalysis:
+        """Create a skipped CharacterAnalysis with the given reason."""
+        return CharacterAnalysis(
+            character_id=character_id,
+            markers=MarkerAnalysis(
+                status=AnalysisStatus.SKIPPED,
+                per_marker=[],
+                reason=reason
+            ),
+            must_compliance=MustComplianceAnalysis(
+                status=AnalysisStatus.SKIPPED,
+                per_directive=[],
+                reason=reason
+            ),
+            status=AnalysisStatus.SKIPPED,
+            reason=reason
+        )
+
+    def _skipped_markers_analysis(self, reason: str) -> MarkerAnalysis:
+        """Create a skipped MarkerAnalysis for edge case handling."""
+        return MarkerAnalysis(
+            status=AnalysisStatus.SKIPPED,
+            per_marker=[],
+            reason=reason
+        )
+
+    def _skipped_must_analysis(self, reason: str) -> MustComplianceAnalysis:
+        """Create a skipped MustComplianceAnalysis for edge case handling."""
+        return MustComplianceAnalysis(
+            status=AnalysisStatus.SKIPPED,
+            per_directive=[],
+            reason=reason
+        )
+
     def _parse_llm_response(
         self,
         character: Character,
-        data: dict
+        data: dict,
+        has_markers: bool = True,
+        has_must: bool = True,
     ) -> CharacterAnalysis:
         """Parse and validate LLM JSON response into CharacterAnalysis.
 
         Args:
             character: Character profile for validation.
             data: Parsed JSON from LLM.
+            has_markers: Whether character has detectable_markers in profile.
+            has_must: Whether character has must_directives in profile.
 
         Returns:
             CharacterAnalysis. On validation error, returns failed analysis.
         """
-        required_fields = {"character_id", "markers", "must_compliance"}
+        required_fields = {"character_id"}
+        if has_markers:
+            required_fields.add("markers")
+        if has_must:
+            required_fields.add("must_compliance")
+
         if not required_fields.issubset(data.keys()):
             missing = required_fields - set(data.keys())
             logger.warning(f"Missing required fields for {character.id}: {missing}")
             return self._failed_analysis(character.id, "missing_required_fields")
 
         try:
-            markers_data = data.get("markers", {})
-            markers = self._parse_markers(character, markers_data)
+            if has_markers:
+                markers_data = data.get("markers", {})
+                markers = self._parse_markers(character, markers_data)
+            else:
+                logger.info(f"Character {character.id} has no markers in profile")
+                markers = self._skipped_markers_analysis("no_markers_in_profile")
 
-            must_data = data.get("must_compliance", {})
-            must_compliance = self._parse_must_compliance(character, must_data)
+            if has_must:
+                must_data = data.get("must_compliance", {})
+                must_compliance = self._parse_must_compliance(character, must_data)
+            else:
+                logger.info(f"Character {character.id} has no must_directives in profile")
+                must_compliance = self._skipped_must_analysis("no_must_in_profile")
 
             analysis = CharacterAnalysis(
                 character_id=character.id,
@@ -197,8 +268,9 @@ class PostGameAnalyzer:
                 status=None
             )
 
-            self._check_for_missing_markers(character, markers, analysis)
-            self._check_for_hallucinated_markers(character, markers, analysis)
+            if has_markers:
+                self._check_for_missing_markers(character, markers, analysis)
+                self._check_for_hallucinated_markers(character, markers, analysis)
 
             return analysis
 
