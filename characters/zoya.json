@@ -63,6 +63,15 @@
       "threshold": 0.4,
       "reaction_type": "mock_with_dry_sarcasm",
       "params": null
+    },
+    {
+      "condition_type": "silent_for_n_turns",
+      "priority": 7,
+      "threshold": 0.4,
+      "reaction_type": "mock_with_dry_sarcasm",
+      "params": {
+        "silent_turns": 2
+      }
     }
   ],
   "intervention_priority": 7,

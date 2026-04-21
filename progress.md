@@ -31,6 +31,29 @@
 
 ---
 
+## [TASK-068] Добавить персональный триггер silent_for_n_turns во все профили персонажей
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Добавлен триггер `silent_for_n_turns` во все 8 профилей персонажей
+- Каждый персонаж получил уникальную настройку триггера:
+  - Борис: silent_turns=2, priority=9, threshold=0.3, reaction=pressure_with_sharper_question
+  - Марго: silent_turns=3, priority=5, threshold=0.5, reaction=deflect_suspicion_to_another
+  - Ким: silent_turns=2, priority=4, threshold=0.4, reaction=panic_and_derail
+  - Штейн: silent_turns=3, priority=6, threshold=0.7, reaction=point_out_inconsistency (уже был)
+  - Зоя: silent_turns=2, priority=7, threshold=0.4, reaction=mock_with_dry_sarcasm
+  - Игнатий: silent_turns=3, priority=5, threshold=0.6, reaction=moralize_and_accuse
+  - Лёха: silent_turns=2, priority=5, threshold=0.4, reaction=short_dismissive_jab
+  - Аврора: silent_turns=3, priority=5, threshold=0.5, reaction=panic_and_derail
+- Все JSON файлы валидны
+- Все персонажи загружаются через pydantic модель без ошибок
+
+### Коммиты
+- `TBD` — feat: add silent_for_n_turns trigger to all character profiles
+
+---
+
 ## [TASK-067] Расширить модель TriggerEvent для новых полей
 **Дата:** 2026-04-21
 **Статус:** done

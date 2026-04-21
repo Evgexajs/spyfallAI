@@ -63,6 +63,15 @@
       "threshold": 0.5,
       "reaction_type": "deflect_suspicion_to_another",
       "params": null
+    },
+    {
+      "condition_type": "silent_for_n_turns",
+      "priority": 5,
+      "threshold": 0.5,
+      "reaction_type": "deflect_suspicion_to_another",
+      "params": {
+        "silent_turns": 3
+      }
     }
   ],
   "intervention_priority": 6,

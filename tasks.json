@@ -1321,7 +1321,7 @@
         "Шаг 3: Проверить наличие триггера silent_for_n_turns"
       ],
       "dependencies": [],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-069",

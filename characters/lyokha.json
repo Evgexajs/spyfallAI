@@ -63,6 +63,15 @@
       "threshold": 0.5,
       "reaction_type": "short_dismissive_jab",
       "params": null
+    },
+    {
+      "condition_type": "silent_for_n_turns",
+      "priority": 5,
+      "threshold": 0.4,
+      "reaction_type": "short_dismissive_jab",
+      "params": {
+        "silent_turns": 2
+      }
     }
   ],
   "intervention_priority": 5,

@@ -63,6 +63,15 @@
       "threshold": 0.5,
       "reaction_type": "moralize_and_accuse",
       "params": null
+    },
+    {
+      "condition_type": "silent_for_n_turns",
+      "priority": 5,
+      "threshold": 0.6,
+      "reaction_type": "moralize_and_accuse",
+      "params": {
+        "silent_turns": 3
+      }
     }
   ],
   "intervention_priority": 6,

@@ -63,6 +63,15 @@
       "threshold": 0.4,
       "reaction_type": "point_out_inconsistency",
       "params": null
+    },
+    {
+      "condition_type": "silent_for_n_turns",
+      "priority": 9,
+      "threshold": 0.3,
+      "reaction_type": "pressure_with_sharper_question",
+      "params": {
+        "silent_turns": 2
+      }
     }
   ],
   "intervention_priority": 9,
