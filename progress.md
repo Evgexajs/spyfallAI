@@ -44,7 +44,7 @@
 - Проверено: сериализация/десериализация JSON работает корректно
 
 ### Коммиты
-- `7d098dc` — feat: add reasoning and params fields to TriggerEvent model
+- `d866c7f` — feat: add reasoning and params fields to TriggerEvent model
 
 ---
 
