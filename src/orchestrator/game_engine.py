@@ -1339,7 +1339,9 @@ async def run_main_round(
             # Create system announcement for voting trigger
             system_turn = Turn(
                 turn_number=len(game.turns) + 1,
+                timestamp=datetime.now(),
                 speaker_id="system",
+                addressee_id="all",
                 type=TurnType.SYSTEM,
                 content=f"[ГОЛОСОВАНИЕ] {vote_trigger_result.reason}",
                 display_delay_ms=0,
