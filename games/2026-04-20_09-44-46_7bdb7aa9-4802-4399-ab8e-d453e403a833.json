@@ -75,5 +75,85 @@
     "total_output_tokens": 46,
     "total_cost_usd": 0.0028375,
     "llm_calls_count": 1
+  },
+  "post_game_analysis": {
+    "analyzed_at": "2026-04-21T08:04:06.273432Z",
+    "analyzer_model": "gpt-4o-mini",
+    "status": "completed",
+    "per_character": {
+      "boris_molot": {
+        "character_id": "boris_molot",
+        "markers": {
+          "status": "skipped",
+          "per_marker": [],
+          "reason": "no_replies",
+          "error": null
+        },
+        "must_compliance": {
+          "status": "skipped",
+          "per_directive": [],
+          "reason": "no_replies",
+          "error": null
+        },
+        "status": "skipped",
+        "reason": "no_replies",
+        "error": null
+      },
+      "professor_stein": {
+        "character_id": "professor_stein",
+        "markers": {
+          "status": "failed",
+          "per_marker": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "must_compliance": {
+          "status": "failed",
+          "per_directive": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "status": "failed",
+        "reason": null,
+        "error": "unexpected_error: OPENAI_API_KEY not set"
+      },
+      "aurora": {
+        "character_id": "aurora",
+        "markers": {
+          "status": "skipped",
+          "per_marker": [],
+          "reason": "no_replies",
+          "error": null
+        },
+        "must_compliance": {
+          "status": "skipped",
+          "per_directive": [],
+          "reason": "no_replies",
+          "error": null
+        },
+        "status": "skipped",
+        "reason": "no_replies",
+        "error": null
+      },
+      "lyokha": {
+        "character_id": "lyokha",
+        "markers": {
+          "status": "skipped",
+          "per_marker": [],
+          "reason": "no_replies",
+          "error": null
+        },
+        "must_compliance": {
+          "status": "skipped",
+          "per_directive": [],
+          "reason": "no_replies",
+          "error": null
+        },
+        "status": "skipped",
+        "reason": "no_replies",
+        "error": null
+      }
+    },
+    "error": null
   }
 }

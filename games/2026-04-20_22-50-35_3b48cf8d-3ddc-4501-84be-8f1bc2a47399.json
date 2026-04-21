@@ -176,5 +176,85 @@
   "preliminary_vote_result": null,
   "defense_speeches": [],
   "final_vote_result": null,
-  "vote_changes": []
+  "vote_changes": [],
+  "post_game_analysis": {
+    "analyzed_at": "2026-04-21T08:04:06.262181Z",
+    "analyzer_model": "gpt-4o-mini",
+    "status": "completed",
+    "per_character": {
+      "father_ignatius": {
+        "character_id": "father_ignatius",
+        "markers": {
+          "status": "failed",
+          "per_marker": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "must_compliance": {
+          "status": "failed",
+          "per_directive": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "status": "failed",
+        "reason": null,
+        "error": "unexpected_error: OPENAI_API_KEY not set"
+      },
+      "boris_molot": {
+        "character_id": "boris_molot",
+        "markers": {
+          "status": "failed",
+          "per_marker": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "must_compliance": {
+          "status": "failed",
+          "per_directive": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "status": "failed",
+        "reason": null,
+        "error": "unexpected_error: OPENAI_API_KEY not set"
+      },
+      "aurora": {
+        "character_id": "aurora",
+        "markers": {
+          "status": "failed",
+          "per_marker": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "must_compliance": {
+          "status": "failed",
+          "per_directive": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "status": "failed",
+        "reason": null,
+        "error": "unexpected_error: OPENAI_API_KEY not set"
+      },
+      "margo": {
+        "character_id": "margo",
+        "markers": {
+          "status": "skipped",
+          "per_marker": [],
+          "reason": "no_replies",
+          "error": null
+        },
+        "must_compliance": {
+          "status": "skipped",
+          "per_directive": [],
+          "reason": "no_replies",
+          "error": null
+        },
+        "status": "skipped",
+        "reason": "no_replies",
+        "error": null
+      }
+    },
+    "error": null
+  }
 }

@@ -1,0 +1,259 @@
+{
+  "id": "6c552c16-0a9f-4549-802c-5a3430e5ca57",
+  "started_at": "2026-04-21T09:04:15.694924",
+  "ended_at": "2026-04-21T09:05:16.470111",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 50,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "submarine",
+  "players": [
+    {
+      "character_id": "kim",
+      "role_id": "sonar_operator",
+      "is_spy": false
+    },
+    {
+      "character_id": "zoya",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "professor_stein",
+      "role_id": "cook",
+      "is_spy": false
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": "captain",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "zoya",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-21T09:04:18.176538",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Штейн, скажи честно, как часто тебе приходится слышать звук двигателей вокруг себя?",
+      "display_delay_ms": 3055,
+      "raw_response": "{\n  \"content\": \"Штейн, скажи честно, как часто тебе приходится слышать звук двигателей вокруг себя?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T09:04:26.775178",
+      "speaker_id": "professor_stein",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "С точки зрения акустического восприятия, подобные звуки, по сути, становятся частью нашей фоновой реальности. Это, строго говоря, напоминает постоянный гул, к которому начинаешь относиться как к шороху леса для лесника: вначале слышно отчётливо, затем привыкаешь и едва замечаешь в повседневной жизни.",
+      "display_delay_ms": 9601,
+      "raw_response": "{\n  \"content\": \"С точки зрения акустического восприятия, подобные звуки, по сути, становятся частью нашей фоновой реальности. Это, строго говоря, напоминает постоянный гул, к которому начинаешь относиться как к шороху леса для лесника: вначале слышно отчётливо, затем привыкаешь и едва замечаешь в повседневной жизни.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-21T09:04:38.345355",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, как ты относишься к ограниченному пространству при выполнении своих обязанностей?",
+      "display_delay_ms": 3000,
+      "raw_response": "{\n  \"content\": \"Зоя, как ты относишься к ограниченному пространству при выполнении своих обязанностей?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-21T09:04:42.853004",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "О, ограниченность пространства — моя вторая тюрьма. Ну да, конечно, особенно как стендап-комик, привыкла к тесным сценам.",
+      "display_delay_ms": 4186,
+      "raw_response": "{\n  \"content\": \"О, ограниченность пространства — моя вторая тюрьма. Ну да, конечно, особенно как стендап-комик, привыкла к тесным сценам.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T09:04:47.961802",
+      "speaker_id": "zoya",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "Игнатий, скажи, как часто здесь нужно заботиться о защите от солнечных лучей?",
+      "display_delay_ms": 2829,
+      "raw_response": "{\n  \"content\": \"Игнатий, скажи, как часто здесь нужно заботиться о защите от солнечных лучей?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-21T09:04:52.827004",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Зоя, в этом месте защиту от солнечных лучей нам заменяет нечто более насущное. Больше волнуют иные аспекты бытия, требующие внимательного отношения и внутренней дисциплины. Согласись, куда важнее быть внимательным к своему присутствию и делам, нежели к тому, что происходит за пределами нашего окружения.",
+      "display_delay_ms": 9395,
+      "raw_response": "{\n  \"content\": \"Зоя, в этом месте защиту от солнечных лучей нам заменяет нечто более насущное. Больше волнуют иные аспекты бытия, требующие внимательного отношения и внутренней дисциплины. Согласись, куда важнее быть внимательным к своему присутствию и делам, нежели к тому, что происходит за пределами нашего окружения.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-21T09:05:06.944569",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "spy_guess",
+      "content": "Я думаю, мы находимся в: Подводная лодка",
+      "display_delay_ms": 1793,
+      "raw_response": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T09:05:10.499347",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "intervention",
+      "content": "Ага, подводная лодка! Кто-то тут явно слишком глубоко нырнул в свои фантазии, да? Ожидали, что я не смогу пробраться в самые потаённые места, да? Ну да, у вас и не все на поверхности.",
+      "display_delay_ms": 5969,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-21T09:05:04.783481",
+      "level": "confident",
+      "hints": [
+        "Звук двигателей является частью фоновой реальности.",
+        "Ограниченность пространства и важность внутренней дисциплины."
+      ],
+      "location_guess": "подводная лодка",
+      "reasoning": "Звук двигателей как фоновая реальность и ограниченное пространство указывают на подводную лодку. Дополнительно, акцент на внутренней дисциплине и отсутствие заботы о солнечных лучах также соответствует условиям на подводной лодке.",
+      "raw_response": "{\n  \"hints\": [\n    \"Звук двигателей является частью фоновой реальности.\",\n    \"Ограниченность пространства и важность внутренней дисциплины.\"\n  ],\n  \"location_guess\": \"подводная лодка\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Звук двигателей как фоновая реальность и ограниченное пространство указывают на подводную лодку. Дополнительно, акцент на внутренней дисциплине и отсутствие заботы о солнечных лучах также соответствует условиям на подводной лодке.\"\n}"
+    }
+  ],
+  "triggered_events": [],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-21T09:04:15.694924",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T09:04:15.695252",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T09:05:16.470141",
+      "from_phase": "main_round",
+      "to_phase": "resolution",
+      "reason": "Spy guessed location: correct",
+      "status": null,
+      "initiator_id": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Шпион (zoya) угадал локацию: Подводная лодка",
+    "votes": null,
+    "spy_guess": "submarine",
+    "spy_guess_correct": true,
+    "accused_id": null
+  },
+  "compressed_history": null,
+  "compression_checkpoint": null,
+  "token_usage": {
+    "total_input_tokens": 11485,
+    "total_output_tokens": 675,
+    "total_cost_usd": 0.03242160000000001,
+    "llm_calls_count": 9
+  },
+  "preliminary_vote_result": null,
+  "defense_speeches": [],
+  "final_vote_result": null,
+  "vote_changes": [],
+  "post_game_analysis": {
+    "analyzed_at": "2026-04-21T08:04:06.251895Z",
+    "analyzer_model": "gpt-4o-mini",
+    "status": "completed",
+    "per_character": {
+      "kim": {
+        "character_id": "kim",
+        "markers": {
+          "status": "skipped",
+          "per_marker": [],
+          "reason": "no_replies",
+          "error": null
+        },
+        "must_compliance": {
+          "status": "skipped",
+          "per_directive": [],
+          "reason": "no_replies",
+          "error": null
+        },
+        "status": "skipped",
+        "reason": "no_replies",
+        "error": null
+      },
+      "zoya": {
+        "character_id": "zoya",
+        "markers": {
+          "status": "failed",
+          "per_marker": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "must_compliance": {
+          "status": "failed",
+          "per_directive": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "status": "failed",
+        "reason": null,
+        "error": "unexpected_error: OPENAI_API_KEY not set"
+      },
+      "professor_stein": {
+        "character_id": "professor_stein",
+        "markers": {
+          "status": "failed",
+          "per_marker": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "must_compliance": {
+          "status": "failed",
+          "per_directive": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "status": "failed",
+        "reason": null,
+        "error": "unexpected_error: OPENAI_API_KEY not set"
+      },
+      "father_ignatius": {
+        "character_id": "father_ignatius",
+        "markers": {
+          "status": "failed",
+          "per_marker": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "must_compliance": {
+          "status": "failed",
+          "per_directive": [],
+          "reason": null,
+          "error": "unexpected_error: OPENAI_API_KEY not set"
+        },
+        "status": "failed",
+        "reason": null,
+        "error": "unexpected_error: OPENAI_API_KEY not set"
+      }
+    },
+    "error": null
+  }
+}

@@ -1,0 +1,250 @@
+{
+  "id": "2fa7226b-f5cf-46ca-8d4b-daedfadaef9b",
+  "started_at": "2026-04-21T11:13:33.609610",
+  "ended_at": "2026-04-21T11:51:21.638095",
+  "config": {
+    "duration_minutes": 3,
+    "players_count": 4,
+    "max_questions": 30,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "submarine",
+  "players": [
+    {
+      "character_id": "aurora",
+      "role_id": "sonar_operator",
+      "is_spy": false
+    },
+    {
+      "character_id": "boris_molot",
+      "role_id": "engineer",
+      "is_spy": false
+    },
+    {
+      "character_id": "margo",
+      "role_id": "cook",
+      "is_spy": false
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": null,
+      "is_spy": true
+    }
+  ],
+  "spy_id": "father_ignatius",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-21T11:13:36.477202",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "Борис, скажи мне... какой звук больше всего отвлекает тебя здесь и почему он так... немыслим?!",
+      "display_delay_ms": 94387,
+      "raw_response": "{\n  \"content\": \"Борис, скажи мне... какой звук больше всего отвлекает тебя здесь и почему он так... немыслим?!\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T11:15:13.046435",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Гул. Веет металлом, бьёт по нервам. Что думаешь об этом, Аврора?",
+      "display_delay_ms": 64371,
+      "raw_response": "{\n  \"content\": \"Гул. Веет металлом, бьёт по нервам. Что думаешь об этом, Аврора?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-21T11:16:19.858118",
+      "speaker_id": "system",
+      "addressee_id": "all",
+      "type": "system",
+      "content": "[ГОЛОСОВАНИЕ] Осталось менее 20% времени",
+      "display_delay_ms": 0,
+      "raw_response": null
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-21T11:16:22.110800",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Борис] О, как же это возможно?! Веет металлом, говоришь, Борис? Этот гул... он так знаком мне, как давний друг, что всегда рядом. Но ты, ты описываешь его с таким холодом! Я чувствую... немыслимую отстранённость в твоих словах. Как будто ты не разделяешь с нами эту тесную, почти интимную атмосферу. О, я вынуждена подозревать тебя, Борис! Прошу понять меня... это просто невозможно иначе!",
+      "display_delay_ms": 397424,
+      "raw_response": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T11:23:01.636960",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Аврора] Аврора, твой вопрос был слишком туманным. Так шпиону легче спрятаться. Я против тебя.",
+      "display_delay_ms": 101233,
+      "raw_response": null
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-21T11:24:45.921236",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Борис] Дорогие мои, как интересно наблюдать за обменом мнениями. Борис, ты так многословен, но твои ответы всегда оставляют ощущение недосказанности. Мне кажется, что это Аврора звучит убедительнее. Уверена, ты поймёшь, почему мой голос за тебя.",
+      "display_delay_ms": 253440,
+      "raw_response": null
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-21T11:29:02.335900",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Борис] Борис, в нашей жизни всегда важно искать истину и быть честным перед собой. Посмотри мне в глаза и скажи, что ты не шпион. Но, к сожалению, твои слова звучат так, как будто ты пытаешься укрыться за абстракциями. Пусть совесть твоё ведёт, но мой голос будет против тебя.",
+      "display_delay_ms": 284388,
+      "raw_response": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T11:33:53.143307",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "defense_speech",
+      "content": "Аврора, Марго, Игнатий, вы гоните не туда. Я здесь, чтобы контролировать давление, а не срывать крышки.",
+      "display_delay_ms": 103351,
+      "raw_response": null
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-21T11:35:36.497087",
+      "speaker_id": "system",
+      "addressee_id": "all",
+      "type": "intervention",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи",
+      "display_delay_ms": 500,
+      "raw_response": null
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-21T11:35:41.174689",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Борис] О, мои дорогие! Как можно не заметить эту... немыслимую уклончивость Бориса?! Его ответы столь же туманны, как и глубины, в которых мы погружены! Как можно не заподозрить его, когда звук, о котором он говорит, столь же общий, как и его уверенность в нашем месте?!",
+      "display_delay_ms": 284480,
+      "raw_response": null
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T11:40:28.719340",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Аврора] Аврора, твои вопросы слишком общие и звучат подозрительно. Гул металла не может быть 'немыслимым'. Ты скрываешь что-то. Я за тебя.",
+      "display_delay_ms": 152299,
+      "raw_response": null
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-21T11:43:03.750757",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Борис] Дорогие мои, вы знаете, я всегда ищу гармонию в нашей команде. Борис, милый, твоя нервозность может быть объяснена, но позволь заметить, что твои ответы звучат как-то... странно. Может быть, просто напряжение, но, возможно, Аврора всё же права?",
+      "display_delay_ms": 265321,
+      "raw_response": null
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-21T11:47:32.035700",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Борис] Борис, давай обратимся к твоей совести. Ты говоришь о звуках, которые бьют по нервам, но разве это не слова того, кто не в ладах с правдой? Посмотри мне в глаза и скажи честно, не прячешь ли ты что-то от нас?",
+      "display_delay_ms": 229597,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [],
+  "triggered_events": [],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-21T11:13:33.609610",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T11:13:33.609650",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T11:16:19.858218",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Осталось менее 20% времени",
+      "status": "critical",
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T11:16:19.858393",
+      "from_phase": "optional_vote",
+      "to_phase": "preliminary_vote",
+      "reason": "Preliminary voting started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T11:33:46.717443",
+      "from_phase": "preliminary_vote",
+      "to_phase": "pre_final_vote_defense",
+      "reason": "Defense speeches for 1 player(s) with 3 votes",
+      "status": null,
+      "initiator_id": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Игроки единогласно обвинили Борис, но шпионом был Игнатий",
+    "votes": {
+      "aurora": "boris_molot",
+      "boris_molot": "aurora",
+      "margo": "boris_molot",
+      "father_ignatius": "boris_molot"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": "boris_molot"
+  },
+  "compressed_history": null,
+  "compression_checkpoint": null,
+  "token_usage": {
+    "total_input_tokens": 20128,
+    "total_output_tokens": 877,
+    "total_cost_usd": 0.0583239,
+    "llm_calls_count": 13
+  },
+  "preliminary_vote_result": {
+    "aurora": "boris_molot",
+    "boris_molot": "aurora",
+    "margo": "boris_molot",
+    "father_ignatius": "boris_molot"
+  },
+  "defense_speeches": [
+    {
+      "defender_id": "boris_molot",
+      "votes_received": 3,
+      "content": "Аврора, Марго, Игнатий, вы гоните не туда. Я здесь, чтобы контролировать давление, а не срывать крышки.",
+      "timestamp": "2026-04-21T11:33:53.143242",
+      "regenerated": true
+    }
+  ],
+  "final_vote_result": null,
+  "vote_changes": []
+}
