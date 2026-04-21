@@ -1,0 +1,1261 @@
+{
+  "id": "bd1189be-ab6c-4359-8978-8d93a2face91",
+  "started_at": "2026-04-21T21:28:14.987660",
+  "ended_at": "2026-04-21T21:31:47.724713",
+  "config": {
+    "duration_minutes": 2,
+    "players_count": 4,
+    "max_questions": 50,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "casino",
+  "players": [
+    {
+      "character_id": "father_ignatius",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "lyokha",
+      "role_id": "bartender",
+      "is_spy": false
+    },
+    {
+      "character_id": "professor_stein",
+      "role_id": "security",
+      "is_spy": false
+    },
+    {
+      "character_id": "margo",
+      "role_id": "pit_boss",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "father_ignatius",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-21T21:28:17.797980",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "Игнатий, дорогой, а как часто ты слышишь здесь звон фишек и шум рулетки?",
+      "display_delay_ms": 2758,
+      "raw_response": "{\n  \"content\": \"Игнатий, дорогой, а как часто ты слышишь здесь звон фишек и шум рулетки?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T21:28:22.777028",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Марго, знаешь, даже в самых шумных местах, иногда стоит прислушаться к себе, к своей душе. Там, в тишине, слышится больше, чем любые внешние звуки.",
+      "display_delay_ms": 4753,
+      "raw_response": "{\n  \"content\": \"Марго, знаешь, даже в самых шумных местах, иногда стоит прислушаться к себе, к своей душе. Там, в тишине, слышится больше, чем любые внешние звуки.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-21T21:28:30.196186",
+      "speaker_id": "professor_stein",
+      "addressee_id": "father_ignatius",
+      "type": "intervention",
+      "content": "Любопытное рассуждение, Игнатий. Однако, строго говоря, твой ответ весьма уклончив и абстрактен, что наталкивает на мысль о том, что ты что-то скрываешь.",
+      "display_delay_ms": 4954,
+      "raw_response": "Любопытное рассуждение, Игнатий. Однако, строго говоря, твой ответ весьма уклончив и абстрактен, что наталкивает на мысль о том, что ты что-то скрываешь."
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-21T21:28:36.130571",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "Лёха, скажи честно, какие запахи витают здесь чаще всего и какие чувства они вызывают у тебя? По совести.",
+      "display_delay_ms": 3546,
+      "raw_response": "{\n  \"content\": \"Лёха, скажи честно, какие запахи витают здесь чаще всего и какие чувства они вызывают у тебя? По совести.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T21:28:41.683333",
+      "speaker_id": "lyokha",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "Да тут спиртяга да парфюмерия. Чё ещё? Норм, короче.",
+      "display_delay_ms": 1874,
+      "raw_response": "{\n  \"content\": \"Да тут спиртяга да парфюмерия. Чё ещё? Норм, короче.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-21T21:28:46.084422",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "type": "intervention",
+      "content": "Строго говоря, твой ответ, Лёха, напоминает пазл с недостающими кусочками — весьма расплывчат и не даёт ясного представления о происходящем. Это, по сути, вызывает некоторое подозрение.",
+      "display_delay_ms": 6136,
+      "raw_response": "[professor_stein → lyokha] Строго говоря, твой ответ, Лёха, напоминает пазл с недостающими кусочками — весьма расплывчат и не даёт ясного представления о происходящем. Это, по сути, вызывает некоторое подозрение."
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-21T21:28:54.041587",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Эй, Штейн, а сам-то как к шуму относишься? Спокойно или раздражает?",
+      "display_delay_ms": 2511,
+      "raw_response": "{\n  \"content\": \"Эй, Штейн, а сам-то как к шуму относишься? Спокойно или раздражает?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T21:28:58.413125",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "Видите ли, шум здесь, строго говоря, напоминает симфонию, где каждый звук является частью большого оркестра. По сути, это часть атмосферы, что не раздражает, а скорее погружает в некое странное равновесие. Как говорил один мой коллега, \"в шуме хаоса возникает порядок\".",
+      "display_delay_ms": 8342,
+      "raw_response": "{\n  \"content\": \"Видите ли, шум здесь, строго говоря, напоминает симфонию, где каждый звук является частью большого оркестра. По сути, это часть атмосферы, что не раздражает, а скорее погружает в некое странное равновесие. Как говорил один мой коллега, \\\"в шуме хаоса возникает порядок\\\".\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-21T21:29:10.824374",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "professor_stein",
+      "type": "intervention",
+      "content": "Штейн, твоя речь полна абстракций и уклончивых замечаний — не свидетельствует ли это о том, что ты что-то скрываешь? Скажи, по совести.",
+      "display_delay_ms": 4436,
+      "raw_response": "Штейн, твоя речь полна абстракций и уклончивых замечаний — не свидетельствует ли это о том, что ты что-то скрываешь? Скажи, по совести."
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-21T21:29:16.339564",
+      "speaker_id": "professor_stein",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "Игнатий, скажи, как тебе освещение в этом месте? Яркое или размытого характера?",
+      "display_delay_ms": 2765,
+      "raw_response": "{\n  \"content\": \"Игнатий, скажи, как тебе освещение в этом месте? Яркое или размытого характера?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T21:29:24.228101",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "Освещение здесь мягкое и ненавязчивое, будто бы специально создано для того, чтобы думы могли окунуться в спокойствие. Но посмотри мне в глаза, Штейн, разве ты видишь во мне тень лукавства?",
+      "display_delay_ms": 6005,
+      "raw_response": "{\n  \"content\": \"Освещение здесь мягкое и ненавязчивое, будто бы специально создано для того, чтобы думы могли окунуться в спокойствие. Но посмотри мне в глаза, Штейн, разве ты видишь во мне тень лукавства?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-21T21:29:36.563880",
+      "speaker_id": "professor_stein",
+      "addressee_id": "father_ignatius",
+      "type": "intervention",
+      "content": "Любопытное наблюдение, Игнатий. Строго говоря, твой ответ словно завуалирован дымкой неопределённости, что, по сути, может вызвать обоснованные сомнения в твоей открытости.",
+      "display_delay_ms": 5754,
+      "raw_response": "Любопытное наблюдение, Игнатий. Строго говоря, твой ответ словно завуалирован дымкой неопределённости, что, по сути, может вызвать обоснованные сомнения в твоей открытости."
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-21T21:29:48.118077",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "Лёха, скажи честно, какие действия здесь наиболее часто случаются? Люди больше сидят или перемещаются?",
+      "display_delay_ms": 3655,
+      "raw_response": "{\n  \"content\": \"Лёха, скажи честно, какие действия здесь наиболее часто случаются? Люди больше сидят или перемещаются?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-21T21:29:56.339917",
+      "speaker_id": "lyokha",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "А кто их считает? Кто-то сидит, кто-то бегает. Короче, движуха нормальная.",
+      "display_delay_ms": 2445,
+      "raw_response": "{\n  \"content\": \"А кто их считает? Кто-то сидит, кто-то бегает. Короче, движуха нормальная.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-21T21:30:07.325172",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "type": "intervention",
+      "content": "Любопытно, Лёха. Твоя реплика, фактически, изобилует расплывчатостью и недостатком конкретики, что, по сути, порождает подозрение о твоём истинном знании локации.",
+      "display_delay_ms": 5406,
+      "raw_response": "Любопытно, Лёха. Твоя реплика, фактически, изобилует расплывчатостью и недостатком конкретики, что, по сути, порождает подозрение о твоём истинном знании локации."
+    },
+    {
+      "turn_number": 16,
+      "timestamp": "2026-04-21T21:30:12.732291",
+      "speaker_id": "system",
+      "addressee_id": "all",
+      "type": "system",
+      "content": "[ГОЛОСОВАНИЕ] Осталось менее 20% времени",
+      "display_delay_ms": 0,
+      "raw_response": null
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-21T21:30:24.105213",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Лёха] Друзья и соратники, давайте же обратим наш взор на Лёху. Его слова, словно завуалированные тени, вызывают сомнение в его искренности. Спросите свою совесть — могут ли такие ответы исходить от чистого сердца? Призываю вас к правде и честности в этом вопросе.",
+      "display_delay_ms": 8557,
+      "raw_response": null
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-21T21:30:34.850146",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Штейн] Чё, Штейн, философствуешь больше всех, а конкретики ноль. Я за тебя.",
+      "display_delay_ms": 3003,
+      "raw_response": null
+    },
+    {
+      "turn_number": 19,
+      "timestamp": "2026-04-21T21:30:39.578368",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Лёха] Фактически, анализируя предоставленные ответы, следует отметить, что Лёха неоднократно прибегал к расплывчатым формулировкам, что, по сути, вызывает обоснованные сомнения в его знании нашего окружения. Подобно туману, скрывающему истинную картину, его слова были лишены конкретики, что и побуждает меня выразить недоверие к его позиции.",
+      "display_delay_ms": 11051,
+      "raw_response": null
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-21T21:30:52.554761",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Лёха] О, мой милый Лёха, мне кажется, ты ведёшь себя немного странно. Твои ответы как-то неопределённы, и это вызывает у меня лёгкое беспокойство. Надеюсь, ты понимаешь, о чём я говорю, дорогой.",
+      "display_delay_ms": 6344,
+      "raw_response": null
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-21T21:31:01.436479",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "defense_speech",
+      "content": "Да вы чё, ребята? Я тут не для того, чтобы вам мозги пудрить.",
+      "display_delay_ms": 2096,
+      "raw_response": null
+    },
+    {
+      "turn_number": 22,
+      "timestamp": "2026-04-21T21:31:03.537666",
+      "speaker_id": "system",
+      "addressee_id": "all",
+      "type": "intervention",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи",
+      "display_delay_ms": 500,
+      "raw_response": null
+    },
+    {
+      "turn_number": 23,
+      "timestamp": "2026-04-21T21:31:09.728189",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Лёха] Лёха, дорогой мой, я, конечно, верю в искренность твоих слов, но разве твоя совесть не подсказывает тебе, что именно твои ответы вызывают у нас сомнения? Скажи по совести, разве моя душа может быть спокойна при таких расплывчатых ответах?",
+      "display_delay_ms": 8258,
+      "raw_response": null
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-21T21:31:19.623087",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Штейн] Да ладно, Штейн, ты чё в облаках витаешь? Пора на землю.",
+      "display_delay_ms": 2885,
+      "raw_response": null
+    },
+    {
+      "turn_number": 25,
+      "timestamp": "2026-04-21T21:31:25.172462",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Лёха] Фактически, в данной ситуации, если рассматривать вопрос с точки зрения рациональности, следует отметить, что поведение Лёхи напоминает классический пример уклонения от конкретики, как будто бы он стремится скрыть знание о нашей локации. Подобно тому, как туман скрывает очертания деревьев, его ответы скрывают истинное понимание происходящего. Поэтому я сохраняю свой голос против него.",
+      "display_delay_ms": 12637,
+      "raw_response": null
+    },
+    {
+      "turn_number": 26,
+      "timestamp": "2026-04-21T21:31:40.059463",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Лёха] Лёха, мой дорогой, ты знаешь, твои ответы напоминают неясные тени, и это немного настораживает. Вместе с тем, Игнатий и Штейн кажутся более открытыми в своих намерениях. Может быть, ты хотел бы прояснить кое-что для нас всех?",
+      "display_delay_ms": 7662,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 14,
+      "answer_count_at_check": 5,
+      "timestamp": "2026-04-21T21:30:04.756723",
+      "level": "confident",
+      "hints": [
+        "звуки рулетки",
+        "спиртное и парфюмерия",
+        "мягкое освещение",
+        "движуха нормальная"
+      ],
+      "location_guess": "казино",
+      "reasoning": "Подсказки указывают на казино: звуки рулетки и спиртное — это характерные элементы для казино. Мягкое освещение также типично для таких мест, чтобы создать расслабляющую атмосферу. 'Движуха нормальная' говорит о том, что люди могут как сидеть за столами, так и активно перемещаться между ними. Эти детали однозначно указывают на казино, исключая другие локации.",
+      "raw_response": "{\n  \"hints\": [\"звуки рулетки\", \"спиртное и парфюмерия\", \"мягкое освещение\", \"движуха нормальная\"],\n  \"location_guess\": \"казино\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Подсказки указывают на казино: звуки рулетки и спиртное — это характерные элементы для казино. Мягкое освещение также типично для таких мест, чтобы создать расслабляющую атмосферу. 'Движуха нормальная' говорит о том, что люди могут как сидеть за столами, так и активно перемещаться между ними. Эти детали однозначно указывают на казино, исключая другие локации.\"\n}"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T21:28:35.155334",
+      "character_id": "professor_stein",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T21:28:35.155387",
+      "character_id": "margo",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T21:28:35.155397",
+      "character_id": "lyokha",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "short_dismissive_jab",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T21:28:52.223718",
+      "character_id": "professor_stein",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T21:28:52.223773",
+      "character_id": "margo",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T21:28:52.223785",
+      "character_id": "father_ignatius",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "moralize_and_accuse",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T21:29:15.265754",
+      "character_id": "father_ignatius",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "moralize_and_accuse",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T21:29:15.265861",
+      "character_id": "margo",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T21:29:42.319669",
+      "character_id": "professor_stein",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T21:29:42.319783",
+      "character_id": "margo",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T21:29:42.319794",
+      "character_id": "lyokha",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "short_dismissive_jab",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T21:29:42.319803",
+      "character_id": "lyokha",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "short_dismissive_jab",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T21:29:42.319811",
+      "character_id": "margo",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-21T21:30:12.732056",
+      "character_id": "professor_stein",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "point_out_inconsistency",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-21T21:30:12.732166",
+      "character_id": "margo",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-21T21:30:12.732181",
+      "character_id": "father_ignatius",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "moralize_and_accuse",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-21T21:30:12.732191",
+      "character_id": "margo",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-21T21:28:14.987660",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T21:28:14.987704",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T21:30:12.732332",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Осталось менее 20% времени",
+      "status": "critical",
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T21:30:12.732469",
+      "from_phase": "optional_vote",
+      "to_phase": "preliminary_vote",
+      "reason": "Preliminary voting started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T21:30:58.901030",
+      "from_phase": "preliminary_vote",
+      "to_phase": "pre_final_vote_defense",
+      "reason": "Defense speeches for 1 player(s) with 3 votes",
+      "status": null,
+      "initiator_id": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Игроки единогласно обвинили Лёха, но шпионом был Игнатий",
+    "votes": {
+      "father_ignatius": "lyokha",
+      "lyokha": "professor_stein",
+      "professor_stein": "lyokha",
+      "margo": "lyokha"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": "lyokha"
+  },
+  "compressed_history": "В диалоге из игры Spyfall участники подозревают друг друга в сокрытии информации о локации. Марго начинает с вопроса к Игнатию о звуках рулетки, на что Игнатий отвечает уклончиво, что вызывает подозрения у профессора Штейна. Он указывает на абстрактность Игнатия, намекая на то, что тот что-то скрывает. Игнатий, в свою очередь, задает вопрос Лёхе о запахах, на что тот отвечает, что чувствует спирт и парфюмерию, но его ответ кажется Штейну недостаточно ясным и вызывает дополнительные подозрения.\n\nЛёха пытается отвлечь внимание, спрашивая профессора о его отношении к шуму, но Штейн продолжает говорить абстрактно, что снова ставит его под сомнение. Игнатий также указывает на уклончивость Штейна, задавая вопрос о освещении, что демонстрирует общий уровень недоверия среди участников. В диалоге присутствуют намёки на казино или игорное заведение, однако все ответы остаются расплывчатыми и не дают ясного представления о локации.",
+  "compression_checkpoint": 10,
+  "token_usage": {
+    "total_input_tokens": 55738,
+    "total_output_tokens": 3352,
+    "total_cost_usd": 0.14757665,
+    "llm_calls_count": 38
+  },
+  "preliminary_vote_result": {
+    "father_ignatius": "lyokha",
+    "lyokha": "professor_stein",
+    "professor_stein": "lyokha",
+    "margo": "lyokha"
+  },
+  "defense_speeches": [
+    {
+      "defender_id": "lyokha",
+      "votes_received": 3,
+      "content": "Да вы чё, ребята? Я тут не для того, чтобы вам мозги пудрить.",
+      "timestamp": "2026-04-21T21:31:01.436455",
+      "regenerated": false,
+      "truncated_from": 3
+    }
+  ],
+  "final_vote_result": null,
+  "vote_changes": [],
+  "post_game_analysis": {
+    "analyzed_at": "2026-04-21T16:33:47.408076Z",
+    "analyzer_model": "gpt-4o-mini",
+    "status": "completed",
+    "per_character": {
+      "father_ignatius": {
+        "character_id": "father_ignatius",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "names_addressee",
+              "triggered_count": 6,
+              "total_relevant_replies": 8,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Обращение к Марго по имени."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Обращение к Лёхе по имени."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Обращение к Штейну по имени."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Обращение к Штейну по имени."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Обращение к Лёхе по имени."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Обращение к Лёхе по имени."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "conscience_appeal",
+              "triggered_count": 6,
+              "total_relevant_replies": 8,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Апелляция к совести в вопросе о чувствах."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Апелляция к совести в вопросе о скрытности."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Апелляция к совести в вопросе о лукавстве."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Апелляция к совести в голосовании о Лёхе."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Апелляция к совести в подтверждении о Лёхе."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "measured_speech",
+              "triggered_count": 6,
+              "total_relevant_replies": 8,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Речь состоит из двух предложений."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Речь состоит из двух предложений."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Речь состоит из двух предложений."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Речь состоит из двух предложений."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Речь состоит из двух предложений."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Речь состоит из двух предложений."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_sarcasm",
+              "triggered_count": 8,
+              "total_relevant_replies": 8,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Отсутствие сарказма в реплике."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Отсутствие сарказма в реплике."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Отсутствие сарказма в реплике."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Отсутствие сарказма в реплике."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Отсутствие сарказма в реплике."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Отсутствие сарказма в реплике."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Отсутствие сарказма в реплике."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "moral_pressure",
+              "triggered_count": 5,
+              "total_relevant_replies": 8,
+              "rate": 0.625,
+              "per_turn": [
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Мягкое моральное давление в вопросе о скрытности."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Моральное давление в вопросе о лукавстве."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Моральное давление в голосовании о Лёхе."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Моральное давление в подтверждении о Лёхе."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Обращаться к собеседнику по имени в каждом ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Игнатий обращается к каждому собеседнику по имени в каждой реплике."
+            },
+            {
+              "directive": "Использовать апелляции к совести, честности или правде (совесть, честно, правда, искренне, по совести)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Игнатий использует апелляции к совести в нескольких репликах."
+            },
+            {
+              "directive": "Формулировать ответы минимум в 2 предложениях, взвешенно и размеренно",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все реплики Игнатия состоят минимум из двух предложений."
+            },
+            {
+              "directive": "При подозрениях использовать моральное давление вместо прямых обвинений (посмотри в глаза, скажи честно, будь искренен)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Игнатий использует моральное давление в своих репликах при подозрениях."
+            },
+            {
+              "directive": "В защитной речи (defense_speech) — апелляция к совести обвинителей через моральное давление. Обязательно одна из фраз: посмотрите мне в глаза, скажите по совести, спросите свою совесть, разве моя душа не чиста. Обратиться к обвинителям по именам. Тон укоризненный, спокойный. Минимум 2 предложения",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В репликах 11 и 23 Игнатий обращается к Штейну и Лёхе с моральным давлением и апелляцией к совести."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "lyokha": {
+        "character_id": "lyokha",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "short_reply",
+              "triggered_count": 4,
+              "total_relevant_replies": 6,
+              "rate": 0.6666666666666666,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из одного предложения."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": false,
+                  "reasoning": "Реплика состоит из двух предложений, но не является короткой."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": false,
+                  "reasoning": "Реплика не является ответом."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "colloquial_speech",
+              "triggered_count": 6,
+              "total_relevant_replies": 6,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Используются разговорные слова 'чё', 'короче'."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Используется разговорное 'эй'."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": true,
+                  "reasoning": "Используется разговорное 'короче'."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Используется разговорное 'чё'."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": true,
+                  "reasoning": "Используется разговорное 'да ладно'."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": true,
+                  "reasoning": "Используется разговорное 'чё'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "dismissive_words",
+              "triggered_count": 1,
+              "total_relevant_replies": 6,
+              "rate": 0.16666666666666666,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": false,
+                  "reasoning": "Нет обрубания умничания."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": false,
+                  "reasoning": "Нет обрубания умничания."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": false,
+                  "reasoning": "Нет обрубания умничания."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Обрубает умничание простым 'мозги пудрить'."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": false,
+                  "reasoning": "Нет обрубания умничания."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": false,
+                  "reasoning": "Нет обрубания умничания."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_complex_analogy",
+              "triggered_count": 6,
+              "total_relevant_replies": 6,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "plain_direct_speech",
+              "triggered_count": 5,
+              "total_relevant_replies": 6,
+              "rate": 0.8333333333333334,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Прямая речь без усложнений."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Прямая речь без усложнений."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": true,
+                  "reasoning": "Прямая речь без усложнений."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Прямая речь без усложнений."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": false,
+                  "reasoning": "Реплика не является простой и прямой."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": false,
+                  "reasoning": "Реплика не является ответом."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Отвечать не более чем двумя предложениями",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все реплики содержат не более двух предложений."
+            },
+            {
+              "directive": "Использовать разговорные слова и выражения (чё, ладно, короче, блин, типа, хорош)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все реплики содержат разговорные слова."
+            },
+            {
+              "directive": "При столкновении с умничанием — обрубать простым словом (фигня, бред, чушь, ерунда)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В одной реплике обрубает умничание."
+            },
+            {
+              "directive": "Обращаться к собеседникам на ты, без церемоний",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Везде используется обращение на 'ты'."
+            },
+            {
+              "directive": "В защитной речи (defense_speech) — короткое возмущение в разговорном стиле. Максимум 1-2 предложения. Минимум одно разговорное слово (чё, блин, короче, да ладно, не гони). Никаких развёрнутых оправданий и аналогий. Грубовато и прямо",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Защитная речь соответствует всем требованиям."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "professor_stein": {
+        "character_id": "professor_stein",
+        "markers": {
+          "status": "failed",
+          "per_marker": [],
+          "reason": null,
+          "error": "invalid_json"
+        },
+        "must_compliance": {
+          "status": "failed",
+          "per_directive": [],
+          "reason": null,
+          "error": "invalid_json"
+        },
+        "status": "failed",
+        "reason": null,
+        "error": "invalid_json"
+      },
+      "margo": {
+        "character_id": "margo",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "names_addressee",
+              "triggered_count": 3,
+              "total_relevant_replies": 3,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Обращение к Игнатию по имени."
+                },
+                {
+                  "turn_number": 20,
+                  "triggered": true,
+                  "reasoning": "Обращение к Лёхе по имени и ласковому обращению."
+                },
+                {
+                  "turn_number": 26,
+                  "triggered": true,
+                  "reasoning": "Обращение к Лёхе по имени и ласковому обращению."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "warm_lexicon",
+              "triggered_count": 3,
+              "total_relevant_replies": 3,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Использование слова 'дорогой'."
+                },
+                {
+                  "turn_number": 20,
+                  "triggered": true,
+                  "reasoning": "Использование слов 'милый' и 'легкое беспокойство'."
+                },
+                {
+                  "turn_number": 26,
+                  "triggered": true,
+                  "reasoning": "Использование слова 'дорогой' и фразы 'немного настораживает'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_direct_accusation",
+              "triggered_count": 3,
+              "total_relevant_replies": 3,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений в реплике."
+                },
+                {
+                  "turn_number": 20,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений, выражает беспокойство о Лёхе."
+                },
+                {
+                  "turn_number": 26,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений, мягко указывает на поведение Лёхи."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_pressure_words",
+              "triggered_count": 3,
+              "total_relevant_replies": 3,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера, отсутствие давления."
+                },
+                {
+                  "turn_number": 20,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера, выражение беспокойства."
+                },
+                {
+                  "turn_number": 26,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера, отсутствие давления на Лёху."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "deflection_present",
+              "triggered_count": 2,
+              "total_relevant_replies": 3,
+              "rate": 0.67,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": false,
+                  "reasoning": "Нет перенаправления, просто вопрос."
+                },
+                {
+                  "turn_number": 20,
+                  "triggered": true,
+                  "reasoning": "Мягкое перенаправление внимания на Лёху."
+                },
+                {
+                  "turn_number": 26,
+                  "triggered": true,
+                  "reasoning": "Мягкое перенаправление внимания на Лёху и других игроков."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Обращаться к собеседнику по имени в каждом ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Во всех репликах Марго обращается к собеседникам по имени."
+            },
+            {
+              "directive": "Не обвинять напрямую — указывать на 'странное' поведение другого в разговоре с третьим",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Марго указывает на странное поведение Лёхи, не обвиняя его напрямую."
+            },
+            {
+              "directive": "Использовать минимум одно тёплое слово в реплике (дорогой, милый, чудесно, прекрасно, замечательно)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Во всех репликах используются тёплые слова."
+            },
+            {
+              "directive": "При прямом обвинении — мягко перенаправить подозрение на другого игрока",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Марго мягко перенаправляет подозрение на Лёху в обеих репликах."
+            },
+            {
+              "directive": "В защитной речи (defense_speech) — мягко и с теплом отвести подозрение на другого игрока, не отрицая обвинение в лоб. Обратиться к обвинителю и к ещё одному игроку по имени. Минимум 1 тёплое слово (дорогой, милый). Максимум 3 предложения",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Не было прямых обвинений, поэтому защитной речи не потребовалось."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      }
+    },
+    "error": null
+  }
+}

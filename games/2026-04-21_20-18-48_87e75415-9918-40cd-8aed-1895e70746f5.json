@@ -1,0 +1,1416 @@
+{
+  "id": "87e75415-9918-40cd-8aed-1895e70746f5",
+  "started_at": "2026-04-21T20:18:48.753651",
+  "ended_at": "2026-04-21T20:21:57.042867",
+  "config": {
+    "duration_minutes": 2,
+    "players_count": 4,
+    "max_questions": 50,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "submarine",
+  "players": [
+    {
+      "character_id": "boris_molot",
+      "role_id": "captain",
+      "is_spy": false
+    },
+    {
+      "character_id": "margo",
+      "role_id": "engineer",
+      "is_spy": false
+    },
+    {
+      "character_id": "kim",
+      "role_id": "sonar_operator",
+      "is_spy": false
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": null,
+      "is_spy": true
+    }
+  ],
+  "spy_id": "father_ignatius",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-21T20:18:50.244663",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Марго, как ты относишься к шуму здесь?",
+      "display_delay_ms": 1557,
+      "raw_response": "{\"content\":\"Марго, как ты относишься к шуму здесь?\",\"wants_vote\":false,\"suspect_id\":null}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T20:18:53.208290",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "type": "answer",
+      "content": "Ах, дорогой Борис, шум здесь имеет свой особый шарм, не так ли? Кажется, что он стал уже частью нашей повседневной жизни. Интересно, что ты об этом думаешь?",
+      "display_delay_ms": 5184,
+      "raw_response": "{\n  \"content\": \"Ах, дорогой Борис, шум здесь имеет свой особый шарм, не так ли? Кажется, что он стал уже частью нашей повседневной жизни. Интересно, что ты об этом думаешь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-21T20:19:00.505447",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Марго, это подозрительно уклончиво. Ты что-то скрываешь?",
+      "display_delay_ms": 1988,
+      "raw_response": "Марго, это подозрительно уклончиво. Ты что-то скрываешь?"
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-21T20:19:04.165927",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "Игнатий, милый, скажи, много ли тебе приходится взаимодействовать с разными механизмами и инструментами в своей работе?",
+      "display_delay_ms": 3886,
+      "raw_response": "{\n  \"content\": \"Игнатий, милый, скажи, много ли тебе приходится взаимодействовать с разными механизмами и инструментами в своей работе?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T20:19:09.443528",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "Марго, знаешь, в моей работе всегда было важно сохранять сосредоточенность и спокойствие. Даже если приходится взаимодействовать с механизмами и инструментами, я стараюсь вникать в их сущность с искренностью и вниманием. Ведь главное — это истина, которая за ними скрывается.",
+      "display_delay_ms": 8820,
+      "raw_response": "{\n  \"content\": \"Марго, знаешь, в моей работе всегда было важно сохранять сосредоточенность и спокойствие. Даже если приходится взаимодействовать с механизмами и инструментами, я стараюсь вникать в их сущность с искренностью и вниманием. Ведь главное — это истина, которая за ними скрывается.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-21T20:19:21.577228",
+      "speaker_id": "boris_molot",
+      "addressee_id": "father_ignatius",
+      "type": "intervention",
+      "content": "Игнатий, это звучит подозрительно расплывчато. Что конкретно ты делаешь, когда работаешь с механизмами?",
+      "display_delay_ms": 3680,
+      "raw_response": "[boris_molot → father_ignatius] Игнатий, это звучит подозрительно расплывчато. Что конкретно ты делаешь, когда работаешь с механизмами?"
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-21T20:19:26.694425",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "Борис, как ты считаешь, насколько важна здесь форма одежды для выполнения наших обязанностей?",
+      "display_delay_ms": 3228,
+      "raw_response": "{\n  \"content\": \"Борис, как ты считаешь, насколько важна здесь форма одежды для выполнения наших обязанностей?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T20:19:31.095499",
+      "speaker_id": "boris_molot",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "Одежда важна. Без неё никуда. Почему спрашиваешь, Игнатий?",
+      "display_delay_ms": 2164,
+      "raw_response": "{\n  \"content\": \"Одежда важна. Без неё никуда. Почему спрашиваешь, Игнатий?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-21T20:19:37.944920",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "type": "intervention",
+      "content": "Ким, дорогая, не показалось ли тебе, что Игнатий как-то слишком уклончиво отвечает на вопросы? Интересно, что ты об этом думаешь?",
+      "display_delay_ms": 4422,
+      "raw_response": "[margo → kim] Ким, дорогая, не показалось ли тебе, что Игнатий как-то слишком уклончиво отвечает на вопросы? Интересно, что ты об этом думаешь?"
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-21T20:19:43.128100",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Марго, какие звуки ты чаще всего слышишь вокруг себя?",
+      "display_delay_ms": 1910,
+      "raw_response": "{\n  \"content\": \"Марго, какие звуки ты чаще всего слышишь вокруг себя?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T20:19:51.371229",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "type": "answer",
+      "content": "О, Борис, милый, работа здесь неизменно сопровождается ритмичным фоном, как будто всё вокруг дышит и пульсирует. Это звучание придаёт нашему труду особую мелодичность, не находишь? Интересно, как это отражается на твоих обязанностях?",
+      "display_delay_ms": 7479,
+      "raw_response": "{\n  \"content\": \"О, Борис, милый, работа здесь неизменно сопровождается ритмичным фоном, как будто всё вокруг дышит и пульсирует. Это звучание придаёт нашему труду особую мелодичность, не находишь? Интересно, как это отражается на твоих обязанностях?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-21T20:20:05.155764",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "Марго, ты опять уклончиво отвечаешь. Мне это подозрительно. Ты что-то скрываешь?",
+      "display_delay_ms": 2695,
+      "raw_response": "Марго, ты опять уклончиво отвечаешь. Мне это подозрительно. Ты что-то скрываешь?"
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-21T20:20:07.852621",
+      "speaker_id": "system",
+      "addressee_id": "all",
+      "type": "system",
+      "content": "[ГОЛОСОВАНИЕ] Марго получил 2 обвинений",
+      "display_delay_ms": 0,
+      "raw_response": null
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-21T20:20:13.695354",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Марго] Марго, ты слишком уклончива. Ритмичный фон и мелодичность – это пустые слова. Я голосую против тебя.",
+      "display_delay_ms": 3840,
+      "raw_response": null
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-21T20:20:19.213727",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Игнатий] Дорогие мои, мне кажется, что Игнатий своим философским подходом и уклончивыми ответами вызывает больше вопросов, чем ответов. Его ответы были слишком расплывчатыми, что может быть попыткой скрыть своё истинное положение. Надеюсь, мы примем правильное решение.",
+      "display_delay_ms": 8680,
+      "raw_response": null
+    },
+    {
+      "turn_number": 16,
+      "timestamp": "2026-04-21T20:20:31.230201",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Марго] Ну, то есть, Марго... твои ответы, они... как бы это сказать, слишком расплывчатые, кажется. В смысле, ты вроде говоришь, но как будто... ну, не договариваешь что-то важное. Это... ну, может быть, просто мне кажется, но всё же подозрительно, наверное.",
+      "display_delay_ms": 8412,
+      "raw_response": null
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-21T20:20:42.060074",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Марго] Марго, дорогая, мне кажется, что твои ответы были несколько уклончивыми и расплывчатыми. Важно быть честным и искренним, особенно когда речь идёт о доверии в нашей команде. Давай взглянем правде в глаза и попытаемся разобраться, почему твои ответы вызвали столько вопросов у Бориса.",
+      "display_delay_ms": 9423,
+      "raw_response": null
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-21T20:20:54.417135",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "defense_speech",
+      "content": "Дорогие Борис, Ким и Игнатий, мне кажется, что наше недоверие лишь усиливает напряжение. Знаете, Борис, твой взгляд на ситуацию такой проницательный, но разве не кажется странным, что Игнатий так мало говорит о своей роли?",
+      "display_delay_ms": 6972,
+      "raw_response": null
+    },
+    {
+      "turn_number": 19,
+      "timestamp": "2026-04-21T20:21:01.392737",
+      "speaker_id": "system",
+      "addressee_id": "all",
+      "type": "intervention",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи",
+      "display_delay_ms": 500,
+      "raw_response": null
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-21T20:21:09.385196",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Марго] Марго, твои ответы наводят на мысли о том, что ты пытаешься что-то скрыть. Слишком много тумана и мелодий вокруг, а конкретики нет. Это вызывает недоверие. Я голосую за тебя.",
+      "display_delay_ms": 6150,
+      "raw_response": null
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-21T20:21:18.516983",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Игнатий] Дорогие, не могу не заметить, что Игнатий, милый, как-то странно увиливает от ответов, когда речь заходит о конкретных действиях. Возможно, это просто его стиль, но такие уклончивые ответы всегда вызывают сомнения, не правда ли? Я всё же склоняюсь к тому, что именно Игнатий ведёт себя наиболее подозрительно.",
+      "display_delay_ms": 10355,
+      "raw_response": null
+    },
+    {
+      "turn_number": 22,
+      "timestamp": "2026-04-21T20:21:33.772953",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Марго] Ну, в смысле, я всё ещё считаю, что Марго, наверное, слишком уклончива в ответах. То есть, её описание звуков как-то... как будто она пытается завуалировать, где мы находимся, ну, в смысле, это просто странно. А вдруг она шпион? Я не это хотел сказать, но подозрения остаются.",
+      "display_delay_ms": 9230,
+      "raw_response": null
+    },
+    {
+      "turn_number": 23,
+      "timestamp": "2026-04-21T20:21:46.156629",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Марго] Дорогая Марго, ведь истины не скрыть в ритме жизни, и в этом смысл наших трудов. Однако, твоя мелодичность и пульсация в ответах остаются для меня завуалированными. Разве не честнее было бы открыть своё сердце и говорить прямо? Я верю, что каждый из нас должен стремиться к свету истины, и потому мой голос остаётся прежним.",
+      "display_delay_ms": 10892,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 8,
+      "answer_count_at_check": 3,
+      "timestamp": "2026-04-21T20:19:35.030251",
+      "level": "few_guesses",
+      "hints": [
+        "Шум здесь имеет особый шарм",
+        "Взаимодействие с механизмами и инструментами"
+      ],
+      "location_guess": "фабрика",
+      "reasoning": "Разговор о шуме и взаимодействии с механизмами может указывать на фабрику, где такие условия вполне типичны. Однако, это также может быть и другое место с подобными характеристиками, поэтому уверенность не полная.",
+      "raw_response": "{\n  \"hints\": [\n    \"Шум здесь имеет особый шарм\",\n    \"Взаимодействие с механизмами и инструментами\"\n  ],\n  \"location_guess\": \"фабрика\",\n  \"confidence\": \"few_guesses\",\n  \"reasoning\": \"Разговор о шуме и взаимодействии с механизмами может указывать на фабрику, где такие условия вполне типичны. Однако, это также может быть и другое место с подобными характеристиками, поэтому уверенность не полная.\"\n}"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T20:19:02.497178",
+      "character_id": "boris_molot",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "pressure_with_sharper_question",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T20:19:02.497348",
+      "character_id": "kim",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T20:19:02.497389",
+      "character_id": "father_ignatius",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "moralize_and_accuse",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T20:19:25.259495",
+      "character_id": "boris_molot",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "pressure_with_sharper_question",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T20:19:25.259603",
+      "character_id": "margo",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T20:19:25.259623",
+      "character_id": "kim",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T20:19:25.259637",
+      "character_id": "kim",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T20:19:42.371510",
+      "character_id": "margo",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T20:19:42.371611",
+      "character_id": "kim",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T20:19:42.371628",
+      "character_id": "father_ignatius",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "moralize_and_accuse",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T20:19:42.371639",
+      "character_id": "margo",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T20:19:42.371649",
+      "character_id": "kim",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T20:20:07.852431",
+      "character_id": "boris_molot",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "pressure_with_sharper_question",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T20:20:07.852495",
+      "character_id": "kim",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T20:20:07.852505",
+      "character_id": "father_ignatius",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "moralize_and_accuse",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T20:20:07.852512",
+      "character_id": "father_ignatius",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "moralize_and_accuse",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T20:20:07.852518",
+      "character_id": "kim",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-21T20:18:48.753651",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T20:18:48.753692",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T20:20:07.852654",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Марго получил 2 обвинений",
+      "status": "optional",
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T20:20:07.852757",
+      "from_phase": "optional_vote",
+      "to_phase": "preliminary_vote",
+      "reason": "Preliminary voting started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T20:20:51.488430",
+      "from_phase": "preliminary_vote",
+      "to_phase": "pre_final_vote_defense",
+      "reason": "Defense speeches for 1 player(s) with 3 votes",
+      "status": null,
+      "initiator_id": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Игроки единогласно обвинили Марго, но шпионом был Игнатий",
+    "votes": {
+      "boris_molot": "margo",
+      "margo": "father_ignatius",
+      "kim": "margo",
+      "father_ignatius": "margo"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": "margo"
+  },
+  "compressed_history": "В диалоге между Борисом, Марго и Игнатием возникают подозрения и уклончивые ответы, что создает атмосферу недоверия. Борис начинает с вопроса к Марго о шуме, на что она отвечает уклончиво, что вызывает у него подозрения: он считает, что она что-то скрывает. Затем Марго переключает внимание на Игнатия, спрашивая о его взаимодействии с механизмами. Игнатий отвечает философски, подчеркивая важность сосредоточенности, но его ответ кажется Борису расплывчатым и неясным.\n\nБорис обвиняет Игнатия в неопределенности, задавая вопрос о конкретных действиях с механизмами, на что Игнатий отвечает вопросом о важности формы одежды, что также выглядит как попытка уклониться от темы. В ходе диалога неясно, какая именно локация обсуждается, но намёки на шум и механизмы могут указывать на место, где требуется высокая концентрация и взаимодействие с техникой, например, на заводе или в мастерской. Подозрения между участниками нарастают, и каждый из них пытается защитить себя, что создает напряжение в разговоре.",
+  "compression_checkpoint": 7,
+  "token_usage": {
+    "total_input_tokens": 44368,
+    "total_output_tokens": 2454,
+    "total_cost_usd": 0.12082185000000002,
+    "llm_calls_count": 31
+  },
+  "preliminary_vote_result": {
+    "boris_molot": "margo",
+    "margo": "father_ignatius",
+    "kim": "margo",
+    "father_ignatius": "margo"
+  },
+  "defense_speeches": [
+    {
+      "defender_id": "margo",
+      "votes_received": 3,
+      "content": "Дорогие Борис, Ким и Игнатий, мне кажется, что наше недоверие лишь усиливает напряжение. Знаете, Борис, твой взгляд на ситуацию такой проницательный, но разве не кажется странным, что Игнатий так мало говорит о своей роли?",
+      "timestamp": "2026-04-21T20:20:54.417036",
+      "regenerated": false,
+      "truncated_from": null
+    }
+  ],
+  "final_vote_result": null,
+  "vote_changes": [],
+  "post_game_analysis": {
+    "analyzed_at": "2026-04-21T15:23:34.170466Z",
+    "analyzer_model": "gpt-4o-mini",
+    "status": "completed",
+    "per_character": {
+      "boris_molot": {
+        "character_id": "boris_molot",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "short_reply",
+              "triggered_count": 6,
+              "total_relevant_replies": 10,
+              "rate": 0.6,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из одного предложения."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из одного предложения."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "direct_question",
+              "triggered_count": 6,
+              "total_relevant_replies": 10,
+              "rate": 0.6,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Содержит прямой вопрос к Марго."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Содержит прямой вопрос к Марго."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Содержит прямой вопрос к Игнатию."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Содержит прямой вопрос к Марго."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": true,
+                  "reasoning": "Содержит прямой вопрос к Марго."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": false,
+                  "reasoning": "Не содержит вопроса."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "names_addressee",
+              "triggered_count": 6,
+              "total_relevant_replies": 10,
+              "rate": 0.6,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Обращается к Марго по имени."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Обращается к Марго по имени."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Обращается к Игнатию по имени."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Обращается к Марго по имени."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": true,
+                  "reasoning": "Обращается к Марго по имени."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": false,
+                  "reasoning": "Не обращается по имени."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_hedging",
+              "triggered_count": 6,
+              "total_relevant_replies": 10,
+              "rate": 0.6,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Реплика уверенная, без смягчителей."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Реплика уверенная, без смягчителей."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Реплика уверенная, без смягчителей."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Реплика уверенная, без смягчителей."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": true,
+                  "reasoning": "Реплика уверенная, без смягчителей."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": false,
+                  "reasoning": "Не содержит уверенной речи."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "counter_accusation",
+              "triggered_count": 0,
+              "total_relevant_replies": 10,
+              "rate": 0.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": false,
+                  "reasoning": "Нет обвинений."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": false,
+                  "reasoning": "Нет контробвинений."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": false,
+                  "reasoning": "Нет контробвинений."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": false,
+                  "reasoning": "Нет контробвинений."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": false,
+                  "reasoning": "Нет контробвинений."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": false,
+                  "reasoning": "Нет контробвинений."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": false,
+                  "reasoning": "Нет контробвинений."
+                },
+                {
+                  "turn_number": 20,
+                  "triggered": false,
+                  "reasoning": "Нет контробвинений."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "При прямом обвинении — немедленно переводить подозрение на обвинителя, называя его по имени",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Не было прямых обвинений, поэтому не было возможности перевести подозрение."
+            },
+            {
+              "directive": "Ссылаться на конкретные противоречия в словах других, цитируя их фразы",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Не было ссылок на конкретные противоречия в словах других."
+            },
+            {
+              "directive": "Если 2 хода подряд не обращались — влезть с обвинением или резким вопросом",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Борис не влезал с обвинением или резким вопросом после двух ходов без обращения."
+            },
+            {
+              "directive": "Использовать не более 2 предложений в ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все реплики, кроме голосования, содержат не более двух предложений."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "margo": {
+        "character_id": "margo",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "names_addressee",
+              "triggered_count": 6,
+              "total_relevant_replies": 8,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Обращение к Борису по имени."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Обращение к Игнатию по имени."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Обращение к Ким по имени."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Обращение к Борису по имени."
+                },
+                {
+                  "turn_number": 15,
+                  "triggered": false,
+                  "reasoning": "Нет обращения по имени."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": true,
+                  "reasoning": "Обращение к Борису, Ким и Игнатию по именам."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Обращение к Игнатию по имени."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "warm_lexicon",
+              "triggered_count": 6,
+              "total_relevant_replies": 8,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Использование теплого обращения 'дорогой'."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Использование теплого обращения 'милый'."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Использование теплого обращения 'дорогая'."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Использование теплого обращения 'милый'."
+                },
+                {
+                  "turn_number": 15,
+                  "triggered": false,
+                  "reasoning": "Нет теплых слов."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": true,
+                  "reasoning": "Использование теплого обращения 'дорогие'."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Использование теплого обращения 'милый'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_direct_accusation",
+              "triggered_count": 5,
+              "total_relevant_replies": 8,
+              "rate": 0.625,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений."
+                },
+                {
+                  "turn_number": 15,
+                  "triggered": false,
+                  "reasoning": "Прямое обвинение Игнатия."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_pressure_words",
+              "triggered_count": 6,
+              "total_relevant_replies": 8,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера общения."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера общения."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера общения."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера общения."
+                },
+                {
+                  "turn_number": 15,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера общения."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера общения."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера общения."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "deflection_present",
+              "triggered_count": 4,
+              "total_relevant_replies": 8,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": false,
+                  "reasoning": "Нет перенаправления."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": false,
+                  "reasoning": "Нет перенаправления."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Перенаправление внимания на Игнатия."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": false,
+                  "reasoning": "Нет перенаправления."
+                },
+                {
+                  "turn_number": 15,
+                  "triggered": false,
+                  "reasoning": "Нет перенаправления."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": true,
+                  "reasoning": "Перенаправление внимания на Игнатия."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Перенаправление внимания на Игнатия."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Обращаться к собеседнику по имени в каждом ответе",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В реплике 15 отсутствует обращение по имени."
+            },
+            {
+              "directive": "Не обвинять напрямую — указывать на 'странное' поведение другого в разговоре с третьим",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В реплике 15 присутствует прямое обвинение Игнатия."
+            },
+            {
+              "directive": "Использовать минимум одно тёплое слово в реплике (дорогой, милый, чудесно, прекрасно, замечательно)",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В реплике 15 отсутствует теплое слово."
+            },
+            {
+              "directive": "При прямом обвинении — мягко перенаправить подозрение на другого игрока",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В реплике 15 присутствует прямое обвинение без перенаправления."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "kim": {
+        "character_id": "kim",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "self_correction",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 16,
+                  "triggered": true,
+                  "reasoning": "Использованы фразы 'ну, то есть' и 'в смысле', что указывает на самокоррекцию."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Фраза 'я не это хотел сказать' также демонстрирует самокоррекцию."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "hedging_words",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 16,
+                  "triggered": true,
+                  "reasoning": "Слова 'кажется', 'может быть' указывают на использование смягчителей."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Фразы 'наверное', 'как будто' также являются словами-смягчителями."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "nervous_filler",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 16,
+                  "triggered": true,
+                  "reasoning": "Использование 'ну, то есть' и 'в смысле' указывает на нервозность."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Фразы 'в смысле' и 'я не это хотел сказать' также являются нервными заполнителями."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_confident_accusation",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 16,
+                  "triggered": true,
+                  "reasoning": "Ким выражает сомнения в своих обвинениях, что соответствует маркеру."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Ким снова сомневается в своих обвинениях, используя 'может быть' и 'наверное'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "panic_response",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 16,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит признаки нервозности и самооправдания."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Ким проявляет панические реакции, выражая сомнения и неуверенность."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать маркеры самокоррекции (ну то есть, в смысле, вернее, точнее, я хотел сказать) хотя бы раз в ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Ким использовал маркеры самокоррекции в обеих репликах."
+            },
+            {
+              "directive": "Использовать слова-смягчители (возможно, наверное, может быть, кажется, вроде) в каждом утверждении о других",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В обеих репликах Ким использует слова-смягчители."
+            },
+            {
+              "directive": "При прямом обвинении — начинать с оправдания и объяснения, не с контратаки",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Ким начинает с сомнений и объяснений, а не с прямых обвинений."
+            },
+            {
+              "directive": "Давать развёрнутые ответы минимум из 2 предложений с оговорками",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Каждая реплика состоит из нескольких предложений с оговорками."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "father_ignatius": {
+        "character_id": "father_ignatius",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "names_addressee",
+              "triggered_count": 4,
+              "total_relevant_replies": 4,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Игнатий обращается к Марго по имени."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Игнатий обращается к Борису по имени."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Игнатий обращается к Марго по имени."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Игнатий обращается к Марго по имени."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "conscience_appeal",
+              "triggered_count": 4,
+              "total_relevant_replies": 4,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Игнатий говорит о важности искренности и истине."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Игнатий подчеркивает важность честности и искренности."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Игнатий призывает к честности и открытости."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": false,
+                  "reasoning": "Вопрос о форме одежды не содержит апелляции к совести."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "measured_speech",
+              "triggered_count": 3,
+              "total_relevant_replies": 4,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Ответ состоит из двух предложений, выраженных взвешенно."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": false,
+                  "reasoning": "Вопрос состоит из одного предложения."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Ответ состоит из двух предложений, выраженных взвешенно."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Ответ состоит из двух предложений, выраженных взвешенно."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_sarcasm",
+              "triggered_count": 4,
+              "total_relevant_replies": 4,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Нет признаков сарказма."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Нет признаков сарказма."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Нет признаков сарказма."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Нет признаков сарказма."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "moral_pressure",
+              "triggered_count": 3,
+              "total_relevant_replies": 4,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": false,
+                  "reasoning": "Нет прямого морального давления."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": false,
+                  "reasoning": "Нет прямого морального давления."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Игнатий призывает к честности и искренности."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Игнатий призывает к открытости и стремлению к истине."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Обращаться к собеседнику по имени в каждом ответе",
+              "satisfied": true,
+              "evidence_turns": [
+                5,
+                7,
+                17,
+                23
+              ],
+              "reasoning": "Игнатий обращался к собеседникам по имени в каждой реплике."
+            },
+            {
+              "directive": "Использовать апелляции к совести, честности или правде (совесть, честно, правда, искренне, по совести)",
+              "satisfied": true,
+              "evidence_turns": [
+                5,
+                17,
+                23
+              ],
+              "reasoning": "Игнатий использовал апелляции к совести и честности в своих репликах."
+            },
+            {
+              "directive": "Формулировать ответы минимум в 2 предложениях, взвешенно и размеренно",
+              "satisfied": false,
+              "evidence_turns": [
+                7
+              ],
+              "reasoning": "В одном из ответов (вопросе к Борису) Игнатий использовал только одно предложение."
+            },
+            {
+              "directive": "При подозрениях использовать моральное давление вместо прямых обвинений (посмотри в глаза, скажи честно, будь искренен)",
+              "satisfied": true,
+              "evidence_turns": [
+                17,
+                23
+              ],
+              "reasoning": "Игнатий использовал моральное давление в своих репликах, призывая к честности."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      }
+    },
+    "error": null
+  }
+}

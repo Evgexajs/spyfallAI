@@ -1,0 +1,813 @@
+{
+  "id": "6d97d13e-1db8-4730-a899-be7e6de8bc78",
+  "started_at": "2026-04-21T20:19:46.773862",
+  "ended_at": "2026-04-21T20:20:34.867473",
+  "config": {
+    "duration_minutes": 2,
+    "players_count": 4,
+    "max_questions": 50,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "spa",
+  "players": [
+    {
+      "character_id": "lyokha",
+      "role_id": "masseur",
+      "is_spy": false
+    },
+    {
+      "character_id": "kim",
+      "role_id": "administrator",
+      "is_spy": false
+    },
+    {
+      "character_id": "zoya",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "margo",
+      "role_id": "cosmetologist",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "zoya",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-21T20:19:48.820646",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "type": "question",
+      "content": "Ким, какой тут саундтрек, ты тоже слышишь?",
+      "display_delay_ms": 1679,
+      "raw_response": "{\n  \"content\": \"Ким, какой тут саундтрек, ты тоже слышишь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T20:19:52.707375",
+      "speaker_id": "kim",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Ну, в смысле... мне кажется, что-то расслабляющее, вернее, спокойное, в общем, как будто специально для того, чтобы отключиться от мыслей. Наверное, ты как-то так же его воспринимаешь, не знаю...",
+      "display_delay_ms": 6271,
+      "raw_response": "{\n  \"content\": \"Ну, в смысле... мне кажется, что-то расслабляющее, вернее, спокойное, в общем, как будто специально для того, чтобы отключиться от мыслей. Наверное, ты как-то так же его воспринимаешь, не знаю...\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-21T20:20:01.836280",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "type": "intervention",
+      "content": "Ага, конечно, очень конкретно. Ты так уклончиво отвечаешь, что кажется, будто что-то знаешь больше, чем говоришь.",
+      "display_delay_ms": 3852,
+      "raw_response": "Ага, конечно, очень конкретно. Ты так уклончиво отвечаешь, что кажется, будто что-то знаешь больше, чем говоришь."
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-21T20:20:06.732701",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "type": "question",
+      "content": "Лёха, а как часто ты сталкиваешься с людьми здесь, ну, в смысле, как часто они к тебе обращаются?",
+      "display_delay_ms": 3289,
+      "raw_response": "{\n  \"content\": \"Лёха, а как часто ты сталкиваешься с людьми здесь, ну, в смысле, как часто они к тебе обращаются?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T20:20:11.075030",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "type": "answer",
+      "content": "Да постоянно. Все расслабиться хотят, чё.",
+      "display_delay_ms": 1691,
+      "raw_response": "{\n  \"content\": \"Да постоянно. Все расслабиться хотят, чё.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-21T20:20:14.413824",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Марго, чё тут чаще всего нюхаешь, когда работаешь?",
+      "display_delay_ms": 1711,
+      "raw_response": "{\n  \"content\": \"Марго, чё тут чаще всего нюхаешь, когда работаешь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-21T20:20:17.382834",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "type": "answer",
+      "content": "О, милый Лёха, здесь каждый день в воздухе витает что-то нежное и расслабляющее. Эти ароматы просто окутывают тебя теплом и комфортом, будто ты на облаке. Разве это не чудесно?",
+      "display_delay_ms": 5841,
+      "raw_response": "{\n  \"content\": \"О, милый Лёха, здесь каждый день в воздухе витает что-то нежное и расслабляющее. Эти ароматы просто окутывают тебя теплом и комфортом, будто ты на облаке. Разве это не чудесно?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T20:20:27.718012",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "spy_guess",
+      "content": "Я думаю, мы находимся в: Спа-салон",
+      "display_delay_ms": 1418,
+      "raw_response": null
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-21T20:20:30.315995",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "intervention",
+      "content": "Ага, спа-салон, конечно, место для отдыха... или для тех, кто не знает, что делать с жизнью. Кто знал, что следить за вами так просто, ребята?",
+      "display_delay_ms": 4547,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 7,
+      "answer_count_at_check": 3,
+      "timestamp": "2026-04-21T20:20:26.267329",
+      "level": "confident",
+      "hints": [
+        "спокойная музыка",
+        "ароматы, создающие атмосферу расслабления"
+      ],
+      "location_guess": "спа-салон",
+      "reasoning": "Разговоры о спокойной, расслабляющей музыке и ароматах, которые создают атмосферу тепла и комфорта, указывают на место, где люди приходят расслабиться, например, спа-салон. Частое обращение людей к Лёхе также подтверждает, что это место с высоким потоком посетителей, что характерно для спа.",
+      "raw_response": "{\n  \"hints\": [\"спокойная музыка\", \"ароматы, создающие атмосферу расслабления\"],\n  \"location_guess\": \"спа-салон\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Разговоры о спокойной, расслабляющей музыке и ароматах, которые создают атмосферу тепла и комфорта, указывают на место, где люди приходят расслабиться, например, спа-салон. Частое обращение людей к Лёхе также подтверждает, что это место с высоким потоком посетителей, что характерно для спа.\"\n}"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T20:20:05.693460",
+      "character_id": "zoya",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "mock_with_dry_sarcasm",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T20:20:05.693574",
+      "character_id": "margo",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T20:20:05.693583",
+      "character_id": "lyokha",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "short_dismissive_jab",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-21T20:19:46.773862",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T20:19:46.773921",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T20:20:34.867520",
+      "from_phase": "main_round",
+      "to_phase": "resolution",
+      "reason": "Spy guessed location: correct",
+      "status": null,
+      "initiator_id": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Шпион (zoya) угадал локацию: Спа-салон",
+    "votes": null,
+    "spy_guess": "spa",
+    "spy_guess_correct": true,
+    "accused_id": null
+  },
+  "compressed_history": null,
+  "compression_checkpoint": null,
+  "token_usage": {
+    "total_input_tokens": 13077,
+    "total_output_tokens": 607,
+    "total_cost_usd": 0.0358673,
+    "llm_calls_count": 11
+  },
+  "preliminary_vote_result": null,
+  "defense_speeches": [],
+  "final_vote_result": null,
+  "vote_changes": [],
+  "post_game_analysis": {
+    "analyzed_at": "2026-04-21T15:21:37.283830Z",
+    "analyzer_model": "gpt-4o-mini",
+    "status": "completed",
+    "per_character": {
+      "lyokha": {
+        "character_id": "lyokha",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "short_reply",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "colloquial_speech",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Использует разговорное слово 'чё'."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Использует разговорное слово 'чё'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "dismissive_words",
+              "triggered_count": 0,
+              "total_relevant_replies": 2,
+              "rate": 0.0,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": false,
+                  "reasoning": "Не обрубает умничание, так как нет умничания."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": false,
+                  "reasoning": "Не обрубает умничание, так как нет умничания."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_complex_analogy",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "plain_direct_speech",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Реплика проста и пряма."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Реплика проста и пряма."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Отвечать не более чем двумя предложениями",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все реплики содержат не более двух предложений."
+            },
+            {
+              "directive": "Использовать разговорные слова и выражения (чё, ладно, короче, блин, типа, хорош)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В обеих репликах использовано разговорное слово 'чё'."
+            },
+            {
+              "directive": "При столкновении с умничанием — обрубать простым словом (фигня, бред, чушь, ерунда)",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Не было умничания, поэтому не было необходимости обрубать."
+            },
+            {
+              "directive": "Обращаться к собеседникам на ты, без церемоний",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Обращение к Марго на 'ты' без церемоний."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "kim": {
+        "character_id": "kim",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "self_correction",
+              "triggered_count": 1,
+              "total_relevant_replies": 2,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "В реплике присутствует самокоррекция: 'вернее, спокойное, в общем, как будто'."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": false,
+                  "reasoning": "В этой реплике нет маркеров самокоррекции."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "hedging_words",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Используются слова-смягчители: 'мне кажется', 'наверное'."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Слова-смягчители: 'в смысле', 'как часто'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "nervous_filler",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Нервные слова-заполнители: 'ну, в смысле...'."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Нервные слова-заполнители: 'ну, в смысле,'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_confident_accusation",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Отсутствие уверенных обвинений, выражает сомнение."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Сомнение в вопросе, нет уверенности."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "panic_response",
+              "triggered_count": 0,
+              "total_relevant_replies": 2,
+              "rate": 0.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": false,
+                  "reasoning": "Нет признаков паники или нервозности."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": false,
+                  "reasoning": "Нет признаков паники или нервозности."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать маркеры самокоррекции (ну то есть, в смысле, вернее, точнее, я хотел сказать) хотя бы раз в ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В реплике 2 использован маркер самокоррекции."
+            },
+            {
+              "directive": "Использовать слова-смягчители (возможно, наверное, может быть, кажется, вроде) в каждом утверждении о других",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В обеих репликах использованы слова-смягчители."
+            },
+            {
+              "directive": "При прямом обвинении — начинать с оправдания и объяснения, не с контратаки",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В обеих репликах отсутствуют прямые обвинения."
+            },
+            {
+              "directive": "Давать развёрнутые ответы минимум из 2 предложений с оговорками",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В обеих репликах нет развёрнутых ответов из 2 предложений."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "zoya": {
+        "character_id": "zoya",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "short_reply",
+              "triggered_count": 4,
+              "total_relevant_replies": 4,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из одного вопроса."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит 2 предложения."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из одного предложения."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из 2 предложений."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "sarcasm_markers",
+              "triggered_count": 3,
+              "total_relevant_replies": 4,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит сарказма."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Используется саркастический тон в отношении уклончивого ответа."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит сарказма."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Сарказм присутствует в комментарии о спа-салоне."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "question_response",
+              "triggered_count": 2,
+              "total_relevant_replies": 4,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Реплика является вопросом."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Реплика заканчивается вопросом."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит вопроса."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит вопроса."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_pathos",
+              "triggered_count": 4,
+              "total_relevant_replies": 4,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Реплика не содержит пафосных конструкций."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Реплика не содержит пафосных конструкций."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Реплика не содержит пафосных конструкций."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Реплика не содержит пафосных конструкций."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "ironic_tone",
+              "triggered_count": 3,
+              "total_relevant_replies": 4,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит иронии."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Ироничный тон присутствует в реплике."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит иронии."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Ирония присутствует в комментарии о спа-салоне."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать ироничные маркеры (ага, конечно, ну да, о да, как бы, типа) хотя бы раз в ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Ироничные маркеры 'ага' и 'конечно' использованы в репликах."
+            },
+            {
+              "directive": "На прямой вопрос отвечать встречным вопросом или саркастическим комментарием",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Ответ на вопрос Кима является саркастическим комментарием."
+            },
+            {
+              "directive": "Использовать не более 3 предложений в ответе — краткость важнее полноты",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все реплики содержат не более 3 предложений."
+            },
+            {
+              "directive": "При обвинении в свой адрес — высмеять обвинителя, не оправдываться",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Зоя высмеивает уклончивость Кима, не оправдываясь."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "margo": {
+        "character_id": "margo",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "names_addressee",
+              "triggered_count": 1,
+              "total_relevant_replies": 1,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Марго обратилась к Лёхе по имени, используя ласковое обращение 'милый Лёха'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "warm_lexicon",
+              "triggered_count": 1,
+              "total_relevant_replies": 1,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "В реплике использованы теплые слова, такие как 'нежное', 'расслабляющее', 'теплом' и 'комфортом'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_direct_accusation",
+              "triggered_count": 1,
+              "total_relevant_replies": 1,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "В реплике отсутствуют прямые обвинения, она говорит о приятных ощущениях."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_pressure_words",
+              "triggered_count": 1,
+              "total_relevant_replies": 1,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Реплика написана мягким тоном, без слов давления."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "deflection_present",
+              "triggered_count": 0,
+              "total_relevant_replies": 1,
+              "rate": 0.0,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": false,
+                  "reasoning": "В реплике нет мягкого перенаправления подозрения на другого игрока."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Обращаться к собеседнику по имени в каждом ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Марго обратилась к Лёхе по имени в своей реплике."
+            },
+            {
+              "directive": "Не обвинять напрямую — указывать на 'странное' поведение другого в разговоре с третьим",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В реплике отсутствуют прямые обвинения, она говорит о приятных ощущениях."
+            },
+            {
+              "directive": "Использовать минимум одно тёплое слово в реплике (дорогой, милый, чудесно, прекрасно, замечательно)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В реплике использовано теплое слово 'милый' и 'чудесно'."
+            },
+            {
+              "directive": "При прямом обвинении — мягко перенаправить подозрение на другого игрока",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В реплике не было прямого обвинения, следовательно, не было необходимости в перенаправлении."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      }
+    },
+    "error": null
+  }
+}
