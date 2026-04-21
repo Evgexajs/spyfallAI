@@ -1703,7 +1703,7 @@
         "Шаг 3: Запустить с --no-overwrite повторно — проверить пропуск"
       ],
       "dependencies": ["TASK-087"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-089",
