@@ -1356,7 +1356,7 @@
         "Шаг 3: Запустить игру и проверить логи"
       ],
       "dependencies": ["TASK-068", "TASK-069"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-071",

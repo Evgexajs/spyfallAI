@@ -31,6 +31,26 @@
 
 ---
 
+## [TASK-070] Рефакторинг логики выбора reaction_type в TriggerChecker
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Рефакторинг `_check_global_trigger()`: глобальные триггеры теперь срабатывают ТОЛЬКО если у персонажа есть соответствующий персональный триггер для этого condition_type
+- reaction_type, priority и threshold берутся из персонального триггера, не из глобального дефолта
+- В `check_triggers_for_character()` добавлен трекинг обработанных condition_type для избежания дублирования результатов
+- Создан файл тестов `tests/test_trigger_reaction_types.py` с 7 юнит-тестами:
+  - Борис при silent_for_n_turns использует reaction `pressure_with_sharper_question`
+  - Ким при silent_for_n_turns использует reaction `panic_and_derail`
+  - Разные персонажи имеют разные reaction_type для одного condition_type
+  - Глобальный триггер НЕ срабатывает для персонажа без персонального триггера
+  - Нет дублирования триггеров
+
+### Коммиты
+- `pending` — feat: refactor TriggerChecker to use personal trigger reaction_types
+
+---
+
 ## [TASK-069] Убрать глобальный silent_for_n_turns из trigger_rules.json
 **Дата:** 2026-04-21
 **Статус:** done

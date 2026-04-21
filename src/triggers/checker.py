@@ -162,11 +162,18 @@ class TriggerChecker:
         Check all triggers (global + personal) for a character after a turn.
 
         Returns list of triggered results, sorted by priority (highest first).
+
+        TASK-070: Global triggers use detection patterns but require personal triggers
+        to fire. To avoid duplicates, we track which condition_types were handled
+        by global triggers and skip personal trigger checks for those.
         """
         results = []
         character = self.characters.get(character_id)
         if not character:
             return results
+
+        # Track condition_types handled by global triggers to avoid duplicates
+        handled_conditions: set[ConditionType] = set()
 
         for gt in self.global_triggers:
             if gt.deprecated:
@@ -174,8 +181,12 @@ class TriggerChecker:
             result = self._check_global_trigger(gt, character_id, turn, game)
             if result and result.triggered:
                 results.append(result)
+                handled_conditions.add(gt.condition_type)
 
+        # Check personal triggers, skip if already handled by global trigger
         for pt in character.personal_triggers:
+            if pt.condition_type in handled_conditions:
+                continue
             result = self._check_personal_trigger(pt, character_id, turn, game)
             if result and result.triggered:
                 results.append(result)
@@ -190,7 +201,27 @@ class TriggerChecker:
         turn: Turn,
         game: Game,
     ) -> Optional[TriggerResult]:
-        """Check a single global trigger for a character."""
+        """Check a single global trigger for a character.
+
+        TASK-070: Global triggers only fire if the character has a matching
+        personal trigger for this condition_type. The reaction_type, priority,
+        and threshold are taken from the personal trigger, not from global defaults.
+        """
+        character = self.characters.get(character_id)
+        if not character:
+            return None
+
+        # Find matching personal trigger for this condition_type
+        matching_personal = None
+        for pt in character.personal_triggers:
+            if pt.condition_type == trigger.condition_type:
+                matching_personal = pt
+                break
+
+        # If no personal trigger exists, global trigger does NOT fire for this character
+        if matching_personal is None:
+            return None
+
         triggered = False
 
         if trigger.condition_type == ConditionType.DIRECT_ACCUSATION:
@@ -198,26 +229,24 @@ class TriggerChecker:
                 triggered = self.check_direct_accusation(turn, character_id)
 
         elif trigger.condition_type == ConditionType.SILENT_FOR_N_TURNS:
-            n_turns = trigger.params.get("silent_turns", 3)
+            # Use personal trigger's params for silent_turns
+            n_turns = (
+                matching_personal.params.get("silent_turns", 3)
+                if matching_personal.params
+                else 3
+            )
             triggered = self.check_silent_for_n_turns(character_id, n_turns)
 
         if triggered:
-            character = self.characters.get(character_id)
-            reaction = trigger.default_reaction_type
-            if character:
-                for pt in character.personal_triggers:
-                    if pt.condition_type == trigger.condition_type:
-                        reaction = pt.reaction_type
-                        break
-
+            # Use personal trigger's reaction_type, priority, and threshold
             return TriggerResult(
                 triggered=True,
                 character_id=character_id,
                 condition_type=trigger.condition_type,
-                reaction_type=reaction,
-                priority=trigger.priority,
-                threshold=trigger.threshold,
-                target_character_id=turn.speaker_id if triggered else None,
+                reaction_type=matching_personal.reaction_type,
+                priority=matching_personal.priority,
+                threshold=matching_personal.threshold,
+                target_character_id=turn.speaker_id,
             )
 
         return None
