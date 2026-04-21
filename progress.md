@@ -55,7 +55,7 @@
   - `test_create_trigger_event_with_reasoning_and_params` — params и reasoning в событии
 
 ### Коммиты
-- `TBD` — feat: implement contradiction_with_previous_answer detector (TASK-074)
+- `72cf007` — feat: implement contradiction_with_previous_answer detector (TASK-074)
 
 ---
 
