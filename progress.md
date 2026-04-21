@@ -31,6 +31,31 @@
 
 ---
 
+## [TASK-076] Обновить метод создания TriggerEvent для новых полей
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Проверено, что метод `create_trigger_event` в `src/triggers/checker.py` уже принимает:
+  - `params: Optional[dict]` — дополнительные параметры события
+  - `reasoning: Optional[str]` — результат анализа LLM
+- Для `contradiction_with_previous_answer`: reasoning записывается через `llm_detector_meta`
+- Для `repeated_accusation_on_same_target`: `params.target_id` автоматически добавляется из `result.target_character_id`
+- Удалён неиспользуемый импорт `Any` из `src/models/game.py`
+- Проверена сериализация TriggerEvent в JSON — работает корректно
+- Все существующие тесты проходят:
+  - `test_trigger_event_includes_target_id_in_params` — params для repeated_accusation
+  - `test_create_trigger_event_with_reasoning_and_params` — reasoning и params для contradiction
+
+### Заметки
+- Функциональность была реализована в рамках TASK-067, TASK-072, TASK-073, TASK-074
+- Данная задача подтвердила корректность интеграции
+
+### Коммиты
+- (будет добавлен после коммита)
+
+---
+
 ## [TASK-075] Интегрировать новые детекторы в run_main_round
 **Дата:** 2026-04-21
 **Статус:** done
