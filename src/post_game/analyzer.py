@@ -210,7 +210,7 @@ class PostGameAnalyzer:
                 messages=messages,
                 model=model,
                 temperature=0.3,
-                max_tokens=2000,
+                max_tokens=4000,
                 json_mode=True,
             )
             raw_content = response.content.strip()
@@ -226,11 +226,59 @@ class PostGameAnalyzer:
             data = json.loads(raw_content)
         except json.JSONDecodeError as e:
             logger.warning(f"Invalid JSON from LLM for character {character.id}: {e}")
-            return self._failed_analysis(character.id, "invalid_json")
+            # Fallback: try to extract JSON by finding first { and last }
+            data = self._try_extract_json(raw_content)
+            if data is None:
+                snippet = raw_content[:500] if len(raw_content) > 500 else raw_content
+                return self._failed_analysis(
+                    character.id,
+                    f"invalid_json: {e}. Response snippet: {snippet}"
+                )
 
         return self._parse_llm_response(
             character, data, has_markers=has_markers, has_must=has_must
         )
+
+    def _try_extract_json(self, raw: str) -> Optional[dict]:
+        """Try to extract JSON from raw LLM response with fallback strategies.
+
+        Strategies:
+        1. Find first { and last }, try to parse substring
+        2. Remove markdown code blocks if present
+
+        Args:
+            raw: Raw string response from LLM.
+
+        Returns:
+            Parsed dict or None if all strategies fail.
+        """
+        # Strategy 1: Remove markdown code blocks
+        cleaned = raw.strip()
+        if cleaned.startswith("```json"):
+            cleaned = cleaned[7:]
+        elif cleaned.startswith("```"):
+            cleaned = cleaned[3:]
+        if cleaned.endswith("```"):
+            cleaned = cleaned[:-3]
+        cleaned = cleaned.strip()
+
+        try:
+            return json.loads(cleaned)
+        except json.JSONDecodeError:
+            pass
+
+        # Strategy 2: Find first { and last }
+        first_brace = raw.find("{")
+        last_brace = raw.rfind("}")
+
+        if first_brace != -1 and last_brace != -1 and last_brace > first_brace:
+            candidate = raw[first_brace:last_brace + 1]
+            try:
+                return json.loads(candidate)
+            except json.JSONDecodeError:
+                pass
+
+        return None
 
     def _failed_analysis(self, character_id: str, error: str) -> CharacterAnalysis:
         """Create a failed CharacterAnalysis with the given error."""
