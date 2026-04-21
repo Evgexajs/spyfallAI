@@ -54,7 +54,7 @@
 - Игры без API ключа завершаются с ошибкой "all_characters_failed" — ожидаемое поведение
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `81afd37` — test: add unit tests for analyze --all CLI command (TASK-093)
 
 ---
 
