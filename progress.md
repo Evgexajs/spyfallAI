@@ -62,7 +62,7 @@
 - Все 20 тестов post_game модуля проходят
 
 ### Коммиты
-- (будет добавлен)
+- `bb9036b` — feat: implement analyze() method in PostGameAnalyzer (TASK-086)
 
 ---
 
