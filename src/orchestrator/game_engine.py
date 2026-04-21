@@ -64,6 +64,9 @@ MAX_RE_VOTES = 2  # Maximum number of re-votes when leader changes
 REPEATED_ACCUSATION_WINDOW = int(os.environ.get("REPEATED_ACCUSATION_WINDOW", "5"))
 CONTRADICTION_HISTORY_WINDOW = int(os.environ.get("CONTRADICTION_HISTORY_WINDOW", "10"))
 
+# Second round voting settings
+SECOND_ROUND_COMMENT_PROBABILITY = float(os.environ.get("SECOND_ROUND_COMMENT_PROBABILITY", "0.4"))
+
 logger = logging.getLogger(__name__)
 
 
@@ -2056,20 +2059,21 @@ async def run_revote(
             prev_vote_text = f"В прошлом раунде ты голосовал за {prev_vote_name}. "
 
         allow_abstain_str = "null если воздерживаешься" if DEFENSE_ALLOW_ABSTAIN else "воздержание НЕДОСТУПНО"
-        vote_instruction = (
+
+        # Step 1: Get vote decision only (without speech)
+        vote_decision_instruction = (
             f"Ты — {voter_char.display_name}. Идёт ПЕРЕВЫБОР (раунд {revote_number}). "
             f"{prev_vote_text}{previous_votes_text}\n"
             f"После защитной речи ты можешь изменить или подтвердить свой голос.\n"
             f"Кандидаты: {candidates_display}\n\n"
-            f"Ответь JSON:\n"
-            f'{{"vote_for": ID из [{candidates_json}] или {allow_abstain_str}, '
-            f'"speech": "твоя речь"}}'
+            f"Ответь JSON (ТОЛЬКО решение, без речи):\n"
+            f'{{"vote_for": ID из [{candidates_json}] или {allow_abstain_str}}}'
         )
 
         messages = [
             {"role": "system", "content": voter_prompt},
             *history,
-            {"role": "user", "content": vote_instruction},
+            {"role": "user", "content": vote_decision_instruction},
         ]
 
         if on_typing:
@@ -2079,14 +2083,65 @@ async def run_revote(
             messages=messages,
             model=game.config.main_model,
             temperature=0.7,
-            max_tokens=200,
+            max_tokens=50,
             json_mode=True,
         )
         _track_usage_and_check_cost(game, vote_llm_response)
         vote_parsed = _parse_json_response(vote_llm_response.content.strip())
 
         voted_for = vote_parsed.get("vote_for")
-        vote_speech = vote_parsed.get("speech", "")
+        vote_speech = ""
+
+        # Step 2: Generate speech based on vote change status
+        is_vote_changed = voted_for != prev_vote and voted_for is not None and prev_vote is not None
+
+        if is_vote_changed:
+            # Changed vote: require full explanation
+            speech_instruction = (
+                f"Ты меняешь голос после защитной речи (был за {id_to_name.get(prev_vote, prev_vote)}, "
+                f"теперь за {id_to_name.get(voted_for, voted_for)}). "
+                f"Обязательно объясни причину смены. Используй свой характерный стиль.\n"
+                f"Ответь JSON: {{\"speech\": \"твоя речь\"}}"
+            )
+            speech_messages = [
+                {"role": "system", "content": voter_prompt},
+                *history,
+                {"role": "user", "content": speech_instruction},
+            ]
+            speech_response = await provider.complete(
+                messages=speech_messages,
+                model=game.config.main_model,
+                temperature=0.7,
+                max_tokens=150,
+                json_mode=True,
+            )
+            _track_usage_and_check_cost(game, speech_response)
+            speech_parsed = _parse_json_response(speech_response.content.strip())
+            vote_speech = speech_parsed.get("speech", "")
+        elif voted_for is not None and random.random() < SECOND_ROUND_COMMENT_PROBABILITY:
+            # Confirmed vote with short comment
+            speech_instruction = (
+                f"Ты подтверждаешь свой предыдущий голос за {id_to_name.get(voted_for, voted_for)}. "
+                f"Добавь ОДНУ короткую фразу в своём характерном стиле (максимум 1 предложение). "
+                f"Никаких развёрнутых аргументов.\n"
+                f"Ответь JSON: {{\"speech\": \"короткая фраза\"}}"
+            )
+            speech_messages = [
+                {"role": "system", "content": voter_prompt},
+                *history,
+                {"role": "user", "content": speech_instruction},
+            ]
+            speech_response = await provider.complete(
+                messages=speech_messages,
+                model=game.config.main_model,
+                temperature=0.7,
+                max_tokens=80,
+                json_mode=True,
+            )
+            _track_usage_and_check_cost(game, speech_response)
+            speech_parsed = _parse_json_response(speech_response.content.strip())
+            vote_speech = speech_parsed.get("speech", "")
+        # else: confirmed vote without comment - no LLM call, empty speech
 
         if voted_for is not None and voted_for not in candidates:
             voted_for = None
