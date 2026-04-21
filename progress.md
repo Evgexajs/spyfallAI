@@ -56,7 +56,7 @@
 - Рекомендуется повторить live-тестирование когда API стабилизируется
 
 ### Коммиты
-- `TBD` — test: add TASK-078 integration tests
+- `6c7cb67` — test: add TASK-078 integration tests and verification
 
 ---
 
