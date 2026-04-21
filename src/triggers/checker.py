@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Optional
 
 from src.models.character import Character, ConditionType, ReactionType, Trigger
-from src.models.game import Game, TriggerEvent, Turn
+from src.models.game import Game, TriggerEvent, Turn, TurnType
 
 if TYPE_CHECKING:
     from src.llm.adapter import LLMProvider
@@ -188,6 +188,90 @@ class TriggerChecker:
         accusations = self._accusation_tracker[target_id]
         recent = [t for t in accusations if t > current_turn - window]
         return len(recent) >= 2
+
+    async def check_contradiction(
+        self,
+        speaker_id: str,
+        current_answer: Turn,
+        game: Game,
+        provider: "LLMProvider",
+        model: str,
+        history_window: int = 10,
+    ) -> tuple[bool, Optional[str], Optional[list[int]]]:
+        """
+        Check if the current answer contradicts the speaker's previous answers.
+
+        Uses LLM to analyze whether the current answer directly contradicts
+        earlier statements by the same speaker.
+
+        Args:
+            speaker_id: ID of the speaker to check
+            current_answer: The current answer Turn object
+            game: Game object to get turn history
+            provider: LLMProvider instance for LLM calls
+            model: Model name to use (typically utility model)
+            history_window: Number of turns back to check (default 10)
+
+        Returns:
+            Tuple of (triggered: bool, reasoning: Optional[str], turn_numbers: Optional[list[int]])
+            - triggered: True if contradiction detected, False otherwise
+            - reasoning: LLM's reasoning (if triggered), None otherwise
+            - turn_numbers: Turn numbers of previous answers considered (if triggered)
+            Returns (False, None, None) on LLM errors and logs warning.
+        """
+        min_turn_number = current_answer.turn_number - history_window
+        previous_answers = [
+            t
+            for t in game.turns
+            if t.speaker_id == speaker_id
+            and t.turn_number < current_answer.turn_number
+            and t.turn_number > min_turn_number
+            and t.type == TurnType.ANSWER
+        ]
+
+        if len(previous_answers) < 2:
+            return False, None, None
+
+        previous_texts = "\n".join(
+            f"- Ход {t.turn_number}: \"{t.content}\"" for t in previous_answers
+        )
+        turn_numbers = [t.turn_number for t in previous_answers]
+
+        prompt = f"""Игрок ранее говорил:
+{previous_texts}
+
+Сейчас игрок сказал: "{current_answer.content}"
+
+Есть ли в текущем ответе прямое противоречие ранее сказанному? Ответь только "да" или "нет".
+Смещение темы и перефразирование — это НЕ противоречие.
+Противоречие — это когда утверждение фактически несовместимо с ранее сказанным."""
+
+        try:
+            response = await provider.complete(
+                messages=[{"role": "user", "content": prompt}],
+                model=model,
+                temperature=0.3,
+                max_tokens=10,
+            )
+
+            answer = response.content.strip().lower()
+
+            if answer not in ("да", "нет", "yes", "no"):
+                logger.warning(
+                    f"Invalid LLM response for contradiction check: '{answer}'"
+                )
+                return False, None, None
+
+            # "да"/"yes" means contradiction found -> return True
+            # "нет"/"no" means no contradiction -> return False
+            if answer in ("да", "yes"):
+                reasoning = f"LLM detected contradiction with previous statements from turns {turn_numbers}"
+                return True, reasoning, turn_numbers
+            return False, None, None
+
+        except Exception as e:
+            logger.warning(f"Error checking contradiction: {e}")
+            return False, None, None
 
     async def check_dodged_question(
         self,
@@ -458,14 +542,27 @@ class TriggerChecker:
         result: TriggerResult,
         turn_number: int,
         intervened: bool,
+        reasoning: Optional[str] = None,
+        params: Optional[dict] = None,
     ) -> TriggerEvent:
-        """Create a TriggerEvent from a TriggerResult for logging."""
-        params = None
+        """Create a TriggerEvent from a TriggerResult for logging.
+
+        Args:
+            result: TriggerResult from trigger check
+            turn_number: Turn number when trigger fired
+            intervened: Whether character actually intervened
+            reasoning: LLM analysis result (for contradiction detector)
+            params: Additional parameters to merge with auto-generated ones
+        """
+        event_params = params.copy() if params else None
+
         if (
             result.condition_type == ConditionType.REPEATED_ACCUSATION_ON_SAME_TARGET
             and result.target_character_id
         ):
-            params = {"target_id": result.target_character_id}
+            if event_params is None:
+                event_params = {}
+            event_params["target_id"] = result.target_character_id
 
         return TriggerEvent(
             turn_number=turn_number,
@@ -474,5 +571,6 @@ class TriggerChecker:
             condition_type=result.condition_type.value,
             reaction_type=result.reaction_type.value,
             intervened=intervened,
-            params=params,
+            reasoning=reasoning,
+            params=event_params,
         )

@@ -1434,7 +1434,7 @@
         "Шаг 3: Юнит-тест: смена темы — НЕ срабатывает"
       ],
       "dependencies": ["TASK-066", "TASK-067"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-075",

@@ -472,3 +472,362 @@ class TestRepeatedAccusationOnSameTarget:
         assert result.reaction_type == ReactionType.DEFLECT_SUSPICION_TO_ANOTHER
         assert result.priority == 6  # Margo's personal trigger priority
         assert result.threshold == 0.5  # Margo's personal trigger threshold
+
+
+class TestContradictionWithPreviousAnswer:
+    """Tests for TASK-074: contradiction_with_previous_answer detector."""
+
+    import asyncio
+
+    @pytest.fixture
+    def mock_llm_provider(self):
+        """Mock LLM provider for testing."""
+        from unittest.mock import AsyncMock, MagicMock
+
+        provider = MagicMock()
+        provider.complete = AsyncMock()
+        return provider
+
+    @pytest.fixture
+    def game_with_turns(self, sample_game):
+        """Game with previous answer turns."""
+        sample_game.turns = [
+            Turn(
+                turn_number=1,
+                timestamp=datetime.now(),
+                speaker_id="kim",
+                addressee_id="boris_molot",
+                type=TurnType.ANSWER,
+                content="Я работаю здесь уже пять лет.",
+                display_delay_ms=1000,
+            ),
+            Turn(
+                turn_number=2,
+                timestamp=datetime.now(),
+                speaker_id="boris_molot",
+                addressee_id="zoya",
+                type=TurnType.ANSWER,
+                content="Это моя первая смена.",
+                display_delay_ms=1000,
+            ),
+            Turn(
+                turn_number=3,
+                timestamp=datetime.now(),
+                speaker_id="kim",
+                addressee_id="zoya",
+                type=TurnType.ANSWER,
+                content="Я точно знаю всех здесь.",
+                display_delay_ms=1000,
+            ),
+        ]
+        return sample_game
+
+    def test_explicit_contradiction_triggers(
+        self, boris, kim, game_with_turns, mock_llm_provider
+    ):
+        """TASK-074 Step 1: Explicit contradiction should trigger."""
+        import asyncio
+        from unittest.mock import MagicMock
+
+        checker = TriggerChecker(characters=[boris, kim])
+
+        # Kim says something that contradicts earlier statements
+        current_answer = Turn(
+            turn_number=4,
+            timestamp=datetime.now(),
+            speaker_id="kim",
+            addressee_id="boris_molot",
+            type=TurnType.ANSWER,
+            content="Вообще-то я никого здесь не знаю, это мой первый день.",
+            display_delay_ms=1000,
+        )
+        game_with_turns.turns.append(current_answer)
+
+        # Mock LLM returns "да" (yes, contradiction found)
+        mock_response = MagicMock()
+        mock_response.content = "да"
+        mock_llm_provider.complete.return_value = mock_response
+
+        triggered, reasoning, turn_numbers = asyncio.run(checker.check_contradiction(
+            speaker_id="kim",
+            current_answer=current_answer,
+            game=game_with_turns,
+            provider=mock_llm_provider,
+            model="gpt-4o-mini",
+        ))
+
+        assert triggered is True
+        assert reasoning is not None
+        assert turn_numbers is not None
+        assert 1 in turn_numbers  # Kim's first answer at turn 1
+        assert 3 in turn_numbers  # Kim's second answer at turn 3
+
+    def test_rephrasing_does_not_trigger(
+        self, boris, kim, game_with_turns, mock_llm_provider
+    ):
+        """TASK-074 Step 2: Rephrasing should NOT trigger."""
+        import asyncio
+        from unittest.mock import MagicMock
+
+        checker = TriggerChecker(characters=[boris, kim])
+
+        # Kim says something similar (rephrasing)
+        current_answer = Turn(
+            turn_number=4,
+            timestamp=datetime.now(),
+            speaker_id="kim",
+            addressee_id="boris_molot",
+            type=TurnType.ANSWER,
+            content="Как я уже говорил, работаю тут давно и знаю всех коллег.",
+            display_delay_ms=1000,
+        )
+        game_with_turns.turns.append(current_answer)
+
+        # Mock LLM returns "нет" (no contradiction)
+        mock_response = MagicMock()
+        mock_response.content = "нет"
+        mock_llm_provider.complete.return_value = mock_response
+
+        triggered, reasoning, turn_numbers = asyncio.run(checker.check_contradiction(
+            speaker_id="kim",
+            current_answer=current_answer,
+            game=game_with_turns,
+            provider=mock_llm_provider,
+            model="gpt-4o-mini",
+        ))
+
+        assert triggered is False
+        assert reasoning is None
+        assert turn_numbers is None
+
+    def test_topic_change_does_not_trigger(
+        self, boris, kim, game_with_turns, mock_llm_provider
+    ):
+        """TASK-074 Step 3: Topic change should NOT trigger."""
+        import asyncio
+        from unittest.mock import MagicMock
+
+        checker = TriggerChecker(characters=[boris, kim])
+
+        # Kim changes topic completely
+        current_answer = Turn(
+            turn_number=4,
+            timestamp=datetime.now(),
+            speaker_id="kim",
+            addressee_id="boris_molot",
+            type=TurnType.ANSWER,
+            content="Давайте лучше поговорим о погоде сегодня.",
+            display_delay_ms=1000,
+        )
+        game_with_turns.turns.append(current_answer)
+
+        # Mock LLM returns "нет" (no contradiction, just topic change)
+        mock_response = MagicMock()
+        mock_response.content = "нет"
+        mock_llm_provider.complete.return_value = mock_response
+
+        triggered, reasoning, turn_numbers = asyncio.run(checker.check_contradiction(
+            speaker_id="kim",
+            current_answer=current_answer,
+            game=game_with_turns,
+            provider=mock_llm_provider,
+            model="gpt-4o-mini",
+        ))
+
+        assert triggered is False
+        assert reasoning is None
+        assert turn_numbers is None
+
+    def test_less_than_two_previous_answers_skips_check(
+        self, boris, kim, sample_game, mock_llm_provider
+    ):
+        """Detector should not run if speaker has < 2 previous answers."""
+        import asyncio
+
+        checker = TriggerChecker(characters=[boris, kim])
+
+        # Only one previous answer from Kim
+        sample_game.turns = [
+            Turn(
+                turn_number=1,
+                timestamp=datetime.now(),
+                speaker_id="kim",
+                addressee_id="boris_molot",
+                type=TurnType.ANSWER,
+                content="Я работаю здесь.",
+                display_delay_ms=1000,
+            ),
+        ]
+
+        current_answer = Turn(
+            turn_number=2,
+            timestamp=datetime.now(),
+            speaker_id="kim",
+            addressee_id="boris_molot",
+            type=TurnType.ANSWER,
+            content="На самом деле я не работаю здесь.",
+            display_delay_ms=1000,
+        )
+        sample_game.turns.append(current_answer)
+
+        triggered, reasoning, turn_numbers = asyncio.run(checker.check_contradiction(
+            speaker_id="kim",
+            current_answer=current_answer,
+            game=sample_game,
+            provider=mock_llm_provider,
+            model="gpt-4o-mini",
+        ))
+
+        # Should return False without calling LLM
+        assert triggered is False
+        assert reasoning is None
+        assert turn_numbers is None
+        mock_llm_provider.complete.assert_not_called()
+
+    def test_invalid_llm_response_does_not_trigger(
+        self, boris, kim, game_with_turns, mock_llm_provider
+    ):
+        """Invalid LLM response should not trigger, just log warning."""
+        import asyncio
+        from unittest.mock import MagicMock
+
+        checker = TriggerChecker(characters=[boris, kim])
+
+        current_answer = Turn(
+            turn_number=4,
+            timestamp=datetime.now(),
+            speaker_id="kim",
+            addressee_id="boris_molot",
+            type=TurnType.ANSWER,
+            content="Что-то противоречивое.",
+            display_delay_ms=1000,
+        )
+        game_with_turns.turns.append(current_answer)
+
+        # Mock LLM returns invalid response
+        mock_response = MagicMock()
+        mock_response.content = "maybe"
+        mock_llm_provider.complete.return_value = mock_response
+
+        triggered, reasoning, turn_numbers = asyncio.run(checker.check_contradiction(
+            speaker_id="kim",
+            current_answer=current_answer,
+            game=game_with_turns,
+            provider=mock_llm_provider,
+            model="gpt-4o-mini",
+        ))
+
+        assert triggered is False
+        assert reasoning is None
+        assert turn_numbers is None
+
+    def test_history_window_limits_turns_checked(
+        self, boris, kim, mock_llm_provider
+    ):
+        """History window should limit which turns are considered."""
+        import asyncio
+        from unittest.mock import MagicMock
+
+        checker = TriggerChecker(characters=[boris, kim])
+
+        players = [
+            Player(character_id="boris_molot", role_id="doctor", is_spy=False),
+            Player(character_id="kim", role_id="nurse", is_spy=False),
+            Player(character_id="zoya", role_id=None, is_spy=True),
+        ]
+        game = Game(
+            id=uuid4(),
+            started_at=datetime.now(),
+            config=GameConfig(
+                duration_minutes=10,
+                players_count=3,
+                max_questions=20,
+                main_model="gpt-4o",
+                utility_model="gpt-4o-mini",
+            ),
+            location_id="hospital",
+            players=players,
+            spy_id="zoya",
+            turns=[],
+        )
+
+        # Add many turns spread over time
+        for i in range(1, 20):
+            game.turns.append(
+                Turn(
+                    turn_number=i,
+                    timestamp=datetime.now(),
+                    speaker_id="kim",
+                    addressee_id="boris_molot",
+                    type=TurnType.ANSWER,
+                    content=f"Ответ номер {i}.",
+                    display_delay_ms=1000,
+                )
+            )
+
+        current_answer = Turn(
+            turn_number=20,
+            timestamp=datetime.now(),
+            speaker_id="kim",
+            addressee_id="boris_molot",
+            type=TurnType.ANSWER,
+            content="Текущий ответ.",
+            display_delay_ms=1000,
+        )
+        game.turns.append(current_answer)
+
+        mock_response = MagicMock()
+        mock_response.content = "да"
+        mock_llm_provider.complete.return_value = mock_response
+
+        # With history_window=5, should only consider turns 16-19
+        triggered, reasoning, turn_numbers = asyncio.run(checker.check_contradiction(
+            speaker_id="kim",
+            current_answer=current_answer,
+            game=game,
+            provider=mock_llm_provider,
+            model="gpt-4o-mini",
+            history_window=5,
+        ))
+
+        assert triggered is True
+        assert turn_numbers is not None
+        # Should only include turns within window (16-19)
+        for tn in turn_numbers:
+            assert tn > 20 - 5  # Only turns after turn 15
+            assert tn < 20  # Not including current turn
+
+    def test_create_trigger_event_with_reasoning_and_params(
+        self, boris, kim, sample_game
+    ):
+        """TriggerEvent should include reasoning and contradicting_turn_numbers in params."""
+        from src.models.character import ConditionType, ReactionType
+        from src.triggers.checker import TriggerResult
+
+        checker = TriggerChecker(characters=[boris, kim])
+
+        result = TriggerResult(
+            triggered=True,
+            character_id="zoya",
+            condition_type=ConditionType.CONTRADICTION_WITH_PREVIOUS_ANSWER,
+            reaction_type=ReactionType.MOCK_WITH_DRY_SARCASM,
+            priority=7,
+            threshold=0.4,
+            target_character_id="kim",
+        )
+
+        reasoning = "LLM detected contradiction with previous statements from turns [1, 3]"
+        params = {"contradicting_turn_numbers": [1, 3]}
+
+        event = checker.create_trigger_event(
+            result=result,
+            turn_number=4,
+            intervened=True,
+            reasoning=reasoning,
+            params=params,
+        )
+
+        assert event.condition_type == "contradiction_with_previous_answer"
+        assert event.reasoning == reasoning
+        assert event.params is not None
+        assert event.params.get("contradicting_turn_numbers") == [1, 3]

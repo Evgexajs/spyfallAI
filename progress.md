@@ -31,6 +31,34 @@
 
 ---
 
+## [TASK-074] Реализовать детектор contradiction_with_previous_answer
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Реализован асинхронный метод `check_contradiction(speaker_id, current_answer, game, provider, model, history_window=10)` в `src/triggers/checker.py`
+- Метод собирает предыдущие ответы игрока за последние `history_window` ходов
+- Если у игрока < 2 предыдущих ответов — детектор не запускается (возвращает False)
+- LLM-промпт на русском языке с бинарным вопросом о прямом противоречии
+- Явная инструкция в промпте: смещение темы и перефразирование — НЕ противоречие
+- Возвращает кортеж `(triggered: bool, reasoning: Optional[str], turn_numbers: Optional[list[int]])`
+- При срабатывании возвращает reasoning и номера ходов с предыдущими ответами
+- Добавлен импорт `TurnType` для фильтрации только ответов (не вопросов/вмешательств)
+- Обновлён метод `create_trigger_event` для поддержки параметров `reasoning` и `params`
+- Написано 7 юнит-тестов в `tests/test_trigger_reaction_types.py`:
+  - `test_explicit_contradiction_triggers` — явное противоречие срабатывает
+  - `test_rephrasing_does_not_trigger` — перефразирование НЕ срабатывает
+  - `test_topic_change_does_not_trigger` — смена темы НЕ срабатывает
+  - `test_less_than_two_previous_answers_skips_check` — пропуск при < 2 ответах
+  - `test_invalid_llm_response_does_not_trigger` — невалидный ответ не ломает
+  - `test_history_window_limits_turns_checked` — окно истории работает
+  - `test_create_trigger_event_with_reasoning_and_params` — params и reasoning в событии
+
+### Коммиты
+- `TBD` — feat: implement contradiction_with_previous_answer detector (TASK-074)
+
+---
+
 ## [TASK-073] Реализовать детектор dodged_direct_question
 **Дата:** 2026-04-21
 **Статус:** done
