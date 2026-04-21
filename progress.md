@@ -55,7 +55,7 @@
 - Предшествующий тест `test_api_key_security` упал из-за старого лога с ошибкой "OPENAI_API_KEY not set" — не связано с текущей задачей
 
 ### Коммиты
-- (нет коммитов — задача интеграционного тестирования)
+- `5bbf6ad` — test: integration testing of post-game analysis (TASK-092)
 
 ---
 
