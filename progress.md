@@ -31,6 +31,30 @@
 
 ---
 
+## [TASK-072] Реализовать детектор repeated_accusation_on_same_target
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Добавлен глобальный триггер `global_repeated_accusation` в `trigger_rules.json`
+- Интегрирован вызов `track_accusation()` в `game_engine.py` после каждого ответа
+- Обновлён `create_trigger_event()` для записи `target_id` в `params` при REPEATED_ACCUSATION
+- Написаны юнит-тесты в `tests/test_trigger_reaction_types.py`:
+  - `test_two_accusations_in_row_triggers` — 2 обвинения подряд срабатывает
+  - `test_accusations_spread_over_10_turns_does_not_trigger` — обвинения вне окна не срабатывают
+  - `test_accusations_on_different_targets_does_not_trigger` — обвинения на разные цели не срабатывают
+  - `test_trigger_event_includes_target_id_in_params` — TriggerEvent содержит target_id
+  - `test_margo_repeated_accusation_uses_correct_reaction_type` — персональный reaction_type используется
+
+### Заметки
+- Базовая структура `_accusation_tracker`, `track_accusation()`, `check_repeated_accusation()` была уже реализована в checker.py
+- Требовалось добавить глобальный триггер и интеграцию в оркестраторе
+
+### Коммиты
+- (будет добавлен после коммита)
+
+---
+
 ## [TASK-071] Добавить валидатор отсутствия silent_for_n_turns при загрузке профиля
 **Дата:** 2026-04-21
 **Статус:** done

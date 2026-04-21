@@ -44,6 +44,21 @@
         "method": "counter",
         "rule": "turns_since_spoke >= silent_turns"
       }
+    },
+    {
+      "id": "global_repeated_accusation",
+      "condition_type": "repeated_accusation_on_same_target",
+      "description": "Triggers when the same player is accused 2+ times within a window of turns",
+      "priority": 4,
+      "threshold": 0.5,
+      "default_reaction_type": "deflect_suspicion_to_another",
+      "params": {
+        "window": 5
+      },
+      "detection": {
+        "method": "counter_with_markers",
+        "rule": "accusations_on_target >= 2 within window turns"
+      }
     }
   ],
   "accusation_markers": {

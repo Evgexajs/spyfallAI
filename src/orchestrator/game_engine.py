@@ -1261,6 +1261,11 @@ async def run_main_round(
 
         trigger_checker.update_silence_counters(answer_turn)
 
+        # Track accusations for repeated_accusation_on_same_target detector
+        accused_id = trigger_checker.detect_accusation_target(answer_turn)
+        if accused_id:
+            trigger_checker.track_accusation(accused_id, answer_turn.turn_number)
+
         trigger_results = trigger_checker.check_all_characters(answer_turn, game)
         winner = trigger_checker.select_winner(trigger_results)
 

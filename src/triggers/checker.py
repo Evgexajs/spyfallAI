@@ -77,6 +77,7 @@ class TriggerChecker:
         self.global_triggers = global_triggers or load_global_triggers()
         self._silence_counters: dict[str, int] = {c.id: 0 for c in characters}
         self._accusation_counts: dict[str, dict[str, int]] = {}
+        self._accusation_tracker: dict[str, list[int]] = {}
 
         self._accusation_patterns = self._compile_accusation_patterns()
 
@@ -152,6 +153,60 @@ class TriggerChecker:
         if character_id in self._silence_counters:
             self._silence_counters[character_id] = 0
 
+    def track_accusation(self, target_id: str, turn_number: int) -> None:
+        """Track an accusation against a target for repeated_accusation detection."""
+        if target_id not in self._accusation_tracker:
+            self._accusation_tracker[target_id] = []
+        self._accusation_tracker[target_id].append(turn_number)
+
+    def check_repeated_accusation(
+        self,
+        target_id: str,
+        current_turn: int,
+        window: int = 5,
+    ) -> bool:
+        """
+        Check if a target was accused 2+ times in the last `window` turns.
+
+        Args:
+            target_id: The character who was accused
+            current_turn: Current turn number
+            window: Number of recent turns to consider (default 5)
+
+        Returns:
+            True if 2+ accusations in the window, False otherwise
+        """
+        if target_id not in self._accusation_tracker:
+            return False
+
+        accusations = self._accusation_tracker[target_id]
+        recent = [t for t in accusations if t > current_turn - window]
+        return len(recent) >= 2
+
+    def detect_accusation_target(self, turn: Turn) -> Optional[str]:
+        """
+        Detect which character (if any) is being accused in this turn.
+
+        Returns the character_id of the accused, or None if no accusation detected.
+        """
+        has_accusation_marker = False
+        for pattern in self._accusation_patterns:
+            if pattern.search(turn.content.lower()):
+                has_accusation_marker = True
+                break
+
+        if not has_accusation_marker:
+            return None
+
+        content_lower = turn.content.lower()
+        for char_id, char in self.characters.items():
+            if char_id == turn.speaker_id:
+                continue
+            if char.display_name.lower() in content_lower:
+                return char_id
+
+        return None
+
     def check_triggers_for_character(
         self,
         character_id: str,
@@ -224,6 +279,8 @@ class TriggerChecker:
 
         triggered = False
 
+        target_for_result = turn.speaker_id
+
         if trigger.condition_type == ConditionType.DIRECT_ACCUSATION:
             if turn.speaker_id != character_id:
                 triggered = self.check_direct_accusation(turn, character_id)
@@ -237,6 +294,23 @@ class TriggerChecker:
             )
             triggered = self.check_silent_for_n_turns(character_id, n_turns)
 
+        elif trigger.condition_type == ConditionType.REPEATED_ACCUSATION_ON_SAME_TARGET:
+            # Get window from personal trigger params or default to 5
+            window = (
+                matching_personal.params.get("window", 5)
+                if matching_personal.params
+                else 5
+            )
+            # Detect who was accused in this turn
+            accused_id = self.detect_accusation_target(turn)
+            if accused_id:
+                # Check if this is a repeated accusation
+                triggered = self.check_repeated_accusation(
+                    accused_id, turn.turn_number, window
+                )
+                if triggered:
+                    target_for_result = accused_id
+
         if triggered:
             # Use personal trigger's reaction_type, priority, and threshold
             return TriggerResult(
@@ -246,7 +320,7 @@ class TriggerChecker:
                 reaction_type=matching_personal.reaction_type,
                 priority=matching_personal.priority,
                 threshold=matching_personal.threshold,
-                target_character_id=turn.speaker_id,
+                target_character_id=target_for_result,
             )
 
         return None
@@ -328,6 +402,13 @@ class TriggerChecker:
         intervened: bool,
     ) -> TriggerEvent:
         """Create a TriggerEvent from a TriggerResult for logging."""
+        params = None
+        if (
+            result.condition_type == ConditionType.REPEATED_ACCUSATION_ON_SAME_TARGET
+            and result.target_character_id
+        ):
+            params = {"target_id": result.target_character_id}
+
         return TriggerEvent(
             turn_number=turn_number,
             timestamp=datetime.now(),
@@ -335,4 +416,5 @@ class TriggerChecker:
             condition_type=result.condition_type.value,
             reaction_type=result.reaction_type.value,
             intervened=intervened,
+            params=params,
         )

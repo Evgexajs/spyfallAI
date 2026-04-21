@@ -285,3 +285,190 @@ class TestNoDuplicateTriggers:
         # Each condition_type should appear at most once
         for ct, count in condition_counts.items():
             assert count == 1, f"Duplicate results for {ct}"
+
+
+class TestRepeatedAccusationOnSameTarget:
+    """Tests for TASK-072: repeated_accusation_on_same_target detector."""
+
+    @pytest.fixture
+    def accusation_turn_1(self):
+        """First accusation turn against Kim at turn 1."""
+        return Turn(
+            turn_number=1,
+            timestamp=datetime.now(),
+            speaker_id="boris_molot",
+            addressee_id="zoya",
+            type=TurnType.ANSWER,
+            content="Ким, ты шпион! Я уверен в этом!",
+            display_delay_ms=1000,
+        )
+
+    @pytest.fixture
+    def accusation_turn_2(self):
+        """Second accusation turn against Kim at turn 2."""
+        return Turn(
+            turn_number=2,
+            timestamp=datetime.now(),
+            speaker_id="zoya",
+            addressee_id="boris_molot",
+            type=TurnType.ANSWER,
+            content="Согласна, Ким точно шпион! Он всё время молчит!",
+            display_delay_ms=1000,
+        )
+
+    @pytest.fixture
+    def accusation_turn_late(self):
+        """Accusation turn against Kim at turn 12 (outside window)."""
+        return Turn(
+            turn_number=12,
+            timestamp=datetime.now(),
+            speaker_id="boris_molot",
+            addressee_id="zoya",
+            type=TurnType.ANSWER,
+            content="Ким, ты шпион! Вернёмся к этому!",
+            display_delay_ms=1000,
+        )
+
+    @pytest.fixture
+    def accusation_turn_against_different_target(self):
+        """Accusation turn against Boris (different target)."""
+        return Turn(
+            turn_number=2,
+            timestamp=datetime.now(),
+            speaker_id="zoya",
+            addressee_id="kim",
+            type=TurnType.ANSWER,
+            content="Борис, ты шпион! Ты слишком агрессивен!",
+            display_delay_ms=1000,
+        )
+
+    def test_two_accusations_in_row_triggers(
+        self, margo, boris, kim, accusation_turn_1, accusation_turn_2, sample_game
+    ):
+        """TASK-072 Step 1: 2 accusations in a row should trigger."""
+        checker = TriggerChecker(characters=[margo, boris, kim])
+
+        # Track first accusation against Kim at turn 1
+        accused_1 = checker.detect_accusation_target(accusation_turn_1)
+        assert accused_1 == "kim"
+        checker.track_accusation(accused_1, accusation_turn_1.turn_number)
+
+        # Track second accusation against Kim at turn 2
+        accused_2 = checker.detect_accusation_target(accusation_turn_2)
+        assert accused_2 == "kim"
+        checker.track_accusation(accused_2, accusation_turn_2.turn_number)
+
+        # Check repeated accusation - should trigger (2 in window of 5)
+        assert checker.check_repeated_accusation("kim", current_turn=2, window=5) is True
+
+    def test_accusations_spread_over_10_turns_does_not_trigger(
+        self, margo, boris, kim, accusation_turn_1, accusation_turn_late, sample_game
+    ):
+        """TASK-072 Step 2: Accusations spread over 10 turns should not trigger."""
+        checker = TriggerChecker(characters=[margo, boris, kim])
+
+        # Track first accusation against Kim at turn 1
+        checker.track_accusation("kim", turn_number=1)
+
+        # Track second accusation against Kim at turn 12 (11 turns later)
+        checker.track_accusation("kim", turn_number=12)
+
+        # Check repeated accusation at turn 12 with window of 5
+        # Turn 1 is outside window (12 - 5 = 7, turn 1 < 7)
+        assert checker.check_repeated_accusation("kim", current_turn=12, window=5) is False
+
+    def test_accusations_on_different_targets_does_not_trigger(
+        self, margo, boris, kim, accusation_turn_1, accusation_turn_against_different_target, sample_game
+    ):
+        """TASK-072 Step 3: Accusations on different targets should not trigger."""
+        checker = TriggerChecker(characters=[margo, boris, kim])
+
+        # Track accusation against Kim at turn 1
+        accused_1 = checker.detect_accusation_target(accusation_turn_1)
+        assert accused_1 == "kim"
+        checker.track_accusation(accused_1, accusation_turn_1.turn_number)
+
+        # Track accusation against Boris at turn 2
+        accused_2 = checker.detect_accusation_target(accusation_turn_against_different_target)
+        assert accused_2 == "boris_molot"
+        checker.track_accusation(accused_2, accusation_turn_against_different_target.turn_number)
+
+        # Neither target should trigger repeated accusation (only 1 each)
+        assert checker.check_repeated_accusation("kim", current_turn=2, window=5) is False
+        assert checker.check_repeated_accusation("boris_molot", current_turn=2, window=5) is False
+
+    def test_trigger_event_includes_target_id_in_params(self, margo, boris, kim, sample_game):
+        """TriggerEvent should include target_id in params for repeated_accusation."""
+        checker = TriggerChecker(characters=[margo, boris, kim])
+
+        # Pre-populate tracker with accusations against Kim
+        checker.track_accusation("kim", turn_number=1)
+        checker.track_accusation("kim", turn_number=2)
+
+        # Create a turn with accusation against Kim
+        turn = Turn(
+            turn_number=3,
+            timestamp=datetime.now(),
+            speaker_id="boris_molot",
+            addressee_id="zoya",
+            type=TurnType.ANSWER,
+            content="Ким, ты шпион! Третий раз говорю!",
+            display_delay_ms=1000,
+        )
+        checker.track_accusation("kim", turn.turn_number)
+
+        # Check triggers for Margo (she has repeated_accusation_on_same_target personal trigger)
+        results = checker.check_triggers_for_character("margo", turn, sample_game)
+
+        repeated_results = [
+            r for r in results
+            if r.condition_type == ConditionType.REPEATED_ACCUSATION_ON_SAME_TARGET
+        ]
+
+        assert len(repeated_results) == 1
+        result = repeated_results[0]
+
+        # Verify target_character_id is set
+        assert result.target_character_id == "kim"
+
+        # Create TriggerEvent and verify params
+        event = checker.create_trigger_event(result, turn_number=3, intervened=True)
+        assert event.params is not None
+        assert event.params.get("target_id") == "kim"
+
+    def test_margo_repeated_accusation_uses_correct_reaction_type(
+        self, margo, boris, kim, sample_game
+    ):
+        """Margo should use deflect_suspicion_to_another for repeated_accusation."""
+        checker = TriggerChecker(characters=[margo, boris, kim])
+
+        # Pre-populate tracker with accusations against Kim
+        checker.track_accusation("kim", turn_number=1)
+        checker.track_accusation("kim", turn_number=2)
+
+        # Create a turn with accusation against Kim
+        turn = Turn(
+            turn_number=3,
+            timestamp=datetime.now(),
+            speaker_id="boris_molot",
+            addressee_id="zoya",
+            type=TurnType.ANSWER,
+            content="Ким, ты шпион! Это очевидно!",
+            display_delay_ms=1000,
+        )
+        checker.track_accusation("kim", turn.turn_number)
+
+        results = checker.check_triggers_for_character("margo", turn, sample_game)
+
+        repeated_results = [
+            r for r in results
+            if r.condition_type == ConditionType.REPEATED_ACCUSATION_ON_SAME_TARGET
+        ]
+
+        assert len(repeated_results) == 1
+        result = repeated_results[0]
+
+        # Margo's personal trigger values
+        assert result.reaction_type == ReactionType.DEFLECT_SUSPICION_TO_ANOTHER
+        assert result.priority == 6  # Margo's personal trigger priority
+        assert result.threshold == 0.5  # Margo's personal trigger threshold
