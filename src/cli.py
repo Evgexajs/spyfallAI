@@ -23,6 +23,8 @@ from src.orchestrator import (
     run_preliminary_with_revotes,
     setup_game,
 )
+from src.post_game.analyzer import PostGameAnalyzer
+from src.post_game.config import POST_GAME_ANALYSIS_ENABLED
 from src.storage import save_game
 
 
@@ -120,6 +122,7 @@ async def run_game(
     location_id: Optional[str],
     duration_minutes: int,
     max_questions: int,
+    skip_analysis: bool = False,
 ) -> Path:
     """Run a complete game and return the path to the saved log."""
     print(colorize("=" * 60, "bold"))
@@ -274,6 +277,26 @@ async def run_game(
     filepath = save_game(game)
     print(f"Лог сохранён: {filepath}")
 
+    # Post-game analysis (runs AFTER game log is saved)
+    should_analyze = POST_GAME_ANALYSIS_ENABLED and not skip_analysis
+    if should_analyze:
+        print()
+        print(colorize("-" * 60, "bold"))
+        print(colorize("POST-GAME ANALYSIS", "bold"))
+        print(colorize("-" * 60, "bold"))
+        print()
+        try:
+            analyzer = PostGameAnalyzer()
+            analysis = await analyzer.analyze(filepath)
+            if analysis.status.value != "failed":
+                analyzer.save_analysis(filepath, analysis)
+                print(colorize(f"Анализ сохранён в лог ({analysis.status.value})", "green"))
+            else:
+                print(colorize(f"Анализ не удался: {analysis.error}", "yellow"))
+        except Exception as e:
+            print(colorize(f"Ошибка анализа: {e}", "yellow"))
+            print(colorize("Лог партии сохранён без анализа", "yellow"))
+
     return filepath
 
 
@@ -322,6 +345,11 @@ def main():
         action="store_true",
         help="List available locations and exit"
     )
+    parser.add_argument(
+        "--skip-analysis",
+        action="store_true",
+        help="Skip post-game analysis after game completion"
+    )
 
     args = parser.parse_args()
 
@@ -363,6 +391,7 @@ def main():
             location_id=args.location,
             duration_minutes=args.duration,
             max_questions=args.max_questions,
+            skip_analysis=args.skip_analysis,
         ))
         print()
         print(colorize("Game completed successfully!", "green"))
