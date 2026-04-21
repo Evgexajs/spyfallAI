@@ -72,6 +72,20 @@
       "params": {
         "silent_turns": 2
       }
+    },
+    {
+      "condition_type": "direct_accusation",
+      "priority": 6,
+      "threshold": 0.4,
+      "reaction_type": "short_dismissive_jab",
+      "params": null
+    },
+    {
+      "condition_type": "contradiction_with_previous_answer",
+      "priority": 5,
+      "threshold": 0.4,
+      "reaction_type": "short_dismissive_jab",
+      "params": null
     }
   ],
   "intervention_priority": 5,

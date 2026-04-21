@@ -65,6 +65,27 @@
       "params": {
         "silent_turns": 3
       }
+    },
+    {
+      "condition_type": "direct_accusation",
+      "priority": 7,
+      "threshold": 0.6,
+      "reaction_type": "point_out_inconsistency",
+      "params": null
+    },
+    {
+      "condition_type": "dodged_direct_question",
+      "priority": 8,
+      "threshold": 0.6,
+      "reaction_type": "point_out_inconsistency",
+      "params": null
+    },
+    {
+      "condition_type": "repeated_accusation_on_same_target",
+      "priority": 6,
+      "threshold": 0.7,
+      "reaction_type": "point_out_inconsistency",
+      "params": null
     }
   ],
   "intervention_priority": 7,

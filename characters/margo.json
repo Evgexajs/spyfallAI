@@ -72,6 +72,20 @@
       "params": {
         "silent_turns": 3
       }
+    },
+    {
+      "condition_type": "dodged_direct_question",
+      "priority": 7,
+      "threshold": 0.5,
+      "reaction_type": "deflect_suspicion_to_another",
+      "params": null
+    },
+    {
+      "condition_type": "contradiction_with_previous_answer",
+      "priority": 6,
+      "threshold": 0.5,
+      "reaction_type": "mock_with_dry_sarcasm",
+      "params": null
     }
   ],
   "intervention_priority": 6,
