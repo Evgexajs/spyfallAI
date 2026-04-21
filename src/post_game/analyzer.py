@@ -43,14 +43,28 @@ class PostGameAnalyzer:
     ) -> list[Turn]:
         """Collect all turns for a specific character with context.
 
+        Collects all turns where the speaker is the specified character.
+        Each Turn includes contextual information:
+        - turn_number: position in game, use to find previous turn
+        - addressee_id: who the character was addressing
+        - type: the type of turn (QUESTION, ANSWER, INTERVENTION, etc.)
+
+        To find the previous turn (what prompted this reply), use:
+            prev_turn = game.turns[turn.turn_number - 2] if turn.turn_number > 1 else None
+        (turn_number is 1-indexed, list is 0-indexed, so -2 gives previous)
+
         Args:
             game: The game to analyze.
             character_id: ID of the character to collect turns for.
 
         Returns:
-            List of Turn objects for this character with context (previous turn, addressee).
+            List of Turn objects for this character in chronological order.
+            Returns empty list if no turns found for this character.
         """
-        raise NotImplementedError("Will be implemented in TASK-082")
+        return [
+            turn for turn in game.turns
+            if turn.speaker_id == character_id
+        ]
 
     async def _analyze_character(
         self,
