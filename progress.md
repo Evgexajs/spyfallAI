@@ -47,7 +47,7 @@
 - Все 8 существующих персонажей загружаются без WARNING
 
 ### Коммиты
-- `66e07c5` — feat: add validator for missing silent_for_n_turns trigger
+- `7fd8d74` — feat: add validator for missing silent_for_n_turns trigger
 
 ---
 
