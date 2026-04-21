@@ -51,7 +51,7 @@
 - Шаг 3: Проверил наличие инструкций: "ОБЯЗАТЕЛЬНЫЙ формат ответа", "без markdown-обёртки" ✓
 
 ### Коммиты
-- `d4ca03e` — feat: implement build_analysis_prompt for post-game analysis (TASK-083)
+- `82d4406` — feat: implement build_analysis_prompt for post-game analysis (TASK-083)
 
 ---
 
