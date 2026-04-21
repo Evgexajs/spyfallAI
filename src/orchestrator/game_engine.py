@@ -2078,16 +2078,7 @@ async def run_preliminary_with_revotes(
     if leader is None:
         return game, vote_counts, False, None
 
-    # Check initial unanimity
-    is_unanimous, votes_for, total_eligible = _check_unanimity(
-        game.preliminary_vote_result, leader
-    )
-
-    if is_unanimous:
-        logger.info(f"Unanimous vote for {leader} in preliminary ({votes_for}/{total_eligible})")
-        return game, vote_counts, True, leader
-
-    # Step 2: Defense for top voted
+    # Step 2: Defense for top voted (ALWAYS happens before final decision)
     game, defense_executed = await run_defense_speeches(
         game, characters, vote_counts, provider, on_turn, on_typing
     )
