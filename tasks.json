@@ -1780,7 +1780,7 @@
         "Шаг 3: Проверить token_usage для анализа"
       ],
       "dependencies": ["TASK-091"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-093",

@@ -238,5 +238,730 @@
     "total_output_tokens": 654,
     "total_cost_usd": 0.054935700000000004,
     "llm_calls_count": 18
+  },
+  "post_game_analysis": {
+    "analyzed_at": "2026-04-21T08:21:01.988117Z",
+    "analyzer_model": "gpt-4o-mini",
+    "status": "completed",
+    "per_character": {
+      "zoya": {
+        "character_id": "zoya",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "short_reply",
+              "triggered_count": 4,
+              "total_relevant_replies": 5,
+              "rate": 0.8,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из одного вопроса."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из одного вопроса."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из одного предложения."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "sarcasm_markers",
+              "triggered_count": 3,
+              "total_relevant_replies": 5,
+              "rate": 0.6,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Содержит саркастическую иронию о 'эмоциональной насыщенности'."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Содержит саркастическую иронию о 'звёздном небе'."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": false,
+                  "reasoning": "Вопрос не содержит сарказма."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": false,
+                  "reasoning": "Голосование не содержит сарказма."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "question_response",
+              "triggered_count": 3,
+              "total_relevant_replies": 5,
+              "rate": 0.6,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": false,
+                  "reasoning": "Реплика не является вопросом."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Реплика заканчивается вопросом."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": false,
+                  "reasoning": "Реплика не является вопросом."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Реплика является вопросом."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": false,
+                  "reasoning": "Реплика не является вопросом."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_pathos",
+              "triggered_count": 4,
+              "total_relevant_replies": 5,
+              "rate": 0.8,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Отсутствуют пафосные конструкции."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Отсутствуют пафосные конструкции."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Отсутствуют пафосные конструкции."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Отсутствуют пафосные конструкции."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Отсутствуют пафосные конструкции."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "ironic_tone",
+              "triggered_count": 3,
+              "total_relevant_replies": 5,
+              "rate": 0.6,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит ироничный тон."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит ироничного тона."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит ироничный тон."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит ироничного тона."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит ироничного тона."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать ироничные маркеры (ага, конечно, ну да, о да, как бы, типа) хотя бы раз в ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Ироничные маркеры использованы в репликах 2 и 6."
+            },
+            {
+              "directive": "На прямой вопрос отвечать встречным вопросом или саркастическим комментарием",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Вопросы заданы в ответ на реплики других игроков."
+            },
+            {
+              "directive": "Использовать не более 3 предложений в ответе — краткость важнее полноты",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все реплики содержат не более 3 предложений."
+            },
+            {
+              "directive": "При обвинении в свой адрес — высмеять обвинителя, не оправдываться",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Не было прямых обвинений в адрес Зои, поэтому директива не выполнена."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "boris_molot": {
+        "character_id": "boris_molot",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "short_reply",
+              "triggered_count": 3,
+              "total_relevant_replies": 3,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из 2 предложений."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из 2 предложений."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из 2 предложений."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "direct_question",
+              "triggered_count": 1,
+              "total_relevant_replies": 3,
+              "rate": 0.3333333333333333,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Содержит прямой вопрос: 'Определись, что ты тут видишь.'"
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": false,
+                  "reasoning": "Не содержит прямого вопроса."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": false,
+                  "reasoning": "Не содержит прямого вопроса."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "names_addressee",
+              "triggered_count": 2,
+              "total_relevant_replies": 3,
+              "rate": 0.6666666666666666,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Обращается к Zoya по имени."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Обращается к Zoya по имени."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": false,
+                  "reasoning": "Не содержит обращения к собеседнику."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_hedging",
+              "triggered_count": 3,
+              "total_relevant_replies": 3,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Реплика уверенная, без смягчителей."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Реплика уверенная, без смягчителей."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": true,
+                  "reasoning": "Реплика уверенная, без смягчителей."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "counter_accusation",
+              "triggered_count": 1,
+              "total_relevant_replies": 3,
+              "rate": 0.3333333333333333,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Переводит подозрение на Zoya, обвиняя её в загадках."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": false,
+                  "reasoning": "Не содержит контробвинения."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": false,
+                  "reasoning": "Не содержит контробвинения."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "При прямом обвинении — немедленно переводить подозрение на обвинителя, называя его по имени",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В реплике 7 Борис обвиняет Zoya и переводит подозрение на неё."
+            },
+            {
+              "directive": "Ссылаться на конкретные противоречия в словах других, цитируя их фразы",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Не было ссылок на конкретные противоречия в словах других игроков."
+            },
+            {
+              "directive": "Если 2 хода подряд не обращались — влезть с обвинением или резким вопросом",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Борис не влез с обвинением или вопросом после 2 ходов."
+            },
+            {
+              "directive": "Использовать не более 2 предложений в ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все реплики содержат не более 2 предложений."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "lyokha": {
+        "character_id": "lyokha",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "short_reply",
+              "triggered_count": 1,
+              "total_relevant_replies": 1,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из одного предложения."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "colloquial_speech",
+              "triggered_count": 0,
+              "total_relevant_replies": 1,
+              "rate": 0.0,
+              "per_turn": [
+                {
+                  "turn_number": 13,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит разговорной лексики."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "dismissive_words",
+              "triggered_count": 0,
+              "total_relevant_replies": 1,
+              "rate": 0.0,
+              "per_turn": [
+                {
+                  "turn_number": 13,
+                  "triggered": false,
+                  "reasoning": "Реплика не обрубает умничание."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_complex_analogy",
+              "triggered_count": 1,
+              "total_relevant_replies": 1,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Отсутствуют сложные аналогии."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "plain_direct_speech",
+              "triggered_count": 1,
+              "total_relevant_replies": 1,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Реплика проста и прямая."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Отвечать не более чем двумя предложениями",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Реплика содержит только одно предложение."
+            },
+            {
+              "directive": "Использовать разговорные слова и выражения (чё, ладно, короче, блин, типа, хорош)",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В реплике отсутствуют разговорные слова."
+            },
+            {
+              "directive": "При столкновении с умничанием — обрубать простым словом (фигня, бред, чушь, ерунда)",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Реплика не содержит обрубания умничания."
+            },
+            {
+              "directive": "Обращаться к собеседникам на ты, без церемоний",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Реплика обращается к собеседникам на ты."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "professor_stein": {
+        "character_id": "professor_stein",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "analogy_present",
+              "triggered_count": 2,
+              "total_relevant_replies": 5,
+              "rate": 0.4,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": false,
+                  "reasoning": "Вопрос не содержит аналогий."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит несколько аналогий о звуках и музыке."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": false,
+                  "reasoning": "Вопрос не содержит аналогий."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит аналогий, это утверждение."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит аналогий, это голосование."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "introductory_phrases",
+              "triggered_count": 3,
+              "total_relevant_replies": 5,
+              "rate": 0.6,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": false,
+                  "reasoning": "Вопрос не содержит вводных конструкций."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Используется 'по сути своей' в начале предложения."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": false,
+                  "reasoning": "Вопрос не содержит вводных конструкций."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Используется 'по сути своей' в утверждении."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": false,
+                  "reasoning": "В голосовании отсутствуют вводные конструкции."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "long_reply",
+              "triggered_count": 2,
+              "total_relevant_replies": 5,
+              "rate": 0.4,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": false,
+                  "reasoning": "Вопрос не является длинным ответом."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Ответ состоит из более чем трех предложений."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": false,
+                  "reasoning": "Вопрос не является длинным ответом."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": false,
+                  "reasoning": "Утверждение не состоит из трех предложений."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": false,
+                  "reasoning": "Голосование не является длинным ответом."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_exclamation",
+              "triggered_count": 5,
+              "total_relevant_replies": 5,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Вопрос не содержит восклицательных знаков."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Ответ не содержит восклицательных знаков."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Вопрос не содержит восклицательных знаков."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Утверждение не содержит восклицательных знаков."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": true,
+                  "reasoning": "Голосование не содержит восклицательных знаков."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "logical_reference",
+              "triggered_count": 2,
+              "total_relevant_replies": 5,
+              "rate": 0.4,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": false,
+                  "reasoning": "Вопрос не содержит ссылки на логику."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": false,
+                  "reasoning": "Ответ не содержит ссылки на логику."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": false,
+                  "reasoning": "Вопрос не содержит ссылки на логику."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Утверждение ссылается на моральные и этические нормы."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": false,
+                  "reasoning": "Голосование не содержит ссылки на логику."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать минимум одно сравнение или аналогию в каждом ответе (как, подобно, словно, напоминает)",
+              "satisfied": false,
+              "evidence_turns": [
+                1,
+                5,
+                10,
+                14
+              ],
+              "reasoning": "В нескольких репликах отсутствуют аналогии."
+            },
+            {
+              "directive": "Формулировать ответы минимум в 3 предложениях, избегая краткости",
+              "satisfied": false,
+              "evidence_turns": [
+                1,
+                5,
+                10,
+                14
+              ],
+              "reasoning": "Некоторые реплики не содержат минимум трех предложений."
+            },
+            {
+              "directive": "Использовать вводные конструкции: строго говоря, фактически, по сути, следует отметить, с точки зрения",
+              "satisfied": false,
+              "evidence_turns": [
+                1,
+                5,
+                14
+              ],
+              "reasoning": "В нескольких репликах отсутствуют вводные конструкции."
+            },
+            {
+              "directive": "При указании на противоречия ссылаться на логику и рациональность",
+              "satisfied": true,
+              "evidence_turns": [
+                10
+              ],
+              "reasoning": "В одной из реплик содержится ссылка на моральные и этические нормы."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      }
+    },
+    "error": null
   }
 }

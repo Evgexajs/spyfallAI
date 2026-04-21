@@ -238,5 +238,719 @@
     "total_output_tokens": 556,
     "total_cost_usd": 0.051393100000000004,
     "llm_calls_count": 18
+  },
+  "post_game_analysis": {
+    "analyzed_at": "2026-04-21T08:19:42.834140Z",
+    "analyzer_model": "gpt-4o-mini",
+    "status": "completed",
+    "per_character": {
+      "lyokha": {
+        "character_id": "lyokha",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "short_reply",
+              "triggered_count": 5,
+              "total_relevant_replies": 5,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит одно предложение."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит одно предложение."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит одно предложение."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит одно предложение."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит одно предложение."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "colloquial_speech",
+              "triggered_count": 5,
+              "total_relevant_replies": 5,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Используется разговорная лексика ('чё')."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Используется разговорная лексика ('норм')."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Используется разговорная лексика ('чё')."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Используется разговорная лексика ('да ладно')."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Используется разговорная лексика ('за')."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "dismissive_words",
+              "triggered_count": 0,
+              "total_relevant_replies": 5,
+              "rate": 0.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": false,
+                  "reasoning": "Нет обрубания умничания."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": false,
+                  "reasoning": "Нет обрубания умничания."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": false,
+                  "reasoning": "Нет обрубания умничания."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": false,
+                  "reasoning": "Нет обрубания умничания."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": false,
+                  "reasoning": "Нет обрубания умничания."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_complex_analogy",
+              "triggered_count": 5,
+              "total_relevant_replies": 5,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Нет сложных аналогий."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "plain_direct_speech",
+              "triggered_count": 5,
+              "total_relevant_replies": 5,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Реплика проста и пряма."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Реплика проста и пряма."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Реплика проста и пряма."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Реплика проста и пряма."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Реплика проста и пряма."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Отвечать не более чем двумя предложениями",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все реплики содержат не более двух предложений."
+            },
+            {
+              "directive": "Использовать разговорные слова и выражения (чё, ладно, короче, блин, типа, хорош)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все реплики содержат разговорные слова и выражения."
+            },
+            {
+              "directive": "При столкновении с умничанием — обрубать простым словом (фигня, бред, чушь, ерунда)",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Не было случаев умничания, которые нужно было бы обрубать."
+            },
+            {
+              "directive": "Обращаться к собеседникам на ты, без церемоний",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все обращения на 'ты', без церемоний."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "kim": {
+        "character_id": "kim",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "self_correction",
+              "triggered_count": 1,
+              "total_relevant_replies": 2,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "В реплике присутствуют маркеры самокоррекции, такие как 'ну то есть' и 'в смысле'."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": false,
+                  "reasoning": "В этой реплике отсутствуют маркеры самокоррекции."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "hedging_words",
+              "triggered_count": 1,
+              "total_relevant_replies": 2,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Используется слово 'наверное', что является словом-смягчителем."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": false,
+                  "reasoning": "В этой реплике отсутствуют слова-смягчители."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "nervous_filler",
+              "triggered_count": 1,
+              "total_relevant_replies": 2,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "В реплике присутствуют нервные слова-заполнители, такие как 'ну то есть' и 'в смысле'."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": false,
+                  "reasoning": "В этой реплике отсутствуют нервные слова-заполнители."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_confident_accusation",
+              "triggered_count": 1,
+              "total_relevant_replies": 2,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "В реплике отсутствуют уверенные обвинения, присутствует сомнение в связи между эмоциями и нормальностью."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": false,
+                  "reasoning": "В этой реплике отсутствуют обвинения."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "panic_response",
+              "triggered_count": 1,
+              "total_relevant_replies": 2,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит признаки нервозности и самокритики."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": false,
+                  "reasoning": "В этой реплике отсутствуют признаки паники или нервозности."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать маркеры самокоррекции (ну то есть, в смысле, вернее, точнее, я хотел сказать) хотя бы раз в ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В реплике 7 Ким использует маркеры самокоррекции."
+            },
+            {
+              "directive": "Использовать слова-смягчители (возможно, наверное, может быть, кажется, вроде) в каждом утверждении о других",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В реплике 12 отсутствуют слова-смягчители, что нарушает директиву."
+            },
+            {
+              "directive": "При прямом обвинении — начинать с оправдания и объяснения, не с контратаки",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В реплике 7 Ким выражает сомнение, а не делает прямое обвинение."
+            },
+            {
+              "directive": "Давать развёрнутые ответы минимум из 2 предложений с оговорками",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Реплика 12 состоит из одного предложения, что не соответствует требованиям директивы."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "aurora": {
+        "character_id": "aurora",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "long_reply",
+              "triggered_count": 2,
+              "total_relevant_replies": 3,
+              "rate": 0.6666666666666666,
+              "per_turn": [
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит более трех предложений."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит более трех предложений."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": false,
+                  "reasoning": "Реплика состоит из одного предложения."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "exclamation_present",
+              "triggered_count": 2,
+              "total_relevant_replies": 3,
+              "rate": 0.6666666666666666,
+              "per_turn": [
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Используются восклицательные знаки для передачи эмоций."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": false,
+                  "reasoning": "В реплике отсутствуют восклицательные знаки."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": false,
+                  "reasoning": "В реплике отсутствуют восклицательные знаки."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "theatrical_pauses",
+              "triggered_count": 2,
+              "total_relevant_replies": 3,
+              "rate": 0.6666666666666666,
+              "per_turn": [
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Используются театральные паузы '...' в речи."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Используются театральные паузы '...' в речи."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": false,
+                  "reasoning": "В реплике отсутствуют театральные паузы."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "emotional_vocabulary",
+              "triggered_count": 2,
+              "total_relevant_replies": 3,
+              "rate": 0.6666666666666666,
+              "per_turn": [
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Используется эмоциональная лексика (о боже, буря эмоций)."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Используется эмоциональная лексика (иллюзия)."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": false,
+                  "reasoning": "В реплике отсутствует эмоциональная лексика."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "dramatic_tone",
+              "triggered_count": 2,
+              "total_relevant_replies": 3,
+              "rate": 0.6666666666666666,
+              "per_turn": [
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Реплика имеет театральный и драматичный тон."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Реплика имеет театральный и драматичный тон."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": false,
+                  "reasoning": "Реплика не имеет драматичного тона."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать минимум три предложения в каждом ответе",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В последней реплике содержится только одно предложение."
+            },
+            {
+              "directive": "Использовать восклицательные знаки для передачи эмоций",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В двух репликах отсутствуют восклицательные знаки."
+            },
+            {
+              "directive": "Использовать театральные паузы '...' для драматического эффекта",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В последней реплике отсутствуют театральные паузы."
+            },
+            {
+              "directive": "Использовать эмоциональную лексику (о боже, как можно, невозможно, немыслимо, ужасно, невероятно)",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В последней реплике отсутствует эмоциональная лексика."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "margo": {
+        "character_id": "margo",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "names_addressee",
+              "triggered_count": 4,
+              "total_relevant_replies": 4,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Обращается к Lyokha по имени."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Обращается к Lyokha по имени и использует ласковое обращение 'милый'."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Обращается к Lyokha по имени и использует ласковое обращение 'милый'."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": false,
+                  "reasoning": "Не обращается к конкретному игроку, голосует за всех."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "warm_lexicon",
+              "triggered_count": 3,
+              "total_relevant_replies": 4,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Использует теплое слово 'дорогой'."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Использует теплое слово 'милый'."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Использует теплое слово 'милый'."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": false,
+                  "reasoning": "Не использует теплую лексику."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_direct_accusation",
+              "triggered_count": 4,
+              "total_relevant_replies": 4,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": true,
+                  "reasoning": "Нет прямых обвинений."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_pressure_words",
+              "triggered_count": 4,
+              "total_relevant_replies": 4,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера, нет слов давления."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера, нет слов давления."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера, нет слов давления."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера, нет слов давления."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "deflection_present",
+              "triggered_count": 1,
+              "total_relevant_replies": 4,
+              "rate": 0.25,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": false,
+                  "reasoning": "Нет перенаправления."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": false,
+                  "reasoning": "Нет перенаправления."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Мягко перенаправляет внимание на aurora."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": false,
+                  "reasoning": "Нет перенаправления."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Обращаться к собеседнику по имени в каждом ответе",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В последней реплике не обращается к конкретному игроку."
+            },
+            {
+              "directive": "Не обвинять напрямую — указывать на 'странное' поведение другого в разговоре с третьим",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В реплике 10 мягко указывает на поведение другого игрока."
+            },
+            {
+              "directive": "Использовать минимум одно тёплое слово в реплике (дорогой, милый, чудесно, прекрасно, замечательно)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В репликах 2, 3 и 10 использует теплые слова."
+            },
+            {
+              "directive": "При прямом обвинении — мягко перенаправить подозрение на другого игрока",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Не было прямых обвинений в репликах."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      }
+    },
+    "error": null
   }
 }
