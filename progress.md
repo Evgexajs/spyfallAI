@@ -31,6 +31,25 @@
 
 ---
 
+## [TASK-090] Добавить find_game_path_by_id в game_repository
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Добавлена функция `find_game_path_by_id(game_id, games_dir) -> Path | None` в `src/storage/game_repository.py`:
+  - Ищет файл в папке games/ по uuid в имени файла
+  - Возвращает Path если найден, None если нет
+- Рефакторинг `find_game_by_id` — теперь использует `find_game_path_by_id` внутри
+- Обновлён `src/analyze.py` — импортирует `find_game_path_by_id` из `game_repository` вместо локального определения
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- `pending` — добавить после коммита
+
+---
+
 ## [TASK-089] Автозапуск анализа после завершения партии
 **Дата:** 2026-04-21
 **Статус:** done

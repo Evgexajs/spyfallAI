@@ -1741,7 +1741,7 @@
         "Шаг 3: Вызвать с несуществующим id — проверить None"
       ],
       "dependencies": [],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-091",

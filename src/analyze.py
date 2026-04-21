@@ -15,31 +15,7 @@ from pathlib import Path
 from typing import Optional
 
 from src.post_game.analyzer import PostGameAnalyzer
-from src.storage.game_repository import list_games
-
-
-def find_game_path_by_id(game_id: str, games_dir: Optional[Path] = None) -> Optional[Path]:
-    """Find game log file path by game ID.
-
-    Args:
-        game_id: The UUID string of the game to find.
-        games_dir: Optional custom directory. Defaults to project's games/.
-
-    Returns:
-        Path to the game file if found, None otherwise.
-    """
-    if games_dir is None:
-        games_dir = Path(__file__).parent.parent / "games"
-
-    games_dir = Path(games_dir)
-    if not games_dir.exists():
-        return None
-
-    matching_files = list(games_dir.glob(f"*_{game_id}.json"))
-    if not matching_files:
-        return None
-
-    return matching_files[0]
+from src.storage.game_repository import find_game_path_by_id, list_games
 
 
 def has_post_game_analysis(game_path: Path) -> bool:

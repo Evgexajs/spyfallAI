@@ -90,16 +90,16 @@ def list_games(games_dir: Optional[Path] = None) -> list[Path]:
     return files
 
 
-def find_game_by_id(game_id: str, games_dir: Optional[Path] = None) -> Optional[Game]:
+def find_game_path_by_id(game_id: str, games_dir: Optional[Path] = None) -> Optional[Path]:
     """
-    Find and load a game by its ID.
+    Find the path to a game log file by its ID.
 
     Args:
         game_id: The UUID string of the game to find.
         games_dir: Optional custom directory. Defaults to project's games/.
 
     Returns:
-        The Game object if found, None otherwise.
+        Path to the game file if found, None otherwise.
     """
     if games_dir is None:
         games_dir = _get_games_dir()
@@ -112,4 +112,22 @@ def find_game_by_id(game_id: str, games_dir: Optional[Path] = None) -> Optional[
     if not matching_files:
         return None
 
-    return load_game(matching_files[0])
+    return matching_files[0]
+
+
+def find_game_by_id(game_id: str, games_dir: Optional[Path] = None) -> Optional[Game]:
+    """
+    Find and load a game by its ID.
+
+    Args:
+        game_id: The UUID string of the game to find.
+        games_dir: Optional custom directory. Defaults to project's games/.
+
+    Returns:
+        The Game object if found, None otherwise.
+    """
+    game_path = find_game_path_by_id(game_id, games_dir)
+    if game_path is None:
+        return None
+
+    return load_game(game_path)
