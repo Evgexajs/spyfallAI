@@ -44,7 +44,7 @@
 - Проверено: только активный триггер `global_direct_accusation` используется системой
 
 ### Коммиты
-- `PENDING` — feat: deprecate global silent_for_n_turns trigger
+- `db92582` — feat: deprecate global silent_for_n_turns trigger in favor of personal triggers
 
 ---
 
