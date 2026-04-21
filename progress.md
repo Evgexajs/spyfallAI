@@ -53,7 +53,7 @@
   - `contradiction_with_previous_answer` — LLM-детектор (TASK-074)
 
 ### Коммиты
-- `aafe5e2` — feat: integrate LLM detectors into run_main_round (TASK-075)
+- `4da8a71` — feat: integrate LLM detectors into run_main_round (TASK-075)
 
 ---
 
