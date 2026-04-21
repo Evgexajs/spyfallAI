@@ -50,7 +50,7 @@
 - Все персонажи загружаются через pydantic модель без ошибок
 
 ### Коммиты
-- `TBD` — feat: add silent_for_n_turns trigger to all character profiles
+- `4ac2066` — feat: add silent_for_n_turns trigger to all character profiles
 
 ---
 
