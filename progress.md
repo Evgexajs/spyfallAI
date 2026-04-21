@@ -31,6 +31,28 @@
 
 ---
 
+## [TASK-091] Юнит-тесты для пост-анализа
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Создан `tests/test_post_game_analyzer.py` с 18 юнит-тестами:
+  - `TestValidResponseParsing` (3 теста): валидный JSON парсится корректно, маркеры и must_compliance парсятся правильно
+  - `TestInvalidJsonResponse` (3 теста): невалидный JSON возвращает status='failed', error='invalid_json'
+  - `TestMissingRequiredFields` (3 теста): отсутствие обязательных полей возвращает status='failed', error='missing_required_fields'
+  - `TestNoReplies` (4 теста): игрок без реплик возвращает status='skipped', reason='no_replies'
+  - `TestNoMarkersInProfile` (2 теста): игрок без маркеров возвращает markers.status='skipped'
+  - `TestLLMMocking` (3 теста): проверка что все тесты используют моки для LLM, включая таймаут и ошибки
+- Все 18 тестов используют моки для LLM (AsyncMock + patch)
+
+### Проблемы / Заметки
+- Нет
+
+### Коммиты
+- (будет добавлен после коммита)
+
+---
+
 ## [TASK-090] Добавить find_game_path_by_id в game_repository
 **Дата:** 2026-04-21
 **Статус:** done
