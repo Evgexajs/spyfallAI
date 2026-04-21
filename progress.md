@@ -63,7 +63,7 @@
 - Все тесты используют моки для LLM (`AsyncMock`, `MagicMock`)
 
 ### Коммиты
-- `<pending>` — test: add consolidated trigger detector tests (TASK-077)
+- `dddea66` — test: add consolidated trigger detector tests (TASK-077)
 
 ---
 
