@@ -52,7 +52,7 @@
 - Данная задача подтвердила корректность интеграции
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `f11e0ad` — chore: verify TriggerEvent params/reasoning fields (TASK-076)
 
 ---
 
