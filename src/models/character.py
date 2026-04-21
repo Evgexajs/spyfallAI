@@ -1,9 +1,12 @@
 """Character, Trigger, and Marker models for SpyfallAI."""
 
+import logging
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
+
+logger = logging.getLogger(__name__)
 
 
 class SpyRiskTolerance(str, Enum):
@@ -120,3 +123,17 @@ class Character(BaseModel):
         if len(v) < 1:
             raise ValueError("At least 1 detectable marker is required")
         return v
+
+    @model_validator(mode="after")
+    def warn_missing_silent_trigger(self) -> "Character":
+        """Log a WARNING if character has no silent_for_n_turns trigger."""
+        has_silent_trigger = any(
+            trigger.condition_type == ConditionType.SILENT_FOR_N_TURNS
+            for trigger in self.personal_triggers
+        )
+        if not has_silent_trigger:
+            logger.warning(
+                f"Character '{self.id}' has no silent_for_n_turns trigger. "
+                "This trigger is recommended for proper intervention behavior."
+            )
+        return self

@@ -31,6 +31,26 @@
 
 ---
 
+## [TASK-071] Добавить валидатор отсутствия silent_for_n_turns при загрузке профиля
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Добавлен `@model_validator(mode="after")` в класс `Character` (`src/models/character.py`)
+- Валидатор `warn_missing_silent_trigger()` проверяет наличие триггера `silent_for_n_turns` в `personal_triggers`
+- Если триггер отсутствует — логируется WARNING, персонаж всё равно создаётся успешно
+- Валидация работает автоматически везде, где используется `Character.model_validate()`
+
+### Тесты
+- Создание персонажа без silent_for_n_turns → WARNING в логе
+- Создание персонажа с silent_for_n_turns → без WARNING
+- Все 8 существующих персонажей загружаются без WARNING
+
+### Коммиты
+- `66e07c5` — feat: add validator for missing silent_for_n_turns trigger
+
+---
+
 ## [TASK-070] Рефакторинг логики выбора reaction_type в TriggerChecker
 **Дата:** 2026-04-21
 **Статус:** done
