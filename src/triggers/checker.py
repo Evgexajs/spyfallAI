@@ -106,22 +106,34 @@ class TriggerChecker:
         """
         Check if a turn contains a direct accusation of a character.
 
-        Detection logic:
-        1. The accused character's name must be mentioned in the content
-        2. At least one accusation marker must be present
+        Detection logic (any of):
+        1. Turn is addressed to the accused AND accusation pattern present
+        2. Accused's name mentioned in content AND accusation pattern present
         """
         accused = self.characters.get(accused_character_id)
         if not accused:
             return False
 
         content_lower = turn.content.lower()
-        name_lower = accused.display_name.lower()
-        if name_lower not in content_lower:
-            return False
 
+        # Check if accusation patterns are present
+        has_accusation_pattern = False
         for pattern in self._accusation_patterns:
             if pattern.search(content_lower):
-                return True
+                has_accusation_pattern = True
+                break
+
+        if not has_accusation_pattern:
+            return False
+
+        # Option 1: Turn is directly addressed to accused
+        if turn.addressee_id == accused_character_id:
+            return True
+
+        # Option 2: Accused's name is mentioned in content
+        name_lower = accused.display_name.lower()
+        if name_lower in content_lower:
+            return True
 
         return False
 
