@@ -30,6 +30,7 @@ from src.llm import (
 )
 from src.models import (
     Character,
+    ConditionType,
     ConfidenceEntry,
     ConfidenceLevel,
     DefenseSpeech,
@@ -1267,7 +1268,73 @@ async def run_main_round(
             trigger_checker.track_accusation(accused_id, answer_turn.turn_number)
 
         trigger_results = trigger_checker.check_all_characters(answer_turn, game)
-        winner = trigger_checker.select_winner(trigger_results)
+
+        # CR-002: Check async LLM-based detectors (dodged_direct_question, contradiction)
+        llm_trigger_results: list[TriggerResult] = []
+        llm_detector_meta: dict[str, dict] = {}  # char_id -> {reasoning, params}
+
+        # Check dodged_direct_question: did the answerer dodge the question?
+        dodged = await trigger_checker.check_dodged_question(
+            question_turn=turn,  # question turn created earlier
+            answer_turn=answer_turn,
+            provider=provider,
+            model=game.config.utility_model,
+        )
+        if dodged:
+            for char_id, char in trigger_checker.characters.items():
+                if char_id == answer_turn.speaker_id:
+                    continue
+                for pt in char.personal_triggers:
+                    if pt.condition_type == ConditionType.DODGED_DIRECT_QUESTION:
+                        llm_trigger_results.append(
+                            TriggerResult(
+                                triggered=True,
+                                character_id=char_id,
+                                condition_type=ConditionType.DODGED_DIRECT_QUESTION,
+                                reaction_type=pt.reaction_type,
+                                priority=pt.priority,
+                                threshold=pt.threshold,
+                                target_character_id=answer_turn.speaker_id,
+                            )
+                        )
+                        break
+
+        # Check contradiction_with_previous_answer
+        contradiction_triggered, contradiction_reasoning, contradiction_turns = (
+            await trigger_checker.check_contradiction(
+                speaker_id=answer_turn.speaker_id,
+                current_answer=answer_turn,
+                game=game,
+                provider=provider,
+                model=game.config.utility_model,
+            )
+        )
+        if contradiction_triggered:
+            for char_id, char in trigger_checker.characters.items():
+                if char_id == answer_turn.speaker_id:
+                    continue
+                for pt in char.personal_triggers:
+                    if pt.condition_type == ConditionType.CONTRADICTION_WITH_PREVIOUS_ANSWER:
+                        llm_trigger_results.append(
+                            TriggerResult(
+                                triggered=True,
+                                character_id=char_id,
+                                condition_type=ConditionType.CONTRADICTION_WITH_PREVIOUS_ANSWER,
+                                reaction_type=pt.reaction_type,
+                                priority=pt.priority,
+                                threshold=pt.threshold,
+                                target_character_id=answer_turn.speaker_id,
+                            )
+                        )
+                        llm_detector_meta[char_id] = {
+                            "reasoning": contradiction_reasoning,
+                            "params": {"contradicting_turn_numbers": contradiction_turns},
+                        }
+                        break
+
+        # Merge LLM detector results with synchronous trigger results
+        all_trigger_results = trigger_results + llm_trigger_results
+        winner = trigger_checker.select_winner(all_trigger_results)
 
         if winner:
             wants_to_intervene = await _ask_to_intervene(
@@ -1331,10 +1398,20 @@ async def run_main_round(
                 trigger_checker.update_silence_counters(intervention_turn)
                 vote_trigger_checker.update_after_turn(intervention_turn)
 
+            # CR-002: Pass reasoning/params from LLM detectors if available
+            event_reasoning = None
+            event_params = None
+            if winner.character_id in llm_detector_meta:
+                meta = llm_detector_meta[winner.character_id]
+                event_reasoning = meta.get("reasoning")
+                event_params = meta.get("params")
+
             trigger_event = trigger_checker.create_trigger_event(
                 result=winner,
                 turn_number=answer_turn.turn_number,
                 intervened=wants_to_intervene,
+                reasoning=event_reasoning,
+                params=event_params,
             )
             game.triggered_events.append(trigger_event)
 

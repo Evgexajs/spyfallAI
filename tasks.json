@@ -1453,7 +1453,7 @@
         "Шаг 3: Проверить что победитель выбирается по highest priority"
       ],
       "dependencies": ["TASK-072", "TASK-073", "TASK-074"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-076",

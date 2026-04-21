@@ -31,6 +31,32 @@
 
 ---
 
+## [TASK-075] Интегрировать новые детекторы в run_main_round
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Добавлен импорт `ConditionType` в `src/orchestrator/game_engine.py`
+- После каждого ответа в `run_main_round` вызываются LLM-детекторы:
+  - `check_dodged_question()` — проверяет, уклонился ли отвечающий от вопроса
+  - `check_contradiction()` — проверяет противоречие с предыдущими ответами
+- Оба детектора используют utility модель (`game.config.utility_model`)
+- Для каждого персонажа с соответствующим персональным триггером создаётся `TriggerResult`
+- Результаты LLM-детекторов объединяются с синхронными триггерами перед `select_winner`
+- Логика выбора победителя по priority сохраняется (highest wins)
+- При создании `TriggerEvent` передаются `reasoning` и `params` для LLM-детекторов
+- Все 5 condition_types теперь проверяются:
+  - `direct_accusation` — синхронный
+  - `silent_for_n_turns` — синхронный
+  - `repeated_accusation_on_same_target` — синхронный (TASK-072)
+  - `dodged_direct_question` — LLM-детектор (TASK-073)
+  - `contradiction_with_previous_answer` — LLM-детектор (TASK-074)
+
+### Коммиты
+- `aafe5e2` — feat: integrate LLM detectors into run_main_round (TASK-075)
+
+---
+
 ## [TASK-074] Реализовать детектор contradiction_with_previous_answer
 **Дата:** 2026-04-21
 **Статус:** done
