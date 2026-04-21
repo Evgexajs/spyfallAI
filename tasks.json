@@ -1262,6 +1262,252 @@
       ],
       "dependencies": ["TASK-058"],
       "status": "done"
+    },
+    {
+      "id": "TASK-066",
+      "category": "infrastructure",
+      "priority": "high",
+      "description": "[CR-002] Добавить env-переменные для новых детекторов",
+      "acceptance_criteria": [
+        "REPEATED_ACCUSATION_WINDOW (int, default 5) — окно для подсчёта повторных обвинений",
+        "CONTRADICTION_HISTORY_WINDOW (int, default 10) — окно истории для детектора противоречий",
+        "Переменные добавлены в .env.example с описанием",
+        "Переменные читаются в game_engine.py"
+      ],
+      "test_steps": [
+        "Шаг 1: Проверить .env.example содержит новые переменные",
+        "Шаг 2: Импортировать переменные в game_engine.py без ошибок"
+      ],
+      "dependencies": [],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-067",
+      "category": "models",
+      "priority": "high",
+      "description": "[CR-002] Расширить модель TriggerEvent для новых полей",
+      "acceptance_criteria": [
+        "Поле reasoning: Optional[str] — для результата анализа LLM (детектор contradiction)",
+        "Поле params: Optional[dict] — для дополнительных параметров (target_id для repeated_accusation)",
+        "Существующий код создания TriggerEvent продолжает работать (обратная совместимость)"
+      ],
+      "test_steps": [
+        "Шаг 1: Создать TriggerEvent с новыми полями",
+        "Шаг 2: Создать TriggerEvent без новых полей — не падает",
+        "Шаг 3: Сериализовать/десериализовать в JSON"
+      ],
+      "dependencies": [],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-068",
+      "category": "functional",
+      "priority": "high",
+      "description": "[CR-002] Добавить персональный триггер silent_for_n_turns во все профили персонажей",
+      "acceptance_criteria": [
+        "Все 8 файлов персонажей содержат триггер silent_for_n_turns",
+        "Борис: silent_turns=2, priority=9, threshold=0.3, reaction=pressure_with_sharper_question",
+        "Марго: silent_turns=3, priority=5, threshold=0.5, reaction=deflect_suspicion_to_another",
+        "Ким: silent_turns=2, priority=4, threshold=0.4, reaction=panic_and_derail",
+        "Штейн: silent_turns=3, priority=6, threshold=0.7, reaction=point_out_inconsistency",
+        "Зоя: silent_turns=2, priority=7, threshold=0.4, reaction=mock_with_dry_sarcasm",
+        "Игнатий: silent_turns=3, priority=5, threshold=0.6, reaction=moralize_and_accuse",
+        "Лёха: silent_turns=2, priority=5, threshold=0.4, reaction=short_dismissive_jab",
+        "Аврора: silent_turns=3, priority=5, threshold=0.5, reaction=panic_and_derail"
+      ],
+      "test_steps": [
+        "Шаг 1: python -m json.tool для всех 8 файлов персонажей",
+        "Шаг 2: Загрузить персонажей через pydantic модель",
+        "Шаг 3: Проверить наличие триггера silent_for_n_turns"
+      ],
+      "dependencies": [],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-069",
+      "category": "functional",
+      "priority": "high",
+      "description": "[CR-002] Убрать глобальный silent_for_n_turns из trigger_rules.json",
+      "acceptance_criteria": [
+        "Глобальный триггер silent_for_n_turns удалён или помечен deprecated: true",
+        "Добавлен комментарий что это резервный/устаревший триггер",
+        "Система не использует глобальный триггер"
+      ],
+      "test_steps": [
+        "Шаг 1: Проверить trigger_rules.json",
+        "Шаг 2: Запустить игру — триггер срабатывает только персональный"
+      ],
+      "dependencies": ["TASK-068"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-070",
+      "category": "functional",
+      "priority": "high",
+      "description": "[CR-002] Рефакторинг логики выбора reaction_type в TriggerChecker",
+      "acceptance_criteria": [
+        "reaction_type берется из персонального триггера, не из глобального дефолта",
+        "Если у персонажа нет персонального триггера — глобальный НЕ срабатывает для него",
+        "Разные персонажи имеют разные reaction_type для одного condition_type"
+      ],
+      "test_steps": [
+        "Шаг 1: Юнит-тест: Борис при silent_for_n_turns имеет reaction pressure_with_sharper_question",
+        "Шаг 2: Юнит-тест: Ким при silent_for_n_turns имеет reaction panic_and_derail",
+        "Шаг 3: Запустить игру и проверить логи"
+      ],
+      "dependencies": ["TASK-068", "TASK-069"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-071",
+      "category": "functional",
+      "priority": "medium",
+      "description": "[CR-002] Добавить валидатор отсутствия silent_for_n_turns при загрузке профиля",
+      "acceptance_criteria": [
+        "При загрузке персонажа без silent_for_n_turns — WARNING в лог",
+        "Партия продолжает работать (не падает)",
+        "Защита от ошибок при добавлении новых персонажей"
+      ],
+      "test_steps": [
+        "Шаг 1: Создать тестовый персонаж без триггера",
+        "Шаг 2: Загрузить — увидеть WARNING в логе",
+        "Шаг 3: Игра не падает"
+      ],
+      "dependencies": ["TASK-068"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-072",
+      "category": "functional",
+      "priority": "high",
+      "description": "[CR-002] Реализовать детектор repeated_accusation_on_same_target",
+      "acceptance_criteria": [
+        "Счётчик _accusation_tracker: dict[str, list[int]] в TriggerChecker",
+        "При каждом direct_accusation — запись номера хода для target_id",
+        "Метод check_repeated_accusation(target_id, window=5) -> bool",
+        "Срабатывает если 2+ обвинения за последние window ходов",
+        "В TriggerEvent.params записывается target_id"
+      ],
+      "test_steps": [
+        "Шаг 1: Юнит-тест: 2 обвинения подряд — срабатывает",
+        "Шаг 2: Юнит-тест: обвинения разнесены на 10 ходов — не срабатывает",
+        "Шаг 3: Юнит-тест: обвинения на разные цели — не срабатывает"
+      ],
+      "dependencies": ["TASK-066", "TASK-067"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-073",
+      "category": "functional",
+      "priority": "high",
+      "description": "[CR-002] Реализовать детектор dodged_direct_question",
+      "acceptance_criteria": [
+        "Асинхронный метод check_dodged_question(question_turn, answer_turn, provider, model) -> bool",
+        "LLM-промпт: бинарный вопрос 'ответил ли игрок по существу?'",
+        "Парсинг ответа yes/no",
+        "При невалидном ответе — не срабатывает, warning в лог",
+        "Использует utility модель"
+      ],
+      "test_steps": [
+        "Шаг 1: Юнит-тест с моком: уклончивый ответ — срабатывает",
+        "Шаг 2: Юнит-тест с моком: прямой ответ — не срабатывает",
+        "Шаг 3: Юнит-тест с моком: невалидный ответ LLM — warning, не срабатывает"
+      ],
+      "dependencies": ["TASK-067"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-074",
+      "category": "functional",
+      "priority": "high",
+      "description": "[CR-002] Реализовать детектор contradiction_with_previous_answer",
+      "acceptance_criteria": [
+        "Метод check_contradiction(speaker_id, current_answer, game, provider, model, history_window=10)",
+        "Собирает предыдущие ответы игрока за последние M ходов",
+        "Если < 2 предыдущих ответов — не запускается",
+        "LLM-промпт: бинарный вопрос о прямом противоречии",
+        "В params записывается contradicting_turn_numbers и reasoning"
+      ],
+      "test_steps": [
+        "Шаг 1: Юнит-тест: явное противоречие — срабатывает",
+        "Шаг 2: Юнит-тест: перефразирование — НЕ срабатывает",
+        "Шаг 3: Юнит-тест: смена темы — НЕ срабатывает"
+      ],
+      "dependencies": ["TASK-066", "TASK-067"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-075",
+      "category": "functional",
+      "priority": "critical",
+      "description": "[CR-002] Интегрировать новые детекторы в run_main_round",
+      "acceptance_criteria": [
+        "После каждого ответа вызываются LLM-детекторы (dodged, contradiction)",
+        "Все 5 condition_type проверяются: direct_accusation, silent_for_n_turns, repeated_accusation, dodged_direct_question, contradiction",
+        "LLM-детекторы используют роль utility",
+        "Логика выбора победителя по priority сохраняется"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить игру, проверить triggered_events содержит разные condition_type",
+        "Шаг 2: Проверить что utility модель используется для детекторов",
+        "Шаг 3: Проверить что победитель выбирается по highest priority"
+      ],
+      "dependencies": ["TASK-072", "TASK-073", "TASK-074"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-076",
+      "category": "functional",
+      "priority": "medium",
+      "description": "[CR-002] Обновить метод создания TriggerEvent для новых полей",
+      "acceptance_criteria": [
+        "Метод create_trigger_event принимает params: Optional[dict] и reasoning: Optional[str]",
+        "При создании события для contradiction записывается reasoning",
+        "При создании события для repeated_accusation записывается params.target_id"
+      ],
+      "test_steps": [
+        "Шаг 1: Создать событие с params — проверить сериализацию",
+        "Шаг 2: Создать событие с reasoning — проверить сериализацию"
+      ],
+      "dependencies": ["TASK-067", "TASK-072", "TASK-073", "TASK-074"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-077",
+      "category": "integration",
+      "priority": "high",
+      "description": "[CR-002] Написать тесты для всех детекторов",
+      "acceptance_criteria": [
+        "Тест: dodged_direct_question срабатывает корректно",
+        "Тест: repeated_accusation срабатывает при 2 обвинениях подряд",
+        "Тест: contradiction срабатывает при противоречии",
+        "Тест: персональные silent_for_n_turns имеют разные reaction_type",
+        "Все тесты используют моки для LLM"
+      ],
+      "test_steps": [
+        "Шаг 1: pytest tests/test_trigger_detectors.py -v",
+        "Шаг 2: Все тесты проходят"
+      ],
+      "dependencies": ["TASK-075", "TASK-076"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-078",
+      "category": "integration",
+      "priority": "medium",
+      "description": "[CR-002] Ручное тестирование на 3 партиях",
+      "acceptance_criteria": [
+        "Минимум 2 разных condition_type сработали за 3 партии",
+        "silent_for_n_turns имеет разные reaction_type у разных персонажей",
+        "Стоимость каждой партии <= $0.25"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить 3 партии",
+        "Шаг 2: Проверить triggered_events в логах",
+        "Шаг 3: Проверить стоимость"
+      ],
+      "dependencies": ["TASK-077"],
+      "status": "pending"
     }
   ]
 }
