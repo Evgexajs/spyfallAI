@@ -47,7 +47,7 @@
   - Нет дублирования триггеров
 
 ### Коммиты
-- `pending` — feat: refactor TriggerChecker to use personal trigger reaction_types
+- `f745fe4` — feat: refactor TriggerChecker to require personal triggers for global trigger firing
 
 ---
 
