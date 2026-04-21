@@ -50,7 +50,7 @@
 - Шаг 2: `from src.post_game import PostGameAnalyzer` работает ✓
 
 ### Коммиты
-- `pending` — feat: add basic post_game module structure (TASK-081)
+- `1b7487d` — feat: add basic post_game module structure (TASK-081)
 
 ---
 
