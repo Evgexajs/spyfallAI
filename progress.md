@@ -59,7 +59,7 @@
 - Интеграция в game_engine будет выполнена в TASK-075
 
 ### Коммиты
-- (pending)
+- `e8d5876` — feat: implement dodged_direct_question detector (TASK-073)
 
 ---
 
