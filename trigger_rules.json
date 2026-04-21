@@ -32,7 +32,8 @@
     {
       "id": "global_silent_for_n_turns",
       "condition_type": "silent_for_n_turns",
-      "description": "Triggers when a character has been silent (not asked or answered) for N turns",
+      "description": "[DEPRECATED] Резервный триггер молчания. Используйте персональные триггеры silent_for_n_turns из профилей персонажей (TASK-068). Этот глобальный триггер сохранён для обратной совместимости, но не используется системой.",
+      "deprecated": true,
       "priority": 3,
       "threshold": 0.7,
       "default_reaction_type": "point_out_inconsistency",

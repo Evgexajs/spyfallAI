@@ -31,6 +31,23 @@
 
 ---
 
+## [TASK-069] Убрать глобальный silent_for_n_turns из trigger_rules.json
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Глобальный триггер `global_silent_for_n_turns` помечен как `deprecated: true` в trigger_rules.json
+- Обновлено описание триггера с пояснением что это резервный/устаревший триггер
+- Добавлено поле `deprecated` в dataclass `GlobalTrigger` в checker.py
+- Функция `load_global_triggers()` теперь читает флаг `deprecated`
+- Метод `check_triggers_for_character()` теперь пропускает deprecated триггеры
+- Проверено: только активный триггер `global_direct_accusation` используется системой
+
+### Коммиты
+- `PENDING` — feat: deprecate global silent_for_n_turns trigger
+
+---
+
 ## [TASK-068] Добавить персональный триггер silent_for_n_turns во все профили персонажей
 **Дата:** 2026-04-21
 **Статус:** done

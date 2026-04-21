@@ -36,6 +36,7 @@ class GlobalTrigger:
     default_reaction_type: ReactionType
     params: dict = field(default_factory=dict)
     detection: dict = field(default_factory=dict)
+    deprecated: bool = False
 
 
 def load_global_triggers(config_path: Optional[Path] = None) -> list[GlobalTrigger]:
@@ -58,6 +59,7 @@ def load_global_triggers(config_path: Optional[Path] = None) -> list[GlobalTrigg
                 default_reaction_type=ReactionType(t["default_reaction_type"]),
                 params=t.get("params", {}),
                 detection=t.get("detection", {}),
+                deprecated=t.get("deprecated", False),
             )
         )
     return triggers
@@ -167,6 +169,8 @@ class TriggerChecker:
             return results
 
         for gt in self.global_triggers:
+            if gt.deprecated:
+                continue
             result = self._check_global_trigger(gt, character_id, turn, game)
             if result and result.triggered:
                 results.append(result)
