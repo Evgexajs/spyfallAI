@@ -31,6 +31,28 @@
 
 ---
 
+## [TASK-079] Добавить env-переменные для пост-анализа партии
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Добавлены 3 env-переменные в `.env.example`:
+  - `POST_GAME_ANALYSIS_ENABLED` (bool, default true) — автозапуск анализатора после партии
+  - `POST_GAME_ANALYSIS_TIMEOUT_SECONDS` (int, default 30) — таймаут LLM вызова
+  - `POST_GAME_ANALYSIS_MODEL_ROLE` (string, default 'utility') — роль модели
+- Создан модуль `src/post_game/` с конфигом:
+  - `src/post_game/__init__.py` — экспорт переменных
+  - `src/post_game/config.py` — чтение из os.environ с дефолтами
+
+### Тестовые шаги (пройдены)
+- Шаг 1: .env.example содержит POST_GAME_ANALYSIS_* переменные ✓
+- Шаг 2: `from src.post_game import POST_GAME_ANALYSIS_ENABLED` работает ✓
+
+### Коммиты
+- (pending)
+
+---
+
 ## [TASK-078] Ручное тестирование на 3 партиях
 **Дата:** 2026-04-21
 **Статус:** done
