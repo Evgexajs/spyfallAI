@@ -1508,6 +1508,298 @@
       ],
       "dependencies": ["TASK-077"],
       "status": "pending"
+    },
+    {
+      "id": "TASK-079",
+      "category": "infrastructure",
+      "priority": "high",
+      "description": "[CR-003] Добавить env-переменные для пост-анализа партии",
+      "acceptance_criteria": [
+        "POST_GAME_ANALYSIS_ENABLED (bool, default true) — автозапуск анализатора после партии",
+        "POST_GAME_ANALYSIS_TIMEOUT_SECONDS (int, default 30) — таймаут одного LLM вызова",
+        "POST_GAME_ANALYSIS_MODEL_ROLE (string, default 'utility') — роль модели из llm_config.json",
+        "Переменные добавлены в .env.example с описанием",
+        "Переменные читаются в модуле пост-анализа"
+      ],
+      "test_steps": [
+        "Шаг 1: Проверить .env.example содержит новые переменные",
+        "Шаг 2: Импортировать переменные в модуле пост-анализа без ошибок"
+      ],
+      "dependencies": [],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-080",
+      "category": "models",
+      "priority": "high",
+      "description": "[CR-003] Создать Pydantic модели для пост-анализа",
+      "acceptance_criteria": [
+        "MarkerAnalysis: marker_id, triggered_count, total_relevant_replies, rate, per_turn",
+        "MustDirectiveAnalysis: directive, satisfied, evidence_turns, reasoning",
+        "CharacterAnalysis: character_id, markers, must_compliance, status, error (опц.)",
+        "PostGameAnalysis: analyzed_at, analyzer_model, status, per_character",
+        "Все модели с валидацией и сериализацией в JSON"
+      ],
+      "test_steps": [
+        "Шаг 1: Импортировать все модели без ошибок",
+        "Шаг 2: Создать экземпляр PostGameAnalysis с тестовыми данными",
+        "Шаг 3: Сериализовать/десериализовать в JSON"
+      ],
+      "dependencies": [],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-081",
+      "category": "infrastructure",
+      "priority": "high",
+      "description": "[CR-003] Создать базовую структуру модуля src/post_game/",
+      "acceptance_criteria": [
+        "Создана директория src/post_game/",
+        "Создан src/post_game/__init__.py",
+        "Создан src/post_game/analyzer.py с классом PostGameAnalyzer",
+        "Создан src/post_game/prompts.py для промптов LLM"
+      ],
+      "test_steps": [
+        "Шаг 1: Проверить наличие директории и файлов",
+        "Шаг 2: Импортировать PostGameAnalyzer без ошибок"
+      ],
+      "dependencies": ["TASK-079", "TASK-080"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-082",
+      "category": "functional",
+      "priority": "high",
+      "description": "[CR-003] Реализовать сбор реплик персонажа из лога партии",
+      "acceptance_criteria": [
+        "Метод _collect_character_turns(game, character_id) -> list[Turn]",
+        "Собирает все реплики персонажа с номером хода и типом",
+        "Включает контекст: предыдущую реплику и адресата",
+        "Возвращает пустой список если реплик нет"
+      ],
+      "test_steps": [
+        "Шаг 1: Загрузить тестовый лог партии",
+        "Шаг 2: Вызвать метод для существующего персонажа",
+        "Шаг 3: Проверить что возвращаются корректные реплики с контекстом"
+      ],
+      "dependencies": ["TASK-081"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-083",
+      "category": "functional",
+      "priority": "high",
+      "description": "[CR-003] Реализовать промпт для LLM анализа персонажа",
+      "acceptance_criteria": [
+        "Функция build_analysis_prompt(character, turns) -> str",
+        "Промпт содержит: профиль персонажа, detectable_markers, must_directives",
+        "Промпт содержит: все реплики персонажа с контекстом",
+        "Явная инструкция вернуть JSON строго в указанном формате из CR-003 раздел 6.2",
+        "Запрет markdown-обёртки и комментариев"
+      ],
+      "test_steps": [
+        "Шаг 1: Собрать промпт для тестового персонажа",
+        "Шаг 2: Проверить наличие всех обязательных секций",
+        "Шаг 3: Проверить что формат JSON явно задан"
+      ],
+      "dependencies": ["TASK-081"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-084",
+      "category": "functional",
+      "priority": "critical",
+      "description": "[CR-003] Реализовать вызов LLM и парсинг ответа",
+      "acceptance_criteria": [
+        "Метод _analyze_character(character, turns, provider, model) -> CharacterAnalysis",
+        "Вызов утилитарной модели с промптом из TASK-083",
+        "Таймаут 30 секунд (из env)",
+        "Парсинг JSON ответа в CharacterAnalysis",
+        "При невалидном JSON — status='failed', error='invalid_json'"
+      ],
+      "test_steps": [
+        "Шаг 1: Вызвать с моком LLM, возвращающим валидный JSON",
+        "Шаг 2: Вызвать с моком, возвращающим невалидный JSON — проверить status='failed'",
+        "Шаг 3: Вызвать с моком таймаута — проверить error='timeout'"
+      ],
+      "dependencies": ["TASK-083"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-085",
+      "category": "functional",
+      "priority": "high",
+      "description": "[CR-003] Обработка edge cases в анализаторе",
+      "acceptance_criteria": [
+        "Игрок без реплик — status='skipped', reason='no_replies'",
+        "Профиль без detectable_markers — markers.status='skipped', reason='no_markers_in_profile'",
+        "Профиль без must_directives — must_compliance.status='skipped', reason='no_must_in_profile'",
+        "LLM вернул маркеры не из профиля — игнорируются, пишется _analyzer_warnings",
+        "LLM пропустил маркер из профиля — добавляется status='not_analyzed'"
+      ],
+      "test_steps": [
+        "Шаг 1: Тест с персонажем без реплик",
+        "Шаг 2: Тест с персонажем без маркеров в профиле",
+        "Шаг 3: Тест с галлюцинированными маркерами от LLM"
+      ],
+      "dependencies": ["TASK-084"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-086",
+      "category": "functional",
+      "priority": "critical",
+      "description": "[CR-003] Реализовать основной метод analyze()",
+      "acceptance_criteria": [
+        "Метод analyze(game_path) -> PostGameAnalysis",
+        "Загружает JSON-лог партии",
+        "Для каждого игрока: загрузка профиля, сбор реплик, вызов LLM",
+        "Провал одного игрока не ломает анализ других",
+        "Если все провалились — status='failed' на верхнем уровне",
+        "Возвращает структуру PostGameAnalysis"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить analyze на тестовом логе партии",
+        "Шаг 2: Проверить что результат содержит анализ всех игроков",
+        "Шаг 3: Симулировать провал одного — проверить что остальные проанализированы"
+      ],
+      "dependencies": ["TASK-084", "TASK-085"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-087",
+      "category": "functional",
+      "priority": "high",
+      "description": "[CR-003] Запись результата анализа в лог партии",
+      "acceptance_criteria": [
+        "Метод save_analysis(game_path, analysis) перезаписывает файл",
+        "Добавляет поле post_game_analysis в JSON",
+        "Существующие поля лога сохраняются без изменений",
+        "Если post_game_analysis уже есть — перезаписывается, пишется warning"
+      ],
+      "test_steps": [
+        "Шаг 1: Сохранить анализ в лог без post_game_analysis",
+        "Шаг 2: Проверить что поле добавлено",
+        "Шаг 3: Сохранить повторно — проверить warning и перезапись"
+      ],
+      "dependencies": ["TASK-086"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-088",
+      "category": "functional",
+      "priority": "high",
+      "description": "[CR-003] CLI команда analyze для ретроспективного анализа",
+      "acceptance_criteria": [
+        "Команда: python -m spyfall.analyze --game-id <uuid>",
+        "Флаг --no-overwrite — пропустить если анализ уже есть",
+        "Флаг --all — проанализировать все логи без post_game_analysis",
+        "Вывод в stdout: статус анализа, ошибки если есть",
+        "Возвращает код 0 при успехе, 1 при ошибке"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить analyze --game-id на существующем логе",
+        "Шаг 2: Проверить что post_game_analysis добавлен",
+        "Шаг 3: Запустить с --no-overwrite повторно — проверить пропуск"
+      ],
+      "dependencies": ["TASK-087"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-089",
+      "category": "functional",
+      "priority": "high",
+      "description": "[CR-003] Автозапуск анализа после завершения партии",
+      "acceptance_criteria": [
+        "Если POST_GAME_ANALYSIS_ENABLED=true — запуск после resolution",
+        "CLI флаг --skip-analysis переопределяет env",
+        "Анализ запускается ПОСЛЕ сохранения лога партии",
+        "Ошибка анализа не ломает сохранение партии"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить партию с POST_GAME_ANALYSIS_ENABLED=true",
+        "Шаг 2: Проверить что post_game_analysis добавлен в лог",
+        "Шаг 3: Запустить с --skip-analysis — проверить отсутствие анализа"
+      ],
+      "dependencies": ["TASK-086", "TASK-087"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-090",
+      "category": "functional",
+      "priority": "medium",
+      "description": "[CR-003] Добавить find_game_path_by_id в game_repository",
+      "acceptance_criteria": [
+        "Метод find_game_path_by_id(game_id) -> Path | None",
+        "Ищет файл в папке games/ по uuid в имени файла",
+        "Возвращает None если не найден",
+        "Используется CLI командой analyze"
+      ],
+      "test_steps": [
+        "Шаг 1: Создать тестовый лог с известным id",
+        "Шаг 2: Вызвать find_game_path_by_id — проверить что возвращает путь",
+        "Шаг 3: Вызвать с несуществующим id — проверить None"
+      ],
+      "dependencies": [],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-091",
+      "category": "integration",
+      "priority": "high",
+      "description": "[CR-003] Юнит-тесты для пост-анализа",
+      "acceptance_criteria": [
+        "Тест: валидный ответ модели парсится корректно",
+        "Тест: невалидный JSON — status='failed'",
+        "Тест: отсутствие обязательных полей — status='failed', error='missing_required_fields'",
+        "Тест: игрок без реплик — status='skipped'",
+        "Тест: игрок без маркеров в профиле — markers.status='skipped'",
+        "Все тесты используют моки для LLM"
+      ],
+      "test_steps": [
+        "Шаг 1: pytest tests/test_post_game_analyzer.py -v",
+        "Шаг 2: Все тесты проходят"
+      ],
+      "dependencies": ["TASK-086"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-092",
+      "category": "integration",
+      "priority": "high",
+      "description": "[CR-003] Интеграционное тестирование пост-анализа",
+      "acceptance_criteria": [
+        "Запустить анализ на 3 существующих логах партий",
+        "Проверить что формат post_game_analysis соответствует спецификации CR-003 раздел 6",
+        "Проверить что стоимость анализа <= $0.10 на партию",
+        "Проверить graceful degradation при ошибках"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить analyze --game-id на 3 разных логах",
+        "Шаг 2: Проверить структуру post_game_analysis",
+        "Шаг 3: Проверить token_usage для анализа"
+      ],
+      "dependencies": ["TASK-091"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-093",
+      "category": "integration",
+      "priority": "medium",
+      "description": "[CR-003] Тестирование analyze --all на старых логах",
+      "acceptance_criteria": [
+        "Команда analyze --all корректно находит логи без post_game_analysis",
+        "Пропускает логи с уже существующим анализом",
+        "Выводит summary: сколько проанализировано, сколько пропущено, сколько ошибок",
+        "Работает корректно на пустой папке games/"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить analyze --all",
+        "Шаг 2: Проверить что все старые логи получили post_game_analysis",
+        "Шаг 3: Запустить повторно — проверить что все пропущены"
+      ],
+      "dependencies": ["TASK-092"],
+      "status": "pending"
     }
   ]
 }
