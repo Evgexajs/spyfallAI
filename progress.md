@@ -31,6 +31,38 @@
 
 ---
 
+## [TASK-084] Реализовать вызов LLM и парсинг ответа
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Реализован метод `_analyze_character(character, turns)` в `src/post_game/analyzer.py`
+- Вызывается промпт из TASK-083 (`build_analysis_prompt`)
+- Используется утилитарная модель из `POST_GAME_ANALYSIS_MODEL_ROLE`
+- Таймаут берётся из `POST_GAME_ANALYSIS_TIMEOUT_SECONDS` (default 30 сек)
+- Парсинг JSON ответа в `CharacterAnalysis` с валидацией обязательных полей
+- Обработка ошибок:
+  - `LLMTimeoutError` → `status='failed', error='timeout'`
+  - Невалидный JSON → `status='failed', error='invalid_json'`
+  - Отсутствие обязательных полей → `status='failed', error='missing_required_fields'`
+- Вспомогательные методы:
+  - `_failed_analysis()` — создание failed CharacterAnalysis
+  - `_parse_llm_response()` — валидация и парсинг ответа
+  - `_parse_markers()` — парсинг секции markers
+  - `_parse_must_compliance()` — парсинг секции must_compliance
+  - `_check_for_missing_markers()` — добавление пропущенных маркеров с status='not_analyzed'
+  - `_check_for_hallucinated_markers()` — игнорирование галлюцинированных маркеров с warning
+
+### Тестовые шаги (пройдены)
+- Шаг 1: Вызов с моком LLM, возвращающим валидный JSON — парсится корректно ✓
+- Шаг 2: Вызов с моком, возвращающим невалидный JSON — status='failed', error='invalid_json' ✓
+- Шаг 3: Вызов с моком таймаута — status='failed', error='timeout' ✓
+
+### Коммиты
+- `850f96e` — feat: implement _analyze_character with LLM call and JSON parsing (TASK-084)
+
+---
+
 ## [TASK-083] Реализовать промпт для LLM анализа персонажа
 **Дата:** 2026-04-21
 **Статус:** done
