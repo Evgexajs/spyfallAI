@@ -31,6 +31,23 @@
 
 ---
 
+## [TASK-067] Расширить модель TriggerEvent для новых полей
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Добавлены два опциональных поля в TriggerEvent (src/models/game.py):
+  - `reasoning: Optional[str]` — для результата анализа LLM (детектор contradiction)
+  - `params: Optional[dict]` — для дополнительных параметров (target_id для repeated_accusation)
+- Поля имеют default=None для обратной совместимости
+- Проверено: существующие логи игр загружаются без ошибок
+- Проверено: сериализация/десериализация JSON работает корректно
+
+### Коммиты
+- `7d098dc` — feat: add reasoning and params fields to TriggerEvent model
+
+---
+
 ## [TASK-066] Добавить env-переменные для новых детекторов
 **Дата:** 2026-04-21
 **Статус:** done

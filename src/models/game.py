@@ -86,6 +86,8 @@ class TriggerEvent(BaseModel):
     condition_type: str = Field(min_length=1, description="Type of condition that triggered")
     reaction_type: str = Field(min_length=1, description="Type of reaction")
     intervened: bool = Field(description="Whether the character actually intervened")
+    reasoning: Optional[str] = Field(default=None, description="LLM analysis result (for contradiction detector)")
+    params: Optional[dict] = Field(default=None, description="Additional parameters (e.g. target_id for repeated_accusation)")
 
 
 class PhaseEntry(BaseModel):
