@@ -48,7 +48,7 @@
 - Нет
 
 ### Коммиты
-- (будет добавлен после коммита)
+- `e02f09a` — feat: implement auto-analysis after game completion (TASK-089)
 
 ---
 
