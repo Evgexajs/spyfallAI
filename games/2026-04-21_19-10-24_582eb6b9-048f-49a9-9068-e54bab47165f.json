@@ -1,0 +1,975 @@
+{
+  "id": "582eb6b9-048f-49a9-9068-e54bab47165f",
+  "started_at": "2026-04-21T19:10:24.953686",
+  "ended_at": "2026-04-21T19:16:05.994318",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 50,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "circus",
+  "players": [
+    {
+      "character_id": "aurora",
+      "role_id": "spectator",
+      "is_spy": false
+    },
+    {
+      "character_id": "zoya",
+      "role_id": "ringmaster",
+      "is_spy": false
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": "clown",
+      "is_spy": false
+    },
+    {
+      "character_id": "professor_stein",
+      "role_id": null,
+      "is_spy": true
+    }
+  ],
+  "spy_id": "professor_stein",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-21T19:10:31.418972",
+      "speaker_id": "aurora",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "О, Штейн, скажи, что ты чувствуешь, когда слышишь рев толпы и яркие вспышки света вокруг? Как эти звуки влияют на твой артистический дух?",
+      "display_delay_ms": 4457,
+      "raw_response": "{\n  \"content\": \"О, Штейн, скажи, что ты чувствуешь, когда слышишь рев толпы и яркие вспышки света вокруг? Как эти звуки влияют на твой артистический дух?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T19:10:38.512601",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Видите ли, Аврора, рев толпы, в сущности, можно сравнить с публикацией научной статьи — много шума, но до истины ещё нужно добраться. Яркие вспышки света, по сути, напоминают внезапное озарение, которое приходит, когда находишь новый поворот в аргументации. Это скорее стимулирует аналитическое мышление, нежели артистический дух.",
+      "display_delay_ms": 10221,
+      "raw_response": "{\n  \"content\": \"Видите ли, Аврора, рев толпы, в сущности, можно сравнить с публикацией научной статьи — много шума, но до истины ещё нужно добраться. Яркие вспышки света, по сути, напоминают внезапное озарение, которое приходит, когда находишь новый поворот в аргументации. Это скорее стимулирует аналитическое мышление, нежели артистический дух.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-21T19:10:51.910804",
+      "speaker_id": "professor_stein",
+      "addressee_id": "father_ignatius",
+      "type": "question",
+      "content": "Игнатий, как вы могли бы описать обстановку вокруг нас? Какие характерные звуки или запахи могли бы вы выделить в нашей текущей среде?",
+      "display_delay_ms": 4406,
+      "raw_response": "{\n  \"content\": \"Игнатий, как вы могли бы описать обстановку вокруг нас? Какие характерные звуки или запахи могли бы вы выделить в нашей текущей среде?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-21T19:10:59.461633",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "Штейн, важно помнить, что вокруг нас всегда царствует атмосфера радости и ожидания. Посмотри мне в глаза — ты ведь тоже слышишь, как смех разливается подобно лёгкому ветру? А запах... Он будто смешивает в себе нотки детских воспоминаний. Надеюсь, совесть твоя позволяет наслаждаться этими моментами.",
+      "display_delay_ms": 9296,
+      "raw_response": "{\n  \"content\": \"Штейн, важно помнить, что вокруг нас всегда царствует атмосфера радости и ожидания. Посмотри мне в глаза — ты ведь тоже слышишь, как смех разливается подобно лёгкому ветру? А запах... Он будто смешивает в себе нотки детских воспоминаний. Надеюсь, совесть твоя позволяет наслаждаться этими моментами.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T19:11:10.997489",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, скажи честно, как ты относишься к ярким костюмам и забавным аксессуарам, которые окружают нас? Они ведь имеют какое-то особое значение для тебя?",
+      "display_delay_ms": 5043,
+      "raw_response": "{\n  \"content\": \"Зоя, скажи честно, как ты относишься к ярким костюмам и забавным аксессуарам, которые окружают нас? Они ведь имеют какое-то особое значение для тебя?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-21T19:11:18.997620",
+      "speaker_id": "zoya",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "Ага, конечно, они же как раз для меня и созданы. Помогают скрыть истинное лицо и заодно заставляют задуматься, кто тут на самом деле клоун.",
+      "display_delay_ms": 4692,
+      "raw_response": "{\n  \"content\": \"Ага, конечно, они же как раз для меня и созданы. Помогают скрыть истинное лицо и заодно заставляют задуматься, кто тут на самом деле клоун.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-21T19:11:27.843861",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "Аврора, а что тут по запахам? Какие ароматы тут разлетаются?",
+      "display_delay_ms": 2392,
+      "raw_response": "{\n  \"content\": \"Аврора, а что тут по запахам? Какие ароматы тут разлетаются?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T19:11:32.658676",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Ах, Зоя, как же это захватывающе! ... Эти ароматы... О, они словно ветер из детства, смешанный с шармом диковинных приключений! Запах напоенных карамельными воспоминаниями моментов и тонкие нотки... ну, ты знаешь... тех, кто нам тут помогает. Немыслимо, как всё это оживает вокруг нас!",
+      "display_delay_ms": 8811,
+      "raw_response": "{\n  \"content\": \"Ах, Зоя, как же это захватывающе! ... Эти ароматы... О, они словно ветер из детства, смешанный с шармом диковинных приключений! Запах напоенных карамельными воспоминаниями моментов и тонкие нотки... ну, ты знаешь... тех, кто нам тут помогает. Немыслимо, как всё это оживает вокруг нас!\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-21T19:11:44.330316",
+      "speaker_id": "aurora",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Штейн, мой дорогой, как ты считаешь, какое оборудование или инструменты здесь являются самыми важными для создания этого незабвенного зрелища?",
+      "display_delay_ms": 4498,
+      "raw_response": "{\n  \"content\": \"Штейн, мой дорогой, как ты считаешь, какое оборудование или инструменты здесь являются самыми важными для создания этого незабвенного зрелища?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-21T19:11:50.738974",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Фактически, в любом подобном месте, строго говоря, центральную роль играют системы освещения и звуковое оборудование. Подобно тому, как разум просвещает тьму, световые эффекты и звуки создают атмосферу, которой мы все здесь наслаждаемся. Без них, по сути, наше восприятие было бы значительно искажено.",
+      "display_delay_ms": 9278,
+      "raw_response": "{\n  \"content\": \"Фактически, в любом подобном месте, строго говоря, центральную роль играют системы освещения и звуковое оборудование. Подобно тому, как разум просвещает тьму, световые эффекты и звуки создают атмосферу, которой мы все здесь наслаждаемся. Без них, по сути, наше восприятие было бы значительно искажено.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T19:12:12.775812",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, позволь спросить, какие роли ты наблюдаешь среди нас, и как они влияют на общее действо? Подобно тому, как актёры управляют сценой, роли здесь, вероятно, также имеют своё значение?",
+      "display_delay_ms": 5959,
+      "raw_response": "{\n  \"content\": \"Зоя, позволь спросить, какие роли ты наблюдаешь среди нас, и как они влияют на общее действо? Подобно тому, как актёры управляют сценой, роли здесь, вероятно, также имеют своё значение?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-21T19:12:25.798706",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "О да, роли у нас тут прямо как в великом цирке жизни, где каждый делает что-то из ряда вон. А ты говорил про важность? Ну да, конечно.",
+      "display_delay_ms": 4586,
+      "raw_response": "{\n  \"content\": \"О да, роли у нас тут прямо как в великом цирке жизни, где каждый делает что-то из ряда вон. А ты говорил про важность? Ну да, конечно.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-21T19:12:41.139493",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Зоя, моя дорогая, твои слова звучат уклончиво и расплывчато. Быть может, ты что-то скрываешь? Позволь нам услышать твою правду, чтобы мы могли доверять тебе.",
+      "display_delay_ms": 5233,
+      "raw_response": "Зоя, моя дорогая, твои слова звучат уклончиво и расплывчато. Быть может, ты что-то скрываешь? Позволь нам услышать твою правду, чтобы мы могли доверять тебе."
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-21T19:12:53.462578",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "Аврора, а тебе не кажется, что без всех этих удивительных костюмов здесь стало бы слишком обыденно?",
+      "display_delay_ms": 3510,
+      "raw_response": "{\n  \"content\": \"Аврора, а тебе не кажется, что без всех этих удивительных костюмов здесь стало бы слишком обыденно?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-21T19:13:03.051589",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "О, Зоя, ты не представляешь, как эти костюмы оживляют нашу реальность! Ведь без них всё было бы как... утро без солнца, как сцена без зрителей, как представление без финальной аплодисс-аплодиссенции! Эти яркие наряды — души нашего мира, несущие радость и цвет в каждое мгновение нашего пребывания здесь.",
+      "display_delay_ms": 9664,
+      "raw_response": "{\n  \"content\": \"О, Зоя, ты не представляешь, как эти костюмы оживляют нашу реальность! Ведь без них всё было бы как... утро без солнца, как сцена без зрителей, как представление без финальной аплодисс-аплодиссенции! Эти яркие наряды — души нашего мира, несущие радость и цвет в каждое мгновение нашего пребывания здесь.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 16,
+      "timestamp": "2026-04-21T19:13:21.016151",
+      "speaker_id": "aurora",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Профессор Штейн, о великий мыслитель, скажите, как вы чувствуете себя, когда весь зал охвачен звуками, почти как... как будто само пространство вибрирует вокруг нас? Какие ощущения это вызывает в вашей душе?",
+      "display_delay_ms": 6685,
+      "raw_response": "{\n  \"content\": \"Профессор Штейн, о великий мыслитель, скажите, как вы чувствуете себя, когда весь зал охвачен звуками, почти как... как будто само пространство вибрирует вокруг нас? Какие ощущения это вызывает в вашей душе?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-21T19:13:35.800428",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Строго говоря, звуки, которые окружает нас, напоминают гармоничную симфонию, в которой каждый элемент имеет своё значение, подобно тому, как строится логичная и связная лекция. Звуковые волны словно резонируют с внутренним миром, вызывая ощущение глубокой вовлечённости и, я бы сказал, даже непосредственного участия в происходящем вокруг.",
+      "display_delay_ms": 10468,
+      "raw_response": "{\n  \"content\": \"Строго говоря, звуки, которые окружает нас, напоминают гармоничную симфонию, в которой каждый элемент имеет своё значение, подобно тому, как строится логичная и связная лекция. Звуковые волны словно резонируют с внутренним миром, вызывая ощущение глубокой вовлечённости и, я бы сказал, даже непосредственного участия в происходящем вокруг.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-21T19:13:54.391647",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "intervention",
+      "content": "Ага, философия у нас тут на высшем уровне, профессор. Правда, слишком уж уклончиво — как будто ты что-то скрываешь. Ты шпион, а?",
+      "display_delay_ms": 4060,
+      "raw_response": "Ага, философия у нас тут на высшем уровне, профессор. Правда, слишком уж уклончиво — как будто ты что-то скрываешь. Ты шпион, а?"
+    },
+    {
+      "turn_number": 19,
+      "timestamp": "2026-04-21T19:13:58.454007",
+      "speaker_id": "system",
+      "addressee_id": "all",
+      "type": "system",
+      "content": "[ГОЛОСОВАНИЕ] Нет обвинений уже 18 ходов",
+      "display_delay_ms": 0,
+      "raw_response": null
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-21T19:14:04.204449",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Штейн] О, профессор Штейн, ваш ответ был столь уклончив и возвышен, что я не могу не выразить своё недоверие! Как можно было описать эту звуковую симфонию, не упомянув ни единой детали из того, что окружает нас? Это подозрительно! И потому я, как истинная драма-квин, вынуждена сделать свой выбор... И мой голос направлен против вас, о, великий мыслитель!",
+      "display_delay_ms": 11327,
+      "raw_response": null
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-21T19:14:17.833987",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Штейн] Ну да, конечно, профессор, твоя философия тут как раз в тему. Но, знаешь, эта твоя симфония звучит как-то подозрительно абстрактно. Мой голос против тебя.",
+      "display_delay_ms": 5385,
+      "raw_response": null
+    },
+    {
+      "turn_number": 22,
+      "timestamp": "2026-04-21T19:14:26.384380",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Штейн] Профессор Штейн, я с глубоким уважением отношусь к вашей мудрости и философии, но ваши слова звучат так, словно вы стремитесь увести нас от истины. Совесть моя подсказывает, что здесь что-то нечисто. Пусть ваше сердце будет открыто, и если вы невиновны, то истина сама откроется.",
+      "display_delay_ms": 9295,
+      "raw_response": null
+    },
+    {
+      "turn_number": 23,
+      "timestamp": "2026-04-21T19:14:38.183304",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Игнатий] Фактически, голосование — это момент истины, когда каждый из нас должен принять решение, основанное на логике и наблюдении. Я голосую за Игнатия, поскольку, строго говоря, его ответы и вопросы, с точки зрения анализа, были достаточно расплывчатыми, что вызывает определённые сомнения и подозрения.",
+      "display_delay_ms": 9707,
+      "raw_response": null
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-21T19:14:51.128889",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "defense_speech",
+      "content": "Дорогие коллеги, вполне вероятно, что моё стремление к философскому анализу, подобно реке, уводящей вдаль, может показаться таинственным. Однако, следует отметить, что истинное понимание обстановки требует такого подхода, чтобы избежать необоснованных выводов.",
+      "display_delay_ms": 8240,
+      "raw_response": null
+    },
+    {
+      "turn_number": 25,
+      "timestamp": "2026-04-21T19:14:59.370667",
+      "speaker_id": "system",
+      "addressee_id": "all",
+      "type": "intervention",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи",
+      "display_delay_ms": 500,
+      "raw_response": null
+    },
+    {
+      "turn_number": 26,
+      "timestamp": "2026-04-21T19:15:08.321995",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Меняю голос: Зоя] О, как же всё это волнительно! Зоя, твои слова, как тени, проскальзывают между нами, вызывая подозрения, что ты скрываешь истину. Я чувствую... чувство этого места, как волнение в воздухе перед бурей! Но, увы, твои костюмы, за которыми ты прячешься, не умаляют того, что твоя уклончивость столь явна! О, какова же правда твоей души?!",
+      "display_delay_ms": 10815,
+      "raw_response": null
+    },
+    {
+      "turn_number": 27,
+      "timestamp": "2026-04-21T19:15:21.934318",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Штейн] Ну да, конечно, Аврора на меня пальцем указывает, но философия Штейна из воздуха загадок наплела. Может, он и не шпион, но уж больно туманно всё у него звучит. А что, если он просто мастер маскировки? О да, я даже не удивлюсь.",
+      "display_delay_ms": 7987,
+      "raw_response": null
+    },
+    {
+      "turn_number": 28,
+      "timestamp": "2026-04-21T19:15:36.570463",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Меняю голос: Зоя] Дорогая Зоя, позволь мне обратиться к твоей совести. Я заметил, как ты уклоняешься от конкретики, что наводит на размышления. Без осуждения, но с искренним желанием понять: сможешь ли ты прямо и честно ответить на вопрос о своих намерениях? Пусть твоя правда освещает наш путь к истине.",
+      "display_delay_ms": 9356,
+      "raw_response": null
+    },
+    {
+      "turn_number": 29,
+      "timestamp": "2026-04-21T19:15:51.168591",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Меняю голос: Зоя] Фактически, Зоя, ваша настойчивость и желание обвинять, как бы это сказать, напоминают классическую уловку, когда защита становится атакой. Подобно философскому парадоксу, ваши ответы не раскрывают полной картины, оставляя пространство для сомнений. Вы, как кажется, активно стремитесь увести нас в сторону, что, по сути, может быть свидетельством вашей скрытной роли в этой игре. Поэтому я полагаю, что голосование против вас будет логичным шагом в поиске истины.",
+      "display_delay_ms": 14822,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 6,
+      "answer_count_at_check": 3,
+      "timestamp": "2026-04-21T19:11:26.074835",
+      "level": "confident",
+      "hints": [
+        "рев толпы и яркие вспышки света",
+        "атмосфера радости и ожидания, смех разливается подобно лёгкому ветру",
+        "яркие костюмы и забавные аксессуары"
+      ],
+      "location_guess": "цирк",
+      "reasoning": "Несколько участников упоминают рев толпы, яркие вспышки света и атмосферу радости, что характерно для цирка. Кроме того, обсуждение ярких костюмов и аксессуаров, которые могут скрывать личность, также указывает на цирковую обстановку.",
+      "raw_response": "{\n  \"hints\": [\n    \"рев толпы и яркие вспышки света\",\n    \"атмосфера радости и ожидания, смех разливается подобно лёгкому ветру\",\n    \"яркие костюмы и забавные аксессуары\"\n  ],\n  \"location_guess\": \"цирк\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Несколько участников упоминают рев толпы, яркие вспышки света и атмосферу радости, что характерно для цирка. Кроме того, обсуждение ярких костюмов и аксессуаров, которые могут скрывать личность, также указывает на цирковую обстановку.\"\n}"
+    },
+    {
+      "turn_number": 12,
+      "answer_count_at_check": 6,
+      "timestamp": "2026-04-21T19:12:37.537900",
+      "level": "confident",
+      "hints": [
+        "шум толпы и яркие вспышки света",
+        "ароматы, напоенные карамелью и приключениями"
+      ],
+      "location_guess": "Цирк",
+      "reasoning": "Разговоры о шуме и ярких вспышках света, а также упоминание о костюмах и ролях, создают ассоциацию с цирком. Упоминание о карамельных ароматах также соответствует атмосфере цирка, где часто продаются сладости. Подсказки о звуковом и световом оборудовании также поддерживают эту догадку.",
+      "raw_response": "{\n  \"hints\": [\"шум толпы и яркие вспышки света\", \"ароматы, напоенные карамелью и приключениями\"],\n  \"location_guess\": \"Цирк\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Разговоры о шуме и ярких вспышках света, а также упоминание о костюмах и ролях, создают ассоциацию с цирком. Упоминание о карамельных ароматах также соответствует атмосфере цирка, где часто продаются сладости. Подсказки о звуковом и световом оборудовании также поддерживают эту догадку.\"\n}"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-21T19:12:46.374148",
+      "character_id": "father_ignatius",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "moralize_and_accuse",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-21T19:13:58.453675",
+      "character_id": "zoya",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "mock_with_dry_sarcasm",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-21T19:10:24.953686",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T19:10:24.953996",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T19:13:58.454511",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Early voting triggered: Нет обвинений уже 18 ходов",
+      "status": "optional",
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T19:13:58.454802",
+      "from_phase": "optional_vote",
+      "to_phase": "preliminary_vote",
+      "reason": "Preliminary voting started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T19:14:47.892497",
+      "from_phase": "preliminary_vote",
+      "to_phase": "pre_final_vote_defense",
+      "reason": "Defense speeches for 1 player(s) with 3 votes",
+      "status": null,
+      "initiator_id": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Игроки единогласно обвинили Зоя, но шпионом был Штейн",
+    "votes": {
+      "aurora": "zoya",
+      "zoya": "professor_stein",
+      "father_ignatius": "zoya",
+      "professor_stein": "zoya"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": "zoya"
+  },
+  "compressed_history": "В диалоге из игры Spyfall участники обсуждают атмосферу вокруг них, что приводит к подозрениям и обвинениям. Профессор Штейн задаёт вопросы о звуках и запахах, пытаясь понять обстановку. Игнатий описывает атмосферу радости, но его слова звучат несколько уклончиво. Зоя, в ответ на вопрос о костюмах, намекает на то, что они помогают скрыть истинное лицо, что вызывает подозрения у Игнатия. Он обвиняет её в уклончивости и призывает раскрыть правду.\n\nАврора, в свою очередь, описывает ароматы как «ветер из детства», что может быть намёком на детские воспоминания, но также может быть и ложным следом. Штейн утверждает, что освещение и звуковое оборудование играют ключевую роль в создании атмосферы, что может указывать на место, связанное с развлечениями, например, цирк или шоу. В целом, Зоя становится центральной фигурой подозрений, так как её ответы вызывают вопросы о её намерениях и истинной роли в происходящем.",
+  "compression_checkpoint": 13,
+  "token_usage": {
+    "total_input_tokens": 65835,
+    "total_output_tokens": 5163,
+    "total_cost_usd": 0.17496794999999998,
+    "llm_calls_count": 42
+  },
+  "preliminary_vote_result": {
+    "aurora": "zoya",
+    "zoya": "professor_stein",
+    "father_ignatius": "zoya",
+    "professor_stein": "zoya"
+  },
+  "defense_speeches": [
+    {
+      "defender_id": "professor_stein",
+      "votes_received": 3,
+      "content": "Дорогие коллеги, вполне вероятно, что моё стремление к философскому анализу, подобно реке, уводящей вдаль, может показаться таинственным. Однако, следует отметить, что истинное понимание обстановки требует такого подхода, чтобы избежать необоснованных выводов.",
+      "timestamp": "2026-04-21T19:14:51.128851",
+      "regenerated": false
+    }
+  ],
+  "final_vote_result": null,
+  "vote_changes": [],
+  "post_game_analysis": {
+    "analyzed_at": "2026-04-21T14:17:58.917443Z",
+    "analyzer_model": "gpt-4o-mini",
+    "status": "completed",
+    "per_character": {
+      "aurora": {
+        "character_id": "aurora",
+        "markers": {
+          "status": "failed",
+          "per_marker": [],
+          "reason": null,
+          "error": "timeout"
+        },
+        "must_compliance": {
+          "status": "failed",
+          "per_directive": [],
+          "reason": null,
+          "error": "timeout"
+        },
+        "status": "failed",
+        "reason": null,
+        "error": "timeout"
+      },
+      "zoya": {
+        "character_id": "zoya",
+        "markers": {
+          "status": "failed",
+          "per_marker": [],
+          "reason": null,
+          "error": "timeout"
+        },
+        "must_compliance": {
+          "status": "failed",
+          "per_directive": [],
+          "reason": null,
+          "error": "timeout"
+        },
+        "status": "failed",
+        "reason": null,
+        "error": "timeout"
+      },
+      "father_ignatius": {
+        "character_id": "father_ignatius",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "names_addressee",
+              "triggered_count": 5,
+              "total_relevant_replies": 5,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Обращение к Штейну по имени."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Обращение к Зое по имени."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Обращение к Зое по имени."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Обращение к Штейну по имени."
+                },
+                {
+                  "turn_number": 28,
+                  "triggered": true,
+                  "reasoning": "Обращение к Зое по имени."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "conscience_appeal",
+              "triggered_count": 5,
+              "total_relevant_replies": 5,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Апелляция к совести через упоминание о радости и воспоминаниях."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Прямой вопрос о честности отношения к костюмам."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Призыв услышать правду Зои."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Апелляция к совести Штейна и призыв к открытости."
+                },
+                {
+                  "turn_number": 28,
+                  "triggered": true,
+                  "reasoning": "Призыв к совести Зои с желанием понять её намерения."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "measured_speech",
+              "triggered_count": 5,
+              "total_relevant_replies": 5,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Речь состоит из нескольких предложений, размеренная и взвешенная."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Вопрос состоит из двух предложений, размеренный стиль."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Речь состоит из нескольких предложений, взвешенная."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Речь состоит из нескольких предложений, размеренная."
+                },
+                {
+                  "turn_number": 28,
+                  "triggered": true,
+                  "reasoning": "Речь состоит из нескольких предложений, размеренная."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_sarcasm",
+              "triggered_count": 5,
+              "total_relevant_replies": 5,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Отсутствие сарказма в реплике."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Отсутствие сарказма в реплике."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Отсутствие сарказма в реплике."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Отсутствие сарказма в реплике."
+                },
+                {
+                  "turn_number": 28,
+                  "triggered": true,
+                  "reasoning": "Отсутствие сарказма в реплике."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "moral_pressure",
+              "triggered_count": 5,
+              "total_relevant_replies": 5,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 4,
+                  "triggered": false,
+                  "reasoning": "Нет прямого морального давления."
+                },
+                {
+                  "turn_number": 5,
+                  "triggered": false,
+                  "reasoning": "Нет прямого морального давления."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Призыв к честности и доверию."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Призыв к открытости и доверию."
+                },
+                {
+                  "turn_number": 28,
+                  "triggered": true,
+                  "reasoning": "Призыв к совести и честности."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Обращаться к собеседнику по имени в каждом ответе",
+              "satisfied": true,
+              "evidence_turns": [
+                4,
+                5,
+                13,
+                22,
+                28
+              ],
+              "reasoning": "Игнатий обращается к каждому собеседнику по имени в каждой реплике."
+            },
+            {
+              "directive": "Использовать апелляции к совести, честности или правде (совесть, честно, правда, искренне, по совести)",
+              "satisfied": true,
+              "evidence_turns": [
+                4,
+                5,
+                13,
+                22,
+                28
+              ],
+              "reasoning": "Все реплики содержат апелляции к совести и честности."
+            },
+            {
+              "directive": "Формулировать ответы минимум в 2 предложениях, взвешенно и размеренно",
+              "satisfied": true,
+              "evidence_turns": [
+                4,
+                5,
+                13,
+                22,
+                28
+              ],
+              "reasoning": "Все реплики состоят минимум из двух предложений и имеют размеренный стиль."
+            },
+            {
+              "directive": "При подозрениях использовать моральное давление вместо прямых обвинений (посмотри в глаза, скажи честно, будь искренен)",
+              "satisfied": true,
+              "evidence_turns": [
+                13,
+                22,
+                28
+              ],
+              "reasoning": "В репликах 13, 22 и 28 Игнатий использует моральное давление вместо прямых обвинений."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "professor_stein": {
+        "character_id": "professor_stein",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "analogy_present",
+              "triggered_count": 6,
+              "total_relevant_replies": 10,
+              "rate": 0.6,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Сравнение рев толпы с публикацией научной статьи."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Сравнение света с разумом, просвещающим тьму."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Сравнение ролей с актёрами на сцене."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Сравнение звуков с гармоничной симфонией."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": true,
+                  "reasoning": "Сравнение стремления к анализу с рекой."
+                },
+                {
+                  "turn_number": 29,
+                  "triggered": true,
+                  "reasoning": "Сравнение настойчивости Зои с классической уловкой."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "introductory_phrases",
+              "triggered_count": 5,
+              "total_relevant_replies": 10,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Использование 'в сущности' и 'по сути'."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Использование 'фактически' и 'строго говоря'."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Использование 'позволь спросить'."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Использование 'строго говоря'."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": true,
+                  "reasoning": "Использование 'следует отметить'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "long_reply",
+              "triggered_count": 6,
+              "total_relevant_replies": 10,
+              "rate": 0.6,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Ответ состоит из 3 предложений."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Ответ состоит из 3 предложений."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Ответ состоит из 3 предложений."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Ответ состоит из 3 предложений."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": true,
+                  "reasoning": "Ответ состоит из 3 предложений."
+                },
+                {
+                  "turn_number": 29,
+                  "triggered": true,
+                  "reasoning": "Ответ состоит из 3 предложений."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_exclamation",
+              "triggered_count": 10,
+              "total_relevant_replies": 10,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Отсутствие восклицательных знаков."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Отсутствие восклицательных знаков."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Отсутствие восклицательных знаков."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Отсутствие восклицательных знаков."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": true,
+                  "reasoning": "Отсутствие восклицательных знаков."
+                },
+                {
+                  "turn_number": 29,
+                  "triggered": true,
+                  "reasoning": "Отсутствие восклицательных знаков."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "logical_reference",
+              "triggered_count": 5,
+              "total_relevant_replies": 10,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": false,
+                  "reasoning": "Нет ссылки на логику или рациональность."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": false,
+                  "reasoning": "Нет ссылки на логику или рациональность."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": false,
+                  "reasoning": "Нет ссылки на логику или рациональность."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": false,
+                  "reasoning": "Нет ссылки на логику или рациональность."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": true,
+                  "reasoning": "Ссылка на необходимость избегать необоснованных выводов."
+                },
+                {
+                  "turn_number": 29,
+                  "triggered": true,
+                  "reasoning": "Ссылка на логику в голосовании."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать минимум одно сравнение или аналогию в каждом ответе (как, подобно, словно, напоминает)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Во всех ответах персонажа присутствуют сравнения или аналогии."
+            },
+            {
+              "directive": "Формулировать ответы минимум в 3 предложениях, избегая краткости",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все ответы содержат минимум 3 предложения."
+            },
+            {
+              "directive": "Использовать вводные конструкции: строго говоря, фактически, по сути, следует отметить, с точки зрения",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Вводные конструкции использованы в большинстве ответов."
+            },
+            {
+              "directive": "При указании на противоречия ссылаться на логику и рациональность",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Ссылки на логику присутствуют в защите и голосовании."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      }
+    },
+    "error": null
+  }
+}

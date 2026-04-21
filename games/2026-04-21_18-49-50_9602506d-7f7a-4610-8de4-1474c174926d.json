@@ -1,0 +1,619 @@
+{
+  "id": "9602506d-7f7a-4610-8de4-1474c174926d",
+  "started_at": "2026-04-21T18:49:50.434406",
+  "ended_at": "2026-04-21T18:50:41.775223",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 4,
+    "max_questions": 50,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "submarine",
+  "players": [
+    {
+      "character_id": "zoya",
+      "role_id": "captain",
+      "is_spy": false
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": "cook",
+      "is_spy": false
+    },
+    {
+      "character_id": "boris_molot",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "professor_stein",
+      "role_id": "sonar_operator",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "boris_molot",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-21T18:49:52.891613",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, как ты относишься к ощущению обладания ограниченным пространством на работе?",
+      "display_delay_ms": 2668,
+      "raw_response": "{\n  \"content\": \"Зоя, как ты относишься к ощущению обладания ограниченным пространством на работе?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T18:49:57.103996",
+      "speaker_id": "zoya",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "Ага, как будто у нас тут не тесно. А где ты видел просторные офисы, просвети меня?",
+      "display_delay_ms": 2817,
+      "raw_response": "{\n  \"content\": \"Ага, как будто у нас тут не тесно. А где ты видел просторные офисы, просвети меня?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-21T18:50:02.185031",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "type": "question",
+      "content": "Штейн, как тебе эти постоянные гулы вокруг? Напрягают?",
+      "display_delay_ms": 2192,
+      "raw_response": "{\n  \"content\": \"Штейн, как тебе эти постоянные гулы вокруг? Напрягают?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-21T18:50:06.985860",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "По сути, звуковая среда, в которой мы существуем, напоминает океан шумов — подобно тому, как море захлёстывает берег. Если анализировать философски, звук становится фоном, интегрированным в наше восприятие, и перестаёт быть заметным, подобно тому, как часы на стене не тревожат наше сознание. Следует отметить, что это неизбежный элемент нашей деятельности и среды.",
+      "display_delay_ms": 11467,
+      "raw_response": "{\n  \"content\": \"По сути, звуковая среда, в которой мы существуем, напоминает океан шумов — подобно тому, как море захлёстывает берег. Если анализировать философски, звук становится фоном, интегрированным в наше восприятие, и перестаёт быть заметным, подобно тому, как часы на стене не тревожат наше сознание. Следует отметить, что это неизбежный элемент нашей деятельности и среды.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T18:50:21.199351",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "type": "intervention",
+      "content": "Штейн, это подозрительно уклончиво. Ты что-то скрываешь, или просто не знаешь, где мы?",
+      "display_delay_ms": 2928,
+      "raw_response": "Штейн, это подозрительно уклончиво. Ты что-то скрываешь, или просто не знаешь, где мы?"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-21T18:50:25.951613",
+      "speaker_id": "professor_stein",
+      "addressee_id": "boris_molot",
+      "type": "question",
+      "content": "Борис, если рассуждать о специфике нашего окружения, как ты оцениваешь важность приборов, окружающих нас в нашем месте работы?",
+      "display_delay_ms": 4155,
+      "raw_response": "{\n  \"content\": \"Борис, если рассуждать о специфике нашего окружения, как ты оцениваешь важность приборов, окружающих нас в нашем месте работы?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-21T18:50:31.220383",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "type": "answer",
+      "content": "Приборы важны, Штейн. Без них тут никуда. Ты что-то запутал всё.",
+      "display_delay_ms": 2292,
+      "raw_response": "{\n  \"content\": \"Приборы важны, Штейн. Без них тут никуда. Ты что-то запутал всё.\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T18:50:37.038666",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "spy_guess",
+      "content": "Я думаю, мы находимся в: Школа",
+      "display_delay_ms": 1215,
+      "raw_response": null
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-21T18:50:39.131411",
+      "speaker_id": "boris_molot",
+      "addressee_id": "all",
+      "type": "intervention",
+      "content": "Что за неразбериха? Школа? Да это подводная лодка! Как я мог ошибиться?",
+      "display_delay_ms": 2642,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [
+    {
+      "turn_number": 7,
+      "answer_count_at_check": 3,
+      "timestamp": "2026-04-21T18:50:35.401771",
+      "level": "confident",
+      "hints": [
+        "Ощущение обладания ограниченным пространством на работе",
+        "Постоянные гулы и приборы важны для работы"
+      ],
+      "location_guess": "подводная лодка",
+      "reasoning": "Ограниченное пространство и постоянный шум указывают на место с ограниченной площадью и звуковым окружением, например, подводную лодку. Упоминание о важности приборов также соответствует условиям на подводной лодке, где приборы играют ключевую роль в обеспечении работы и безопасности.",
+      "raw_response": "{\n  \"hints\": [\n    \"Ощущение обладания ограниченным пространством на работе\",\n    \"Постоянные гулы и приборы важны для работы\"\n  ],\n  \"location_guess\": \"подводная лодка\",\n  \"confidence\": \"confident\",\n  \"reasoning\": \"Ограниченное пространство и постоянный шум указывают на место с ограниченной площадью и звуковым окружением, например, подводную лодку. Упоминание о важности приборов также соответствует условиям на подводной лодке, где приборы играют ключевую роль в обеспечении работы и безопасности.\"\n}"
+    }
+  ],
+  "triggered_events": [
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-21T18:50:24.128807",
+      "character_id": "boris_molot",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "pressure_with_sharper_question",
+      "intervened": true,
+      "reasoning": null,
+      "params": null
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-21T18:49:50.434406",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T18:49:50.434729",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T18:50:41.775252",
+      "from_phase": "main_round",
+      "to_phase": "resolution",
+      "reason": "Spy guessed location: wrong",
+      "status": null,
+      "initiator_id": null
+    }
+  ],
+  "outcome": {
+    "winner": "civilians",
+    "reason": "Шпион (boris_molot) неправильно угадал: Школа (на самом деле: Подводная лодка)",
+    "votes": null,
+    "spy_guess": "school",
+    "spy_guess_correct": false,
+    "accused_id": null
+  },
+  "compressed_history": null,
+  "compression_checkpoint": null,
+  "token_usage": {
+    "total_input_tokens": 13478,
+    "total_output_tokens": 635,
+    "total_cost_usd": 0.03702290000000001,
+    "llm_calls_count": 11
+  },
+  "preliminary_vote_result": null,
+  "defense_speeches": [],
+  "final_vote_result": null,
+  "vote_changes": [],
+  "post_game_analysis": {
+    "analyzed_at": "2026-04-21T13:51:58.482087Z",
+    "analyzer_model": "gpt-4o-mini",
+    "status": "completed",
+    "per_character": {
+      "zoya": {
+        "character_id": "zoya",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "short_reply",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из двух предложений."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "sarcasm_markers",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Используется саркастическая фраза 'как будто у нас тут не тесно'."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Вопрос содержит саркастический подтекст о постоянных гулках."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "question_response",
+              "triggered_count": 1,
+              "total_relevant_replies": 2,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": false,
+                  "reasoning": "Ответ не является вопросом на вопрос."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Реплика заканчивается вопросом."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_pathos",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Отсутствуют пафосные конструкции."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Отсутствуют пафосные конструкции."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "ironic_tone",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Ироничный тон присутствует в реплике."
+                },
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Ироничный тон присутствует в реплике."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать ироничные маркеры (ага, конечно, ну да, о да, как бы, типа) хотя бы раз в ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В реплике 2 использован ироничный маркер 'ага'."
+            },
+            {
+              "directive": "На прямой вопрос отвечать встречным вопросом или саркастическим комментарием",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В реплике 3 задан встречный вопрос."
+            },
+            {
+              "directive": "Использовать не более 3 предложений в ответе — краткость важнее полноты",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Обе реплики содержат не более 3 предложений."
+            },
+            {
+              "directive": "При обвинении в свой адрес — высмеять обвинителя, не оправдываться",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В реплике 2 содержится сарказм и высмеивание в ответ на подразумеваемое обвинение."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "father_ignatius": {
+        "character_id": "father_ignatius",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "names_addressee",
+              "triggered_count": 1,
+              "total_relevant_replies": 1,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Игнатий обратился к Зое по имени."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "conscience_appeal",
+              "triggered_count": 0,
+              "total_relevant_replies": 1,
+              "rate": 0.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": false,
+                  "reasoning": "В реплике отсутствуют апелляции к совести, честности или правде."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "measured_speech",
+              "triggered_count": 1,
+              "total_relevant_replies": 1,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из одного вопроса, но она достаточно взвешенная."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_sarcasm",
+              "triggered_count": 1,
+              "total_relevant_replies": 1,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "В реплике отсутствуют маркеры сарказма и насмешки."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "moral_pressure",
+              "triggered_count": 0,
+              "total_relevant_replies": 1,
+              "rate": 0.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит мягкого морального давления или призывов к честности."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Обращаться к собеседнику по имени в каждом ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Игнатий обратился к Зое по имени в своей реплике."
+            },
+            {
+              "directive": "Использовать апелляции к совести, честности или правде (совесть, честно, правда, искренне, по совести)",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В реплике отсутствуют апелляции к совести, честности или правде."
+            },
+            {
+              "directive": "Формулировать ответы минимум в 2 предложениях, взвешенно и размеренно",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Реплика состоит только из одного предложения."
+            },
+            {
+              "directive": "При подозрениях использовать моральное давление вместо прямых обвинений (посмотри в глаза, скажи честно, будь искренен)",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Реплика не содержит морального давления или призывов к честности."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "boris_molot": {
+        "character_id": "boris_molot",
+        "markers": {
+          "status": "failed",
+          "per_marker": [],
+          "reason": null,
+          "error": "timeout"
+        },
+        "must_compliance": {
+          "status": "failed",
+          "per_directive": [],
+          "reason": null,
+          "error": "timeout"
+        },
+        "status": "failed",
+        "reason": null,
+        "error": "timeout"
+      },
+      "professor_stein": {
+        "character_id": "professor_stein",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "analogy_present",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит несколько аналогий, сравнивающих звуковую среду с океаном шумов и часами на стене."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Реплика подразумевает аналогию, хотя и не содержит явного сравнения, но продолжает тему обсуждения."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "introductory_phrases",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Используются вводные конструкции, такие как 'по сути' и 'следует отметить'."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Начинается с 'если рассуждать о специфике', что является вводной конструкцией."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "long_reply",
+              "triggered_count": 1,
+              "total_relevant_replies": 2,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит более трех предложений."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": false,
+                  "reasoning": "Реплика состоит из двух предложений."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_exclamation",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "В реплике отсутствуют восклицательные знаки."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "В реплике отсутствуют восклицательные знаки."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "logical_reference",
+              "triggered_count": 1,
+              "total_relevant_replies": 2,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Содержит ссылку на философский анализ звука как фона, что подразумевает логический подход."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": false,
+                  "reasoning": "Не содержит явной ссылки на логику или рациональность."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать минимум одно сравнение или аналогию в каждом ответе (как, подобно, словно, напоминает)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В обеих репликах присутствуют аналогии и сравнения."
+            },
+            {
+              "directive": "Формулировать ответы минимум в 3 предложениях, избегая краткости",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Только первая реплика содержит более трех предложений, вторая — две."
+            },
+            {
+              "directive": "Использовать вводные конструкции: строго говоря, фактически, по сути, следует отметить, с точки зрения",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В обеих репликах использованы вводные конструкции."
+            },
+            {
+              "directive": "При указании на противоречия ссылаться на логику и рациональность",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Только первая реплика содержит ссылку на философский анализ, вторая — нет."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      }
+    },
+    "error": null
+  }
+}
