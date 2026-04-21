@@ -31,6 +31,35 @@
 
 ---
 
+## [TASK-078] Ручное тестирование на 3 партиях
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Создан файл `tests/test_task078_integration.py` с 4 интеграционными тестами:
+  - `test_characters_have_different_reaction_types` — 4 персонажа имеют разные reaction_type для silent_for_n_turns
+  - `test_triggered_events_use_personal_reaction_types` — проверка что TriggerResult использует персональный reaction_type
+  - `test_direct_accusation_and_silent_triggers_both_fire` — оба condition_type могут срабатывать в одной игре
+  - `test_trigger_check_is_synchronous_for_non_llm_triggers` — синхронная проверка для non-LLM триггеров
+- Проанализированы 29 существующих игровых логов:
+  - 93% игр (27 из 29) стоят <= $0.25
+  - Средняя стоимость: $0.12
+  - 2 разных condition_type (direct_accusation, silent_for_n_turns) срабатывали в логах
+- Верифицированы исправления TASK-070:
+  - До фикса: все silent_for_n_turns показывали `point_out_inconsistency`
+  - После фикса: код использует персональные reaction_type из профиля персонажа
+- Все 28 юнит-тестов и 4 интеграционных теста проходят
+
+### Проблемы / Заметки
+- OpenAI API работает очень медленно (>2 мин на ответ), что препятствует live-тестированию
+- Только 1 игра была сыграна после фикса TASK-070 (11:13:33), в ней 0 событий триггеров
+- Рекомендуется повторить live-тестирование когда API стабилизируется
+
+### Коммиты
+- `TBD` — test: add TASK-078 integration tests
+
+---
+
 ## [TASK-077] Написать тесты для всех детекторов
 **Дата:** 2026-04-21
 **Статус:** done

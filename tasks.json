@@ -1507,7 +1507,7 @@
         "Шаг 3: Проверить стоимость"
       ],
       "dependencies": ["TASK-077"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-079",
