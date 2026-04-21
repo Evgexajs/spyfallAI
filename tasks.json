@@ -1414,7 +1414,7 @@
         "Шаг 3: Юнит-тест с моком: невалидный ответ LLM — warning, не срабатывает"
       ],
       "dependencies": ["TASK-067"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-074",

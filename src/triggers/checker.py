@@ -1,14 +1,20 @@
 """Trigger detection and checking system for SpyfallAI."""
 
 import json
+import logging
 import re
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 
 from src.models.character import Character, ConditionType, ReactionType, Trigger
-from src.models.game import Game, Turn, TurnType, TriggerEvent
+from src.models.game import Game, TriggerEvent, Turn
+
+if TYPE_CHECKING:
+    from src.llm.adapter import LLMProvider
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -182,6 +188,58 @@ class TriggerChecker:
         accusations = self._accusation_tracker[target_id]
         recent = [t for t in accusations if t > current_turn - window]
         return len(recent) >= 2
+
+    async def check_dodged_question(
+        self,
+        question_turn: Turn,
+        answer_turn: Turn,
+        provider: "LLMProvider",
+        model: str,
+    ) -> bool:
+        """
+        Check if a player dodged answering a direct question substantively.
+
+        Uses LLM to analyze whether the answer addresses the question.
+
+        Args:
+            question_turn: The question Turn object
+            answer_turn: The answer Turn object
+            provider: LLMProvider instance for LLM calls
+            model: Model name to use (typically utility model)
+
+        Returns:
+            True if the answer dodged the question, False otherwise.
+            Returns False on LLM errors and logs warning.
+        """
+        prompt = f"""Вопрос: "{question_turn.content}"
+
+Ответ: "{answer_turn.content}"
+
+Ответил ли игрок по существу на заданный вопрос? Отвечай только "да" или "нет"."""
+
+        try:
+            response = await provider.complete(
+                messages=[{"role": "user", "content": prompt}],
+                model=model,
+                temperature=0.3,
+                max_tokens=10,
+            )
+
+            answer = response.content.strip().lower()
+
+            if answer not in ("да", "нет", "yes", "no"):
+                logger.warning(
+                    f"Invalid LLM response for dodged_question check: '{answer}'"
+                )
+                return False
+
+            # "да"/"yes" means answered substantively -> not dodged -> return False
+            # "нет"/"no" means did NOT answer substantively -> dodged -> return True
+            return answer in ("нет", "no")
+
+        except Exception as e:
+            logger.warning(f"Error checking dodged question: {e}")
+            return False
 
     def detect_accusation_target(self, turn: Turn) -> Optional[str]:
         """

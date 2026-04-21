@@ -31,6 +31,38 @@
 
 ---
 
+## [TASK-073] Реализовать детектор dodged_direct_question
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Добавлен импорт `logging` и `TYPE_CHECKING` в `src/triggers/checker.py`
+- Реализован асинхронный метод `check_dodged_question(question_turn, answer_turn, provider, model) -> bool`
+- Метод использует LLM для определения, ответил ли игрок по существу на вопрос
+- Промпт на русском языке с бинарным ответом "да/нет"
+- Парсинг ответа поддерживает русский ("да"/"нет") и английский ("yes"/"no")
+- При невалидном ответе LLM — возвращает False и логирует warning
+- При исключении — возвращает False и логирует warning
+- Написаны 9 юнит-тестов в `tests/test_dodged_question_detector.py`:
+  - `test_evasive_answer_returns_true` — уклончивый ответ срабатывает
+  - `test_direct_answer_returns_false` — прямой ответ не срабатывает
+  - `test_invalid_llm_response_returns_false_with_warning` — невалидный ответ не срабатывает
+  - `test_llm_exception_returns_false_with_warning` — исключение не ломает работу
+  - `test_yes_english_returns_false` — английский "yes" работает
+  - `test_no_english_returns_true` — английский "no" работает
+  - `test_response_with_whitespace_is_normalized` — пробелы нормализуются
+  - `test_prompt_includes_question_and_answer_content` — промпт содержит вопрос и ответ
+  - `test_uses_specified_model` — используется переданная модель
+
+### Заметки
+- Детектор использует utility модель для экономии токенов
+- Интеграция в game_engine будет выполнена в TASK-075
+
+### Коммиты
+- (pending)
+
+---
+
 ## [TASK-072] Реализовать детектор repeated_accusation_on_same_target
 **Дата:** 2026-04-21
 **Статус:** done
