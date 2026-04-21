@@ -50,7 +50,7 @@
 - Тестирование без API ключа показало корректную обработку ошибок
 
 ### Коммиты
-- (будет добавлен)
+- `3e33983` — feat: implement CLI analyze command for retrospective game analysis
 
 ---
 
