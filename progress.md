@@ -31,6 +31,33 @@
 
 ---
 
+## [TASK-093] Тестирование analyze --all на старых логах
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Протестировал команду `python3 -m src.analyze --all --no-overwrite`:
+  - Корректно находит логи без `post_game_analysis`
+  - Пропускает логи с существующим анализом (8 skipped)
+  - Выводит summary: "Summary: X analyzed, Y skipped, Z errors"
+- Проверил работу на пустой папке games/ (возвращает 0, 0, 0)
+- Создал тестовый файл `tests/test_analyze_cli.py` с 12 юнит-тестами:
+  - TestHasPostGameAnalysis (4 теста)
+  - TestGetGameIdFromPath (2 теста)
+  - TestAnalyzeSingleGame (1 тест)
+  - TestAnalyzeAllGames (3 теста)
+  - TestSummaryOutput (1 тест)
+  - TestRerunSkipsAllAnalyzed (1 тест)
+- Все 50 связанных тестов проходят (12 новых + 38 существующих)
+
+### Проблемы / Заметки
+- Игры без API ключа завершаются с ошибкой "all_characters_failed" — ожидаемое поведение
+
+### Коммиты
+- (будет добавлен после коммита)
+
+---
+
 ## [TASK-092] Интеграционное тестирование пост-анализа
 **Дата:** 2026-04-21
 **Статус:** done
