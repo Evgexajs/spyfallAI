@@ -54,7 +54,7 @@
 - Шаг 3: Сериализация/десериализация в JSON ✓
 
 ### Коммиты
-- (pending)
+- `e31ed31` — feat: add Pydantic models for post-game analysis (TASK-080)
 
 ---
 
