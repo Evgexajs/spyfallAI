@@ -660,6 +660,7 @@ async def _check_spy_confidence(
 
     entry = ConfidenceEntry(
         turn_number=max(1, len(game.turns)),
+        answer_count_at_check=answer_count,
         timestamp=datetime.now(),
         level=level,
         hints=hints,

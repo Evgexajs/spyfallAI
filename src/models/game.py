@@ -68,6 +68,7 @@ class ConfidenceEntry(BaseModel):
     """Entry in the spy confidence log."""
 
     turn_number: int = Field(ge=1, description="Turn number when checked")
+    answer_count_at_check: Optional[int] = Field(default=None, ge=0, description="Answer count when check triggered")
     timestamp: datetime = Field(description="When the check occurred")
     level: ConfidenceLevel = Field(description="Confidence level chosen by spy")
     hints: Optional[list[str]] = Field(default=None, description="Hints the spy noticed")
