@@ -6,6 +6,7 @@ It checks detectable_markers and must_directives compliance for each character.
 
 import json
 import logging
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -31,6 +32,7 @@ from src.post_game.config import (
     POST_GAME_ANALYSIS_TIMEOUT_SECONDS,
 )
 from src.post_game.prompts import build_analysis_prompt
+from src.storage.game_repository import load_game
 
 logger = logging.getLogger(__name__)
 
@@ -55,8 +57,73 @@ class PostGameAnalyzer:
 
         Returns:
             PostGameAnalysis with per-character analysis results.
+            If all characters fail analysis, status='failed'.
+            If at least one succeeds, status='completed'.
         """
-        raise NotImplementedError("Will be implemented in TASK-086")
+        config = LLMConfig()
+        _, model = config.get_model_for_role(POST_GAME_ANALYSIS_MODEL_ROLE)
+
+        try:
+            game = load_game(game_path)
+        except Exception as e:
+            logger.error(f"Failed to load game from {game_path}: {e}")
+            return PostGameAnalysis(
+                analyzed_at=datetime.now(timezone.utc),
+                analyzer_model=model,
+                status=AnalysisStatus.FAILED,
+                per_character={},
+                error=f"failed_to_load_game: {e}"
+            )
+
+        per_character: dict[str, CharacterAnalysis] = {}
+        failed_count = 0
+        total_count = 0
+
+        for player in game.players:
+            character_id = player.character_id
+            total_count += 1
+
+            character = self._load_character_profile(character_id)
+            if character is None:
+                logger.warning(f"Could not load profile for {character_id}, skipping")
+                per_character[character_id] = self._failed_analysis(
+                    character_id, f"profile_not_found"
+                )
+                failed_count += 1
+                continue
+
+            turns = self._collect_character_turns(game, character_id)
+
+            try:
+                analysis = await self._analyze_character(character, turns)
+                per_character[character_id] = analysis
+
+                if analysis.status == AnalysisStatus.FAILED:
+                    failed_count += 1
+            except Exception as e:
+                logger.warning(f"Unexpected error analyzing {character_id}: {e}")
+                per_character[character_id] = self._failed_analysis(
+                    character_id, f"unexpected_error: {e}"
+                )
+                failed_count += 1
+
+        if total_count == 0:
+            overall_status = AnalysisStatus.FAILED
+            error = "no_players_in_game"
+        elif failed_count == total_count:
+            overall_status = AnalysisStatus.FAILED
+            error = "all_characters_failed"
+        else:
+            overall_status = AnalysisStatus.COMPLETED
+            error = None
+
+        return PostGameAnalysis(
+            analyzed_at=datetime.now(timezone.utc),
+            analyzer_model=model,
+            status=overall_status,
+            per_character=per_character,
+            error=error
+        )
 
     def _collect_character_turns(
         self, game: Game, character_id: str
@@ -401,4 +468,17 @@ class PostGameAnalyzer:
         Returns:
             Character model or None if not found.
         """
-        raise NotImplementedError("Will be implemented in TASK-086")
+        characters_dir = Path(__file__).parent.parent.parent / "characters"
+        filepath = characters_dir / f"{character_id}.json"
+
+        if not filepath.exists():
+            logger.warning(f"Character profile not found: {filepath}")
+            return None
+
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            return Character.model_validate(data)
+        except (json.JSONDecodeError, Exception) as e:
+            logger.warning(f"Failed to load character {character_id}: {e}")
+            return None

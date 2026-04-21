@@ -31,6 +31,41 @@
 
 ---
 
+## [TASK-086] Реализовать основной метод analyze()
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Реализован метод `_load_character_profile(character_id)` в `src/post_game/analyzer.py`:
+  - Загружает профиль персонажа из `characters/{character_id}.json`
+  - Возвращает `None` если файл не найден или невалиден
+  - Использует `Character.model_validate()` для десериализации
+- Реализован метод `analyze(game_path)` в `src/post_game/analyzer.py`:
+  - Загружает JSON-лог партии через `load_game()`
+  - Для каждого игрока: загрузка профиля, сбор реплик, вызов `_analyze_character()`
+  - Провал одного игрока НЕ ломает анализ других (graceful degradation)
+  - Если все провалились — `status='failed'`, `error='all_characters_failed'`
+  - Если хотя бы один успешен — `status='completed'`
+  - Возвращает структуру `PostGameAnalysis` с `analyzed_at`, `analyzer_model`, `per_character`
+- Добавлены импорты: `datetime`, `timezone`, `load_game`
+
+### Тесты
+- Создан `tests/test_post_game_analyzer_analyze.py` с 8 тестами:
+  - `test_analyze_loads_game_and_returns_analysis` — проверка структуры результата
+  - `test_analyze_returns_analysis_for_all_players` — все игроки в результате
+  - `test_analyze_one_failure_doesnt_break_others` — graceful degradation
+  - `test_analyze_all_failures_returns_failed_status` — все провалились → FAILED
+  - `test_analyze_game_not_found_returns_failed` — несуществующий файл
+  - `test_load_existing_character` — загрузка реального персонажа
+  - `test_load_nonexistent_character_returns_none` — несуществующий персонаж
+  - `test_load_all_characters` — загрузка всех 8 персонажей
+- Все 20 тестов post_game модуля проходят
+
+### Коммиты
+- (будет добавлен)
+
+---
+
 ## [TASK-085] Обработка edge cases в анализаторе
 **Дата:** 2026-04-21
 **Статус:** done
