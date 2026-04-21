@@ -31,6 +31,22 @@
 
 ---
 
+## [TASK-066] Добавить env-переменные для новых детекторов
+**Дата:** 2026-04-21
+**Статус:** done
+
+### Что сделано
+- Добавлены переменные в .env.example:
+  - `REPEATED_ACCUSATION_WINDOW=5` — окно для подсчёта повторных обвинений
+  - `CONTRADICTION_HISTORY_WINDOW=10` — окно истории для детектора противоречий
+- Добавлены переменные в game_engine.py с os.environ.get() и дефолтами
+- Успешно импортируются: `from src.orchestrator.game_engine import REPEATED_ACCUSATION_WINDOW, CONTRADICTION_HISTORY_WINDOW`
+
+### Коммиты
+- `1b0ff9d` — Add CR-002 env variables for trigger detectors
+
+---
+
 ## [TASK-065] Обратная совместимость со старыми логами игр
 **Дата:** 2026-04-20
 **Статус:** done

@@ -59,6 +59,10 @@ DEFENSE_SPEECH_MAX_SENTENCES = int(os.environ.get("DEFENSE_SPEECH_MAX_SENTENCES"
 DEFENSE_ALLOW_ABSTAIN = os.environ.get("DEFENSE_ALLOW_ABSTAIN", "true").lower() in ("true", "1", "yes")
 MAX_RE_VOTES = 2  # Maximum number of re-votes when leader changes
 
+# Trigger detector settings (CR-002)
+REPEATED_ACCUSATION_WINDOW = int(os.environ.get("REPEATED_ACCUSATION_WINDOW", "5"))
+CONTRADICTION_HISTORY_WINDOW = int(os.environ.get("CONTRADICTION_HISTORY_WINDOW", "10"))
+
 logger = logging.getLogger(__name__)
 
 
