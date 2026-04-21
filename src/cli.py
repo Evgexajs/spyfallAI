@@ -11,6 +11,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+from dotenv import load_dotenv
+
 from src.llm import CostExceededError, LLMConfig, create_provider
 from src.models import Character, Game, Turn, TurnType
 from src.models import GameOutcome
@@ -302,6 +304,8 @@ async def run_game(
 
 def main():
     """Main CLI entry point."""
+    load_dotenv()
+
     parser = argparse.ArgumentParser(
         description="SpyfallAI - AI-powered Spyfall game generator"
     )
