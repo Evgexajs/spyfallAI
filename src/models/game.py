@@ -86,6 +86,7 @@ class TriggerEvent(BaseModel):
     condition_type: str = Field(min_length=1, description="Type of condition that triggered")
     reaction_type: str = Field(min_length=1, description="Type of reaction")
     intervened: bool = Field(description="Whether the character actually intervened")
+    won_intervention: bool = Field(default=True, description="Whether this trigger won the priority competition")
     reasoning: Optional[str] = Field(default=None, description="LLM analysis result (for contradiction detector)")
     params: Optional[dict] = Field(default=None, description="Additional parameters (e.g. target_id for repeated_accusation)")
 
@@ -109,6 +110,7 @@ class DefenseSpeech(BaseModel):
     content: str = Field(min_length=1, description="Text of defense speech")
     timestamp: datetime = Field(description="When the speech was given")
     regenerated: bool = Field(default=False, description="Whether the speech was regenerated for being not characteristic")
+    truncated_from: Optional[int] = Field(default=None, description="Original sentence count if speech was truncated")
 
 
 class VoteChange(BaseModel):

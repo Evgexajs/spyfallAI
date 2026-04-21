@@ -70,7 +70,7 @@
       "threshold": 0.3,
       "reaction_type": "pressure_with_sharper_question",
       "params": {
-        "silent_turns": 2
+        "silent_turns": 3
       }
     }
   ],

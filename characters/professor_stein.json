@@ -63,7 +63,7 @@
       "threshold": 0.7,
       "reaction_type": "point_out_inconsistency",
       "params": {
-        "silent_turns": 3
+        "silent_turns": 4
       }
     },
     {

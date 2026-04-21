@@ -1398,22 +1398,28 @@ async def run_main_round(
                 trigger_checker.update_silence_counters(intervention_turn)
                 vote_trigger_checker.update_after_turn(intervention_turn)
 
-            # CR-002: Pass reasoning/params from LLM detectors if available
-            event_reasoning = None
-            event_params = None
-            if winner.character_id in llm_detector_meta:
-                meta = llm_detector_meta[winner.character_id]
-                event_reasoning = meta.get("reasoning")
-                event_params = meta.get("params")
+            # Log ALL triggered results, not just the winner
+            for trigger_result in all_trigger_results:
+                is_winner = (trigger_result.character_id == winner.character_id and
+                             trigger_result.condition_type == winner.condition_type)
 
-            trigger_event = trigger_checker.create_trigger_event(
-                result=winner,
-                turn_number=answer_turn.turn_number,
-                intervened=wants_to_intervene,
-                reasoning=event_reasoning,
-                params=event_params,
-            )
-            game.triggered_events.append(trigger_event)
+                # Get reasoning/params from LLM detectors if available
+                event_reasoning = None
+                event_params = None
+                if trigger_result.character_id in llm_detector_meta:
+                    meta = llm_detector_meta[trigger_result.character_id]
+                    event_reasoning = meta.get("reasoning")
+                    event_params = meta.get("params")
+
+                trigger_event = trigger_checker.create_trigger_event(
+                    result=trigger_result,
+                    turn_number=answer_turn.turn_number,
+                    intervened=wants_to_intervene if is_winner else False,
+                    won_intervention=is_winner,
+                    reasoning=event_reasoning,
+                    params=event_params,
+                )
+                game.triggered_events.append(trigger_event)
 
         vote_trigger_result = vote_trigger_checker.check_vote_triggers(game)
         if vote_trigger_result and vote_trigger_result.triggered:
@@ -2456,11 +2462,9 @@ async def run_defense_speeches(
         truncated_content, was_truncated = _truncate_to_sentences(
             defense_content, DEFENSE_SPEECH_MAX_SENTENCES
         )
+        original_sentence_count = None
         if was_truncated:
-            logger.warning(
-                f"Defense speech from {defender_id} truncated from "
-                f"{_count_sentences(defense_content)} to {DEFENSE_SPEECH_MAX_SENTENCES} sentences"
-            )
+            original_sentence_count = _count_sentences(defense_content)
             defense_content = truncated_content
 
         defense_speech = DefenseSpeech(
@@ -2469,6 +2473,7 @@ async def run_defense_speeches(
             content=defense_content,
             timestamp=datetime.now(),
             regenerated=was_regenerated,
+            truncated_from=original_sentence_count,
         )
         game.defense_speeches.append(defense_speech)
 

@@ -70,7 +70,7 @@
       "threshold": 0.6,
       "reaction_type": "moralize_and_accuse",
       "params": {
-        "silent_turns": 3
+        "silent_turns": 4
       }
     }
   ],

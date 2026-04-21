@@ -254,9 +254,11 @@ class TriggerChecker:
 
 Сейчас игрок сказал: "{current_answer.content}"
 
-Есть ли в текущем ответе прямое противоречие ранее сказанному? Ответь только "да" или "нет".
-Смещение темы и перефразирование — это НЕ противоречие.
-Противоречие — это когда утверждение фактически несовместимо с ранее сказанным."""
+Есть ли прямое противоречие? Смещение темы — НЕ противоречие. Противоречие — когда факты несовместимы.
+
+Ответь одним словом без точки:
+да
+нет"""
 
         try:
             response = await provider.complete(
@@ -311,7 +313,11 @@ class TriggerChecker:
 
 Ответ: "{answer_turn.content}"
 
-Ответил ли игрок по существу на заданный вопрос? Отвечай только "да" или "нет"."""
+Ответил ли игрок по существу на вопрос?
+
+Ответь одним словом без точки:
+да
+нет"""
 
         try:
             response = await provider.complete(
@@ -554,6 +560,7 @@ class TriggerChecker:
         result: TriggerResult,
         turn_number: int,
         intervened: bool,
+        won_intervention: bool = True,
         reasoning: Optional[str] = None,
         params: Optional[dict] = None,
     ) -> TriggerEvent:
@@ -563,6 +570,7 @@ class TriggerChecker:
             result: TriggerResult from trigger check
             turn_number: Turn number when trigger fired
             intervened: Whether character actually intervened
+            won_intervention: Whether this trigger won priority competition
             reasoning: LLM analysis result (for contradiction detector)
             params: Additional parameters to merge with auto-generated ones
         """
@@ -583,6 +591,7 @@ class TriggerChecker:
             condition_type=result.condition_type.value,
             reaction_type=result.reaction_type.value,
             intervened=intervened,
+            won_intervention=won_intervention,
             reasoning=reasoning,
             params=event_params,
         )

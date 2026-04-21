@@ -70,7 +70,7 @@
       "threshold": 0.4,
       "reaction_type": "panic_and_derail",
       "params": {
-        "silent_turns": 2
+        "silent_turns": 3
       }
     },
     {

@@ -9,7 +9,7 @@ POST_GAME_ANALYSIS_ENABLED: bool = os.environ.get(
 
 # Timeout in seconds for each LLM call during analysis
 POST_GAME_ANALYSIS_TIMEOUT_SECONDS: int = int(
-    os.environ.get("POST_GAME_ANALYSIS_TIMEOUT_SECONDS", "30")
+    os.environ.get("POST_GAME_ANALYSIS_TIMEOUT_SECONDS", "90")
 )
 
 # LLM role from llm_config.json to use for analysis (main/utility)
