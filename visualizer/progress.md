@@ -185,3 +185,12 @@ Format for entries:
 - src/render/index.ts (updated to re-export Scene)
 **Notes:** Детерминированное размещение персонажей согласно PRD 6.3.1. При N < 2 или N > 8 используется fallback с равномерным распределением по ширине. TypeScript компиляция и build успешны.
 
+### TASK-019: Создание PlayerState машины состояний
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/player/state.ts с классом PlayerState — машина состояний для управления воспроизведением timeline. Реализован enum PlayerStatus (idle, playing, paused, finished), тип PlaybackSpeed (0.5, 1, 2). Класс PlayerState содержит поля status, currentEventIndex, speed, timeline и методы play(), pause(), restart(), setSpeed(), nextEvent(). Геттеры для currentEvent, isFinished, totalEvents.
+**Files changed:**
+- src/player/state.ts (created)
+- src/player/index.ts (updated to re-export)
+**Notes:** Согласно PRD 6.9: play() запускает воспроизведение, pause() замораживает состояние, restart() сбрасывает index в 0 и status в idle. nextEvent() возвращает следующее событие и автоматически переводит в finished при достижении конца timeline.
+

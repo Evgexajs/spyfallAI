@@ -417,7 +417,7 @@
         "restart() должен сбросить index в 0 и status в 'idle'"
       ],
       "dependencies": ["TASK-007"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-020",
