@@ -70,3 +70,12 @@ Format for entries:
 - src/config/index.ts (updated to re-export)
 **Notes:** Все значения соответствуют PRD: индикатор печатания 500-3000ms, скорость печати 30ms/char, hold 1500ms/20chars (min 1000ms), пауза между событиями 500ms, phase_change 1500ms, spy_guess 4000ms.
 
+### TASK-006: Создание конфигурации карт слотов для персонажей (N=2..8)
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/config/slots.ts с SLOT_MAPS для N=2..8 персонажей. Координаты в пространстве 1920x1080. N=2 — по бокам, N=3-4 — в ряд, N=5-6 — полукруг, N=7-8 — два ряда.
+**Files changed:**
+- src/config/slots.ts (created)
+- src/config/index.ts (updated to re-export)
+**Notes:** Позиции слотов учитывают место для облачков над персонажами (y от 480 до 740). Добавлена вспомогательная функция getSlotMap().
+
