@@ -194,3 +194,12 @@ Format for entries:
 - src/player/index.ts (updated to re-export)
 **Notes:** Согласно PRD 6.9: play() запускает воспроизведение, pause() замораживает состояние, restart() сбрасывает index в 0 и status в idle. nextEvent() возвращает следующее событие и автоматически переводит в finished при достижении конца timeline.
 
+### TASK-020: Реализация расчета таймингов для событий
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/player/timing.ts с функциями расчёта таймингов согласно PRD 6.2. Реализованы: calculateTypingIndicatorDuration() — max(500, min(3000, 100×length)), calculateTypingDuration() — 30ms/char, calculateHoldDuration() — 1500ms/20chars min 1000ms, calculateEventDuration() — полный расчёт длительности для всех типов событий timeline.
+**Files changed:**
+- src/player/timing.ts (created)
+- src/player/index.ts (updated to re-export timing functions)
+**Notes:** Все тесты пройдены: indicator(10)=1000, indicator(5)=500 (min), indicator(100)=3000 (max), typing(100)=3000. calculateEventDuration обрабатывает все типы событий: speech, phase_change, system_message, vote, spy_guess, outcome. Экспортированы константы EVENT_GAP_MS и VOTING_EXTRA_PAUSE_MS для использования в EventPlayer.
+

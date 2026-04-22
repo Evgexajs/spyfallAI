@@ -439,7 +439,7 @@
         "calculateTypingDuration(100) должен вернуть 3000"
       ],
       "dependencies": ["TASK-005", "TASK-007"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-021",
