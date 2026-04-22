@@ -298,3 +298,21 @@ Format for entries:
 - src/render/index.ts (updated to re-export SystemMessage)
 **Notes:** Паттерн анимации аналогичен PhaseOverlay: отдельный Ticker, три фазы (fade_in, hold, fade_out), easing-функции (easeOutCubic/easeInCubic). Добавлены методы hide(), isVisible(), destroy(), getContainer() для интеграции со Scene.
 
+### TASK-032: Реализация spy_guess визуализации
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан класс SpyGuessOverlay в src/render/spy-guess.ts для визуализации момента угадывания локации шпионом. Реализован метод show(spyPosition, guessedLocation, correct): Promise<void> с 5-фазной анимацией (fade_in, hold_guess, reveal, hold_result, fade_out) общей длительностью SPY_GUESS_DURATION_MS (4000ms). Шпион визуально выделяется концентрическими кругами с пульсацией. Крупно отображается название догадки (оранжевый акцент). При reveal меняется цвет на зелёный (correct) или красный (incorrect).
+**Files changed:**
+- src/render/spy-guess.ts (created)
+- src/render/index.ts (updated to re-export SpyGuessOverlay)
+**Notes:** Согласно PRD 6.7: spy_guess — драматичный проходящий момент, не финальный экран. После анимации Promise резолвится, сцена возвращается к норме. Анимация: fade_in 15%, hold_guess 30% (с пульсацией текста), reveal 15%, hold_result 25%, fade_out 15%.
+
+### TASK-033: Реализация outcome финального экрана
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан класс OutcomeOverlay в src/render/outcome.ts для финального экрана партии. Реализован метод show(winner, spyPosition, spyName, reason): void — экран остаётся на виду (не fade out). Визуально отличается от spy_guess: более тёмный overlay (85%), горизонтальный баннер с цветовой темой победителя (красный для шпиона, синий для мирных), золотая подсветка шпиона с двойным контуром, явный текст победителя и причины. Анимация fade_in 1.5с с последовательным появлением элементов.
+**Files changed:**
+- src/render/outcome.ts (created)
+- src/render/index.ts (updated to re-export OutcomeOverlay)
+**Notes:** Согласно PRD 6.8: outcome — финальный экран, после которого воспроизведение заканчивается. Кнопки Play/Pause неактивны, доступен только Restart. Визуально должен отличаться от spy_guess — spy_guess это "момент ставки", outcome это "итоговый экран".
+

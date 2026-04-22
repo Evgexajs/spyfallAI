@@ -690,7 +690,7 @@
         "После раскрытия сцена должна вернуться к норме"
       ],
       "dependencies": ["TASK-018", "TASK-027"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-033",
@@ -714,7 +714,7 @@
         "Экран не должен исчезать автоматически"
       ],
       "dependencies": ["TASK-018", "TASK-032"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-034",
