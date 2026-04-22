@@ -212,3 +212,12 @@ Format for entries:
 - src/player/index.ts (updated to re-export EventPlayer)
 **Notes:** Согласно PRD 6.9: pause() замораживает текущее состояние ровно как есть, resume() продолжает с того же места. Реализован через отслеживание remainingTime при pause — при resume таймаут перезапускается с оставшимся временем. Метод reset() позволяет сбросить состояние для повторного использования.
 
+### TASK-022: Реализация базового облачка (SpeechBubble)
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан класс SpeechBubble в src/render/speech-bubble.ts. Облачко с белым фоном, закруглёнными углами (radius 12px), серой рамкой и хвостиком, указывающим вниз на персонажа. Максимальная ширина 400px с переносом текста. Реализованы методы show(position), hide(), setText(text), getText(), getContainer(), isVisible(), destroy().
+**Files changed:**
+- src/render/speech-bubble.ts (created)
+- src/render/index.ts (updated to re-export SpeechBubble)
+**Notes:** Использован PixiJS v8 Graphics API для рисования roundRect и хвостика. Облачко позиционируется так, чтобы хвостик указывал на точку position. Текст автоматически переносится при wordWrapWidth = MAX_WIDTH - padding * 2.
+

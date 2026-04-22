@@ -484,7 +484,7 @@
         "Вызвать hide() - должно исчезнуть"
       ],
       "dependencies": ["TASK-013"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-023",

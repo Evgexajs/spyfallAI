@@ -4,3 +4,4 @@ export type { CharacterRenderer, CharacterState, Position } from './character-re
 export { PlaceholderCharacterRenderer } from './placeholder-character'
 export { createCharacterRenderer } from './character-factory'
 export { Scene } from './scene'
+export { SpeechBubble } from './speech-bubble'
