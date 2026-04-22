@@ -1,6 +1,8 @@
 export { PlayerState, PlayerStatus } from './state';
 export type { PlaybackSpeed } from './state';
 
+export { EventPlayer } from './event-player';
+
 export {
   calculateTypingIndicatorDuration,
   calculateTypingDuration,

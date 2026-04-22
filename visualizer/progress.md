@@ -203,3 +203,12 @@ Format for entries:
 - src/player/index.ts (updated to re-export timing functions)
 **Notes:** Все тесты пройдены: indicator(10)=1000, indicator(5)=500 (min), indicator(100)=3000 (max), typing(100)=3000. calculateEventDuration обрабатывает все типы событий: speech, phase_change, system_message, vote, spy_guess, outcome. Экспортированы константы EVENT_GAP_MS и VOTING_EXTRA_PAUSE_MS для использования в EventPlayer.
 
+### TASK-021: Реализация EventPlayer для последовательного воспроизведения
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/player/event-player.ts с классом EventPlayer для управления воспроизведением событий timeline. Реализованы методы: playEvent(event) — воспроизводит событие с учётом таймингов, pause() — замораживает состояние посреди события, resume() — продолжает с того же места, stop() — останавливает воспроизведение. Добавлен метод waitEventGap() для паузы между событиями и delay() для pausable задержек. Геттеры isPaused/isStopped позволяют render слою отслеживать состояние.
+**Files changed:**
+- src/player/event-player.ts (created)
+- src/player/index.ts (updated to re-export EventPlayer)
+**Notes:** Согласно PRD 6.9: pause() замораживает текущее состояние ровно как есть, resume() продолжает с того же места. Реализован через отслеживание remainingTime при pause — при resume таймаут перезапускается с оставшимся временем. Метод reset() позволяет сбросить состояние для повторного использования.
+
