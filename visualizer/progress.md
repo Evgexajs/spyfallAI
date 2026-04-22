@@ -229,3 +229,11 @@ Format for entries:
 - src/render/speech-bubble.ts (updated)
 **Notes:** Использован отдельный Ticker для анимации. При showTypingIndicator() текст скрывается и рисуется компактный фон под индикатор. При hideTypingIndicator() тикер останавливается и уничтожается. Анимация использует Math.sin для плавного перехода alpha. Метод destroy() корректно очищает ресурсы.
 
+### TASK-024: Реализация эффекта печатания текста
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Расширен класс SpeechBubble методом typeText(text, speed): Promise<void>. Текст появляется символ за символом с заданной скоростью (мс на символ). Promise резолвится после полного отображения текста. Добавлена поддержка паузы через getter/setter isPaused — при isPaused=true анимация замораживается, при isPaused=false продолжается с того же места.
+**Files changed:**
+- src/render/speech-bubble.ts (updated)
+**Notes:** Использован отдельный Ticker с аккумулятором времени для точного контроля скорости печатания. При вызове typeText() индикатор печатания автоматически скрывается. Метод destroy() корректно останавливает и очищает typeText тикер.
+

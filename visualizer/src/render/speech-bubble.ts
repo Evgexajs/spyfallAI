@@ -28,6 +28,14 @@ export class SpeechBubble {
   private typingTicker: Ticker | null = null
   private typingAnimationTime = 0
 
+  private _isPaused = false
+  private typeTextResolve: (() => void) | null = null
+  private typeTextFullText = ''
+  private typeTextCurrentIndex = 0
+  private typeTextSpeed = 30
+  private typeTextTicker: Ticker | null = null
+  private typeTextAccumulator = 0
+
   constructor() {
     this.container = new Container()
     this.container.visible = false
@@ -181,6 +189,68 @@ export class SpeechBubble {
     return this.textDisplay.text
   }
 
+  get isPaused(): boolean {
+    return this._isPaused
+  }
+
+  set isPaused(value: boolean) {
+    this._isPaused = value
+  }
+
+  typeText(text: string, speed: number): Promise<void> {
+    return new Promise((resolve) => {
+      this.hideTypingIndicator()
+      this.textDisplay.visible = true
+
+      this.typeTextFullText = text
+      this.typeTextCurrentIndex = 0
+      this.typeTextSpeed = speed
+      this.typeTextResolve = resolve
+
+      this.textDisplay.text = ''
+      this.drawBackground()
+
+      if (this.typeTextTicker) {
+        this.typeTextTicker.stop()
+        this.typeTextTicker.destroy()
+      }
+
+      this.typeTextTicker = new Ticker()
+      this.typeTextTicker.add(this.tickTypeText, this)
+      this.typeTextTicker.start()
+    })
+  }
+
+  private tickTypeText(ticker: Ticker): void {
+    if (this._isPaused) return
+
+    this.typeTextAccumulator += ticker.deltaMS
+
+    while (this.typeTextAccumulator >= this.typeTextSpeed && this.typeTextCurrentIndex < this.typeTextFullText.length) {
+      this.typeTextAccumulator -= this.typeTextSpeed
+      this.typeTextCurrentIndex++
+      this.textDisplay.text = this.typeTextFullText.slice(0, this.typeTextCurrentIndex)
+      this.drawBackground()
+    }
+
+    if (this.typeTextCurrentIndex >= this.typeTextFullText.length) {
+      this.stopTypeText()
+      if (this.typeTextResolve) {
+        this.typeTextResolve()
+        this.typeTextResolve = null
+      }
+    }
+  }
+
+  private stopTypeText(): void {
+    if (this.typeTextTicker) {
+      this.typeTextTicker.stop()
+      this.typeTextTicker.destroy()
+      this.typeTextTicker = null
+    }
+    this.typeTextAccumulator = 0
+  }
+
   getContainer(): Container {
     return this.container
   }
@@ -191,6 +261,7 @@ export class SpeechBubble {
 
   destroy(): void {
     this.hideTypingIndicator()
+    this.stopTypeText()
     this.container.destroy({ children: true })
   }
 

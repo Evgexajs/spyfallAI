@@ -524,7 +524,7 @@
         "Время печатания ~330ms (11 символов * 30ms)"
       ],
       "dependencies": ["TASK-023"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-025",
