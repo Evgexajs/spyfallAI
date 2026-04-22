@@ -121,3 +121,12 @@ Format for entries:
 - src/parser/validator.ts (updated)
 **Notes:** Согласно PRD 5.3: "outcome обязательно последнее событие в timeline (если присутствует)".
 
+### TASK-012: Реализация парсера JSON в типизированные объекты
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/parser/parser.ts с функцией parseGameData(json: string): ParseResult. Парсер принимает JSON строку, парсит её через JSON.parse, затем валидирует через validateGameData(). При ошибке парсинга JSON возвращает понятное сообщение об ошибке. При успешной валидации возвращает типизированный GameData. ParseResult содержит data: GameData | null и errors: string[].
+**Files changed:**
+- src/parser/parser.ts (created)
+- src/parser/index.ts (updated to re-export parser)
+**Notes:** Все тесты пройдены: невалидный JSON возвращает ошибку парсинга, валидный JSON возвращает GameData с правильной структурой.
+
