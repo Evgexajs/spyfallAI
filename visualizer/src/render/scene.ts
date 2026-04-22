@@ -1,12 +1,16 @@
-import { Application, Container } from 'pixi.js'
+import { Application, Container, Graphics, ColorMatrixFilter } from 'pixi.js'
 import type { Character } from '@parser/types'
+import { Phase } from '@parser/types'
 import type { CharacterRenderer } from './character-renderer'
 import { createCharacterRenderer } from './character-factory'
 import { getSlotMap, type SlotPosition } from '@config/slots'
+import { getPhaseStyle } from '@config/phase-styles'
 import { SpeechBubble } from './speech-bubble'
 
 const CHARACTER_RADIUS = 60
 const BUBBLE_OFFSET_Y = 15
+const SCENE_WIDTH = 1920
+const SCENE_HEIGHT = 1080
 
 export class Scene {
   private app: Application
@@ -15,9 +19,20 @@ export class Scene {
   private renderers: Map<string, CharacterRenderer> = new Map()
   private characterPositions: Map<string, SlotPosition> = new Map()
   private currentBubble: SpeechBubble | null = null
+  private phaseFilter: ColorMatrixFilter
+  private phaseTintOverlay: Graphics
+  private currentPhase: Phase = Phase.MainRound
 
   constructor(app: Application) {
     this.app = app
+
+    this.phaseFilter = new ColorMatrixFilter()
+    this.app.stage.filters = [this.phaseFilter]
+
+    this.phaseTintOverlay = new Graphics()
+    this.phaseTintOverlay.label = 'phase-tint'
+    this.app.stage.addChild(this.phaseTintOverlay)
+
     this.characterContainer = new Container()
     this.characterContainer.label = 'characters'
     this.app.stage.addChild(this.characterContainer)
@@ -25,6 +40,8 @@ export class Scene {
     this.bubbleContainer = new Container()
     this.bubbleContainer.label = 'speech-bubbles'
     this.app.stage.addChild(this.bubbleContainer)
+
+    this.applyPhaseStyle(Phase.MainRound)
   }
 
   placeCharacters(characters: Character[]): void {
@@ -76,6 +93,45 @@ export class Scene {
 
   getCharacterRenderer(characterId: string): CharacterRenderer | undefined {
     return this.renderers.get(characterId)
+  }
+
+  setPhase(phase: Phase): void {
+    if (this.currentPhase === phase) return
+    this.currentPhase = phase
+    this.applyPhaseStyle(phase)
+  }
+
+  resetPhase(): void {
+    this.setPhase(Phase.MainRound)
+  }
+
+  getCurrentPhase(): Phase {
+    return this.currentPhase
+  }
+
+  private applyPhaseStyle(phase: Phase): void {
+    const style = getPhaseStyle(phase)
+
+    this.phaseFilter.reset()
+
+    if (style.brightness !== 0) {
+      this.phaseFilter.brightness(1 + style.brightness, false)
+    }
+    if (style.contrast !== 0) {
+      this.phaseFilter.contrast(1 + style.contrast, false)
+    }
+    if (style.saturation !== 0) {
+      this.phaseFilter.saturate(style.saturation, false)
+    }
+    if (style.hue !== 0) {
+      this.phaseFilter.hue(style.hue, false)
+    }
+
+    this.phaseTintOverlay.clear()
+    if (style.tintAlpha > 0) {
+      this.phaseTintOverlay.rect(0, 0, SCENE_WIDTH, SCENE_HEIGHT)
+      this.phaseTintOverlay.fill({ color: style.tint, alpha: style.tintAlpha })
+    }
   }
 
   private resolvePositions(characters: Character[]): SlotPosition[] {
@@ -149,6 +205,10 @@ export class Scene {
 
   destroy(): void {
     this.clearCharacters()
+    this.app.stage.filters = []
+    this.phaseFilter.destroy()
+    this.app.stage.removeChild(this.phaseTintOverlay)
+    this.phaseTintOverlay.destroy()
     this.app.stage.removeChild(this.characterContainer)
     this.app.stage.removeChild(this.bubbleContainer)
   }

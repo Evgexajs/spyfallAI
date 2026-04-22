@@ -262,3 +262,13 @@ Format for entries:
 - src/render/index.ts (updated to re-export PhaseOverlay)
 **Notes:** Использованы easing-функции (easeOutCubic/easeInCubic) для плавных переходов. Каждая фаза игры имеет свой accent color (voting — синий, defense — оранжевый, final — красный). Добавлены методы hide(), destroy(), getContainer() для интеграции со Scene.
 
+### TASK-028: Изменение цветовой температуры сцены по фазам
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/config/phase-styles.ts с конфигурацией визуальных стилей для каждой фазы игры. Расширен класс Scene методами setPhase(phase), resetPhase(), getCurrentPhase() для применения фазовых стилей. Реализовано через ColorMatrixFilter (brightness, contrast, saturation, hue) и Graphics overlay для tint-эффекта.
+**Files changed:**
+- src/config/phase-styles.ts (created)
+- src/config/index.ts (updated to re-export phase-styles)
+- src/render/scene.ts (updated with phase styling)
+**Notes:** Стили фаз: main_round — нейтральный, voting — холодный синий (hue -10, tint 0x3366cc), defense — тёплый оранжевый (hue +10, tint 0xff9933), final — высокий контраст и насыщенность (contrast +0.2, saturation +0.15, tint 0xff3333), resolution — приглушённый (saturation -0.2). Фильтр применяется ко всему stage.
+

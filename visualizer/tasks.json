@@ -607,7 +607,7 @@
         "Визуальные изменения заметны"
       ],
       "dependencies": ["TASK-027"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-029",
