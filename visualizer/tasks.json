@@ -163,7 +163,7 @@
         "npx tsc --noEmit (должен скомпилироваться без ошибок)"
       ],
       "dependencies": ["TASK-003"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-008",

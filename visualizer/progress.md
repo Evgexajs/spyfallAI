@@ -79,3 +79,12 @@ Format for entries:
 - src/config/index.ts (updated to re-export)
 **Notes:** Позиции слотов учитывают место для облачков над персонажами (y от 480 до 740). Добавлена вспомогательная функция getSlotMap().
 
+### TASK-007: Определение TypeScript типов для API контракта
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Созданы TypeScript типы для API контракта визуализатора согласно PRD раздел 5. Определены все enum-ы (SpeechSubtype, Phase, VotePhase, Winner), интерфейсы событий (SpeechEvent, PhaseChangeEvent, SystemMessageEvent, VoteEvent, SpyGuessEvent, OutcomeEvent), union type TimelineEvent и верхнеуровневый GameData.
+**Files changed:**
+- src/parser/types.ts (created)
+- src/parser/index.ts (updated to re-export)
+**Notes:** Типы полностью соответствуют PRD section 5. Enum-ы используют строковые значения для совместимости с JSON. position_hint в Character опциональный согласно PRD 6.3.1 (fallback поведение).
+
