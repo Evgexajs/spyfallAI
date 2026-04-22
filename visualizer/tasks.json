@@ -874,7 +874,7 @@
         "Персонажи должны отобразиться на сцене"
       ],
       "dependencies": ["TASK-012", "TASK-35", "TASK-039"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-042",

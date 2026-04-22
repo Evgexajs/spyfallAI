@@ -378,3 +378,11 @@ Format for entries:
 - src/ui/index.ts (updated to re-export createLoadingIndicator)
 **Notes:** HTML разметка (#loading-indicator со спиннером) и CSS стили (анимация @keyframes spin, toggle через .visible class) уже существовали в index.html (TASK-034). Согласно PRD 7.5: до завершения preload-а кнопка Play disabled. Блокировка UI реализуется через координацию с PlaybackControls.disable() в TASK-042.
 
+### TASK-041: Интеграция парсера с UI (загрузка файла)
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Реализована полная интеграция между UI компонентами и парсером в main.ts. При выборе JSON файла через FileSelector вызывается parseGameData(). При успешной валидации: показывается loading indicator, загружается фон локации через loadBackground(), персонажи размещаются на сцене через Scene.placeCharacters(), затем loading скрывается и активируется Play кнопка. При ошибке валидации — ошибка отображается в ErrorDisplay с указанием имени файла и всех ошибок валидации.
+**Files changed:**
+- src/main.ts (полностью переписан — интеграция всех компонентов)
+**Notes:** Экспортированы currentGameData и scene для использования в будущих интеграционных задачах (TASK-043, TASK-044). SpeedControls и ProgressIndicator инициализированы, но их полная интеграция с PlayerState будет в последующих задачах. Согласно PRD 5.3 и 7.5: валидация JSON обязательна перед рендерингом, Play disabled до завершения preloading.
+
