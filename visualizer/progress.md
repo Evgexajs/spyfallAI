@@ -43,3 +43,11 @@ Format for entries:
 - assets/fonts/ (folder)
 **Notes:** Структура соответствует рекомендациям PRD раздел 7.4.
 
+### TASK-003: Настройка TypeScript конфигурации
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан tsconfig.json с strict mode, настроены path aliases (@parser, @player, @render, @ui, @config), target ES2020, moduleResolution: bundler для совместимости с Vite.
+**Files changed:**
+- tsconfig.json
+**Notes:** Добавлены строгие проверки: noUnusedLocals, noUnusedParameters, noFallthroughCasesInSwitch, noUncheckedIndexedAccess.
+

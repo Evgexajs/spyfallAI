@@ -76,7 +76,7 @@
         "npx tsc --noEmit (должен пройти без ошибок)"
       ],
       "dependencies": ["TASK-001", "TASK-002"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-004",
