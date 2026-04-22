@@ -95,7 +95,7 @@
         "Убедиться что страница загружается без ошибок в консоли"
       ],
       "dependencies": ["TASK-003"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-005",

@@ -51,3 +51,13 @@ Format for entries:
 - tsconfig.json
 **Notes:** Добавлены строгие проверки: noUnusedLocals, noUnusedParameters, noFallthroughCasesInSwitch, noUncheckedIndexedAccess.
 
+### TASK-004: Настройка Vite dev server и точки входа
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Настроен Vite dev server с TypeScript, создана точка входа приложения с инициализацией PixiJS Application (1920x1080, черный фон).
+**Files changed:**
+- vite.config.ts
+- index.html
+- src/main.ts
+**Notes:** Vite config включает path aliases для всех модулей проекта. PixiJS v8 использует новый API с async init().
+
