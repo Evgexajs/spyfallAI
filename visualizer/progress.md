@@ -140,3 +140,12 @@ Format for entries:
 - src/main.ts (updated to use createApp from render module)
 **Notes:** Архитектурно логика инициализации PixiJS вынесена в отдельный модуль render слоя. TypeScript компилируется без ошибок, npm run build успешен.
 
+### TASK-014: Реализация загрузки и отображения фона локации
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/render/background.ts с функцией loadBackground(app: Application, locationId: string): Promise<void>. Функция загружает картинку локации из assets/locations/{locationId}.png и масштабирует её на весь canvas (1920x1080). При ошибке загрузки отображается fallback-градиент от тёмно-синего к чёрному.
+**Files changed:**
+- src/render/background.ts (created)
+- src/render/index.ts (updated to re-export loadBackground)
+**Notes:** Использован PixiJS v8 Assets API для загрузки текстур. Градиент рисуется через Graphics построчно. Старый фон удаляется перед добавлением нового (по label 'background').
+

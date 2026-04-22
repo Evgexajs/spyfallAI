@@ -309,7 +309,7 @@
         "Вызвать с несуществующим ID - должен отобразиться градиент"
       ],
       "dependencies": ["TASK-013"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-015",
