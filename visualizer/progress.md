@@ -21,3 +21,11 @@ Format for entries:
 **Notes:** Any additional notes or blockers encountered
 -->
 
+### TASK-001: Инициализация package.json и базовых зависимостей проекта
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан package.json с именем spyfall-visualizer, добавлены зависимости pixi.js (v8), devDependencies vite и typescript, настроены scripts dev/build/preview.
+**Files changed:**
+- package.json
+**Notes:** Использован "type": "module" для ESM совместимости с Vite.
+
