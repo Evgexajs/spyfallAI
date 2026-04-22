@@ -360,3 +360,12 @@ Format for entries:
 - src/ui/index.ts (updated to re-export createProgressIndicator)
 **Notes:** Согласно PRD 6.1: индикатор прогресса показывает текущее событие из timeline. HTML разметка (#progress-bar, #progress-text) уже существовала в index.html (TASK-034) с CSS transition для плавной анимации.
 
+### TASK-039: Отображение ошибок валидации в UI
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/ui/error-display.ts с функцией createErrorDisplay(). Реализован интерфейс ErrorDisplay с методами: showError(message) для отображения ошибки (добавляет CSS class .visible), clearError() для скрытия ошибки, isVisible() для проверки состояния. Ошибка отображается с красным фоном/рамкой согласно существующим CSS стилям в index.html.
+**Files changed:**
+- src/ui/error-display.ts (created)
+- src/ui/index.ts (updated to re-export createErrorDisplay)
+**Notes:** HTML разметка (#error-display) и CSS стили (красный фон rgba(220, 53, 69, 0.15), красная рамка #dc3545, toggle через .visible class) уже существовали в index.html (TASK-034). TypeScript модуль предоставляет API для интеграции с парсером (TASK-041).
+

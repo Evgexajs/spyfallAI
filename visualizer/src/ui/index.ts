@@ -6,3 +6,6 @@ export type { PlaybackControls, PlaybackCallback, SpeedControls, SpeedChangeCall
 
 export { createProgressIndicator } from './progress';
 export type { ProgressIndicator } from './progress';
+
+export { createErrorDisplay } from './error-display';
+export type { ErrorDisplay } from './error-display';
