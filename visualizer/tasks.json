@@ -755,7 +755,7 @@
         "Callback должен получить содержимое"
       ],
       "dependencies": ["TASK-034"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-036",

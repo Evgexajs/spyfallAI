@@ -324,3 +324,12 @@ Format for entries:
 - index.html (updated)
 **Notes:** Согласно PRD 6.1: UI-оболочка с селектором файла, кнопками Play/Pause/Restart, индикатором прогресса, переключателем скорости. Все элементы размечены с id для последующей интеграции в TASK-035..TASK-040.
 
+### TASK-035: Реализация селектора JSON файла
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/ui/file-selector.ts с функцией createFileSelector(). Реализован интерфейс FileSelector с методами: onFileSelected(callback) для подписки на выбор файла, getSelectedFileName() для получения имени выбранного файла, reset() для сброса состояния. Компонент связывает #file-button с #file-input, фильтрует только .json файлы, читает содержимое через FileReader и передаёт в callback вместе с именем файла. Имя файла отображается в #file-name.
+**Files changed:**
+- src/ui/file-selector.ts (created)
+- src/ui/index.ts (updated to re-export)
+**Notes:** Согласно PRD 6.1: селектор файла через input type=file. Только .json файлы принимаются (accept=".json" + проверка в коде). При ошибке чтения файла отображается сообщение.
+
