@@ -289,3 +289,12 @@ Format for entries:
 - src/render/scene.ts (updated — добавлен showVote метод, VoteIndicator интеграция)
 **Notes:** Добавлен VoteIndicator контейнер в Scene, метод getVoteIndicator() для доступа. Тайминги: typing indicator duration, typing speed (30ms/char), hold duration — все используют calculateTypingIndicatorDuration() и calculateHoldDuration() из player/timing.ts. Согласно PRD 5.2: "Облачко vote.comment использует нейтральный стиль (ближе к speech.subtype: normal)".
 
+### TASK-031: Реализация system_message overlay
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан класс SystemMessage в src/render/system-message.ts для отображения системных сообщений. Реализован метод show(content: string): Promise<void> с анимацией fade_in (15%), hold (70%), fade_out (15%) общей длительностью 2000ms. Текст отображается внизу сцены с полупрозрачным фоном (закруглённый прямоугольник). Promise резолвится после завершения анимации.
+**Files changed:**
+- src/render/system-message.ts (created)
+- src/render/index.ts (updated to re-export SystemMessage)
+**Notes:** Паттерн анимации аналогичен PhaseOverlay: отдельный Ticker, три фазы (fade_in, hold, fade_out), easing-функции (easeOutCubic/easeInCubic). Добавлены методы hide(), isVisible(), destroy(), getContainer() для интеграции со Scene.
+

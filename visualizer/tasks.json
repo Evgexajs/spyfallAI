@@ -667,7 +667,7 @@
         "Текст должен появиться и исчезнуть через ~2 сек"
       ],
       "dependencies": ["TASK-013"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-032",
