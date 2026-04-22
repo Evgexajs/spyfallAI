@@ -158,3 +158,12 @@ Format for entries:
 - src/render/index.ts (updated to re-export types)
 **Notes:** Position вынесен в отдельный тип для переиспользования. CharacterState = 'idle' | 'speaking' соответствует PRD 6.4.
 
+### TASK-016: Реализация PlaceholderCharacterRenderer (круг с именем)
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан класс PlaceholderCharacterRenderer, реализующий интерфейс CharacterRenderer. Рендерит круг диаметром 120px с детерминированным цветом от characterId (хеш → HSL → hex). Имя персонажа отображается по центру круга белым текстом с word-wrap. При state 'speaking' запускается анимация пульсации масштаба (±8% с частотой 4 Гц) через отдельный Ticker.
+**Files changed:**
+- src/render/placeholder-character.ts (created)
+- src/render/index.ts (updated to re-export PlaceholderCharacterRenderer)
+**Notes:** Функция hashStringToColor обеспечивает стабильный цвет: один и тот же ID всегда даёт один цвет. HSL используется для контроля насыщенности и светлости (60-80% S, 45-60% L) — цвета яркие и различимые. Анимация пульсации корректно останавливается при переходе в idle с возвратом scale к 1.
+

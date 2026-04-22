@@ -353,7 +353,7 @@
         "Вызвать setState('idle') - анимация должна остановиться"
       ],
       "dependencies": ["TASK-015"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-017",
