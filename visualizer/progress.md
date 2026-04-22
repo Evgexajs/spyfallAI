@@ -149,3 +149,12 @@ Format for entries:
 - src/render/index.ts (updated to re-export loadBackground)
 **Notes:** Использован PixiJS v8 Assets API для загрузки текстур. Градиент рисуется через Graphics построчно. Старый фон удаляется перед добавлением нового (по label 'background').
 
+### TASK-015: Создание интерфейса CharacterRenderer
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/render/character-renderer.ts с интерфейсом CharacterRenderer и типами CharacterState, Position. Интерфейс определяет контракт для рендеринга персонажей: render(position), setState(state), getContainer(), destroy(). Это архитектурный дизайн-поинт из PRD 7.2 — сцена использует только этот интерфейс, что позволит заменить PlaceholderCharacterRenderer на SpriteCharacterRenderer без изменений в других слоях.
+**Files changed:**
+- src/render/character-renderer.ts (created)
+- src/render/index.ts (updated to re-export types)
+**Notes:** Position вынесен в отдельный тип для переиспользования. CharacterState = 'idle' | 'speaking' соответствует PRD 6.4.
+
