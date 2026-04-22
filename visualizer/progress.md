@@ -386,3 +386,13 @@ Format for entries:
 - src/main.ts (полностью переписан — интеграция всех компонентов)
 **Notes:** Экспортированы currentGameData и scene для использования в будущих интеграционных задачах (TASK-043, TASK-044). SpeedControls и ProgressIndicator инициализированы, но их полная интеграция с PlayerState будет в последующих задачах. Согласно PRD 5.3 и 7.5: валидация JSON обязательна перед рендерингом, Play disabled до завершения preloading.
 
+### TASK-042: Реализация preloading ассетов
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/render/asset-loader.ts с функцией preloadAssets(locationId: string): Promise<PreloadResult>. Функция параллельно загружает текстуру локации через PixiJS Assets API и шрифты через CSS Font Loading API. При ошибке загрузки текстуры — продолжает работу (loadBackground использует fallback-градиент). При ошибке загрузки шрифта — fallback на системный шрифт (system-ui, sans-serif). Добавлена функция getFontFamily() для получения текущего шрифта.
+**Files changed:**
+- src/render/asset-loader.ts (created)
+- src/render/index.ts (updated to re-export)
+- src/main.ts (updated to use preloadAssets)
+**Notes:** Согласно PRD 7.5: preload происходит после валидации JSON, до завершения Play disabled. PreloadResult содержит флаги locationLoaded и fontsLoaded для диагностики. Функция готова к расширению при добавлении реальных шрифтов в assets/fonts/.
+

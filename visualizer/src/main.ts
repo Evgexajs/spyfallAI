@@ -1,4 +1,4 @@
-import { createApp, Scene, loadBackground } from '@render/index'
+import { createApp, Scene, loadBackground, preloadAssets } from '@render/index'
 import { parseGameData } from '@parser/index'
 import type { GameData } from '@parser/index'
 import {
@@ -44,6 +44,8 @@ async function init() {
     loadingIndicator.show()
 
     try {
+      const preloadResult = await preloadAssets(currentGameData.scene.location_id)
+
       await loadBackground(app, currentGameData.scene.location_id)
 
       scene!.placeCharacters(currentGameData.characters)
@@ -53,7 +55,10 @@ async function init() {
       loadingIndicator.hide()
       playbackControls.enable()
 
-      console.log(`Loaded: ${fileName}, ${currentGameData.characters.length} characters, ${currentGameData.timeline.length} events`)
+      console.log(
+        `Loaded: ${fileName}, ${currentGameData.characters.length} characters, ${currentGameData.timeline.length} events`,
+        `(location: ${preloadResult.locationLoaded ? 'loaded' : 'fallback'}, fonts: ${preloadResult.fontsLoaded ? 'loaded' : 'fallback'})`
+      )
     } catch (error) {
       loadingIndicator.hide()
       const message = error instanceof Error ? error.message : 'Unknown error'

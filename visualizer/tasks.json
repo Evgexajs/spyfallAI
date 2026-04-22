@@ -896,7 +896,7 @@
         "Вызвать с несуществующей - должен применить fallback"
       ],
       "dependencies": ["TASK-014", "TASK-040"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-043",
