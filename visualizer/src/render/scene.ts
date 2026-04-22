@@ -1,0 +1,110 @@
+import { Application, Container } from 'pixi.js'
+import type { Character } from '@parser/types'
+import type { CharacterRenderer } from './character-renderer'
+import { createCharacterRenderer } from './character-factory'
+import { getSlotMap, type SlotPosition } from '@config/slots'
+
+export class Scene {
+  private app: Application
+  private characterContainer: Container
+  private renderers: Map<string, CharacterRenderer> = new Map()
+
+  constructor(app: Application) {
+    this.app = app
+    this.characterContainer = new Container()
+    this.characterContainer.label = 'characters'
+    this.app.stage.addChild(this.characterContainer)
+  }
+
+  placeCharacters(characters: Character[]): void {
+    this.clearCharacters()
+
+    const positions = this.resolvePositions(characters)
+
+    for (let i = 0; i < characters.length; i++) {
+      const character = characters[i]!
+      const position = positions[i]!
+
+      const renderer = createCharacterRenderer(character.id, character.display_name)
+      renderer.render(position)
+      this.characterContainer.addChild(renderer.getContainer())
+      this.renderers.set(character.id, renderer)
+    }
+  }
+
+  getCharacterRenderer(characterId: string): CharacterRenderer | undefined {
+    return this.renderers.get(characterId)
+  }
+
+  private resolvePositions(characters: Character[]): SlotPosition[] {
+    const count = characters.length
+    const slotMap = getSlotMap(count)
+
+    if (!slotMap) {
+      return this.fallbackPositions(count)
+    }
+
+    const positions: SlotPosition[] = new Array(count)
+    const usedSlots = new Set<number>()
+    const unassigned: number[] = []
+
+    for (let i = 0; i < characters.length; i++) {
+      const hint = characters[i]?.position_hint
+
+      if (
+        hint === undefined ||
+        hint === null ||
+        hint < 0 ||
+        hint >= count ||
+        usedSlots.has(hint)
+      ) {
+        unassigned.push(i)
+      } else {
+        usedSlots.add(hint)
+        positions[i] = slotMap[hint]!
+      }
+    }
+
+    const availableSlots = []
+    for (let slot = 0; slot < count; slot++) {
+      if (!usedSlots.has(slot)) {
+        availableSlots.push(slot)
+      }
+    }
+
+    for (let j = 0; j < unassigned.length; j++) {
+      const charIndex = unassigned[j]!
+      const slot = availableSlots[j]!
+      positions[charIndex] = slotMap[slot]!
+    }
+
+    return positions
+  }
+
+  private fallbackPositions(count: number): SlotPosition[] {
+    const positions: SlotPosition[] = []
+    const spacing = 1920 / (count + 1)
+
+    for (let i = 0; i < count; i++) {
+      positions.push({
+        x: spacing * (i + 1),
+        y: 700,
+      })
+    }
+
+    return positions
+  }
+
+  private clearCharacters(): void {
+    for (const renderer of this.renderers.values()) {
+      renderer.destroy()
+    }
+    this.renderers.clear()
+    this.characterContainer.removeChildren()
+  }
+
+  destroy(): void {
+    this.clearCharacters()
+    this.app.stage.removeChild(this.characterContainer)
+  }
+}

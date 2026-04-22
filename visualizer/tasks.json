@@ -393,7 +393,7 @@
         "Проверить fallback с дублирующимися position_hint"
       ],
       "dependencies": ["TASK-006", "TASK-017"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-019",

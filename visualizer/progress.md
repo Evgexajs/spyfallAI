@@ -176,3 +176,12 @@ Format for entries:
 - src/render/index.ts (updated to re-export createCharacterRenderer)
 **Notes:** Комментарий о будущей замене на SpriteCharacterRenderer добавлен в код. TypeScript компиляция и build прошли успешно.
 
+### TASK-018: Реализация расстановки персонажей на сцене по слотам
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан класс Scene в src/render/scene.ts с методом placeCharacters(characters: Character[]). Сцена использует SLOT_MAPS из config/slots.ts для позиционирования персонажей по position_hint. Реализован fallback при невалидных, дублирующихся или отсутствующих position_hint — персонажи распределяются по доступным слотам в порядке массива. Добавлен метод getCharacterRenderer(characterId) для будущей интеграции с облачками речи.
+**Files changed:**
+- src/render/scene.ts (created)
+- src/render/index.ts (updated to re-export Scene)
+**Notes:** Детерминированное размещение персонажей согласно PRD 6.3.1. При N < 2 или N > 8 используется fallback с равномерным распределением по ширине. TypeScript компиляция и build успешны.
+
