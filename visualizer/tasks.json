@@ -565,7 +565,7 @@
         "Вызвать showSpeechBubble для другого - первое должно скрыться"
       ],
       "dependencies": ["TASK-018", "TASK-025"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-027",

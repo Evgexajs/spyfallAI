@@ -245,3 +245,11 @@ Format for entries:
 - src/render/speech-bubble.ts (updated)
 **Notes:** Добавлен интерфейс BubbleStyle и объект STYLES с настройками для каждого subtype. Методы drawBackground() и drawBackgroundForTypingIndicator() теперь используют currentStyle. При вызове setStyle() автоматически обновляется цвет текста и перерисовывается фон если облачко видимо.
 
+### TASK-026: Интеграция облачка с персонажем
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Расширен класс Scene методами showSpeechBubble(characterId: string): SpeechBubble и hideSpeechBubble(): void. Облачко позиционируется над головой персонажа (y = characterY - RADIUS - offset). Поддерживается только одно активное облачко — при вызове showSpeechBubble для другого персонажа предыдущее автоматически скрывается и уничтожается.
+**Files changed:**
+- src/render/scene.ts (updated)
+**Notes:** Добавлен bubbleContainer для облачков и characterPositions Map для хранения позиций персонажей. При clearCharacters() также скрывается текущее облачко. Bubble offset = 15px от верхней границы круга персонажа (radius=60).
+

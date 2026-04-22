@@ -3,17 +3,28 @@ import type { Character } from '@parser/types'
 import type { CharacterRenderer } from './character-renderer'
 import { createCharacterRenderer } from './character-factory'
 import { getSlotMap, type SlotPosition } from '@config/slots'
+import { SpeechBubble } from './speech-bubble'
+
+const CHARACTER_RADIUS = 60
+const BUBBLE_OFFSET_Y = 15
 
 export class Scene {
   private app: Application
   private characterContainer: Container
+  private bubbleContainer: Container
   private renderers: Map<string, CharacterRenderer> = new Map()
+  private characterPositions: Map<string, SlotPosition> = new Map()
+  private currentBubble: SpeechBubble | null = null
 
   constructor(app: Application) {
     this.app = app
     this.characterContainer = new Container()
     this.characterContainer.label = 'characters'
     this.app.stage.addChild(this.characterContainer)
+
+    this.bubbleContainer = new Container()
+    this.bubbleContainer.label = 'speech-bubbles'
+    this.app.stage.addChild(this.bubbleContainer)
   }
 
   placeCharacters(characters: Character[]): void {
@@ -29,6 +40,37 @@ export class Scene {
       renderer.render(position)
       this.characterContainer.addChild(renderer.getContainer())
       this.renderers.set(character.id, renderer)
+      this.characterPositions.set(character.id, position)
+    }
+  }
+
+  showSpeechBubble(characterId: string): SpeechBubble | null {
+    const position = this.characterPositions.get(characterId)
+    if (!position) {
+      return null
+    }
+
+    this.hideSpeechBubble()
+
+    const bubble = new SpeechBubble()
+    this.bubbleContainer.addChild(bubble.getContainer())
+
+    const bubblePosition = {
+      x: position.x,
+      y: position.y - CHARACTER_RADIUS - BUBBLE_OFFSET_Y
+    }
+    bubble.show(bubblePosition)
+
+    this.currentBubble = bubble
+    return bubble
+  }
+
+  hideSpeechBubble(): void {
+    if (this.currentBubble) {
+      this.currentBubble.hide()
+      this.bubbleContainer.removeChild(this.currentBubble.getContainer())
+      this.currentBubble.destroy()
+      this.currentBubble = null
     }
   }
 
@@ -96,15 +138,18 @@ export class Scene {
   }
 
   private clearCharacters(): void {
+    this.hideSpeechBubble()
     for (const renderer of this.renderers.values()) {
       renderer.destroy()
     }
     this.renderers.clear()
+    this.characterPositions.clear()
     this.characterContainer.removeChildren()
   }
 
   destroy(): void {
     this.clearCharacters()
     this.app.stage.removeChild(this.characterContainer)
+    this.app.stage.removeChild(this.bubbleContainer)
   }
 }
