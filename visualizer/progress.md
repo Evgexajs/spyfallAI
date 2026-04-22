@@ -253,3 +253,12 @@ Format for entries:
 - src/render/scene.ts (updated)
 **Notes:** Добавлен bubbleContainer для облачков и characterPositions Map для хранения позиций персонажей. При clearCharacters() также скрывается текущее облачко. Bubble offset = 15px от верхней границы круга персонажа (radius=60).
 
+### TASK-027: Реализация визуализации phase_change
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан класс PhaseOverlay в src/render/phase-overlay.ts для визуализации смены фаз игры. Реализован метод showPhaseChange(phase: Phase, label: string): Promise<void> с анимацией: затемнение фона (alpha 0.7), крупная надпись с label (72px, тень), акцентные горизонтальные линии под текстом. Анимация состоит из трёх фаз: fade_in (25%), hold (50%), fade_out (25%) с общей длительностью PHASE_CHANGE_DURATION_MS (1500ms). Promise резолвится после завершения анимации.
+**Files changed:**
+- src/render/phase-overlay.ts (created)
+- src/render/index.ts (updated to re-export PhaseOverlay)
+**Notes:** Использованы easing-функции (easeOutCubic/easeInCubic) для плавных переходов. Каждая фаза игры имеет свой accent color (voting — синий, defense — оранжевый, final — красный). Добавлены методы hide(), destroy(), getContainer() для интеграции со Scene.
+

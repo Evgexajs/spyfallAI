@@ -587,7 +587,7 @@
         "Через ~1.5 сек надпись должна исчезнуть"
       ],
       "dependencies": ["TASK-013"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-028",
