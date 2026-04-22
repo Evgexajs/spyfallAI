@@ -351,3 +351,12 @@ Format for entries:
 - src/ui/index.ts (updated to re-export createSpeedControls and types)
 **Notes:** Согласно PRD 6.1: переключатель скорости x0.5/x1/x2. HTML разметка кнопок уже существовала в index.html (TASK-034). Функция связывает DOM-элементы с логикой и предоставляет callback API для интеграции с PlayerState.
 
+### TASK-038: Реализация индикатора прогресса
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/ui/progress.ts с функцией createProgressIndicator(). Реализован интерфейс ProgressIndicator с методами: update(current, total) для обновления прогресс-бара и текста "current / total", reset() для сброса в начальное состояние. Прогресс-бар заполняется пропорционально (percentage = current/total * 100). Защита от некорректных значений через Math.max/min.
+**Files changed:**
+- src/ui/progress.ts (created)
+- src/ui/index.ts (updated to re-export createProgressIndicator)
+**Notes:** Согласно PRD 6.1: индикатор прогресса показывает текущее событие из timeline. HTML разметка (#progress-bar, #progress-text) уже существовала в index.html (TASK-034) с CSS transition для плавной анимации.
+

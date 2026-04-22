@@ -816,7 +816,7 @@
         "Установить 10/10 - 100% заполнения"
       ],
       "dependencies": ["TASK-034"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-039",
