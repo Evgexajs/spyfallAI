@@ -453,3 +453,13 @@ Format for entries:
 - index.html (updated — полностью переработаны CSS стили, добавлены span.btn-icon к кнопкам)
 **Notes:** CSS переменные обеспечивают единообразие и упрощают будущие изменения темы. Disabled состояние чётко отличимо (opacity 0.7, серый цвет, убраны тени и градиент). Focus-visible для accessibility. Responsive: scale(0.9) → scale(0.6) при уменьшении ширины viewport.
 
+### TASK-050: Детерминированность цвета персонажа по ID
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан модуль src/utils/color-hash.ts с функцией getColorFromId(id: string): number. Функция генерирует детерминированный цвет из строки ID через хеширование → HSL → hex. PlaceholderCharacterRenderer обновлён для использования новой утилиты вместо локальной функции hashStringToColor.
+**Files changed:**
+- src/utils/color-hash.ts (created)
+- src/utils/index.ts (created)
+- src/render/placeholder-character.ts (updated — импорт getColorFromId из utils)
+**Notes:** HSL параметры: H = hash % 360, S = 60-80%, L = 45-60% обеспечивают яркие различимые цвета. Тесты подтвердили: один ID → один цвет (детерминированность), разные ID → разные цвета, 8 ID → 8 уникальных цветов.
+

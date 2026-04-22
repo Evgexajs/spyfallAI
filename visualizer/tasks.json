@@ -1062,7 +1062,7 @@
         "8 разных ID дают 8 различимых цветов"
       ],
       "dependencies": ["TASK-016"],
-      "status": "pending"
+      "status": "done"
     }
   ]
 }
