@@ -1,6 +1,8 @@
 import { createApp, Scene, loadBackground, preloadAssets } from '@render/index'
 import { parseGameData } from '@parser/index'
 import type { GameData } from '@parser/index'
+import { PlayerState } from '@player/index'
+import type { PlaybackSpeed } from '@player/index'
 import {
   createFileSelector,
   createErrorDisplay,
@@ -12,6 +14,7 @@ import {
 
 let currentGameData: GameData | null = null
 let scene: Scene | null = null
+let playerState: PlayerState | null = null
 
 async function init() {
   const app = await createApp()
@@ -50,6 +53,8 @@ async function init() {
 
       scene!.placeCharacters(currentGameData.characters)
 
+      playerState = new PlayerState(currentGameData.timeline)
+
       progressIndicator.update(0, currentGameData.timeline.length)
 
       loadingIndicator.hide()
@@ -66,7 +71,43 @@ async function init() {
     }
   })
 
-  speedControls.onSpeedChange((speed) => {
+  playbackControls.onPlay(() => {
+    if (!playerState) return
+
+    playerState.play()
+    playbackControls.setPlaying(true)
+
+    console.log(`Play: status=${playerState.status}, event=${playerState.currentEventIndex}/${playerState.totalEvents}`)
+  })
+
+  playbackControls.onPause(() => {
+    if (!playerState) return
+
+    playerState.pause()
+    playbackControls.setPlaying(false)
+
+    console.log(`Pause: status=${playerState.status}, event=${playerState.currentEventIndex}/${playerState.totalEvents}`)
+  })
+
+  playbackControls.onRestart(() => {
+    if (!playerState || !scene || !currentGameData) return
+
+    playerState.restart()
+    playbackControls.setPlaying(false)
+    playbackControls.reset()
+    progressIndicator.update(0, playerState.totalEvents)
+
+    scene.hideSpeechBubble()
+    scene.resetPhase()
+
+    console.log(`Restart: status=${playerState.status}, index reset to 0`)
+  })
+
+  speedControls.onSpeedChange((speed: PlaybackSpeed) => {
+    if (!playerState) return
+
+    playerState.setSpeed(speed)
+
     console.log(`Speed changed to: ${speed}x`)
   })
 
@@ -75,4 +116,4 @@ async function init() {
 
 init().catch(console.error)
 
-export { currentGameData, scene }
+export { currentGameData, scene, playerState }

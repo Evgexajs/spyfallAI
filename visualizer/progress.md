@@ -396,3 +396,11 @@ Format for entries:
 - src/main.ts (updated to use preloadAssets)
 **Notes:** Согласно PRD 7.5: preload происходит после валидации JSON, до завершения Play disabled. PreloadResult содержит флаги locationLoaded и fontsLoaded для диагностики. Функция готова к расширению при добавлении реальных шрифтов в assets/fonts/.
 
+### TASK-043: Интеграция PlayerState с UI контролами
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Реализована интеграция PlayerState с UI контролами в main.ts. Play кнопка вызывает playerState.play(), Pause — playerState.pause(), Restart — playerState.restart() с сбросом UI (прогресс, облачка, фаза сцены). Speed selector вызывает playerState.setSpeed(). UI реагирует на изменения через playbackControls.setPlaying() и reset().
+**Files changed:**
+- src/main.ts (updated — added PlayerState integration with playback/speed controls)
+**Notes:** PlayerState инициализируется при загрузке JSON с timeline. Restart также сбрасывает scene.hideSpeechBubble() и scene.resetPhase() для полного возврата в начальное состояние. Экспортирован playerState для использования в будущих интеграционных задачах (TASK-044, TASK-045).
+

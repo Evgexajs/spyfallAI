@@ -916,7 +916,7 @@
         "Нажать Restart - index должен сброситься"
       ],
       "dependencies": ["TASK-019", "TASK-036", "TASK-037"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-044",
