@@ -120,7 +120,7 @@
         "Проверить что все константы соответствуют PRD"
       ],
       "dependencies": ["TASK-002"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-006",

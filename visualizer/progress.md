@@ -61,3 +61,12 @@ Format for entries:
 - src/main.ts
 **Notes:** Vite config включает path aliases для всех модулей проекта. PixiJS v8 использует новый API с async init().
 
+### TASK-005: Создание конфигурационного файла с таймингами
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/config/timings.ts со всеми константами таймингов из PRD раздел 6.2. Добавлена также TYPING_INDICATOR_MS_PER_CHAR = 100 для формулы расчёта длительности индикатора.
+**Files changed:**
+- src/config/timings.ts (created)
+- src/config/index.ts (updated to re-export)
+**Notes:** Все значения соответствуют PRD: индикатор печатания 500-3000ms, скорость печати 30ms/char, hold 1500ms/20chars (min 1000ms), пауза между событиями 500ms, phase_change 1500ms, spy_guess 4000ms.
+
