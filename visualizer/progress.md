@@ -445,3 +445,11 @@ Format for entries:
 - src/main.ts (updated — added SOUND_HOOK stubs and call sites)
 **Notes:** Функции-заглушки используют void для подавления unused variable warnings. Вызовы хуков добавлены в соответствующие места: onLocationLoaded при загрузке JSON, остальные в renderEvent switch. Build проходит без ошибок, приложение работает корректно.
 
+### TASK-049: Стилизация UI панели управления
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Полностью переработаны CSS стили для UI панели управления. Добавлены CSS переменные для консистентной цветовой схемы (--color-*, --shadow-*, --transition-*, --radius-*). Улучшены стили кнопок: градиентный блик, тени, плавные hover/active/focus-visible состояния. Добавлены иконки к кнопкам (unicode символы: ▶ Play, ⏸ Pause, ↺ Restart, 📂 File). Улучшены группы контролов с фоновой подсветкой и рамками. Добавлена анимация slideIn для error display. Добавлены media queries для responsive масштабирования на экранах < 1920px.
+**Files changed:**
+- index.html (updated — полностью переработаны CSS стили, добавлены span.btn-icon к кнопкам)
+**Notes:** CSS переменные обеспечивают единообразие и упрощают будущие изменения темы. Disabled состояние чётко отличимо (opacity 0.7, серый цвет, убраны тени и градиент). Focus-visible для accessibility. Responsive: scale(0.9) → scale(0.6) при уменьшении ширины viewport.
+
