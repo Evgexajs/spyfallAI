@@ -161,11 +161,10 @@ export class SpeechBubble {
     this.background.clear()
 
     const indicatorWidth = DOT_COUNT * DOT_RADIUS * 2 + (DOT_COUNT - 1) * DOT_SPACING
-    const bubbleWidth = indicatorWidth + BUBBLE_PADDING * 2
-    this.container.x = this.targetPosition.x - bubbleWidth / 2
-    this.container.y = this.targetPosition.y
     const width = indicatorWidth + BUBBLE_PADDING * 2
     const height = DOT_RADIUS * 2 + BUBBLE_PADDING * 2
+    this.container.x = this.targetPosition.x - width / 2
+    this.container.y = this.targetPosition.y - height - TAIL_HEIGHT
     const { backgroundColor, borderColor, borderWidth } = this.currentStyle
 
     this.background.roundRect(0, 0, width, height, BUBBLE_RADIUS)
@@ -310,8 +309,9 @@ export class SpeechBubble {
       this.targetPosition = position
     }
     const bubbleWidth = this.calculateBubbleWidth()
+    const bubbleHeight = this.calculateBubbleHeight()
     this.container.x = this.targetPosition.x - bubbleWidth / 2
-    this.container.y = this.targetPosition.y
+    this.container.y = this.targetPosition.y - bubbleHeight - TAIL_HEIGHT
   }
 
   private calculateBubbleWidth(): number {
