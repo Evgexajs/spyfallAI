@@ -1,16 +1,41 @@
 import { Container, Graphics, Text, Ticker } from 'pixi.js'
 import type { Position } from './character-renderer'
+import { SpeechSubtype } from '@parser/types'
 
 const BUBBLE_MAX_WIDTH = 400
 const BUBBLE_PADDING = 16
 const BUBBLE_RADIUS = 12
 const TAIL_WIDTH = 20
 const TAIL_HEIGHT = 15
-const BACKGROUND_COLOR = 0xffffff
-const BORDER_COLOR = 0xcccccc
-const BORDER_WIDTH = 2
-const TEXT_COLOR = 0x333333
 const FONT_SIZE = 18
+
+interface BubbleStyle {
+  backgroundColor: number
+  borderColor: number
+  borderWidth: number
+  textColor: number
+}
+
+const STYLES: Record<SpeechSubtype, BubbleStyle> = {
+  [SpeechSubtype.Normal]: {
+    backgroundColor: 0xffffff,
+    borderColor: 0xcccccc,
+    borderWidth: 2,
+    textColor: 0x333333,
+  },
+  [SpeechSubtype.Defense]: {
+    backgroundColor: 0xfffef0,
+    borderColor: 0xf5a623,
+    borderWidth: 4,
+    textColor: 0x333333,
+  },
+  [SpeechSubtype.PostGuess]: {
+    backgroundColor: 0xf0f0f0,
+    borderColor: 0x999999,
+    borderWidth: 2,
+    textColor: 0x555555,
+  },
+}
 
 const DOT_RADIUS = 5
 const DOT_SPACING = 12
@@ -36,6 +61,8 @@ export class SpeechBubble {
   private typeTextTicker: Ticker | null = null
   private typeTextAccumulator = 0
 
+  private currentStyle: BubbleStyle = STYLES[SpeechSubtype.Normal]
+
   constructor() {
     this.container = new Container()
     this.container.visible = false
@@ -48,7 +75,7 @@ export class SpeechBubble {
       style: {
         fontFamily: 'Arial, sans-serif',
         fontSize: FONT_SIZE,
-        fill: TEXT_COLOR,
+        fill: this.currentStyle.textColor,
         align: 'left',
         wordWrap: true,
         wordWrapWidth: BUBBLE_MAX_WIDTH - BUBBLE_PADDING * 2
@@ -135,10 +162,11 @@ export class SpeechBubble {
     const indicatorWidth = DOT_COUNT * DOT_RADIUS * 2 + (DOT_COUNT - 1) * DOT_SPACING
     const width = indicatorWidth + BUBBLE_PADDING * 2
     const height = DOT_RADIUS * 2 + BUBBLE_PADDING * 2
+    const { backgroundColor, borderColor, borderWidth } = this.currentStyle
 
     this.background.roundRect(0, 0, width, height, BUBBLE_RADIUS)
-    this.background.fill(BACKGROUND_COLOR)
-    this.background.stroke({ width: BORDER_WIDTH, color: BORDER_COLOR })
+    this.background.fill(backgroundColor)
+    this.background.stroke({ width: borderWidth, color: borderColor })
 
     const tailX = width / 2
     const tailY = height
@@ -147,18 +175,18 @@ export class SpeechBubble {
     this.background.lineTo(tailX, tailY + TAIL_HEIGHT)
     this.background.lineTo(tailX + TAIL_WIDTH / 2, tailY)
     this.background.closePath()
-    this.background.fill(BACKGROUND_COLOR)
+    this.background.fill(backgroundColor)
 
     this.background.moveTo(tailX - TAIL_WIDTH / 2, tailY)
     this.background.lineTo(tailX, tailY + TAIL_HEIGHT)
-    this.background.stroke({ width: BORDER_WIDTH, color: BORDER_COLOR })
+    this.background.stroke({ width: borderWidth, color: borderColor })
 
     this.background.moveTo(tailX, tailY + TAIL_HEIGHT)
     this.background.lineTo(tailX + TAIL_WIDTH / 2, tailY)
-    this.background.stroke({ width: BORDER_WIDTH, color: BORDER_COLOR })
+    this.background.stroke({ width: borderWidth, color: borderColor })
 
     this.background.rect(tailX - TAIL_WIDTH / 2 + 1, tailY - 2, TAIL_WIDTH - 2, 4)
-    this.background.fill(BACKGROUND_COLOR)
+    this.background.fill(backgroundColor)
   }
 
   private animateTypingDots(ticker: Ticker): void {
@@ -177,6 +205,14 @@ export class SpeechBubble {
       } else {
         dot.alpha = 0.3
       }
+    }
+  }
+
+  setStyle(subtype: SpeechSubtype): void {
+    this.currentStyle = STYLES[subtype]
+    this.textDisplay.style.fill = this.currentStyle.textColor
+    if (this.visible) {
+      this.drawBackground()
     }
   }
 
@@ -285,10 +321,11 @@ export class SpeechBubble {
 
     const width = this.calculateBubbleWidth()
     const height = this.calculateBubbleHeight()
+    const { backgroundColor, borderColor, borderWidth } = this.currentStyle
 
     this.background.roundRect(0, 0, width, height, BUBBLE_RADIUS)
-    this.background.fill(BACKGROUND_COLOR)
-    this.background.stroke({ width: BORDER_WIDTH, color: BORDER_COLOR })
+    this.background.fill(backgroundColor)
+    this.background.stroke({ width: borderWidth, color: borderColor })
 
     const tailX = width / 2
     const tailY = height
@@ -297,17 +334,17 @@ export class SpeechBubble {
     this.background.lineTo(tailX, tailY + TAIL_HEIGHT)
     this.background.lineTo(tailX + TAIL_WIDTH / 2, tailY)
     this.background.closePath()
-    this.background.fill(BACKGROUND_COLOR)
+    this.background.fill(backgroundColor)
 
     this.background.moveTo(tailX - TAIL_WIDTH / 2, tailY)
     this.background.lineTo(tailX, tailY + TAIL_HEIGHT)
-    this.background.stroke({ width: BORDER_WIDTH, color: BORDER_COLOR })
+    this.background.stroke({ width: borderWidth, color: borderColor })
 
     this.background.moveTo(tailX, tailY + TAIL_HEIGHT)
     this.background.lineTo(tailX + TAIL_WIDTH / 2, tailY)
-    this.background.stroke({ width: BORDER_WIDTH, color: BORDER_COLOR })
+    this.background.stroke({ width: borderWidth, color: borderColor })
 
     this.background.rect(tailX - TAIL_WIDTH / 2 + 1, tailY - 2, TAIL_WIDTH - 2, 4)
-    this.background.fill(BACKGROUND_COLOR)
+    this.background.fill(backgroundColor)
   }
 }

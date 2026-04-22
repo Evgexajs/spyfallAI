@@ -237,3 +237,11 @@ Format for entries:
 - src/render/speech-bubble.ts (updated)
 **Notes:** Использован отдельный Ticker с аккумулятором времени для точного контроля скорости печатания. При вызове typeText() индикатор печатания автоматически скрывается. Метод destroy() корректно останавливает и очищает typeText тикер.
 
+### TASK-025: Стилизация облачка по subtype (normal, defense, post_guess)
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Расширен класс SpeechBubble методом setStyle(subtype: SpeechSubtype): void. Реализованы три визуально различимых стиля: normal (белый фон, серая рамка 2px), defense (кремовый фон, оранжевая рамка 4px — акцентный стиль), post_guess (светло-серый фон, серая рамка 2px, приглушённый текст).
+**Files changed:**
+- src/render/speech-bubble.ts (updated)
+**Notes:** Добавлен интерфейс BubbleStyle и объект STYLES с настройками для каждого subtype. Методы drawBackground() и drawBackgroundForTypingIndicator() теперь используют currentStyle. При вызове setStyle() автоматически обновляется цвет текста и перерисовывается фон если облачко видимо.
+
