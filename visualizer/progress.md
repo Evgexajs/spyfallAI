@@ -272,3 +272,12 @@ Format for entries:
 - src/render/scene.ts (updated with phase styling)
 **Notes:** Стили фаз: main_round — нейтральный, voting — холодный синий (hue -10, tint 0x3366cc), defense — тёплый оранжевый (hue +10, tint 0xff9933), final — высокий контраст и насыщенность (contrast +0.2, saturation +0.15, tint 0xff3333), resolution — приглушённый (saturation -0.2). Фильтр применяется ко всему stage.
 
+### TASK-029: Реализация визуализации vote события
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан класс VoteIndicator в src/render/vote-indicator.ts для визуализации голосов. Метод showVote(voterPosition, targetPosition, phase) рисует стрелку от voter к target и подсвечивает цель. Анимация: fade_in (20%), hold (60%), fade_out (20%), общая длительность 2000ms. Preliminary vote — синий цвет, тонкая стрелка (4px), слабая подсветка (alpha 0.3). Final vote — красный цвет, толстая стрелка (8px), яркая подсветка (alpha 0.5).
+**Files changed:**
+- src/render/vote-indicator.ts (created)
+- src/render/index.ts (updated to re-export VoteIndicator)
+**Notes:** Стрелка начинается на расстоянии 60px от центра voter (край круга персонажа) и заканчивается за 80px до target (у границы highlight). Наконечник стрелки — треугольник 20×16px. Highlight — круг radius=80 + внешний stroke. Easing-функции: easeOutCubic/easeInCubic для плавных переходов.
+

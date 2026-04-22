@@ -628,7 +628,7 @@
         "Target должен быть подсвечен"
       ],
       "dependencies": ["TASK-018"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-030",
