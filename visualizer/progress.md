@@ -221,3 +221,11 @@ Format for entries:
 - src/render/index.ts (updated to re-export SpeechBubble)
 **Notes:** Использован PixiJS v8 Graphics API для рисования roundRect и хвостика. Облачко позиционируется так, чтобы хвостик указывал на точку position. Текст автоматически переносится при wordWrapWidth = MAX_WIDTH - padding * 2.
 
+### TASK-023: Реализация индикатора печатания (три точки)
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Расширен класс SpeechBubble методами showTypingIndicator() и hideTypingIndicator(). Три точки отображаются с циклической анимацией — каждая точка последовательно становится ярче (alpha 0.3 → 1.0 по синусоиде), создавая эффект "волны". Цикл анимации: 400ms на точку, полный цикл 1200ms.
+**Files changed:**
+- src/render/speech-bubble.ts (updated)
+**Notes:** Использован отдельный Ticker для анимации. При showTypingIndicator() текст скрывается и рисуется компактный фон под индикатор. При hideTypingIndicator() тикер останавливается и уничтожается. Анимация использует Math.sin для плавного перехода alpha. Метод destroy() корректно очищает ресурсы.
+

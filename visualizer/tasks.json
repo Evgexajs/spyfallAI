@@ -504,7 +504,7 @@
         "Вызвать hideTypingIndicator() - точки должны исчезнуть"
       ],
       "dependencies": ["TASK-022"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-024",
