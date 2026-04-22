@@ -1022,7 +1022,7 @@
         "Приложение работает без ошибок"
       ],
       "dependencies": ["TASK-044"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-049",

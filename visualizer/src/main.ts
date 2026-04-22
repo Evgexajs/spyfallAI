@@ -12,6 +12,33 @@ import {
   createProgressIndicator,
 } from '@ui/index'
 
+// =============================================================================
+// SOUND HOOKS - Stub functions for future audio integration (PRD 7.3)
+// These functions are called at key moments where sound effects will be added.
+// Current implementation: no-op stubs that don't affect playback.
+// =============================================================================
+
+// SOUND_HOOK: персонаж начал говорить
+function onCharacterStartedSpeaking(characterId: string, _text: string): void {
+  void characterId
+}
+
+// SOUND_HOOK: смена фазы
+function onPhaseChange(phase: string, _label: string): void {
+  void phase
+}
+
+// SOUND_HOOK: spy_guess момент
+function onSpyGuess(spyId: string, guessedLocation: string, _correct: boolean): void {
+  void spyId
+  void guessedLocation
+}
+
+// SOUND_HOOK: фоновая атмосфера локации
+function onLocationLoaded(locationId: string): void {
+  void locationId
+}
+
 let currentGameData: GameData | null = null
 let scene: Scene | null = null
 let playerState: PlayerState | null = null
@@ -53,6 +80,9 @@ async function init() {
 
       await loadBackground(app, currentGameData.scene.location_id)
 
+      // SOUND_HOOK: фоновая атмосфера локации
+      onLocationLoaded(currentGameData.scene.location_id)
+
       scene!.placeCharacters(currentGameData.characters)
 
       playerState = new PlayerState(currentGameData.timeline)
@@ -86,8 +116,6 @@ async function init() {
 
       progressIndicator.update(playerState.currentEventIndex, playerState.totalEvents)
 
-      // SOUND_HOOK: event starting (for future sound integration)
-
       await renderEvent(event)
 
       if (eventPlayer.isStopped) break
@@ -111,12 +139,14 @@ async function init() {
 
     switch (event.type) {
       case 'speech':
-        // SOUND_HOOK: character started speaking
+        // SOUND_HOOK: персонаж начал говорить
+        onCharacterStartedSpeaking(event.speaker_id, event.content)
         await scene.renderSpeech(event, eventPlayer)
         break
 
       case 'phase_change':
-        // SOUND_HOOK: phase change
+        // SOUND_HOOK: смена фазы
+        onPhaseChange(event.phase, event.label)
         await scene.renderPhaseChange(event)
         break
 
@@ -129,7 +159,8 @@ async function init() {
         break
 
       case 'spy_guess':
-        // SOUND_HOOK: spy guess moment
+        // SOUND_HOOK: spy_guess момент
+        onSpyGuess(event.spy_id, event.guessed_location_name, event.correct)
         await scene.renderSpyGuess(event)
         break
 
