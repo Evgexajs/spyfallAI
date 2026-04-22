@@ -2,6 +2,7 @@
  * JSON schema validation for GameData
  * TASK-008: Basic validation of required fields and structure
  * TASK-009: Enum value validation for timeline events
+ * TASK-010: Referential integrity validation for character IDs
  */
 
 export interface ValidationResult {
@@ -82,6 +83,91 @@ function validateTimelineEvents(timeline: unknown[], errors: string[]): void {
   });
 }
 
+function validateReferentialIntegrity(
+  characters: unknown[],
+  timeline: unknown[],
+  errors: string[]
+): void {
+  const characterIds = new Set<string>();
+  characters.forEach((char) => {
+    if (isObject(char) && 'id' in char && isString(char.id)) {
+      characterIds.add(char.id);
+    }
+  });
+
+  if (characterIds.size === 0) {
+    return;
+  }
+
+  timeline.forEach((event, index) => {
+    if (!isObject(event) || !('type' in event) || !isString(event.type)) {
+      return;
+    }
+
+    const eventType = event.type;
+
+    switch (eventType) {
+      case 'speech': {
+        if ('speaker_id' in event && isString(event.speaker_id)) {
+          if (!characterIds.has(event.speaker_id)) {
+            errors.push(
+              `timeline[${index}] (speech): speaker_id '${event.speaker_id}' does not exist in characters`
+            );
+          }
+        }
+        if ('addressee_id' in event && event.addressee_id !== null) {
+          if (isString(event.addressee_id) && !characterIds.has(event.addressee_id)) {
+            errors.push(
+              `timeline[${index}] (speech): addressee_id '${event.addressee_id}' does not exist in characters`
+            );
+          }
+        }
+        break;
+      }
+
+      case 'vote': {
+        if ('voter_id' in event && isString(event.voter_id)) {
+          if (!characterIds.has(event.voter_id)) {
+            errors.push(
+              `timeline[${index}] (vote): voter_id '${event.voter_id}' does not exist in characters`
+            );
+          }
+        }
+        if ('target_id' in event && isString(event.target_id)) {
+          if (!characterIds.has(event.target_id)) {
+            errors.push(
+              `timeline[${index}] (vote): target_id '${event.target_id}' does not exist in characters`
+            );
+          }
+        }
+        break;
+      }
+
+      case 'spy_guess': {
+        if ('spy_id' in event && isString(event.spy_id)) {
+          if (!characterIds.has(event.spy_id)) {
+            errors.push(
+              `timeline[${index}] (spy_guess): spy_id '${event.spy_id}' does not exist in characters`
+            );
+          }
+        }
+        break;
+      }
+
+      case 'outcome': {
+        if ('spy_id' in event && isString(event.spy_id)) {
+          if (!characterIds.has(event.spy_id)) {
+            errors.push(
+              `timeline[${index}] (outcome): spy_id '${event.spy_id}' does not exist in characters`
+            );
+          }
+        }
+        break;
+      }
+    }
+  });
+}
+
 export function validateGameData(json: unknown): ValidationResult {
   const errors: string[] = [];
 
@@ -147,6 +233,10 @@ export function validateGameData(json: unknown): ValidationResult {
     } else {
       validateTimelineEvents(json.timeline, errors);
     }
+  }
+
+  if (isArray(json.characters) && isArray(json.timeline)) {
+    validateReferentialIntegrity(json.characters, json.timeline, errors);
   }
 
   return {

@@ -229,7 +229,7 @@
         "Проверить все типы ссылок"
       ],
       "dependencies": ["TASK-009"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-011",

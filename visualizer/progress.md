@@ -105,3 +105,11 @@ Format for entries:
 - src/parser/validator.ts (updated)
 **Notes:** Используются константные массивы VALID_* для валидации. Сообщения об ошибках включают индекс события, тип и список допустимых значений.
 
+### TASK-010: Валидация ссылочной целостности ID персонажей
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Добавлена функция validateReferentialIntegrity() в validator.ts. Проверяет что все ID персонажей в событиях timeline существуют в массиве characters: speech.speaker_id, speech.addressee_id (если не null), vote.voter_id, vote.target_id, spy_guess.spy_id, outcome.spy_id. Ошибки указывают индекс события, тип и конкретное поле с невалидным ID.
+**Files changed:**
+- src/parser/validator.ts (updated)
+**Notes:** Валидация выполняется после базовой проверки схемы и enum-значений. При пустом списке characters валидация ссылок пропускается.
+
