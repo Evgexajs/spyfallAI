@@ -289,7 +289,7 @@
         "В консоли не должно быть ошибок PixiJS"
       ],
       "dependencies": ["TASK-004"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-014",

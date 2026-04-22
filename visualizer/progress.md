@@ -130,3 +130,13 @@ Format for entries:
 - src/parser/index.ts (updated to re-export parser)
 **Notes:** Все тесты пройдены: невалидный JSON возвращает ошибку парсинга, валидный JSON возвращает GameData с правильной структурой.
 
+### TASK-013: Инициализация PixiJS Application
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/render/app.ts с функцией createApp(): Promise<Application>. Функция инициализирует PixiJS Application с размером сцены 1920x1080, чёрным фоном, поддержкой devicePixelRatio. Canvas добавляется в контейнер #app. Обновлён main.ts для использования нового модуля.
+**Files changed:**
+- src/render/app.ts (created)
+- src/render/index.ts (updated to re-export createApp)
+- src/main.ts (updated to use createApp from render module)
+**Notes:** Архитектурно логика инициализации PixiJS вынесена в отдельный модуль render слоя. TypeScript компилируется без ошибок, npm run build успешен.
+
