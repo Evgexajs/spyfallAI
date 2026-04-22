@@ -1,0 +1,190 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "test-001",
+    "title": "Test Game - Restaurant"
+  },
+  "scene": {
+    "location_id": "restaurant",
+    "location_name": "Ресторан"
+  },
+  "characters": [
+    {
+      "id": "alice",
+      "display_name": "Алиса",
+      "position_hint": 0
+    },
+    {
+      "id": "bob",
+      "display_name": "Боб",
+      "position_hint": 1
+    },
+    {
+      "id": "carol",
+      "display_name": "Кэрол",
+      "position_hint": 2
+    },
+    {
+      "id": "dave",
+      "display_name": "Дэйв",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "alice",
+      "addressee_id": "bob",
+      "content": "Боб, как тебе здешнее обслуживание?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "bob",
+      "addressee_id": null,
+      "content": "Официанты работают отлично, я всегда оставляю чаевые.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "carol",
+      "addressee_id": "dave",
+      "content": "Дэйв, что ты обычно заказываешь в таких местах?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "dave",
+      "addressee_id": null,
+      "content": "Мне нравится пробовать разные блюда из меню...",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "Прошло 3 минуты"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "alice",
+      "addressee_id": "dave",
+      "content": "Дэйв, ты странно отвечаешь. Как часто ты сюда приходишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "dave",
+      "addressee_id": null,
+      "content": "Достаточно часто... когда есть время.",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "Голосование инициировано"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "alice",
+      "target_id": "dave",
+      "comment": "Дэйв очень уклончиво отвечал на вопросы!"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "bob",
+      "target_id": "dave",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "carol",
+      "target_id": "dave",
+      "comment": "Согласна, он явно что-то скрывает."
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защита"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "dave",
+      "addressee_id": null,
+      "content": "Подождите! Я просто не люблю много говорить. Но я точно знаю, что мы в ресторане - посмотрите на эти столики и меню!",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "final",
+      "label": "Финальное голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "alice",
+      "target_id": "dave",
+      "comment": "Все равно голосую против Дэйва."
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "bob",
+      "target_id": "dave",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "carol",
+      "target_id": "alice",
+      "comment": "Хм, может это Алиса нас отвлекает?"
+    },
+    {
+      "type": "system_message",
+      "content": "Дэйв получил большинство голосов"
+    },
+    {
+      "type": "spy_guess",
+      "spy_id": "dave",
+      "guessed_location_id": "restaurant",
+      "guessed_location_name": "Ресторан",
+      "correct": true
+    },
+    {
+      "type": "speech",
+      "speaker_id": "alice",
+      "addressee_id": null,
+      "content": "Не могу поверить! Он угадал локацию!",
+      "subtype": "post_guess"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "bob",
+      "addressee_id": null,
+      "content": "Мы были так близки к победе...",
+      "subtype": "post_guess"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "dave",
+      "reason": "Шпион угадал локацию после разоблачения"
+    }
+  ]
+}

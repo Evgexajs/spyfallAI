@@ -1001,7 +1001,7 @@
         "Валидация должна пройти"
       ],
       "dependencies": ["TASK-012"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-048",

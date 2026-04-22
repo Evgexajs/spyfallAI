@@ -429,3 +429,11 @@ Format for entries:
 - (нет изменений — код уже полностью интегрирован)
 **Notes:** Build (npm run build) и dev server (npm run dev) работают корректно. Приложение готово к end-to-end тестированию с тестовым JSON файлом (TASK-047). Архитектура соответствует PRD 7.1: слои parser, player, render, ui изолированы друг от друга.
 
+### TASK-047: Создание тестового JSON файла для проверки
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан assets/test-game.json — полноценный тестовый сценарий игры в ресторане с 4 персонажами (Алиса, Боб, Кэрол, Дэйв — шпион). Timeline содержит 25 событий: 5 phase_change (main_round, voting, defense, final, resolution), 9 speech (6 normal, 1 defense, 2 post_guess), 3 system_message, 6 vote (4 с comment, 2 без), 1 spy_guess (correct=true), 1 outcome (winner=spy). Все acceptance criteria выполнены.
+**Files changed:**
+- assets/test-game.json (created)
+**Notes:** Сценарий описывает реалистичную партию: основной раунд с вопросами-ответами, подозрение на Дэйва, голосование, защита шпиона, финальное голосование, угадывание локации шпионом (успешно) и победа шпиона. Все enum-значения соответствуют PRD 5.2, все ID персонажей валидны, outcome — последнее событие.
+
