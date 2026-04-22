@@ -281,3 +281,11 @@ Format for entries:
 - src/render/index.ts (updated to re-export VoteIndicator)
 **Notes:** Стрелка начинается на расстоянии 60px от центра voter (край круга персонажа) и заканчивается за 80px до target (у границы highlight). Наконечник стрелки — треугольник 20×16px. Highlight — круг radius=80 + внешний stroke. Easing-функции: easeOutCubic/easeInCubic для плавных переходов.
 
+### TASK-030: Интеграция vote.comment с облачком
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Расширен класс Scene методом showVote(voterId, targetId, phase, comment?) для интеграции vote.comment с облачком речи. При наличии comment сначала показывается облачко над voter с индикатором печатания, затем текст печатается посимвольно, после hold-периода облачко скрывается и отображается стрелка голоса. Облачко использует стиль SpeechSubtype.Normal (нейтральный).
+**Files changed:**
+- src/render/scene.ts (updated — добавлен showVote метод, VoteIndicator интеграция)
+**Notes:** Добавлен VoteIndicator контейнер в Scene, метод getVoteIndicator() для доступа. Тайминги: typing indicator duration, typing speed (30ms/char), hold duration — все используют calculateTypingIndicatorDuration() и calculateHoldDuration() из player/timing.ts. Согласно PRD 5.2: "Облачко vote.comment использует нейтральный стиль (ближе к speech.subtype: normal)".
+

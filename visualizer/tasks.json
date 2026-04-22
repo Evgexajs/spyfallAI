@@ -647,7 +647,7 @@
         "После исчезновения - стрелка голоса"
       ],
       "dependencies": ["TASK-026", "TASK-029"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-031",

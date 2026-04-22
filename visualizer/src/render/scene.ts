@@ -1,11 +1,19 @@
 import { Application, Container, Graphics, ColorMatrixFilter } from 'pixi.js'
 import type { Character } from '@parser/types'
-import { Phase } from '@parser/types'
+import { Phase, VotePhase, SpeechSubtype } from '@parser/types'
 import type { CharacterRenderer } from './character-renderer'
 import { createCharacterRenderer } from './character-factory'
 import { getSlotMap, type SlotPosition } from '@config/slots'
 import { getPhaseStyle } from '@config/phase-styles'
 import { SpeechBubble } from './speech-bubble'
+import { VoteIndicator } from './vote-indicator'
+import {
+  TYPING_SPEED_MS_PER_CHAR,
+} from '@config/timings'
+import {
+  calculateTypingIndicatorDuration,
+  calculateHoldDuration,
+} from '@player/timing'
 
 const CHARACTER_RADIUS = 60
 const BUBBLE_OFFSET_Y = 15
@@ -16,9 +24,11 @@ export class Scene {
   private app: Application
   private characterContainer: Container
   private bubbleContainer: Container
+  private voteIndicatorContainer: Container
   private renderers: Map<string, CharacterRenderer> = new Map()
   private characterPositions: Map<string, SlotPosition> = new Map()
   private currentBubble: SpeechBubble | null = null
+  private voteIndicator: VoteIndicator
   private phaseFilter: ColorMatrixFilter
   private phaseTintOverlay: Graphics
   private currentPhase: Phase = Phase.MainRound
@@ -40,6 +50,13 @@ export class Scene {
     this.bubbleContainer = new Container()
     this.bubbleContainer.label = 'speech-bubbles'
     this.app.stage.addChild(this.bubbleContainer)
+
+    this.voteIndicatorContainer = new Container()
+    this.voteIndicatorContainer.label = 'vote-indicators'
+    this.app.stage.addChild(this.voteIndicatorContainer)
+
+    this.voteIndicator = new VoteIndicator()
+    this.voteIndicatorContainer.addChild(this.voteIndicator.getContainer())
 
     this.applyPhaseStyle(Phase.MainRound)
   }
@@ -89,6 +106,48 @@ export class Scene {
       this.currentBubble.destroy()
       this.currentBubble = null
     }
+  }
+
+  async showVote(
+    voterId: string,
+    targetId: string,
+    phase: VotePhase,
+    comment?: string | null
+  ): Promise<void> {
+    const voterPosition = this.characterPositions.get(voterId)
+    const targetPosition = this.characterPositions.get(targetId)
+
+    if (!voterPosition || !targetPosition) {
+      return
+    }
+
+    if (comment) {
+      const bubble = this.showSpeechBubble(voterId)
+      if (bubble) {
+        bubble.setStyle(SpeechSubtype.Normal)
+        bubble.showTypingIndicator()
+
+        const indicatorDuration = calculateTypingIndicatorDuration(comment.length)
+        await this.delay(indicatorDuration)
+
+        await bubble.typeText(comment, TYPING_SPEED_MS_PER_CHAR)
+
+        const holdDuration = calculateHoldDuration(comment.length)
+        await this.delay(holdDuration)
+
+        this.hideSpeechBubble()
+      }
+    }
+
+    await this.voteIndicator.showVote(voterPosition, targetPosition, phase)
+  }
+
+  getVoteIndicator(): VoteIndicator {
+    return this.voteIndicator
+  }
+
+  private delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms))
   }
 
   getCharacterRenderer(characterId: string): CharacterRenderer | undefined {
@@ -205,11 +264,13 @@ export class Scene {
 
   destroy(): void {
     this.clearCharacters()
+    this.voteIndicator.destroy()
     this.app.stage.filters = []
     this.phaseFilter.destroy()
     this.app.stage.removeChild(this.phaseTintOverlay)
     this.phaseTintOverlay.destroy()
     this.app.stage.removeChild(this.characterContainer)
     this.app.stage.removeChild(this.bubbleContainer)
+    this.app.stage.removeChild(this.voteIndicatorContainer)
   }
 }
