@@ -413,3 +413,11 @@ Format for entries:
 - src/main.ts (updated — playback loop, EventPlayer integration, renderEvent routing)
 **Notes:** Событие speech корректно связывает isPaused состояние между EventPlayer и SpeechBubble для паузы посреди печатания текста. Все overlay'и инициализируются в конструкторе Scene и добавляются в overlayContainer. При Restart вызывается hideAllOverlays() для полной очистки.
 
+### TASK-045: Интеграция прогресса воспроизведения с UI
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Верифицирована и задокументирована интеграция прогресса воспроизведения с UI. Все acceptance criteria были реализованы в рамках TASK-044: progressIndicator.update() вызывается после каждого события в playback loop (main.ts:87), при завершении timeline устанавливается status 'finished' через PlayerState.isFinished, при outcome вызывается playbackControls.setFinished() который отключает Play/Pause и оставляет активным только Restart.
+**Files changed:**
+- (нет изменений — функциональность уже реализована в TASK-044)
+**Notes:** Интеграция была выполнена как часть playback loop в TASK-044. Прогресс показывает "current/total" где current — номер текущего события (1-based после nextEvent). При 5 из 10 событий показывается "5/10" (50%). После последнего события setFinished() корректно блокирует кнопки Play/Pause.
+

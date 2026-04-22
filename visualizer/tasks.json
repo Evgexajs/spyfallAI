@@ -955,7 +955,7 @@
         "Дойти до outcome - Play должен стать disabled"
       ],
       "dependencies": ["TASK-038", "TASK-044"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-046",
