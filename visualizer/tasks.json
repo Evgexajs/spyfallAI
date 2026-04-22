@@ -1,0 +1,1068 @@
+{
+  "agent_instructions": {
+    "before_start": [
+      "Прочитай этот файл и git log --oneline -20",
+      "Выбери ОДНУ задачу со статусом pending и наивысшим приоритетом",
+      "Проверь, что все dependencies этой задачи имеют статус done"
+    ],
+    "during_work": [
+      "Работай только над выбранной задачей",
+      "Делай коммиты после каждого логического изменения",
+      "Не трогай код, не связанный с текущей задачей"
+    ],
+    "before_finish": [
+      "Выполни ВСЕ test_steps из задачи",
+      "Меняй status на done ТОЛЬКО после успешного прохождения всех тестов",
+      "Напиши summary в progress.md",
+      "ЗАПРЕЩЕНО удалять или редактировать задачи - только менять status"
+    ]
+  },
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "Инициализация package.json и базовых зависимостей проекта",
+      "acceptance_criteria": [
+        "Создан package.json с именем spyfall-visualizer",
+        "Добавлены зависимости: pixi.js",
+        "Добавлены devDependencies: vite, typescript",
+        "Добавлены scripts: dev, build, preview"
+      ],
+      "test_steps": [
+        "cd /Users/evgeniy/Desktop/spyfallAI/visualizer && cat package.json",
+        "Проверить наличие pixi.js в dependencies",
+        "Проверить наличие vite и typescript в devDependencies"
+      ],
+      "dependencies": [],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-002",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "Создание структуры папок проекта согласно PRD раздел 7.4",
+      "acceptance_criteria": [
+        "Создана папка src/parser/",
+        "Создана папка src/player/",
+        "Создана папка src/render/",
+        "Создана папка src/ui/",
+        "Создана папка src/config/",
+        "Создана папка assets/locations/",
+        "Создана папка assets/fonts/",
+        "В каждой папке src/* создан index.ts с экспортом"
+      ],
+      "test_steps": [
+        "ls -la /Users/evgeniy/Desktop/spyfallAI/visualizer/src/",
+        "ls -la /Users/evgeniy/Desktop/spyfallAI/visualizer/assets/",
+        "Проверить что все папки существуют"
+      ],
+      "dependencies": ["TASK-001"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-003",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "Настройка TypeScript конфигурации",
+      "acceptance_criteria": [
+        "Создан tsconfig.json с strict mode",
+        "Настроены paths для алиасов (@parser, @player, @render, @ui, @config)",
+        "Настроен target ES2020 или выше",
+        "Включен moduleResolution: bundler"
+      ],
+      "test_steps": [
+        "cat /Users/evgeniy/Desktop/spyfallAI/visualizer/tsconfig.json",
+        "npx tsc --noEmit (должен пройти без ошибок)"
+      ],
+      "dependencies": ["TASK-001", "TASK-002"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-004",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "Настройка Vite dev server и точки входа",
+      "acceptance_criteria": [
+        "Создан vite.config.ts с настройками для TypeScript",
+        "Создан index.html с canvas контейнером",
+        "Создан src/main.ts как точка входа",
+        "Dev server запускается на localhost:5173"
+      ],
+      "test_steps": [
+        "cd /Users/evgeniy/Desktop/spyfallAI/visualizer && npm run dev",
+        "Открыть http://localhost:5173 в браузере",
+        "Убедиться что страница загружается без ошибок в консоли"
+      ],
+      "dependencies": ["TASK-003"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-005",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "Создание конфигурационного файла с таймингами",
+      "acceptance_criteria": [
+        "Создан src/config/timings.ts с константами из PRD раздел 6.2",
+        "TYPING_INDICATOR_MIN_MS = 500",
+        "TYPING_INDICATOR_MAX_MS = 3000",
+        "TYPING_SPEED_MS_PER_CHAR = 30",
+        "HOLD_MS_PER_20_CHARS = 1500",
+        "HOLD_MIN_MS = 1000",
+        "EVENT_GAP_MS = 500",
+        "VOTING_EXTRA_PAUSE_MS = 1000",
+        "PHASE_CHANGE_DURATION_MS = 1500",
+        "SPY_GUESS_DURATION_MS = 4000",
+        "Все константы экспортированы"
+      ],
+      "test_steps": [
+        "cat /Users/evgeniy/Desktop/spyfallAI/visualizer/src/config/timings.ts",
+        "Проверить что все константы соответствуют PRD"
+      ],
+      "dependencies": ["TASK-002"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-006",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "Создание конфигурации карт слотов для персонажей (N=2..8)",
+      "acceptance_criteria": [
+        "Создан src/config/slots.ts",
+        "Экспортирован SLOT_MAPS: Record<number, {x: number, y: number}[]>",
+        "Карты для N=2,3,4,5,6,7,8 персонажей",
+        "Координаты в пространстве 1920x1080",
+        "N=2: два персонажа по бокам",
+        "N=5-6: полукруг",
+        "N=7-8: два ряда или расширенный полукруг"
+      ],
+      "test_steps": [
+        "cat /Users/evgeniy/Desktop/spyfallAI/visualizer/src/config/slots.ts",
+        "Проверить что все 7 карт определены",
+        "Проверить что координаты в разумных пределах (0-1920, 0-1080)"
+      ],
+      "dependencies": ["TASK-002"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-007",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Определение TypeScript типов для API контракта",
+      "acceptance_criteria": [
+        "Создан src/parser/types.ts",
+        "Тип GameData (version, metadata, scene, characters, timeline)",
+        "Тип Character (id, display_name, position_hint)",
+        "Тип Scene (location_id, location_name)",
+        "Тип TimelineEvent (union type для всех событий)",
+        "Типы SpeechEvent, PhaseChangeEvent, SystemMessageEvent, VoteEvent, SpyGuessEvent, OutcomeEvent",
+        "Enum-ы SpeechSubtype, Phase, VotePhase, Winner"
+      ],
+      "test_steps": [
+        "cat /Users/evgeniy/Desktop/spyfallAI/visualizer/src/parser/types.ts",
+        "npx tsc --noEmit (должен скомпилироваться без ошибок)"
+      ],
+      "dependencies": ["TASK-003"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-008",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Реализация базовой валидации JSON схемы",
+      "acceptance_criteria": [
+        "Создан src/parser/validator.ts",
+        "Функция validateGameData(json: unknown): ValidationResult",
+        "Проверка наличия обязательных полей верхнего уровня",
+        "Проверка что characters не пустой (2-8 персонажей)",
+        "Проверка что timeline не пустой",
+        "ValidationResult содержит isValid: boolean и errors: string[]"
+      ],
+      "test_steps": [
+        "Импортировать validateGameData",
+        "Вызвать с пустым объектом - должен вернуть isValid: false",
+        "Вызвать с characters: [] - должен вернуть ошибку",
+        "Вызвать с корректным JSON - должен вернуть isValid: true"
+      ],
+      "dependencies": ["TASK-007"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-009",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Валидация enum значений в событиях timeline",
+      "acceptance_criteria": [
+        "Расширен validator.ts",
+        "Проверка type в каждом событии (speech, phase_change, system_message, vote, spy_guess, outcome)",
+        "Проверка speech.subtype (normal, defense, post_guess)",
+        "Проверка phase_change.phase (main_round, voting, defense, final, resolution)",
+        "Проверка vote.phase (preliminary, final)",
+        "Проверка outcome.winner (spy, civilians)",
+        "При неизвестном значении - ошибка валидации"
+      ],
+      "test_steps": [
+        "Вызвать с событием type: 'unknown' - должна быть ошибка",
+        "Вызвать с speech.subtype: 'invalid' - должна быть ошибка",
+        "Вызвать с корректными enum - должен пройти"
+      ],
+      "dependencies": ["TASK-008"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-010",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Валидация ссылочной целостности ID персонажей",
+      "acceptance_criteria": [
+        "Расширен validator.ts",
+        "Проверка speech.speaker_id существует в characters",
+        "Проверка speech.addressee_id null или существует в characters",
+        "Проверка vote.voter_id и vote.target_id существуют",
+        "Проверка spy_guess.spy_id существует",
+        "Проверка outcome.spy_id существует",
+        "Ошибка указывает какое событие и какое поле не прошло проверку"
+      ],
+      "test_steps": [
+        "Создать JSON с несуществующим speaker_id",
+        "Валидация должна вернуть ошибку с указанием события и поля",
+        "Проверить все типы ссылок"
+      ],
+      "dependencies": ["TASK-009"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-011",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Валидация порядка outcome события",
+      "acceptance_criteria": [
+        "Расширен validator.ts",
+        "Если outcome присутствует - он должен быть последним событием",
+        "Если за outcome идут другие события - ошибка валидации",
+        "Ошибка указывает что outcome должен быть последним"
+      ],
+      "test_steps": [
+        "JSON с outcome не в конце - должна быть ошибка",
+        "JSON с outcome в конце - должен пройти",
+        "JSON без outcome - должен пройти (outcome опционален)"
+      ],
+      "dependencies": ["TASK-010"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-012",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Реализация парсера JSON в типизированные объекты",
+      "acceptance_criteria": [
+        "Создан src/parser/parser.ts",
+        "Функция parseGameData(json: string): ParseResult",
+        "ParseResult содержит data: GameData | null и errors: string[]",
+        "Использует validator для проверки",
+        "При ошибке парсинга JSON - понятное сообщение",
+        "При успехе - возвращает типизированный GameData"
+      ],
+      "test_steps": [
+        "Вызвать с невалидным JSON строкой - должна быть ошибка парсинга",
+        "Вызвать с валидным JSON - должен вернуть GameData",
+        "Проверить что возвращаемый объект имеет правильную структуру"
+      ],
+      "dependencies": ["TASK-011"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-013",
+      "category": "render",
+      "priority": "critical",
+      "description": "Инициализация PixiJS Application",
+      "acceptance_criteria": [
+        "Создан src/render/app.ts",
+        "Функция createApp(): Promise<Application>",
+        "Размер сцены 1920x1080",
+        "Canvas добавляется в #app контейнер",
+        "Фон по умолчанию - черный"
+      ],
+      "test_steps": [
+        "npm run dev",
+        "Открыть браузер - должен отобразиться черный canvas 1920x1080",
+        "В консоли не должно быть ошибок PixiJS"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-014",
+      "category": "render",
+      "priority": "critical",
+      "description": "Реализация загрузки и отображения фона локации",
+      "acceptance_criteria": [
+        "Создан src/render/background.ts",
+        "Функция loadBackground(app: Application, locationId: string): Promise<void>",
+        "Загружает assets/locations/{locationId}.png",
+        "При ошибке загрузки - fallback градиент (темно-синий к черному)",
+        "Фон масштабируется на весь canvas"
+      ],
+      "test_steps": [
+        "Положить тестовую картинку в assets/locations/test.png",
+        "Вызвать loadBackground с 'test' - должна отобразиться картинка",
+        "Вызвать с несуществующим ID - должен отобразиться градиент"
+      ],
+      "dependencies": ["TASK-013"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-015",
+      "category": "render",
+      "priority": "critical",
+      "description": "Создание интерфейса CharacterRenderer",
+      "acceptance_criteria": [
+        "Создан src/render/character-renderer.ts",
+        "Интерфейс CharacterRenderer с методами:",
+        "  - render(position: {x, y}): void",
+        "  - setState(state: 'idle' | 'speaking'): void",
+        "  - getContainer(): Container",
+        "  - destroy(): void",
+        "Тип CharacterState = 'idle' | 'speaking'"
+      ],
+      "test_steps": [
+        "cat src/render/character-renderer.ts",
+        "Проверить что интерфейс определен со всеми методами",
+        "npx tsc --noEmit должен пройти"
+      ],
+      "dependencies": ["TASK-013"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-016",
+      "category": "render",
+      "priority": "critical",
+      "description": "Реализация PlaceholderCharacterRenderer (круг с именем)",
+      "acceptance_criteria": [
+        "Создан src/render/placeholder-character.ts",
+        "Класс PlaceholderCharacterRenderer implements CharacterRenderer",
+        "Рендерит круг диаметром 120px",
+        "Цвет круга - детерминированный хеш от characterId",
+        "Имя персонажа по центру круга",
+        "При state 'speaking' - пульсация масштаба"
+      ],
+      "test_steps": [
+        "Создать экземпляр с разными ID",
+        "Проверить что цвета разные но стабильные для одного ID",
+        "Вызвать setState('speaking') - должна начаться анимация",
+        "Вызвать setState('idle') - анимация должна остановиться"
+      ],
+      "dependencies": ["TASK-015"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-017",
+      "category": "render",
+      "priority": "critical",
+      "description": "Фабрика для создания CharacterRenderer",
+      "acceptance_criteria": [
+        "Создан src/render/character-factory.ts",
+        "Функция createCharacterRenderer(characterId: string, displayName: string): CharacterRenderer",
+        "В MVP возвращает PlaceholderCharacterRenderer",
+        "Комментарий про будущую замену на SpriteCharacterRenderer"
+      ],
+      "test_steps": [
+        "Вызвать createCharacterRenderer('test', 'Test Name')",
+        "Проверить что возвращается PlaceholderCharacterRenderer",
+        "Проверить что отображается имя 'Test Name'"
+      ],
+      "dependencies": ["TASK-016"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-018",
+      "category": "render",
+      "priority": "critical",
+      "description": "Реализация расстановки персонажей на сцене по слотам",
+      "acceptance_criteria": [
+        "Создан src/render/scene.ts",
+        "Класс Scene с методом placeCharacters(characters: Character[]): void",
+        "Использует SLOT_MAPS для определения позиций",
+        "Fallback на порядок массива при проблемах с position_hint",
+        "Персонажи добавляются на stage в правильных позициях"
+      ],
+      "test_steps": [
+        "Создать Scene с 4 персонажами",
+        "Проверить что все 4 отображаются",
+        "Проверить что позиции соответствуют SLOT_MAPS[4]",
+        "Проверить fallback с дублирующимися position_hint"
+      ],
+      "dependencies": ["TASK-006", "TASK-017"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-019",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Создание PlayerState машины состояний",
+      "acceptance_criteria": [
+        "Создан src/player/state.ts",
+        "Enum PlayerStatus: 'idle' | 'playing' | 'paused' | 'finished'",
+        "Класс PlayerState с полями:",
+        "  - status: PlayerStatus",
+        "  - currentEventIndex: number",
+        "  - speed: number (0.5, 1, 2)",
+        "  - timeline: TimelineEvent[]",
+        "Методы: play(), pause(), restart(), setSpeed(), nextEvent()"
+      ],
+      "test_steps": [
+        "Создать PlayerState с timeline из 5 событий",
+        "play() должен установить status = 'playing'",
+        "pause() должен установить status = 'paused'",
+        "restart() должен сбросить index в 0 и status в 'idle'"
+      ],
+      "dependencies": ["TASK-007"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-020",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Реализация расчета таймингов для событий",
+      "acceptance_criteria": [
+        "Создан src/player/timing.ts",
+        "Функция calculateTypingIndicatorDuration(textLength: number): number",
+        "Функция calculateTypingDuration(textLength: number): number",
+        "Функция calculateHoldDuration(textLength: number): number",
+        "Функция calculateEventDuration(event: TimelineEvent): number",
+        "Все функции используют константы из config/timings.ts"
+      ],
+      "test_steps": [
+        "calculateTypingIndicatorDuration(10) должен вернуть 1000",
+        "calculateTypingIndicatorDuration(5) должен вернуть 500 (min)",
+        "calculateTypingIndicatorDuration(100) должен вернуть 3000 (max)",
+        "calculateTypingDuration(100) должен вернуть 3000"
+      ],
+      "dependencies": ["TASK-005", "TASK-007"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-021",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Реализация EventPlayer для последовательного воспроизведения",
+      "acceptance_criteria": [
+        "Создан src/player/event-player.ts",
+        "Класс EventPlayer с методами:",
+        "  - playEvent(event: TimelineEvent): Promise<void>",
+        "  - pause(): void",
+        "  - resume(): void",
+        "  - stop(): void",
+        "Воспроизведение событий строго последовательное",
+        "Поддержка паузы посреди события"
+      ],
+      "test_steps": [
+        "Создать EventPlayer и воспроизвести speech событие",
+        "Вызвать pause() посреди печатания - должно заморозиться",
+        "Вызвать resume() - должно продолжиться с того же места"
+      ],
+      "dependencies": ["TASK-019", "TASK-020"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-022",
+      "category": "render",
+      "priority": "high",
+      "description": "Реализация базового облачка (SpeechBubble)",
+      "acceptance_criteria": [
+        "Создан src/render/speech-bubble.ts",
+        "Класс SpeechBubble",
+        "Метод show(position: {x, y}): void",
+        "Метод hide(): void",
+        "Белый фон с закругленными углами",
+        "Хвостик указывающий на персонажа",
+        "Максимальная ширина 400px с переносом текста"
+      ],
+      "test_steps": [
+        "Создать SpeechBubble и вызвать show()",
+        "Должно отобразиться пустое облачко",
+        "Вызвать hide() - должно исчезнуть"
+      ],
+      "dependencies": ["TASK-013"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-023",
+      "category": "render",
+      "priority": "high",
+      "description": "Реализация индикатора печатания (три точки)",
+      "acceptance_criteria": [
+        "Расширен SpeechBubble",
+        "Метод showTypingIndicator(): void",
+        "Метод hideTypingIndicator(): void",
+        "Анимация трех точек (появляются/исчезают по очереди)",
+        "Анимация зациклена"
+      ],
+      "test_steps": [
+        "Вызвать showTypingIndicator()",
+        "Должны отображаться анимированные точки",
+        "Вызвать hideTypingIndicator() - точки должны исчезнуть"
+      ],
+      "dependencies": ["TASK-022"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-024",
+      "category": "render",
+      "priority": "high",
+      "description": "Реализация эффекта печатания текста",
+      "acceptance_criteria": [
+        "Расширен SpeechBubble",
+        "Метод typeText(text: string, speed: number): Promise<void>",
+        "Текст появляется символ за символом",
+        "Promise резолвится когда текст полностью напечатан",
+        "Поддержка паузы (через внешний флаг isPaused)"
+      ],
+      "test_steps": [
+        "Вызвать typeText('Hello World', 30)",
+        "Текст должен появляться посимвольно",
+        "Время печатания ~330ms (11 символов * 30ms)"
+      ],
+      "dependencies": ["TASK-023"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-025",
+      "category": "render",
+      "priority": "high",
+      "description": "Стилизация облачка по subtype (normal, defense, post_guess)",
+      "acceptance_criteria": [
+        "Расширен SpeechBubble",
+        "Метод setStyle(subtype: SpeechSubtype): void",
+        "normal: белый фон",
+        "defense: желтая/оранжевая рамка (акцент)",
+        "post_guess: другой фон (например светло-серый)",
+        "Визуальные различия заметны"
+      ],
+      "test_steps": [
+        "Создать три облачка с разными subtype",
+        "Сравнить визуально - должны различаться",
+        "defense должен быть самым заметным"
+      ],
+      "dependencies": ["TASK-024"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-026",
+      "category": "render",
+      "priority": "high",
+      "description": "Интеграция облачка с персонажем",
+      "acceptance_criteria": [
+        "Scene умеет показывать облачко над персонажем",
+        "Метод showSpeechBubble(characterId: string): SpeechBubble",
+        "Метод hideSpeechBubble(): void",
+        "Облачко позиционируется над головой персонажа",
+        "Одновременно только одно облачко"
+      ],
+      "test_steps": [
+        "Вызвать showSpeechBubble для персонажа",
+        "Облачко должно появиться над ним",
+        "Вызвать showSpeechBubble для другого - первое должно скрыться"
+      ],
+      "dependencies": ["TASK-018", "TASK-025"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-027",
+      "category": "render",
+      "priority": "high",
+      "description": "Реализация визуализации phase_change",
+      "acceptance_criteria": [
+        "Создан src/render/phase-overlay.ts",
+        "Класс PhaseOverlay",
+        "Метод showPhaseChange(phase: Phase, label: string): Promise<void>",
+        "Затемнение фона",
+        "Крупная надпись с label",
+        "Анимация появления/исчезновения (1-2 сек)",
+        "Promise резолвится после завершения анимации"
+      ],
+      "test_steps": [
+        "Вызвать showPhaseChange('voting', 'Голосование')",
+        "Должно затемниться и показать надпись",
+        "Через ~1.5 сек надпись должна исчезнуть"
+      ],
+      "dependencies": ["TASK-013"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-028",
+      "category": "render",
+      "priority": "high",
+      "description": "Изменение цветовой температуры сцены по фазам",
+      "acceptance_criteria": [
+        "Создан src/config/phase-styles.ts",
+        "Стили для каждой фазы (main_round, voting, defense, final, resolution)",
+        "voting: холодный синий оттенок",
+        "final: контрастная подсветка",
+        "Scene применяет фильтр/оверлей по текущей фазе"
+      ],
+      "test_steps": [
+        "Переключить фазу на voting - сцена должна стать холоднее",
+        "Переключить на final - должна быть контрастная подсветка",
+        "Визуальные изменения заметны"
+      ],
+      "dependencies": ["TASK-027"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-029",
+      "category": "render",
+      "priority": "high",
+      "description": "Реализация визуализации vote события",
+      "acceptance_criteria": [
+        "Создан src/render/vote-indicator.ts",
+        "Класс VoteIndicator",
+        "Метод showVote(voterId: string, targetId: string, phase: VotePhase): Promise<void>",
+        "Стрелка от voter к target",
+        "Подсветка target",
+        "final фаза - более яркая/выраженная визуализация"
+      ],
+      "test_steps": [
+        "Показать preliminary vote - должна появиться стрелка",
+        "Показать final vote - стрелка должна быть ярче",
+        "Target должен быть подсвечен"
+      ],
+      "dependencies": ["TASK-018"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-030",
+      "category": "render",
+      "priority": "high",
+      "description": "Интеграция vote.comment с облачком",
+      "acceptance_criteria": [
+        "При vote с comment != null сначала показывается облачко",
+        "Облачко работает по тем же правилам что и speech",
+        "После исчезновения облачка - показывается стрелка голоса",
+        "Облачко использует нейтральный стиль"
+      ],
+      "test_steps": [
+        "Показать vote с comment='Я голосую за него!'",
+        "Сначала должно появиться облачко с текстом",
+        "После исчезновения - стрелка голоса"
+      ],
+      "dependencies": ["TASK-026", "TASK-029"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-031",
+      "category": "render",
+      "priority": "high",
+      "description": "Реализация system_message overlay",
+      "acceptance_criteria": [
+        "Создан src/render/system-message.ts",
+        "Класс SystemMessage",
+        "Метод show(content: string): Promise<void>",
+        "Текст появляется сверху или снизу сцены",
+        "Короткая анимация появления/исчезновения",
+        "Promise резолвится после исчезновения"
+      ],
+      "test_steps": [
+        "Вызвать show('Голосование инициировано')",
+        "Текст должен появиться и исчезнуть через ~2 сек"
+      ],
+      "dependencies": ["TASK-013"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-032",
+      "category": "render",
+      "priority": "high",
+      "description": "Реализация spy_guess визуализации",
+      "acceptance_criteria": [
+        "Создан src/render/spy-guess.ts",
+        "Класс SpyGuessOverlay",
+        "Метод show(spyId: string, guessedLocation: string, correct: boolean): Promise<void>",
+        "Шпион визуально выделен (зум/подсветка)",
+        "Крупно название догадки",
+        "Раскрытие результата (верно/неверно)",
+        "Возврат к обычному виду сцены",
+        "Длительность 3-5 сек"
+      ],
+      "test_steps": [
+        "Показать spy_guess с correct=true - должна быть позитивная индикация",
+        "Показать с correct=false - негативная индикация",
+        "После раскрытия сцена должна вернуться к норме"
+      ],
+      "dependencies": ["TASK-018", "TASK-027"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-033",
+      "category": "render",
+      "priority": "high",
+      "description": "Реализация outcome финального экрана",
+      "acceptance_criteria": [
+        "Создан src/render/outcome.ts",
+        "Класс OutcomeOverlay",
+        "Метод show(winner: Winner, spyId: string, reason: string): void",
+        "Подсветка шпиона (раскрытие роли)",
+        "Текст reason",
+        "Явное указание победителя",
+        "Визуально отличается от spy_guess",
+        "Остается на экране (не исчезает)"
+      ],
+      "test_steps": [
+        "Показать outcome с winner='spy'",
+        "Показать outcome с winner='civilians'",
+        "Визуализация должна отличаться",
+        "Экран не должен исчезать автоматически"
+      ],
+      "dependencies": ["TASK-018", "TASK-032"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-034",
+      "category": "ui",
+      "priority": "high",
+      "description": "Создание HTML layout с контейнером canvas и панелью управления",
+      "acceptance_criteria": [
+        "Обновлен index.html",
+        "Контейнер #app для canvas",
+        "Панель управления с местом для кнопок и индикаторов",
+        "Flexbox/Grid layout для центрирования canvas",
+        "Базовые CSS стили"
+      ],
+      "test_steps": [
+        "Открыть страницу в браузере",
+        "Canvas должен быть по центру",
+        "Панель управления видна"
+      ],
+      "dependencies": ["TASK-004"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-035",
+      "category": "ui",
+      "priority": "high",
+      "description": "Реализация селектора JSON файла",
+      "acceptance_criteria": [
+        "Создан src/ui/file-selector.ts",
+        "Input type=file для выбора JSON",
+        "Принимает только .json файлы",
+        "Callback при выборе файла с содержимым",
+        "Отображение имени выбранного файла"
+      ],
+      "test_steps": [
+        "Нажать кнопку выбора файла",
+        "Выбрать JSON файл",
+        "Имя файла должно отобразиться",
+        "Callback должен получить содержимое"
+      ],
+      "dependencies": ["TASK-034"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-036",
+      "category": "ui",
+      "priority": "high",
+      "description": "Реализация кнопок Play/Pause/Restart",
+      "acceptance_criteria": [
+        "Создан src/ui/controls.ts",
+        "Три кнопки: Play, Pause, Restart",
+        "Play disabled до загрузки JSON и ассетов",
+        "Pause активна только во время воспроизведения",
+        "Restart всегда активна после загрузки",
+        "Callbacks для каждой кнопки"
+      ],
+      "test_steps": [
+        "До загрузки файла - Play disabled",
+        "После загрузки - Play enabled",
+        "Нажать Play - Pause становится активной",
+        "Нажать Pause - Play становится активной"
+      ],
+      "dependencies": ["TASK-034"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-037",
+      "category": "ui",
+      "priority": "high",
+      "description": "Реализация переключателя скорости воспроизведения",
+      "acceptance_criteria": [
+        "Расширен src/ui/controls.ts",
+        "Три кнопки/переключатель: x0.5, x1, x2",
+        "x1 выбран по умолчанию",
+        "Callback при смене скорости",
+        "Визуальная индикация текущей скорости"
+      ],
+      "test_steps": [
+        "По умолчанию выбрано x1",
+        "Нажать x2 - должно выделиться",
+        "Callback должен вернуть 2"
+      ],
+      "dependencies": ["TASK-036"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-038",
+      "category": "ui",
+      "priority": "high",
+      "description": "Реализация индикатора прогресса",
+      "acceptance_criteria": [
+        "Создан src/ui/progress.ts",
+        "Показывает текущее событие / всего событий",
+        "Прогресс-бар заполняется по мере воспроизведения",
+        "Метод update(current: number, total: number): void"
+      ],
+      "test_steps": [
+        "Установить прогресс 5/10",
+        "Должно показать '5/10' и 50% заполнения",
+        "Установить 10/10 - 100% заполнения"
+      ],
+      "dependencies": ["TASK-034"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-039",
+      "category": "ui",
+      "priority": "high",
+      "description": "Отображение ошибок валидации в UI",
+      "acceptance_criteria": [
+        "Создан src/ui/error-display.ts",
+        "Метод showError(message: string): void",
+        "Метод clearError(): void",
+        "Ошибка отображается заметно (красный фон/рамка)",
+        "Понятное сообщение об ошибке"
+      ],
+      "test_steps": [
+        "Вызвать showError('Invalid JSON')",
+        "Должно появиться сообщение об ошибке",
+        "Вызвать clearError() - сообщение исчезает"
+      ],
+      "dependencies": ["TASK-034"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-040",
+      "category": "ui",
+      "priority": "high",
+      "description": "Индикатор загрузки ассетов",
+      "acceptance_criteria": [
+        "Создан src/ui/loading.ts",
+        "Метод show(): void отображает 'Loading assets...'",
+        "Метод hide(): void скрывает индикатор",
+        "Индикатор блокирует UI (overlay)"
+      ],
+      "test_steps": [
+        "Вызвать show() - должен появиться loading overlay",
+        "Play кнопка должна быть disabled",
+        "Вызвать hide() - overlay исчезает"
+      ],
+      "dependencies": ["TASK-036"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-041",
+      "category": "integration",
+      "priority": "high",
+      "description": "Интеграция парсера с UI (загрузка файла)",
+      "acceptance_criteria": [
+        "При выборе файла вызывается parseGameData",
+        "При успехе - данные передаются в Scene",
+        "При ошибке - отображается в error-display",
+        "После валидации начинается preloading ассетов"
+      ],
+      "test_steps": [
+        "Загрузить невалидный JSON - должна показаться ошибка",
+        "Загрузить валидный JSON - должен начаться preloading",
+        "Персонажи должны отобразиться на сцене"
+      ],
+      "dependencies": ["TASK-012", "TASK-35", "TASK-039"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-042",
+      "category": "integration",
+      "priority": "high",
+      "description": "Реализация preloading ассетов",
+      "acceptance_criteria": [
+        "Создан src/render/asset-loader.ts",
+        "Функция preloadAssets(locationId: string): Promise<void>",
+        "Загружает картинку локации",
+        "Загружает шрифты",
+        "Показывает loading индикатор",
+        "При ошибке картинки - продолжает (fallback)",
+        "При ошибке шрифта - fallback на системный"
+      ],
+      "test_steps": [
+        "Вызвать preloadAssets с существующей локацией",
+        "Loading должен показаться и исчезнуть",
+        "Вызвать с несуществующей - должен применить fallback"
+      ],
+      "dependencies": ["TASK-014", "TASK-040"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-043",
+      "category": "integration",
+      "priority": "high",
+      "description": "Интеграция PlayerState с UI контролами",
+      "acceptance_criteria": [
+        "Play кнопка вызывает playerState.play()",
+        "Pause вызывает playerState.pause()",
+        "Restart вызывает playerState.restart()",
+        "Speed selector вызывает playerState.setSpeed()",
+        "UI реагирует на изменения состояния"
+      ],
+      "test_steps": [
+        "Нажать Play - status должен стать 'playing'",
+        "Нажать Pause - status 'paused'",
+        "Нажать Restart - index должен сброситься"
+      ],
+      "dependencies": ["TASK-019", "TASK-036", "TASK-037"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-044",
+      "category": "integration",
+      "priority": "high",
+      "description": "Интеграция EventPlayer с Scene рендерингом",
+      "acceptance_criteria": [
+        "EventPlayer вызывает соответствующие методы Scene",
+        "speech -> showSpeechBubble + typeText",
+        "phase_change -> showPhaseChange",
+        "vote -> showVote (с comment если есть)",
+        "spy_guess -> showSpyGuess",
+        "outcome -> showOutcome",
+        "system_message -> showSystemMessage"
+      ],
+      "test_steps": [
+        "Воспроизвести speech - облачко должно появиться",
+        "Воспроизвести phase_change - overlay должен показаться",
+        "Воспроизвести все типы событий последовательно"
+      ],
+      "dependencies": ["TASK-021", "TASK-026", "TASK-027", "TASK-029", "TASK-031", "TASK-032", "TASK-033"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-045",
+      "category": "integration",
+      "priority": "high",
+      "description": "Интеграция прогресса воспроизведения с UI",
+      "acceptance_criteria": [
+        "При каждом событии обновляется progress indicator",
+        "При завершении timeline - status 'finished'",
+        "При outcome - Play/Pause disabled, только Restart"
+      ],
+      "test_steps": [
+        "Воспроизвести 5 из 10 событий - прогресс 50%",
+        "Дойти до outcome - Play должен стать disabled"
+      ],
+      "dependencies": ["TASK-038", "TASK-044"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-046",
+      "category": "integration",
+      "priority": "medium",
+      "description": "Полная интеграция main.ts - точка входа приложения",
+      "acceptance_criteria": [
+        "main.ts инициализирует все компоненты",
+        "Создает PixiJS app",
+        "Инициализирует UI контролы",
+        "Связывает file-selector с парсером",
+        "Связывает controls с PlayerState",
+        "Связывает EventPlayer со Scene",
+        "Приложение работает end-to-end"
+      ],
+      "test_steps": [
+        "npm run dev",
+        "Загрузить тестовый JSON",
+        "Нажать Play - должно воспроизвестись",
+        "Pause - заморозить",
+        "Restart - сбросить"
+      ],
+      "dependencies": ["TASK-041", "TASK-042", "TASK-043", "TASK-044", "TASK-045"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-047",
+      "category": "integration",
+      "priority": "medium",
+      "description": "Создание тестового JSON файла для проверки",
+      "acceptance_criteria": [
+        "Создан assets/test-game.json",
+        "Содержит все типы событий",
+        "4 персонажа",
+        "Минимум 15 событий в timeline",
+        "Включает speech с разными subtype",
+        "Включает vote с comment и без",
+        "Включает spy_guess и outcome"
+      ],
+      "test_steps": [
+        "Загрузить test-game.json",
+        "Все события должны отрендериться корректно",
+        "Валидация должна пройти"
+      ],
+      "dependencies": ["TASK-012"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-048",
+      "category": "functional",
+      "priority": "medium",
+      "description": "Точки интеграции для звукового слоя (заглушки)",
+      "acceptance_criteria": [
+        "Добавлены комментарии/пустые функции в EventPlayer",
+        "// SOUND_HOOK: персонаж начал говорить",
+        "// SOUND_HOOK: смена фазы",
+        "// SOUND_HOOK: spy_guess момент",
+        "// SOUND_HOOK: фоновая атмосфера локации",
+        "Функции-заглушки не влияют на работу"
+      ],
+      "test_steps": [
+        "Найти все SOUND_HOOK комментарии в коде",
+        "Должно быть минимум 4 точки интеграции",
+        "Приложение работает без ошибок"
+      ],
+      "dependencies": ["TASK-044"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-049",
+      "category": "ui",
+      "priority": "medium",
+      "description": "Стилизация UI панели управления",
+      "acceptance_criteria": [
+        "CSS стили для всех контролов",
+        "Консистентный визуальный стиль",
+        "Кнопки с hover/active состояниями",
+        "Disabled состояние визуально отличимо",
+        "Responsive в разумных пределах (desktop)"
+      ],
+      "test_steps": [
+        "Визуальный осмотр UI",
+        "Все кнопки кликабельны",
+        "Disabled кнопки выглядят неактивными"
+      ],
+      "dependencies": ["TASK-036", "TASK-037", "TASK-038"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-050",
+      "category": "functional",
+      "priority": "low",
+      "description": "Детерминированность цвета персонажа по ID",
+      "acceptance_criteria": [
+        "Создан src/utils/color-hash.ts",
+        "Функция getColorFromId(id: string): number",
+        "Один и тот же ID всегда дает один цвет",
+        "Цвета визуально различимы (не слишком близкие)",
+        "PlaceholderCharacterRenderer использует эту функцию"
+      ],
+      "test_steps": [
+        "getColorFromId('alice') вызвать 10 раз - результат одинаковый",
+        "getColorFromId('bob') должен отличаться от alice",
+        "8 разных ID дают 8 различимых цветов"
+      ],
+      "dependencies": ["TASK-016"],
+      "status": "pending"
+    }
+  ]
+}

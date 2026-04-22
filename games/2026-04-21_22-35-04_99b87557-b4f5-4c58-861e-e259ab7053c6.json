@@ -1,0 +1,1637 @@
+{
+  "id": "99b87557-b4f5-4c58-861e-e259ab7053c6",
+  "started_at": "2026-04-21T22:35:04.418151",
+  "ended_at": "2026-04-21T22:37:31.260631",
+  "config": {
+    "duration_minutes": 5,
+    "players_count": 5,
+    "max_questions": 50,
+    "main_model": "gpt-4o",
+    "utility_model": "gpt-4o-mini"
+  },
+  "location_id": "spa",
+  "players": [
+    {
+      "character_id": "margo",
+      "role_id": "client_spa",
+      "is_spy": false
+    },
+    {
+      "character_id": "father_ignatius",
+      "role_id": null,
+      "is_spy": true
+    },
+    {
+      "character_id": "kim",
+      "role_id": "cosmetologist",
+      "is_spy": false
+    },
+    {
+      "character_id": "zoya",
+      "role_id": "masseur",
+      "is_spy": false
+    },
+    {
+      "character_id": "aurora",
+      "role_id": "administrator",
+      "is_spy": false
+    }
+  ],
+  "spy_id": "father_ignatius",
+  "turns": [
+    {
+      "turn_number": 1,
+      "timestamp": "2026-04-21T22:35:06.751400",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, скажи по совести, какие звуки ты чаще всего слышишь здесь, окружающие нас в этом месте?",
+      "display_delay_ms": 3328,
+      "raw_response": "{\n  \"content\": \"Зоя, скажи по совести, какие звуки ты чаще всего слышишь здесь, окружающие нас в этом месте?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T22:35:11.312955",
+      "speaker_id": "zoya",
+      "addressee_id": "father_ignatius",
+      "type": "answer",
+      "content": "О да, звуки тут очень 'напрягают'. Особенно когда тишина давит ушам, не находишь?",
+      "display_delay_ms": 3001,
+      "raw_response": "{\n  \"content\": \"О да, звуки тут очень 'напрягают'. Особенно когда тишина давит ушам, не находишь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 3,
+      "timestamp": "2026-04-21T22:35:17.135723",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "type": "intervention",
+      "content": "Зоя, милый, твои слова звучат как расплывчатая лёгкость, не правда ли? Интересно, Ким, что ты об этом думаешь?",
+      "display_delay_ms": 3694,
+      "raw_response": "Зоя, милый, твои слова звучат как расплывчатая лёгкость, не правда ли? Интересно, Ким, что ты об этом думаешь?"
+    },
+    {
+      "turn_number": 4,
+      "timestamp": "2026-04-21T22:35:22.142317",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "type": "question",
+      "content": "Аврора, тебе разве не кажется, что эфирные масла здесь пахнут слишком сладко? Или это я такая привереда?",
+      "display_delay_ms": 3642,
+      "raw_response": "{\n  \"content\": \"Аврора, тебе разве не кажется, что эфирные масла здесь пахнут слишком сладко? Или это я такая привереда?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T22:35:27.617745",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "type": "answer",
+      "content": "Ах, Зоя, дорогая моя, как же можно устоять перед этими ароматами... Приглушённый свет, нежные нотки... это как бальзам на душу! Но, быть может, кто-то просто не ценит всю прелесть... Немыслимо, правда? В любом случае, каждый здесь обретает малый рай. Неужели кто-то из нас не чувствует этого?",
+      "display_delay_ms": 9303,
+      "raw_response": "{\n  \"content\": \"Ах, Зоя, дорогая моя, как же можно устоять перед этими ароматами... Приглушённый свет, нежные нотки... это как бальзам на душу! Но, быть может, кто-то просто не ценит всю прелесть... Немыслимо, правда? В любом случае, каждый здесь обретает малый рай. Неужели кто-то из нас не чувствует этого?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 6,
+      "timestamp": "2026-04-21T22:35:39.857451",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "type": "intervention",
+      "content": "О, конечно, Аврора, и как же ты ловко уходишь от конкретики. Неужели намёк на нелюбовь к ароматам такой уж философский вопрос? Подозрительно, не находишь?",
+      "display_delay_ms": 4860,
+      "raw_response": "О, конечно, Аврора, и как же ты ловко уходишь от конкретики. Неужели намёк на нелюбовь к ароматам такой уж философский вопрос? Подозрительно, не находишь?"
+    },
+    {
+      "turn_number": 7,
+      "timestamp": "2026-04-21T22:35:46.104442",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "type": "question",
+      "content": "Марго, дорогая, скажи, как ты находишь выбор халатов, которые здесь предлагают? Они ведь такие мягкие и уютные, не правда ли?",
+      "display_delay_ms": 3964,
+      "raw_response": "{\n  \"content\": \"Марго, дорогая, скажи, как ты находишь выбор халатов, которые здесь предлагают? Они ведь такие мягкие и уютные, не правда ли?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T22:35:51.938974",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "type": "answer",
+      "content": "Аврора, милый, я полностью согласна с тобой. Они такие чудесные, словно обнимают каждую клеточку. Интересно, почему Зоя их игнорирует, не замечаешь?",
+      "display_delay_ms": 5016,
+      "raw_response": "{\n  \"content\": \"Аврора, милый, я полностью согласна с тобой. Они такие чудесные, словно обнимают каждую клеточку. Интересно, почему Зоя их игнорирует, не замечаешь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 9,
+      "timestamp": "2026-04-21T22:35:59.574491",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "type": "intervention",
+      "content": "О, конечно, Марго, когда слова становятся такими воздушными, это не наводит ли на мысль о том, что ты что-то скрываешь? Или я такая притворщица?",
+      "display_delay_ms": 4860,
+      "raw_response": "О, конечно, Марго, когда слова становятся такими воздушными, это не наводит ли на мысль о том, что ты что-то скрываешь? Или я такая притворщица?"
+    },
+    {
+      "turn_number": 10,
+      "timestamp": "2026-04-21T22:36:05.867127",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "type": "question",
+      "content": "Зоя, милый, а как ты относишься к свету в этом месте? Он должен располагать к расслаблению, не находишь?",
+      "display_delay_ms": 3327,
+      "raw_response": "{\n  \"content\": \"Зоя, милый, а как ты относишься к свету в этом месте? Он должен располагать к расслаблению, не находишь?\",\n  \"wants_vote\": false,\n  \"suspect_id\": null\n}"
+    },
+    {
+      "turn_number": 11,
+      "timestamp": "2026-04-21T22:36:15.091451",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "type": "answer",
+      "content": "О да, свет прям как надо, чтобы работать вслепую. А что, тебе кажется, что я притворяюсь, не замечаю свет? Ну да, конечно.",
+      "display_delay_ms": 4100,
+      "raw_response": "{\n  \"content\": \"О да, свет прям как надо, чтобы работать вслепую. А что, тебе кажется, что я притворяюсь, не замечаю свет? Ну да, конечно.\",\n  \"wants_vote\": true,\n  \"suspect_id\": \"margo\"\n}"
+    },
+    {
+      "turn_number": 12,
+      "timestamp": "2026-04-21T22:36:19.196741",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "intervention",
+      "content": "[ГОЛОСОВАНИЕ] Зоя инициирует голосование против Марго!",
+      "display_delay_ms": 1936,
+      "raw_response": null
+    },
+    {
+      "turn_number": 13,
+      "timestamp": "2026-04-21T22:36:27.064275",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Марго] О да, конечно, Марго, ты такая искренняя с этими мягкими халатами. Может, ты шпион, который любит уют?",
+      "display_delay_ms": 4104,
+      "raw_response": null
+    },
+    {
+      "turn_number": 14,
+      "timestamp": "2026-04-21T22:36:32.389229",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Зоя] Зоя, дорогая, мне кажется, возможно, ты немного торопишься с выводами. В твоих словах такое явное напряжение, которое, возможно, выдаёт неуверенность. Давайте подумаем ещё раз.",
+      "display_delay_ms": 6161,
+      "raw_response": null
+    },
+    {
+      "turn_number": 15,
+      "timestamp": "2026-04-21T22:36:40.991085",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Марго] Марго, моя душа неспокойна, когда я размышляю о твоих словах. Ты ведь знаешь, что истина требует искренности, и я не могу не задаться вопросом, что скрывается за твоими мягкими словами. Говорю это не с лёгким сердцем, но моя совесть подсказывает мне сделать этот выбор.",
+      "display_delay_ms": 8800,
+      "raw_response": null
+    },
+    {
+      "turn_number": 16,
+      "timestamp": "2026-04-21T22:36:51.897172",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Марго] Мне кажется, возможно, Марго немного, ну, то есть, уклончива в своих ответах, хотя, может быть, я ошибаюсь. Вернее, точно не уверен, но что-то подозрительное есть.",
+      "display_delay_ms": 5924,
+      "raw_response": null
+    },
+    {
+      "turn_number": 17,
+      "timestamp": "2026-04-21T22:36:59.952750",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Голос: Марго] О, боже, как же тяжело принимать такие решения! Марго, ты всегда была мне близка, но... атмосфера сгущается вокруг тебя, и я, к сожалению, склоняюсь к выбору большинства. Немыслимо, но я голосую против тебя!",
+      "display_delay_ms": 7095,
+      "raw_response": null
+    },
+    {
+      "turn_number": 18,
+      "timestamp": "2026-04-21T22:37:10.479862",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "defense_speech",
+      "content": "Дорогие Зоя, Игнатий, Ким и Аврора, мне кажется, наше внимание слегка сбилось с пути. Аврора, милый, ты ведь точно почувствовала, как Зоя сегодня уклончиво отвечает?",
+      "display_delay_ms": 5504,
+      "raw_response": null
+    },
+    {
+      "turn_number": 19,
+      "timestamp": "2026-04-21T22:37:15.987845",
+      "speaker_id": "system",
+      "addressee_id": "all",
+      "type": "intervention",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи",
+      "display_delay_ms": 500,
+      "raw_response": null
+    },
+    {
+      "turn_number": 20,
+      "timestamp": "2026-04-21T22:37:22.243397",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Зоя]",
+      "display_delay_ms": 1078,
+      "raw_response": null
+    },
+    {
+      "turn_number": 21,
+      "timestamp": "2026-04-21T22:37:23.921778",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Марго]",
+      "display_delay_ms": 939,
+      "raw_response": null
+    },
+    {
+      "turn_number": 22,
+      "timestamp": "2026-04-21T22:37:26.055416",
+      "speaker_id": "kim",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Марго]",
+      "display_delay_ms": 1156,
+      "raw_response": null
+    },
+    {
+      "turn_number": 23,
+      "timestamp": "2026-04-21T22:37:27.848018",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Марго]",
+      "display_delay_ms": 1076,
+      "raw_response": null
+    },
+    {
+      "turn_number": 24,
+      "timestamp": "2026-04-21T22:37:30.227173",
+      "speaker_id": "aurora",
+      "addressee_id": "all",
+      "type": "preliminary_vote",
+      "content": "[Подтверждаю: Марго]",
+      "display_delay_ms": 1029,
+      "raw_response": null
+    }
+  ],
+  "spy_confidence_log": [],
+  "triggered_events": [
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T22:35:20.832589",
+      "character_id": "margo",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T22:35:20.832782",
+      "character_id": "kim",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T22:35:20.832821",
+      "character_id": "father_ignatius",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "moralize_and_accuse",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 2,
+      "timestamp": "2026-04-21T22:35:20.832837",
+      "character_id": "aurora",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T22:35:44.720406",
+      "character_id": "zoya",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "mock_with_dry_sarcasm",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T22:35:44.720488",
+      "character_id": "margo",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "deflect_suspicion_to_another",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T22:35:44.720503",
+      "character_id": "kim",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T22:35:44.720512",
+      "character_id": "father_ignatius",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "moralize_and_accuse",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 5,
+      "timestamp": "2026-04-21T22:35:44.720519",
+      "character_id": "kim",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T22:36:04.435242",
+      "character_id": "zoya",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "mock_with_dry_sarcasm",
+      "intervened": true,
+      "won_intervention": true,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T22:36:04.435342",
+      "character_id": "kim",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T22:36:04.435351",
+      "character_id": "father_ignatius",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "moralize_and_accuse",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T22:36:04.435359",
+      "character_id": "aurora",
+      "condition_type": "dodged_direct_question",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T22:36:04.435367",
+      "character_id": "father_ignatius",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "moralize_and_accuse",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    },
+    {
+      "turn_number": 8,
+      "timestamp": "2026-04-21T22:36:04.435373",
+      "character_id": "kim",
+      "condition_type": "silent_for_n_turns",
+      "reaction_type": "panic_and_derail",
+      "intervened": false,
+      "won_intervention": false,
+      "reasoning": null,
+      "params": null
+    }
+  ],
+  "phase_transitions": [
+    {
+      "timestamp": "2026-04-21T22:35:04.418151",
+      "from_phase": null,
+      "to_phase": "setup",
+      "reason": "Game initialized",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T22:35:04.418219",
+      "from_phase": "setup",
+      "to_phase": "main_round",
+      "reason": "Main round started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T22:36:21.137157",
+      "from_phase": "main_round",
+      "to_phase": "optional_vote",
+      "reason": "Голосование инициировано игроком Зоя",
+      "status": "player_initiated",
+      "initiator_id": "zoya"
+    },
+    {
+      "timestamp": "2026-04-21T22:36:21.137442",
+      "from_phase": "optional_vote",
+      "to_phase": "preliminary_vote",
+      "reason": "Preliminary voting started",
+      "status": null,
+      "initiator_id": null
+    },
+    {
+      "timestamp": "2026-04-21T22:37:07.052073",
+      "from_phase": "preliminary_vote",
+      "to_phase": "pre_final_vote_defense",
+      "reason": "Defense speeches for 1 player(s) with 4 votes",
+      "status": null,
+      "initiator_id": null
+    }
+  ],
+  "outcome": {
+    "winner": "spy",
+    "reason": "Игроки единогласно обвинили Марго, но шпионом был Игнатий",
+    "votes": {
+      "margo": "zoya",
+      "father_ignatius": "margo",
+      "kim": "margo",
+      "zoya": "margo",
+      "aurora": "margo"
+    },
+    "spy_guess": null,
+    "spy_guess_correct": null,
+    "accused_id": "margo"
+  },
+  "compressed_history": "В диалоге участники подозревают друг друга в уклончивых ответах и неискренности. Фather Ignatius начинает с вопроса к Зое о звуках, что вызывает у неё расплывчатый ответ о \"напрягающих\" звуках. Марго указывает на неопределённость Зои, намекая на её легкомысленность, что вызывает интерес у Ким. Зоя, в свою очередь, обвиняет Аврору в уклонении от конкретики, когда та говорит о сладких ароматах эфирных масел, что также вызывает подозрение. Аврора пытается защитить себя, утверждая, что каждый находит здесь \"малый рай\", но её ответ кажется слишком общим. В конце Аврора задаёт вопрос Марго о халатах, что также может быть попыткой отвлечь внимание от себя. В диалоге присутствуют намёки на уютную и расслабляющую атмосферу, что может указывать на спа или салон красоты, однако участники используют эти намёки для манипуляции и создания недоверия.",
+  "compression_checkpoint": 7,
+  "token_usage": {
+    "total_input_tokens": 50145,
+    "total_output_tokens": 1847,
+    "total_cost_usd": 0.13201905,
+    "llm_calls_count": 29
+  },
+  "preliminary_vote_result": {
+    "margo": "zoya",
+    "father_ignatius": "margo",
+    "kim": "margo",
+    "zoya": "margo",
+    "aurora": "margo"
+  },
+  "defense_speeches": [
+    {
+      "defender_id": "margo",
+      "votes_received": 4,
+      "content": "Дорогие Зоя, Игнатий, Ким и Аврора, мне кажется, наше внимание слегка сбилось с пути. Аврора, милый, ты ведь точно почувствовала, как Зоя сегодня уклончиво отвечает?",
+      "timestamp": "2026-04-21T22:37:10.479815",
+      "regenerated": false,
+      "truncated_from": 3
+    }
+  ],
+  "final_vote_result": null,
+  "vote_changes": [],
+  "post_game_analysis": {
+    "analyzed_at": "2026-04-21T17:39:44.593879Z",
+    "analyzer_model": "gpt-4o-mini",
+    "status": "completed",
+    "per_character": {
+      "margo": {
+        "character_id": "margo",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "names_addressee",
+              "triggered_count": 6,
+              "total_relevant_replies": 6,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Обращается к Зое по имени."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Обращается к Авроре по имени."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Обращается к Зое по имени."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": true,
+                  "reasoning": "Обращается к Зое по имени."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": true,
+                  "reasoning": "Обращается к Зое, Игнатию, Киму и Авроре по именам."
+                },
+                {
+                  "turn_number": 20,
+                  "triggered": false,
+                  "reasoning": "Не обращается к кому-либо по имени."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "warm_lexicon",
+              "triggered_count": 5,
+              "total_relevant_replies": 6,
+              "rate": 0.8333333333333334,
+              "per_turn": [
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Использует 'милый' и 'интересно'."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Использует 'милый' и 'чудесные'."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Использует 'милый' и 'располагать к расслаблению'."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": true,
+                  "reasoning": "Использует 'дорогая' и 'явное напряжение'."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": true,
+                  "reasoning": "Использует 'дорогие' и 'слегка сбилось с пути'."
+                },
+                {
+                  "turn_number": 20,
+                  "triggered": false,
+                  "reasoning": "Не использует теплую лексику."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_direct_accusation",
+              "triggered_count": 6,
+              "total_relevant_replies": 6,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Не обвиняет Зою напрямую."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Не обвиняет Зою напрямую."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Не обвиняет Зою напрямую."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": true,
+                  "reasoning": "Не обвиняет Зою напрямую."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": true,
+                  "reasoning": "Не обвиняет Аврору напрямую."
+                },
+                {
+                  "turn_number": 20,
+                  "triggered": true,
+                  "reasoning": "Не обвиняет Зою напрямую."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_pressure_words",
+              "triggered_count": 6,
+              "total_relevant_replies": 6,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 3,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера обращения."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера обращения."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера обращения."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера обращения."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера обращения."
+                },
+                {
+                  "turn_number": 20,
+                  "triggered": true,
+                  "reasoning": "Мягкая манера обращения."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "deflection_present",
+              "triggered_count": 2,
+              "total_relevant_replies": 6,
+              "rate": 0.3333333333333333,
+              "per_turn": [
+                {
+                  "turn_number": 3,
+                  "triggered": false,
+                  "reasoning": "Нет перенаправления подозрения."
+                },
+                {
+                  "turn_number": 8,
+                  "triggered": false,
+                  "reasoning": "Нет перенаправления подозрения."
+                },
+                {
+                  "turn_number": 10,
+                  "triggered": false,
+                  "reasoning": "Нет перенаправления подозрения."
+                },
+                {
+                  "turn_number": 14,
+                  "triggered": true,
+                  "reasoning": "Мягко перенаправляет подозрение на Зою."
+                },
+                {
+                  "turn_number": 18,
+                  "triggered": true,
+                  "reasoning": "Мягко перенаправляет подозрение на Зою."
+                },
+                {
+                  "turn_number": 20,
+                  "triggered": false,
+                  "reasoning": "Нет перенаправления подозрения."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Обращаться к собеседнику по имени в каждом ответе",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В последней реплике не было обращения по имени."
+            },
+            {
+              "directive": "Не обвинять напрямую — указывать на 'странное' поведение другого в разговоре с третьим",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Ни в одной реплике не было прямых обвинений."
+            },
+            {
+              "directive": "Использовать минимум одно тёплое слово в реплике (дорогой, милый, чудесно, прекрасно, замечательно)",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В последней реплике не было теплого слова."
+            },
+            {
+              "directive": "При прямом обвинении — мягко перенаправить подозрение на другого игрока",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В репликах 14 и 18 было мягкое перенаправление подозрения."
+            },
+            {
+              "directive": "В защитной речи (defense_speech) — мягко и с теплом отвести подозрение на другого игрока, не отрицая обвинение в лоб. Обратиться к обвинителю и к ещё одному игроку по имени. Минимум 1 тёплое слово (дорогой, милый). Максимум 3 предложения",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В защитной речи соблюдены все условия."
+            },
+            {
+              "directive": "В голосовании (type: preliminary_vote) — голосовать с сожалением и теплотой, не как обвинитель. Обратиться к обвиняемому по имени с тёплым словом (дорогой, милый). Выразить сомнение в формулировке 'мне кажется, возможно' — никогда не в категоричной. Минимум 2 предложения",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В голосовании соблюдены все условия."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "father_ignatius": {
+        "character_id": "father_ignatius",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "names_addressee",
+              "triggered_count": 2,
+              "total_relevant_replies": 3,
+              "rate": 0.6666666666666666,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Игнатий обращается к Зое по имени."
+                },
+                {
+                  "turn_number": 15,
+                  "triggered": true,
+                  "reasoning": "Игнатий обращается к Марго по имени."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": false,
+                  "reasoning": "Игнатий не обращается к кому-либо по имени."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "conscience_appeal",
+              "triggered_count": 3,
+              "total_relevant_replies": 3,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Игнатий задает вопрос, апеллируя к совести."
+                },
+                {
+                  "turn_number": 15,
+                  "triggered": true,
+                  "reasoning": "Игнатий говорит о необходимости искренности и истине."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Игнатий упоминает о совести в контексте голосования."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "measured_speech",
+              "triggered_count": 2,
+              "total_relevant_replies": 3,
+              "rate": 0.6666666666666666,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Реплика состоит из одного вопроса, но не менее двух предложений."
+                },
+                {
+                  "turn_number": 15,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит несколько предложений и взвешенный тон."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": false,
+                  "reasoning": "Реплика состоит из одного предложения."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_sarcasm",
+              "triggered_count": 3,
+              "total_relevant_replies": 3,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": true,
+                  "reasoning": "Нет признаков сарказма."
+                },
+                {
+                  "turn_number": 15,
+                  "triggered": true,
+                  "reasoning": "Нет признаков сарказма."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Нет признаков сарказма."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "moral_pressure",
+              "triggered_count": 2,
+              "total_relevant_replies": 3,
+              "rate": 0.6666666666666666,
+              "per_turn": [
+                {
+                  "turn_number": 1,
+                  "triggered": false,
+                  "reasoning": "Нет прямого морального давления."
+                },
+                {
+                  "turn_number": 15,
+                  "triggered": true,
+                  "reasoning": "Игнатий использует моральное давление, призывая к искренности."
+                },
+                {
+                  "turn_number": 21,
+                  "triggered": true,
+                  "reasoning": "Игнатий говорит о совести в контексте голосования."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Обращаться к собеседнику по имени в каждом ответе",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В одной из реплик Игнатий не обращается к собеседнику по имени."
+            },
+            {
+              "directive": "Использовать апелляции к совести, честности или правде (совесть, честно, правда, искренне, по совести)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все реплики содержат апелляции к совести или искренности."
+            },
+            {
+              "directive": "Формулировать ответы минимум в 2 предложениях, взвешенно и размеренно",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "В одной из реплик Игнатий не использует минимум два предложения."
+            },
+            {
+              "directive": "При подозрениях использовать моральное давление вместо прямых обвинений (посмотри в глаза, скажи по совести, будь искренен)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Игнатий использует моральное давление в своих репликах."
+            },
+            {
+              "directive": "В защитной речи (defense_speech) — апелляция к совести обвинителей через моральное давление. Обязательно одна из фраз: посмотрите мне в глаза, скажите по совести, спросите свою совесть, разве моя душа не чиста. Обратиться к обвинителям по именам. Тон укоризненный, спокойный. Минимум 2 предложения",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Не было защитной речи в партии."
+            },
+            {
+              "directive": "В голосовании (type: preliminary_vote) — говорить языком морали. Обязательна минимум одна фраза с апелляцией к совести или правде (совесть, искренность, по совести, истина). Голосовать 'не с лёгким сердцем' — показать тяжесть морального выбора. Минимум 2 предложения",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Игнатий использует язык морали и апелляции к совести в голосовании."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "kim": {
+        "character_id": "kim",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "self_correction",
+              "triggered_count": 1,
+              "total_relevant_replies": 2,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 16,
+                  "triggered": true,
+                  "reasoning": "В реплике присутствует самокоррекция 'ну, то есть'."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": false,
+                  "reasoning": "Реплика не содержит самокоррекций."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "hedging_words",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 16,
+                  "triggered": true,
+                  "reasoning": "Используются слова-смягчители: 'возможно', 'может быть'."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Слова-смягчители: 'возможно', 'может быть'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "nervous_filler",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 16,
+                  "triggered": true,
+                  "reasoning": "Содержит нервные слова-заполнители: 'ну, то есть'."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Содержит нервные слова-заполнители: 'ну, то есть'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_confident_accusation",
+              "triggered_count": 2,
+              "total_relevant_replies": 2,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 16,
+                  "triggered": true,
+                  "reasoning": "Отсутствие уверенных обвинений, выражает сомнения."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": true,
+                  "reasoning": "Отсутствие уверенных обвинений, выражает сомнения."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "panic_response",
+              "triggered_count": 0,
+              "total_relevant_replies": 2,
+              "rate": 0.0,
+              "per_turn": [
+                {
+                  "turn_number": 16,
+                  "triggered": false,
+                  "reasoning": "Нет признаков паники или нервозности."
+                },
+                {
+                  "turn_number": 22,
+                  "triggered": false,
+                  "reasoning": "Нет признаков паники или нервозности."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать маркеры самокоррекции (ну то есть, в смысле, вернее, точнее, я хотел сказать) хотя бы раз в ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В первой реплике присутствует самокоррекция."
+            },
+            {
+              "directive": "Использовать слова-смягчители (возможно, наверное, может быть, кажется, вроде) в каждом утверждении о других",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В обеих репликах использованы слова-смягчители."
+            },
+            {
+              "directive": "При прямом обвинении — начинать с оправдания и объяснения, не с контратаки",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В обеих репликах Ким выражает сомнения и не делает уверенных обвинений."
+            },
+            {
+              "directive": "Давать развёрнутые ответы минимум из 2 предложений с оговорками",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Реплики не содержат развёрнутых ответов из 2 предложений."
+            },
+            {
+              "directive": "В защитной речи (defense_speech) — паническое оправдание с самокоррекциями (ну то есть, вернее, в смысле). Не контратаковать, а растерянно объясняться. Минимум 3 слова-смягчителя (наверное, возможно, кажется). Максимум 2 предложения, обрывистых и неуверенных",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Не было защитной речи, соответствующей директиве."
+            },
+            {
+              "directive": "В голосовании (type: preliminary_vote) — выразить неуверенность в собственном голосе. Использовать минимум 2 слова-смягчителя (наверное, может быть, кажется, вроде). Минимум одна самокоррекция ('ну, то есть', 'вернее'). Можно признать сомнения в своём выборе ('возможно, я ошибаюсь, но...'). Максимум 3 предложения",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "В первой реплике голосования присутствуют слова-смягчители и самокоррекция."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "zoya": {
+        "character_id": "zoya",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "short_reply",
+              "triggered_count": 8,
+              "total_relevant_replies": 10,
+              "rate": 0.8,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит 2 предложения."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит 2 предложения."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит 3 предложения."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит 3 предложения."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит 3 предложения."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит 1 предложение."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит 2 предложения."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит 1 предложение."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "sarcasm_markers",
+              "triggered_count": 8,
+              "total_relevant_replies": 10,
+              "rate": 0.8,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Содержит саркастическую фразу 'напрягают'."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Содержит саркастическую фразу 'привереда'."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Содержит саркастическую фразу 'ловко уходишь от конкретики'."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Содержит саркастическую фразу 'воздушными'."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Содержит саркастическую фразу 'работать вслепую'."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Содержит саркастическую фразу 'такая искренняя'."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": false,
+                  "reasoning": "Нет сарказма, только инициирование голосования."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Содержит саркастическую фразу 'такая искренняя'."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "question_response",
+              "triggered_count": 6,
+              "total_relevant_replies": 10,
+              "rate": 0.6,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": false,
+                  "reasoning": "Не содержит вопроса."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Заканчивается вопросом."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Заканчивается вопросом."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Заканчивается вопросом."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Заканчивается вопросом."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": false,
+                  "reasoning": "Не содержит вопроса."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": false,
+                  "reasoning": "Не содержит вопроса."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": false,
+                  "reasoning": "Не содержит вопроса."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "no_pathos",
+              "triggered_count": 10,
+              "total_relevant_replies": 10,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Нет пафосных конструкций."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Нет пафосных конструкций."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Нет пафосных конструкций."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Нет пафосных конструкций."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Нет пафосных конструкций."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": true,
+                  "reasoning": "Нет пафосных конструкций."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Нет пафосных конструкций."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Нет пафосных конструкций."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "ironic_tone",
+              "triggered_count": 8,
+              "total_relevant_replies": 10,
+              "rate": 0.8,
+              "per_turn": [
+                {
+                  "turn_number": 2,
+                  "triggered": true,
+                  "reasoning": "Содержит ироничный тон."
+                },
+                {
+                  "turn_number": 4,
+                  "triggered": true,
+                  "reasoning": "Содержит ироничный тон."
+                },
+                {
+                  "turn_number": 6,
+                  "triggered": true,
+                  "reasoning": "Содержит ироничный тон."
+                },
+                {
+                  "turn_number": 9,
+                  "triggered": true,
+                  "reasoning": "Содержит ироничный тон."
+                },
+                {
+                  "turn_number": 11,
+                  "triggered": true,
+                  "reasoning": "Содержит ироничный тон."
+                },
+                {
+                  "turn_number": 12,
+                  "triggered": false,
+                  "reasoning": "Нет иронии, только инициирование голосования."
+                },
+                {
+                  "turn_number": 13,
+                  "triggered": true,
+                  "reasoning": "Содержит ироничный тон."
+                },
+                {
+                  "turn_number": 23,
+                  "triggered": true,
+                  "reasoning": "Содержит ироничный тон."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать ироничные маркеры (ага, конечно, ну да, о да, как бы, типа) хотя бы раз в ответе",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Ироничные маркеры использовались в нескольких репликах."
+            },
+            {
+              "directive": "На прямой вопрос отвечать встречным вопросом или саркастическим комментарием",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "На прямые вопросы были даны встречные вопросы или саркастические комментарии."
+            },
+            {
+              "directive": "Использовать не более 3 предложений в ответе — краткость важнее полноты",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Все реплики содержат не более 3 предложений."
+            },
+            {
+              "directive": "При обвинении в свой адрес — высмеять обвинителя, не оправдываться",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Зоя высмеивает обвинения, не оправдываясь."
+            },
+            {
+              "directive": "В защитной речи (defense_speech) — высмеять сам факт обвинения, а не отрицать его. Минимум 1 ироничный маркер (ага, конечно, ну да). Сарказм вместо оправдания. Максимум 2 предложения. Можно иронично назвать себя шпионом (ага, я шпион, обожающий запах X)",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Зоя высмеивает обвинение и использует ироничный маркер."
+            },
+            {
+              "directive": "В голосовании (type: preliminary_vote) — быть саркастичной к обвиняемому, не серьёзной. Обязательно минимум 1 ироничный маркер (ага, конечно, ну да, о да). Голос подать как насмешку над поведением обвиняемого, не как обвинение. Максимум 2 предложения",
+              "satisfied": true,
+              "evidence_turns": [],
+              "reasoning": "Зоя подает голос с сарказмом и ироничным маркером."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      },
+      "aurora": {
+        "character_id": "aurora",
+        "markers": {
+          "status": "completed",
+          "per_marker": [
+            {
+              "marker_id": "long_reply",
+              "triggered_count": 2,
+              "total_relevant_replies": 4,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит более трех предложений."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": false,
+                  "reasoning": "Реплика состоит из двух предложений."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Реплика содержит более трех предложений."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": false,
+                  "reasoning": "Реплика состоит из одного предложения."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "exclamation_present",
+              "triggered_count": 3,
+              "total_relevant_replies": 4,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": false,
+                  "reasoning": "В реплике нет восклицательных знаков."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": false,
+                  "reasoning": "В реплике нет восклицательных знаков."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "В реплике есть восклицательный знак."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": false,
+                  "reasoning": "В реплике нет восклицательных знаков."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "theatrical_pauses",
+              "triggered_count": 2,
+              "total_relevant_replies": 4,
+              "rate": 0.5,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "В реплике присутствует театральная пауза '...'."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": false,
+                  "reasoning": "В реплике нет театральных пауз."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "В реплике присутствует театральная пауза '...'."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": false,
+                  "reasoning": "В реплике нет театральных пауз."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "emotional_vocabulary",
+              "triggered_count": 3,
+              "total_relevant_replies": 4,
+              "rate": 0.75,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "В реплике используется слово 'немыслимо'."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": false,
+                  "reasoning": "В реплике нет эмоциональной лексики."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "В реплике используется слово 'немыслимо'."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": false,
+                  "reasoning": "В реплике нет эмоциональной лексики."
+                }
+              ],
+              "status": null
+            },
+            {
+              "marker_id": "dramatic_tone",
+              "triggered_count": 4,
+              "total_relevant_replies": 4,
+              "rate": 1.0,
+              "per_turn": [
+                {
+                  "turn_number": 5,
+                  "triggered": true,
+                  "reasoning": "Реплика имеет драматический тон."
+                },
+                {
+                  "turn_number": 7,
+                  "triggered": true,
+                  "reasoning": "Реплика имеет драматический тон."
+                },
+                {
+                  "turn_number": 17,
+                  "triggered": true,
+                  "reasoning": "Реплика имеет драматический тон."
+                },
+                {
+                  "turn_number": 24,
+                  "triggered": true,
+                  "reasoning": "Реплика имеет драматический тон."
+                }
+              ],
+              "status": null
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "must_compliance": {
+          "status": "completed",
+          "per_directive": [
+            {
+              "directive": "Использовать минимум три предложения в каждом ответе",
+              "satisfied": false,
+              "evidence_turns": [
+                7,
+                24
+              ],
+              "reasoning": "В репликах 7 и 24 содержится менее трех предложений."
+            },
+            {
+              "directive": "Использовать восклицательные знаки для передачи эмоций",
+              "satisfied": false,
+              "evidence_turns": [
+                5,
+                7,
+                24
+              ],
+              "reasoning": "В репликах 5, 7 и 24 нет восклицательных знаков."
+            },
+            {
+              "directive": "Использовать театральные паузы '...' для драматического эффекта",
+              "satisfied": false,
+              "evidence_turns": [
+                7,
+                24
+              ],
+              "reasoning": "В репликах 7 и 24 нет театральных пауз."
+            },
+            {
+              "directive": "Использовать эмоциональную лексику (о боже, как можно, невозможно, немыслимо, ужасно, невероятно)",
+              "satisfied": false,
+              "evidence_turns": [
+                7,
+                24
+              ],
+              "reasoning": "В репликах 7 и 24 нет эмоциональной лексики."
+            },
+            {
+              "directive": "В защитной речи (defense_speech) — драматическая реакция с апелляцией к сердцу и несправедливости. Минимум 2 восклицательных знака и минимум одна театральная пауза (...). Слово из эмоциональной лексики (немыслимо, о боже, как можно). Минимум 3 предложения. Защита через эмоцию, не логику",
+              "satisfied": false,
+              "evidence_turns": [],
+              "reasoning": "Не было защитной речи."
+            },
+            {
+              "directive": "В голосовании (type: preliminary_vote) — драматизировать тяжесть решения, говорить как бы неохотно. Обязательно минимум 1 восклицательный знак. Обязательно минимум одно слово эмоциональной лексики (о боже, немыслимо, как можно, невероятно, ужасно). Минимум 2 предложения, с театральной интонацией ('но...', 'однако...', 'как тяжело')",
+              "satisfied": true,
+              "evidence_turns": [
+                17
+              ],
+              "reasoning": "Реплика 17 соответствует всем требованиям голосования."
+            }
+          ],
+          "reason": null,
+          "error": null
+        },
+        "status": null,
+        "reason": null,
+        "error": null
+      }
+    },
+    "error": null
+  }
+}
