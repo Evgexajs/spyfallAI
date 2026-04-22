@@ -88,3 +88,12 @@ Format for entries:
 - src/parser/index.ts (updated to re-export)
 **Notes:** Типы полностью соответствуют PRD section 5. Enum-ы используют строковые значения для совместимости с JSON. position_hint в Character опциональный согласно PRD 6.3.1 (fallback поведение).
 
+### TASK-008: Реализация базовой валидации JSON схемы
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/parser/validator.ts с функцией validateGameData(json: unknown): ValidationResult. Реализована проверка обязательных полей верхнего уровня (version, metadata, scene, characters, timeline), проверка что characters содержит 2-8 персонажей, проверка что timeline не пустой. ValidationResult содержит isValid: boolean и errors: string[].
+**Files changed:**
+- src/parser/validator.ts (created)
+- src/parser/index.ts (updated to re-export validator)
+**Notes:** Базовая валидация схемы. Валидация enum-значений (TASK-009) и ссылочной целостности ID (TASK-010) будут добавлены в следующих задачах.
+
