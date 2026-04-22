@@ -797,7 +797,7 @@
         "Callback должен вернуть 2"
       ],
       "dependencies": ["TASK-036"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-038",

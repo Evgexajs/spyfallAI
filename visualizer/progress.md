@@ -342,3 +342,12 @@ Format for entries:
 - src/ui/index.ts (updated to re-export)
 **Notes:** Согласно PRD 6.1 и 6.9: кнопки управления воспроизведением. При setFinished() только Restart активна (после outcome). Логика состояний: isEnabled, isPlaying, isFinished определяют disabled-состояния кнопок.
 
+### TASK-037: Реализация переключателя скорости воспроизведения
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Расширен src/ui/controls.ts функцией createSpeedControls(). Реализован интерфейс SpeedControls с методами: onSpeedChange(callback) для регистрации callback смены скорости, getSpeed() для получения текущей скорости, setSpeed(speed) для программной установки скорости. Три кнопки x0.5/x1/x2 с визуальной индикацией активной через CSS class "active". По умолчанию x1. Тип PlaybackSpeed = 0.5 | 1 | 2.
+**Files changed:**
+- src/ui/controls.ts (updated — added SpeedControls interface and createSpeedControls function)
+- src/ui/index.ts (updated to re-export createSpeedControls and types)
+**Notes:** Согласно PRD 6.1: переключатель скорости x0.5/x1/x2. HTML разметка кнопок уже существовала в index.html (TASK-034). Функция связывает DOM-элементы с логикой и предоставляет callback API для интеграции с PlayerState.
+
