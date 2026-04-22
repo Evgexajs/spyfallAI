@@ -1,0 +1,128 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "f4c0d167-4929-4eb9-9970-1a2cb775deb0",
+    "title": "Партия в Музей"
+  },
+  "scene": {
+    "location_id": "museum",
+    "location_name": "Музей"
+  },
+  "characters": [
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 0
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 1
+    },
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 2
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, чё ты тут всегда делаешь в первую очередь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "content": "Видите ли, Лёха, всякий раз, как я сюда прихожу, я, по сути, выполняю функцию, подобную проводнику знаний. Это можно сравнить с тем, как библиотекарь открывает мир книг перед читающим. Строго говоря, моя роль здесь связана с передачей информации, которая находится на стыке искусства и истории.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "О, конечно, Штейн, как всегда на высоте. Такое ощущение, что ты не библиотекарь, а новый пророк. Неужели настолько уклончиво, потому что ты что-то скрываешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "content": "Марго, с точки зрения человека, часто ли здесь можно услышать пространство, наполненное тишиной или, возможно, шёпотом обсуждающих?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "content": "О, дорогой Штейн, здесь действительно порой царит удивительная тишина, как в храме искусства. Но иногда шёпот становится громче — особенно, когда кто-то увлечённо делится впечатлениями. Вопросы, кстати, интересные у тебя, не находишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "О, конечно, как же обойтись без мистической тишины и впечатлений. Кто-то явно слишком увлечён расплывчатостью. Может, ты что-то скрываешь, Марго?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Лёха, милый, а как ты относишься к тому, что здесь всё под пристальным вниманием? Напряжённо или уже привык?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Да привык уже. Тут всегда под прицелом глаз, типа.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Я думаю, мы находимся в: Музей",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Ага, музей — это как ваши умы: затеряны в пыли. Ну да, скажите спасибо, что хоть тут что-то ценное нашлось!",
+      "subtype": "normal"
+    },
+    {
+      "type": "spy_guess",
+      "spy_id": "zoya",
+      "guessed_location_id": "museum",
+      "guessed_location_name": "Музей",
+      "correct": true
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "zoya",
+      "reason": "Шпион (zoya) угадал локацию: Музей"
+    }
+  ]
+}

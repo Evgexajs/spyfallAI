@@ -1,0 +1,273 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "99b87557-b4f5-4c58-861e-e259ab7053c6",
+    "title": "Партия в Спа-салон"
+  },
+  "scene": {
+    "location_id": "spa",
+    "location_name": "Спа-салон"
+  },
+  "characters": [
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 0
+    },
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 1
+    },
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 2
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 3
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 4
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "zoya",
+      "content": "Зоя, скажи по совести, какие звуки ты чаще всего слышишь здесь, окружающие нас в этом месте?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "father_ignatius",
+      "content": "О да, звуки тут очень 'напрягают'. Особенно когда тишина давит ушам, не находишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "Зоя, милый, твои слова звучат как расплывчатая лёгкость, не правда ли? Интересно, Ким, что ты об этом думаешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "Аврора, тебе разве не кажется, что эфирные масла здесь пахнут слишком сладко? Или это я такая привереда?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "content": "Ах, Зоя, дорогая моя, как же можно устоять перед этими ароматами... Приглушённый свет, нежные нотки... это как бальзам на душу! Но, быть может, кто-то просто не ценит всю прелесть... Немыслимо, правда? В любом случае, каждый здесь обретает малый рай. Неужели кто-то из нас не чувствует этого?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "О, конечно, Аврора, и как же ты ловко уходишь от конкретики. Неужели намёк на нелюбовь к ароматам такой уж философский вопрос? Подозрительно, не находишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "content": "Марго, дорогая, скажи, как ты находишь выбор халатов, которые здесь предлагают? Они ведь такие мягкие и уютные, не правда ли?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "content": "Аврора, милый, я полностью согласна с тобой. Они такие чудесные, словно обнимают каждую клеточку. Интересно, почему Зоя их игнорирует, не замечаешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "О, конечно, Марго, когда слова становятся такими воздушными, это не наводит ли на мысль о том, что ты что-то скрываешь? Или я такая притворщица?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "Зоя, милый, а как ты относишься к свету в этом месте? Он должен располагать к расслаблению, не находишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "О да, свет прям как надо, чтобы работать вслепую. А что, тебе кажется, что я притворяюсь, не замечаю свет? Ну да, конечно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[ГОЛОСОВАНИЕ] Зоя инициирует голосование против Марго!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Голос: Марго] О да, конечно, Марго, ты такая искренняя с этими мягкими халатами. Может, ты шпион, который любит уют?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Голос: Зоя] Зоя, дорогая, мне кажется, возможно, ты немного торопишься с выводами. В твоих словах такое явное напряжение, которое, возможно, выдаёт неуверенность. Давайте подумаем ещё раз.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "[Голос: Марго] Марго, моя душа неспокойна, когда я размышляю о твоих словах. Ты ведь знаешь, что истина требует искренности, и я не могу не задаться вопросом, что скрывается за твоими мягкими словами. Говорю это не с лёгким сердцем, но моя совесть подсказывает мне сделать этот выбор.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "[Голос: Марго] Мне кажется, возможно, Марго немного, ну, то есть, уклончива в своих ответах, хотя, может быть, я ошибаюсь. Вернее, точно не уверен, но что-то подозрительное есть.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Голос: Марго] О, боже, как же тяжело принимать такие решения! Марго, ты всегда была мне близка, но... атмосфера сгущается вокруг тебя, и я, к сожалению, склоняюсь к выбору большинства. Немыслимо, но я голосую против тебя!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Дорогие Зоя, Игнатий, Ким и Аврора, мне кажется, наше внимание слегка сбилось с пути. Аврора, милый, ты ведь точно почувствовала, как Зоя сегодня уклончиво отвечает?",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Зоя]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Марго]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Марго]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Марго]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Марго]",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "margo",
+      "target_id": "zoya",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "father_ignatius",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "kim",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Дорогие Зоя, Игнатий, Ким и Аврора, мне кажется, наше внимание слегка сбилось с пути. Аврора, милый, ты ведь точно почувствовала, как Зоя сегодня уклончиво отвечает?",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "father_ignatius",
+      "reason": "Игроки единогласно обвинили Марго, но шпионом был Игнатий"
+    }
+  ]
+}

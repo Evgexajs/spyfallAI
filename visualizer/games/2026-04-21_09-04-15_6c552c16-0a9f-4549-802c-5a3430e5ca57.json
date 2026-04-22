@@ -1,0 +1,114 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "6c552c16-0a9f-4549-802c-5a3430e5ca57",
+    "title": "Партия в Подводная лодка"
+  },
+  "scene": {
+    "location_id": "submarine",
+    "location_name": "Подводная лодка"
+  },
+  "characters": [
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 0
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 1
+    },
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 2
+    },
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, скажи честно, как часто тебе приходится слышать звук двигателей вокруг себя?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "father_ignatius",
+      "content": "С точки зрения акустического восприятия, подобные звуки, по сути, становятся частью нашей фоновой реальности. Это, строго говоря, напоминает постоянный гул, к которому начинаешь относиться как к шороху леса для лесника: вначале слышно отчётливо, затем привыкаешь и едва замечаешь в повседневной жизни.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Зоя, как ты относишься к ограниченному пространству при выполнении своих обязанностей?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "О, ограниченность пространства — моя вторая тюрьма. Ну да, конечно, особенно как стендап-комик, привыкла к тесным сценам.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "father_ignatius",
+      "content": "Игнатий, скажи, как часто здесь нужно заботиться о защите от солнечных лучей?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "zoya",
+      "content": "Зоя, в этом месте защиту от солнечных лучей нам заменяет нечто более насущное. Больше волнуют иные аспекты бытия, требующие внимательного отношения и внутренней дисциплины. Согласись, куда важнее быть внимательным к своему присутствию и делам, нежели к тому, что происходит за пределами нашего окружения.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Я думаю, мы находимся в: Подводная лодка",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Ага, подводная лодка! Кто-то тут явно слишком глубоко нырнул в свои фантазии, да? Ожидали, что я не смогу пробраться в самые потаённые места, да? Ну да, у вас и не все на поверхности.",
+      "subtype": "normal"
+    },
+    {
+      "type": "spy_guess",
+      "spy_id": "zoya",
+      "guessed_location_id": "submarine",
+      "guessed_location_name": "Подводная лодка",
+      "correct": true
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "zoya",
+      "reason": "Шпион (zoya) угадал локацию: Подводная лодка"
+    }
+  ]
+}

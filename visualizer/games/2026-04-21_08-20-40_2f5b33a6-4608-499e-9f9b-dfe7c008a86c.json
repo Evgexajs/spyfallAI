@@ -1,0 +1,329 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "2f5b33a6-4608-499e-9f9b-dfe7c008a86c",
+    "title": "Партия в Подводная лодка"
+  },
+  "scene": {
+    "location_id": "submarine",
+    "location_name": "Подводная лодка"
+  },
+  "characters": [
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 0
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 1
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 2
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "content": "Милая Марго, скажи, пожалуйста, честно: как ты относишься к постоянному гулу вокруг нас? Способствует ли он твоей работе, или мешает сосредоточиться?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "content": "О, дорогой отец Игнатий, этот гул уже стал мне почти как музыка. Он мне не мешает, наоборот, помогает сосредоточиться, ведь мы все привыкли к своим особенностям работы, не так ли?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Лёха, милый, какой у тебя самый любимый элемент одежды здесь и почему?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Штаны, короче. В них удобно по технике лазить.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "father_ignatius",
+      "content": "Слышь, Игнатий, а как ты к отсутствию свежего воздуха относишься?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "content": "Лёха, знаешь, это испытание для тела и духа. Отсутствие свежего воздуха проверяет нашу стойкость. Как пастырь, я взращиваю терпение и смирение даже в таких условиях. Но быть честным перед собой — это основа. А ты, Лёха, как с этим справляешься?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "content": "Игнатий! О, как драматично ты уклоняешься от конкретики! Это подозрительно! Такой пафосный ответ, словно ты не здесь, а на сцены играешь!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "content": "Аврора, скажи честно, как ты относишься к тесноте, в которой мы находимся? Как это влияет на твои повседневные дела?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "content": "Теснота... О, как она меня душит! Пространства будто не хватает для моей широкой души... Но это заставляет меня быть более изобретательной в своих действиях. Я чувствую, как стены сжимаются, но это лишь добавляет драмы в каждое движение!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "content": "Аврора, чё за поэзию гонишь? Подозрительно это всё. Ты что-то скрываешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "content": "Лёха, скажи мне, о боже, почему здесь всегда так шумно? Как ты справляешься с этим постоянным гулом?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "content": "Да чё там, привык уже к этому шуму. Он как-то даже расслабляет.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "content": "Лёха, посмотри мне в глаза и скажи честно, разве такие слова можно назвать искренними? Твой уклончивый ответ вызывает подозрения.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "father_ignatius",
+      "content": "Игнатий, а чё у тебя всегда под рукой для работы?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "content": "Лёха, в моей работе всегда необходимо иметь под рукой терпение и мудрость для решения любых возникающих трудностей. Эти качества важны не только на моей позиции, но и в любом деле, не так ли?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "content": "Игнатий, дорогой, твой ответ звучит как-то расплывчато, не находишь? Такое философствование может показаться уклончивым, особенно в нашей ситуации. Может, попробуешь быть чуть конкретнее, чтобы развеять подозрения?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "content": "Аврора, как тебе приходится адаптироваться к постоянному гулу двигателей и тесноте вокруг? Это ведь особенные условия работы, согласись?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "content": "О, Игнатий, как можно! Этот постоянный гул... он словно музыка для моих ушей, но и тяжесть для души! Каждый день, когда я нахожусь здесь, это вызывает во мне бурю эмоций... но эта теснота, хоть и давит на меня, вдохновляет на невыразимые драматические выступления!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "content": "Аврора, ты чё-то мутная. Меньше поэзии, больше конкретики.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "content": "Марго, дорогая, скажи мне, о боже, как ты справляешься с духотой и этими ужасными, давящими запахами вокруг? Это ведь лихо бросает вызов твоему обонянию, не правда ли?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "content": "Аврора, милая, как ты поэтично описала нашу атмосферу! Мне иногда кажется, что это как тренировка для всех моих чувств — постоянно быть на чеку. А ты как справляешься? Интересно бы узнать.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "content": "Марго, дорогая, если позволишь заметить, твои ответы носят оттенок уклончивости и поэзии, что может выглядеть подозрительно. Не согласишься ли ты быть более искренней и прямой в своих высказываниях?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Лёха, милый, как ты относишься к шуму вокруг? Это утомляет тебя или, наоборот, помогает сосредоточиться?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Да ладно, Марго, я к этому шуму как к старому другу. Не мешает совсем.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "content": "Лёха, как можно так уклончиво отвечать?! Это явно подозрительно... Ты что-то скрываешь?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "father_ignatius",
+      "content": "Игнатий, как ты тут с нашими ватными ушами справляешься? Не напрягает?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "content": "Лёха, в этом призывном гуле есть что-то до боли знакомое, что помогает мне сосредоточиться и оставаться верным своим обязанностям. Порой кажется, что именно в такой атмосфере можно услышать внутренний голос совести. Разве не так, Лёха?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "content": "О, Игнатий, дорогой, как замечательно ты описал свои чувства к этому звуку. Но разве эта поэтичность не кажется немного уклончивой? Возможно, нам стоит быть чуть более конкретными, правда же?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "content": "Марго, скажи, как ты выбираешь одежду для такой непростой работы? Есть ли какие-то особые требования?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "content": "О, Игнатий, ты знаешь, в условиях, где мы находимся, удобство — главный приоритет. Выбираю что-то простое, что не будет стеснять движения. А как ты считаешь, важна ли одежда в подобной обстановке, дорогой?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Марго, это как-то подозрительно уклончиво, не находишь? Ты что-то скрываешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "[Голос: Марго] Дорогие друзья, настало время принять взвешенное решение. Марго, твои ответы порой кажутся мне недостаточно конкретными, и это вызывает сомнения в искренности твоих намерений. Вспомни, что честность — лучшая политика. Надеюсь, ты поймёшь, почему я выбираю голосовать за тебя. Пусть это решение будет верным.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Голос: Марго] Марго, ты чё-то мутная. Твои ответы как-то скользкие, как будто ты всё время на шпагате. Глаза не отводи, а то шпионить не получится.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Голос: Лёха] Дорогие, мне кажется, что Лёха ведёт себя странно и уклончиво. Он часто задаёт вопросы, но не даёт конкретных ответов. Не думаете ли вы, что это немного подозрительно?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Голос: Марго] О, как же тяжело мне сделать этот выбор! Но, Марго, дорогая, твоя уклончивость... она как туман на сцене, скрывающий истинные намерения! Возможно, ты и не виновата, но сомнения поселились в моём сердце...",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "father_ignatius",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "margo",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "aurora",
+      "reason": "Игроки единогласно обвинили Марго, но шпионом был Аврора"
+    }
+  ]
+}

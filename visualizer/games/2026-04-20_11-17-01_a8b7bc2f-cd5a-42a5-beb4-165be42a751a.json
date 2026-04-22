@@ -1,0 +1,702 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "a8b7bc2f-cd5a-42a5-beb4-165be42a751a",
+    "title": "Партия в Ресторан"
+  },
+  "scene": {
+    "location_id": "restaurant",
+    "location_name": "Ресторан"
+  },
+  "characters": [
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 0
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 1
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 2
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "Зоя, дорогая, скажи, как часто ты сталкиваешься с неожиданностями в своей работе здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "О да, здесь сплошные неожиданности, прям как утренний дождь в пустыне. А ты как, часто промокаешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "[zoя → professor_stein] Professor, как думаешь, что здесь хуже — местный климат или твои шутки?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Видите ли, строго говоря, сравнивать климат и мои шутки — это, по сути, как сопоставлять философский трактат с простым анекдотом. Один авторитет настаивал, что истинное понимание зависит от предшествующих обстоятельств, и в данном случае местный климат, вероятно, более значим для первичного восприятия.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "content": "[margo], как ты оцениваешь значение тишины в этом месте, если рассматривать её как условие для достижения гармонии между звуками, создаваемыми тобой, и окружающей средой?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "content": "О, professor_stein, вы так мудро подметили этот аспект тишины. Мне всегда казалось, что в гармонии со звуками, которые я создаю, есть особая красота. А вы замечали, как иногда lyokha как-то особенно внимателен к нашим разговорам?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Да ладно, margo, не гони пургу. Какой там внимателен, тут не до философии вашей.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "content": "[мargo → professor_stein] Professor, дорогой, скажите, когда вы в последний раз испытали настоящий восторг от своей работы здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "content": "Знаете, восторг, по сути, подобен редкому винтажному вину — его сложно обрести и ещё сложнее оценить без контекста. В моей практике, строго говоря, истинный восторг возникает в моменты, когда предоставляется возможность создать уникальную гармонию между сложной истинной и доступной её интерпретацией. Но, если ответить на ваш вопрос, последний раз это чувство посетило меня, когда удалось убедить молодого коллегу в неочевидной, но глубокой связи между двумя казалось бы несопоставимыми философскими подходами.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "Ага, конечно, сравнивать восторг с вином — это как носить шляпу на пляже ночью.  Как насчёт того, чтобы почаще удивлять молодых коллег?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую за professor_stein",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Голосую за professor_stein",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "[margo], чё у тебя тут самый сложный день был?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "О, милый lyokha, ты знаешь, иногда самый сложный день — это когда всё идёт не так, как было задумано. Но я всегда стараюсь сделать так, чтобы даже самые трудные ситуации превращались в моменты сладкого триумфа. А ты как справляешься со сложностями?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "content": "Professor, милый, скажите, а как вы относитесь к шуму, который иногда может нарушать наше спокойствие?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "content": "Шум, уважаемая, в нашем контексте напоминает фон в симфонии, который при неумелом исполнении способен исказить тональность всей пьесы. Строго говоря, в нашей работе, как и в философии, важно уметь находить и соблюдать баланс между звуковыми волнами и внутренней тишиной. Это, казалось бы, парадоксальное состояние является основой для правильной интерпретации окружающей действительности.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "content": "[professor_stein → lyokha] Lyokha, позвольте поинтересоваться: как вы справляетесь с необходимостью поддерживать гармонию между, скажем, внешним хаосом и внутренним спокойствием в ваших текущих условиях?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "content": "Да ладно, чё за гармония? Просто делаю своё дело, и всё.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "О да, конечно, \"просто делаю своё дело\". Интересно, как это у тебя выходит в таком хаосе. Звучит как стратегия из разряда \"закрой глаза и надейся на лучшее\", а?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "[margo → lyokha] Слушай, Margo, а как часто ты тут бываешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Ах, милый Lyokha, моя работа требует постоянного присутствия, так что здесь я как рыба в воде. А как ты относишься к постоянству, дорогой?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "content": "Любопытно, как ваше утверждение о постоянном присутствии перекликается с философской концепцией времени, где каждый миг уникален и неповторим. Возникает вопрос: если все столь непостоянно, как можно утверждать постоянство?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую за lyokha",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Голосую за professor_stein",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую за professor_stein",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Голосую за professor_stein",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "content": "Lyokha, с точки зрения логики, хотелось бы понять, как вы воспринимаете баланс между необходимостью в стабильных результатах и непредвиденными изменениями, которые, как метафорическая волна, могут изменить траекторию деятельности?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "content": "Да чё-то выдумываешь, чувак. Просто делаю максимум, чё могу, и всё.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "content": "Ай, Zoya, а чё для тебя тут самое сложное?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "Самое сложное? Ага, притворяться, что мне это всё интересно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "[yoya → lyokha] А сколько у тебя таких вот \"максимумов\" в день бывает, интересно?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "content": "Да чё, каждый день по разному.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "content": "Любопытное утверждение, Lyokha. Строго говоря, вариативность в этой ситуации напоминает случайную последовательность, а не закономерность, как в методах научного поиска.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "content": "Чё думаешь о местной живой музыке?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "Ага, как насчёт какофонии вместо музыки? Ну да, местные таланты всегда удивляют.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "Мне кажется, дорогой Lyokha, это ведь немножко странно, что Зоя так отозвалась о музыке. Разве она не звучит совершенно волшебно и не добавляет шарма этому месту? Может быть, она просто пытается отвлечь наше внимание?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую за lyokha",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "Зоя, дорогая, а как ты относишься к тому, что иногда атмосфера здесь бывает такой... изысканной? Не замечала ли ты, как это влияет на твоё настроение?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "О да, изысканность. Ничего так поднимает настроение, как пыль с налётом пафоса. А ты разве не чувствуешь себя героиней романа? Ну да, конечно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "[zoya → professor_stein] Ну, профессор, как там ваш научный подход помогает с выбором напитков? Или тут тоже случайности правят бал?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Видите ли, в вопросе выбора напитков заложена, как ни странно, метафизическая задача на поиск гармонии. Строго говоря, это не просто вопрос вкуса, а поиск симфонии между различными аспектами — подобно тому, как философ пытается постичь истину, сопоставляя противоречивые идеи. Таким образом, случайность, о которой вы упомянули, лишь кажущаяся — в действительности, всё подчинено скрытым закономерностям, которые мы стремимся постичь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Зоя, как бы вы оценили природу неизбежного фонового шума здесь — является ли он, по вашему, необходимым элементом общей атмосферы или скорее невидимой тенью, омрачающей восприятие?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "О да, шум — это как саундтрек к моей жизни. Нельзя же жить без драматической музыки на фоне, верно? Ну да, конечно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "Мне кажется, дорогой профессор, Зоя немного противоречит себе. Сначала жалуясь на пыльный налёт пафоса, а теперь утверждая, что шум — это её саундтрек. Как думаете, откуда такая перемена?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "О, профессор, как насчёт того, чтобы выбрать между интеллектом и интуицией? Или вы там по-прежнему предпочитаете метафизические копания?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Видите ли, Зоя, попытка выбрать между интеллектом и интуицией напоминает мне классическую дихотомию между рационализмом и эмпиризмом. Строго говоря, это не столько выбор, сколько поиск синергии между двумя подходами. Подобно тому, как алхимик стремится объединить противоречивые элементы, я предпочитаю использовать оба инструмента в достижении более глубокой истины.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "content": "Ой, профессор, хватит уже этой фигни! Говори проще, а не как робот.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую за margo",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Лёха, дорогой, а как ты относишься к тем, кто не умеет наслаждаться моментами тишины? Не кажется ли тебе, что они упускают что-то важное?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Да нормально отношусь. Пусть себе не наслаждаются, их дело.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "content": "Как тебе местная еда, профессор?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "content": "Любопытно, ваш вопрос, Лёха, может быть трактован с точки зрения символизма, где еда — это нечто большее, нежели просто пища. По сути, каждая дегустация — это как встреча с произведением искусства, где каждый элемент и нюанс вкуса напоминает сложный симфонический аккорд, а атмосфера делает это переживание почти сакральным.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Зоя, как бы ты описала гармонию, если бы она была звуком, исходящим из подсознательной глубины твоего опыта?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "О да, конечно, профессор. Гармония как звук? Это, наверное, тот момент, когда все наконец-то замолчат. Как думаешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "Зоя, ты так интересно описала гармонию, но разве шум не всегда был тебе по душе, дорогая? Это небольшое противоречие, не находишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "[margo] Ну да, конечно, дорогая. А скажи, как ты относишься к тем, кто постоянно меняет своё мнение?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "О, Зоя, интересный вопрос. Изменчивость мнений — это как специи в блюде, не правда ли? Важно лишь, чтобы менялось всё к лучшему, ты ведь согласна, милый друг?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "content": "Любопытное замечание, но важно отметить, что изменчивость мнений сама по себе не гарантирует улучшения, подобно тому, как добавление случайных ингредиентов в блюдо не всегда приводит к кулинарному шедевру.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую за margo",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "[зоя → lyokha] Ну что, Лёха, расскажи-ка, каково это — смотреть на всё с той высоты, где ты обычно летаешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "content": "Да ладно, Зоя, не гони. Я на земле стою, а не лечу.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую за lyokha",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую за margo",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую за margo",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую за margo",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую за margo",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "cancelled",
+      "spy_id": "zoya",
+      "reason": "Game stopped by user"
+    }
+  ]
+}

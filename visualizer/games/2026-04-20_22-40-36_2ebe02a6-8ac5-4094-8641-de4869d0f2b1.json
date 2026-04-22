@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "2ebe02a6-8ac5-4094-8641-de4869d0f2b1",
+    "title": "Партия в Больница"
+  },
+  "scene": {
+    "location_id": "hospital",
+    "location_name": "Больница"
+  },
+  "characters": [
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 0
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 1
+    },
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 2
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "content": "Лёха, а как ты относишься к таким специфическим запахам здесь? Ну, в смысле... как считаешь, это нормально, вернее, привычно?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "content": "Такие запахи, чё. Нормально, давно привык.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "content": "Эй, Ким, а ты как с одеждой, тут удобно?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "content": "Ну, в смысле... в зелёном халате довольно удобно, вернее, иногда даже чувствуешь себя некой... защитой. Правда, маска может немного мешать, но это всё привычное дело.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "content": "А что тебя больше всего раздражает здесь, ну, в смысле, среди звуков и всего такого?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "content": "Да фиг его знает, шум постоянно какой-то. Надоедает.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Я думаю, мы находимся в: Больница",
+      "subtype": "normal"
+    },
+    {
+      "type": "spy_guess",
+      "spy_id": "lyokha",
+      "guessed_location_id": "hospital",
+      "guessed_location_name": "Больница",
+      "correct": true
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "lyokha",
+      "reason": "Шпион (lyokha) угадал локацию: Больница"
+    }
+  ]
+}

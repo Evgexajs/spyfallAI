@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "6d97d13e-1db8-4730-a899-be7e6de8bc78",
+    "title": "Партия в Спа-салон"
+  },
+  "scene": {
+    "location_id": "spa",
+    "location_name": "Спа-салон"
+  },
+  "characters": [
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 0
+    },
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 1
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 2
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "content": "Ким, какой тут саундтрек, ты тоже слышишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "zoya",
+      "content": "Ну, в смысле... мне кажется, что-то расслабляющее, вернее, спокойное, в общем, как будто специально для того, чтобы отключиться от мыслей. Наверное, ты как-то так же его воспринимаешь, не знаю...",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "content": "Ага, конечно, очень конкретно. Ты так уклончиво отвечаешь, что кажется, будто что-то знаешь больше, чем говоришь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "content": "Лёха, а как часто ты сталкиваешься с людьми здесь, ну, в смысле, как часто они к тебе обращаются?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "content": "Да постоянно. Все расслабиться хотят, чё.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Марго, чё тут чаще всего нюхаешь, когда работаешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "О, милый Лёха, здесь каждый день в воздухе витает что-то нежное и расслабляющее. Эти ароматы просто окутывают тебя теплом и комфортом, будто ты на облаке. Разве это не чудесно?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Я думаю, мы находимся в: Спа-салон",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Ага, спа-салон, конечно, место для отдыха... или для тех, кто не знает, что делать с жизнью. Кто знал, что следить за вами так просто, ребята?",
+      "subtype": "normal"
+    },
+    {
+      "type": "spy_guess",
+      "spy_id": "zoya",
+      "guessed_location_id": "spa",
+      "guessed_location_name": "Спа-салон",
+      "correct": true
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "zoya",
+      "reason": "Шпион (zoya) угадал локацию: Спа-салон"
+    }
+  ]
+}

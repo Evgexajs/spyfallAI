@@ -1,0 +1,247 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "534d43ad-1462-4593-8c7e-439a3d67da2b",
+    "title": "Партия в Банк"
+  },
+  "scene": {
+    "location_id": "bank",
+    "location_name": "Банк"
+  },
+  "characters": [
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 0
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 1
+    },
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 2
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "А как тебе эти стеклянные перегородки? Удобно через них работать?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "content": "О, стеклянные перегородки! Как они создают атмосферу... некоей уединённости, но при этом всё на виду! Это как играть на сцене с открытыми кулисами! Удобство? Оно, конечно, спорно... но в этом есть нечто драматическое!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "content": "Борис, скажи, а этот запах... он тебе кажется привычным или вызывает какое-то особенное восприятие?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Запах денег знаком, как старая пыль. Каждый день одно и то же.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Аврора, что чаще слышишь: разговоры или шелест бумаг?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "content": "Ах, какой сложный вопрос! Звуки... они переплетаются... Но, пожалуй, разговоры... они всегда громче и насыщеннее, чем шелест бумаг. Эмоции людей заполняют пространство сильнее!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "content": "Любопытное замечание, Аврора. Однако, строго говоря, ваше ответ оставляет много вопросов, поскольку он явно уклончив и лишён конкретики. Вы что-то скрываете?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "content": "Борис, скажи, а как ты справляешься с этими бесконечными телефонными звонками и переговорами?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Не мой вопрос. Я у входа, следить за порядком — моё дело, а не звонки.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "content": "Ага, и конечно все мы верим, что в банке всегда спокойно у входа. Что-то ты темнишь, Борис, явно не убедительно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "content": "[boris_molot → zoya] Зоя, что ты носишь на работе: форма или обычная одежда?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "content": "О, конечно, у нас здесь стандартная форма. Как же ещё без неё?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Любопытное заявление, Зоя. Фактически, ваш ответ демонстрирует некоторую расплывчатость. \"Стандартная форма\" — это весьма уклончивое определение. Быть может, вы что-то скрываете от нас?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, а как у тебя дела с мраморными полами? Скучаешь по ним, когда не здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Видите ли, с мраморными полами у меня установлены довольно глубокие ассоциации. Они напоминают, в некоторых аспектах, строгую элегантность, присущую классическому искусству. Когда не здесь, я, строго говоря, действительно ощущаю определённую нехватку той утончённой атмосферы, которую мрамор добавляет в каждодневные будни.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "content": "[boris_molot] Это подозрительно, Штейн. Слишком философствуешь. Ты что-то скрываешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "content": "[professor_stein → aurora] Аврора, скажите, когда вы оказываетесь здесь, какой конкретный звук наиболее часто привлекает ваше внимание?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "professor_stein",
+      "content": "О, боже мой, звуки здесь... они такие разнообразные! Иногда нежное жужжание, словно шепот ветра... И в то же время, могут быть такие моменты, когда звуки становятся более отчетливыми, вызывая чувство таинственности и ожидания. Этот контраст завораживает, не правда ли?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "Ага, Аврора, снова поэзия вместо ответов. Ты что-то скрываешь, и это подозрительно уклончиво.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "content": "Зоя, скажи мне, о боже, какие специфические запахи ты чувствуешь, находясь здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "Ах, запахи... ну да, пахнет бумагой и металлом. Как думаешь, где это может быть, Аврора?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Любопытное наблюдение, Зоя. Ваши ответы, по сути, аналогичны туману в зеркале: вроде бы что-то видишь, но сама суть ускользает. Это подозрительно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "content": "Как часто у вас тут пересчитывают содержимое, Борис?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "content": "Пересчитывают регулярно. Порядок у нас строгий.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "content": "Борис, о, как захватывающе... но не слишком ли это уклончиво, мой дорогой? Пересчитывание может быть столь разным в понимании! Подозрительно, не так ли?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "content": "Зоя, какая у тебя униформа?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "content": "О да, униформа — почти как в комедии: строгий костюм, как будто деньги сами не пересчитаются.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Любопытное заявление, Зоя. Фактически, ваша аналогия с комедией напоминает театральную завесу, скрывающую истинный контекст. Возможно, вы что-то скрываете?",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "cancelled",
+      "spy_id": "aurora",
+      "reason": "Error: _transition_phase() got an unexpected keyword argument 'status'"
+    }
+  ]
+}

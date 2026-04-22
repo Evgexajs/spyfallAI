@@ -1,0 +1,224 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "0bd1cce0-0fc5-4ed4-9bda-6843b4754d7a",
+    "title": "Партия в Казино"
+  },
+  "scene": {
+    "location_id": "casino",
+    "location_name": "Казино"
+  },
+  "characters": [
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 0
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 1
+    },
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 2
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "Как ты относишься к звону фишек? Прямо успокаивает, да?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "content": "Да, приятно, когда что-то звенит и работает.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "boris_molot",
+      "content": "Борис, а запах тут тебе как, норм или чё?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "lyokha",
+      "content": "Запах как в любом таком месте — смесь свежести и денег. Вопросов больше нет.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Аврора, как здесь время ощущается?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "content": "О, как можно! Время здесь... оно словно растворяется в воздухе, словно песочные часы разбиты и ветер разносит невидимые песчинки. Кажется, что каждый момент длится вечно, и в то же время ускользает сквозь пальцы... Невероятное ощущение, согласитесь!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "Подозрительно красиво говоришь, Аврора. Пытаешься ускользнуть как песчинки, да?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "content": "Лёха, как думаешь, что за звуки здесь больше всего поглощают внимание и уносят в мир фантазий?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "content": "Да любые звуки норм, главное чтоб не глушило.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "lyokha",
+      "content": "Банальности говоришь, Лёха. Абстрактно как-то. Ты что-то скрываешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "boris_molot",
+      "content": "Борис, чё тут обычно на себе носишь? Одежда какая?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "lyokha",
+      "content": "Форма. Внимание к деталям и к людям. Мне больше знать надо про твоё \"норм\", Лёха.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "content": "Ах, Борис, твой ответ... он словно туман! Столько таинственности и загадок, что это просто... немыслимо! Не пытаешься ли ты скрыть в нём что-то особенное?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "content": "Зоя, какие здесь запахи вокруг тебя чаще всего ловишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "content": "Ах, запахи... Типа, смесь кофе и напряжения, знаешь? Тут этим дышится.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[ГОЛОСОВАНИЕ] Зоя инициирует голосование против Аврора!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Ах, Аврора, твоё поэтичное восприятие времени — просто шедевр уклончивости. Давайте не будем забывать, что мы тут не на литературном вечере.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Голос: Лёха] О, как несправедливо, что моя невинная душа подвергается сомнению! Но, Лёха, твои уклончивые ответы... они звучат, как эхо пустоты, скрывающее твои истинные намерения. Я голосую против тебя, ибо твои слова кажутся мне подозрительными, словно тайна, которую ты не хочешь раскрыть!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Короче, Аврора слишком много поэтично говорит. Мне это не нравится. Голосую за неё.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Аврора, твои загадки и туманы не для меня. Слишком много поэзии, слишком мало конкретики. Мой голос против тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "boris_molot",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "lyokha",
+      "reason": "Игроки единогласно обвинили Аврора, но шпионом был Лёха"
+    }
+  ]
+}

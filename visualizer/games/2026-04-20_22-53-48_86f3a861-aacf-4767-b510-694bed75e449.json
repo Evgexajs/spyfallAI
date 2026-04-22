@@ -1,0 +1,229 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "86f3a861-aacf-4767-b510-694bed75e449",
+    "title": "Партия в Подводная лодка"
+  },
+  "scene": {
+    "location_id": "submarine",
+    "location_name": "Подводная лодка"
+  },
+  "characters": [
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 0
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 1
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 2
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "Какие звуки у тебя за стеной, Марго?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "О, Зоя, это такой интересный вопрос. В общем-то, я слышу приглушенные шумы, и, знаете, кажется, кто-то иногда негромко разговаривает. Как будто кто-то делится своими мыслями. А ты что слышишь, дорогая?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, дорогой, а какие запахи ты чаще всего ощущаешь здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "content": "Следует отметить, что обоняние, по сути, является важнейшим инструментом восприятия нашего окружения. Подобно тому, как морские течения перемещают воду, здесь иногда ощущается неуловимый аромат свежести, смешанный с нотками машинного масла, словно напоминание о нашем текущем положении и функциях. Всё это создаёт определённую атмосферу, характерную для нашего местоположения.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Зоя, каково твоё отношение к тесноте пространства, в котором мы находимся?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "Ну, знаешь, теснота — это как обнимашки, только без согласия. О, да, обожаю это чувство!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "content": "Чё за фигня, Зоя? Подозрительно уклончиво ответила. Ты явно что-то скрываешь, а?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "Марго, а как ты относишься к этой вечной вибрации тут? Не замечаешь её, случайно?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "О, Зоя, эта вибрация как будто убаюкивает, правда? Это такое непривычное, но интересное ощущение, не находишь? Как ты к этому относишься, милая?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "content": "Любопытное наблюдение, Марго. Однако, ваш ответ несколько уклончив и обобщён, что вызывает определённые подозрения, словно вы пытаетесь скрыть истинную природу места, где мы находимся.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, дорогой, а что скажешь о странных звуках, которые иногда можно услышать здесь? Они ведь могут о многом рассказать, правда?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "content": "Строго говоря, звуки здесь могут быть подобны симфонии, созданной взаимодействием различных факторов, как в сложной оркестровке, где каждый элемент важен. Конечно, это может вызывать переживания, но, по сути, такие звуки, скорее, напоминают постоянный шёпот, сопровождающий нашу работу. Следует отметить, что в этом есть определённая стабильность.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[ГОЛОСОВАНИЕ] Штейн инициирует голосование против Марго!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Голос: Марго] Строго говоря, друзья, в сложной и многослойной ситуации, в которой мы оказались, именно ответы Марго вызывают наибольшее подозрение. Её уклончивые комментарии и обобщения, подобно туману, скрывают истинную природу того, что мы должны выявить. По сути, я считаю, что она не демонстрирует понимание нашей текущей ситуации, что весьма тревожно. Таким образом, я голосую за Марго.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Голос: Марго] Марго, чё-то ты сильно хитришь. Вибрации, звуки — всё как-то общо. Голосую против тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Голос: Зоя] Дорогие, мне кажется, что Зоя вела себя немного странновато, не так ли? Её комментарии о тесноте и обнимашках были несколько уклончивыми, как будто она что-то скрывает. Думаю, стоит обратить внимание на неё.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Голос: Марго] Ну да, конечно, я всегда мечтала оказаться в компании великого шпиона. Марго, твои ответы - это как попытка спрятать слона за занавеской. Тут что-то явно не так.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Дорогие Штейн, Лёха и Зоя, вы такие проницательные и наблюдательные! Однако, возможно, ваши предположения отвлекают от истинного подозреваемого.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "Марго, а какую одежду ты тут предпочитаешь носить? Это что-то специфическое или просто что-то удобное?",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "professor_stein",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "margo",
+      "target_id": "zoya",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Дорогие Штейн, Лёха и Зоя, вы такие проницательные и наблюдательные! Однако, возможно, ваши предположения отвлекают от истинного подозреваемого.",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "cancelled",
+      "spy_id": "margo",
+      "reason": "Game stopped by user"
+    }
+  ]
+}

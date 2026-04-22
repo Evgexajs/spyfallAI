@@ -1,0 +1,291 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "d2ff50d6-a914-4c79-a0c8-d3e334380a60",
+    "title": "Партия в Самолёт"
+  },
+  "scene": {
+    "location_id": "airplane",
+    "location_name": "Самолёт"
+  },
+  "characters": [
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 0
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 1
+    },
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 2
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "content": "Лёха, как бы ты описал свои ощущения от звуков, которые окружают нас здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "content": "Знаешь, шумно тут, но привыкаешь быстро. Короче, нормально.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "content": "Зоя, а тебе тут с креслом удобно или так себе?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "О да, кресло тут — это просто вершина комфорта. Особенно когда оно решает вдруг стать массажным.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "Аврора, как же приятно работать с людьми в такой красивой униформе, не находишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "content": "О, Зоя, как только я их увидела... эти униформы! Они словно созданы для великой драмы, вы не находите? Каждая деталь на своём месте, и это подчеркивает гармонию... Я прямо чувствую, как они придают особый шарм каждому движению!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "content": "Любопытно, Аврора. Ваше описание униформ напоминает картину, но, строго говоря, не даёт конкретных деталей о функциональности и общении. Такое многообразие образов может быть уклончивым. Не ощущаете ли вы здесь некую загадочность?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "professor_stein",
+      "content": "О, профессор Штейн, скажите, какие ароматы обычно витают в воздухе здесь? Это что-то особенное или привычное?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "content": "Ароматы, скажем, носят здесь скорее искусственный характер, подобно тому, как природа уступает место технологии. Фактически, они создают нейтральный фон, который, по сути, поддерживает атмосферу уединённости и сосредоточенности. Это позволяет мне почувствовать себя несколько изолированным от внешнего мира, даже в компании других людей.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "content": "Чё за фигня? Штейн, ты чё пургу гонишь? Уклончиво как-то, давай по делу! Подозрительно, знаешь ли.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Зоя, как часто вы наблюдаете смену видов вокруг, находясь здесь? Может ли это быть связано с вашим опытом в этой обстановке?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "О да, смена видов — это прям мой конёк! Ну да, конечно, я ведь живу в мире облаков, а не среди скучных стен.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "content": "Как это драматично, Зоя! 'Мир облаков', говоришь? Как загадочно и... уклончиво! Ты что-то скрываешь? Подозрительно!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "Аврора, а как тут с турбулентностью? Часто ли вас трясёт, или можно расслабиться?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "content": "О, Зоя, как ты смеешь задавать такие вопросы, когда моя душа трепещет от любой мелочи?! Турбулентность... это как в жизни, невероятно, иногда ощущается, а иногда нет. Но ведь именно это делает каждый миг таким волнительным, правда?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "content": "Любопытно, Аврора. Ваши рассуждения напоминают философскую эквилибристику, но, строго говоря, они уклоняются от конкретики. Это весьма подозрительно, не находите?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "content": "Лёха, скажи, как часто тебе приходится сталкиваться с технологическими сбоями в этой... эээ... обстановке? Они создают дополнительные преграды для твоей работы?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "content": "Да ладно, сбои тут редко, но бывает, чё. Работа не страдает особо.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "Лёха, а чё так уклончиво? Даже такой мастер философии, как Аврора, заволновалась бы. Ты что-то скрываешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "content": "Зоя, а какие звуки ты слышишь вокруг? Это что-то привычное или что-то такое, что сразу напрягает?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "Ну да, звуки такие, будто кто-то решил тут пылесосить, только сверху и сбоку. Знаешь, ничего нового.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Любопытно, Зоя. Ваше описание, по сути, напоминает метафору, но строго говоря, впечатляет своей уклончивостью. Это вызывает подозрение, не так ли?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "Аврора, а как ты относишься к этому бесконечному шуму? Тебя он не утомляет?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "content": "О, этот шум... Он словно симфония, призванная разбить спокойствие в моём сердце! Как же он завораживает своей монотонностью... как будто часы, отсчитывающие время до великого финала! Но признаюсь, он может быть утомительным, если вслушиваться слишком долго...",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "content": "Подозрительно как-то, Аврора. Ты на деле скрываешь что-то? Слишком уж красиво говоришь для такой темы.",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ГОЛОСОВАНИЕ] Аврора получил 2 обвинений"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Ну, ребят, голосую за Аврору. Слишком много красивых слов для простых вещей. Чё-то слишком подозрительно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Голос: Лёха] Как можно так легко обвинять меня в скрытности, Лёха?! Ты сам говоришь так уклончиво, будто играешь на чувствах аудитории, но не открываешь душу! О, жестоко мир обошёлся со мной, но я выбираю не молчать! Мой голос против тебя!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] С точки зрения аналитического подхода, Аврора проявляет чрезмерное увлечение метафорическим описанием и, фактически, избегает конкретных деталей, что напоминает классический способ отвлечь внимание. Следует отметить, что это может быть стратегией, призванной скрыть истинные намерения. Посему, мой голос против Авроры.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Ага, симфонии шумов и финалы... Звучит как попытка спрятаться за красивыми словами. Мой голос за Аврору. Ну да, конечно, всё это случайно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "professor_stein",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "civilians",
+      "spy_id": "aurora",
+      "reason": "Шпион (Аврора) был единогласно разоблачён"
+    }
+  ]
+}

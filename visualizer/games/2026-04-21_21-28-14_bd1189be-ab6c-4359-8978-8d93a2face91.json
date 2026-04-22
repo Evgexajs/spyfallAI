@@ -1,0 +1,272 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "bd1189be-ab6c-4359-8978-8d93a2face91",
+    "title": "Партия в Казино"
+  },
+  "scene": {
+    "location_id": "casino",
+    "location_name": "Казино"
+  },
+  "characters": [
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 0
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 1
+    },
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 2
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "content": "Игнатий, дорогой, а как часто ты слышишь здесь звон фишек и шум рулетки?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "content": "Марго, знаешь, даже в самых шумных местах, иногда стоит прислушаться к себе, к своей душе. Там, в тишине, слышится больше, чем любые внешние звуки.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "father_ignatius",
+      "content": "Любопытное рассуждение, Игнатий. Однако, строго говоря, твой ответ весьма уклончив и абстрактен, что наталкивает на мысль о том, что ты что-то скрываешь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "content": "Лёха, скажи честно, какие запахи витают здесь чаще всего и какие чувства они вызывают у тебя? По совести.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "father_ignatius",
+      "content": "Да тут спиртяга да парфюмерия. Чё ещё? Норм, короче.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "content": "Строго говоря, твой ответ, Лёха, напоминает пазл с недостающими кусочками — весьма расплывчат и не даёт ясного представления о происходящем. Это, по сути, вызывает некоторое подозрение.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "content": "Эй, Штейн, а сам-то как к шуму относишься? Спокойно или раздражает?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "content": "Видите ли, шум здесь, строго говоря, напоминает симфонию, где каждый звук является частью большого оркестра. По сути, это часть атмосферы, что не раздражает, а скорее погружает в некое странное равновесие. Как говорил один мой коллега, \"в шуме хаоса возникает порядок\".",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, твоя речь полна абстракций и уклончивых замечаний — не свидетельствует ли это о том, что ты что-то скрываешь? Скажи, по совести.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "father_ignatius",
+      "content": "Игнатий, скажи, как тебе освещение в этом месте? Яркое или размытого характера?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "professor_stein",
+      "content": "Освещение здесь мягкое и ненавязчивое, будто бы специально создано для того, чтобы думы могли окунуться в спокойствие. Но посмотри мне в глаза, Штейн, разве ты видишь во мне тень лукавства?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "father_ignatius",
+      "content": "Любопытное наблюдение, Игнатий. Строго говоря, твой ответ словно завуалирован дымкой неопределённости, что, по сути, может вызвать обоснованные сомнения в твоей открытости.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "content": "Лёха, скажи честно, какие действия здесь наиболее часто случаются? Люди больше сидят или перемещаются?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "father_ignatius",
+      "content": "А кто их считает? Кто-то сидит, кто-то бегает. Короче, движуха нормальная.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "content": "Любопытно, Лёха. Твоя реплика, фактически, изобилует расплывчатостью и недостатком конкретики, что, по сути, порождает подозрение о твоём истинном знании локации.",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ГОЛОСОВАНИЕ] Осталось менее 20% времени"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "[Голос: Лёха] Друзья и соратники, давайте же обратим наш взор на Лёху. Его слова, словно завуалированные тени, вызывают сомнение в его искренности. Спросите свою совесть — могут ли такие ответы исходить от чистого сердца? Призываю вас к правде и честности в этом вопросе.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] Чё, Штейн, философствуешь больше всех, а конкретики ноль. Я за тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Голос: Лёха] Фактически, анализируя предоставленные ответы, следует отметить, что Лёха неоднократно прибегал к расплывчатым формулировкам, что, по сути, вызывает обоснованные сомнения в его знании нашего окружения. Подобно туману, скрывающему истинную картину, его слова были лишены конкретики, что и побуждает меня выразить недоверие к его позиции.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Голос: Лёха] О, мой милый Лёха, мне кажется, ты ведёшь себя немного странно. Твои ответы как-то неопределённы, и это вызывает у меня лёгкое беспокойство. Надеюсь, ты понимаешь, о чём я говорю, дорогой.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Да вы чё, ребята? Я тут не для того, чтобы вам мозги пудрить.",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Лёха] Лёха, дорогой мой, я, конечно, верю в искренность твоих слов, но разве твоя совесть не подсказывает тебе, что именно твои ответы вызывают у нас сомнения? Скажи по совести, разве моя душа может быть спокойна при таких расплывчатых ответах?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Штейн] Да ладно, Штейн, ты чё в облаках витаешь? Пора на землю.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Лёха] Фактически, в данной ситуации, если рассматривать вопрос с точки зрения рациональности, следует отметить, что поведение Лёхи напоминает классический пример уклонения от конкретики, как будто бы он стремится скрыть знание о нашей локации. Подобно тому, как туман скрывает очертания деревьев, его ответы скрывают истинное понимание происходящего. Поэтому я сохраняю свой голос против него.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Лёха] Лёха, мой дорогой, ты знаешь, твои ответы напоминают неясные тени, и это немного настораживает. Вместе с тем, Игнатий и Штейн кажутся более открытыми в своих намерениях. Может быть, ты хотел бы прояснить кое-что для нас всех?",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "father_ignatius",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "professor_stein",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "margo",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Да вы чё, ребята? Я тут не для того, чтобы вам мозги пудрить.",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "father_ignatius",
+      "reason": "Игроки единогласно обвинили Лёха, но шпионом был Игнатий"
+    }
+  ]
+}

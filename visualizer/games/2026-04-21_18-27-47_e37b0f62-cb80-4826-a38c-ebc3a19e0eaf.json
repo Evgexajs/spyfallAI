@@ -1,0 +1,254 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "e37b0f62-cb80-4826-a38c-ebc3a19e0eaf",
+    "title": "Партия в Музей"
+  },
+  "scene": {
+    "location_id": "museum",
+    "location_name": "Музей"
+  },
+  "characters": [
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 0
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 1
+    },
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 2
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "content": "Ким, какие тут звуки слышишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "content": "Ну, вроде как обычно... вернее, тишина, но иногда слышно шаги, ну, я имею в виду, когда кто-то проходит. В смысле, тут, наверное, очень тихо, чтобы ничто не отвлекало, если ты понимаешь, о чём я.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "aurora",
+      "content": "Аврора, а что думаешь про температурный режим здесь, ну то есть, может быть, тебе кажется, в смысле, тебе комфортно?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "kim",
+      "content": "О, как же это волнительно, Ким! Температура здесь... она словно идеально подстроена под каждое моё дыхание! Почти как в храме искусства, где всё должно быть совершенным, чтобы каждое мгновение можно было проживать с новым вдохновением. Невероятно, правда?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Аврора, слишком уклончиво. Ты что, шпион, скрываешь что-то?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "content": "О, Борис, скажи мне, как ты относишься к искусству, которое здесь представлено? Что тебя особенно вдохновляет на этой выставке?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Меня вдохновляют детали. Особенно древние, в них столько историй, хоть голоса нет. Аврора, ты явно что-то недоговариваешь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "lyokha",
+      "content": "Лёха, какие экспонаты больше всего привлекают твоё внимание здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "boris_molot",
+      "content": "Да фиг знает, мне больше по душе те, что как бы с историей. Знаешь, когда смотришь и сразу чё-то такое мощное чувствуешь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "content": "Аврора (вмешивается): *О, как можно так говорить! Лёха, твой ответ... он так расплывчат! Ты что-то скрываешь? Подозрительно, не находите?!*",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "content": "Ким, а ты чё чаще всего здесь делаешь? Какое оборудование используешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "content": "Ну, в смысле, я в основном слежу, чтобы всё было в порядке, вернее, чтобы порядок соблюдался. Оборудование? Эм, вроде ничего особенного, ну такое, что позволяет делать замечания, если кто-то трогает... в смысле, нарушает правила.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "[ГОЛОСОВАНИЕ] Ким инициирует голосование против Аврора!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Ну, в смысле, я просто думаю, что её ответы были, вернее, как бы, уклончивыми, наверное. Она много говорила об искусстве, но не давала конкретных деталей. Это... ну, подозрительно, наверное.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Аврора, твои уклончивые ответы и попытки перевести разговор на искусство вызывают подозрения. Ты слишком сильно стараешься уйти от конкретики. Голосую против тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Голос: Ким] О, как несправедливо, как немыслимо! Ким, ты первым бросила камень, но в твоих ответах слишком много уклончивости... слишком мало конкретики! Мой голос против тебя, ибо я абсолютно уверена, что правда рано или поздно восторжествует!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Да, чё-то Аврора мутит воду. Я за неё.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "О, как же так! Друзья мои, зришь в корень!",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Аврора] Аврора, ты слишком много вокруг да около ходишь. Твоя 'атмосфера храма искусства' — это что-то странное. Прямо скажи, где мы, и хватит уклоняться. Голосую за тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Ким] О, как можно обвинять меня в такой важный момент нашей игры?! Вы все видите, как я стараюсь, как моё сердце пылает страстью к искусству, как я живу этой атмосферой! И вдруг такие обвинения... это немыслимо! Я уверена, что истинный шпион среди нас и это не я. Ким, твои слова звучат так... как бы это сказать, осторожно? Я не могу не заметить это. Подумайте, друзья мои, прежде чем делать выбор!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Аврора] Ну, в смысле, Аврора, ты как-то странно реагировала на вопросы, особенно когда Борис тебя спросил. Это было, ну, как-то... слишком театрально, вернее, я хотел сказать, слишком уклончиво. Мне кажется, это может быть подозрительно. Может быть, ты пытаешься скрыть, что не знаешь, где мы находимся?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Аврора] Аврора, ты как-то всё вокруг да около. Заумь какая-то. Тут не до искусства, когда шпион рядом, понимаешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "boris_molot",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "kim",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "kim",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "О, как же так! Друзья мои, зришь в корень!",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "lyokha",
+      "reason": "Игроки единогласно обвинили Аврора, но шпионом был Лёха"
+    }
+  ]
+}

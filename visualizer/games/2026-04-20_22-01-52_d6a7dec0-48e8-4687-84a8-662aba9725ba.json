@@ -1,0 +1,367 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "d6a7dec0-48e8-4687-84a8-662aba9725ba",
+    "title": "Партия в Музей"
+  },
+  "scene": {
+    "location_id": "museum",
+    "location_name": "Музей"
+  },
+  "characters": [
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 0
+    },
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 1
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 2
+    },
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "content": "Борис, милый, расскажи, какие интересные звуки ты здесь слышишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "content": "Шаги по мрамору, шорох одежды, шёпоты иногда. Звуки спокойные.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "content": "Какие наряды здесь привычны для работников, Марго?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "content": "О, здесь все такие изысканные, Борис. Я бы сказала, по одежде можно заметить некий стильный флёр. Интересно, а ты замечал какие-то особенные детали в нарядах?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "content": "Аврора, дорогая, интересно узнать, какие ароматы ты здесь замечала?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "content": "Ах, как можно не заметить этот изысканный аромат старины и изящества! Здесь пахнет, словно древними книгами и легкой ноткой лака для дерева... Мы словно в другом времени, не правда ли?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "content": "Аврора, позволь заметить, твои слова кажутся мне уклончивыми. Не скрываешь ли ты чего-то от нас? Будь искренней — разве так сложно назвать конкретные детали?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "content": "Ах, Игнатий, ты только послушай моё волнение! Что ты можешь рассказать о том, как здесь организованы выставки? Есть ли особые детали, привлекающие внимание?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "content": "Аврора, ты знаешь, что выставки здесь организуются с особым вниманием к деталям и эстетике. Каждая картина находится в золотой раме, которая подчёркивает её искусность. Также античные скульптуры расставлены так, чтобы их красота была видна в каждом уголке зала. Всё это создает атмосферу величия и почтения к искусству.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "content": "Мне кажется, дорогой Игнатий, ты немного уклончиво ответил на вопрос Авроры. Такая обтекаемость — это не признак ли чего-то подозрительного?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "content": "Марго, скажи по совести, какие образы или произведения искусства вызывают у тебя наибольшее впечатление в текущей экспозиции?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "content": "Ах, Игнатий, дорогой, знаешь, мне всегда нравятся те произведения искусства, которые передают тепло человеческих эмоций. Портреты с тонкими мазками и яркими глазами — вот что меня всегда трогает. Не находишь их поразительными?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "content": "Марго, о боже! Твои слова... столь возвышенные, и всё же... столь уклончивые! Портреты с \"теплом эмоций\", говоришь? Разве это не туманно? Может, ты что-то скрываешь, а?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "content": "Борис, милый, скажи, ты заметил, какие здесь вокруг стулья? Они как-то особенно выделяются, правда?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "content": "Стулья здесь жёсткие, Марго, специально чтоб долго на них не сидели. Для смотрителей такие, чтоб не расслаблялись, понимаешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "boris_molot",
+      "content": "Борис, твой ответ вызывает у меня сомнения, друг мой. Тебе не кажется, что эта жёсткость стульев — слишком узкая деталь для такого места? Быть может, ты что-то скрываешь от нас?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "content": "Марго, как здесь охраняют картины? Видела ли ты что-то особенное в системе безопасности?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "content": "О, Борис, милая деталь, которую ты заметил! Да, охрана здесь внимательная, но действует ненавязчиво. У них особая система, которая не бросается в глаза, но, тем не менее, эффективна.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "content": "Ах, Марго! Как потрясающе звучит твоя речь... но столь расплывчато! Эти слова о \"ненавязчивой системе\"... Разве это не уклончиво? Ты что-то скрываешь, милая?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "content": "Борис, милый, что ты слышишь вокруг? Какие звуки больше всего привлекают твоё внимание здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "content": "Слышишь шорох обуви по паркету и негромкий треск охранной радио, когда друг другу докладывают.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "boris_molot",
+      "content": "Борис, друг мой, ты столь уверенно говоришь о звуках, да ещё и о таких специфических. Но не кажется ли тебе, что твой ответ несколько.. как бы это сказать.. настораживающий? Может, это лишь фасад? Будь искренен.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "content": "Марго, какие здесь указатели? Есть ли у них особая тематика или стиль?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "content": "О, Борис, какие интересные наблюдения! Указатели здесь действительно утончённые, с лёгкими декоративными элементами, и они прекрасно вписываются в общую атмосферу. Замечаешь, как они не перегружают пространство?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "content": "Ах, Марго! Как можно было?! Твои слова звучат столь приглаженно и безлико... разве это не уклончивое описание, о котором говорят в книгах о шпионах? Обман и тайна витает в воздухе... Ты что-то скрываешь, без сомнения!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Выдвигаю голосование, дорогие. Мне кажется, что Аврора ведёт себя несколько странно, не так ли? Её ответы часто звучат как обвинения, а не прояснения. Может, это она пытается отвлечь нас от истины?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "Аврора, моя подруга, твоё поведение и риторика вызывают у меня вопросы. Твои слова о тайне и обмане звучат слишком общими и беспочвенными. Возможно, за этой завесой скрывается что-то большее, чем ты хочешь показать. Поэтому я голосую против тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "О, как можно было так жестоко поступить со мной, друзья мои?! Голоса против меня — это как кинжал в сердце! Но я не сдамся без боя... Я голосую против Марго! Её слова... они словно покрыты туманом неопределённости. Ужасно, немыслимо! Всё указывает на скрытый умысел... О боже, пусть правда восторжествует!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Аврора. У неё уклончивые ответы, а на мой вопрос о стиле указателей — ни слова. Подозрительно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "Друзья мои, о боже, как можно! Я всего лишь актриса, погруженная в атмосферу искусства и старины...",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Я голосую за Игнатия, дорогая Аврора. Мне кажется, его подозрения и настойчивость несколько противоречат той атмосфере, которую мы все так ценим. Не правда ли, он был слишком строг и категоричен?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "Аврора, моя дорогая, твои слова могут сбить с толку, но мне всё же кажется, что ты уклоняешься от истины. Советую взглянуть в глаза своей совести и задуматься о честности. Я подтверждаю свой голос против тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "О, боже, как же несправедливо! Я, Аврора, стою здесь среди вас, а мои друзья уже дважды подняли голос против меня! Но, позвольте! Я не шпион, я всего лишь погружена в атмосферу искусства и старины! Как можно?! \n\nТем не менее, раз такое дело... Я остаюсь верна своему первому чувству и голосую против Марго. Её слова и уклончивость... они внушают мне подозрения. Пусть правда восторжествует!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Аврора, ты слишком часто уходишь в обтекаемость и расплывчатые описания. Я подтверждаю свой голос. Аврора.",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "margo",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "father_ignatius",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "boris_molot",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "Друзья мои, о боже, как можно! Я всего лишь актриса, погруженная в атмосферу искусства и старины...",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "final",
+      "label": "Финальное голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "margo",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "father_ignatius",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "aurora",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "boris_molot",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "margo",
+      "reason": "Мирные не единогласны (2/3) — шпион (Марго) побеждает"
+    }
+  ]
+}

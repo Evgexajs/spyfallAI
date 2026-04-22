@@ -1,0 +1,149 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "f2f98f55-0b33-41d0-a5e0-4c9af68e0e00",
+    "title": "Партия в Ресторан"
+  },
+  "scene": {
+    "location_id": "restaurant",
+    "location_name": "Ресторан"
+  },
+  "characters": [
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 0
+    },
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 1
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 2
+    },
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "content": "Ага, boris_molot, сколько ты уже сидишь в таком месте и не скучно ли тебе?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "content": "Зоя, я тут недавно, но скучно быть не может. Ты чего спрашиваешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "father_ignatius",
+      "content": "[boris_molot → father_ignatius] Father_ignatius, что ты думаешь о звуках вокруг?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "boris_molot",
+      "content": "Дорогой Борис, позволь мне быть откровенным с тобой. В этой тишине и гармонии звуки кажутся мелодией для души. Скажи честно, разве ты не чувствуешь этой атмосферы?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "zoya",
+      "content": "Дорогая Зоя, скажи по совести, что здесь приносит тебе наибольшее удовлетворение?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "father_ignatius",
+      "content": "О, конечно, удовлетворение. Ты это серьёзно? Разве не очевидно, что это вино?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "content": "Ах, дорогая Зоя!... Как можно?! Вино в таком месте?! Это просто немыслимо!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "father_ignatius",
+      "content": "[зоя → father_ignatius] О, вы, святые отцы, обожаете гармонию и тишину, а что вы скажете о бокале или двух к обеду?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "zoya",
+      "content": "Зоя, дорогая, ты затронула интересную тему. По совести говоря, умеренность во всём — лучшая добродетель. Может ли бокал вина нарушить гармонию? Это зависит от намерений сердца.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "father_ignatius",
+      "content": "Это ты, Father_ignatius, тут в гармонии плаваешь, а сам про вино говоришь. Определись, тишина или бокал?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую за aurora",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Голосую за father_ignatius",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "Голосую за father_ignatius",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "Голосую за boris_molot",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "aurora",
+      "reason": "Мирные обвинили father_ignatius, но шпионом был aurora"
+    }
+  ]
+}

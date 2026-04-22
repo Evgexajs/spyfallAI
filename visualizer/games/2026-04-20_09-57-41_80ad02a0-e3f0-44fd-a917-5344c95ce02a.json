@@ -1,0 +1,149 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "80ad02a0-e3f0-44fd-a917-5344c95ce02a",
+    "title": "Партия в Подводная лодка"
+  },
+  "scene": {
+    "location_id": "submarine",
+    "location_name": "Подводная лодка"
+  },
+  "characters": [
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 0
+    },
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 1
+    },
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 2
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "content": "Aurora, скажи честно, какие мысли приходят тебе на ум, когда ты слышишь постоянный гул вокруг?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "content": "О, отец Игнатий, как вы можете задавать такой вопрос?! Этот гул... он немыслим! Как будто вся вселенная шепчет свои тайны мне на ухо... Этот звук пробуждает странные эмоции, заставляя задуматься о вечном! Как можно оставаться равнодушным в такой момент?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "content": "Отец Игнатий, о боже, расскажите мне, какое ощущение вызывает у вас окружающий свет? Неужели он не кажется вам божественным сиянием, освещающим наш путь?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "content": "Аврора, свет вокруг нас не столько божественен, сколько необходим. В его мерцании я вижу не только путь к истине, но и предупреждение о нашей хрупкости. Как думаешь, можем ли мы оставаться на этом пути, если совесть не будет нашему компасом?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "content": "Аврора, скажи честно, как ты справляешься с теснотой вокруг нас? Разве не вызывают ли такие условия желание обрести свободу душе?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "content": "Ах, отец Игнатий, какая мука! Теснота... она словно сковывает моё сердце, лишая крыльев мою душу! Но разве возможно не мечтать о свободе, когда стены давят нам на плечи?! О, как я жажду простора, где могу развернуться во всю ширь своей страсти и чувств! Это, увы, мучительное испытание для моего драматического духа!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Аврора, не надо драм. Сама говоришь о мечтах, а всё равно прячешь настоящие чувства. И не слишком ли много громких слов для такого простого вопроса?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "content": "О, отец Игнатий, скажите мне, пожалуйста, как ваши чувства отзываются на этот невероятный ажиотаж вокруг? Разве он не напоминает вам о буре страстей, что бушуют в человеческой душе?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "content": "Аврора, мои чувства в этом ажиотаже напоминают мне о том, как важно оставаться спокойным и рассудительным. Ведь буря страстей может увести нас от истины, если мы не будем внимательны к голосу своей совести. Скажи честно, можешь ли ты устоять перед соблазном потерять эту ясность?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "father_ignatius",
+      "content": "Эм... отец Игнатий, вы, ну, говорите о спокойствии, а тут такой гул и, в смысле, теснота, наверное сложно сохранять ясность, я хотел сказать. Как это вяжется, если, опять же, эти условия, ну, не совсем-то спокойные, в общем?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Голосую за aurora",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "Голосую за aurora",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "Голосую за aurora",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "Голосую за kim",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "civilians",
+      "spy_id": "aurora",
+      "reason": "Шпион (aurora) был разоблачён голосованием"
+    }
+  ]
+}

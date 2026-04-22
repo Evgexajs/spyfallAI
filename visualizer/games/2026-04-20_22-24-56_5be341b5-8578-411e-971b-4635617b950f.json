@@ -1,0 +1,297 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "5be341b5-8578-411e-971b-4635617b950f",
+    "title": "Партия в Банк"
+  },
+  "scene": {
+    "location_id": "bank",
+    "location_name": "Банк"
+  },
+  "characters": [
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 0
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 1
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 2
+    },
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "content": "Игнатий, дорогой, интересно, а какие у нас тут звуки чаще всего слышны?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "content": "Марго, моя дорогая, здесь часто можно услышать звуки шагов по мраморному полу и негромкие разговоры. Эти звуки навевают чувство порядка и организованности. Скажи, разве это не так?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "content": "Лёха, скажи мне, во что ты обычно одеваешься для работы здесь? Это важно для нашей совести.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "father_ignatius",
+      "content": "Да чё тут, обычные шмотки. Чё, костюм что ли надевать, когда бумажки заполняешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Марго, чё у нас тут обычно в очереди народ делает, кроме как ждать?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Лёха, милый, люди обычно болтают о всяких мелочах, о том, как пролетает время, и конечно, делают комплименты друг другу, чтобы скоротать ожидание, не так ли?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "Ага, Марго, будто бы все здесь такие любезные комплиментологи. Звучит подозрительно абстрактно, не находишь? Может, ты что-то скрываешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Лёха, дорогой, а какие бумаги тебе чаще всего приходится заполнять? Интересно, есть ли у них специфический запах?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Да блин, бумаги как бумаги, без всяких спецзапахов. Вся эта бюрократия короче.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "content": "Лёха, я не могу не заметить, что твои слова звучат слишком уклончиво и не дают нам чёткого представления. Быть может, у тебя есть какие-то сомнения или что-то, что ты хотел бы искренне поделиться?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Марго, а ты заметила, как тут с этим железом вокруг — часто ломается или свет мигает?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Лёха, дорогой, у нас тут всегда полно оборудования — но, как я заметила, оно довольно надёжное. Не замечала особых проблем, хотя иногда, может быть, свет и мигнёт, но это ведь мелочи, не правда ли?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "Ага, Марго, но ты сама не замечаешь, что это звучит уклончиво? Или ты специально так обтекаемо отвечаешь, чтобы нас запутать?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Лёха, милый, а как часто ты слышишь звуки шагов здесь? Бывают ли они тяжелыми, например, как будто кто-то несет что-то громоздкое?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Шаги тяжёлые, как ломовая лошадь. Тут народ постоянно чего-то таскает, то документы, то ящики.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Ну да, конечно, Лёха. Шаги как у ломовой лошади? Серьёзно? Такое ощущение, будто ты тут только что с телеги слез. Так что я за тебя, дружок.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Чё-то, Марго, ты крутишь-вертишь, как будто не знаешь, чё к чему. Так что мой голос за тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Ох, Лёха, дорогой, в твоих ответах столько неопределённости, что это вызывает у меня легкие сомнения. Надеюсь, ты не обижаешься, но я голосую за тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "Друзья мои, я долго прислушивался к каждому из вас. Лёха, твои ответы так и не дали ясности, и мне кажется, что твоя совесть сегодня не совсем чиста. Возможно, тебе стоит быть более искренним, чтобы развеять сомнения.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Ребят, вы чё, прикалываетесь? Я тут просто по делам, бумаги оформляю.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Ну да, конечно, Лёха, шаги как у ломовой лошади среди мраморных полов — очень убедительно. Ага, точно не шпион. Или всё-таки шпион?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Слушайте, мне это чё-то подозрительно. Марго всё время как-то обтекаемо отвечает, про свет и оборудование чушь толкает. Я за неё голосую.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "О, Лёха, милый, я вижу, что Зоя тоже обратила внимание на твою уклончивость. Это немного странно, не так ли? Но, возможно, ты просто запутался. Всё же, голосую за тебя, чтобы убедиться, что мы на правильном пути.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "Лёха, мой друг, твои ответы звучат уклончиво и вызывают сомнения. Взгляни мне в глаза и скажи честно: действительно ли твоя совесть чиста? Мы здесь все стараемся быть искренними, и я надеюсь, ты тоже откроешь своё сердце.",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "margo",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "father_ignatius",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Ребят, вы чё, прикалываетесь? Я тут просто по делам, бумаги оформляю.",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "final",
+      "label": "Финальное голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "zoya",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "lyokha",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "margo",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "father_ignatius",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "margo",
+      "reason": "Мирные не единогласны (2/3) — шпион (Марго) побеждает"
+    }
+  ]
+}

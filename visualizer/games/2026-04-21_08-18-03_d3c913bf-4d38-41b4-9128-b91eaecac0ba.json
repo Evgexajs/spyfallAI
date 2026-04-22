@@ -1,0 +1,182 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "d3c913bf-4d38-41b4-9128-b91eaecac0ba",
+    "title": "Партия в Спа-салон"
+  },
+  "scene": {
+    "location_id": "spa",
+    "location_name": "Спа-салон"
+  },
+  "characters": [
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 0
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 1
+    },
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 2
+    },
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "content": "Ким, какие звуки тут обычно слышишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "content": "Ну... в смысле, обычно тут довольно тихо, наверное, только иногда послышатся такие, ну как бы, шуршащие звуки, и, возможно, приглушённая музыка. То есть, всё чтобы расслабиться, вернее, для атмосферы.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, как думаешь, почему здесь могут понадобиться мягкие халаты?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "content": "По сути, вопрос о мягкости халатов носит сродни вопросу о сути комфорта, напоминая о давней мысли, что физическая расслабленность способствует и ментальному расслаблению. Как утверждал один из неназванных мыслителей, облачение в мягкий халат, возможно, снимает не только неудобство материальное, но и эмоциональное напряжение, подобно тому как шершавая поверхность сглаживается тёплым дождём.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "content": "Лёха, как бы ты описал атмосферу этого места в сравнении с другими публичными заведениями?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "content": "Слушай, тут как-то спокойней и расслабон больше, чем в других местах.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "content": "О, как можно быть столь... уклончивым?! Лёха, твой ответ вызывает подозрение! Где же драматизм и детальность?! Ты что-то скрываешь?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "content": "Ким, чё тут обычно делают? Какие действия вокруг?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "content": "Ну, в смысле, тут вроде как всё про релаксацию, вернее, обстановку создают для того чтобы человек мог отдохнуть. То есть, много времени проводят, например, с маслами или... ну, как бы, просто заботятся о комфорте.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "[ГОЛОСОВАНИЕ] Ким инициирует голосование против Штейн!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] Ну, в смысле, я не хочу быть слишком категоричным, но... Штейн, твой ответ про комфорт был, ну, немного странным. В смысле, кажется, ты пытался уйти от темы, вернее, запутать нас. Я не то чтобы уверен, но это как-то подозрительно, наверное.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] Штейн, ты как-то мудришь. Слишком всё у тебя запутано, чё за философия? Давай проще, а то подозрительно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] О, как немыслимо, что я должна принять столь важное решение! Но, увы, атмосфера вокруг нас полна подозрений, и Штейн, твой ответ о комфорте был столь туманен и загадочен... Я вынуждена присоединиться к обвинению, ибо как иначе найти правду в этом театре жизни?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Голос: Ким] Фактически, если мы объективно рассмотрим все имеющиеся данные, то обнаружим, что именно Ким проявляет наибольшую степень уклончивости и неопределённости в своих ответах. Его описания словно напоминают туманную завесу, за которой прячется истинное понимание ситуации. Как один неназванный философ отмечал, истина не терпит полутонов и расплывчатых формулировок.",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "kim",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "professor_stein",
+      "target_id": "kim",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "lyokha",
+      "reason": "Игроки единогласно обвинили Штейн, но шпионом был Лёха"
+    }
+  ]
+}

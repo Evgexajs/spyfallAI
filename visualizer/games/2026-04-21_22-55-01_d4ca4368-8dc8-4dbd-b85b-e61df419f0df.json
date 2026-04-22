@@ -1,0 +1,252 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "d4ca4368-8dc8-4dbd-b85b-e61df419f0df",
+    "title": "Партия в Музей"
+  },
+  "scene": {
+    "location_id": "museum",
+    "location_name": "Музей"
+  },
+  "characters": [
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 0
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 1
+    },
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 2
+    },
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 3
+    },
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 4
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, а что у тебя на стене висит, что притягивает толпы?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Интересный вопрос, Зоя. По сути, объект, который вызывает столь живой интерес, является, так сказать, воплощением искусства, что словно магнит притягивает взоры ценителей. Как утверждал один известный искусствовед, истинное произведение искусства говорит само за себя без лишних слов. Здесь, фактически, важна не только визуальная составляющая, но и исторический контекст, который открывается перед зрителем подобно разверзающейся книге времени.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, это звучит подозрительно уклончиво. Что конкретно у тебя на стене, а не философия эта?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "content": "Ким, как ты относишься к строгим правилам в этом месте, где внимание к деталям столь важно?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "professor_stein",
+      "content": "Ну, то есть... я отношусь, ну, как сказать, с уважением, вернее. Строгость здесь, наверное, нужна, чтоб, ну, сохранить всё как надо, понимаешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "content": "О да, Ким, ты прямо оратор-мыслитель: \"ну, как сказать, ну, понимаешь?\" Подозрительно уклончиво, не находишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "zoya",
+      "content": "Зоя, а как ты относишься к тишине в этом месте? Она, ну, помогает сосредоточиться или наоборот, в смысле, мешает?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "content": "О да, тишина здесь как бальзам на душу, особенно когда надоели вопли... ценителей искусства. Ага, сосредоточиться помогает, конечно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[ГОЛОСОВАНИЕ] Зоя инициирует голосование против Ким!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Голос: Ким] О да, Ким, твоя навязчивая любовь к 'ну' и 'как сказать' прямо кричит 'я шпион'. Конечно, я за тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Голос: Ким] Ким мутный, блин. Голосую.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Голос: Ким] Фактически, если рассмотреть ситуацию с точки зрения анализа и рационального подхода, ответы Кима действительно кажутся несколько уклончивыми и неопределёнными. По сути, отсутствие конкретики может свидетельствовать о попытке скрыть незнание. Поэтому мой голос за Кима.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Голос: Ким] Ким, ты сказал 'ну, сохранить всё как надо, понимаешь?' Это звучит как попытка уйти от конкретики. Ты шпион?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "[Голос: Зоя] Ну, в смысле, возможно я ошибаюсь, но, кажется, Зоя, ты как-то слишком быстро на меня переключилась. Может быть, это подозрительно, вернее, не знаю, но вот так мне кажется.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "Ребята, ну, я... в смысле, наверное, вы ошибаетесь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Ким] Мутный ты, Ким, голосую.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Ким]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Ким]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Ким]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Зоя]",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "kim",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "kim",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "professor_stein",
+      "target_id": "kim",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "boris_molot",
+      "target_id": "kim",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "kim",
+      "target_id": "zoya",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "Ребята, ну, я... в смысле, наверное, вы ошибаетесь.",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "boris_molot",
+      "reason": "Игроки единогласно обвинили Ким, но шпионом был Борис"
+    }
+  ]
+}

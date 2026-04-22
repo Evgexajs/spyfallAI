@@ -1,0 +1,252 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "b2439743-36a2-41a5-a066-9de06b93a17f",
+    "title": "Партия в Казино"
+  },
+  "scene": {
+    "location_id": "casino",
+    "location_name": "Казино"
+  },
+  "characters": [
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 0
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 1
+    },
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 2
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 3
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 4
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, часто ты слышишь звук фишек вокруг?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "boris_molot",
+      "content": "Звук фишек, если провести аналогию с импульсом, отражает динамику происходящего и напоминает мне, по сути, постоянный поток информации, как в бурлящем мегаполисе. Этот звук, строго говоря, становится неотъемлемой частью фона, подобно тому, как тиканье часов сопровождает наше восприятие времени.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, ты подозрительно уклончив. Звук фишек — это не философия, а конкретный шум. Ты что-то скрываешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "content": "Аврора, как ты, по сути, реагируешь на постоянный поток световых эффектов вокруг нас? Напоминает ли это тебе нечто особенное?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "professor_stein",
+      "content": "О, световые эффекты... Они такие невообразимые, такие яркие и ослепляющие! Это действительно напоминает сцену, где всё настолько захватывающе, что теряешься во времени... и пространстве... О боже, как это потрясающе! Кажется, будто ты на грани чего-то невероятного в этом потоке красок и огней!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "Ага, конечно, всё это настолько захватывающе, что уже нечего сказать по делу. Неужели все эти пространственные метафоры просто маскируют твоё незнание?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "content": "Зоя, скажи мне, как ты относишься к звону, который постоянно раздаётся вокруг нас? Он будоражит твои чувства или утомляет?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "Ах, этот звон — как музыка для ушей, или как комар в спальне. Никогда не знаешь, что раздражает больше.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[ГОЛОСОВАНИЕ] Зоя инициирует голосование против Штейн!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] О да, Штейн, твои словесные фокусы — это что-то! Конечно, философия о звуках фишек — лучший способ скрыть свою шпионскую натуру.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Фактически, анализируя поданную информацию, Аврора демонстрирует склонность к пространственным метафорам, что, по сути, может указывать на попытку уклониться от конкретики. С точки зрения рационального подхода, это вызывает определённые подозрения, учитывая нашу задачу выявить шпиона, опираясь на логику и факты.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] О боже, как тяжело принимать такие решения! Однако, в этом мире, полном драматических поворотов, мы должны следовать интуиции. И, хоть это и немыслимо, я голосую против Штейн... Словно судьба ведёт меня к этому выбору!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] Штейн, ты сказал 'постоянный поток информации', но нет конкретики. Что это значит? Ты не знаешь, где мы.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] Дорогой Штейн, мне кажется, возможно, ты действительно немного увлёкся философией в этом шумном месте. Хотя я и сомневаюсь, но, возможно, это наводит на определённые мысли...",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Уважаемые коллеги, строго говоря, ваше подозрение напоминает мне парадокс наведения порядка на хаос, где попытка упрощения приводит к усложнению. По сути, ваш рациональный подход основывается на звуках и световых эффектах, которые, как заметил один известный мыслитель, могут быть столь же обманчивыми, как тени на стене пещеры.",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Меняю голос: Зоя] Строго говоря, инициатива Зои, как и её реакция на звон, напоминает мне о феномене когнитивного диссонанса, когда отсутствие ясности порождает поспешные выводы. Фактически, если мы проанализируем последовательность её вопросов и ответов, возникает ощущение, словно она пытается скрыть своё истинное знание о нашем местоположении за завесой аллегорий. С точки зрения логики, я меняю свой голос, поскольку рациональный подход требует учитывать все нюансы и противоречия, выявленные в ходе нашего обсуждения.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Штейн]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Штейн]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Штейн] О, Штейн, дорогой, мне кажется, возможно ты увлёкся философией слишком сильно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Штейн]",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "professor_stein",
+      "target_id": "zoya",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "boris_molot",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "margo",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Уважаемые коллеги, строго говоря, ваше подозрение напоминает мне парадокс наведения порядка на хаос, где попытка упрощения приводит к усложнению. По сути, ваш рациональный подход основывается на звуках и световых эффектах, которые, как заметил один известный мыслитель, могут быть столь же обманчивыми, как тени на стене пещеры.",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "margo",
+      "reason": "Игроки единогласно обвинили Штейн, но шпионом был Марго"
+    }
+  ]
+}

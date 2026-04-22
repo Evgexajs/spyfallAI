@@ -1,0 +1,149 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "bbb6b856-1919-475e-aca9-234ac69c3b0c",
+    "title": "Партия в Казино"
+  },
+  "scene": {
+    "location_id": "casino",
+    "location_name": "Казино"
+  },
+  "characters": [
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 0
+    },
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 1
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 2
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Чё тут жрать дают, норм?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "О, дорогой Lyokha, здесь каждый найдёт что-то по вкусу. А ты сам что предпочитаешь, интересно?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Lyokha, милый, а как ты относишься к яркому освещению?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Да норм, лишь бы глаза не слепило.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "content": "[lyokha → aurora] Чё за люди тут, нормальные?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "content": "О, как можно вообще спросить об этом! Люди, которых я встречаю здесь... они такие разные, но, о боже, все они — часть этой яркой, бурной жизни! Каждый шаг по полу... каждый взгляд... вызывает во мне бурю эмоций! Да, нормальные или нет — это вопрос восприятия... и каждый момент здесь как сцена великой пьесы!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "aurora",
+      "content": "Что-то не сходится, ну то есть... ты же вроде говорила про бурю эмоций, а... в смысле, не совсем понятно, как тут это связано с нормальностью, вернее, её отсутствием, наверное.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "content": "О, Lyokha, как часто ты ощущаешь здесь, в этом... месте, что время будто бы исчезло и всё вокруг — лишь иллюзия?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "content": "Да ладно, чё за заморочки? Время как время.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Милый Lyokha, интересно, что ты так уверенно говоришь о времени. Ведь здесь, в этой атмосфере, зачастую кажется, что оно течёт совсем иначе, правда, aurora?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Голосую за aurora",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "Голосую за lyokha",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "Голосую за lyokha",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Голосую за lyokha",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "civilians",
+      "spy_id": "lyokha",
+      "reason": "Шпион (lyokha) был разоблачён голосованием"
+    }
+  ]
+}

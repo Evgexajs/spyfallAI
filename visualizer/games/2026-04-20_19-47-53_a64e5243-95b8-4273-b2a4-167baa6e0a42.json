@@ -1,0 +1,409 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "a64e5243-95b8-4273-b2a4-167baa6e0a42",
+    "title": "Партия в Больница"
+  },
+  "scene": {
+    "location_id": "hospital",
+    "location_name": "Больница"
+  },
+  "characters": [
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 0
+    },
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 1
+    },
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 2
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "content": "Как ты относишься к запахам, которые здесь раздаются?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "zoya",
+      "content": "Ну, запахи, в смысле... они могут быть разными, наверное. То есть, иногда, кажется, слишком интенсивными, но, в то же время, может быть... это просто моя тревожность, наверное.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "boris_molot",
+      "content": "[kim → boris_molot] А, скажи, ты часто слышишь здесь... ну, в смысле, какие-то странные звуки, вернее, они могут... может быть, тебе тоже кажется, что они подозрительные?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "kim",
+      "content": "Звуки? Да, постоянные. Ким, ты так и не ответил прямо. Уверен, ты знаешь, что здесь происходит?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "kim",
+      "content": "Как ты относишься к толпе, Ким?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "boris_molot",
+      "content": "Толпа, ну... я не против, в смысле, если всё под контролем, наверное. Но, может быть, иногда это напрягает, вернее, вызывает беспокойство, кажется.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "content": "Любопытное наблюдение, Ким. Однако следует отметить, что ваши рассуждения касательно контроля и беспокойства находятся в определённом логическом противоречии, которое требует более детального анализа.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "zoya",
+      "content": "[zoya] А ты, ну, как думаешь, здесь что-то может... ну, как бы... пойти не так, в смысле, что-то, что, кажется, вызывает... беспокойство?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "content": "О, конечно, здесь всё всегда идёт не так, если верить паранойе. А у тебя часто \"всё под контролем\", как ты выразился?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "content": "Кажется, Зоя, ты сама не уверена, что здесь происходит. Вон, как выкрутилась, когда тебя спросили.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "[zoya → professor_stein] О да, профессор, а как вы относитесь к запаху антисептика? Не напоминает ли это вам что-то из вашей цветущей молодости?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Видите ли, запах антисептика, строго говоря, напоминает мне об эпохах академических исследований, когда чистота была не просто условием, а необходимым элементом достижения объективности. Фактически, этот аромат действует как своеобразный катализатор для умственного сосредоточения, подобно тому, как метафорический свежий воздух может вдохновить на новые открытия.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "professor_stein",
+      "content": "Но ведь, ну, в смысле... профессор, вы, может быть, спутали что-то? Вернее, антисептик и свежий воздух — вещи, наверное, не совсем совместимые, то есть, ну, разве что в теории, вернее, в ваших академических изысканиях.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "content": "Ким, разрешите уточнить, как вы считаете, есть ли в данной среде, так сказать, элементы, которые, подобно цепной реакции, способны повлиять на ваше эмоциональное состояние и, возможно, даже вызывать иррациональные проявления?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "professor_stein",
+      "content": "Ну, то есть, профессор, конечно... может быть, что-то здесь и влияет, в смысле, цепная реакция, как вы сказали. Вернее, я хотел сказать, что это возможно, да, вполне вероятно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "kim",
+      "content": "Это ты запутался, Ким. Сам же сказал, что толпе не доверяешь, а теперь цепная реакция на эмоции влияет? Определись уже.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "professor_stein",
+      "content": "Профессор, а у вас, в смысле, часто бывают такие моменты, ну, когда вы чувствуете, что вроде как находитесь не совсем там, где думали, не из-за неправильных расчётов, а, ну, из-за чего-то более... непредвиденного?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "content": "Ким, с точки зрения философской интерпретации, строго говоря, чувство дезориентации, которое вы описываете, может, по сути, напоминать эффект, подобный открытию незнакомой главы в книге, которую вы считали давно изученной. Это состояние, где ожидаемое и неожиданное переплетаются, создавая уникальную возможность для переоценки окружающей реальности.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "Ах, профессор, вы, конечно, мастер сказочных метафор. Дезориентация или книжный клуб, неужели это одно и то же? Может, просто кто-то потерял очки?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "content": "Ким, как вы считаете, существует ли в этом месте, если взять метафорическую призму, под которой события кажутся одновременно предсказуемыми и абстрактными, нечто, что можно было бы назвать иллюзией спокойствия?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "professor_stein",
+      "content": "Ну, в смысле... наверное, может быть, да — иллюзия спокойствия, вернее, она вроде бы есть, но... словами обманчива, ну то есть, вроде так.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "kim",
+      "content": "Ким, ты запутался. \"Наверное, может быть\" — это не ответ. Чего ты темнишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "zoya",
+      "content": "Зоя, а у тебя когда-нибудь было такое, ну, в смысле, как будто все вокруг говорит одно, а ты чувствуешь, что должно быть по-другому, может быть, из-за... вернее, не знаю, просто из-за интуиции?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "content": "Ага, конечно, каждый день. У меня интуиция с радио анекдоты слушает.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Любопытное наблюдение, Зоя. Как говорил один известный философ, разум-раздвоенность — это зеркало собственных внутренних противоречий.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "content": "Борис, скажи, а что тебя больше раздражает: когда всё слишком тихо или когда каждый пытается переорать друг друга?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "content": "Когда тишина, значит, кто-то темнит. Шумнее — проще шпиона вычислить.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "boris_molot",
+      "content": "Но ведь когда шумно, кажется, можно что-то упустить, ну в смысле, не заметить чьей-то хитрой игры, вернее, может быть незаметной!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "content": "Профессор, какой запах тебе тут знаком?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "boris_molot",
+      "content": "Фактически, Борис, запах, который наиболее напоминает мне о текущем контексте, это аромат антисептика — он, как невидимый страж, защищает нас от невидимых угроз, подобно тому, как мудрость охраняет от заблуждений.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "О да, профессор, мудрость и антисептик — такие уж они друзья. А может, ты просто работаешь в магазине метафор?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую против kim",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "Голосую против boris_molot",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Голосую против kim",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую против kim",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "Ну, я понимаю, что может показаться, в смысле, что мои ответы были, ну, немного расплывчаты, вернее, не совсем конкретны, но я... я не шпион, в смысле, я просто стараюсь разобраться, как и все вы.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Подтверждаю голос за kim",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "Подтверждаю голос за boris_molot",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Воздерживаюсь",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Подтверждаю голос за kim",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "professor_stein",
+      "target_id": "kim",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "kim",
+      "target_id": "boris_molot",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "boris_molot",
+      "target_id": "kim",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "kim",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "Ну, я понимаю, что может показаться, в смысле, что мои ответы были, ну, немного расплывчаты, вернее, не совсем конкретны, но я... я не шпион, в смысле, я просто стараюсь разобраться, как и все вы.",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "final",
+      "label": "Финальное голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "professor_stein",
+      "target_id": "kim",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "kim",
+      "target_id": "boris_molot",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "boris_molot",
+      "target_id": null,
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "zoya",
+      "target_id": "kim",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "civilians",
+      "spy_id": "kim",
+      "reason": "Шпион (kim) был разоблачён большинством голосов (2/3)"
+    }
+  ]
+}

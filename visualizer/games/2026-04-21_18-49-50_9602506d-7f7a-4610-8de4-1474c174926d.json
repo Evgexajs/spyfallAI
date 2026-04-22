@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "9602506d-7f7a-4610-8de4-1474c174926d",
+    "title": "Партия в Подводная лодка"
+  },
+  "scene": {
+    "location_id": "submarine",
+    "location_name": "Подводная лодка"
+  },
+  "characters": [
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 0
+    },
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 1
+    },
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 2
+    },
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "zoya",
+      "content": "Зоя, как ты относишься к ощущению обладания ограниченным пространством на работе?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "father_ignatius",
+      "content": "Ага, как будто у нас тут не тесно. А где ты видел просторные офисы, просвети меня?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, как тебе эти постоянные гулы вокруг? Напрягают?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "По сути, звуковая среда, в которой мы существуем, напоминает океан шумов — подобно тому, как море захлёстывает берег. Если анализировать философски, звук становится фоном, интегрированным в наше восприятие, и перестаёт быть заметным, подобно тому, как часы на стене не тревожат наше сознание. Следует отметить, что это неизбежный элемент нашей деятельности и среды.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, это подозрительно уклончиво. Ты что-то скрываешь, или просто не знаешь, где мы?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "boris_molot",
+      "content": "Борис, если рассуждать о специфике нашего окружения, как ты оцениваешь важность приборов, окружающих нас в нашем месте работы?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "content": "Приборы важны, Штейн. Без них тут никуда. Ты что-то запутал всё.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Я думаю, мы находимся в: Школа",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Что за неразбериха? Школа? Да это подводная лодка! Как я мог ошибиться?",
+      "subtype": "normal"
+    },
+    {
+      "type": "spy_guess",
+      "spy_id": "boris_molot",
+      "guessed_location_id": "school",
+      "guessed_location_name": "Школа",
+      "correct": false
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "civilians",
+      "spy_id": "boris_molot",
+      "reason": "Шпион (boris_molot) неправильно угадал: Школа (на самом деле: Подводная лодка)"
+    }
+  ]
+}

@@ -62,6 +62,7 @@ export class SpeechBubble {
   private typeTextAccumulator = 0
 
   private currentStyle: BubbleStyle = STYLES[SpeechSubtype.Normal]
+  private targetPosition: Position = { x: 0, y: 0 }
 
   constructor() {
     this.container = new Container()
@@ -160,6 +161,9 @@ export class SpeechBubble {
     this.background.clear()
 
     const indicatorWidth = DOT_COUNT * DOT_RADIUS * 2 + (DOT_COUNT - 1) * DOT_SPACING
+    const bubbleWidth = indicatorWidth + BUBBLE_PADDING * 2
+    this.container.x = this.targetPosition.x - bubbleWidth / 2
+    this.container.y = this.targetPosition.y
     const width = indicatorWidth + BUBBLE_PADDING * 2
     const height = DOT_RADIUS * 2 + BUBBLE_PADDING * 2
     const { backgroundColor, borderColor, borderWidth } = this.currentStyle
@@ -301,10 +305,13 @@ export class SpeechBubble {
     this.container.destroy({ children: true })
   }
 
-  private updatePosition(position: Position): void {
+  private updatePosition(position?: Position): void {
+    if (position) {
+      this.targetPosition = position
+    }
     const bubbleWidth = this.calculateBubbleWidth()
-    this.container.x = position.x - bubbleWidth / 2
-    this.container.y = position.y
+    this.container.x = this.targetPosition.x - bubbleWidth / 2
+    this.container.y = this.targetPosition.y
   }
 
   private calculateBubbleWidth(): number {
@@ -318,6 +325,7 @@ export class SpeechBubble {
 
   private drawBackground(): void {
     this.background.clear()
+    this.updatePosition()
 
     const width = this.calculateBubbleWidth()
     const height = this.calculateBubbleHeight()

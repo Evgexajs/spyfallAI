@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "7bdb7aa9-4802-4399-ab8e-d453e403a833",
+    "title": "Партия в Самолёт"
+  },
+  "scene": {
+    "location_id": "airplane",
+    "location_name": "Самолёт"
+  },
+  "characters": [
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 0
+    },
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 1
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 2
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "content": "Строго говоря, мне любопытно узнать, aurora, если бы ты сравнила атмосферу нашего местопребывания с какой-либо литературной аллюзией, на что бы это напоминало?",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "cancelled",
+      "spy_id": "professor_stein",
+      "reason": "Error: 'PhaseEntry' object has no attribute 'phase'"
+    }
+  ]
+}

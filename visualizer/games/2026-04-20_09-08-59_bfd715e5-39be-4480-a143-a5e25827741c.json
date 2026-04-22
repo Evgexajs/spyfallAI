@@ -1,0 +1,149 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "bfd715e5-39be-4480-a143-a5e25827741c",
+    "title": "Партия в Казино"
+  },
+  "scene": {
+    "location_id": "casino",
+    "location_name": "Казино"
+  },
+  "characters": [
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 0
+    },
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 1
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 2
+    },
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Zoya, если бы ты могла провести один день, занимаясь только своим делом здесь, как бы ты охарактеризовала этот опыт с точки зрения эмоциональной насыщенности?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "О, эмоциональная насыщенность, конечно. Прямо как смотреть на сохнущую краску, только с огоньками и фишками.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "[zoya → professor_stein] Профессор, а как вы относитесь к постоянным звукам, которые здесь слышите?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Знаете, звуки, которые здесь сопутствуют моему пребыванию, по сути своей напоминают непрерывный симфонический оркестр. Это как если бы каждое движение имело свою мелодию, а каждый жест — свою партитуру. В контексте подобного места, шум становится своего рода фоном, без которого мы не можем существовать в полной мере.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "[professor_stein → zoya] Zoya, скажите, какова, на ваш взгляд, роль света в этом пространстве, и каким образом он влияет на ваше восприятие происходящего здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "Свет? Ага, как будто звёздное небо спустилось на землю, чтобы всем мешать спать.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "content": "Это ты, zoya, мешаешь спать своими загадками. Только что сказала про огоньки и фишки, а теперь звёздное небо. Определись, что ты тут видишь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "content": "[zoya → boris_molot] Борис, а как часто тебе встречаются действительно честные люди здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "content": "Редко встречаю. Ты следующая, zoya.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "boris_molot",
+      "content": "Любопытно, Борис. Выходит, что редко встречаем честных людей в месте, где моральные и этические нормы, по сути своей, должны быть краеугольным камнем.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "Голосую за lyokha",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Голосую за zoya",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "boris_molot",
+      "reason": "Мирные обвинили zoya, но шпионом был boris_molot"
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "608cea81-4479-4319-a5fc-b2d04ebc482f",
+    "title": "Партия в Больница"
+  },
+  "scene": {
+    "location_id": "hospital",
+    "location_name": "Больница"
+  },
+  "characters": [
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 0
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 1
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 2
+    },
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 3
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 4
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "lyokha",
+      "content": "Лёха, как ты относишься к типичным запахам в этом месте? Они не вызывают у тебя никаких подозрений?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "father_ignatius",
+      "content": "Да нормальные запахи, чё. Работа как работа.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "О да, Лёха, ну конечно, \"нормальные запахи\". Это же так конкретно и информативно! Ты что, ароматами шпиона залюбовался?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, чё обычно делаешь, когда вокруг шум конкретный, не напрягает?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "lyokha",
+      "content": "Видите ли, шум в окружающей среде можно сравнить с потоком информации, который, несмотря на свою интенсивность, позволяет сохранять равновесие и фокусироваться на главном. Подобно тому, как в лекции выделяют ключевые моменты, здесь важно уметь абстрагироваться и не позволять внешним звукам нарушать внимание. Эти звуки, строго говоря, напоминают постоянный фон, на который со временем перестаёшь обращать внимание.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "О, Штейн, ну конечно, философия вместо конкретики — это явно помогает понять шум в конкретном месте, ага. Скажи честно, ты что-то скрываешь или просто любишь уклоняться от прямых ответов?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "content": "Марго, каким образом ты взаимодействуешь с людьми в этом месте и что обычно привлекает их внимание?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "content": "О, дорогой Штейн, взаимодействие с людьми здесь требует большого терпения и эмпатии. Люди часто обращают внимание на заботливое отношение и знание нюансов их состояния. Интересно, иногда небольшая улыбка может сотворить чудеса, не так ли? Кстати, вам не кажется, что Лёха как-то уклончиво ответил на вопрос о запахах?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "content": "[ГОЛОСОВАНИЕ] Марго инициирует голосование против Лёха!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "content": "[Голос: Лёха] Дорогой Лёха, мне кажется, возможно, ты ведёшь себя немного странно с этими 'нормальными запахами', которые, как ты сказал, тебя не беспокоят. Но это всего лишь моё мнение, и я готова выслушать остальных.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "content": "[Голос: Лёха] Лёха, мой дорогой друг, твои ответы кажутся расплывчатыми и уклончивыми. По совести, я должен задать себе вопрос: не скрываешь ли ты что-то от нас? Мы все здесь стремимся к правде, и я голосую не с лёгким сердцем, но во имя искренности.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "content": "[Голос: Лёха] О да, Лёха, конечно, 'нормальные запахи'. Это же так убедительно. Не знаю, как ты, но я чую что-то шпионское.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "content": "[Голос: Лёха] Фактически, мы видим, как Лёха, отвечая на вопрос о запахах, использует крайне обобщённые формулировки, что, с точки зрения логики, может свидетельствовать о его незнании специфики нашего окружения. Такой подход в анализе ситуации, строго говоря, не соответствует рациональному подходу, что вызывает обоснованные подозрения.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "content": "[Голос: Штейн] Штейн гонит фигню, явно мутит.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "content": "Да ладно, ребят, не гоните. Я просто работаю, чё за дела-то такие?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "system",
+      "addressee_id": "all",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "all",
+      "content": "[Подтверждаю: Лёха] По совести, его ответы вызывают сомнения.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "all",
+      "content": "[Подтверждаю: Лёха] Дорогой Лёха, мне кажется, возможно, ты что-то не договариваешь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "all",
+      "content": "[Подтверждаю: Лёха] Ага, Лёха, ты прям мастер уклончивых ответов, ну да.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "all",
+      "content": "[Подтверждаю: Лёха] Фактически, его ответы демонстрируют информационную асимметрию.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "all",
+      "content": "[Подтверждаю: Штейн]",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "father_ignatius",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "margo",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "professor_stein",
+      "target_id": "lyokha",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "Да ладно, ребят, не гоните. Я просто работаю, чё за дела-то такие?",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "civilians",
+      "spy_id": "lyokha",
+      "reason": "Шпион (Лёха) был единогласно разоблачён"
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "2fa7226b-f5cf-46ca-8d4b-daedfadaef9b",
+    "title": "Партия в Подводная лодка"
+  },
+  "scene": {
+    "location_id": "submarine",
+    "location_name": "Подводная лодка"
+  },
+  "characters": [
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 0
+    },
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 1
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 2
+    },
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "content": "Борис, скажи мне... какой звук больше всего отвлекает тебя здесь и почему он так... немыслим?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Гул. Веет металлом, бьёт по нервам. Что думаешь об этом, Аврора?",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ГОЛОСОВАНИЕ] Осталось менее 20% времени"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Голос: Борис] О, как же это возможно?! Веет металлом, говоришь, Борис? Этот гул... он так знаком мне, как давний друг, что всегда рядом. Но ты, ты описываешь его с таким холодом! Я чувствую... немыслимую отстранённость в твоих словах. Как будто ты не разделяешь с нами эту тесную, почти интимную атмосферу. О, я вынуждена подозревать тебя, Борис! Прошу понять меня... это просто невозможно иначе!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Аврора, твой вопрос был слишком туманным. Так шпиону легче спрятаться. Я против тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Голос: Борис] Дорогие мои, как интересно наблюдать за обменом мнениями. Борис, ты так многословен, но твои ответы всегда оставляют ощущение недосказанности. Мне кажется, что это Аврора звучит убедительнее. Уверена, ты поймёшь, почему мой голос за тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "[Голос: Борис] Борис, в нашей жизни всегда важно искать истину и быть честным перед собой. Посмотри мне в глаза и скажи, что ты не шпион. Но, к сожалению, твои слова звучат так, как будто ты пытаешься укрыться за абстракциями. Пусть совесть твоё ведёт, но мой голос будет против тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Аврора, Марго, Игнатий, вы гоните не туда. Я здесь, чтобы контролировать давление, а не срывать крышки.",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Борис] О, мои дорогие! Как можно не заметить эту... немыслимую уклончивость Бориса?! Его ответы столь же туманны, как и глубины, в которых мы погружены! Как можно не заподозрить его, когда звук, о котором он говорит, столь же общий, как и его уверенность в нашем месте?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Аврора] Аврора, твои вопросы слишком общие и звучат подозрительно. Гул металла не может быть 'немыслимым'. Ты скрываешь что-то. Я за тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Борис] Дорогие мои, вы знаете, я всегда ищу гармонию в нашей команде. Борис, милый, твоя нервозность может быть объяснена, но позволь заметить, что твои ответы звучат как-то... странно. Может быть, просто напряжение, но, возможно, Аврора всё же права?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Борис] Борис, давай обратимся к твоей совести. Ты говоришь о звуках, которые бьют по нервам, но разве это не слова того, кто не в ладах с правдой? Посмотри мне в глаза и скажи честно, не прячешь ли ты что-то от нас?",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "boris_molot",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "boris_molot",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "margo",
+      "target_id": "boris_molot",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "father_ignatius",
+      "target_id": "boris_molot",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Аврора, Марго, Игнатий, вы гоните не туда. Я здесь, чтобы контролировать давление, а не срывать крышки.",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "father_ignatius",
+      "reason": "Игроки единогласно обвинили Борис, но шпионом был Игнатий"
+    }
+  ]
+}

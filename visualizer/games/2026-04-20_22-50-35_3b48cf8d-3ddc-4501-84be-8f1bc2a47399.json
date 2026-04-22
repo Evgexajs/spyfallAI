@@ -1,0 +1,114 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "3b48cf8d-3ddc-4501-84be-8f1bc2a47399",
+    "title": "Партия в Музей"
+  },
+  "scene": {
+    "location_id": "museum",
+    "location_name": "Музей"
+  },
+  "characters": [
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 0
+    },
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 1
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 2
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "content": "О, Борис, какие ароматы наполняют этот загадочный уголок? Неужели это запах сражения или же аромат вселенской победы?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Краски и лак. Победы тут не пахнет, Аврора, скорее искусством.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "father_ignatius",
+      "content": "Игнатий, чем тебя смущает это помещение? Слышал, тут любят прятать странные детали.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "boris_molot",
+      "content": "Борис, здесь моя душа встречает нечто величественное, будто бы прикоснулась к самому творению человеческого гения. Картины в золотых рамах, скульптуры, что словно дышат историей — всё это вызывает у меня благоговение. Разве это не место, где можно видеть вечные следы прошлого и размышлять о правде времени?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "content": "Аврора, что тебе приходит на ум, когда видишь античные скульптуры в этом месте? Как они влияют на твои мысли о вечности?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "content": "Античные скульптуры... о боже, как они завораживают! Их формы, их величие... всё это словно отголоски прошедших веков, напоминающие нам о хрупкости и красоте человеческой души. Как можно не задуматься о вечности, глядя на такие творения?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "Я думаю, мы находимся в: Музей",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "О, боже мой! Как можно было не заметить, что я, ваша великолепная Аврора, уже давно разгадала эту загадку? Невозможно не восхититься моим острым умом и безупречным чутьём, ведь даже тени древних экспонатов не могут скрыть мою гениальность! Аплодисменты, дорогие друзья, потому что я — звезда этой игры!",
+      "subtype": "normal"
+    },
+    {
+      "type": "spy_guess",
+      "spy_id": "aurora",
+      "guessed_location_id": "museum",
+      "guessed_location_name": "Музей",
+      "correct": true
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "aurora",
+      "reason": "Шпион (aurora) угадал локацию: Музей"
+    }
+  ]
+}

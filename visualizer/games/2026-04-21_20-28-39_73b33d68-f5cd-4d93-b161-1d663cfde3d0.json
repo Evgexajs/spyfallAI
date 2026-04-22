@@ -1,0 +1,261 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "73b33d68-f5cd-4d93-b161-1d663cfde3d0",
+    "title": "Партия в Цирк"
+  },
+  "scene": {
+    "location_id": "circus",
+    "location_name": "Цирк"
+  },
+  "characters": [
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 0
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 1
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 2
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "content": "Слушай, Аврора, чё там слышно вокруг нас постоянно?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "content": "О, Лёха! Как можно не слышать это вечное волнение вокруг нас?! *вздыхает* Звуки, они такие разнообразные... шумные, как аплодисменты толпы, и веселые, как смех детей... ах, без этого мой мир исчез бы в одночасье! Невозможно не заметить, как они заполняют пространство эмоциями...",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "content": "Борис, скажи, как тебе эта... арена вокруг нас? Какие чувства она вызывает в твоём сердце? Ах, это же так важно...",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Чего мне её чувствовать? Опилки под ногами, свет яркий, все как надо. Но вот тебя, Аврора, послушать — так будто в сказке обитаем.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "content": "О да, Борис, сказка с опилками и ярким светом. Прямо волшебство... Или уклончивость. Ты чего-то не договариваешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "content": "Зоя, чем тебя больше всего привлекает это место: запах попкорна или вспышки света?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "content": "Ага, прям выбор между воздухом и светом. Как будто у нас тут нечто другое есть, кроме этих 'ароматов' и 'вспышек'.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "zoya",
+      "content": "Зоя, хватаешь таинственность вместо деталей. Попкорн не только запах, но и вкус, а вспышки — это не просто свет, а работа. Или ты шпион, что не можешь конкретнее?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "Аврора, что бы ты делала, если бы здесь неожиданно исчез свет?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "content": "О, Зоя, без света... как можно?! Это было бы настоящей катастрофой! *вздыхает с надрывом* Я бы приняла это как вызов судьбы и попыталась всё же развеселить публику, шутила бы в темноте, чтобы все почувствовали волшебство момента на ощупь... ах, какой это был бы спектакль! Невероятно, правда?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Аврора, твоя речь — одна сплошная абстракция. Катастрофа, вызов судьбы, волшебство наощупь — уклончиво и подозрительно. Ты что-то скрываешь или не знаешь, где мы?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "content": "Борис, скажи мне, какое у тебя самое яркое воспоминание о работе? Были ли моменты, когда всё шло не по плану, и что ты тогда делал?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Яркий момент? Когда в зале свет выключили, а люди всё равно продолжали аплодировать. Я поднялся, сказал: 'Ничего, по запаху найдём'. Главное — держать волнение в руках. А ты, как обычно, вилами по воде водишь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[ГОЛОСОВАНИЕ] Борис инициирует голосование против Аврора!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Аврора, твои слова слишком расплывчаты. Вся эта поэзия и философия — прикрытие. Я голосую за тебя. Докажи, что знаешь, где мы.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Слушай, Аврора, чё-то ты мутная. Борис прав, фигню несёшь. Я за тебя.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Голос: Борис] О, Борис, как можно так поступать со мной?! Эти обвинения... они режут душу, как нож! Я вижу в тебе ту самую тень сомнения и, возможно, обмана... Голосую за тебя, ибо это — мой единственный шанс спасти себя от несправедливости!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] О, Аврора, твоё волшебство наощупь — это, конечно, сильно. Но, знаешь, в мире сарказма и цинизма такие фокусы не проходят. Голосую против тебя, ага.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "О, мои дорогие! Как можно меня обвинять...",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Аврора] Аврора, твоя речь — сплошная мишура. Всё про волшебство и катастрофы, а конкретики ноль. Это и есть твоя защита? Держу голос за тебя, пока не услышу что-то более убедительное.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Аврора] Аврора, ты всё время какие-то сказки поёшь. Много слов, а конкретики — ноль. Мне кажется, ты шпион.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Борис] О, друзья мои, как можно! Борис обвиняет меня в уклончивости, но ведь я всего лишь искренне делюсь своими эмоциями и переживаниями... Это же драма, это же жизнь! А он... он говорит о запахах, как будто это что-то существенное! Разве это не странно? Разве это не подозрительно? О, как можно так несправедливо обращаться со мной, когда моё сердце открыто?! Я остаюсь при своём мнении и голосую против Бориса, ибо его слова полны тумана и недосказанности...",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Аврора] Ой, Аврора, твои слова — как дым: красиво, но ничего конкретного. Волшебство наощупь — это, конечно, сильно. Но, может, скажешь что-то более приземлённое? Или всё-таки шпионские уши торчат?",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "boris_molot",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "boris_molot",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "О, мои дорогие! Как можно меня обвинять...",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "lyokha",
+      "reason": "Игроки единогласно обвинили Аврора, но шпионом был Лёха"
+    }
+  ]
+}

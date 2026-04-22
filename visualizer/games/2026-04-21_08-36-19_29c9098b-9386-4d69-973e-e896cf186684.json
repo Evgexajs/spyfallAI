@@ -1,0 +1,184 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "29c9098b-9386-4d69-973e-e896cf186684",
+    "title": "Партия в Ресторан"
+  },
+  "scene": {
+    "location_id": "restaurant",
+    "location_name": "Ресторан"
+  },
+  "characters": [
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 0
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 1
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 2
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "content": "О, Марго, скажи мне, как на тебя влияет живая музыка вокруг? Часто ли она сопровождает твои дни?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "content": "Ах, Аврора, музыка — это всегда так чудесно, не правда ли? Она добавляет волшебства каждому моменту. Хотя и не могу сказать, что каждый день наслаждаюсь ей. А у тебя часто бывают такие музыкальные сопровождения, дорогая?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Лёха, милый, интересно узнать, какие ароматы ты чаще всего ощущаешь в этом месте? Может быть, есть что-то особенное, что привлекает твоё внимание?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Пахнет выпечкой, короче. Да и вино часто чувствуешь. Что уж тут особо выдумывать.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "content": "Как у тебя с одеждой здесь? Много возни или всё просто?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "content": "О, одежда здесь... это целый спектакль, мой дорогой Лёха! Каждый элемент должен быть безупречным, каждая складка на своём месте... Видишь ли, это не просто наряд, а часть атмосферы этого места! О, как же я люблю, когда всё гармонирует...",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "Ага, спектакль, ещё и с безупречностью в главной роли. Подозрительно уклончиво. Ты что-то скрываешь, Аврора?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "content": "Марго, скажи мне, как ты относишься к освещению здесь? Оно влияет на твою работу?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "content": "Ах, Аврора, освещение здесь приятно мягкое, оно так чудесно создаёт атмосферу. Оно не мешает, а скорее способствует сосредоточению. Сама чувствую, как оно влияет на общее настроение. А как ты считаешь, дорогая, оно помогает в создании той самой безупречной гармонии?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Подозрительно много слов про свет, а конкретики — ноль. Марго, ты что-то явно скрываешь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "Зоя, дорогая, а как у тебя здесь с напитками? Это постоянный элемент или больше как изысканное дополнение?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "Ага, конечно, напитки тут — это как шутка без юмора: не постоянный аншлаг, но когда нужно, спасают ситуацию. Изысканность — слово дня, как всегда.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "content": "О, Зоя, твоё уклончивое описание вызывает у меня вопросы! Почему такая неопределённость в речи? Ты что-то скрываешь? Подозрительно!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "Лёха, скажи, что тебе больше всего нравится в твоей одежде здесь? Это влияет на твою работу или больше для красоты?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "content": "Да простая одежда, главное чтобы не мешала. Удобство важнее красоты.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Зоя, дорогая, Лёха что-то совсем абстрактно высказался о своей одежде, вам не кажется? Такое ощущение, будто он что-то важное утаивает.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "margo",
+      "content": "Марго, чё там за звуки вокруг? Музыка какая?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Знаешь, Лёха, звуки здесь такие уютные, как лёгкий шёпот ветра. Музыка создаёт атмосферу, да? Кстати, Зоя, ты заметила, как он на это внимание обратил?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "Ага, кажется, кто-то тут влюбился в музыку, как в серенаду. А что, Марго, твои ответы не слишком ли расплывчаты? Подозрительно, не находишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "cancelled",
+      "spy_id": "margo",
+      "reason": "Error: 2 validation errors for Turn\ntimestamp\n  Field required [type=missing, input_value={'turn_number': 20, 'spea..., 'display_delay_ms': 0}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\naddressee_id\n  Field required [type=missing, input_value={'turn_number': 20, 'spea..., 'display_delay_ms': 0}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing"
+    }
+  ]
+}

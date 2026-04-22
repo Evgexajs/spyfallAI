@@ -1,0 +1,114 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "9c0068a2-4708-46fd-b4a1-2ccb81f791c6",
+    "title": "Партия в Самолёт"
+  },
+  "scene": {
+    "location_id": "airplane",
+    "location_name": "Самолёт"
+  },
+  "characters": [
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 0
+    },
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 1
+    },
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 2
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "content": "Марго, скажи честно, какие звуки ты можешь услышать здесь чаще всего?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "content": "О, Игнатий, дорогой, ты же знаешь, что здесь можно услышать приятное жужжание двигателей и периодические объявления. Это придаёт ощущение безопасности, не находишь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "content": "Аврора, милая, как ты обычно чувствуешь себя, когда здесь немного потряхивает?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "content": "О, Марго, каковы же эти моменты! Такое потряхивание... оно заставляет меня ощущать каждую секунду как новую драму! Жизнь в движении, в постоянной перемене... ах, это так волнительно!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "content": "О, Игнатий, что ты видишь вокруг нас, когда мы двигаемся вперёд?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "content": "Аврора, дорогая, вокруг нас — ряды сидений с людьми, занятыми своими делами. Мы видим узкие проходы, а за окнами — бескрайние небеса и облака. Всё это располагает к размышлениям о высоте и полёте, разве не так?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "Я думаю, мы находимся в: Самолёт",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "О боже, о боже! Как можно было сомневаться в моей гениальности?! Самолёт… это не просто средство передвижения, это символ стремления к высотам! Ах, как немыслимо, что другие игроки не смогли уловить этот величественный смысл! Я — звезда этой игры, и мои соперники могут только мечтать о моём сиянии!",
+      "subtype": "normal"
+    },
+    {
+      "type": "spy_guess",
+      "spy_id": "aurora",
+      "guessed_location_id": "airplane",
+      "guessed_location_name": "Самолёт",
+      "correct": true
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "aurora",
+      "reason": "Шпион (aurora) угадал локацию: Самолёт"
+    }
+  ]
+}

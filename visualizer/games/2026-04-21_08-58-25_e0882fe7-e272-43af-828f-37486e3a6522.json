@@ -1,0 +1,233 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "e0882fe7-e272-43af-828f-37486e3a6522",
+    "title": "Партия в Цирк"
+  },
+  "scene": {
+    "location_id": "circus",
+    "location_name": "Цирк"
+  },
+  "characters": [
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 0
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 1
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 2
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "zoya",
+      "content": "Зоя, о боже, скажи мне... какие впечатляющие запахи ты ощущаешь здесь, в этом загадочном месте?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "aurora",
+      "content": "Ну, наверное, это тот самый аромат победы и немного животных ноток. Не находишь, Аврора?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "Марго, как часто приходится под яркими огнями работать?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "Ах, Зоя, эти огни как настоящая магия, правда? Они заставляют моё сердце биться быстрее каждый раз. Интересно, а как ты справляешься с этими эффектами, дорогая?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "content": "Аврора, дорогая, расскажи, какой самый громкий звук на твоей работе здесь может тебя выбить из колеи?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "content": "О, Марго, вы же знаете, мой мир всегда полон настоящей какофонии звуков! Эти крики и выстрелы... они просто режут слух, не правда ли? Как можно оставаться невозмутимой в таких условиях?! Ах, как театр учит нас выживать даже в самых немыслимых ситуациях!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "content": "Аврора, ты чё городишь? Подозрительно уклончиво, ты что-то скрываешь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "lyokha",
+      "content": "Лёха, о чудо! Скажи мне, каково это — видеть всю местную одежду? Она ведь такая особенная, не так ли?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "aurora",
+      "content": "Да обычная одежда, чё, на деле всё в удобстве, чтоб рухнуть не.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[ГОЛОСОВАНИЕ] Лёха инициирует голосование против Аврора!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Аврора, ты чё-то мутная, короче. Твои ответы не вяжутся с местом. Голосую против тебя, хватит городить ерунду.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Аврора, дорогая, твои ответы действительно вызывают некоторые сомнения. Может быть, ты просто слишком увлечена игрой? Но для спокойствия всех, думаю, стоит прислушаться к Лёхе.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Ну да, конечно, крики и выстрелы... в театре. Аврора, ты это серьёзно? Что-то здесь не сходится, а ты явно пытаешься скрыться за занавесом.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Голос: Зоя] О, как же всё это несправедливо! Как можно обвинять меня, когда я всего лишь актриса в этом театре жизни! Но раз уж вы все решили так, я вынуждена ответить тем же... Зоя, твои загадочные ответы вызывают у меня море сомнений! Как можно оставаться равнодушной, когда вокруг столько тайн?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "Друзья, о, как можно обвинять меня, когда моё сердце и душа вложены в это место?! Я, как актриса на сцене жизни, лишь пытаюсь понять, что происходит вокруг...",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Аврора] Аврора, дорогая, мне кажется, ты иногда увлекаешься своими прекрасными метафорами. Но, возможно, это просто стиль, не так ли? Однако, Лёха, ты, кажется, заметил что-то странное в её словах, и я не могу это проигнорировать. Мне кажется, стоит ещё раз подумать о её ответах.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Аврора] Короче, Аврора, твои ответы все какие-то из воздуха. Я за тебя голосую, чё. Если кто-то согласен, давай добьём эту тему.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Аврора] Ну да, Аврора, крики и выстрелы — это прям мой повседневный саундтрек. Как ты там вообще выживаешь? С такими-то звуками, может, ты и не знаешь, где мы находимся? Ага, конечно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Зоя] О, как же несправедливо! Марго, Лёха, Зоя... вы все собрались против меня, как будто бы я... я — злодей этой пьесы! Но позвольте мне напомнить о загадочности и таинственности, которые окружали нас с самого начала. Мои вопросы были лишь попыткой пролить свет на истинную природу нашего местоположения! И всё же, если посмотреть на всё это с другой стороны... Зоя, дорогая, твои ответы были столь же двусмысленны, как и мои! Может быть, это ты пытаешься сбить нас с пути, как искусный режиссёр, скрывающий финал своего спектакля?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "margo",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "zoya",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "Друзья, о, как можно обвинять меня, когда моё сердце и душа вложены в это место?! Я, как актриса на сцене жизни, лишь пытаюсь понять, что происходит вокруг...",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "civilians",
+      "spy_id": "aurora",
+      "reason": "Шпион (Аврора) был единогласно разоблачён"
+    }
+  ]
+}

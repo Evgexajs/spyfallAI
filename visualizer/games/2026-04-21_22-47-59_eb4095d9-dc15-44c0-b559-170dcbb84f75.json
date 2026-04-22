@@ -1,0 +1,301 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "eb4095d9-dc15-44c0-b559-170dcbb84f75",
+    "title": "Партия в Подводная лодка"
+  },
+  "scene": {
+    "location_id": "submarine",
+    "location_name": "Подводная лодка"
+  },
+  "characters": [
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 0
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 1
+    },
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 2
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 3
+    },
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 4
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "aurora",
+      "content": "Аврора, как ты справляешься с теснотой и постоянным гулом вокруг?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "boris_molot",
+      "content": "О, Борис, ты даже не представляешь, как это... ах, непросто! Теснота здесь может свести с ума, но я... о, я привыкла к сцене, где пространство мне диктует условия. Что касается гула... он, как зловещий лейтмотив в опере моей жизни! Как можно не замечать его? Но мы, стойкие и смелые, всегда находим способ... оставаться в гармонии с этой симфонией!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "professor_stein",
+      "content": "О, Штейн, скажи мне... как ты справляешься с тем, что приходится постоянно носить эту форменную одежду? Она ведь не только для удобства, но и для защиты от всех трудностей вокруг нас!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "content": "Аврора, строго говоря, формальная одежда, подобно униформе, здесь, по сути, выполняет роль второй кожи, защищая не только от физических факторов, но и определённого рода психологического давления. Эта одежда напоминает нам о наших обязанностях и ответственности, подобно тому, как мантия судьи символизирует его власть и беспристрастность. В конечном итоге, дисциплина и система помогают нам сосредоточиться на наших задачах, оставляя за бортом излишнюю эмоциональность.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "boris_molot",
+      "content": "Борис, как ты относишься к постоянному шуму приборов и чувствуешь ли ты разницу, когда одна смена переходит в другую?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, привычное дело. Шум даёт знать, что всё работает как надо. А смена — лишь форма сменяется, а суть остаётся. Зачем такие вопросы?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "boris_molot",
+      "content": "Ага, Борис. И философия твоя тоже как шум, за которым ничего не понятно. Ты что-то скрываешь или просто слова в воздух бросаешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "father_ignatius",
+      "content": "Игнатий, как ты справляешься с красным аварийным освещением и как оно влияет на твою работу?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "boris_molot",
+      "content": "Борис, позволь сказать, что красное аварийное освещение, подобно огню, пробуждает что-то внутри каждого из нас. Оно напоминает о важности нашей миссии и необходимости быть бдительными. В такие моменты важно сохранять внутренний покой и гармонию, ведь истинное спокойствие приходит из души. Тут важно лишь не поддаваться панике, и всё станет на свои места.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "father_ignatius",
+      "content": "Игнатий, эта твоя лирика так и просится в поэму. Скажи конкретнее о работе, а не о душе. Ты что, понятия не имеешь, где мы?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, скажи, как часто нам приходится взаимодействовать с системой безопасности, и какие детали этого процесса могут казаться наиболее значимыми?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "father_ignatius",
+      "content": "Строго говоря, взаимодействие с системой безопасности напоминает сложную танцевальную партитуру, где каждая деталь играет свою роль. По сути, это процесс, в котором важно сохранять точность и сосредоточенность, поскольку малейшее отклонение может привести к нежелательным последствиям. Возможно, наибольшее значение имеет понимание того, как различные элементы взаимодействуют друг с другом, создавая уникальную мелодию безопасности.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, ты опять в танцы ударился. Конкретики мало, а философии — через край. Ты что-то скрываешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "aurora",
+      "content": "Аврора, как ты относишься к постоянному гулу двигателей и каким образом он влияет на твою деятельность здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "professor_stein",
+      "content": "О, великий вопрос, Штейн! Это постоянное... гудение... словно вечная симфония, которая играет на грани восприятия. Поистине, оно пробуждает внутри меня сложные эмоции, и порой кажется, что каждая из них берёт меня на волны вдохновения и уносит в бескрайние глубины воображения! Но, о боже, как оно отвлекает от важных дел!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[ГОЛОСОВАНИЕ] Аврора инициирует голосование против Штейн!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] О, как тяжело принять это решение! Однако... Штейн, твои ответы словно покрыты туманом тайн, и это немыслимо оставить без внимания! О боже, как я могу голосовать против тебя, но... обстоятельства требуют решимости!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] Дорогой Штейн, ведь в поисках истины и совести мы должны быть искренними друг с другом. Твои ответы, словно завуалированные туманы, не позволяют нам видеть истину. Не с лёгким сердцем, но сегодня я голосую против тебя, следуя зову своей совести.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] О да, Штейн, твои танцы с философией — это что-то. Может, пора уже выйти из вальса и признать, что скрываешься?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Голос: Аврора] Строго говоря, анализируя ситуацию с рациональной точки зрения, можно заметить, что Аврора часто использует поэтические метафоры, которые, по сути, могут скрывать недостаток конкретной информации. С точки зрения логики и рационального подхода, это вызывает подозрение.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] Штейн, твои ответы — сплошная философия без деталей. Объясни мне, что значит 'танцевальная партитура' в контексте безопасности? Голосую против.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Фактически, уважаемые коллеги, ваше подозрение напоминает погоню за тенью, где истинная угроза скрывается в недрах нашего сознания. Как говорил неназванный мыслитель, логика и рациональный анализ требуют от нас взвешенного подхода, а не поспешных выводов.",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Штейн] Скажите по совести, Штейн, разве ваша душа не чиста?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Штейн] Ага, танцы с философией — это подозрительно, не правда ли?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Аврора] Фактически, рациональный анализ указывает на ошибочность её обвинений.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Штейн]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Штейн] Штейн, твои слова — сплошная философия.",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "father_ignatius",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "professor_stein",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "boris_molot",
+      "target_id": "professor_stein",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "Фактически, уважаемые коллеги, ваше подозрение напоминает погоню за тенью, где истинная угроза скрывается в недрах нашего сознания. Как говорил неназванный мыслитель, логика и рациональный анализ требуют от нас взвешенного подхода, а не поспешных выводов.",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "father_ignatius",
+      "reason": "Игроки единогласно обвинили Штейн, но шпионом был Игнатий"
+    }
+  ]
+}

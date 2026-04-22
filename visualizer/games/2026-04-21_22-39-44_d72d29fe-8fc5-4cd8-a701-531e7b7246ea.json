@@ -1,0 +1,361 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "d72d29fe-8fc5-4cd8-a701-531e7b7246ea",
+    "title": "Партия в Самолёт"
+  },
+  "scene": {
+    "location_id": "airplane",
+    "location_name": "Самолёт"
+  },
+  "characters": [
+    {
+      "id": "professor_stein",
+      "display_name": "Штейн",
+      "position_hint": 0
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 1
+    },
+    {
+      "id": "lyokha",
+      "display_name": "Лёха",
+      "position_hint": 2
+    },
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 3
+    },
+    {
+      "id": "zoya",
+      "display_name": "Зоя",
+      "position_hint": 4
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "content": "Зоя, чё у тебя с одеждой, нормально для такого места?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "Ага, конечно, как будто здесь у всех одинаковая униформа. Ты что, дресс-код решил ввести?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Строго говоря, твой ответ уклончив и несколько подозрителен, ведь униформа здесь, по сути, имеет вполне конкретное значение. Ты что-то скрываешь, Зоя?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "content": "Ким, а ты тоже чувствуешь этот специфический аромат в воздухе? Или тебе кажется, что это чудеса вентиляции?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "zoya",
+      "content": "Ну, в смысле, я бы не сказал, что это прямо аромат, а скорее... ну, специфическая атмосфера, что ли? Вернее, мне кажется, это что-то стандартное здесь, вроде привычной обстановки.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "content": "Строго говоря, твой ответ, Ким, представляется уклончивым и несколько аморфным, ведь описанию характера аромата, подобно любому явлению, следует уделять больше конкретики. Ты что-то скрываешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "margo",
+      "content": "Марго, а тебе не кажется, что здесь довольно шумно, или это нормальная часть работы, ну, в смысле, связано с твоей ролью?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "kim",
+      "content": "О, Ким, дорогой, ты такой внимательный! Иногда мне даже кажется, что этот шум становится моей музыкой в пути. А тебе не кажется, что Лёха как-то уклончив в своих вопросах? Немного странно, правда?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "margo",
+      "content": "Строго говоря, Марго, твоя формулировка звучит с некой степенью поэтичности, что несколько уклончиво в контексте данного обсуждения. Вопрос о Лёхе, хотя и интересен, но отводит нас от более весомых деталей, столь необходимых для выработки объективной оценки ситуации.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "zoya",
+      "content": "Зоя, дорогая, а как тебе экранчики тут? Удобно пользоваться?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "margo",
+      "content": "Ага, экранчики — наше всё. Но вот без стюардесс тут точно не обойтись для полного комфорта, согласна?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Любопытно, Зоя. Фактически, твой ответ напоминает странный калейдоскоп не совсем связанных между собой элементов. Упоминание стюардесс в данном контексте звучит как уклончивый ответ, скрывающий отсутствие конкретных знаний. Не считаешь ли ты это подозрительным?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "lyokha",
+      "content": "Лёха, а как ты относишься к звуку, который тут раздается периодически? Привычно или раздражает?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "zoya",
+      "content": "Да нормальный звук, чё. Привык уже.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "lyokha",
+      "content": "Лёха, дорогой, твоё замечание про звук как-то слишком расплывчато прозвучало, ты не находишь? Может, ты что-то скрываешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": "kim",
+      "content": "Ким, а чё тут с формой? Как у вас с одеждой обстоят дела?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "lyokha",
+      "content": "Ну, в смысле... форма у нас, наверное, у всех разная. В общем, у меня всё обычно, то есть... по дресс-коду, вернее. Но я могу быть не совсем точен.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "kim",
+      "content": "Любопытная уклончивость, Ким. Фактически, твои слова напоминают попытку увильнуть от конкретного описания, что, строго говоря, вполне может быть признаком сокрытия чего-то. Не находишь ли ты это подозрительным?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "zoya",
+      "content": "Зоя, как часто ты сталкиваешься с проблемами, связанными с работой оборудования, ну, в смысле, здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "kim",
+      "content": "О да, проблемы с оборудованием — это прям мой любимый вид спорта. Ну да, конечно.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Любопытно, Зоя. Фактически, твой ответ имеет оттенок иронии, что, подобно дымке, скрывает ясность сути. Это, строго говоря, может показаться уклончивым, и мне кажется, что ты что-то скрываешь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": "professor_stein",
+      "content": "Штейн, как часто ты слышишь здесь специфические звуки?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": "zoya",
+      "content": "Строго говоря, звуки здесь напоминают мне непрерывный шум, который, по сути, становится естественной частью окружающей среды, как фон, с которым мы неизбежно сживаемся. Это, подобно непрерывному звуку волн на берегу, оказывает некоторое влияние на наше восприятие бытия в данной обстановке.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "professor_stein",
+      "content": "Ой, дорогой Штейн, твои слова такие интересные, но, возможно, звучат чуток уклончиво, правда? Интересно, Лёха, как ты находишь его ответ?",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ГОЛОСОВАНИЕ] Осталось менее 20% времени"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Голос: Зоя] Фактически, с точки зрения рационального анализа, наибольшую подозрительность вызывает Зоя. Её ответы, строго говоря, не содержат конкретных деталей, что может быть признаком недостатка информации о нашей локации. Логический подход подсказывает, что уклончивость в её ответах создаёт асимметрию в знании, что соответствует поведению шпиона.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Голос: Зоя] Зоя, дорогая, мне кажется, возможно, ты немного запуталась в своих ответах. Но, конечно, это всего лишь мои догадки, и я могу ошибаться. Надеюсь, ты понимаешь.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Голос: Зоя] Ну Зоя, блин, мутная ты какая-то. Голосую.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "[Голос: Зоя] Ну, в смысле, я не уверен, но, возможно, Зоя всё-таки скрывает что-то. Кажется, её ответы немного расплывчаты, вернее, не дают ясности. Может быть, я ошибаюсь, но, наверное, стоит присмотреться к её поведению.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Голос: Штейн] Ага, конечно, все против меня — как это оригинально. Но разве Штейн не звучит как будто он читает с учебника по философии? О да, это явно шпионская тактика.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "О да, конечно, сразу четыре великих детектива на одну бедную саркастичную комедиантку. Может, мне сразу признаться в том, что я тайный агент, обожающий запах шампанского и звуки тишины?",
+      "subtype": "normal"
+    },
+    {
+      "type": "system_message",
+      "content": "[ПЕРЕВЫБОР] Раунд 1/2 после защитной речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "professor_stein",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Зоя]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Зоя]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "lyokha",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Зоя]",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "[Подтверждаю: Зоя] Ну, в смысле, наверное, она что-то скрывает.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "[Меняю голос: Ким] Ну да, конечно, все мы тут эксперты по звукам и дымкам. Штейн, ты мастер слова, но Ким — это просто загадка. Так что, пожалуй, я сменю своё мнение. Ага, Ким, ты становишься моим новым фаворитом.",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "professor_stein",
+      "target_id": "zoya",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "margo",
+      "target_id": "zoya",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "lyokha",
+      "target_id": "zoya",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "kim",
+      "target_id": "zoya",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "zoya",
+      "target_id": "kim",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "zoya",
+      "addressee_id": null,
+      "content": "О да, конечно, сразу четыре великих детектива на одну бедную саркастичную комедиантку. Может, мне сразу признаться в том, что я тайный агент, обожающий запах шампанского и звуки тишины?",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "lyokha",
+      "reason": "Игроки единогласно обвинили Зоя, но шпионом был Лёха"
+    }
+  ]
+}

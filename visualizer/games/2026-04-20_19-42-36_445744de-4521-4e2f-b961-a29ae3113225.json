@@ -1,0 +1,325 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "445744de-4521-4e2f-b961-a29ae3113225",
+    "title": "Партия в Больница"
+  },
+  "scene": {
+    "location_id": "hospital",
+    "location_name": "Больница"
+  },
+  "characters": [
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 0
+    },
+    {
+      "id": "aurora",
+      "display_name": "Аврора",
+      "position_hint": 1
+    },
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 2
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "content": "Аврора, милая, а тебе здесь не кажется немного шумновато? Интересно, что ты об этом думаешь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "content": "О, Мардж, ты не представляешь! Шум, он как музыка жизни, но иногда... *вздрагивает* ...он пробирает до костей! Невыносимо, как порой кажется, что он заполоняет всё вокруг, и даже тишина кричит! В такие моменты хочется воскликнуть: \"О боже, как пережить это?!\". Но, увы, такова наша участь, и мы должны играть свои роли, даже в этом сумасшедшем хоре звуков!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "content": "Отец Игнатий, прошу, скажите... *вдох* ...ваша душа спокойна среди этих стен или же вы, подобно мне, ощущаете рокот страстей, витающий в воздухе и переплетающийся с каждой нотой этого места?!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "content": "Аврора, дитя моё, каждый звук здесь служит напоминанием о том, как драгоценна жизнь. Но истина для меня проста: душа должна всегда оставаться в мире, даже если вокруг шумят страсти. Искренне верю, что именно в этом испытании мы можем найти покой и равновесие. А что подсказывает тебе твоя совесть?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "aurora",
+      "content": "Аврора, скажи честно, что больше всего помогает тебе сохранять душевное равновесие среди этих переменчивых звуков?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "father_ignatius",
+      "content": "О, отец Игнатий, это истинное испытание для моей тонкой души! Моя сила в драме, в каждой реплике и жесте, превращающей хаос в искусство! Когда шум заполоняет всё, я закрываю глаза, вдохновляюсь великими партитурами и вспоминаю, что каждый звук — это лишь нота в моей великой симфонии жизни! Невозможно представить, как иное могло бы успокоить бурю эмоций во мне!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "aurora",
+      "content": "Подождите, Аврора, я что-то, ну, кажется, упустил... Ты вроде бы говоришь, что шум тебя вдохновляет, но всё равно на него жалуешься? В смысле, это как-то противоречиво, вернее, я хотел сказать, просто странно немного.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "margo",
+      "content": "О, Мардж! Позволь спросить тебя... *вздыхает* ...какая мелодия звучит в твоей душе, когда ты находишься здесь? Ведь каждому из нас принадлежит свой уникальный мотив, верно?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "aurora",
+      "content": "Аврора, дорогая, ты так прекрасно уловила суть! В моей душе звучит мелодия теплоты и обаяния, как лёгкий бриз на берегу. Разве она не чудесна? Интересно, не кажется ли тебе, что именно этот мотив помогает находить ответы на любые вопросы здесь, вокруг нас?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "margo",
+      "content": "Дорогая Margo, разве не кажется тебе, что подобной мелодии может не хватать конкретики, чтобы понять, что происходит вокруг? Искренность в ответе могла бы прояснить многое.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "kim",
+      "content": "Ким, милый, а что ты больше всего ценишь в наших встречах здесь? Ведь каждый миг может стать бриллиантом в нашей жизни, не так ли?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "margo",
+      "content": "Ну, я... в смысле, наверное, наиболее важно это, ну, общение, вернее, взаимоотношения, которые у нас здесь складываются. То есть, они как бы... как связь между нами, понимаешь? Хотя, возможно, я что-то путаю, но кажется, именно в этом, ну, суть наших встреч.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "kim",
+      "content": "О, Ким, как это трогательно и... вместе с тем НЕВЕРОЯТНО противоречиво! Ты говоришь о связи, как о несокрушимой нити судьбы, но в твоих словах я слышу нотку неуверенности... Как можно?! Это просто немыслимо!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "father_ignatius",
+      "content": "Отец Игнатий, возможно, вы могли бы объяснить, ну, как часто вам приходится сталкиваться, в смысле, с трудностями в вашей деятельности здесь, и как вы, ну, справляетесь с ними?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "kim",
+      "content": "Ким, в своей жизни я часто сталкиваюсь с трудностями, как и всякий человек. Но верю, что душевная стойкость и честность перед самим собой позволяют преодолеть всё. Как ты считаешь, не является ли это ключом к истинному пониманию?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "father_ignatius",
+      "content": "Ах, милый Ким, разве не заметили вы, как Отец Игнатий нежно обращает внимание на добродетели, но не упоминает конкретную ситуацию? Не кажется ли вам, что это немного отвлекает от сути?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "kim",
+      "content": "Ким, скажи честно, как ты чувствуешь себя в этом месте, когда вокруг столько суеты и спешки? Видишь ли ты правду в своём сердце?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "father_ignatius",
+      "content": "Ну, я... в смысле, чувствую себя, наверное, немного напряжённо, то есть, в этом месте всегда что-то происходит, какая-то суета, точно. Но, в общем, наверное, это нормально. Вернее, ну, всё-таки здесь постоянно есть движение, кажется, оно всё-таки неотъемлемая часть.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": "kim",
+      "content": "О, Ким, как это по-человечески и вместе с тем невероятно противоречиво! Ты говоришь о суете, как о вечной симфонии движения, но в твоих словах я слышу эхом тревогу... Как можно?! Это просто немыслимо!",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "Голосую против aurora",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "Голосую против father_ignatius",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "Голосую против margo",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Голосую против father_ignatius",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "Дорогие аврора и марго, прежде чем вы сделаете поспешные выводы, прошу вас, вглядитесь в мои глаза и дайте шанс на истину. Разве можно обвинить меня без веских доказательств, не задумавшись о совести и справедливости?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": null,
+      "content": "Подтверждаю голос за aurora",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "aurora",
+      "addressee_id": null,
+      "content": "Подтверждаю голос за father_ignatius",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "Подтверждаю голос за margo",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": null,
+      "content": "Меняю голос: теперь за aurora",
+      "subtype": "normal"
+    },
+    {
+      "type": "phase_change",
+      "phase": "voting",
+      "label": "Голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "kim",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "aurora",
+      "target_id": "father_ignatius",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "father_ignatius",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "preliminary",
+      "voter_id": "margo",
+      "target_id": "father_ignatius",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "defense",
+      "label": "Защитные речи"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": null,
+      "content": "Дорогие аврора и марго, прежде чем вы сделаете поспешные выводы, прошу вас, вглядитесь в мои глаза и дайте шанс на истину. Разве можно обвинить меня без веских доказательств, не задумавшись о совести и справедливости?",
+      "subtype": "defense"
+    },
+    {
+      "type": "phase_change",
+      "phase": "final",
+      "label": "Финальное голосование"
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "kim",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "aurora",
+      "target_id": "father_ignatius",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "father_ignatius",
+      "target_id": "margo",
+      "comment": null
+    },
+    {
+      "type": "vote",
+      "phase": "final",
+      "voter_id": "margo",
+      "target_id": "aurora",
+      "comment": null
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "margo",
+      "reason": "Голоса разделились (нет большинства) — шпион (margo) побеждает"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "game_id": "5bf989a5-5265-432e-b406-ba9daf754719",
+    "title": "Партия в Самолёт"
+  },
+  "scene": {
+    "location_id": "airplane",
+    "location_name": "Самолёт"
+  },
+  "characters": [
+    {
+      "id": "boris_molot",
+      "display_name": "Борис",
+      "position_hint": 0
+    },
+    {
+      "id": "margo",
+      "display_name": "Марго",
+      "position_hint": 1
+    },
+    {
+      "id": "kim",
+      "display_name": "Ким",
+      "position_hint": 2
+    },
+    {
+      "id": "father_ignatius",
+      "display_name": "Игнатий",
+      "position_hint": 3
+    }
+  ],
+  "timeline": [
+    {
+      "type": "phase_change",
+      "phase": "main_round",
+      "label": "Основной раунд"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "father_ignatius",
+      "addressee_id": "kim",
+      "content": "Ким, скажи честно, как ты относишься к звукам, которые постоянно окружают нас здесь?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "father_ignatius",
+      "content": "Ну, в смысле... я не то чтобы привык, но они как-то, ну, становятся частью фона, вернее, если не обращать внимание, то можно и забыть о них. Хотя иногда, наверное, могут раздражать, но это лишь если очень прислушиваться.",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "kim",
+      "addressee_id": "margo",
+      "content": "Марго, а как у тебя обычно проходят полеты? Что ты делаешь, чтобы скоротать время?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "kim",
+      "content": "О, Ким, полёты всегда проходят интересно, особенно когда можно наблюдать, как облака проплывают мимо. Это даёт мне время отдохнуть и подумать о жизни. А когда нужно занять время, я обычно занимаюсь приготовлением того, что многие из нас ожидают с нетерпением. А ты, дорогая, как проводишь время в дороге?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "content": "Марго, твои слова расплывчаты до подозрительности. Какие такие \"многие\" и что они ожидают?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "margo",
+      "addressee_id": "boris_molot",
+      "content": "Борис, милый, а что тебя больше всего напрягает, когда приходится долго находиться на одном месте?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": "margo",
+      "content": "Меня напрягает, когда люди начинают юлить. Прямота — вот что надо. А ты, Марго, что там увиливаешь насчёт \"многих\"?",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Я думаю, мы находимся в: Самолёт",
+      "subtype": "normal"
+    },
+    {
+      "type": "speech",
+      "speaker_id": "boris_molot",
+      "addressee_id": null,
+      "content": "Вы все не на высоте! Самолёт — это мой трофей. Как вам такое?",
+      "subtype": "normal"
+    },
+    {
+      "type": "spy_guess",
+      "spy_id": "boris_molot",
+      "guessed_location_id": "airplane",
+      "guessed_location_name": "Самолёт",
+      "correct": true
+    },
+    {
+      "type": "phase_change",
+      "phase": "resolution",
+      "label": "Итоги"
+    },
+    {
+      "type": "outcome",
+      "winner": "spy",
+      "spy_id": "boris_molot",
+      "reason": "Шпион (boris_molot) угадал локацию: Самолёт"
+    }
+  ]
+}
