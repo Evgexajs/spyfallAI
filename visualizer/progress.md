@@ -369,3 +369,12 @@ Format for entries:
 - src/ui/index.ts (updated to re-export createErrorDisplay)
 **Notes:** HTML разметка (#error-display) и CSS стили (красный фон rgba(220, 53, 69, 0.15), красная рамка #dc3545, toggle через .visible class) уже существовали в index.html (TASK-034). TypeScript модуль предоставляет API для интеграции с парсером (TASK-041).
 
+### TASK-040: Индикатор загрузки ассетов
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/ui/loading.ts с функцией createLoadingIndicator(). Реализован интерфейс LoadingIndicator с методами: show() для отображения индикатора (добавляет CSS class .visible), hide() для скрытия, isVisible() для проверки состояния. Индикатор показывает спиннер и текст "Загрузка ассетов..." во время preload-а ассетов.
+**Files changed:**
+- src/ui/loading.ts (created)
+- src/ui/index.ts (updated to re-export createLoadingIndicator)
+**Notes:** HTML разметка (#loading-indicator со спиннером) и CSS стили (анимация @keyframes spin, toggle через .visible class) уже существовали в index.html (TASK-034). Согласно PRD 7.5: до завершения preload-а кнопка Play disabled. Блокировка UI реализуется через координацию с PlaybackControls.disable() в TASK-042.
+

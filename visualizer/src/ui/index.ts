@@ -9,3 +9,6 @@ export type { ProgressIndicator } from './progress';
 
 export { createErrorDisplay } from './error-display';
 export type { ErrorDisplay } from './error-display';
+
+export { createLoadingIndicator } from './loading';
+export type { LoadingIndicator } from './loading';
