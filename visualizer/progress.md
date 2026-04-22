@@ -167,3 +167,12 @@ Format for entries:
 - src/render/index.ts (updated to re-export PlaceholderCharacterRenderer)
 **Notes:** Функция hashStringToColor обеспечивает стабильный цвет: один и тот же ID всегда даёт один цвет. HSL используется для контроля насыщенности и светлости (60-80% S, 45-60% L) — цвета яркие и различимые. Анимация пульсации корректно останавливается при переходе в idle с возвратом scale к 1.
 
+### TASK-017: Фабрика для создания CharacterRenderer
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создана фабрика createCharacterRenderer(characterId, displayName) в src/render/character-factory.ts. В MVP возвращает PlaceholderCharacterRenderer. Архитектурный дизайн-поинт из PRD 7.2: замена реализации (например на SpriteCharacterRenderer) требует изменения только в этом файле — Scene и другие слои используют интерфейс CharacterRenderer.
+**Files changed:**
+- src/render/character-factory.ts (created)
+- src/render/index.ts (updated to re-export createCharacterRenderer)
+**Notes:** Комментарий о будущей замене на SpriteCharacterRenderer добавлен в код. TypeScript компиляция и build прошли успешно.
+
