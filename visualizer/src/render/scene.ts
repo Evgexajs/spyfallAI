@@ -1,5 +1,5 @@
 import { Application, Container, Graphics, ColorMatrixFilter } from 'pixi.js'
-import type { Character } from '@parser/types'
+import type { Character, SpeechEvent, PhaseChangeEvent, SystemMessageEvent, SpyGuessEvent, OutcomeEvent } from '@parser/types'
 import { Phase, VotePhase, SpeechSubtype } from '@parser/types'
 import type { CharacterRenderer } from './character-renderer'
 import { createCharacterRenderer } from './character-factory'
@@ -7,6 +7,10 @@ import { getSlotMap, type SlotPosition } from '@config/slots'
 import { getPhaseStyle } from '@config/phase-styles'
 import { SpeechBubble } from './speech-bubble'
 import { VoteIndicator } from './vote-indicator'
+import { PhaseOverlay } from './phase-overlay'
+import { SystemMessage } from './system-message'
+import { SpyGuessOverlay } from './spy-guess'
+import { OutcomeOverlay } from './outcome'
 import {
   TYPING_SPEED_MS_PER_CHAR,
 } from '@config/timings'
@@ -14,6 +18,7 @@ import {
   calculateTypingIndicatorDuration,
   calculateHoldDuration,
 } from '@player/timing'
+import type { EventPlayer } from '@player/event-player'
 
 const CHARACTER_RADIUS = 60
 const BUBBLE_OFFSET_Y = 15
@@ -25,10 +30,16 @@ export class Scene {
   private characterContainer: Container
   private bubbleContainer: Container
   private voteIndicatorContainer: Container
+  private overlayContainer: Container
   private renderers: Map<string, CharacterRenderer> = new Map()
   private characterPositions: Map<string, SlotPosition> = new Map()
+  private characterNames: Map<string, string> = new Map()
   private currentBubble: SpeechBubble | null = null
   private voteIndicator: VoteIndicator
+  private phaseOverlay: PhaseOverlay
+  private systemMessage: SystemMessage
+  private spyGuessOverlay: SpyGuessOverlay
+  private outcomeOverlay: OutcomeOverlay
   private phaseFilter: ColorMatrixFilter
   private phaseTintOverlay: Graphics
   private currentPhase: Phase = Phase.MainRound
@@ -58,6 +69,22 @@ export class Scene {
     this.voteIndicator = new VoteIndicator()
     this.voteIndicatorContainer.addChild(this.voteIndicator.getContainer())
 
+    this.overlayContainer = new Container()
+    this.overlayContainer.label = 'overlays'
+    this.app.stage.addChild(this.overlayContainer)
+
+    this.phaseOverlay = new PhaseOverlay()
+    this.overlayContainer.addChild(this.phaseOverlay.getContainer())
+
+    this.systemMessage = new SystemMessage()
+    this.overlayContainer.addChild(this.systemMessage.getContainer())
+
+    this.spyGuessOverlay = new SpyGuessOverlay()
+    this.overlayContainer.addChild(this.spyGuessOverlay.getContainer())
+
+    this.outcomeOverlay = new OutcomeOverlay()
+    this.overlayContainer.addChild(this.outcomeOverlay.getContainer())
+
     this.applyPhaseStyle(Phase.MainRound)
   }
 
@@ -75,6 +102,7 @@ export class Scene {
       this.characterContainer.addChild(renderer.getContainer())
       this.renderers.set(character.id, renderer)
       this.characterPositions.set(character.id, position)
+      this.characterNames.set(character.id, character.display_name)
     }
   }
 
@@ -152,6 +180,113 @@ export class Scene {
 
   getCharacterRenderer(characterId: string): CharacterRenderer | undefined {
     return this.renderers.get(characterId)
+  }
+
+  getCharacterPosition(characterId: string): SlotPosition | null {
+    return this.characterPositions.get(characterId) ?? null
+  }
+
+  getCharacterName(characterId: string): string | null {
+    return this.characterNames.get(characterId) ?? null
+  }
+
+  async renderSpeech(event: SpeechEvent, eventPlayer: EventPlayer): Promise<void> {
+    const renderer = this.renderers.get(event.speaker_id)
+    if (renderer) {
+      renderer.setState('speaking')
+    }
+
+    const bubble = this.showSpeechBubble(event.speaker_id)
+    if (!bubble) {
+      return
+    }
+
+    bubble.setStyle(event.subtype)
+    bubble.showTypingIndicator()
+
+    const indicatorDuration = calculateTypingIndicatorDuration(event.content.length)
+    await this.pausableDelay(indicatorDuration, eventPlayer)
+
+    bubble.hideTypingIndicator()
+    bubble.isPaused = eventPlayer.isPaused
+
+    const linkPauseState = () => {
+      bubble.isPaused = eventPlayer.isPaused
+    }
+
+    const intervalId = setInterval(linkPauseState, 16)
+
+    await bubble.typeText(event.content, TYPING_SPEED_MS_PER_CHAR / eventPlayer.speed)
+
+    clearInterval(intervalId)
+
+    const holdDuration = calculateHoldDuration(event.content.length)
+    await this.pausableDelay(holdDuration, eventPlayer)
+
+    this.hideSpeechBubble()
+
+    if (renderer) {
+      renderer.setState('idle')
+    }
+  }
+
+  async renderPhaseChange(event: PhaseChangeEvent): Promise<void> {
+    await this.phaseOverlay.showPhaseChange(event.phase, event.label)
+    this.setPhase(event.phase)
+  }
+
+  async renderSystemMessage(event: SystemMessageEvent): Promise<void> {
+    await this.systemMessage.show(event.content)
+  }
+
+  async renderSpyGuess(event: SpyGuessEvent): Promise<void> {
+    const position = this.characterPositions.get(event.spy_id)
+    if (!position) {
+      return
+    }
+
+    await this.spyGuessOverlay.show(position, event.guessed_location_name, event.correct)
+  }
+
+  renderOutcome(event: OutcomeEvent): void {
+    const position = this.characterPositions.get(event.spy_id) ?? null
+    const spyName = this.characterNames.get(event.spy_id) ?? 'Неизвестный'
+
+    this.outcomeOverlay.show(event.winner, position, spyName, event.reason)
+  }
+
+  hideAllOverlays(): void {
+    this.hideSpeechBubble()
+    this.phaseOverlay.hide()
+    this.systemMessage.hide()
+    this.spyGuessOverlay.hide()
+    this.outcomeOverlay.hide()
+    this.voteIndicator.hide()
+
+    for (const renderer of this.renderers.values()) {
+      renderer.setState('idle')
+    }
+  }
+
+  private async pausableDelay(ms: number, eventPlayer: EventPlayer): Promise<void> {
+    const startTime = Date.now()
+    let elapsed = 0
+
+    while (elapsed < ms) {
+      if (eventPlayer.isStopped) {
+        return
+      }
+
+      if (eventPlayer.isPaused) {
+        await new Promise(resolve => setTimeout(resolve, 50))
+        continue
+      }
+
+      const remaining = ms - elapsed
+      const chunk = Math.min(remaining, 50)
+      await new Promise(resolve => setTimeout(resolve, chunk))
+      elapsed = Date.now() - startTime
+    }
   }
 
   setPhase(phase: Phase): void {
@@ -259,12 +394,17 @@ export class Scene {
     }
     this.renderers.clear()
     this.characterPositions.clear()
+    this.characterNames.clear()
     this.characterContainer.removeChildren()
   }
 
   destroy(): void {
     this.clearCharacters()
     this.voteIndicator.destroy()
+    this.phaseOverlay.destroy()
+    this.systemMessage.destroy()
+    this.spyGuessOverlay.destroy()
+    this.outcomeOverlay.destroy()
     this.app.stage.filters = []
     this.phaseFilter.destroy()
     this.app.stage.removeChild(this.phaseTintOverlay)
@@ -272,5 +412,6 @@ export class Scene {
     this.app.stage.removeChild(this.characterContainer)
     this.app.stage.removeChild(this.bubbleContainer)
     this.app.stage.removeChild(this.voteIndicatorContainer)
+    this.app.stage.removeChild(this.overlayContainer)
   }
 }

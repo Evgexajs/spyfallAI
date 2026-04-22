@@ -404,3 +404,12 @@ Format for entries:
 - src/main.ts (updated — added PlayerState integration with playback/speed controls)
 **Notes:** PlayerState инициализируется при загрузке JSON с timeline. Restart также сбрасывает scene.hideSpeechBubble() и scene.resetPhase() для полного возврата в начальное состояние. Экспортирован playerState для использования в будущих интеграционных задачах (TASK-044, TASK-045).
 
+### TASK-044: Интеграция EventPlayer с Scene рендерингом
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Реализована полная интеграция EventPlayer с Scene для рендеринга всех типов событий timeline. Scene расширен overlay'ями (PhaseOverlay, SystemMessage, SpyGuessOverlay, OutcomeOverlay) и методами рендеринга: renderSpeech, renderPhaseChange, renderSystemMessage, renderSpyGuess, renderOutcome. В main.ts создан playback loop с маршрутизацией событий и поддержкой паузы через pausableDelay. Добавлены SOUND_HOOK комментарии для будущей интеграции звука.
+**Files changed:**
+- src/render/scene.ts (extended — overlays, render methods, pausableDelay, hideAllOverlays)
+- src/main.ts (updated — playback loop, EventPlayer integration, renderEvent routing)
+**Notes:** Событие speech корректно связывает isPaused состояние между EventPlayer и SpeechBubble для паузы посреди печатания текста. Все overlay'и инициализируются в конструкторе Scene и добавляются в overlayContainer. При Restart вызывается hideAllOverlays() для полной очистки.
+
