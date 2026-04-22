@@ -97,3 +97,11 @@ Format for entries:
 - src/parser/index.ts (updated to re-export validator)
 **Notes:** Базовая валидация схемы. Валидация enum-значений (TASK-009) и ссылочной целостности ID (TASK-010) будут добавлены в следующих задачах.
 
+### TASK-009: Валидация enum значений в событиях timeline
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Расширен validator.ts функцией validateTimelineEvents(). Добавлена проверка event.type (speech, phase_change, system_message, vote, spy_guess, outcome), speech.subtype (normal, defense, post_guess), phase_change.phase (main_round, voting, defense, final, resolution), vote.phase (preliminary, final), outcome.winner (spy, civilians). При неизвестных значениях возвращается ошибка с указанием индекса события и допустимых значений.
+**Files changed:**
+- src/parser/validator.ts (updated)
+**Notes:** Используются константные массивы VALID_* для валидации. Сообщения об ошибках включают индекс события, тип и список допустимых значений.
+

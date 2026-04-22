@@ -207,7 +207,7 @@
         "Вызвать с корректными enum - должен пройти"
       ],
       "dependencies": ["TASK-008"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-010",

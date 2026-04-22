@@ -1,6 +1,7 @@
 /**
  * JSON schema validation for GameData
  * TASK-008: Basic validation of required fields and structure
+ * TASK-009: Enum value validation for timeline events
  */
 
 export interface ValidationResult {
@@ -18,6 +19,67 @@ function isString(value: unknown): value is string {
 
 function isArray(value: unknown): value is unknown[] {
   return Array.isArray(value);
+}
+
+const VALID_EVENT_TYPES = ['speech', 'phase_change', 'system_message', 'vote', 'spy_guess', 'outcome'] as const;
+const VALID_SPEECH_SUBTYPES = ['normal', 'defense', 'post_guess'] as const;
+const VALID_PHASES = ['main_round', 'voting', 'defense', 'final', 'resolution'] as const;
+const VALID_VOTE_PHASES = ['preliminary', 'final'] as const;
+const VALID_WINNERS = ['spy', 'civilians'] as const;
+
+function validateTimelineEvents(timeline: unknown[], errors: string[]): void {
+  timeline.forEach((event, index) => {
+    if (!isObject(event)) {
+      errors.push(`timeline[${index}] must be an object`);
+      return;
+    }
+
+    if (!('type' in event) || !isString(event.type)) {
+      errors.push(`timeline[${index}].type is missing or not a string`);
+      return;
+    }
+
+    const eventType = event.type;
+
+    if (!VALID_EVENT_TYPES.includes(eventType as typeof VALID_EVENT_TYPES[number])) {
+      errors.push(`timeline[${index}].type has invalid value '${eventType}'. Expected one of: ${VALID_EVENT_TYPES.join(', ')}`);
+      return;
+    }
+
+    switch (eventType) {
+      case 'speech':
+        if (!('subtype' in event) || !isString(event.subtype)) {
+          errors.push(`timeline[${index}] (speech): subtype is missing or not a string`);
+        } else if (!VALID_SPEECH_SUBTYPES.includes(event.subtype as typeof VALID_SPEECH_SUBTYPES[number])) {
+          errors.push(`timeline[${index}] (speech): subtype has invalid value '${event.subtype}'. Expected one of: ${VALID_SPEECH_SUBTYPES.join(', ')}`);
+        }
+        break;
+
+      case 'phase_change':
+        if (!('phase' in event) || !isString(event.phase)) {
+          errors.push(`timeline[${index}] (phase_change): phase is missing or not a string`);
+        } else if (!VALID_PHASES.includes(event.phase as typeof VALID_PHASES[number])) {
+          errors.push(`timeline[${index}] (phase_change): phase has invalid value '${event.phase}'. Expected one of: ${VALID_PHASES.join(', ')}`);
+        }
+        break;
+
+      case 'vote':
+        if (!('phase' in event) || !isString(event.phase)) {
+          errors.push(`timeline[${index}] (vote): phase is missing or not a string`);
+        } else if (!VALID_VOTE_PHASES.includes(event.phase as typeof VALID_VOTE_PHASES[number])) {
+          errors.push(`timeline[${index}] (vote): phase has invalid value '${event.phase}'. Expected one of: ${VALID_VOTE_PHASES.join(', ')}`);
+        }
+        break;
+
+      case 'outcome':
+        if (!('winner' in event) || !isString(event.winner)) {
+          errors.push(`timeline[${index}] (outcome): winner is missing or not a string`);
+        } else if (!VALID_WINNERS.includes(event.winner as typeof VALID_WINNERS[number])) {
+          errors.push(`timeline[${index}] (outcome): winner has invalid value '${event.winner}'. Expected one of: ${VALID_WINNERS.join(', ')}`);
+        }
+        break;
+    }
+  });
 }
 
 export function validateGameData(json: unknown): ValidationResult {
@@ -82,6 +144,8 @@ export function validateGameData(json: unknown): ValidationResult {
   } else {
     if (json.timeline.length === 0) {
       errors.push('timeline array must not be empty');
+    } else {
+      validateTimelineEvents(json.timeline, errors);
     }
   }
 
