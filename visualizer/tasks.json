@@ -248,7 +248,7 @@
         "JSON без outcome - должен пройти (outcome опционален)"
       ],
       "dependencies": ["TASK-010"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-012",

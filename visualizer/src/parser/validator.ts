@@ -3,6 +3,7 @@
  * TASK-008: Basic validation of required fields and structure
  * TASK-009: Enum value validation for timeline events
  * TASK-010: Referential integrity validation for character IDs
+ * TASK-011: Validation that outcome event is last in timeline
  */
 
 export interface ValidationResult {
@@ -168,6 +169,29 @@ function validateReferentialIntegrity(
   });
 }
 
+function validateOutcomePosition(timeline: unknown[], errors: string[]): void {
+  const outcomeIndices: number[] = [];
+
+  timeline.forEach((event, index) => {
+    if (isObject(event) && 'type' in event && event.type === 'outcome') {
+      outcomeIndices.push(index);
+    }
+  });
+
+  if (outcomeIndices.length === 0) {
+    return;
+  }
+
+  const lastIndex = timeline.length - 1;
+  outcomeIndices.forEach((outcomeIndex) => {
+    if (outcomeIndex !== lastIndex) {
+      errors.push(
+        `timeline[${outcomeIndex}] (outcome): outcome event must be the last event in timeline, but found at index ${outcomeIndex} (last index is ${lastIndex})`
+      );
+    }
+  });
+}
+
 export function validateGameData(json: unknown): ValidationResult {
   const errors: string[] = [];
 
@@ -237,6 +261,10 @@ export function validateGameData(json: unknown): ValidationResult {
 
   if (isArray(json.characters) && isArray(json.timeline)) {
     validateReferentialIntegrity(json.characters, json.timeline, errors);
+  }
+
+  if (isArray(json.timeline) && json.timeline.length > 0) {
+    validateOutcomePosition(json.timeline, errors);
   }
 
   return {

@@ -113,3 +113,11 @@ Format for entries:
 - src/parser/validator.ts (updated)
 **Notes:** Валидация выполняется после базовой проверки схемы и enum-значений. При пустом списке characters валидация ссылок пропускается.
 
+### TASK-011: Валидация порядка outcome события
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Добавлена функция validateOutcomePosition() в validator.ts. Проверяет что если событие outcome присутствует в timeline, оно должно быть последним. Если outcome не на последней позиции — возвращается ошибка с указанием индекса события и ожидаемой позиции. Если outcome отсутствует — валидация проходит (outcome опционален).
+**Files changed:**
+- src/parser/validator.ts (updated)
+**Notes:** Согласно PRD 5.3: "outcome обязательно последнее событие в timeline (если присутствует)".
+
