@@ -421,3 +421,11 @@ Format for entries:
 - (нет изменений — функциональность уже реализована в TASK-044)
 **Notes:** Интеграция была выполнена как часть playback loop в TASK-044. Прогресс показывает "current/total" где current — номер текущего события (1-based после nextEvent). При 5 из 10 событий показывается "5/10" (50%). После последнего события setFinished() корректно блокирует кнопки Play/Pause.
 
+### TASK-046: Полная интеграция main.ts - точка входа приложения
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Верифицирована полная интеграция всех компонентов визуализатора в main.ts. Интеграция была реализована инкрементально в ходе TASK-041..TASK-045. Все acceptance criteria выполнены: init() создаёт PixiJS Application, инициализирует все 6 UI компонентов (fileSelector, errorDisplay, loadingIndicator, playbackControls, speedControls, progressIndicator), связывает file-selector с парсером через onFileSelected callback, контролы с PlayerState через onPlay/onPause/onRestart handlers, EventPlayer со Scene через renderEvent() который маршрутизирует события timeline на соответствующие render методы.
+**Files changed:**
+- (нет изменений — код уже полностью интегрирован)
+**Notes:** Build (npm run build) и dev server (npm run dev) работают корректно. Приложение готово к end-to-end тестированию с тестовым JSON файлом (TASK-047). Архитектура соответствует PRD 7.1: слои parser, player, render, ui изолированы друг от друга.
+

@@ -979,7 +979,7 @@
         "Restart - сбросить"
       ],
       "dependencies": ["TASK-041", "TASK-042", "TASK-043", "TASK-044", "TASK-045"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-047",
