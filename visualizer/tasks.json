@@ -777,7 +777,7 @@
         "Нажать Pause - Play становится активной"
       ],
       "dependencies": ["TASK-034"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-037",

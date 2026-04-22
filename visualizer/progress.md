@@ -333,3 +333,12 @@ Format for entries:
 - src/ui/index.ts (updated to re-export)
 **Notes:** Согласно PRD 6.1: селектор файла через input type=file. Только .json файлы принимаются (accept=".json" + проверка в коде). При ошибке чтения файла отображается сообщение.
 
+### TASK-036: Реализация кнопок Play/Pause/Restart
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Создан src/ui/controls.ts с функцией createPlaybackControls(). Реализован интерфейс PlaybackControls с методами: onPlay/onPause/onRestart для регистрации callbacks, enable() для активации после загрузки файла, disable() для деактивации, setPlaying(boolean) для переключения состояния воспроизведения, setFinished() для финального состояния, reset() для сброса. Play disabled по умолчанию, Pause активна только при воспроизведении, Restart активна после загрузки.
+**Files changed:**
+- src/ui/controls.ts (created)
+- src/ui/index.ts (updated to re-export)
+**Notes:** Согласно PRD 6.1 и 6.9: кнопки управления воспроизведением. При setFinished() только Restart активна (после outcome). Логика состояний: isEnabled, isPlaying, isFinished определяют disabled-состояния кнопок.
+
