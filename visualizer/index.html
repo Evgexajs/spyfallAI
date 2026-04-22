@@ -19,17 +19,254 @@
         align-items: center;
         justify-content: center;
         font-family: system-ui, -apple-system, sans-serif;
+        color: #e0e0e0;
+        padding: 20px;
+        gap: 16px;
+      }
+
+      .visualizer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
       }
 
       #app {
         width: 1920px;
         height: 1080px;
         background-color: #000;
+        border-radius: 8px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+      }
+
+      .controls-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        max-width: 1920px;
+        padding: 16px 24px;
+        background-color: #252540;
+        border-radius: 8px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .controls-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .control-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .control-group-label {
+        font-size: 12px;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      #file-selector {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      #file-input {
+        display: none;
+      }
+
+      #file-name {
+        font-size: 14px;
+        color: #aaa;
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      #playback-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      #speed-controls {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      #progress-indicator {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 300px;
+      }
+
+      #progress-bar-container {
+        flex: 1;
+        height: 8px;
+        background-color: #1a1a2e;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      #progress-bar {
+        height: 100%;
+        width: 0%;
+        background-color: #4a6fa5;
+        border-radius: 4px;
+        transition: width 0.2s ease;
+      }
+
+      #progress-text {
+        font-size: 14px;
+        color: #aaa;
+        min-width: 60px;
+        text-align: right;
+      }
+
+      #error-display {
+        display: none;
+        width: 100%;
+        padding: 12px 16px;
+        background-color: rgba(220, 53, 69, 0.15);
+        border: 1px solid #dc3545;
+        border-radius: 6px;
+        color: #ff6b6b;
+        font-size: 14px;
+      }
+
+      #error-display.visible {
+        display: block;
+      }
+
+      #loading-indicator {
+        display: none;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #4a6fa5;
+      }
+
+      #loading-indicator.visible {
+        display: flex;
+      }
+
+      .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #4a6fa5;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      button {
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background-color: #4a6fa5;
+        color: #fff;
+      }
+
+      button:hover:not(:disabled) {
+        background-color: #5a7fb5;
+        transform: translateY(-1px);
+      }
+
+      button:active:not(:disabled) {
+        transform: translateY(0);
+      }
+
+      button:disabled {
+        background-color: #3a3a5a;
+        color: #666;
+        cursor: not-allowed;
+      }
+
+      button.secondary {
+        background-color: #3a3a5a;
+        color: #ccc;
+      }
+
+      button.secondary:hover:not(:disabled) {
+        background-color: #4a4a6a;
+      }
+
+      button.active {
+        background-color: #5a8fc5;
+        box-shadow: 0 0 0 2px rgba(90, 143, 197, 0.4);
+      }
+
+      button.speed-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+        min-width: 48px;
       }
     </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div class="visualizer-container">
+      <div id="app"></div>
+
+      <div class="controls-panel">
+        <div id="error-display"></div>
+
+        <div class="controls-row">
+          <div class="control-group" id="file-selector">
+            <button id="file-button" class="secondary">Выбрать файл</button>
+            <input type="file" id="file-input" accept=".json" />
+            <span id="file-name">Файл не выбран</span>
+          </div>
+
+          <div id="loading-indicator">
+            <div class="spinner"></div>
+            <span>Загрузка ассетов...</span>
+          </div>
+
+          <div class="control-group" id="playback-controls">
+            <button id="play-button" disabled>Play</button>
+            <button id="pause-button" disabled>Pause</button>
+            <button id="restart-button" disabled>Restart</button>
+          </div>
+
+          <div class="control-group" id="speed-controls">
+            <span class="control-group-label">Скорость:</span>
+            <button class="speed-btn" data-speed="0.5">x0.5</button>
+            <button class="speed-btn active" data-speed="1">x1</button>
+            <button class="speed-btn" data-speed="2">x2</button>
+          </div>
+        </div>
+
+        <div class="controls-row">
+          <div id="progress-indicator">
+            <div id="progress-bar-container">
+              <div id="progress-bar"></div>
+            </div>
+            <span id="progress-text">0 / 0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

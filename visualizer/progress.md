@@ -316,3 +316,11 @@ Format for entries:
 - src/render/index.ts (updated to re-export OutcomeOverlay)
 **Notes:** Согласно PRD 6.8: outcome — финальный экран, после которого воспроизведение заканчивается. Кнопки Play/Pause неактивны, доступен только Restart. Визуально должен отличаться от spy_guess — spy_guess это "момент ставки", outcome это "итоговый экран".
 
+### TASK-034: Создание HTML layout с контейнером canvas и панелью управления
+**Date:** 2026-04-22
+**Status:** done
+**Summary:** Обновлён index.html с полной разметкой UI. Добавлен .visualizer-container для Flexbox центрирования, сохранён #app контейнер (1920x1080). Создана .controls-panel с элементами: file-selector (кнопка + скрытый input + имя файла), loading-indicator (спиннер), playback-controls (Play/Pause/Restart), speed-controls (x0.5/x1/x2), progress-indicator (прогресс-бар + текст), error-display. Добавлены CSS стили для всех компонентов: кнопки с hover/active/disabled состояниями, прогресс-бар с transition, error с красным фоном.
+**Files changed:**
+- index.html (updated)
+**Notes:** Согласно PRD 6.1: UI-оболочка с селектором файла, кнопками Play/Pause/Restart, индикатором прогресса, переключателем скорости. Все элементы размечены с id для последующей интеграции в TASK-035..TASK-040.
+
