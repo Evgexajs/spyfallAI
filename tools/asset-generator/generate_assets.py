@@ -2,14 +2,20 @@
 """Asset Generator - CLI tool for generating character images via OpenAI API."""
 
 import sys
+import time
+from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
 from cli_parser import parse_args, CLIArgs
 from character_loader import load_character, list_characters, CharacterNotFoundError
 from prompt_builder import build_prompt
-from env_loader import get_api_key, ApiKeyMissingError
+from env_loader import load_env, get_api_key, ApiKeyMissingError
 from reference_loader import get_reference_path, ReferenceImageMissingError
-from image_saver import get_image_path
+from image_saver import save_image, image_exists, get_image_path
+from log_saver import save_log
+from generation_orchestrator import generate_image, GenerationResult
+from image_client import ImageGenerationError
 
 
 DEFAULT_SIZE = "1024x1536"
@@ -94,6 +100,131 @@ def run_dry_run(args: CLIArgs) -> int:
     return 0
 
 
+def generate_character(
+    character_id: str,
+    args: CLIArgs,
+    api_key: str,
+    reference_path: Optional[Path],
+) -> bool:
+    """
+    Generate image for a single character.
+
+    Returns:
+        True on success, False on error
+    """
+    try:
+        character_config = load_character(character_id)
+    except CharacterNotFoundError as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        return False
+
+    if image_exists(character_id) and not args.regenerate:
+        print(f"[{character_id}] Image already exists, skipping (use --regenerate to overwrite)")
+        return True
+
+    prompt = build_prompt(character_config)
+    display_name = character_config.get("display_name", character_id)
+
+    print(f"[{character_id}] Generating {display_name}...")
+
+    start_time = time.time()
+    timestamp = datetime.now()
+    status = "success"
+    error_msg = None
+    warning_msg = None
+    result: Optional[GenerationResult] = None
+
+    try:
+        result = generate_image(
+            prompt=prompt,
+            approach=args.approach,
+            reference_path=reference_path,
+            model=args.model,
+            size=DEFAULT_SIZE,
+            quality=DEFAULT_QUALITY,
+            api_key=api_key,
+        )
+    except ImageGenerationError as e:
+        status = "error"
+        error_msg = str(e)
+        print(f"[{character_id}] ERROR: {e}", file=sys.stderr)
+
+    elapsed = time.time() - start_time
+
+    log_data = {
+        "character_id": character_id,
+        "timestamp": timestamp,
+        "model": args.model,
+        "approach": result.actual_approach if result else "unknown",
+        "requested_approach": args.approach,
+        "status": status,
+        "prompt": prompt,
+        "elapsed_seconds": round(elapsed, 2),
+        "size": DEFAULT_SIZE,
+        "quality": DEFAULT_QUALITY,
+    }
+
+    if result and result.fallback_triggered:
+        warning_msg = f"Fallback to text-only triggered: {result.fallback_reason}"
+        log_data["warning"] = warning_msg
+        log_data["fallback_trigger"] = result.fallback_reason
+        print(f"[{character_id}] WARNING: {warning_msg}")
+
+    if error_msg:
+        log_data["error"] = error_msg
+
+    log_path = save_log(log_data)
+    print(f"[{character_id}] Log saved: {log_path}")
+
+    if status == "error":
+        return False
+
+    output_path, was_written = save_image(
+        character_id=character_id,
+        image_bytes=result.image_bytes,
+        regenerate=args.regenerate,
+    )
+
+    if was_written:
+        print(f"[{character_id}] Image saved: {output_path}")
+    else:
+        print(f"[{character_id}] Image already exists: {output_path}")
+
+    print(f"[{character_id}] Done ({elapsed:.1f}s)")
+    return True
+
+
+def run_generation(args: CLIArgs) -> int:
+    """
+    Execute generation mode for --character.
+
+    Returns:
+        0 on success, 1 on error
+    """
+    load_env()
+
+    try:
+        api_key = get_api_key(dry_run=False)
+    except ApiKeyMissingError as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        return 1
+
+    reference_path = None
+    if args.approach != "text-only":
+        try:
+            reference_path = get_reference_path(text_only=False)
+        except ReferenceImageMissingError as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            return 1
+
+    if args.character:
+        success = generate_character(args.character, args, api_key, reference_path)
+        return 0 if success else 1
+    else:
+        print("ERROR: --all-characters not implemented yet", file=sys.stderr)
+        return 1
+
+
 def main() -> int:
     """Main entry point."""
     try:
@@ -104,8 +235,7 @@ def main() -> int:
     if args.dry_run:
         return run_dry_run(args)
 
-    print("Generation mode not implemented yet. Use --dry-run to preview.", file=sys.stderr)
-    return 1
+    return run_generation(args)
 
 
 if __name__ == "__main__":

@@ -154,3 +154,11 @@ Format for entries:
 - generate_assets.py (created)
 **Notes:** All test steps passed. Prompt displays correctly with character info. Summary shows model, approach, size, quality, regenerate flag, and all paths. Output directories remain empty after dry-run.
 
+### TASK-AG-017: Генерация одного персонажа (--character)
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Implemented single character generation in generate_assets.py. Extended main entry point with run_generation() and generate_character() functions. Uses generation_orchestrator for approach handling (auto/reference/text-only), saves PNG via image_saver, creates JSON log via log_saver. Without --regenerate, existing files are skipped with clear message. Error handling provides clear messages for missing API key, missing reference image, and API errors.
+**Files changed:**
+- generate_assets.py (extended)
+**Notes:** Tested error handling paths (missing key, missing reference, invalid API key). Skip logic for existing files verified. Log creation with all required fields verified. Full E2E test with real API key requires user configuration.
+

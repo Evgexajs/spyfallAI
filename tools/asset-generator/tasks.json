@@ -326,7 +326,7 @@
         "Шаг 3: Проверить output/logs/ содержит лог"
       ],
       "dependencies": ["TASK-AG-012", "TASK-AG-013", "TASK-AG-014", "TASK-AG-015"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-018",
