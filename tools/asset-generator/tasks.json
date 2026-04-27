@@ -119,7 +119,7 @@
         "Шаг 3: Проверить что промпт НЕ содержит '{visual_description}'"
       ],
       "dependencies": ["TASK-AG-004", "TASK-AG-005"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-007",

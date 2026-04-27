@@ -66,3 +66,11 @@ Format for entries:
 - character_loader.py (created)
 **Notes:** All test steps passed - module imports cleanly, load_character returns dict with all 5 fields, CharacterNotFoundError shows available characters.
 
+### TASK-AG-006: Модуль сборки промпта из шаблона
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created prompt_builder.py module with build_prompt(character_config) function. Loads template from prompts/character_template.txt, substitutes {visual_description} and {pose_notes} placeholders with character config values, returns complete prompt string.
+**Files changed:**
+- prompt_builder.py (created)
+**Notes:** All test steps passed - prompt for boris_molot contains correct description, no unsubstituted placeholders remain.
+
