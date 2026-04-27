@@ -48,7 +48,7 @@
         "Шаг 2: pip install -r requirements.txt — установка без ошибок"
       ],
       "dependencies": ["TASK-AG-001"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-003",
