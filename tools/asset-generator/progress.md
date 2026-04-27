@@ -58,3 +58,11 @@ Format for entries:
 - prompts/character_template.txt (created)
 **Notes:** All test steps passed - template content verified and placeholders confirmed.
 
+### TASK-AG-005: Модуль загрузки конфигурации персонажей
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created character_loader.py module with load_character() and list_characters() functions. Includes CharacterNotFoundError with clear error messages listing available characters.
+**Files changed:**
+- character_loader.py (created)
+**Notes:** All test steps passed - module imports cleanly, load_character returns dict with all 5 fields, CharacterNotFoundError shows available characters.
+

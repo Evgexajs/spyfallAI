@@ -101,7 +101,7 @@
         "Шаг 3: load_character('nonexistent') выбрасывает ошибку с понятным сообщением"
       ],
       "dependencies": ["TASK-AG-003"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-006",
