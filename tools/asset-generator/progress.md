@@ -90,3 +90,11 @@ Format for entries:
 - reference_loader.py (created)
 **Notes:** All test steps passed - path returned correctly, clear error on missing file, text_only mode doesn't crash.
 
+### TASK-AG-009: Базовый клиент OpenAI Image API (text-only)
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created image_client.py module with generate_image_text_only(prompt, model, size, quality, api_key) function. Uses OpenAI client.images.generate() with b64_json response format, returns PNG bytes. Handles AuthenticationFailedError (401) and ServerError (5xx) with clear messages.
+**Files changed:**
+- image_client.py (created)
+**Notes:** Tested with invalid API key - correctly raises AuthenticationFailedError with helpful message. Module compiles and imports cleanly.
+
