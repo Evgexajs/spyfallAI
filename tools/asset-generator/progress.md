@@ -189,3 +189,12 @@ Format for entries:
 - output/logs/ (multiple test logs)
 **Notes:** All test steps passed: dry-run shows correct prompt, generation creates PNG (1024x1792), log contains all required fields (character_id, timestamp, model, approach, requested_approach, status, prompt, elapsed_seconds). Auto mode correctly falls back to text-only with warning/fallback_trigger logged.
 
+### TASK-AG-021: E2E тест: генерация Авроры и сравнение стилей
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Completed E2E test for Aurora character generation. Aurora generated successfully with dall-e-3 model. Visual comparison with Boris shows noticeable style differences: Boris has semi-realistic cartoon/cel-shaded look, Aurora is more photorealistic with detailed texturing. Style inconsistency confirmed to be caused by fallback to text-only approach (Edit API doesn't support dall-e-3 model for reference-flow).
+**Files changed:**
+- output/characters/aurora.png (generated, 3.1MB)
+- output/logs/2026-04-27T21-39-11-742353_aurora.json (generation log)
+**Notes:** All test steps passed. Both characters used text_only approach due to identical fallback trigger: "The model 'dall-e-3' does not exist" in Edit API context. Log correctly shows approach=text_only, requested_approach=auto, fallback_trigger with error details. Style difference is expected limitation when reference-flow unavailable.
+

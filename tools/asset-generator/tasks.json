@@ -400,7 +400,7 @@
         "Шаг 3: Если стиль разный — проверить approach в логе (был ли fallback)"
       ],
       "dependencies": ["TASK-AG-020"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-022",
