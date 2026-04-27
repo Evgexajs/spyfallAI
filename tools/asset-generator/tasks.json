@@ -419,7 +419,7 @@
         "Шаг 3: --character nonexistent — проверить ошибку"
       ],
       "dependencies": ["TASK-AG-017"],
-      "status": "pending"
+      "status": "done"
     }
   ]
 }

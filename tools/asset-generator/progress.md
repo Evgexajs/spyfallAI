@@ -198,3 +198,16 @@ Format for entries:
 - output/logs/2026-04-27T21-39-11-742353_aurora.json (generation log)
 **Notes:** All test steps passed. Both characters used text_only approach due to identical fallback trigger: "The model 'dall-e-3' does not exist" in Edit API context. Log correctly shows approach=text_only, requested_approach=auto, fallback_trigger with error details. Style difference is expected limitation when reference-flow unavailable.
 
+### TASK-AG-022: Тестирование error handling
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Completed integration testing of error handling across 4 scenarios. All errors display clean, user-friendly messages without Python tracebacks. Exit codes correctly return 1 on errors.
+**Tests passed:**
+1. Missing OPENAI_API_KEY → "ERROR: OPENAI_API_KEY is not set. Create a .env file..."
+2. Missing reference image (--approach auto) → "ERROR: Reference image not found... Or use --approach text-only"
+3. Nonexistent character → "ERROR: Character 'nonexistent' not found. Available: aurora, boris_molot"
+4. Unsupported model → "ERROR: OpenAI API error (400): ...model does not exist"
+**Files changed:**
+- No code changes (integration test only)
+**Notes:** All acceptance criteria met. Error messages are actionable (suggest solutions where applicable). Minor stdout/stderr buffering causes message order variance but doesn't affect clarity.
+
