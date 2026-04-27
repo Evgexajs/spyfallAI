@@ -146,3 +146,11 @@ Format for entries:
 - cli_parser.py (created)
 **Notes:** All test steps passed. Argparse provides clear error messages: mutual exclusion error, required argument error, invalid choice error with allowed values.
 
+### TASK-AG-016: Режим --dry-run
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created generate_assets.py as main CLI entry point with --dry-run mode implementation. Dry-run mode loads character config, builds prompt, checks .env (warning if no key), checks reference image (error if missing and approach != text-only), prints prompt and full parameter summary to stdout. No API calls made, no files created in output/.
+**Files changed:**
+- generate_assets.py (created)
+**Notes:** All test steps passed. Prompt displays correctly with character info. Summary shows model, approach, size, quality, regenerate flag, and all paths. Output directories remain empty after dry-run.
+

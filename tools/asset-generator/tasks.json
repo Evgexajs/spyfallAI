@@ -307,7 +307,7 @@
         "Шаг 3: Проверить резюме: модель, approach, size, пути"
       ],
       "dependencies": ["TASK-AG-006", "TASK-AG-007", "TASK-AG-008", "TASK-AG-015"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-017",
