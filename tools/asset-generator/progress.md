@@ -138,3 +138,11 @@ Format for entries:
 - log_saver.py (created)
 **Notes:** All test steps passed. Timestamp in filename uses ISO format with colons/dots replaced by dashes for filesystem compatibility.
 
+### TASK-AG-015: CLI парсер аргументов
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created cli_parser.py module with argparse-based CLI parser. Uses mutually exclusive group for --character/--all-characters (one required). Supports --model (default: gpt-image-2), --approach (choices: auto/reference/text-only, default: auto), --regenerate, and --dry-run flags. Returns CLIArgs dataclass with parsed values. Clear error messages for invalid arguments.
+**Files changed:**
+- cli_parser.py (created)
+**Notes:** All test steps passed. Argparse provides clear error messages: mutual exclusion error, required argument error, invalid choice error with allowed values.
+

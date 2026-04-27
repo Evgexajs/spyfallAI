@@ -287,7 +287,7 @@
         "Шаг 3: --approach invalid — ошибка с допустимыми значениями"
       ],
       "dependencies": [],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-016",
