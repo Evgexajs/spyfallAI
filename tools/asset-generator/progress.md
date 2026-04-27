@@ -162,3 +162,11 @@ Format for entries:
 - generate_assets.py (extended)
 **Notes:** Tested error handling paths (missing key, missing reference, invalid API key). Skip logic for existing files verified. Log creation with all required fields verified. Full E2E test with real API key requires user configuration.
 
+### TASK-AG-018: Генерация всех персонажей (--all-characters)
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Implemented batch generation for all characters. Added run_all_characters() function that iterates through all characters from list_characters(), with MIN_REQUEST_INTERVAL (2 seconds) pause between requests. Continues with remaining characters if one fails. Displays summary at the end showing succeeded/failed count.
+**Files changed:**
+- generate_assets.py (extended with run_all_characters)
+**Notes:** Dry-run mode tested successfully with --all-characters --approach text-only. Reuses existing generate_character() function. Error handling continues batch on individual failures. Full E2E test requires OPENAI_API_KEY configuration.
+

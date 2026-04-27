@@ -15,7 +15,7 @@ from reference_loader import get_reference_path, ReferenceImageMissingError
 from image_saver import save_image, image_exists, get_image_path
 from log_saver import save_log
 from generation_orchestrator import generate_image, GenerationResult
-from image_client import ImageGenerationError
+from image_client import ImageGenerationError, MIN_REQUEST_INTERVAL
 
 
 DEFAULT_SIZE = "1024x1536"
@@ -221,8 +221,45 @@ def run_generation(args: CLIArgs) -> int:
         success = generate_character(args.character, args, api_key, reference_path)
         return 0 if success else 1
     else:
-        print("ERROR: --all-characters not implemented yet", file=sys.stderr)
-        return 1
+        return run_all_characters(args, api_key, reference_path)
+
+
+def run_all_characters(args: CLIArgs, api_key: str, reference_path: Optional[Path]) -> int:
+    """
+    Execute generation mode for --all-characters.
+
+    Generates all characters from config with a pause between each request.
+    Continues with remaining characters if one fails.
+
+    Returns:
+        0 if all succeeded, 1 if any failed
+    """
+    character_ids = list_characters()
+    total = len(character_ids)
+    succeeded = 0
+    failed = 0
+
+    print(f"Generating {total} character(s)...")
+    print()
+
+    for i, character_id in enumerate(character_ids):
+        if i > 0:
+            print(f"Waiting {MIN_REQUEST_INTERVAL:.0f}s before next request...")
+            time.sleep(MIN_REQUEST_INTERVAL)
+            print()
+
+        success = generate_character(character_id, args, api_key, reference_path)
+        if success:
+            succeeded += 1
+        else:
+            failed += 1
+
+    print()
+    print("=" * 40)
+    print(f"SUMMARY: {succeeded}/{total} succeeded, {failed}/{total} failed")
+    print("=" * 40)
+
+    return 0 if failed == 0 else 1
 
 
 def main() -> int:

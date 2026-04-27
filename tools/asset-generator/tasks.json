@@ -345,7 +345,7 @@
         "Шаг 3: Проверить 2 лога в output/logs/"
       ],
       "dependencies": ["TASK-AG-017"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-019",
