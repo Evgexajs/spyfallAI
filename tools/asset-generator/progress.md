@@ -170,3 +170,11 @@ Format for entries:
 - generate_assets.py (extended with run_all_characters)
 **Notes:** Dry-run mode tested successfully with --all-characters --approach text-only. Reuses existing generate_character() function. Error handling continues batch on individual failures. Full E2E test requires OPENAI_API_KEY configuration.
 
+### TASK-AG-019: README с инструкцией тестирования
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created README.md with installation instructions, testing workflow (8 steps from spec 6.3), CLI parameters table, and troubleshooting guide for style consistency issues. README explains how to use logs to diagnose fallback situations.
+**Files changed:**
+- README.md (created)
+**Notes:** All commands from README tested with dry-run mode. Works correctly with python3 (python command not in PATH on this system).
+
