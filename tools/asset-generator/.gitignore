@@ -1,0 +1,18 @@
+# Reference images (style references)
+reference/*
+!reference/.gitkeep
+
+# Output files (generated assets and logs)
+output/*
+!output/.gitkeep
+!output/characters
+!output/logs
+output/characters/*
+!output/characters/.gitkeep
+output/logs/*
+!output/logs/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.env

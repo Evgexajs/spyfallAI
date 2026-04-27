@@ -1,0 +1,425 @@
+{
+  "agent_instructions": {
+    "before_start": [
+      "Прочитай этот файл и docs/asset-generator-spec-mvp-v0.2.md",
+      "Выбери ОДНУ задачу со статусом pending и наивысшим приоритетом",
+      "Проверь, что все dependencies этой задачи имеют статус done"
+    ],
+    "during_work": [
+      "Работай только над выбранной задачей",
+      "Делай коммиты после каждого логического изменения",
+      "Не трогай код, не связанный с текущей задачей"
+    ],
+    "before_finish": [
+      "Выполни ВСЕ test_steps из задачи",
+      "Меняй status на done ТОЛЬКО после успешного прохождения всех тестов",
+      "ЗАПРЕЩЕНО удалять или редактировать задачи — только менять status"
+    ]
+  },
+  "tasks": [
+    {
+      "id": "TASK-AG-001",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "Инициализация структуры проекта asset-generator",
+      "acceptance_criteria": [
+        "Создана структура папок: config/, prompts/, reference/, output/characters/, output/logs/",
+        "Созданы .gitkeep в reference/ и output/*/",
+        "Добавлены reference/ и output/ в .gitignore (кроме .gitkeep)"
+      ],
+      "test_steps": [
+        "Шаг 1: ls -la tools/asset-generator/ — проверить наличие всех папок",
+        "Шаг 2: cat .gitignore | grep -E 'reference|output' — проверить gitignore"
+      ],
+      "dependencies": [],
+      "status": "done"
+    },
+    {
+      "id": "TASK-AG-002",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "Создание requirements.txt с зависимостями",
+      "acceptance_criteria": [
+        "Создан requirements.txt с openai, python-dotenv",
+        "pip install -r requirements.txt работает без ошибок"
+      ],
+      "test_steps": [
+        "Шаг 1: cat requirements.txt — проверить содержимое",
+        "Шаг 2: pip install -r requirements.txt — установка без ошибок"
+      ],
+      "dependencies": ["TASK-AG-001"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-003",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "Создание config/characters.json с 2 персонажами",
+      "acceptance_criteria": [
+        "Создан config/characters.json с boris_molot и aurora",
+        "Содержимое точно соответствует разделу 6.1 ТЗ",
+        "JSON валиден"
+      ],
+      "test_steps": [
+        "Шаг 1: python -m json.tool config/characters.json — валидация",
+        "Шаг 2: Проверить наличие полей: display_name, archetype, color_accent, visual_description, pose_notes"
+      ],
+      "dependencies": ["TASK-AG-001"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-004",
+      "category": "infrastructure",
+      "priority": "critical",
+      "description": "Создание prompts/character_template.txt",
+      "acceptance_criteria": [
+        "Создан prompts/character_template.txt",
+        "Содержимое точно соответствует разделу 6.2 ТЗ",
+        "Содержит плейсхолдеры {visual_description} и {pose_notes}"
+      ],
+      "test_steps": [
+        "Шаг 1: cat prompts/character_template.txt — проверить содержимое",
+        "Шаг 2: grep '{visual_description}' prompts/character_template.txt",
+        "Шаг 3: grep '{pose_notes}' prompts/character_template.txt"
+      ],
+      "dependencies": ["TASK-AG-001"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-005",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Модуль загрузки конфигурации персонажей",
+      "acceptance_criteria": [
+        "Функция load_character(character_id) -> dict",
+        "Выбрасывает понятную ошибку если персонаж не найден",
+        "Функция list_characters() -> list[str]"
+      ],
+      "test_steps": [
+        "Шаг 1: Импортировать модуль без ошибок",
+        "Шаг 2: load_character('boris_molot') возвращает словарь",
+        "Шаг 3: load_character('nonexistent') выбрасывает ошибку с понятным сообщением"
+      ],
+      "dependencies": ["TASK-AG-003"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-006",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Модуль сборки промпта из шаблона",
+      "acceptance_criteria": [
+        "Функция build_prompt(character_config) -> str",
+        "Подставляет visual_description и pose_notes в шаблон",
+        "Возвращает готовый промпт для API"
+      ],
+      "test_steps": [
+        "Шаг 1: Собрать промпт для boris_molot",
+        "Шаг 2: Проверить что промпт содержит 'stocky intimidating man'",
+        "Шаг 3: Проверить что промпт НЕ содержит '{visual_description}'"
+      ],
+      "dependencies": ["TASK-AG-004", "TASK-AG-005"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-007",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Модуль загрузки .env и проверки API ключа",
+      "acceptance_criteria": [
+        "Функция load_env() загружает .env через python-dotenv",
+        "Функция get_api_key() -> str возвращает OPENAI_API_KEY",
+        "Понятная ошибка если ключ не задан (не traceback)",
+        "В dry-run режиме отсутствие ключа допустимо (warning)"
+      ],
+      "test_steps": [
+        "Шаг 1: Создать .env с тестовым ключом, проверить get_api_key()",
+        "Шаг 2: Удалить ключ, проверить понятную ошибку",
+        "Шаг 3: Проверить dry-run режим без ключа — warning, не падает"
+      ],
+      "dependencies": ["TASK-AG-002"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-008",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Модуль загрузки и проверки reference image",
+      "acceptance_criteria": [
+        "Функция get_reference_path() -> Path",
+        "Проверяет существование reference/style_reference.png",
+        "Понятная ошибка если файл отсутствует (и approach != text-only)",
+        "В text-only режиме отсутствие файла допустимо"
+      ],
+      "test_steps": [
+        "Шаг 1: Создать тестовый файл, проверить get_reference_path()",
+        "Шаг 2: Удалить файл, проверить ошибку",
+        "Шаг 3: Проверить text-only режим без файла — не падает"
+      ],
+      "dependencies": ["TASK-AG-001"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-009",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Базовый клиент OpenAI Image API (text-only)",
+      "acceptance_criteria": [
+        "Функция generate_image_text_only(prompt, model, size, quality) -> bytes",
+        "Вызывает OpenAI Image Generation API",
+        "Возвращает PNG как bytes",
+        "Обрабатывает базовые ошибки API (401, 5xx)"
+      ],
+      "test_steps": [
+        "Шаг 1: Вызвать с валидным ключом — получить картинку",
+        "Шаг 2: Вызвать с невалидным ключом — понятная ошибка 401"
+      ],
+      "dependencies": ["TASK-AG-007"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-010",
+      "category": "functional",
+      "priority": "high",
+      "description": "Клиент OpenAI с reference-flow",
+      "acceptance_criteria": [
+        "Функция generate_image_with_reference(prompt, reference_path, model, size, quality) -> bytes",
+        "Использует Images Edit API или Responses API с image input",
+        "Если reference-flow не поддерживается — выбрасывает специфичную ошибку ReferenceFlowError"
+      ],
+      "test_steps": [
+        "Шаг 1: Вызвать с reference — проверить что запрос ушёл с картинкой",
+        "Шаг 2: Проверить структуру ошибки при неподдержке reference-flow"
+      ],
+      "dependencies": ["TASK-AG-008", "TASK-AG-009"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-011",
+      "category": "functional",
+      "priority": "high",
+      "description": "Retry логика с exponential backoff",
+      "acceptance_criteria": [
+        "При 429 (rate limit) — retry до 3 раз с backoff",
+        "При network timeout — retry до 3 раз с backoff",
+        "После 3 неудач — выбрасывает ошибку",
+        "Пауза между запросами в --all-characters минимум 2 секунды"
+      ],
+      "test_steps": [
+        "Шаг 1: Мок 429 ответа, проверить retry",
+        "Шаг 2: Мок 3x 429, проверить что после 3 попыток — ошибка"
+      ],
+      "dependencies": ["TASK-AG-009"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-012",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Логика fallback в режиме auto",
+      "acceptance_criteria": [
+        "В режиме auto: сначала reference-flow, при ReferenceFlowError — fallback на text-only",
+        "Fallback ТОЛЬКО на reference-flow ошибки (не на 429, не на network, не на 5xx)",
+        "В режиме reference: любая ошибка пробрасывается, без fallback",
+        "В режиме text-only: сразу text-only без reference"
+      ],
+      "test_steps": [
+        "Шаг 1: auto + ReferenceFlowError → fallback на text-only",
+        "Шаг 2: auto + 429 → НЕ fallback, retry",
+        "Шаг 3: reference + ReferenceFlowError → ошибка, не fallback"
+      ],
+      "dependencies": ["TASK-AG-010", "TASK-AG-011"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-013",
+      "category": "functional",
+      "priority": "high",
+      "description": "Сохранение PNG результата",
+      "acceptance_criteria": [
+        "Функция save_image(character_id, image_bytes) -> Path",
+        "Сохраняет в output/characters/{character_id}.png",
+        "Создаёт директорию если не существует",
+        "Без --regenerate пропускает существующие файлы"
+      ],
+      "test_steps": [
+        "Шаг 1: Сохранить тестовую картинку, проверить файл",
+        "Шаг 2: Повторно без --regenerate — файл не перезаписан",
+        "Шаг 3: С --regenerate — файл перезаписан"
+      ],
+      "dependencies": ["TASK-AG-001"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-014",
+      "category": "functional",
+      "priority": "high",
+      "description": "JSON логирование каждого запроса",
+      "acceptance_criteria": [
+        "Функция save_log(log_data) -> Path",
+        "Сохраняет в output/logs/{timestamp}_{character_id}.json",
+        "Обязательные поля: character_id, timestamp, model, approach, requested_approach, status, prompt, elapsed_seconds",
+        "Опциональные поля: revised_prompt, usage, output_format, size, quality, warning, error, fallback_trigger"
+      ],
+      "test_steps": [
+        "Шаг 1: Сохранить тестовый лог, проверить файл",
+        "Шаг 2: Проверить наличие всех обязательных полей",
+        "Шаг 3: Проверить что timestamp в ISO формате"
+      ],
+      "dependencies": ["TASK-AG-001"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-015",
+      "category": "functional",
+      "priority": "critical",
+      "description": "CLI парсер аргументов",
+      "acceptance_criteria": [
+        "Парсинг --character {id} и --all-characters (взаимоисключающие)",
+        "Парсинг --model {name} с дефолтом gpt-image-2",
+        "Парсинг --approach {auto|reference|text-only} с дефолтом auto",
+        "Парсинг --regenerate и --dry-run",
+        "Понятные сообщения об ошибках при неверных аргументах"
+      ],
+      "test_steps": [
+        "Шаг 1: --character boris_molot — парсится корректно",
+        "Шаг 2: --character X --all-characters — ошибка взаимоисключения",
+        "Шаг 3: --approach invalid — ошибка с допустимыми значениями"
+      ],
+      "dependencies": [],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-016",
+      "category": "functional",
+      "priority": "high",
+      "description": "Режим --dry-run",
+      "acceptance_criteria": [
+        "Загружает конфиг и собирает промпт",
+        "Проверяет .env (warning если нет ключа)",
+        "Проверяет reference image (если approach != text-only)",
+        "Печатает промпт и резюме параметров в stdout",
+        "НЕ вызывает API, НЕ создаёт файлов в output/"
+      ],
+      "test_steps": [
+        "Шаг 1: --character boris_molot --dry-run — видим промпт в stdout",
+        "Шаг 2: Проверить что output/ пуст после dry-run",
+        "Шаг 3: Проверить резюме: модель, approach, size, пути"
+      ],
+      "dependencies": ["TASK-AG-006", "TASK-AG-007", "TASK-AG-008", "TASK-AG-015"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-017",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Генерация одного персонажа (--character)",
+      "acceptance_criteria": [
+        "python generate_assets.py --character boris_molot создаёт output/characters/boris_molot.png",
+        "Размер ~1024x1536 (портретный)",
+        "Создаётся JSON-лог в output/logs/",
+        "Без --regenerate существующий файл пропускается"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить --character boris_molot",
+        "Шаг 2: Проверить output/characters/boris_molot.png существует",
+        "Шаг 3: Проверить output/logs/ содержит лог"
+      ],
+      "dependencies": ["TASK-AG-012", "TASK-AG-013", "TASK-AG-014", "TASK-AG-015"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-018",
+      "category": "functional",
+      "priority": "high",
+      "description": "Генерация всех персонажей (--all-characters)",
+      "acceptance_criteria": [
+        "python generate_assets.py --all-characters генерирует boris_molot.png и aurora.png",
+        "Пауза минимум 2 секунды между запросами",
+        "Создаётся JSON-лог для каждого персонажа",
+        "При ошибке одного — продолжает с остальными"
+      ],
+      "test_steps": [
+        "Шаг 1: Запустить --all-characters",
+        "Шаг 2: Проверить оба PNG существуют",
+        "Шаг 3: Проверить 2 лога в output/logs/"
+      ],
+      "dependencies": ["TASK-AG-017"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-019",
+      "category": "documentation",
+      "priority": "high",
+      "description": "README с инструкцией тестирования",
+      "acceptance_criteria": [
+        "Создан README.md по разделу 6.3 ТЗ",
+        "Описание: что это и зачем",
+        "Установка: pip install, создание .env",
+        "Шаги тестирования: dry-run, генерация, сравнение стиля"
+      ],
+      "test_steps": [
+        "Шаг 1: Прочитать README, выполнить шаги",
+        "Шаг 2: Все команды работают как описано"
+      ],
+      "dependencies": ["TASK-AG-017"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-020",
+      "category": "integration",
+      "priority": "critical",
+      "description": "E2E тест: генерация Бориса",
+      "acceptance_criteria": [
+        "Положить reference/style_reference.png",
+        "Запустить --dry-run, проверить промпт",
+        "Запустить генерацию, получить PNG",
+        "Проверить JSON-лог содержит все обязательные поля"
+      ],
+      "test_steps": [
+        "Шаг 1: --character boris_molot --dry-run",
+        "Шаг 2: --character boris_molot",
+        "Шаг 3: Проверить лог: model, approach, status=success"
+      ],
+      "dependencies": ["TASK-AG-017", "TASK-AG-019"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-021",
+      "category": "integration",
+      "priority": "high",
+      "description": "E2E тест: генерация Авроры и сравнение стилей",
+      "acceptance_criteria": [
+        "Запустить генерацию Авроры",
+        "Визуально сравнить с Борисом — должны быть в одном стиле",
+        "Если стиль не держится — проверить лог на fallback"
+      ],
+      "test_steps": [
+        "Шаг 1: --character aurora",
+        "Шаг 2: Открыть оба PNG, сравнить стиль",
+        "Шаг 3: Если стиль разный — проверить approach в логе (был ли fallback)"
+      ],
+      "dependencies": ["TASK-AG-020"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-022",
+      "category": "integration",
+      "priority": "high",
+      "description": "Тестирование error handling",
+      "acceptance_criteria": [
+        "Без OPENAI_API_KEY — понятная ошибка, не traceback",
+        "Без reference image (approach=auto) — понятная ошибка",
+        "Несуществующий персонаж — понятная ошибка",
+        "Неподдерживаемая модель — понятная ошибка"
+      ],
+      "test_steps": [
+        "Шаг 1: Удалить OPENAI_API_KEY, запустить — проверить ошибку",
+        "Шаг 2: Удалить reference, запустить --approach auto — проверить ошибку",
+        "Шаг 3: --character nonexistent — проверить ошибку"
+      ],
+      "dependencies": ["TASK-AG-017"],
+      "status": "pending"
+    }
+  ]
+}
