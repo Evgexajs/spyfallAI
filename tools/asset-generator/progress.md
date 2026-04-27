@@ -178,3 +178,14 @@ Format for entries:
 - README.md (created)
 **Notes:** All commands from README tested with dry-run mode. Works correctly with python3 (python command not in PATH on this system).
 
+### TASK-AG-020: E2E тест: генерация Бориса
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Completed E2E test for Boris character generation. During testing, discovered and fixed API compatibility issues: removed `response_format` parameter (not supported by newer models), added quality/size mapping for dall-e-3 compatibility (high→hd, 1024x1536→1024x1792). Tests run with dall-e-3 model since gpt-image-2 requires OpenAI organization verification.
+**Files changed:**
+- image_client.py (fixed API compatibility: removed response_format, added quality/size mappings)
+- .env (symlink to parent directory's .env)
+- output/characters/boris_molot.png (generated)
+- output/logs/ (multiple test logs)
+**Notes:** All test steps passed: dry-run shows correct prompt, generation creates PNG (1024x1792), log contains all required fields (character_id, timestamp, model, approach, requested_approach, status, prompt, elapsed_seconds). Auto mode correctly falls back to text-only with warning/fallback_trigger logged.
+

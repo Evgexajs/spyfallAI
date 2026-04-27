@@ -382,7 +382,7 @@
         "Шаг 3: Проверить лог: model, approach, status=success"
       ],
       "dependencies": ["TASK-AG-017", "TASK-AG-019"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-021",

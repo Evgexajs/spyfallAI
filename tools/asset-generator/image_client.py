@@ -57,6 +57,26 @@ BASE_RETRY_DELAY = 1.0
 MIN_REQUEST_INTERVAL = 2.0  # Minimum pause between requests in batch mode (--all-characters)
 
 
+def _map_quality_for_model(quality: str, model: str) -> str:
+    """Map quality value to model-specific equivalent."""
+    if model.startswith("dall-e"):
+        return "hd" if quality == "high" else "standard"
+    return quality
+
+
+def _map_size_for_model(size: str, model: str) -> str:
+    """Map size to model-specific supported size."""
+    if model.startswith("dall-e-3"):
+        w, h = map(int, size.split("x"))
+        if h > w:
+            return "1024x1792"
+        elif w > h:
+            return "1792x1024"
+        else:
+            return "1024x1024"
+    return size
+
+
 def _retry_on_transient_errors(api_call, max_attempts: int = MAX_RETRY_ATTEMPTS):
     """Execute API call with retry logic for rate limits and network errors.
 
@@ -119,21 +139,28 @@ def generate_image_text_only(
         ImageGenerationError: For other API errors
     """
     client = OpenAI(api_key=api_key)
+    mapped_quality = _map_quality_for_model(quality, model)
+    mapped_size = _map_size_for_model(size, model)
 
     def _make_request():
         return client.images.generate(
             model=model,
             prompt=prompt,
             n=1,
-            size=size,
-            quality=quality,
-            response_format="b64_json",
+            size=mapped_size,
+            quality=mapped_quality,
         )
 
     try:
         response = _retry_on_transient_errors(_make_request)
-        b64_data = response.data[0].b64_json
-        return base64.b64decode(b64_data)
+        if response.data[0].b64_json:
+            return base64.b64decode(response.data[0].b64_json)
+        elif response.data[0].url:
+            import urllib.request
+            with urllib.request.urlopen(response.data[0].url) as resp:
+                return resp.read()
+        else:
+            raise ImageGenerationError("API returned no image data")
 
     except AuthenticationError as e:
         raise AuthenticationFailedError(
@@ -187,15 +214,7 @@ def generate_image_with_reference(
     """
     client = OpenAI(api_key=api_key)
     reference_path = Path(reference_path)
-
-    def _make_request(image_file):
-        return client.images.edit(
-            model=model,
-            image=image_file,
-            prompt=prompt,
-            n=1,
-            size=size,
-        )
+    mapped_size = _map_size_for_model(size, model)
 
     try:
         with open(reference_path, "rb") as image_file:
@@ -208,7 +227,7 @@ def generate_image_with_reference(
                 image=io.BytesIO(image_data),
                 prompt=prompt,
                 n=1,
-                size=size,
+                size=mapped_size,
             )
 
         response = _retry_on_transient_errors(_make_request_with_data)
