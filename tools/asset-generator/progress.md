@@ -82,3 +82,11 @@ Format for entries:
 - env_loader.py (created)
 **Notes:** All test steps passed - key loads correctly from .env, clear error on missing key, dry_run mode warns but doesn't crash.
 
+### TASK-AG-008: Модуль загрузки и проверки reference image
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created reference_loader.py module with get_reference_path(text_only) function. Returns Path to reference/style_reference.png if exists. Raises ReferenceImageMissingError with clear message if file missing (when not text_only). In text_only mode, missing file returns None without error.
+**Files changed:**
+- reference_loader.py (created)
+**Notes:** All test steps passed - path returned correctly, clear error on missing file, text_only mode doesn't crash.
+

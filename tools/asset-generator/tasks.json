@@ -157,7 +157,7 @@
         "Шаг 3: Проверить text-only режим без файла — не падает"
       ],
       "dependencies": ["TASK-AG-001"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-009",
