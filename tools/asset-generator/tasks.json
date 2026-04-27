@@ -138,7 +138,7 @@
         "Шаг 3: Проверить dry-run режим без ключа — warning, не падает"
       ],
       "dependencies": ["TASK-AG-002"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-008",

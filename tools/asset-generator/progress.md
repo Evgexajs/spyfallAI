@@ -74,3 +74,11 @@ Format for entries:
 - prompt_builder.py (created)
 **Notes:** All test steps passed - prompt for boris_molot contains correct description, no unsubstituted placeholders remain.
 
+### TASK-AG-007: Модуль загрузки .env и проверки API ключа
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created env_loader.py module with load_env() and get_api_key(dry_run) functions. load_env() loads .env via python-dotenv. get_api_key() returns OPENAI_API_KEY with clear error message (ApiKeyMissingError) if missing. In dry_run mode, missing key produces a warning to stderr and returns None instead of raising.
+**Files changed:**
+- env_loader.py (created)
+**Notes:** All test steps passed - key loads correctly from .env, clear error on missing key, dry_run mode warns but doesn't crash.
+
