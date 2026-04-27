@@ -1,0 +1,16 @@
+{
+  "boris_molot": {
+    "display_name": "Борис",
+    "archetype": "агрессор",
+    "color_accent": "#e94560",
+    "visual_description": "A stocky intimidating man in his late 40s, former police investigator with 20 years on the force. Heavy build but not bulky — solid, dense, the kind of man who's seen too much. Short cropped greying hair, tired narrow-set eyes that miss nothing, deep weathered face, faint stubble. Wears a worn dark leather jacket over a faded button-up shirt, dark trousers, scuffed boots. Posture is grounded, slightly leaning forward — a man used to dominating rooms by presence alone. Subtle red accent on the shirt collar or jacket lining (signature color #e94560). Confrontational but contained — not a brawler, an interrogator.",
+    "pose_notes": "Full body, slight 3/4 turn to the right, weight on one leg, hands visible — one slightly clenched at side, intense gaze directed slightly off-camera as if assessing someone."
+  },
+  "aurora": {
+    "display_name": "Аврора",
+    "archetype": "драма-квин",
+    "color_accent": "#ec4899",
+    "visual_description": "A theatrical woman in her late 50s, former regional theater actress. Tall, slender, dramatic in every gesture. Elaborate dark red curly hair pinned up with a feather and a small ornamental clip. Expressive face with dramatic eye makeup, prominent cheekbones, lips painted dark wine. Wears a flowing burgundy theatrical coat with wide bell-sleeves trimmed in cream lace, over an old-fashioned high-collared dress with intricate ruffles. Long elbow-length dark gloves. Pink accent in the brooch or hair ornament (signature color #ec4899). Posture: one hand raised in a theatrical performance gesture, the other pressed dramatically to chest. Eyes wide with feigned shock, mouth slightly open mid-monologue.",
+    "pose_notes": "Full body, 3/4 turn, mid-gesture, theatrical pose as if speaking on stage. She is performing even when no one is watching."
+  }
+}

@@ -42,3 +42,11 @@ Format for entries:
 - requirements.txt (created)
 **Notes:** Used python3 -m pip for installation as pip command was not in PATH.
 
+### TASK-AG-003: Создание config/characters.json с 2 персонажами
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created config/characters.json with boris_molot and aurora character configurations. Content matches spec section 6.1 exactly. All required fields present: display_name, archetype, color_accent, visual_description, pose_notes.
+**Files changed:**
+- config/characters.json (created)
+**Notes:** JSON validated with python -m json.tool.
+

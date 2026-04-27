@@ -65,7 +65,7 @@
         "Шаг 2: Проверить наличие полей: display_name, archetype, color_accent, visual_description, pose_notes"
       ],
       "dependencies": ["TASK-AG-001"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-004",
