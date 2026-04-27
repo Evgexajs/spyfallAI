@@ -1,10 +1,20 @@
 """OpenAI Image API client for Asset Generator."""
 
 import base64
+import time
+import random
 from pathlib import Path
 from typing import Optional, Union
 
-from openai import OpenAI, AuthenticationError, APIStatusError, BadRequestError
+from openai import (
+    OpenAI,
+    AuthenticationError,
+    APIStatusError,
+    BadRequestError,
+    RateLimitError,
+    APIConnectionError,
+    APITimeoutError,
+)
 
 
 class ImageGenerationError(Exception):
@@ -32,6 +42,55 @@ class ReferenceFlowError(ImageGenerationError):
     pass
 
 
+class RateLimitExceededError(ImageGenerationError):
+    """Raised when rate limit (429) is exceeded after all retry attempts."""
+    pass
+
+
+class NetworkError(ImageGenerationError):
+    """Raised when network/timeout errors persist after all retry attempts."""
+    pass
+
+
+MAX_RETRY_ATTEMPTS = 3
+BASE_RETRY_DELAY = 1.0
+MIN_REQUEST_INTERVAL = 2.0  # Minimum pause between requests in batch mode (--all-characters)
+
+
+def _retry_on_transient_errors(api_call, max_attempts: int = MAX_RETRY_ATTEMPTS):
+    """Execute API call with retry logic for rate limits and network errors.
+
+    Retries up to max_attempts times with exponential backoff + jitter.
+    Does NOT retry on auth errors, server errors, or reference-flow errors.
+    """
+    last_error = None
+
+    for attempt in range(max_attempts):
+        try:
+            return api_call()
+        except RateLimitError as e:
+            last_error = e
+            if attempt < max_attempts - 1:
+                delay = BASE_RETRY_DELAY * (2 ** attempt) + random.uniform(0, 1)
+                time.sleep(delay)
+        except (APIConnectionError, APITimeoutError) as e:
+            last_error = e
+            if attempt < max_attempts - 1:
+                delay = BASE_RETRY_DELAY * (2 ** attempt) + random.uniform(0, 1)
+                time.sleep(delay)
+
+    if isinstance(last_error, RateLimitError):
+        raise RateLimitExceededError(
+            f"Rate limit exceeded after {max_attempts} attempts. "
+            f"Please wait and try again.\nLast error: {last_error}"
+        ) from last_error
+    else:
+        raise NetworkError(
+            f"Network error after {max_attempts} attempts. "
+            f"Check your connection.\nLast error: {last_error}"
+        ) from last_error
+
+
 def generate_image_text_only(
     prompt: str,
     model: str = "gpt-image-1",
@@ -55,12 +114,14 @@ def generate_image_text_only(
     Raises:
         AuthenticationFailedError: If API key is invalid (401)
         ServerError: If API returns a server error (5xx)
+        RateLimitExceededError: If rate limit exceeded after retries
+        NetworkError: If network errors persist after retries
         ImageGenerationError: For other API errors
     """
     client = OpenAI(api_key=api_key)
 
-    try:
-        response = client.images.generate(
+    def _make_request():
+        return client.images.generate(
             model=model,
             prompt=prompt,
             n=1,
@@ -69,6 +130,8 @@ def generate_image_text_only(
             response_format="b64_json",
         )
 
+    try:
+        response = _retry_on_transient_errors(_make_request)
         b64_data = response.data[0].b64_json
         return base64.b64decode(b64_data)
 
@@ -118,20 +181,37 @@ def generate_image_with_reference(
         ReferenceFlowError: If reference-flow is not supported by the model/endpoint
         AuthenticationFailedError: If API key is invalid (401)
         ServerError: If API returns a server error (5xx)
+        RateLimitExceededError: If rate limit exceeded after retries
+        NetworkError: If network errors persist after retries
         ImageGenerationError: For other API errors
     """
     client = OpenAI(api_key=api_key)
     reference_path = Path(reference_path)
 
+    def _make_request(image_file):
+        return client.images.edit(
+            model=model,
+            image=image_file,
+            prompt=prompt,
+            n=1,
+            size=size,
+        )
+
     try:
         with open(reference_path, "rb") as image_file:
-            response = client.images.edit(
+            image_data = image_file.read()
+
+        def _make_request_with_data():
+            import io
+            return client.images.edit(
                 model=model,
-                image=image_file,
+                image=io.BytesIO(image_data),
                 prompt=prompt,
                 n=1,
                 size=size,
             )
+
+        response = _retry_on_transient_errors(_make_request_with_data)
 
         if response.data[0].b64_json:
             return base64.b64decode(response.data[0].b64_json)

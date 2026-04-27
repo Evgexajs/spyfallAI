@@ -106,3 +106,11 @@ Format for entries:
 - image_client.py (extended)
 **Notes:** All test steps passed. Function signature: generate_image_with_reference(prompt, reference_path, model, size, quality, api_key) -> bytes. ReferenceFlowError properly inherits from ImageGenerationError.
 
+### TASK-AG-011: Retry логика с exponential backoff
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Added retry logic with exponential backoff for rate limits (429) and network timeouts. New exceptions: RateLimitExceededError, NetworkError. Helper function _retry_on_transient_errors() retries up to 3 times with exponential backoff + jitter. Both generate_image_text_only() and generate_image_with_reference() now use this retry logic. Added MIN_REQUEST_INTERVAL constant (2s) for batch mode.
+**Files changed:**
+- image_client.py (extended with retry logic)
+**Notes:** All test steps passed with mocked responses. Retry does NOT trigger fallback — only ReferenceFlowError does. Auth errors, server errors pass through without retry.
+

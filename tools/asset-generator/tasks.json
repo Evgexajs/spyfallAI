@@ -210,7 +210,7 @@
         "Шаг 2: Мок 3x 429, проверить что после 3 попыток — ошибка"
       ],
       "dependencies": ["TASK-AG-009"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-012",
