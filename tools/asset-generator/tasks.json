@@ -192,7 +192,7 @@
         "Шаг 2: Проверить структуру ошибки при неподдержке reference-flow"
       ],
       "dependencies": ["TASK-AG-008", "TASK-AG-009"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-011",

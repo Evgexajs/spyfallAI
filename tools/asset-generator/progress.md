@@ -98,3 +98,11 @@ Format for entries:
 - image_client.py (created)
 **Notes:** Tested with invalid API key - correctly raises AuthenticationFailedError with helpful message. Module compiles and imports cleanly.
 
+### TASK-AG-010: Клиент OpenAI с reference-flow
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Extended image_client.py with generate_image_with_reference() function and ReferenceFlowError exception. Uses OpenAI Images Edit API with reference image as style guide. ReferenceFlowError is raised for reference-specific failures (BadRequestError with image-related keywords), enabling fallback logic in 'auto' mode.
+**Files changed:**
+- image_client.py (extended)
+**Notes:** All test steps passed. Function signature: generate_image_with_reference(prompt, reference_path, model, size, quality, api_key) -> bytes. ReferenceFlowError properly inherits from ImageGenerationError.
+
