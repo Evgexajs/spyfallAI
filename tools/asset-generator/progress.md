@@ -130,3 +130,11 @@ Format for entries:
 - image_saver.py (created)
 **Notes:** All test steps passed. Enhanced return type (Tuple[Path, bool]) provides useful was_written flag for logging purposes.
 
+### TASK-AG-014: JSON логирование каждого запроса
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created log_saver.py module with save_log(log_data) function. Saves JSON logs to output/logs/{timestamp}_{character_id}.json. Validates all 8 required fields (character_id, timestamp, model, approach, requested_approach, status, prompt, elapsed_seconds). Supports optional fields (revised_prompt, usage, output_format, size, quality, warning, error, fallback_trigger). Raises LogValidationError for missing required fields.
+**Files changed:**
+- log_saver.py (created)
+**Notes:** All test steps passed. Timestamp in filename uses ISO format with colons/dots replaced by dashes for filesystem compatibility.
+

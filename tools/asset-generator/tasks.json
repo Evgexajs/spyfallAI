@@ -267,7 +267,7 @@
         "Шаг 3: Проверить что timestamp в ISO формате"
       ],
       "dependencies": ["TASK-AG-001"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-015",
