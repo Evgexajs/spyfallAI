@@ -122,3 +122,11 @@ Format for entries:
 - generation_orchestrator.py (created)
 **Notes:** All test steps passed with mocked responses. Critical distinction: 429/network/auth/5xx errors do NOT trigger fallback — they propagate as errors. Only ReferenceFlowError triggers fallback in auto mode.
 
+### TASK-AG-013: Сохранение PNG результата
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created image_saver.py module with save_image(character_id, image_bytes, regenerate) function. Saves PNG to output/characters/{character_id}.png. Creates directory if not exists. Returns Tuple[Path, bool] where bool indicates if file was written. Without regenerate=True, existing files are skipped (returns was_written=False). Helper functions: image_exists(), get_image_path().
+**Files changed:**
+- image_saver.py (created)
+**Notes:** All test steps passed. Enhanced return type (Tuple[Path, bool]) provides useful was_written flag for logging purposes.
+

@@ -248,7 +248,7 @@
         "Шаг 3: С --regenerate — файл перезаписан"
       ],
       "dependencies": ["TASK-AG-001"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-014",
