@@ -229,7 +229,7 @@
         "Шаг 3: reference + ReferenceFlowError → ошибка, не fallback"
       ],
       "dependencies": ["TASK-AG-010", "TASK-AG-011"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-013",

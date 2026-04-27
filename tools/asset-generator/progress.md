@@ -114,3 +114,11 @@ Format for entries:
 - image_client.py (extended with retry logic)
 **Notes:** All test steps passed with mocked responses. Retry does NOT trigger fallback — only ReferenceFlowError does. Auth errors, server errors pass through without retry.
 
+### TASK-AG-012: Логика fallback в режиме auto
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created generation_orchestrator.py module with generate_image() function that handles all three approaches (auto, reference, text-only). In auto mode: tries reference-flow first, falls back to text-only ONLY on ReferenceFlowError. In reference mode: any error propagates without fallback. In text-only mode: uses text-only directly. Returns GenerationResult dataclass with actual_approach, fallback_triggered, and fallback_reason.
+**Files changed:**
+- generation_orchestrator.py (created)
+**Notes:** All test steps passed with mocked responses. Critical distinction: 429/network/auth/5xx errors do NOT trigger fallback — they propagate as errors. Only ReferenceFlowError triggers fallback in auto mode.
+
