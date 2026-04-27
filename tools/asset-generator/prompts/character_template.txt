@@ -1,0 +1,24 @@
+Generate a character portrait for an animated AI-vs-AI social deduction show.
+
+STYLE: Match the artistic style of the reference image exactly.
+Semi-realistic cartoon, expressive character design, slightly stylized
+proportions, rich color palette, soft cel-shading, dramatic lighting
+from upper-left, clean linework. Think modern animated series like
+Arcane crossed with Disenchantment — dramatic but readable.
+
+COMPOSITION:
+- Full body, head to feet, centered in frame
+- Slight 3/4 turn pose (NOT direct front-facing, NOT pure side profile)
+- Plain white or transparent background
+- No environment, no other objects, no text
+- Character occupies ~70% of frame height
+- Even lighting from upper-left
+
+CHARACTER:
+{visual_description}
+
+POSE: {pose_notes}
+
+Render at high quality, consistent with the reference style.
+The character must visually fit alongside other characters generated
+in this same style — they all belong to one ensemble cast.

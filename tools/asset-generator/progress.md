@@ -50,3 +50,11 @@ Format for entries:
 - config/characters.json (created)
 **Notes:** JSON validated with python -m json.tool.
 
+### TASK-AG-004: Создание prompts/character_template.txt
+**Date:** 2026-04-27
+**Status:** done
+**Summary:** Created prompts/character_template.txt with exact content from spec section 6.2. Template contains placeholders {visual_description} and {pose_notes} for character-specific substitution.
+**Files changed:**
+- prompts/character_template.txt (created)
+**Notes:** All test steps passed - template content verified and placeholders confirmed.
+

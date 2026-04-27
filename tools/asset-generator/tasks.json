@@ -83,7 +83,7 @@
         "Шаг 3: grep '{pose_notes}' prompts/character_template.txt"
       ],
       "dependencies": ["TASK-AG-001"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-005",
