@@ -10,6 +10,8 @@
 ## Project Rules
 - Prefer existing project patterns and folder boundaries over new abstractions.
 - Keep changes scoped to the requested behavior; do not change application code when the task is documentation or configuration only.
+- Do not expand ambiguous user intent into extra work. If the user says they want to test, inspect, explore, or discuss something without asking you to run commands or make changes, ask what exact scope they want first.
+- Before running potentially time-consuming, paid, networked, or state-changing commands, confirm the intended test mode and expected outcome.
 - Never commit secrets. API keys belong in `.env`, and keys must not be logged.
 - Use boring, proven technology for critical paths. Introduce new dependencies only with clear justification.
 - Document meaningful technical decisions, assumptions, and rejected alternatives when they affect future maintenance.
