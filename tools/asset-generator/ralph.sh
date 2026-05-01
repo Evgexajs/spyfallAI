@@ -17,21 +17,6 @@ cleanup() {
 }
 trap cleanup EXIT
 
-# Спиннер с таймером
-show_spinner() {
-    local pid=$1
-    local spin='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
-    local i=0
-    local start=$SECONDS
-
-    while kill -0 "$pid" 2>/dev/null; do
-        local elapsed=$((SECONDS - start))
-        printf "\r  [%s] Работаю... %02d:%02d " "${spin:i++%10:1}" $((elapsed/60)) $((elapsed%60))
-        sleep 0.1
-    done
-    printf "\r%-50s\n" ""  # очистить строку
-}
-
 # Agent selection:
 # - Ralph now runs through Codex only.
 # - RALPH_AGENT is kept for compatibility, but only "codex" is supported.
@@ -55,7 +40,6 @@ run_agent() {
         codex)
             local output_file
             output_file="$(mktemp -t ralph_codex.XXXXXX)"
-            # Use non-interactive Codex exec and capture only the last message.
             codex exec --dangerously-bypass-approvals-and-sandbox --color never -C "$PWD" --output-last-message "$output_file" "$prompt" >/dev/null
             cat "$output_file"
             rm -f "$output_file"
@@ -94,15 +78,24 @@ while has_pending_tasks; do
     echo "Запускаю $agent..."
 
     prompt=$(cat <<EOF
-@${TASKS_FILE} @progress.md @docs/PRD-SpyfallAI-2026-04-19.md
+@${TASKS_FILE} @progress.md @../../docs/asset-generator-spec-mvp-v0.2.md
 1. Найди ПЕРВУЮ по номеру задачу со статусом "pending", у которой все dependencies имеют статус "done".
    НЕ пропускай задачи — бери строго первую подходящую.
 2. Работай ТОЛЬКО над этой одной задачей.
 
 ## Контекст проекта:
-SpyfallAI — генератор игровых партий в Spyfall с AI-агентами.
-Стек: Python 3.11+, OpenAI API, FastAPI (для UI), pydantic, JSON-файлы.
-Структура: src/ (код), characters/ (JSON профили), games/ (логи партий).
+Asset Generator — CLI утилита для генерации картинок персонажей через OpenAI Image API.
+Это часть проекта SpyfallAI (визуализатор игровых партий).
+
+Стек: Python 3.11+, OpenAI API (gpt-image-2), python-dotenv.
+Структура: config/ (characters.json), prompts/ (шаблоны), reference/ (эталон стиля), output/ (результаты).
+
+## Ключевые концепции:
+- Reference image: первый сгенерированный персонаж используется как стилевой эталон
+- Три режима --approach: auto (reference с fallback), reference (без fallback), text-only
+- Fallback срабатывает ТОЛЬКО на reference-flow ошибки, НЕ на 429/network/auth
+- JSON-лог каждого запроса с обязательными и опциональными полями
+- MVP: только 2 персонажа (boris_molot, aurora), без локаций
 
 ## Работай в режиме Codex:
 
@@ -115,7 +108,7 @@ SpyfallAI — генератор игровых партий в Spyfall с AI-а
 2. Если нужно — исследуй код и связанные файлы
 3. Если задача сложная (3+ файлов) — составь план
 4. Выполни задачу
-5. Проверь код: ruff check . && python -m pytest (если есть тесты)
+5. Проверь код: python -m py_compile generate_assets.py (если есть)
 6. Обнови статус задачи в tasks.json на "done"
 7. Добавь запись в progress.md
 8. Сделай git commit
@@ -146,7 +139,7 @@ EOF
         remaining=$(grep -c '"status": "pending"' "$TASKS_FILE" 2>/dev/null) || remaining=0
         if [[ "$remaining" -eq 0 ]]; then
             echo "🎉 Все задачи выполнены!"
-            say -v Milena "[[volm 0.3]] Хозяин, я всё сделал!"
+            say -v Milena "[[volm 0.3]] Хозяин, генератор ассетов готов!"
             exit 0
         fi
         echo "Осталось задач: $remaining. Продолжаю..."
@@ -157,4 +150,4 @@ EOF
 done
 
 echo "Все задачи выполнены! Итераций: $((iteration-1))"
-say -v Milena "[[volm 0.3]] Хозяин, я сделал!"
+say -v Milena "[[volm 0.3]] Хозяин, генератор ассетов готов!"

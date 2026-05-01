@@ -33,16 +33,12 @@ show_spinner() {
 }
 
 # Agent selection:
-# - Set RALPH_AGENT=claude or RALPH_AGENT=codex to force.
-# - Otherwise auto-detect (prefers Claude if available).
+# - Ralph now runs through Codex only.
+# - RALPH_AGENT is kept for compatibility, but only "codex" is supported.
 resolve_agent() {
-    if [[ -n "${RALPH_AGENT:-}" ]]; then
-        echo "$RALPH_AGENT"
-        return 0
-    fi
-    if command -v claude >/dev/null 2>&1; then
-        echo "claude"
-        return 0
+    if [[ -n "${RALPH_AGENT:-}" && "${RALPH_AGENT}" != "codex" ]]; then
+        echo "Unsupported agent: $RALPH_AGENT" >&2
+        return 1
     fi
     if command -v codex >/dev/null 2>&1; then
         echo "codex"
@@ -56,13 +52,10 @@ run_agent() {
     local prompt="$2"
 
     case "$agent" in
-        claude)
-            claude --permission-mode bypassPermissions -p "$prompt"
-            ;;
         codex)
             local output_file
             output_file="$(mktemp -t ralph_codex.XXXXXX)"
-            codex exec --full-auto --color never -C "$PWD" --output-last-message "$output_file" "$prompt" >/dev/null
+            codex exec --dangerously-bypass-approvals-and-sandbox --color never -C "$PWD" --output-last-message "$output_file" "$prompt" >/dev/null
             cat "$output_file"
             rm -f "$output_file"
             ;;
@@ -93,7 +86,7 @@ while has_pending_tasks; do
     echo "-----------------------------------"
 
     agent=$(resolve_agent) || {
-        echo "Не найден поддерживаемый агент. Установите 'claude' или 'codex', либо задайте RALPH_AGENT." >&2
+        echo "Не найден Codex CLI. Установите 'codex' или задайте RALPH_AGENT=codex." >&2
         exit 1
     }
 
@@ -116,19 +109,11 @@ Visualizer — визуализатор диалоговых партий Spyfal
 - render: PixiJS сцена, персонажи, облачка
 - ui: HTML контролы
 
-## Используй специализированных агентов (Agent tool):
+## Работай в режиме Codex:
 
-- **Explore** — исследование кодовой базы, поиск файлов.
-  Используй ПЕРЕД началом работы если задача затрагивает незнакомый код.
-
-- **Plan** — планирование сложных задач.
-  Используй если задача требует изменений в 3+ файлах.
-
-- **frontend-developer** — реализация UI компонентов, PixiJS рендеринга.
-  Используй для задач категории "render", "ui".
-
-- **code-architect** — проектирование структуры модулей.
-  Используй для задач категории "infrastructure".
+- Исследуй кодовую базу перед изменениями, если задача затрагивает незнакомый код.
+- Для сложных задач сначала составь короткий план и затем реализуй его.
+- Следуй существующей архитектуре проекта и локальным паттернам.
 
 ## Ключевые правила:
 - Размер сцены: 1920x1080
@@ -138,9 +123,9 @@ Visualizer — визуализатор диалоговых партий Spyfal
 
 ## Порядок работы:
 1. Прочитай задачу и определи её тип/категорию
-2. Если нужно — запусти Explore агента для исследования кода
-3. Если задача сложная (3+ файлов) — запусти Plan агента
-4. Выполни задачу (сам или через специализированного агента)
+2. Если нужно — исследуй код и связанные файлы
+3. Если задача сложная (3+ файлов) — составь план
+4. Выполни задачу
 5. Проверь код: npm run build (или npx tsc --noEmit)
 6. Обнови статус задачи в tasks.json на "done"
 7. Добавь запись в progress.md
