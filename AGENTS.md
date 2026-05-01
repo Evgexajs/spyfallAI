@@ -42,6 +42,16 @@
 - Prioritize work by business value, technical risk, user impact, and implementation effort.
 - Treat requirements documents as living artifacts; update them when project understanding changes.
 
+## Task Tracking Workflow
+- Before starting feature work, look for nearby planning files such as `tasks.json`, `progress.md`, and relevant docs under `docs/`.
+- Treat `tasks.json` as the structured task list: use task IDs, titles, dependencies, and statuses to choose the next logical unit of work.
+- Treat `progress.md` as the human-readable work log: update it when a task starts, finishes, is blocked, or needs follow-up context.
+- Keep task IDs visible in commits, progress updates, and summaries when the area already uses them, for example `TASK-AG-017`.
+- Follow task dependencies instead of jumping ahead. If dependencies are unclear or stale, note the assumption before changing code.
+- When completing a task, update both implementation and supporting documentation/progress files as appropriate.
+- Do not mark a task `done` until the relevant validation has run, or until the skipped validation and residual risk are explicitly documented.
+- If a task list and docs disagree, prefer the latest explicit user instruction, then the newest project documentation, then the task file; mention the mismatch in the final summary.
+
 ## Testing And Validation
 - Backend validation should usually include targeted `pytest` runs and `ruff` checks when Python code changes.
 - Visualizer validation should usually include `npm run build` from `visualizer/` when TypeScript or frontend code changes.
