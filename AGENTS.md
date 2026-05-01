@@ -14,6 +14,13 @@
 - Use boring, proven technology for critical paths. Introduce new dependencies only with clear justification.
 - Document meaningful technical decisions, assumptions, and rejected alternatives when they affect future maintenance.
 
+## Codex Agents
+- Before non-trivial work, check whether `.codex/agents/*.toml` contains a role that fits the task.
+- Prefer delegating a well-scoped subtask to the matching Codex agent when the role is clearly relevant and the work can run independently.
+- Keep immediate blocking work local. Use subagents for bounded analysis, architecture review, frontend/backend slices, PRD work, or other parallelizable subtasks.
+- Give subagents concrete scope, expected output, relevant files, and ownership boundaries. Do not ask multiple agents to edit the same files in parallel.
+- Review subagent output before integrating it. The main agent remains responsible for final consistency, validation, and user-facing summary.
+
 ## Architecture Rules
 - Start simple, but leave clear paths for scale, observability, and recovery.
 - Keep service boundaries and contracts explicit. Separate orchestration, agents, triggers, LLM provider adapters, storage, web, and CLI concerns.
