@@ -420,6 +420,48 @@
       ],
       "dependencies": ["TASK-AG-017"],
       "status": "done"
+    },
+    {
+      "id": "TASK-AG-023",
+      "category": "workflow",
+      "priority": "high",
+      "description": "Экспорт готовых промптов для ручной генерации через веб-интерфейс",
+      "acceptance_criteria": [
+        "Добавлен флаг --export-prompts PATH",
+        "Флаг работает с --character и --all-characters",
+        "Команда не читает API-ключ, не проверяет reference image, не вызывает API и не создаёт PNG",
+        "Файл содержит финальные промпты, готовые для копирования в веб-интерфейс",
+        "README описывает ручную последовательность генерации"
+      ],
+      "test_steps": [
+        "Шаг 1: python3 generate_assets.py --character boris_molot --export-prompts /tmp/boris_prompt.md",
+        "Шаг 2: python3 generate_assets.py --all-characters --export-prompts /tmp/all_prompts.md",
+        "Шаг 3: Проверить, что Markdown содержит секции персонажей и финальные промпты",
+        "Шаг 4: Проверить, что обычный --dry-run продолжает работать"
+      ],
+      "dependencies": ["TASK-AG-016"],
+      "status": "done"
+    },
+    {
+      "id": "TASK-AG-024",
+      "category": "workflow",
+      "priority": "high",
+      "description": "Расширить asset-generator config до всех 8 персонажей",
+      "acceptance_criteria": [
+        "config/characters.json содержит все 8 персонажей из корневой папки characters/",
+        "Для Бориса и Авроры сохранены ручные visual_description и pose_notes",
+        "Для остальных 6 персонажей добавлены visual_description и pose_notes на основе backstory, voice_style, archetype и color",
+        "--export-prompts для --all-characters создаёт секции для всех 8 персонажей",
+        "README описывает, что asset config составлен на основе корневых profiles"
+      ],
+      "test_steps": [
+        "Шаг 1: python3 -c 'from character_loader import list_characters; print(list_characters())'",
+        "Шаг 2: python3 generate_assets.py --all-characters --export-prompts /tmp/all_prompts.md",
+        "Шаг 3: Проверить, что Markdown содержит 8 секций персонажей",
+        "Шаг 4: Проверить, что Борис и Аврора используют ручные visual descriptions из asset config"
+      ],
+      "dependencies": ["TASK-AG-023"],
+      "status": "done"
     }
   ]
 }

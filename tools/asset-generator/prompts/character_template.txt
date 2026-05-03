@@ -2,22 +2,44 @@ Generate a character portrait for an animated AI-vs-AI social deduction show.
 
 STYLE: Match the artistic style of the reference image exactly.
 Semi-realistic cartoon, expressive character design, slightly stylized
-proportions, rich color palette, soft cel-shading, dramatic lighting
-from upper-left, clean linework. Think modern animated series like
+proportions, rich color palette, soft cel-shading, clean studio lighting,
+minimal cast shadows, clean linework. Think modern animated series like
 Arcane crossed with Disenchantment — dramatic but readable.
 
 COMPOSITION:
 - Full body, head to feet, centered in frame
-- Slight 3/4 turn pose (NOT direct front-facing, NOT pure side profile)
-- Plain white or transparent background
+- Strict 3/4 turn pose, body rotated 30-45 degrees from camera
+- NOT front-facing, NOT symmetrical, NOT passport-photo pose
+- NOT pure side profile
+- Both feet visible
+- Hands visible and separated from torso silhouette when possible
 - No environment, no other objects, no text
 - Character occupies ~70% of frame height
-- Even lighting from upper-left
+
+BACKGROUND:
+- Pure solid white background (#FFFFFF)
+- No transparent checkerboard
+- No gradient, no beige, no cream, no grey, no paper texture
+- No studio backdrop, no floor plane, no horizon line
+- No cast shadow on the background
+- No vignette
+
+LIGHTING:
+- Clean even character lighting for a cutout-ready asset
+- Soft cel-shading only on the character
+- No heavy noir shadows
+- No large cast shadows
+- No strong colored rim light except a very small accent if needed
+- Character silhouette must remain clean and easy to cut out
 
 CHARACTER:
 {visual_description}
 
-POSE: {pose_notes}
+POSE REQUIREMENTS:
+{pose_notes}
+
+The pose must clearly read as a 3/4 character sprite, not a frontal
+character poster.
 
 Render at high quality, consistent with the reference style.
 The character must visually fit alongside other characters generated

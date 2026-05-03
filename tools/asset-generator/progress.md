@@ -211,3 +211,27 @@ Format for entries:
 - No code changes (integration test only)
 **Notes:** All acceptance criteria met. Error messages are actionable (suggest solutions where applicable). Minor stdout/stderr buffering causes message order variance but doesn't affect clarity.
 
+### TASK-AG-023: Экспорт готовых промптов для ручной генерации через веб-интерфейс
+**Date:** 2026-05-03
+**Status:** done
+**Summary:** Added `--export-prompts PATH` mode for manual web generation workflows. The command writes final character prompts to a Markdown file without API calls, API key checks, reference checks, logs, or PNG output. README now documents the manual prompt export and asset review sequence.
+**Files changed:**
+- cli_parser.py
+- generate_assets.py
+- prompts/character_template.txt
+- README.md
+- tasks.json
+- progress.md
+**Notes:** Location generation is still not implemented in the current asset-generator; docs identify it as a separate post-MVP scope requiring its own config and prompt template.
+
+### TASK-AG-024: Расширить asset-generator config до всех 8 персонажей
+**Date:** 2026-05-03
+**Status:** done
+**Summary:** Expanded `tools/asset-generator/config/characters.json` to include all 8 project characters, using root `characters/*.json` profiles as the source material. Boris and Aurora keep handcrafted visual descriptions; the other 6 now have asset-specific `visual_description` and `pose_notes` based on archetype, backstory, voice style, directives, and signature color.
+**Files changed:**
+- character_loader.py
+- config/characters.json
+- README.md
+- tasks.json
+- progress.md
+**Notes:** `character_loader.py` reads only the asset-generator config. `--all-characters --export-prompts` now exports all 8 project characters. Location generation remains a separate missing scope.

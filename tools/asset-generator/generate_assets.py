@@ -100,6 +100,61 @@ def run_dry_run(args: CLIArgs) -> int:
     return 0
 
 
+def run_export_prompts(args: CLIArgs) -> int:
+    """
+    Write final prompts to a Markdown file for manual web generation.
+
+    This mode does not read API keys, check references, call APIs, or create images.
+    """
+    character_ids = [args.character] if args.character else list_characters()
+    export_path = Path(args.export_prompts)
+    export_path.parent.mkdir(parents=True, exist_ok=True)
+
+    lines = [
+        "# SpyfallAI Asset Prompts",
+        "",
+        "Use these prompts manually in the web image-generation interface.",
+        "This file was generated without API calls.",
+        "",
+        "## Shared Settings",
+        "",
+        f"- Model hint: `{args.model}`",
+        f"- Approach hint: `{args.approach}`",
+        f"- Target size: `{DEFAULT_SIZE}`",
+        f"- Quality: `{DEFAULT_QUALITY}`",
+        "",
+    ]
+
+    for character_id in character_ids:
+        try:
+            character_config = load_character(character_id)
+        except CharacterNotFoundError as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            return 1
+
+        prompt = build_prompt(character_config)
+        display_name = character_config.get("display_name", character_id)
+        archetype = character_config.get("archetype", "N/A")
+
+        lines.extend(
+            [
+                f"## {character_id} — {display_name}",
+                "",
+                f"- Archetype: {archetype}",
+                f"- Output file: `output/characters/{character_id}.png`",
+                "",
+                "```text",
+                prompt,
+                "```",
+                "",
+            ]
+        )
+
+    export_path.write_text("\n".join(lines), encoding="utf-8")
+    print(f"Exported {len(character_ids)} prompt(s): {export_path}")
+    return 0
+
+
 def generate_character(
     character_id: str,
     args: CLIArgs,
@@ -268,6 +323,9 @@ def main() -> int:
         args = parse_args()
     except SystemExit as e:
         return e.code if e.code is not None else 1
+
+    if args.export_prompts:
+        return run_export_prompts(args)
 
     if args.dry_run:
         return run_dry_run(args)

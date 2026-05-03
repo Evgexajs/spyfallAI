@@ -15,6 +15,7 @@ class CLIArgs:
     approach: str
     regenerate: bool
     dry_run: bool
+    export_prompts: Optional[str]
 
 
 def create_parser() -> argparse.ArgumentParser:
@@ -64,6 +65,12 @@ def create_parser() -> argparse.ArgumentParser:
         help="Show prompt and parameters without calling API or creating files"
     )
 
+    parser.add_argument(
+        "--export-prompts",
+        metavar="PATH",
+        help="Write final prompts to a Markdown file for manual web generation; no API calls"
+    )
+
     return parser
 
 
@@ -94,4 +101,5 @@ def parse_args(args: Optional[list[str]] = None) -> CLIArgs:
         approach=parsed.approach,
         regenerate=parsed.regenerate,
         dry_run=parsed.dry_run,
+        export_prompts=parsed.export_prompts,
     )

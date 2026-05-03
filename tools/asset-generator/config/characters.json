@@ -1,4 +1,11 @@
 {
+  "aurora": {
+    "display_name": "Аврора",
+    "archetype": "драма-квин",
+    "color_accent": "#ec4899",
+    "visual_description": "A theatrical woman in her late 50s, former regional theater actress. Tall, slender, dramatic in every gesture. Elaborate dark red curly hair pinned up with a feather and a small ornamental clip. Expressive face with dramatic eye makeup, prominent cheekbones, lips painted dark wine. Wears a flowing burgundy theatrical coat with wide bell-sleeves trimmed in cream lace, over an old-fashioned high-collared dress with intricate ruffles. Long elbow-length dark gloves. Pink accent in the brooch or hair ornament (signature color #ec4899). Posture: one hand raised in a theatrical performance gesture, the other pressed dramatically to chest. Eyes wide with feigned shock, mouth slightly open mid-monologue.",
+    "pose_notes": "Full body, 3/4 turn, mid-gesture, theatrical pose as if speaking on stage. She is performing even when no one is watching."
+  },
   "boris_molot": {
     "display_name": "Борис",
     "archetype": "агрессор",
@@ -6,11 +13,46 @@
     "visual_description": "A stocky intimidating man in his late 40s, former police investigator with 20 years on the force. Heavy build but not bulky — solid, dense, the kind of man who's seen too much. Short cropped greying hair, tired narrow-set eyes that miss nothing, deep weathered face, faint stubble. Wears a worn dark leather jacket over a faded button-up shirt, dark trousers, scuffed boots. Posture is grounded, slightly leaning forward — a man used to dominating rooms by presence alone. Subtle red accent on the shirt collar or jacket lining (signature color #e94560). Confrontational but contained — not a brawler, an interrogator.",
     "pose_notes": "Full body, slight 3/4 turn to the right, weight on one leg, hands visible — one slightly clenched at side, intense gaze directed slightly off-camera as if assessing someone."
   },
-  "aurora": {
-    "display_name": "Аврора",
-    "archetype": "драма-квин",
-    "color_accent": "#ec4899",
-    "visual_description": "A theatrical woman in her late 50s, former regional theater actress. Tall, slender, dramatic in every gesture. Elaborate dark red curly hair pinned up with a feather and a small ornamental clip. Expressive face with dramatic eye makeup, prominent cheekbones, lips painted dark wine. Wears a flowing burgundy theatrical coat with wide bell-sleeves trimmed in cream lace, over an old-fashioned high-collared dress with intricate ruffles. Long elbow-length dark gloves. Pink accent in the brooch or hair ornament (signature color #ec4899). Posture: one hand raised in a theatrical performance gesture, the other pressed dramatically to chest. Eyes wide with feigned shock, mouth slightly open mid-monologue.",
-    "pose_notes": "Full body, 3/4 turn, mid-gesture, theatrical pose as if speaking on stage. She is performing even when no one is watching."
+  "father_ignatius": {
+    "display_name": "Игнатий",
+    "archetype": "моралист",
+    "color_accent": "#6366f1",
+    "visual_description": "An elderly small-town priest in his early 60s with calm, penetrating eyes and a patient moral authority. Tall but slightly stooped, thin build, neatly trimmed grey beard, lined face, warm but unsettling gaze. Wears a modest black clerical coat over a dark shirt with a small white collar, simple black trousers, worn shoes, and a small silver cross pendant. Subtle violet-blue accent on a scarf edge, book cover, or cross cord (signature color #6366f1). His presence should feel quiet, sincere, and gently intimidating — a man who asks for truth without raising his voice.",
+    "pose_notes": "Full body, strict 3/4 turn, one hand lightly touching the cross pendant or holding a small worn prayer book, the other hand open in a calm appeal. Eyes directed slightly off-camera as if asking someone to be honest."
+  },
+  "kim": {
+    "display_name": "Ким",
+    "archetype": "параноик",
+    "color_accent": "#14b8a6",
+    "visual_description": "A nervous data analyst in their early 30s with a slim, slightly hunched build and anxious alert eyes. Messy dark hair, tired face, subtle under-eye shadows, expression caught between confidence and panic. Wears a wrinkled office shirt under a soft teal cardigan or lightweight jacket, dark slim trousers, practical sneakers, and an ID badge or lanyard. Subtle teal accent in the cardigan, lanyard, or watch strap (signature color #14b8a6). The character should look intelligent but perpetually worried, as if noticing suspicious patterns everywhere.",
+    "pose_notes": "Full body, strict 3/4 turn, shoulders slightly raised, one hand half-raised as if correcting themself mid-sentence, the other clutching a small notebook or tablet close to the body. Hands visible, nervous but readable silhouette."
+  },
+  "lyokha": {
+    "display_name": "Лёха",
+    "archetype": "работяга",
+    "color_accent": "#f97316",
+    "visual_description": "A blunt working-class auto mechanic in his early 40s with a sturdy practical build, broad shoulders, rough hands, and a direct no-nonsense stare. Short messy hair, light stubble, weathered face, slightly skeptical expression. Wears a dark work jacket or mechanic overalls over a faded T-shirt, heavy work pants, scuffed boots, and a rag tucked into a pocket. Subtle orange accent on a tool patch, sleeve stripe, or shirt detail (signature color #f97316). He should look grounded, practical, unimpressed by clever talk, and ready to call nonsense what it is.",
+    "pose_notes": "Full body, strict 3/4 turn, weight on one leg, one hand relaxed near a pocket or holding a small wrench, the other hand visible in a blunt conversational gesture. Direct skeptical gaze slightly off-camera."
+  },
+  "margo": {
+    "display_name": "Марго",
+    "archetype": "манипулятор",
+    "color_accent": "#f59e0b",
+    "visual_description": "A charming HR manipulator in her late 30s or early 40s with polished elegance and a disarming warm smile. Medium height, graceful posture, sharp observant eyes that contrast with her friendly expression. Styled hair, tasteful makeup, refined business-casual outfit: tailored blazer, silk blouse, fitted trousers or skirt, elegant shoes. Subtle amber accent in jewelry, scarf, brooch, or blouse detail (signature color #f59e0b). She should look welcoming at first glance, but slightly calculating on closer inspection — warmth used as a weapon.",
+    "pose_notes": "Full body, strict 3/4 turn, one hand open in a friendly inviting gesture, the other resting lightly near the waist or holding a slim folder. Soft smile, head slightly tilted, eyes assessing someone off-camera."
+  },
+  "professor_stein": {
+    "display_name": "Штейн",
+    "archetype": "душный интеллектуал",
+    "color_accent": "#3b82f6",
+    "visual_description": "An older philosophy professor in his late 50s or early 60s with a tall lean frame, academic posture, and an intense analytical expression. Thinning grey hair, narrow face, sharp nose, small round glasses, slightly raised eyebrow as if preparing a long correction. Wears a tweed jacket over a buttoned shirt and vest, dark trousers, polished but old shoes, perhaps a folded paper or slim book in hand. Subtle blue accent on tie, pocket square, pen, or book cover (signature color #3b82f6). He should look intellectually heavy, precise, and quietly exhausting — the kind of person who turns every answer into a lecture.",
+    "pose_notes": "Full body, strict 3/4 turn, one hand holding a small book or notes, the other raised with one finger slightly extended as if making a careful point. Calm controlled stance, gaze focused slightly off-camera."
+  },
+  "zoya": {
+    "display_name": "Зоя",
+    "archetype": "дерзкий циник",
+    "color_accent": "#8b5cf6",
+    "visual_description": "A sharp stand-up comedian in her early 30s with a lean expressive build, confident posture, and a mischievous cynical smirk. Short edgy haircut or messy bob, bright observant eyes, expressive eyebrows, casual streetwear with performance flair: dark jacket, graphic tee, slim pants, boots. Subtle purple accent on jacket lining, earrings, shirt print, or wristband (signature color #8b5cf6). She should look quick, sarcastic, and impossible to impress — someone ready to turn any accusation into a joke.",
+    "pose_notes": "Full body, strict 3/4 turn, one hand lifted in a dry sarcastic gesture, the other relaxed at the side or in a pocket. Slight lean, raised eyebrow, smirk aimed just off-camera."
   }
 }
