@@ -480,7 +480,7 @@
         "Проверить наличие output/locations/.gitkeep"
       ],
       "dependencies": ["TASK-AG-001"],
-      "status": "pending"
+      "status": "done"
     },
     {
       "id": "TASK-AG-026",

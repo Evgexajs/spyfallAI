@@ -1,0 +1,72 @@
+{
+  "hospital": {
+    "location_id": "hospital",
+    "display_name": "Больница",
+    "source_description": "Городская больница с приёмным покоем, палатами и операционными. Пахнет антисептиком, слышны писки мониторов.",
+    "visual_description": "A modern city hospital interior with a reception desk, polished floors, glass partitions, directional signs without readable text, pale green and white walls, medical carts, monitors, curtained examination bays, and glimpses of sterile operating-room doors. The mood is clinical, tense, and brightly lit, with small details like antiseptic bottles, clipboards, and waiting chairs.",
+    "composition_notes": "Landscape background asset for SpyfallAI, wide cinematic framing, semi-realistic cartoon style. Keep the lower third mostly empty and clean for character placement. No people, no readable text, no UI elements, no logos."
+  },
+  "airplane": {
+    "location_id": "airplane",
+    "display_name": "Самолёт",
+    "source_description": "Пассажирский Boeing 737 на высоте 10 000 метров. За окном облака, турбулентность минимальная.",
+    "visual_description": "A passenger airplane cabin in flight, inspired by a Boeing 737 economy and business-class interior, with rows of seats, overhead bins, narrow aisle, soft cabin lighting, small windows showing bright clouds outside, tray tables, seat belts, and subtle signs of altitude and quiet travel. The scene should feel enclosed, orderly, and slightly tense.",
+    "composition_notes": "Landscape background asset for SpyfallAI, wide cabin perspective with strong depth. Keep the lower third mostly empty and unobstructed for character placement. No people, no readable text, no UI elements, no airline branding."
+  },
+  "restaurant": {
+    "location_id": "restaurant",
+    "display_name": "Ресторан",
+    "source_description": "Дорогой ресторан с приглушённым светом, белыми скатертями и живой музыкой. Пахнет свежей выпечкой.",
+    "visual_description": "An elegant expensive restaurant interior with dim warm lighting, white tablecloths, polished cutlery, wine glasses, candles, tasteful wall decor, a small live-music corner without performers, and a glimpse of a refined open kitchen or service station. The atmosphere is intimate, polished, and quietly theatrical, with fresh bread baskets and carefully arranged tables.",
+    "composition_notes": "Landscape background asset for SpyfallAI, semi-realistic cartoon lighting and rich but readable detail. Keep the lower third open for full-body characters. No people, no readable menus, no UI elements, no logos."
+  },
+  "school": {
+    "location_id": "school",
+    "display_name": "Школа",
+    "source_description": "Обычная средняя школа: длинные коридоры, классы с партами, звонки каждые 45 минут. Пахнет мелом.",
+    "visual_description": "An ordinary public school interior with a long hallway leading toward classroom doors, lockers, bulletin boards without readable text, tiled floors, fluorescent lights, chalk dust atmosphere, and a visible classroom corner with desks, a chalkboard, and simple educational posters. The setting should feel familiar, slightly worn, and active even while empty.",
+    "composition_notes": "Landscape background asset for SpyfallAI with clear perspective lines. Leave the lower third mostly empty for character silhouettes. No students, no teachers, no readable text, no UI elements."
+  },
+  "casino": {
+    "location_id": "casino",
+    "display_name": "Казино",
+    "source_description": "Роскошное казино в Лас-Вегасе: яркие огни, звон фишек, шум рулетки. Время здесь не существует.",
+    "visual_description": "A luxurious Las Vegas casino floor with dramatic lighting, roulette and card tables, stacks of chips, glowing slot machines, patterned carpet, reflective brass details, and a bar area in the distance. The scene should feel opulent, noisy, and timeless, with saturated lights balanced by clear shapes and readable spatial depth.",
+    "composition_notes": "Landscape background asset for SpyfallAI, wide interior shot. Reserve the lower third as a clean staging area for characters. No gamblers, no staff, no readable text, no UI elements, no brand logos."
+  },
+  "submarine": {
+    "location_id": "submarine",
+    "display_name": "Подводная лодка",
+    "source_description": "Военная подводная лодка на глубине 200 метров. Тесные отсеки, гул двигателей, красное аварийное освещение.",
+    "visual_description": "A cramped military submarine compartment deep underwater, with narrow metal corridors, pipes, valves, pressure gauges, sonar screens without readable text, bulkhead doors, riveted walls, and red emergency lighting reflecting off worn steel surfaces. The atmosphere is claustrophobic, mechanical, and tense.",
+    "composition_notes": "Landscape background asset for SpyfallAI, wide but enclosed composition with strong horizontal lines. Keep the lower third open for character placement. No crew, no readable labels, no UI overlays, no logos."
+  },
+  "bank": {
+    "location_id": "bank",
+    "display_name": "Банк",
+    "source_description": "Центральный офис крупного банка: мраморные полы, стеклянные перегородки, длинные очереди к окошкам.",
+    "visual_description": "A central branch of a large bank with marble floors, glass partitions, teller windows, queue barriers, brass details, security cameras, document counters, waiting chairs, and a discreet vault corridor in the background. The mood is formal, orderly, and slightly cold, with clean reflections and institutional lighting.",
+    "composition_notes": "Landscape background asset for SpyfallAI with a wide lobby view. Leave the lower third mostly empty and uncluttered for characters. No clients, no bank staff, no readable text, no UI elements, no bank logos."
+  },
+  "spa": {
+    "location_id": "spa",
+    "display_name": "Спа-салон",
+    "source_description": "Элитный спа-центр: ароматы эфирных масел, тихая музыка, мягкие халаты. Всё располагает к расслаблению.",
+    "visual_description": "An elite spa center interior with warm wood, smooth stone, soft towels, massage tables, candles, essential-oil bottles, plants, a small tea area, calm indirect lighting, and a quiet pool or treatment-room entrance in the background. The scene should feel serene, expensive, fragrant, and deliberately peaceful.",
+    "composition_notes": "Landscape background asset for SpyfallAI, calm balanced composition. Keep the lower third spacious and free of visual clutter for character placement. No clients, no staff, no readable text, no UI elements, no logos."
+  },
+  "circus": {
+    "location_id": "circus",
+    "display_name": "Цирк",
+    "source_description": "Цирк-шапито под полосатым куполом: арена с опилками, яркие прожектора, запах попкорна и животных.",
+    "visual_description": "A circus big top interior under a striped tent canopy, with a central sawdust arena, colorful spotlights, ropes, curtains, prop pedestals, popcorn stands in the distance, and tiered spectator seats left empty. The mood is bright, theatrical, and slightly chaotic, with strong circular composition and festive colors.",
+    "composition_notes": "Landscape background asset for SpyfallAI, wide arena view. Keep the lower third mostly clear for placing characters. No performers, no spectators, no animals, no readable text, no UI elements."
+  },
+  "museum": {
+    "location_id": "museum",
+    "display_name": "Музей",
+    "source_description": "Художественный музей с картинами в золотых рамах, античными скульптурами и строгими смотрителями.",
+    "visual_description": "An art museum gallery with polished floors, paintings in gold frames, classical sculptures on plinths, rope barriers, soft skylight, benches, and elegant wall panels. The room should feel quiet, curated, and formal, with museum-grade lighting and enough visual variety to identify the location immediately.",
+    "composition_notes": "Landscape background asset for SpyfallAI, wide gallery composition with balanced art displays. Leave the lower third open for character placement. No visitors, no guards, no readable placards, no UI elements, no museum logos."
+  }
+}

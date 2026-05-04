@@ -235,3 +235,13 @@ Format for entries:
 - tasks.json
 - progress.md
 **Notes:** `character_loader.py` reads only the asset-generator config. `--all-characters --export-prompts` now exports all 8 project characters. Location generation remains a separate missing scope.
+
+### TASK-AG-025: Добавить структуру и config для location assets
+**Date:** 2026-05-04
+**Status:** done
+**Summary:** Added location asset infrastructure with `config/locations.json` covering all 10 root locations and `output/locations/.gitkeep` for generated location assets. The asset config keeps root descriptions as `source_description` and adds generation-ready `visual_description` and `composition_notes` fields for each location.
+**Files changed:**
+- .gitignore
+- config/locations.json
+- output/locations/.gitkeep
+**Notes:** Validation passed: `python3 -m json.tool config/locations.json`, 10 `location_id` values confirmed, `output/locations/.gitkeep` exists, and `python3 -m py_compile generate_assets.py` completed successfully.
