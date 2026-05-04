@@ -462,6 +462,188 @@
       ],
       "dependencies": ["TASK-AG-023"],
       "status": "done"
+    },
+    {
+      "id": "TASK-AG-025",
+      "category": "infrastructure",
+      "priority": "high",
+      "description": "Добавить структуру и config для location assets",
+      "acceptance_criteria": [
+        "Создана папка output/locations/ с .gitkeep",
+        "Создан config/locations.json с 10 локациями из корневого locations.json",
+        "Каждая запись содержит location_id/display_name/source_description/visual_description/composition_notes",
+        "JSON валиден и не требует изменения корневого locations.json"
+      ],
+      "test_steps": [
+        "python3 -m json.tool config/locations.json",
+        "Проверить, что config/locations.json содержит 10 location_id",
+        "Проверить наличие output/locations/.gitkeep"
+      ],
+      "dependencies": ["TASK-AG-001"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-026",
+      "category": "functional",
+      "priority": "high",
+      "description": "Добавить location_loader для загрузки location config",
+      "acceptance_criteria": [
+        "Функция load_location(location_id) -> dict",
+        "Функция list_locations() -> list[str]",
+        "Несуществующая локация даёт понятную ошибку со списком доступных id",
+        "Лоадер не смешивает location config с character config"
+      ],
+      "test_steps": [
+        "python3 -c 'from location_loader import list_locations; print(list_locations())'",
+        "python3 -c 'from location_loader import load_location; print(load_location(\"hospital\"))'",
+        "Проверить понятную ошибку для load_location(\"nonexistent\")"
+      ],
+      "dependencies": ["TASK-AG-025"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-027",
+      "category": "functional",
+      "priority": "high",
+      "description": "Добавить prompts/location_template.txt и сборку location prompt",
+      "acceptance_criteria": [
+        "Создан prompts/location_template.txt",
+        "Шаблон описывает landscape background asset для SpyfallAI",
+        "Шаблон требует пустую нижнюю треть под персонажей",
+        "Шаблон запрещает людей, персонажей, текст и UI",
+        "Добавлена функция build_location_prompt(location_config) -> str",
+        "Существующая build_prompt для персонажей не ломается"
+      ],
+      "test_steps": [
+        "grep '{visual_description}' prompts/location_template.txt",
+        "grep '{composition_notes}' prompts/location_template.txt",
+        "Собрать prompt для hospital и проверить отсутствие неподставленных плейсхолдеров",
+        "Собрать prompt для boris_molot и проверить, что character prompt продолжает работать"
+      ],
+      "dependencies": ["TASK-AG-026"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-028",
+      "category": "functional",
+      "priority": "high",
+      "description": "Обобщить output path/save helpers для characters и locations",
+      "acceptance_criteria": [
+        "Location PNG сохраняется в output/locations/{location_id}.png",
+        "Character PNG продолжает сохраняться в output/characters/{character_id}.png",
+        "Skip/regenerate логика одинакова для characters и locations",
+        "Публичные функции либо обратно совместимы, либо все вызовы обновлены"
+      ],
+      "test_steps": [
+        "Сохранить тестовый PNG для location hospital и проверить путь output/locations/hospital.png",
+        "Повторный save без regenerate не перезаписывает файл",
+        "Save character test path продолжает указывать на output/characters/"
+      ],
+      "dependencies": ["TASK-AG-025"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-029",
+      "category": "functional",
+      "priority": "critical",
+      "description": "Расширить CLI target flags для locations",
+      "acceptance_criteria": [
+        "Добавлены взаимоисключающие цели --location ID и --all-locations",
+        "Существующие --character и --all-characters продолжают работать",
+        "Нельзя одновременно указать character и location target",
+        "Help text описывает character и location цели",
+        "--export-prompts, --dry-run, --model, --approach, --regenerate работают с location targets"
+      ],
+      "test_steps": [
+        "python3 generate_assets.py --location hospital --dry-run --approach text-only",
+        "python3 generate_assets.py --all-locations --dry-run --approach text-only",
+        "Проверить ошибку для --character boris_molot --location hospital",
+        "Проверить, что --character boris_molot --dry-run всё ещё работает"
+      ],
+      "dependencies": ["TASK-AG-026", "TASK-AG-027"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-030",
+      "category": "workflow",
+      "priority": "critical",
+      "description": "Добавить export-prompts для location targets",
+      "acceptance_criteria": [
+        "--location ID --export-prompts PATH экспортирует один location prompt",
+        "--all-locations --export-prompts PATH экспортирует 10 location prompts",
+        "Markdown содержит секции Location, display_name и output/locations/{location_id}.png",
+        "Команда не читает API-ключ, не проверяет reference image, не вызывает API и не создаёт PNG",
+        "Character export формат остаётся рабочим"
+      ],
+      "test_steps": [
+        "python3 generate_assets.py --location hospital --export-prompts /tmp/hospital_prompt.md",
+        "python3 generate_assets.py --all-locations --export-prompts /tmp/location_prompts.md",
+        "Проверить, что /tmp/location_prompts.md содержит 10 location секций",
+        "python3 generate_assets.py --all-characters --export-prompts /tmp/character_prompts.md"
+      ],
+      "dependencies": ["TASK-AG-029"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-031",
+      "category": "functional",
+      "priority": "high",
+      "description": "Добавить dry-run и генерацию одного location asset",
+      "acceptance_criteria": [
+        "--location ID --dry-run печатает location prompt, параметры и output path",
+        "--location ID генерирует PNG в output/locations/{location_id}.png",
+        "Для location logs используется object_type=location и object_id/location_id",
+        "Старые character logs остаются совместимыми или получают object_type без поломки существующих проверок",
+        "Ошибки missing API key/reference/model обрабатываются так же, как для characters"
+      ],
+      "test_steps": [
+        "python3 generate_assets.py --location hospital --dry-run --approach text-only",
+        "Запустить --location hospital с тестовым/валидным API key при доступности",
+        "Проверить output/locations/hospital.png",
+        "Проверить JSON log содержит prompt, status, model, requested_approach, object_type=location"
+      ],
+      "dependencies": ["TASK-AG-028", "TASK-AG-029"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-032",
+      "category": "functional",
+      "priority": "high",
+      "description": "Добавить batch generation для --all-locations",
+      "acceptance_criteria": [
+        "--all-locations проходит по всем location ids из config/locations.json",
+        "Между API-запросами сохраняется пауза минимум 2 секунды",
+        "Ошибка одной локации не останавливает остальные",
+        "Итоговый stdout summary показывает succeeded/failed count",
+        "Skip/regenerate работает для существующих location PNG"
+      ],
+      "test_steps": [
+        "python3 generate_assets.py --all-locations --dry-run --approach text-only",
+        "С моками или ручной проверкой убедиться, что batch продолжает выполнение после ошибки одной локации",
+        "Проверить skip существующего output/locations/hospital.png без --regenerate"
+      ],
+      "dependencies": ["TASK-AG-031"],
+      "status": "pending"
+    },
+    {
+      "id": "TASK-AG-033",
+      "category": "documentation",
+      "priority": "high",
+      "description": "Обновить README, tasks.json и progress.md для location asset workflow",
+      "acceptance_criteria": [
+        "README описывает location config, location template, output/locations и CLI флаги",
+        "README содержит команды для --location, --all-locations и location --export-prompts",
+        "progress.md фиксирует завершённые TASK-AG location задачи по существующему формату",
+        "tasks.json содержит новые задачи со статусами, не удаляя старые задачи",
+        "Документация явно говорит, что .claude и root locations.json не менялись без отдельной задачи"
+      ],
+      "test_steps": [
+        "Прочитать README и выполнить documented dry-run/export команды",
+        "Проверить валидность tools/asset-generator/tasks.json через python3 -m json.tool",
+        "Проверить, что progress.md содержит записи для завершённых location tasks"
+      ],
+      "dependencies": ["TASK-AG-030", "TASK-AG-032"],
+      "status": "pending"
     }
   ]
 }
